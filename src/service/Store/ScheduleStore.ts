@@ -1,15 +1,24 @@
 import { create } from 'zustand';
+import { Schedule } from './Schedule';
+import { devtools } from 'zustand/middleware';
 
-type AppState = {
+type ScheduleStoreState = {
   store: ScheduleStore
-  setScheduleData: (schedule: ScheduleData) => void
-  getScheduleData: (year: number, month: number, date: number) => ScheduleData[]
 };
 
-export const useScheduleStore = create<AppState>((set, get) => ({
-  store: {},
+type ScheduleStoreAction = {
+  setScheduleData: (schedule: Schedule) => void
+  getScheduleData: (year: number, month: number, date: number) => Schedule[]
+}
+
+const initStore: ScheduleStoreState = {
+  store: {}
+}
+
+export const useScheduleStore = create<ScheduleStoreState & ScheduleStoreAction>()(devtools((set, get) => ({
+  ...initStore,
   setScheduleData: (schedule) => {
-    set((state) => {
+    return set((state) => {
       const date = `${schedule.year}-${schedule.month}-${schedule.date}`
       const hasBefore = get().getScheduleData(schedule.year,schedule.month, schedule.date)
       return {
@@ -21,4 +30,4 @@ export const useScheduleStore = create<AppState>((set, get) => ({
   getScheduleData: (year: number, month: number, date: number) => {
     return get().store[`${year}-${month}-${date}`] || []
   },
-}));
+})));

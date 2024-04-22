@@ -1,21 +1,44 @@
-export class Schedule {
+import {v4 as uuidv4} from 'uuid'
+
+export const enum ScheduleType {
+  BREAK = 'BREAK',
+  FINISH = 'FINISH',
+  SCHEDULED = 'SCHEDULED',
+  STARTED = 'STARTED'
+}
+export class Schedule implements ScheduleData{
+  id: string
   year: number
   month: number
   date: number
-  start: number
-  breakTime: number
-  type: ScheduleType
-  workoutTimes: number
+  start: number = 0
+  breakTime: number = 60
+  type: ScheduleType = ScheduleType.SCHEDULED
+  workoutTimes: number = 0
   exerciseList: ExerciseData[] = []
-  constructor(year: number, month: number, date: number) {
-    this.year = year
-    this.month = month
-    this.date = date
-    this.start = 0
-    this.workoutTimes = 0
-    this.breakTime = 60
-    this.type = ScheduleType.SCHEDULED
+  constructor(obj: ScheduleData)
+  constructor(year: number, month: number, date: number)
+  constructor(...arg: [object] | [number, number, number]) {
+    this.id = uuidv4()
+    if (arg.length === 1) {
+      const data = arg[0] as ScheduleData
+      this.year = data.year
+      this.month = data.month
+      this.date = data.date
+      this.start = data.start
+      this.breakTime = data.breakTime
+      if (data.type === 'BREAK' || data.type === 'FINISH' || data.type === 'SCHEDULED' || data.type === 'STARTED') {
+        this.type = data.type as ScheduleType
+      }
+      this.workoutTimes = data.workoutTimes
+      this.exerciseList = data.exerciseList
+    } else {
+      this.year = arg[0]
+      this.month = arg[1]
+      this.date = arg[2]
+    }
   }
+
   startSchedule() {
     this.start = Number(new Date().getTime() / 1000)
     this.type = ScheduleType.STARTED
@@ -27,6 +50,13 @@ export class Schedule {
 
   updateBreakTime(t: number) {
     this.breakTime = t
+  }
+
+  setBreakDay() {
+    this.exerciseList.splice(0, this.exerciseList.length)
+    this.start = 0
+    this.workoutTimes = 0
+    this.type = ScheduleType.BREAK
   }
 
   static calanderColor(year: number, month: number, date: number, selectedYear: number, selectedMonth: number, selectedDate: number, scheduleList: ScheduleData[]) {

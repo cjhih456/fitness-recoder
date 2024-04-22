@@ -1,5 +1,8 @@
-enum ScheduleType {
-  BREAK, FINISH, SCHEDULED, STARTED
+enum IScheduleType {
+  BREAK = 'BREAK',
+  FINISH = 'FINISH',
+  SCHEDULED = 'SCHEDULED',
+  STARTED = 'STARTED'
 }
 
 interface Sets {
@@ -24,8 +27,9 @@ interface ScheduleData {
   month: number,
   date: number,
   start: number
+  breakTime: number
   workoutTimes: number
-  type: ScheduleType
+  type: keyof typeof IScheduleType
   exerciseList: ExerciseData[]
 }
 
