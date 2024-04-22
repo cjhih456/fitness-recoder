@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import Calender from '../components/Calander'
+import Calender from '../components/Calander/Calander'
 
 function Home() {
   
   const [choosenDate, changeDate] = useState('')
   useEffect(() => {
     const today = new Date()
-    const todayStr = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    const month = String(today.getMonth() + 1).padStart(2, '0')
+    const date = String(today.getDate()).padStart(2, '0')
+    const todayStr = `${today.getFullYear()}-${month}-${date}`
     changeDate(todayStr)
   }, [])
   return (

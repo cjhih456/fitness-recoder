@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
-import utils from './utils';
+import utils from '../utils';
 import DateCalander from './DateCalander';
 import MonthCalander from './MonthCalander';
 import YearCalander from './YearCalander';
@@ -52,7 +52,11 @@ export default function Calender({
     }
   }, [startDate, endDate, displayStartYear, displayEndYear, choosenDay, displayStartMonth, displayEndMonth])
 
-  const displayDate = useMemo(() => `${choosenDay.year}-${choosenDay.month}-${choosenDay.date}`, [choosenDay])
+  const displayDate = useMemo(() => {
+    const month = String(choosenDay.month).padStart(2, '0')
+    const date = String(choosenDay.date).padStart(2, '0')
+    return `${choosenDay.year}-${month}-${date}`
+  }, [choosenDay])
 
 
   useEffect(() => {
@@ -93,6 +97,7 @@ export default function Calender({
     setChoosenDay((pre) => ({ ...pre, date: Math.min(Math.max(displayStartDate, v), displayEndDate) }))
   }
 
+
   return (
     <div className="w-min h-min border p-4 rounded-md flex flex-col gap-4 transition-size">
       {mode === 'year' && <YearCalander startYear={displayStartYear} year={choosenDay.year} endYear={displayEndYear} onChange={(v) => changeYear(v, true)} />}
@@ -106,9 +111,9 @@ export default function Calender({
       ]}
       {mode === 'date' && [
         <div key='date-top' className="flex gap-2 justify-center content-center">
-          <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month - 1)}> - </Button>
-          <Button className='font-bold' onClick={() => setMode('month')}>{`${choosenDay.year} - ${choosenDay.month}`}</Button>
-          <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month + 1)}> + </Button>
+          <Button isIconOnly radius='full' variant='bordered' onClick={() => changeMonth(choosenDay.month - 1)} className="text-default"> - </Button>
+          <Button className='font-bold text-default' variant='bordered' onClick={() => setMode('month')}>{`${choosenDay.year} - ${String(choosenDay.month).padStart(2,'0')}`}</Button>
+          <Button isIconOnly radius='full' variant='bordered' onClick={() => changeMonth(choosenDay.month + 1)} className="text-default"> + </Button>
         </div>,
         <DateCalander key="date-picker" year={choosenDay.year} month={choosenDay.month} startDate={displayStartDate} date={choosenDay.date} endDate={displayEndDate} onChange={changeDate} />
       ]}
