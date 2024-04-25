@@ -3,7 +3,7 @@ import { nextui } from '@nextui-org/react';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './src/**/*.{tsx,css,sass}',
+    './src/**/*.{tsx,ts,css,sass}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -11,7 +11,8 @@ export default {
   },
   darkMode: 'class',
   plugins: [nextui({
-    addCommonColors: true
+    addCommonColors: true,
+    defaultTheme: 'dark'
   })],
 }
 
