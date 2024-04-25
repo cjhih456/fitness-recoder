@@ -15,7 +15,7 @@ function Home() {
   }, [])
 
   return (
-    <div className="container w-[420px] flex flex-col items-center gap-y-3">
+    <div className="flex flex-col items-center gap-y-3">
       <Calender value={choosenDate} mode='date' onChange={changeDate} startMonth={1} startDate={1} endMonth={12} endDate={31} />
       <Divider className="bg-default-700"></Divider>
       <div>{choosenDate}</div>
