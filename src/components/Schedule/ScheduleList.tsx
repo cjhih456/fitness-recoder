@@ -9,7 +9,7 @@ interface ScheduleListProps {
   choosenDate: string
 }
 
-export default function ScheduleList({ choosenDate }: ScheduleListProps){
+export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   // Schedule Store
   const scheduleStore = useScheduleStore()
   const [parsedDate, scheduleList] = useMemo(() => {
@@ -38,10 +38,9 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps){
       displayList.push(scheduleList.map((schedule, idx) => {
         return <ScheduleDisplay key={schedule.id} schedule={schedule} index={idx} ></ScheduleDisplay>
       }))
-      
     }
     displayList.push(<div key="btn-menu" className="flex gap-x-3 justify-center">
-      <Link to="/fitnessList">
+      <Link to={`${choosenDate}/fitnessList`}>
         <Button className="bg-success-300">
           Add Schedule
         </Button>
@@ -50,7 +49,6 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps){
         Set Break Day
       </Button>
     </div>)
-    
     return displayList
   }, [scheduleList])
 
