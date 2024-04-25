@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { Schedule } from './Schedule';
 import { devtools } from 'zustand/middleware';
 
 type ScheduleStoreState = {
@@ -7,8 +6,8 @@ type ScheduleStoreState = {
 };
 
 type ScheduleStoreAction = {
-  setScheduleData: (schedule: Schedule) => void
-  getScheduleData: (year: number, month: number, date: number) => Schedule[]
+  setScheduleData: (schedule: ScheduleData) => void
+  getScheduleData: (year: number, month: number, date: number) => ScheduleData[]
 }
 
 const initStore: ScheduleStoreState = {
@@ -20,7 +19,7 @@ export const useScheduleStore = create<ScheduleStoreState & ScheduleStoreAction>
   setScheduleData: (schedule) => {
     return set((state) => {
       const date = `${schedule.year}-${schedule.month}-${schedule.date}`
-      const hasBefore = get().getScheduleData(schedule.year,schedule.month, schedule.date)
+      const hasBefore = get().getScheduleData(schedule.year, schedule.month, schedule.date)
       return {
         ...state,
         store: { ...state.store, [date]: hasBefore.concat(schedule) }

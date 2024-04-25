@@ -7,13 +7,13 @@ enum IScheduleType {
 
 interface Sets {
   repeat: number
-  weightUnit: 'kg' | 'lbs'
+  weightUnit: WeightUnit
   weight?: number
   time?: number
 }
 
 interface ExerciseData {
-  exercise: Exercise,
+  exercise: IExercise,
   sets: Sets[]
 }
 
@@ -35,5 +35,5 @@ interface ScheduleData {
 
 
 interface ScheduleStore {
-  [date: string]: Schedule[]
+  [date: string]: ScheduleData[]
 }

@@ -4,7 +4,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -23,7 +23,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -81,7 +81,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "adductors"
     ],
@@ -138,7 +138,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -158,7 +158,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -199,7 +199,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -333,7 +333,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -369,7 +369,7 @@
     "mechanic": "isolation",
     "equipment": "kettlebells",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -389,7 +389,7 @@
     "mechanic": "compound",
     "equipment": "kettlebells",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "abdominals",
@@ -465,7 +465,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "traps",
       "triceps"
     ],
@@ -543,7 +543,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -567,7 +567,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "abdominals",
@@ -577,7 +577,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -596,13 +596,13 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -624,7 +624,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "triceps"
     ],
     "instructions": [
@@ -651,7 +651,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Load a sled with the desired weight, attaching a rope or straps to the sled that you can hold onto.",
@@ -664,7 +664,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -702,7 +702,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -731,7 +731,7 @@
     "secondaryMuscles": [
       "abdominals",
       "forearms",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Choke the band around the center of the pullup bar. You can use different bands to provide varying levels of assistance.",
@@ -752,7 +752,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Using a 41 inch band, stand on one end, spreading your feet a small amount. Bend at the hips to loop the end of the band behind your neck. This will be your starting position.",
@@ -772,7 +772,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Loop the band around a post. Standing a little ways away, loop the opposite end around the neck. Your hands can help hold the band in position.",
@@ -811,7 +811,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -849,7 +849,7 @@
       "abdominals"
     ],
     "secondaryMuscles": [
-      "lower back",
+      "lower_back",
       "shoulders"
     ],
     "instructions": [
@@ -870,7 +870,7 @@
       "abdominals"
     ],
     "secondaryMuscles": [
-      "lower back",
+      "lower_back",
       "shoulders"
     ],
     "instructions": [
@@ -949,7 +949,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "calves",
@@ -957,7 +957,7 @@
       "glutes",
       "hamstrings",
       "lats",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -983,7 +983,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack just above shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -1156,7 +1156,7 @@
     "secondaryMuscles": [
       "biceps",
       "lats",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Stand up straight while holding a barbell using a wide (higher than shoulder width) and overhand (palms facing your body) grip.",
@@ -1260,7 +1260,7 @@
     ],
     "secondaryMuscles": [
       "forearms",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Stand up straight with your feet at shoulder width as you hold a barbell with both hands behind your back using a pronated grip (palms facing back). Tip: Your hands should be a little wider than shoulder width apart. You can use wrist wraps for this exercise for better grip. This will be your starting position.",
@@ -1280,7 +1280,7 @@
       "abdominals"
     ],
     "secondaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Stand up straight while holding a barbell placed on the back of your shoulders (slightly below the neck). Your feet should be shoulder width apart. This will be your starting position.",
@@ -1302,7 +1302,7 @@
     "secondaryMuscles": [
       "calves",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Stand up straight while holding a barbell placed on the back of your shoulders (slightly below the neck). Your feet should be placed wide apart with the foot of the lead leg angled out to the side. This will be your starting position.",
@@ -1325,7 +1325,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack to just below shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -1350,7 +1350,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first place a flat bench or a box behind you. The flat bench is used to teach you to set your hips back and to hit depth.",
@@ -1475,7 +1475,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -1496,7 +1496,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -1658,7 +1658,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -1679,7 +1679,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -1723,8 +1723,8 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -1743,12 +1743,12 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
       "lats",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -1768,7 +1768,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -1791,7 +1791,7 @@
     "mechanic": "compound",
     "equipment": "dumbbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -1813,7 +1813,7 @@
     "mechanic": "compound",
     "equipment": "dumbbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -1839,7 +1839,7 @@
     "secondaryMuscles": [
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "triceps"
@@ -1918,7 +1918,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -1939,7 +1939,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -1958,7 +1958,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "chest"
     ],
@@ -1983,7 +1983,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -2001,7 +2001,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -2086,7 +2086,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -2160,7 +2160,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "The box squat allows you to squat to desired depth and develop explosive strength in the squat movement. Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
@@ -2185,7 +2185,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin in a power rack with a box at the appropriate height behind you. Set up the bands on the sleeves, secured to either band pegs, the rack, or dumbbells so that there is appropriate tension. If dumbbells are used, secure them so that they don't move. Also, ensure that the dumbbells you are using are heavy enough for the bands that you are using. Additional plates can be used to hold the dumbbells down. If more tension is needed, you can either widen the base on the floor or choke the bands. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
@@ -2210,7 +2210,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin in a power rack with a box at the appropriate height behind you. Typically, you would aim for a box height that brings you to a parallel squat, but you can train higher or lower if desired.",
@@ -2226,7 +2226,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": null,
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "biceps"
     ],
@@ -2264,7 +2264,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -2283,7 +2283,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -2391,7 +2391,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Move the cables to the bottom of the towers and select an appropriate weight. Stand directly in between the uprights.",
@@ -2667,7 +2667,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Sit in the same position on a low pulley row station as you would if you were doing seated cable rows for the back.",
@@ -2729,7 +2729,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -2934,7 +2934,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": null,
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "calves"
     ],
@@ -2958,7 +2958,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -3020,10 +3020,10 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -3038,7 +3038,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "lats"
     ],
@@ -3121,7 +3121,7 @@
       "lats"
     ],
     "secondaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Sit upright on a chair.",
@@ -3197,7 +3197,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -3219,7 +3219,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -3240,7 +3240,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -3261,7 +3261,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -3282,7 +3282,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -3301,11 +3301,11 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Get on your hands and knees, walk your hands in front of you.",
@@ -3319,14 +3319,14 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "lats"
     ],
     "secondaryMuscles": [
       "biceps",
       "forearms",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Grab the pull-up bar with the palms facing your torso and a grip closer than the shoulder width.",
@@ -3368,7 +3368,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps",
       "triceps"
     ],
@@ -3393,7 +3393,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -3406,7 +3406,7 @@
       "As full extension is achieved, transition into the third pull by aggressively shrugging and flexing the arms with the elbows up and out. At peak extension, aggressively pull yourself down, rotating your elbows under the bar as you do so. Receive the bar in a front squat position, the depth of which is dependent upon the height of the bar at the end of the third pull. The bar should be racked onto the protracted shoulders, lightly touching the throat with the hands relaxed. Continue to descend to the bottom squat position, which will help in the recovery.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Continue until you have risen to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clean Deadlift",
@@ -3420,8 +3420,8 @@
     "secondaryMuscles": [
       "forearms",
       "glutes",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -3430,7 +3430,7 @@
       "Begin by driving through the floor through the front of your heels. As the bar travels upward, maintain a constant back angle. Flare your knees out to the side to help keep them out of the bar's path.",
       "After the bar crosses the knees, complete the lift by driving the hips into the bar until your hips and knees are extended."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clean Pull",
@@ -3445,7 +3445,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -3453,7 +3453,7 @@
       "Begin the first pull by driving through the heels, extending your knees. Your back angle should stay the same, and your arms should remain straight and elbows out. Move the weight with control as you continue to above the knees.",
       "Next comes the second pull, the main source of acceleration for the clean. As the bar approaches the mid-thigh position, begin extending through the hips. In a jumping motion, accelerate by extending the hips, knees, and ankles, using speed to move the bar upward. There should be no need to actively pull through the arms to accelerate the weight; at the end of the second pull, the body should be fully extended, leaning slightly back, with the arms still extended. Full extension should be violent and abrupt, and ensure that you do not prolong the extension for longer than necessary."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clean Shrug",
@@ -3472,7 +3472,7 @@
       "Begin with a shoulder width, double overhand or hook grip, with the bar hanging at the mid thigh position. Your back should be straight and inclined slightly forward.",
       "Shrug your shoulders towards your ears. While this exercise can usually by loaded with heavier weight than a clean, avoid overloading to the point that the execution slows down."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clean and Jerk",
@@ -3487,7 +3487,7 @@
       "abdominals",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps",
       "triceps"
@@ -3502,7 +3502,7 @@
       "Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders.",
       "At this moment as the feet leave the floor, the feet must be placed into the receiving position as quickly as possible. In the brief moment the feet are not actively driving against the platform, the athletes effort to push the bar up will drive them down. The feet should be split, with one foot forward, and one foot back. Receive the bar with the arms locked out overhead. Return to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clean and Press",
@@ -3518,8 +3518,8 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "shoulders",
       "traps",
@@ -3558,14 +3558,14 @@
       "As full extension is achieved, transition into the receiving position by aggressively shrugging and flexing the arms with the elbows up and out. Aggressively pull yourself down, rotating your elbows under the bar as you do so. Receive the bar in a front squat position, the depth of which is dependent upon the height of the bar at the end of the third pull. The bar should be racked onto the protracted shoulders, lightly touching the throat with the hands relaxed. Continue to descend to the bottom squat position, which will help in the recovery.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Continue until you have risen to a standing position. Return the weight to the boxes for the next rep."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Clock Push-Up",
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -3632,7 +3632,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "biceps"
     ],
@@ -3653,7 +3653,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "triceps"
     ],
@@ -3702,7 +3702,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -3720,7 +3720,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -3763,7 +3763,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -3789,7 +3789,7 @@
       "biceps",
       "calves",
       "forearms",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -3825,7 +3825,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -3889,7 +3889,7 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "abdominals",
@@ -3928,7 +3928,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -3947,7 +3947,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -3968,7 +3968,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -4011,7 +4011,7 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "abductors",
@@ -4030,7 +4030,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -4053,13 +4053,13 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -4077,13 +4077,13 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -4147,7 +4147,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -4247,7 +4247,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -4288,7 +4288,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -4331,13 +4331,13 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -4420,7 +4420,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -4469,7 +4469,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -4575,7 +4575,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -4599,7 +4599,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "glutes"
     ],
@@ -4750,7 +4750,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -4810,7 +4810,7 @@
     "mechanic": "compound",
     "equipment": "dumbbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -4879,7 +4879,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "While holding a dumbbell in one hand, lay with your chest down on a slightly inclined (around 15 degrees when measured from the floor) adjustable bench. The other hand can be used to hold to the leg of the bench for stability.",
@@ -5207,7 +5207,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Stand up straight while holding a dumbbell on each hand (palms facing the side of your legs).",
@@ -5231,7 +5231,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Stand up straight with a flat bench behind you while holding a dumbbell on each hand (palms facing the side of your legs).",
@@ -5308,7 +5308,7 @@
       "chest"
     ],
     "secondaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Stand with your hands together, arms extended directly in front of you. This will be your starting position.",
@@ -5321,7 +5321,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "biceps"
     ],
@@ -5340,7 +5340,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "triceps"
     ],
@@ -5379,7 +5379,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -5441,7 +5441,7 @@
       "lats"
     ],
     "secondaryMuscles": [
-      "middle back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -5480,7 +5480,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -5499,7 +5499,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -5599,7 +5599,7 @@
       "shoulders"
     ],
     "secondaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Facing a high pulley with a rope or dual handles attached, pull the weight directly towards your face, separating your hands as you do so. Keep your upper arms parallel to the ground."
@@ -5619,7 +5619,7 @@
       "abdominals",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -5635,7 +5635,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -5697,7 +5697,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -5716,7 +5716,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -5816,7 +5816,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -5892,14 +5892,14 @@
       "Squat by flexing the knees and hips, sitting in between your legs. Keep the torso upright, the arms up, and the shoulders forward, and the bar should stay in place. Go to the bottom of the squat, until your hamstrings contact your calves.",
       "Return to the upright position by driving through the front of the heel and extending the knees and hips."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Freehand Jump Squat",
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -5943,7 +5943,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -6117,7 +6117,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -6240,7 +6240,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -6260,7 +6260,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Grasp the pull-up bar with a shoulder width underhand grip.",
@@ -6297,7 +6297,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -6346,7 +6346,7 @@
     "secondaryMuscles": [
       "abdominals",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin with a bar on a rack at shoulder height. Rack the bar across the rear of your shoulders as you would a power squat, not on top of your shoulders. Keep your back tight, shoulder blades pinched together, and your knees slightly bent. Step back from the rack.",
@@ -6367,7 +6367,7 @@
     "secondaryMuscles": [
       "abdominals",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin with a bar on a rack at about the same height as your stomach. Bend over underneath the bar and rack the bar across the rear of your shoulders as you would a power squat, not on top of your shoulders. At the proper height, you should be near parallel to the floor when bent over. Keep your back tight, shoulder blades pinched together, and your knees slightly bent. Keep your back arched and your cervical spine in proper alignment.",
@@ -6380,7 +6380,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -6419,7 +6419,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "adductors"
     ],
@@ -6504,7 +6504,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -6538,7 +6538,7 @@
     "force": "push",
     "level": "expert",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -6568,7 +6568,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -6577,7 +6577,7 @@
       "Begin by aggressively extending through the hips, knees and ankles, driving the weight upward. As you do so, shrug your shoulders towards your ears.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Continue until you have risen to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Hang Clean - Below the Knees",
@@ -6593,7 +6593,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -6603,7 +6603,7 @@
       "At peak extension, aggressively pull yourself down, rotating your elbows under the bar as you do so. Receive the bar in a front squat position, the depth of which is dependent upon the height of the bar at the end of the third pull. The bar should be racked onto the protracted shoulders, lightly touching the throat with the hands relaxed. Continue to descend to the bottom squat position, which will help in the recovery.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Continue until you have risen to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Hang Snatch",
@@ -6619,7 +6619,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -6630,7 +6630,7 @@
       "As you move your feet into the receiving position, forcefully pull yourself below the bar as you elevate the bar overhead. Receive the bar with your body as low as possible and the arms fully extended overhead.",
       "Return to a standing position with the weight overhead. Follow by returning the weight to the ground under control."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Hang Snatch - Below Knees",
@@ -6646,7 +6646,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -6657,7 +6657,7 @@
       "As you move your feet into the receiving position, forcefully pull yourself below the bar as you elevate the bar overhead. Receive the bar with your body as low as possible and the arms fully extended overhead.",
       "Return to a standing position with the weight overhead, and then return the weight to the floor under control."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Hanging Bar Good Morning",
@@ -6671,7 +6671,7 @@
     "secondaryMuscles": [
       "abdominals",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin with a bar on a rack at about the same height as your stomach. Suspend the bar using chains or suspension straps.",
@@ -6686,7 +6686,7 @@
     "force": "pull",
     "level": "expert",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -6704,7 +6704,7 @@
     "force": "pull",
     "level": "expert",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -6740,7 +6740,7 @@
       "Begin by dipping with the knees slightly, and popping back up to briefly unload the bar. Drive yourself underneath the bar, elevating it overhead as you descend into a full squat.",
       "Return to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Heavy Bag Thrust",
@@ -6786,7 +6786,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abductors"
     ],
@@ -6864,9 +6864,9 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "calves",
@@ -6886,7 +6886,7 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes"
@@ -6929,7 +6929,7 @@
     "mechanic": "isolation",
     "equipment": "other",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
@@ -6950,9 +6950,9 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
@@ -6988,7 +6988,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "abductors"
     ],
@@ -7005,7 +7005,7 @@
     "force": null,
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -7048,7 +7048,7 @@
     "mechanic": "isolation",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "lats",
@@ -7258,7 +7258,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7278,7 +7278,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -7321,7 +7321,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7344,7 +7344,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7367,7 +7367,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7443,7 +7443,7 @@
     "mechanic": "compound",
     "equipment": null,
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "lats"
@@ -7464,7 +7464,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -7491,7 +7491,7 @@
       "chest",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -7520,7 +7520,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7542,7 +7542,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "neck"
     ],
@@ -7561,7 +7561,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "neck"
     ],
@@ -7580,7 +7580,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -7624,7 +7624,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -7642,7 +7642,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -7668,7 +7668,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -7702,7 +7702,7 @@
       "Initiate the movement as you would a normal jerk, dipping at the knees while keeping your torso vertical, and driving back up forcefully, using momentum and not your arms to elevate the weight.",
       "Keep the rear foot in place, using it to drive your body forward into a full split as you jerk the weight. Recover by standing up with the weight overhead."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Jerk Dip Squat",
@@ -7721,7 +7721,7 @@
       "This movement strengthens the dip portion of the jerk. Begin with the bar racked in the jerk position, with the shoulders forward to create a shelf and the bar lightly contacting the throat. The feet should be directly under the hips, with the feet turned out as is comfortable.",
       "Keeping the torso vertical, dip by flexing the knees, allowing them to travel forward and without moving the hips to the rear. The dip should not be excessive. Return the weight to the starting position by driving forcefully though the feet."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Jogging, Treadmill",
@@ -7749,7 +7749,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "abdominals",
@@ -7758,7 +7758,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "middle back",
+      "middle_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -7802,7 +7802,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -7844,7 +7844,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -7866,7 +7866,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Hold a kettlebell by the handle in one hand. Stand on one leg, on the same side that you hold the kettlebell.",
@@ -8099,7 +8099,7 @@
       "abdominals",
       "biceps",
       "forearms",
-      "middle back",
+      "middle_back",
       "shoulders",
       "traps",
       "triceps"
@@ -8124,7 +8124,7 @@
     ],
     "secondaryMuscles": [
       "abductors",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Lie down on the floor with your right leg straight. Bend your left leg and lower it across your body, holding the knee down toward the floor with your right hand. (The knee doesn't need to touch the floor if you're tight.)",
@@ -8137,7 +8137,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "calves"
     ],
@@ -8176,7 +8176,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "hamstrings"
     ],
@@ -8285,7 +8285,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Select the appropriate weight using a pulley that is above your head. Attach a rope to the cable and kneel a couple of feet away, holding the rope out in front of you with both arms extended. This will be your starting position.",
@@ -8332,7 +8332,7 @@
       "Explode up with your hips, generating enough power to land with your feet flat on the floor.",
       "Continue with the squat by driving through your heels and extending the knees to come to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Kneeling Single-Arm High Pulley Row",
@@ -8345,7 +8345,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Attach a single handle to a high pulley and make your weight selection.",
@@ -8367,7 +8367,7 @@
     "secondaryMuscles": [
       "abdominals",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Set the bar to the proper height in a power rack. Kneel behind the bar; it may be beneficial to put a mat down to pad your knees. Slide under the bar, racking it across the back of your shoulders. Your shoulder blades should be retracted and the bar tight across your back. Unrack the weight.",
@@ -8387,7 +8387,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back",
+      "lower_back",
       "shoulders"
     ],
     "instructions": [
@@ -8430,7 +8430,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "adductors"
     ],
@@ -8522,7 +8522,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "lats"
     ],
@@ -8593,7 +8593,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -8637,7 +8637,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -8717,7 +8717,7 @@
     "mechanic": "compound",
     "equipment": "machine",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "lats"
@@ -8761,7 +8761,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Load an appropriate weight onto the pins and adjust the seat height so that the handles are at chest level. Grasp the handles with either a neutral or pronated grip. This will be your starting position.",
@@ -8889,8 +8889,8 @@
       "chest",
       "glutes",
       "hamstrings",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "traps",
       "triceps"
@@ -8914,7 +8914,7 @@
     "secondaryMuscles": [
       "biceps",
       "forearms",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Attach a climbing rope to a high beam or cross member. Below it, ensure that the smith machine bar is locked in place with the safeties and cannot move. Alternatively, a secure box could also be utilized.",
@@ -8991,7 +8991,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "traps"
     ],
     "instructions": [
@@ -9008,9 +9008,9 @@
     "force": "static",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [],
     "instructions": [
@@ -9024,7 +9024,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -9124,7 +9124,7 @@
     "mechanic": "isolation",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -9184,7 +9184,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "triceps"
     ],
@@ -9203,7 +9203,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abductors"
     ],
@@ -9278,7 +9278,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -9396,7 +9396,7 @@
     "force": null,
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -9454,7 +9454,7 @@
     "mechanic": "compound",
     "equipment": "machine",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -9475,7 +9475,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "triceps"
     ],
@@ -9594,7 +9594,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -9616,7 +9616,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -9636,7 +9636,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -9659,7 +9659,7 @@
     "mechanic": "isolation",
     "equipment": "dumbbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [],
     "instructions": [
@@ -9677,12 +9677,12 @@
     "mechanic": "isolation",
     "equipment": null,
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "abdominals",
       "lats",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Stand so your feet are shoulder width apart and your hands are on your hips.",
@@ -9697,7 +9697,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -9780,7 +9780,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "triceps"
@@ -9790,7 +9790,7 @@
       "Begin the pull by driving through the front of the heels, raising the bar. Transition into the second pull by extending through the hips knees and ankles, driving the bar up as quickly as possible. The bar should be close to the body.",
       "Continue raising the bar to the overhead position, without rebending the knees."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Muscle Up",
@@ -9805,7 +9805,7 @@
       "abdominals",
       "biceps",
       "forearms",
-      "middle back",
+      "middle_back",
       "shoulders",
       "traps",
       "triceps"
@@ -9879,7 +9879,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -9896,14 +9896,14 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "hamstrings"
     ],
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Using the leg pad of a lat pulldown machine or a preacher bench, position yourself so that your ankles are under the pads, knees on the seat, and you are facing away from the machine. You should be upright and maintaining good posture.",
@@ -9956,7 +9956,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -9977,7 +9977,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -10010,7 +10010,7 @@
       "Descend by flexing the knees, refraining from moving the hips back as much as possible. This requires that the knees travel forward; ensure that they stay aligned with the feet. The goal is to keep the torso as upright as possible. Continue all the way down, keeping the weight on the front of the heel.",
       "At the moment the upper legs contact the lower, reverse the motion, driving the weight upward."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "On-Your-Back Quad Stretch",
@@ -10053,7 +10053,7 @@
     "mechanic": "compound",
     "equipment": "dumbbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -10144,7 +10144,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -10282,7 +10282,7 @@
     "mechanic": "compound",
     "equipment": "kettlebells",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -10306,7 +10306,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps",
       "triceps"
     ],
@@ -10374,7 +10374,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "shoulders"
     ],
     "instructions": [],
@@ -10387,7 +10387,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -10407,7 +10407,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -10435,7 +10435,7 @@
     "secondaryMuscles": [
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders"
     ],
@@ -10483,7 +10483,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -10561,7 +10561,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -10657,7 +10657,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Select an appropriate weight and adjust the knee pad to help keep you down. Grasp the handle with a pronated grip. This will be your starting position.",
@@ -10758,7 +10758,7 @@
     ],
     "secondaryMuscles": [
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Start off by lying on the floor.",
@@ -10804,7 +10804,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders"
     ],
@@ -10881,7 +10881,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "lats"
     ],
@@ -10908,7 +10908,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "triceps"
     ],
@@ -10920,7 +10920,7 @@
       "Now use your feet and legs to help bring the weight back up to the starting position while exhaling.",
       "Repeat for the recommended amount of repetitions."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Overhead Stretch",
@@ -10948,7 +10948,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -11125,7 +11125,7 @@
     "mechanic": "compound",
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [],
     "instructions": [
@@ -11140,7 +11140,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": null,
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "calves"
     ],
@@ -11172,7 +11172,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "glutes"
     ],
@@ -11199,7 +11199,7 @@
       "chest",
       "forearms",
       "lats",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -11217,7 +11217,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "glutes"
     ],
@@ -11233,7 +11233,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -11351,7 +11351,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11398,8 +11398,8 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "shoulders",
       "traps",
@@ -11452,7 +11452,7 @@
       "As full extension is achieved, transition into the third pull by aggressively shrugging and flexing the arms with the elbows up and out. At peak extension, pull yourself under the bar far enough that it can be racked onto the shoulders, rotating your elbows under the bar as you do so. The bar should be racked onto the protracted shoulders, lightly touching the throat with the hands relaxed.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Continue until you have risen to a standing position, and complete the repetition by returning the weight to the boxes."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Power Jerk",
@@ -11478,7 +11478,7 @@
       "Receive the bar with the arms locked out overhead.",
       "Return to a standing position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Power Partials",
@@ -11511,7 +11511,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps",
@@ -11524,7 +11524,7 @@
       "As you move your feet into the receiving position, a slightly wider position, pull yourself below the bar as you elevate the bar overhead. The bar should be received in a partial squat. Continue raising the bar to the overhead position, receiving the bar locked out overhead.",
       "Return to a standing position with the weight over head."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Power Snatch from Blocks",
@@ -11540,7 +11540,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps",
       "triceps"
@@ -11552,7 +11552,7 @@
       "As you move your feet into the receiving position, forcefully pull yourself below the bar as you elevate the bar overhead. The feet should move to just outside the hips, turned out as necessary. Receive the bar above a full squat and with the arms fully extended overhead.",
       "Keeping the bar aligned over the front of the heels, your head and chest up, drive through heels of the feet to move to a standing position. Carefully return the weight to the boxes."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Power Stairs",
@@ -11567,7 +11567,7 @@
       "adductors",
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -11692,7 +11692,7 @@
     ],
     "secondaryMuscles": [
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin standing a few feet in front of a low pulley with a rope or handle attached. Face away from the machine, straddling the cable, with your feet set wide apart.",
@@ -11705,13 +11705,13 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "lats"
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Grab the pull-up bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than your shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.",
@@ -11727,7 +11727,7 @@
     "force": null,
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11749,7 +11749,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -11770,7 +11770,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11792,7 +11792,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "chest"
     ],
@@ -11823,7 +11823,7 @@
       "triceps"
     ],
     "instructions": [],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Push Press - Behind the Neck",
@@ -11844,14 +11844,14 @@
       "Using the momentum generated, finish pressing the weight overhead be extending through the arms.",
       "Return to the starting position, using your legs to absorb the impact."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Push Up to Side Plank",
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11874,7 +11874,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11895,7 +11895,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -11916,9 +11916,9 @@
     "force": "static",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "shoulders"
@@ -11950,7 +11950,7 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -12000,7 +12000,7 @@
       "Begin by rotating the elbows around the bar, delivering the bar to the shoulders. As your elbows come forward, relax your grip. The shoulders should be protracted, providing a shelf for the bar, which should lightly contact the throat.",
       "It is important that the bar stay close to the body at all times, as with a heavier load any distance will result in an unwanted collision. As the movement becomes smoother, speed and load can be increased before progressing further."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Rack Pull with Bands",
@@ -12009,7 +12009,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
@@ -12032,7 +12032,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "forearms",
@@ -12052,7 +12052,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -12089,7 +12089,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -12119,7 +12119,7 @@
       "chest",
       "forearms",
       "lats",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -12146,7 +12146,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin in a power rack with a box at the appropriate height behind you. Set up the bands either on band pegs or attached to the top of the rack, ensuring they will be directly above the bar during the squat. Attach the other end to the bar.",
@@ -12163,7 +12163,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "abductors",
@@ -12196,7 +12196,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin in a power rack with the pins and bar set at the appropriate height. After loading the bar, attach bands to the top of the rack, using either pegs or the frame itself. Attach the other end of the bands to the bar.",
@@ -12221,7 +12221,7 @@
       "calves",
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -12259,7 +12259,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "biceps"
     ],
@@ -12300,7 +12300,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -12362,7 +12362,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -12485,9 +12485,9 @@
     "force": "static",
     "level": "intermediate",
     "mechanic": null,
-    "equipment": "foam roll",
+    "equipment": "foam_roll",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "traps"
@@ -12512,7 +12512,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -12535,7 +12535,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -12571,7 +12571,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -12619,7 +12619,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -12644,7 +12644,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Put a barbell in front of you on the ground and grab it using a pronated (palms facing down) grip that a little wider than shoulder width. Tip: Depending on the weight used, you may need wrist wraps to perform the exercise and also a raised platform in order to allow for better range of motion.",
@@ -12667,7 +12667,7 @@
     "secondaryMuscles": [
       "forearms",
       "glutes",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -12675,7 +12675,7 @@
       "Begin by flexing the knees slightly, and then flex at the hip, moving your butt back as far as possible, lowering the torso as far as flexibility allows. The back should remain in absolute extension at all times, and the bar should remain in contact with the legs. If done properly, there should be heavy tension felt in the hamstrings.",
       "Reverse the motion to return to the starting position."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Rope Climb",
@@ -12689,7 +12689,7 @@
     "secondaryMuscles": [
       "biceps",
       "forearms",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -12791,8 +12791,8 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
-      "middle back"
+      "lower_back",
+      "middle_back"
     ],
     "instructions": [
       "To begin, seat yourself on the rower. Make sure that your heels are resting comfortably against the base of the foot pedals and that the straps are secured. Select the program that you wish to use, if applicable. Sit up straight and bend forward at the hips.",
@@ -12845,12 +12845,12 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
     "secondaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Lie down on the floor placing your feet either under something that will not move or by having a partner hold them. Your legs should be bent at the knees.",
@@ -12877,8 +12877,8 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "shoulders",
       "traps"
     ],
@@ -12901,7 +12901,7 @@
     ],
     "secondaryMuscles": [
       "lats",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Take a pronated grip on a pull-up bar.",
@@ -12915,7 +12915,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -12934,7 +12934,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -13075,7 +13075,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "biceps"
     ],
@@ -13097,7 +13097,7 @@
     "mechanic": "compound",
     "equipment": "cable",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -13164,7 +13164,7 @@
     ],
     "secondaryMuscles": [
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Sit up straight on an exercise mat.",
@@ -13301,7 +13301,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -13337,7 +13337,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -13356,7 +13356,7 @@
     "force": "static",
     "level": "expert",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -13377,7 +13377,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes"
@@ -13471,7 +13471,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -13531,7 +13531,7 @@
     "mechanic": "compound",
     "equipment": "cable",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -13696,7 +13696,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Attach a single handle to a low cable.",
@@ -13796,7 +13796,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -13833,7 +13833,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -13886,7 +13886,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "adductors"
     ],
@@ -13966,7 +13966,7 @@
     "secondaryMuscles": [
       "biceps",
       "forearms",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -14066,7 +14066,7 @@
     "force": "push",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "chest"
     ],
@@ -14234,7 +14234,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -14255,7 +14255,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -14295,7 +14295,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -14383,7 +14383,7 @@
     ],
     "secondaryMuscles": [
       "calves",
-      "middle back",
+      "middle_back",
       "quadriceps"
     ],
     "instructions": [
@@ -14458,7 +14458,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -14485,7 +14485,7 @@
       "calves",
       "forearms",
       "lats",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -14568,7 +14568,7 @@
     "mechanic": "compound",
     "equipment": "machine",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -14659,7 +14659,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps"
@@ -14834,7 +14834,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "To begin, first set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -14857,7 +14857,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "To begin, set the bar on the smith machine to a height that is around the middle of your thighs. Once the correct height is chosen and the bar is loaded, grasp the bar using a pronated (palms forward) grip that is shoulder width apart. You may need some wrist wraps if using a significant amount of weight.",
@@ -14879,7 +14879,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -14929,7 +14929,7 @@
       "biceps",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps",
       "triceps"
@@ -14943,7 +14943,7 @@
       "Now in a very quick but powerful motion, you have to get your body under the barbell when it has reached a high enough point where it can be controlled and drop while locking your arms and holding the barbell overhead as you assume a squat position.",
       "Finalize the movement by rising up out of the squat position to finish the lift. At the end of the lift both feet should be on line and the arms fully extended holding the barbell overhead."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Snatch Balance",
@@ -14967,7 +14967,7 @@
       "Receive the bar locked out overhead near the bottom of the squat. The torso should remain vertical, lowering the hips between the legs.",
       "Continue to descend to full depth, and return to a standing position. Carefully lower the weight."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Snatch Deadlift",
@@ -14982,7 +14982,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -14991,7 +14991,7 @@
       "Initiate the movement by driving through the heels, raising the hips. The back angle should remain the same until the bar passes the knees.",
       "At that point, drive your hips through the bar as you lay back. Return the bar to the platform by reversing the motion."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Snatch Pull",
@@ -15005,7 +15005,7 @@
     "secondaryMuscles": [
       "calves",
       "glutes",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "traps"
     ],
@@ -15034,7 +15034,7 @@
       "Begin with a wide grip, with the bar hanging at the mid thigh position. You can use a hook or overhand grip. Your back should be straight and inclined slightly forward.",
       "Shrug your shoulders towards your ears. While this exercise can usually by loaded with heavier weight than a snatch, avoid overloading to the point that the execution slows down."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Snatch from Blocks",
@@ -15050,7 +15050,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps",
       "triceps"
@@ -15062,7 +15062,7 @@
       "As you move your feet into the receiving position, forcefully pull yourself below the bar as you elevate the bar overhead. The feet should move to just outside the hips, turned out as necessary. Receive the bar with your body as low as possible and the arms fully extended overhead.",
       "Keeping the bar aligned over the front of the heels, your head and chest up, drive through heels of the feet to move to a standing position. Carefully return the weight to the boxes."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Speed Band Overhead Triceps",
@@ -15118,7 +15118,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -15156,7 +15156,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -15177,7 +15177,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "e-z curl bar",
+    "equipment": "e-z_curl_bar",
     "primaryMuscles": [
       "biceps"
     ],
@@ -15200,11 +15200,11 @@
     "mechanic": "isolation",
     "equipment": null,
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "lats",
-      "lower back",
+      "lower_back",
       "neck",
       "traps"
     ],
@@ -15230,7 +15230,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps"
     ],
@@ -15242,7 +15242,7 @@
       "Receive the bar with the feet split, aggressively moving one foot forward and one foot back. The bar should be racked onto the protracted shoulders, lightly touching the throat with the hands relaxed. Continue to descend to the bottom position, which will help in the recovery.",
       "Immediately recover by driving through the heels, keeping the torso upright and elbows up. Bring the feet together as you stand up."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Split Jerk",
@@ -15265,14 +15265,14 @@
       "In the brief moment the feet are not actively driving against the platform, the athleteâ€™s effort to push the bar up will drive them down. The feet should be moved to a split stance, one foot forward, one foot back, with the knees partially bent. Receive the bar with the arms locked out overhead.",
       "Return to a standing position, bringing the feet together."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Split Jump",
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -15304,7 +15304,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "quadriceps",
       "shoulders",
       "traps",
@@ -15318,7 +15318,7 @@
       "Keeping the bar aligned over the front of the heels, your head and chest up, drive through heels of the feet to move to a standing position, bringing your feet together.",
       "Carefully return the weight to floor."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Split Squat with Dumbbells",
@@ -15398,7 +15398,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Set up the bands on the sleeves, secured to either band pegs, the rack, or dumbbells so that there is appropriate tension.",
@@ -15422,7 +15422,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "To set up the chains, begin by looping the leader chain over the sleeves of the bar. The heavy chain should be attached using a snap hook. Adjust the length of the lead chain so that a few links are still on the floor at the top of the movement.",
@@ -15473,7 +15473,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "To start out, make sure that the exercise band is at an even split between both the left and right side of the body. To do this, use your hands to grab both sides of the band and place both feet in the middle of the band. Your feet should be shoulder width apart from each other.",
@@ -15967,7 +15967,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abductors"
     ],
@@ -16061,7 +16061,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -16318,7 +16318,7 @@
     "mechanic": "isolation",
     "equipment": null,
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes"
@@ -16387,7 +16387,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "triceps"
     ],
@@ -16405,7 +16405,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "shoulders"
     ],
@@ -16425,7 +16425,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "quadriceps"
     ],
@@ -16447,7 +16447,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "glutes"
     ],
@@ -16493,7 +16493,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Grasp a bar using an overhand grip (palms facing down). You may need some wrist wraps if using a significant amount of weight.",
@@ -16515,7 +16515,7 @@
     ],
     "secondaryMuscles": [
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Grasp a couple of dumbbells holding them by your side at arm's length.",
@@ -16533,7 +16533,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
@@ -16554,7 +16554,7 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -16618,7 +16618,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -16687,8 +16687,8 @@
       "adductors",
       "forearms",
       "glutes",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -16713,8 +16713,8 @@
       "adductors",
       "forearms",
       "glutes",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -16741,8 +16741,8 @@
       "adductors",
       "forearms",
       "glutes",
-      "lower back",
-      "middle back",
+      "lower_back",
+      "middle_back",
       "quadriceps",
       "traps"
     ],
@@ -16760,9 +16760,9 @@
     "force": "static",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
@@ -16781,7 +16781,7 @@
     "force": "push",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "triceps"
     ],
@@ -16802,7 +16802,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -16823,7 +16823,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -16851,7 +16851,7 @@
     ],
     "secondaryMuscles": [
       "chest",
-      "lower back",
+      "lower_back",
       "shoulders"
     ],
     "instructions": [
@@ -16909,7 +16909,7 @@
     "mechanic": "compound",
     "equipment": "other",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -16975,7 +16975,7 @@
     "mechanic": "compound",
     "equipment": "barbell",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -17087,7 +17087,7 @@
       "forearms",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "shoulders",
       "traps",
       "triceps"
@@ -17104,7 +17104,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -17124,7 +17124,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": null,
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -17308,7 +17308,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -17354,7 +17354,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back",
+      "lower_back",
       "traps"
     ],
     "instructions": [
@@ -17408,7 +17408,7 @@
     "mechanic": "compound",
     "equipment": "kettlebells",
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
       "biceps",
@@ -17431,7 +17431,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -17454,8 +17454,8 @@
       "hamstrings"
     ],
     "secondaryMuscles": [
-      "lower back",
-      "middle back"
+      "lower_back",
+      "middle_back"
     ],
     "instructions": [
       "While seated, bend forward to hug your thighs from underneath with both arms.",
@@ -17470,10 +17470,10 @@
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "secondaryMuscles": [
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Clasp fingers together with your thumbs pointing down, round your shoulders as you reach your hands forward."
@@ -17570,7 +17570,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -17588,13 +17588,13 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "lats"
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -17653,14 +17653,14 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
-      "lower back"
+      "lower_back"
     ],
     "secondaryMuscles": [
       "glutes",
       "hamstrings",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "To begin, lie down on an exercise ball with your torso pressing against the ball and parallel to the floor. The ball of your feet should be pressed against the floor to help keep you balanced. Place a weighted plate under your chin or behind your neck. This is the starting position.",
@@ -17675,7 +17675,7 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "isolation",
-    "equipment": "exercise ball",
+    "equipment": "exercise_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -17718,7 +17718,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "medicine ball",
+    "equipment": "medicine_ball",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -17745,7 +17745,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Position a lightly loaded barbell across the back of your shoulders. You could also use a weighted vest, sandbag, or other type of resistance for this exercise.",
@@ -17766,7 +17766,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back"
+      "middle_back"
     ],
     "instructions": [
       "Attach a weight to a dip belt and secure it around your waist. Grab the pull-up bar with the palms of your hands facing forward. For a medium grip, your hands should be spaced at shoulder width. Both arms should be extended in front of you holding the bar at the chosen grip.",
@@ -17915,7 +17915,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -17939,7 +17939,7 @@
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -17957,13 +17957,13 @@
     "force": "pull",
     "level": "intermediate",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "lats"
     ],
     "secondaryMuscles": [
       "biceps",
-      "middle back",
+      "middle_back",
       "shoulders"
     ],
     "instructions": [
@@ -18007,7 +18007,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
@@ -18031,20 +18031,20 @@
     "secondaryMuscles": [
       "adductors",
       "glutes",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Begin with a barbell loaded on the floor. Adopt a wide stance, and then bend at the hips to grab the bar. Your hips should be as far back as possible, and your legs nearly straight. Keep your back straight, and your head and chest up. This will be your starting position.",
       "Begin the movement be engaging the hips, driving them forward as you allow the arms to hang straight. Continue until you are standing straight up, and then slowly return the weight to the starting position. For successive reps, the weight need not touch the floor."
     ],
-    "category": "olympic weightlifting"
+    "category": "olympic_weightlifting"
   },
   {
     "name": "Wind Sprints",
     "force": "pull",
     "level": "beginner",
     "mechanic": "compound",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "abdominals"
     ],
@@ -18069,7 +18069,7 @@
     "secondaryMuscles": [
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "Lie on your back with your arms extended out to the sides and your legs straight. This will be your starting position.",
@@ -18104,7 +18104,7 @@
     "force": "pull",
     "level": "beginner",
     "mechanic": "isolation",
-    "equipment": "body only",
+    "equipment": "body_only",
     "primaryMuscles": [
       "forearms"
     ],
@@ -18170,7 +18170,7 @@
       "calves",
       "glutes",
       "hamstrings",
-      "lower back"
+      "lower_back"
     ],
     "instructions": [
       "The yoke is usually done with a yoke apparatus, but is sometimes seen with refrigerators or other heavy objects.",

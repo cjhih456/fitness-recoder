@@ -1,4 +1,4 @@
-export enum Muscle {
+enum IMuscle {
   abdominals = 'abdominals',
   hamstrings = 'hamstrings',
   calves = 'calves',
@@ -18,25 +18,25 @@ export enum Muscle {
   neck = 'neck',
 }
 
-export enum Force {
+enum IForce {
   pull = 'pull',
   push = 'push',
   static = 'static',
 }
 
-export enum Level {
+enum ILevel {
   beginner = 'beginner',
   intermediate = 'intermediate',
   expert = 'expert',
 }
 
-export enum Mechanic {
+enum IMechanic {
   compound = 'compound',
   isolation = 'isolation',
 }
 
-export enum Equipment {
-  body = 'body only',
+enum IEquipment {
+  body_only = 'body only',
   machine = 'machine',
   kettlebells = 'kettlebells',
   dumbbell = 'dumbbell',
@@ -49,7 +49,7 @@ export enum Equipment {
   foam_roll = 'foam roll',
 }
 
-export enum Category {
+enum ICategory {
   strength = 'strength',
   stretching = 'stretching',
   plyometrics = 'plyometrics',
@@ -62,16 +62,16 @@ export enum Category {
   assisted_bodyweight = 'assisted bodyweight',
 }
 
-export interface Exercise {
+interface IExercise {
   name: string;
   aliases?: string[];
-  primaryMuscles: Muscle[];
-  secondaryMuscles: Muscle[];
-  force?: Force;
-  level: Level;
-  mechanic?: Mechanic;
-  equipment?: Equipment;
-  category: Category;
+  primaryMuscles: (keyof typeof IMuscle)[];
+  secondaryMuscles: (keyof typeof IMuscle)[];
+  force?: keyof typeof IForce;
+  level: keyof typeof ILevel;
+  mechanic?: keyof typeof IMechanic;
+  equipment?: keyof typeof IEquipment;
+  category: keyof typeof ICategory;
   instructions: string[];
   description?: string;
   tips?: string[];
