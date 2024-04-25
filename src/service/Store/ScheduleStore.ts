@@ -1,13 +1,14 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { Schedule } from './Schedule';
 
 type ScheduleStoreState = {
   store: ScheduleStore
 };
 
 type ScheduleStoreAction = {
-  setScheduleData: (schedule: ScheduleData) => void
-  getScheduleData: (year: number, month: number, date: number) => ScheduleData[]
+  setScheduleData: (schedule: Schedule) => void
+  getScheduleData: (year: number, month: number, date: number) => Schedule[]
 }
 
 const initStore: ScheduleStoreState = {

@@ -35,5 +35,5 @@ interface ScheduleData {
 
 
 interface ScheduleStore {
-  [date: string]: ScheduleData[]
+  [date: string]: Schedule[]
 }
