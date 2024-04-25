@@ -16,6 +16,6 @@ module.exports = {
     ],
     '@typescript-eslint/ban-ts-comment': 'off',
     quotes: ['error', 'single'],
-    indent: ['error', 2]
+    indent: ['error', 2, { SwitchCase: 1 }]
   },
 }
