@@ -76,3 +76,5 @@ interface IExercise {
   description?: string;
   tips?: string[];
 }
+
+type SelectedExercise = IExercise & { selected: boolean }

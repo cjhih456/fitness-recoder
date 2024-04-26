@@ -1,16 +1,20 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
+import { MdCheck } from 'react-icons/md';
 
 interface FitnessItemProps {
-  exercise: IExercise
-  onClick?: (exercise: IExercise) => void
+  exercise: SelectedExercise
+  useSelect?: boolean
+  onClick?: (exercise: IExercise, selected: boolean) => void
 }
-export default function FitnessItem({ exercise, onClick }: FitnessItemProps) {
-  return <Card className="fitness-item" onClick={() => { onClick && onClick(exercise) }}>
+export default function FitnessItem({ exercise, onClick, useSelect }: FitnessItemProps) {
+  return <Card className="fitness-item">
     <CardBody className="flex flex-row">
       <div className="flex-[100px] flex-grow-0 flex-shrink-0">
         {/* TODO: add image files */}
       </div>
-      <div className="flex flex-col flex-1 gap-y-2">
+      <div className="flex flex-col flex-1 gap-y-2" onClick={() => {
+        onClick && onClick(exercise, !exercise.selected)
+      }}>
         <h3 className="font-semibold">{exercise.name}</h3>
         <div>
           <Chip>{exercise.category}</Chip>
@@ -24,6 +28,11 @@ export default function FitnessItem({ exercise, onClick }: FitnessItemProps) {
           })}
         </div>
       </div>
+      {
+        useSelect && <div className="flex justify-center items-center">
+          {exercise.selected && <MdCheck></MdCheck>}
+        </div>
+      }
     </CardBody>
   </Card >
 }

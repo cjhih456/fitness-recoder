@@ -7,9 +7,11 @@ function FitnessList() {
   function goBack() {
     navigate('/')
   }
-  return <FitnessListSearch searchPrefix={
-    <Button isIconOnly radius="full" onClick={goBack}><MdArrowBack></MdArrowBack></Button>
-  }></FitnessListSearch>
+  return <div className="grid h-screen overflow-hiden">
+    <FitnessListSearch searchPrefix={
+      <Button isIconOnly radius="full" onClick={goBack}><MdArrowBack></MdArrowBack></Button>
+    }></FitnessListSearch>
+  </div>
 }
 
 export default FitnessList

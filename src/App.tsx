@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import FitnessList from './pages/FitnessList'
+import SelectSchedule from './pages/SelectSchedule'
 
 function App() {
   return <div className="dark flex justify-center">
@@ -10,7 +11,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/:selectDate/fitnessList' element={<FitnessList />} />
+          <Route path='/fitnessList' element={<FitnessList />} />
+          <Route path='/:selectDate/fitnessList' element={<SelectSchedule />} />
         </Routes>
       </Router>
     </main>
