@@ -3,13 +3,14 @@ import { Schedule, ScheduleType } from '../../service/Store/Schedule';
 import { useMemo } from 'react';
 import { useScheduleStore } from '../../service/Store/ScheduleStore';
 import { Button } from '@nextui-org/react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ScheduleListProps {
   choosenDate: string
 }
 
 export default function ScheduleList({ choosenDate }: ScheduleListProps) {
+  const navigate = useNavigate()
   // Schedule Store
   const scheduleStore = useScheduleStore()
   const [parsedDate, scheduleList] = useMemo(() => {
@@ -26,6 +27,9 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
     schedule.setBreakDay()
     scheduleStore.setScheduleData(schedule)
   }
+  function addSchedule() {
+    navigate(`${choosenDate}/schedule/create`)
+  }
 
   const displaySchedule = useMemo(() => {
     const schedule = scheduleList[0]
@@ -39,12 +43,10 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
         return <ScheduleDisplay key={schedule.id} schedule={schedule} index={idx} ></ScheduleDisplay>
       }))
     }
-    displayList.push(<div key="btn-menu" className="flex gap-x-3 justify-center">
-      <Link to={`${choosenDate}/fitnessList`}>
-        <Button className="bg-success-300">
-          Add Schedule
-        </Button>
-      </Link>
+    displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4">
+      <Button className="bg-success-300" onClick={addSchedule}>
+        Add Schedule
+      </Button>
       <Button className="bg-danger-400" onClick={addBreakDaySchedule}>
         Set Break Day
       </Button>

@@ -15,11 +15,15 @@ export default function FitnessItem({ exercise, onClick, useSelect }: FitnessIte
       <div className="flex flex-col flex-1 gap-y-2" onClick={() => {
         onClick && onClick(exercise, !exercise.selected)
       }}>
-        <h3 className="font-semibold">{exercise.name}</h3>
+        <h3 className="font-semibold"><span>{exercise.name}</span> {
+          useSelect && <span className="inline-block" >
+            {exercise.selected && <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white"><MdCheck size="0.75rem"></MdCheck></div>}
+          </span>
+        }</h3>
         <div>
-          <Chip>{exercise.category}</Chip>
+          {exercise.category}
         </div>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-1 flex-wrap">
           {exercise.primaryMuscles.map((muscle) => {
             return <Chip size='sm' key={muscle}>{muscle}</Chip>
           })}
@@ -28,11 +32,7 @@ export default function FitnessItem({ exercise, onClick, useSelect }: FitnessIte
           })}
         </div>
       </div>
-      {
-        useSelect && <div className="flex justify-center items-center">
-          {exercise.selected && <MdCheck></MdCheck>}
-        </div>
-      }
+
     </CardBody>
   </Card >
 }

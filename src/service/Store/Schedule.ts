@@ -95,7 +95,7 @@ export class Schedule implements ScheduleData {
           return 'bg-success-700 text-success-100'
       }
     }
-    return 'bg-default-500'
+    return 'text-default-500'
   }
 }
 

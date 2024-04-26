@@ -24,7 +24,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, on
 
   const daysCount = utils.getDaysByMonth(year)
   const startTemp = utils.calcWeek(year, month)
-  
+
   const temp = [[], [], [], [], [], []] as JSX.Element[][]
   const largeNum = daysCount[month - 1] + startTemp
   const times = 42
@@ -38,17 +38,16 @@ export default function DateCalander({ year, month, date, startDate, endDate, on
       temp[Math.floor(i / 7)].push(<Button
         key={`date-${todayDate}`}
         isDisabled={disable}
+        variant='bordered'
         onClick={() => onChange(todayDate)}
-        className={['flex-1', Schedule.calanderColor(year, month, todayDate, year, month, date, scheduleStore(year, month, todayDate))].join(' ')}
+        className={['flex-1 px-0 max-w-[40px]', Schedule.calanderColor(year, month, todayDate, year, month, date, scheduleStore(year, month, todayDate))].join(' ')}
         isIconOnly
         radius='full'
       >{todayDate}</Button>)
     }
   }
-  return <div className="flex gap-y-2 flex-col">
-    <div className="flex gap-x-2 flex-nowrap">
-      {dateStr.map((v, i) => <div key={`date-week-${i}`} className="flex-1 flex justify-center items-center w-10 h-10">{v}</div>)}
-    </div>
-    {temp.map((r, i) => <div key={`date-row-${i}`} className="flex flex-nowrap gap-x-2">{r}</div>)}
+  return <div className="grid grid-rows-7 grid-cols-7 gap-y-2 flex-col">
+    {dateStr.map((v, i) => <div key={`date-week-${i}`} className="flex-1 flex justify-center items-center w-10 h-10">{v}</div>)}
+    {temp}
   </div>
 }

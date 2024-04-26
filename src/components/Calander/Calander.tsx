@@ -104,7 +104,7 @@ export default function Calender({
 
 
   return (
-    <div className="w-min h-min border p-4 rounded-md flex flex-col gap-4 transition-size">
+    <div className="h-min border-medium border-divider p-4 rounded-medium flex flex-col gap-4 transition-size">
       {mode === 'year' && <YearCalander startYear={displayStartYear} year={choosenDay.year} endYear={displayEndYear} onChange={(v) => changeYear(v, true)} />}
       {mode === 'month' && [
         <div key='month-top' className="flex gap-2 justify-center content-center">

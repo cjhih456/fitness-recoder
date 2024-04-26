@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
-import { Divider } from '@nextui-org/react'
 
 function Home() {
   const [choosenDate, changeDate] = useState('')
@@ -15,11 +14,9 @@ function Home() {
   }, [])
 
   return (
-    <div className="flex flex-col items-center gap-y-3">
+    <div className="flex flex-col items-stretch gap-y-3 px-4">
       <Calender value={choosenDate} mode='date' onChange={changeDate} startMonth={1} startDate={1} endMonth={12} endDate={31} />
-      <Divider className="bg-default-700"></Divider>
-      <div>{choosenDate}</div>
-      <div className='grid'>
+      <div className='grid gap-y-3'>
         <ScheduleList choosenDate={choosenDate}></ScheduleList>
       </div>
     </div>
