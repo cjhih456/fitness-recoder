@@ -61,9 +61,14 @@ export class Schedule implements ScheduleData {
     this.type = ScheduleType.STARTED
   }
 
-  addExercise(exercise: ExerciseData) {
-    this.exerciseList.push(exercise)
+  addExercise(exercise: ExerciseData | ExerciseData[]) {
+    if (Array.isArray(exercise)) {
+      this.exerciseList = ([] as ExerciseData[]).concat(exercise)
+    } else {
+      this.exerciseList.push(exercise)
+    }
   }
+
 
   updateBreakTime(t: number) {
     this.breakTime = t
