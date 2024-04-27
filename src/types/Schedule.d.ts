@@ -6,10 +6,11 @@ enum IScheduleType {
 }
 
 interface Sets {
-  repeat: number
+  repeat: number,
+  isDone: boolean,
   weightUnit: WeightUnit
   weight?: number
-  time?: number
+  duration?: number
 }
 
 interface ExerciseData {

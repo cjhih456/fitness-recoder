@@ -40,7 +40,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
       return displayList
     } else if (scheduleList.length) {
       displayList.push(scheduleList.map((schedule, idx) => {
-        return <ScheduleDisplay key={schedule.id} schedule={schedule} index={idx} ></ScheduleDisplay>
+        return <ScheduleDisplay key={schedule.id} schedule={schedule} index={idx + 1} ></ScheduleDisplay>
       }))
     }
     displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4">
