@@ -27,14 +27,4 @@ export default function ScheduleDisplay({ schedule, index }: ScheduleDisplayProp
       </div>
     </AccordionItem>
   </Accordion>
-  // <Card>
-  //   <CardHeader>
-  //     <div>
-  //       <span>Part {index}</span>
-  //     </div>
-  //   </CardHeader>
-  //   <CardBody>
-
-  //   </CardBody>
-  // </Card>
 }

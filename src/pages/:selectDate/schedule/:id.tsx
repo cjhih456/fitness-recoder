@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
 import { useScheduleStore } from '../../../service/Store/ScheduleStore';
 import { useMemo, useState } from 'react';
-import { Schedule } from '../../../service/Store/Schedule';
 import { Button } from '@nextui-org/react';
 
 export default function DisplaySchedule() {

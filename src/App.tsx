@@ -6,8 +6,6 @@ import DisplaySchedule from './pages/:selectDate/schedule/:id'
 
 function App() {
   return <div className="dark flex justify-center">
-    {/* <header></header> */}
-    {/* <nav></nav> */}
     <main className="w-[420px]">
       <Router>
         <Routes>
