@@ -5,8 +5,8 @@ import FitnessList from './FitnessList'
 import { Category, Muscle } from '../../service/Fitness/FitnessDataEnums'
 interface FitnessListSearchProps {
   searchPrefix?: JSX.Element
-  selectedList?: IExercise[]
-  changeSelectedList?: (list: IExercise[]) => void
+  selectedList?: number[]
+  changeSelectedList?: (list: number[]) => void
 }
 
 

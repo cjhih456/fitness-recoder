@@ -3,26 +3,26 @@ import FitnessListSearch from './FitnessListSearch'
 import { useEffect, useState } from 'react'
 
 interface FitnessSearchModalProps {
-  selectedExercise: IExercise[]
+  selectedExerciseIdx: number[]
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
-  onChangeExerciseList?: (exerciseList: IExercise[]) => void
+  onChangeExerciseIdxList?: (exerciseList: number[]) => void
 }
 
 export default function FitnessSearchModal({
   isOpen,
   onOpenChange,
-  selectedExercise,
-  onChangeExerciseList
+  selectedExerciseIdx,
+  onChangeExerciseIdxList
 }: FitnessSearchModalProps) {
-  const [lazySelectedExercise, changeLazySelectedExercise] = useState<IExercise[]>([])
+  const [lazySelectedExerciseIdx, changeLazySelectedExerciseIdx] = useState<number[]>([])
   function saveSelectedExercise() {
-    if (!selectedExercise) return
-    onChangeExerciseList && onChangeExerciseList(lazySelectedExercise)
+    if (!selectedExerciseIdx) return
+    onChangeExerciseIdxList && onChangeExerciseIdxList(lazySelectedExerciseIdx)
   }
   useEffect(() => {
-    changeLazySelectedExercise(selectedExercise)
-  }, [selectedExercise, isOpen])
+    changeLazySelectedExerciseIdx(selectedExerciseIdx)
+  }, [selectedExerciseIdx, isOpen])
   return <Modal
     isOpen={isOpen}
     placement='bottom-center'
@@ -34,7 +34,7 @@ export default function FitnessSearchModal({
         <>
           <ModalHeader>Select Exercises</ModalHeader>
           <ModalBody>
-            <FitnessListSearch selectedList={lazySelectedExercise} changeSelectedList={changeLazySelectedExercise}></FitnessListSearch>
+            <FitnessListSearch selectedList={lazySelectedExerciseIdx} changeSelectedList={changeLazySelectedExerciseIdx}></FitnessListSearch>
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => {

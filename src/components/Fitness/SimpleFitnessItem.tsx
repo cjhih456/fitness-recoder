@@ -1,10 +1,14 @@
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
+import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas'
 
 interface SimpleFitnessItemProps {
   exercise: ExerciseData
 }
 export default function SimpleFitnessItem({ exercise }: SimpleFitnessItemProps) {
+  const exerciseData = useMemo(() => {
+    return getExerciseByIdx(exercise.exercise)
+  }, [exercise])
   const progress = useMemo(() => {
     if (!exercise.sets.length) return undefined
     const doneCount = exercise.sets.filter(v => v.isDone)
@@ -18,7 +22,7 @@ export default function SimpleFitnessItem({ exercise }: SimpleFitnessItemProps) 
     </div>
   }, [exercise])
   return <div className="flex justify-between items-center">
-    <div>{exercise.exercise.name}</div>
+    <div>{exerciseData.name}</div>
     <div>{progress}</div>
   </div>
 } 

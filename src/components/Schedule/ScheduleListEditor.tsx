@@ -4,16 +4,16 @@ import FitnessList from '../Fitness/FitnessList'
 import { Button } from '@nextui-org/react'
 
 interface ScheduleListEditorProps {
-  savedData?: IExercise[]
-  exerciseList: IExercise[]
-  onChangeExerciseList?: React.Dispatch<React.SetStateAction<IExercise[]>>
+  savedIdxData?: number[]
+  exerciseIdxList: number[]
+  onChangeExerciseIdxList?: React.Dispatch<React.SetStateAction<number[]>>
   children?: JSX.Element
 }
 
 export default function ScheduleListEditor({
-  savedData,
-  exerciseList,
-  onChangeExerciseList,
+  savedIdxData,
+  exerciseIdxList,
+  onChangeExerciseIdxList,
   children
 }: ScheduleListEditorProps) {
 
@@ -25,33 +25,33 @@ export default function ScheduleListEditor({
     changeDialogState(true)
   }
 
-  const [lazyExerciseList, changeLazyExerciseList] = useState<IExercise[]>([])
+  const [lazyExerciseIdxList, changeLazyExerciseIdxList] = useState<number[]>([])
 
   useEffect(() => {
-    changeLazyExerciseList(() => {
-      return ([] as IExercise[]).concat(exerciseList, savedData ?? [])
+    changeLazyExerciseIdxList(() => {
+      return ([] as number[]).concat(exerciseIdxList, savedIdxData ?? [])
     })
   }, [])
 
 
   /**
    * update seleted list
-   * @param selectedExerciseList new selected list of exercises
+   * @param selectedExerciseList new selected list of exercise index
    */
-  function changeSelectedExerciseList(selectedExerciseList: IExercise[]) {
-    changeLazyExerciseList((current) => {
-      const tempList = [] as IExercise[]
+  function changeSelectedExerciseIdxList(selectedExerciseList: number[]) {
+    changeLazyExerciseIdxList((current) => {
+      const tempList = [] as number[]
       current.forEach(data => {
-        if (selectedExerciseList.findIndex(exercise => exercise.name === data.name) !== -1) {
+        if (selectedExerciseList.includes(data)) {
           tempList.push(data)
         }
       })
       selectedExerciseList.forEach(v => {
-        if (tempList.findIndex(data => data.name === v.name) === -1) {
+        if (!tempList.includes(v)) {
           tempList.push(v)
         }
       })
-      onChangeExerciseList && onChangeExerciseList(tempList)
+      onChangeExerciseIdxList && onChangeExerciseIdxList(tempList)
       return tempList
     })
   }
@@ -60,12 +60,12 @@ export default function ScheduleListEditor({
     <FitnessSearchModal
       isOpen={dialogState}
       onOpenChange={changeDialogState}
-      selectedExercise={lazyExerciseList}
-      onChangeExerciseList={changeSelectedExerciseList}
+      selectedExerciseIdx={lazyExerciseIdxList}
+      onChangeExerciseIdxList={changeSelectedExerciseIdxList}
     ></FitnessSearchModal>
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col gap-y-2">
-        <FitnessList list={lazyExerciseList}></FitnessList>
+        <FitnessList list={lazyExerciseIdxList}></FitnessList>
       </div>
       <div className="grid grid-cols-2 gap-x-2">
         <Button onClick={openSearchDialog}>Add Exercise</Button>

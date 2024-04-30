@@ -1,6 +1,6 @@
 import Data from './FitnessData.json'
 import { Category, Equipment, Force, Level, Mechanic, Muscle } from './FitnessDataEnums'
-export const exercises = Data as IExercise[]
+export const exercises = (Data as IExercise[]).map((v, idx) => { v.idx = idx; return v })
 
 export const muscleList: { value: Muscle, text: string }[] = [
   { value: Muscle.abdominals, text: 'Abdominals' },
@@ -34,6 +34,9 @@ export const categoryList: { value: Category, text: string }[] = [
   { value: Category.assisted_bodyweight, text: 'Assisted Bodyweight' },
 ]
 
+export function getExerciseByIdx(idx: number) {
+  return exercises[idx]
+}
 
 export function filterExcercises(name: string, category: Category[], force?: Force[], level?: Level[], muscle?: Muscle[], mechanic?: Mechanic[], equipment?: Equipment[]) {
   return exercises.filter((exer) => {
@@ -62,5 +65,5 @@ export function filterExcercises(name: string, category: Category[], force?: For
       if (exer.equipment && !equipment.includes(exer.equipment as Equipment)) return false
     }
     return true
-  })
+  }).map(v => v.idx)
 }

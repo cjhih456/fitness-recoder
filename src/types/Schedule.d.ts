@@ -15,7 +15,7 @@ interface Sets {
 }
 
 interface ExerciseData {
-  exercise: IExercise,
+  exercise: number, // IExercise.idx
   sets: Sets[]
 }
 

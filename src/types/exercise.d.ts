@@ -63,6 +63,7 @@ enum ICategory {
 }
 
 interface IExercise {
+  idx: number
   name: string;
   aliases?: string[];
   primaryMuscles: (keyof typeof IMuscle)[];

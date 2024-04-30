@@ -10,21 +10,23 @@ export default function DisplaySchedule() {
   const navigate = useNavigate()
   const scheduleStore = useScheduleStore()
   const selectedSchedule = useMemo(() => scheduleStore.getSchedule(id || ''), [scheduleStore, id])
-  const savedExerciseList = useMemo(
+  const savedExerciseIdxList = useMemo(
     () =>
       selectedSchedule?.exerciseList.map(v => v.exercise), [selectedSchedule, id]);
-
-  const [exerciseList, changeExerciseList] = useState<IExercise[]>([])
+  /**
+   * exerciseIndexList
+   */
+  const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {
     if (!selectDate || !selectedSchedule) return
-    scheduleStore.addExercise(id || '', exerciseList.map(v => ({
+    scheduleStore.addExercise(id || '', exerciseIdxList.map(v => ({
       exercise: v,
       sets: []
     }) as ExerciseData))
     navigate('/')
   }
 
-  return <ScheduleListEditor savedData={savedExerciseList} exerciseList={exerciseList} onChangeExerciseList={changeExerciseList}>
+  return <ScheduleListEditor savedIdxData={savedExerciseIdxList} exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
     <Button onClick={startFitnessTime}>Save Exercise</Button>
   </ScheduleListEditor>
 }

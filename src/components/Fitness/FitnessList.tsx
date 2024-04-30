@@ -3,10 +3,11 @@ import FitnessItem from './FitnessItem';
 import { useEffect, useMemo, useState } from 'react';
 import useIntersectionObserver from '../../hooks/IntersectionObserver';
 
+export type FitnessListSelectedProps = { selected: boolean, idx: number }
 interface FitnessListProps {
-  list: IExercise[]
-  selectedList?: IExercise[]
-  changeSelectedList?: (selectedList: IExercise[]) => void
+  list: number[]
+  selectedList?: number[]
+  changeSelectedList?: (selectedList: number[]) => void
 }
 
 export default function FitnessList({ list, selectedList, changeSelectedList }: FitnessListProps) {
@@ -15,13 +16,14 @@ export default function FitnessList({ list, selectedList, changeSelectedList }: 
     changePage((v) => v + 1)
   })
   const useSelect = useMemo(() => Boolean(selectedList), [selectedList])
-  const selectedNameList = useMemo(() => selectedList?.map(v => v.name), [selectedList])
-  const displayList = useMemo<SelectedExercise[]>(() => {
-    return list.slice(0, page * 10).map(v => ({
-      selected: selectedNameList?.includes(v.name) || false,
-      ...v
-    }))
-  }, [list, page, selectedNameList])
+  const displayList = useMemo<FitnessListSelectedProps[]>(() => {
+    return list.slice(0, page * 10).map(v => {
+      return {
+        selected: selectedList?.includes(v) || false,
+        idx: v
+      }
+    })
+  }, [list, page, selectedList])
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: 'smooth' })
@@ -35,12 +37,12 @@ export default function FitnessList({ list, selectedList, changeSelectedList }: 
       disconnect()
     }
   }, [list])
-  function selectExercise(exercise: IExercise, selected: boolean) {
+  function selectExercise(exercise: FitnessListSelectedProps, selected: boolean) {
     if (changeSelectedList) {
       if (selected) {
-        changeSelectedList(([] as IExercise[]).concat(selectedList || [], exercise))
+        changeSelectedList(([] as number[]).concat(selectedList || [], exercise.idx))
       } else {
-        changeSelectedList(selectedList?.filter(e => e.name !== exercise.name) || [])
+        changeSelectedList(selectedList?.filter(e => e !== exercise.idx) || [])
       }
     }
   }
@@ -62,7 +64,7 @@ export default function FitnessList({ list, selectedList, changeSelectedList }: 
   return (
     <div className="flex flex-col gap-y-4 pt-4">
       {displayList.map(exercise => (
-        <FitnessItem key={exercise.name} exercise={exercise} useSelect={useSelect} onClick={selectExercise}></FitnessItem>
+        <FitnessItem key={exercise.idx} selectedExercise={exercise} useSelect={useSelect} onClick={selectExercise}></FitnessItem>
       ))}
       {spinner}
     </div>

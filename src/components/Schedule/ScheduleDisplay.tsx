@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem, Button } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
-import { Schedule } from '../../service/Store/ScheduleKeyStore'
+import { Schedule } from '../../service/Store/ScheduleInfoStore'
 
 interface ScheduleDisplayProps {
   schedule: Schedule

@@ -5,10 +5,9 @@ interface SimpleFitnessListProps {
 }
 
 export default function SimpleFitnessList({ list }: SimpleFitnessListProps) {
-
   return <div className="flex flex-col gap-y-2">
     {list.map(exercise => (
-      <SimpleFitnessItem key={exercise.exercise.name} exercise={exercise} />
+      <SimpleFitnessItem key={exercise.exercise} exercise={exercise} />
     ))}
   </div>
 }

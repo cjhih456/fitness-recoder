@@ -10,19 +10,19 @@ export default function CreateSchedule() {
   const scheduleStore = useScheduleStore()
   const [year, month, date] = useMemo(() => selectDate && selectDate.split('-').map(v => +v) || [0, 0, 0], [selectDate])
 
-  const [exerciseList, changeExerciseList] = useState<IExercise[]>([])
+  const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {
     if (!selectDate) return
     const schedule = scheduleStore.createSchedule(year, month, date)
 
-    scheduleStore.addExercise(schedule, exerciseList.map(v => ({
+    scheduleStore.addExercise(schedule, exerciseIdxList.map(v => ({
       exercise: v,
       sets: []
     }) as ExerciseData))
     navigate('/')
   }
 
-  return <ScheduleListEditor exerciseList={exerciseList} onChangeExerciseList={changeExerciseList}>
+  return <ScheduleListEditor exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
     <Button onClick={startFitnessTime}>Save Exercise</Button>
   </ScheduleListEditor>
 }
