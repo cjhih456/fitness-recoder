@@ -1,9 +1,8 @@
 import { Button } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Schedule } from '../../../service/Store/Schedule';
-import { useScheduleStore } from '../../../service/Store/ScheduleStore';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
+import useScheduleStore from '../../../service/Store/ScheduleStoreHooks';
 
 export default function CreateSchedule() {
   const { selectDate } = useParams()
@@ -14,12 +13,12 @@ export default function CreateSchedule() {
   const [exerciseList, changeExerciseList] = useState<IExercise[]>([])
   function startFitnessTime() {
     if (!selectDate) return
-    const schedule = new Schedule(year, month, date)
-    schedule.addExercise(exerciseList.map(v => ({
+    const schedule = scheduleStore.createSchedule(year, month, date)
+
+    scheduleStore.addExercise(schedule, exerciseList.map(v => ({
       exercise: v,
       sets: []
     }) as ExerciseData))
-    scheduleStore.setScheduleData(schedule)
     navigate('/')
   }
 

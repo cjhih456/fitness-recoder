@@ -1,20 +1,22 @@
 import { Accordion, AccordionItem, Button } from '@nextui-org/react'
-import { Schedule } from '../../service/Store/Schedule'
 import { useNavigate } from 'react-router-dom'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
+import { Schedule } from '../../service/Store/ScheduleKeyStore'
 
 interface ScheduleDisplayProps {
   schedule: Schedule
   index: number
+  date: string
+  id: string
 }
 
-export default function ScheduleDisplay({ schedule, index }: ScheduleDisplayProps) {
+export default function ScheduleDisplay({ date, id, schedule, index }: ScheduleDisplayProps) {
   const navigate = useNavigate()
   function gotoModify() {
-    navigate(`${schedule.year}-${schedule.month}-${schedule.date}/schedule/${schedule.id}`)
+    navigate(`${date}/schedule/${id}`)
   }
   function startSchedule() {
-    navigate(`${schedule.year}-${schedule.month}-${schedule.date}/workout/${schedule.id}`)
+    navigate(`${date}/workout/${id}`)
   }
   return <Accordion variant='bordered'>
     <AccordionItem title={`Part ${index}`}>

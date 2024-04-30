@@ -1,8 +1,9 @@
 enum IScheduleType {
   BREAK = 'BREAK',
-  FINISH = 'FINISH',
   SCHEDULED = 'SCHEDULED',
-  STARTED = 'STARTED'
+  STARTED = 'STARTED',
+  PAUSED = 'PAUSED',
+  FINISH = 'FINISH',
 }
 
 interface Sets {
@@ -24,9 +25,6 @@ interface ExercisePreset {
 }
 
 interface ScheduleData {
-  year: number,
-  month: number,
-  date: number,
   start: number
   breakTime: number
   workoutTimes: number
@@ -36,5 +34,5 @@ interface ScheduleData {
 
 
 interface ScheduleStore {
-  [date: string]: Schedule[]
+  [date: string]: { [id: string]: Schedule }
 }

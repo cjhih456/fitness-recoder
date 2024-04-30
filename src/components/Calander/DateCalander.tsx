@@ -1,8 +1,7 @@
 import { Button } from '@nextui-org/react'
 import utils from '../utils'
 import { useMemo } from 'react'
-import { Schedule } from '../../service/Store/Schedule'
-import { useScheduleStore } from '../../service/Store/ScheduleStore'
+import useScheduleStore, { calanderColor } from '../../service/Store/ScheduleStoreHooks'
 
 interface DateCalanderProps {
   year: number
@@ -17,7 +16,7 @@ const dateStr = ['일', '월', '화', '수', '목', '금', '토']
 
 export default function DateCalander({ year, month, date, startDate, endDate, onChange }: DateCalanderProps) {
   // Store
-  const scheduleStore = useScheduleStore(state => state.getScheduleData)
+  const scheduleStore = useScheduleStore()
 
   const displayStartDate = useMemo(() => startDate || 0, [startDate])
   const displayEndDate = useMemo(() => endDate || 32, [endDate])
@@ -40,7 +39,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, on
         isDisabled={disable}
         variant='bordered'
         onClick={() => onChange(todayDate)}
-        className={['flex-1 px-0 max-w-[40px]', Schedule.calanderColor(year, month, todayDate, year, month, date, scheduleStore(year, month, todayDate))].join(' ')}
+        className={['flex-1 px-0 max-w-[40px]', calanderColor(year, month, todayDate, year, month, date, scheduleStore.getScheduleByData(year, month, todayDate))].join(' ')}
         isIconOnly
         radius='full'
       >{todayDate}</Button>)

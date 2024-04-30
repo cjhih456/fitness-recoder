@@ -1,24 +1,23 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
-import { useScheduleStore } from '../../../service/Store/ScheduleStore';
 import { useMemo, useState } from 'react';
 import { Button } from '@nextui-org/react';
+import useScheduleStore from '../../../service/Store/ScheduleStoreHooks';
 
 export default function DisplaySchedule() {
 
   const { selectDate, id } = useParams()
   const navigate = useNavigate()
   const scheduleStore = useScheduleStore()
-  const [year, month, date] = useMemo(() => selectDate && selectDate.split('-').map(v => +v) || [0, 0, 0], [selectDate])
-  const selectedSchedule = useMemo(() => scheduleStore.getScheduleData(year, month, date).find(v => v.id === id), [scheduleStore, year, month, date])
+  const selectedSchedule = useMemo(() => scheduleStore.getSchedule(id || ''), [scheduleStore, id])
   const savedExerciseList = useMemo(
     () =>
       selectedSchedule?.exerciseList.map(v => v.exercise), [selectedSchedule, id]);
 
   const [exerciseList, changeExerciseList] = useState<IExercise[]>([])
   function startFitnessTime() {
-    if (!selectDate) return
-    selectedSchedule?.addExercise(exerciseList.map(v => ({
+    if (!selectDate || !selectedSchedule) return
+    scheduleStore.addExercise(id || '', exerciseList.map(v => ({
       exercise: v,
       sets: []
     }) as ExerciseData))
