@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import FitnessList from './pages/FitnessList'
 import CreateSchedule from './pages/:selectDate/schedule/create'
 import DisplaySchedule from './pages/:selectDate/schedule/:id'
+import DisplayWorkout from './pages/:selectDate/workout/:id'
 
 function App() {
   return <div className="dark flex justify-center">
@@ -17,7 +18,7 @@ function App() {
               <Route path=':id' element={<DisplaySchedule />} />
             </Route>
             <Route path='workout'>
-              <Route path=":id"></Route>
+              <Route path=":id" element={<DisplayWorkout />}></Route>
             </Route>
           </Route>
         </Routes>

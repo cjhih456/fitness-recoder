@@ -5,20 +5,17 @@ import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor'
 import useScheduleStore from '../../../service/Store/ScheduleStoreHooks';
 
 export default function CreateSchedule() {
-  const { selectDate } = useParams()
   const navigate = useNavigate()
+  const { selectDate } = useParams()
   const scheduleStore = useScheduleStore()
   const [year, month, date] = useMemo(() => selectDate && selectDate.split('-').map(v => +v) || [0, 0, 0], [selectDate])
 
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {
     if (!selectDate) return
-    const schedule = scheduleStore.createSchedule(year, month, date)
+    const scheduleIdx = scheduleStore.createSchedule(year, month, date)
 
-    scheduleStore.addExercise(schedule, exerciseIdxList.map(v => ({
-      exercise: v,
-      sets: []
-    }) as ExerciseData))
+    scheduleStore.addExerciseListByScheduleWithExerciseData(scheduleIdx || '', exerciseIdxList)
     navigate('/')
   }
 

@@ -1,28 +1,33 @@
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas'
+import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
 
 interface SimpleFitnessItemProps {
-  exercise: ExerciseData
+  exerciseDataIdx: string
 }
-export default function SimpleFitnessItem({ exercise }: SimpleFitnessItemProps) {
+export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItemProps) {
+  const scheduleStore = useScheduleStore()
   const exerciseData = useMemo(() => {
-    return getExerciseByIdx(exercise.exercise)
-  }, [exercise])
+    return scheduleStore.getExerciseData(exerciseDataIdx)
+  }, [exerciseDataIdx])
+  const exerciseDisplay = useMemo(() => {
+    return getExerciseByIdx(exerciseData.exercise)
+  }, [exerciseData])
   const progress = useMemo(() => {
-    if (!exercise.sets.length) return undefined
-    const doneCount = exercise.sets.filter(v => v.isDone)
-    if (doneCount.length !== exercise.sets.length) {
+    if (!exerciseData.sets.length) return undefined
+    const doneCount = exerciseData.sets.filter(v => v.isDone)
+    if (doneCount.length !== exerciseData.sets.length) {
       return <div>
-        {doneCount.length}/{exercise.sets.length}
+        {doneCount.length}/{exerciseData.sets.length}
       </div>
     }
     return <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">
       <MdCheck size="0.75rem"></MdCheck>
     </div>
-  }, [exercise])
+  }, [exerciseData])
   return <div className="flex justify-between items-center">
-    <div>{exerciseData.name}</div>
+    <div>{exerciseDisplay.name}</div>
     <div>{progress}</div>
   </div>
 } 

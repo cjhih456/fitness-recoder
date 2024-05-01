@@ -15,13 +15,15 @@ interface Sets {
 }
 
 interface ExerciseData {
-  exercise: number, // IExercise.idx
+  /** IExercise.idx */
+  exercise: number,
   sets: Sets[]
 }
 
 interface ExercisePreset {
   name: string
-  exerciseList: ExerciseData[]
+  /** ExerciseData key */
+  exerciseList: string[]
 }
 
 interface ScheduleData {
@@ -29,9 +31,17 @@ interface ScheduleData {
   breakTime: number
   workoutTimes: number
   type: keyof typeof IScheduleType
-  exerciseList: ExerciseData[]
+  /** ExerciseData key */
+  exerciseList: string[]
 }
 
+type Schedule = {
+  id: string
+  year: number
+  month: number
+  date: number
+  beforeTime: number
+} & ScheduleData
 
 interface ScheduleStore {
   [date: string]: { [id: string]: Schedule }

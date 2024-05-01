@@ -3,19 +3,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { ScheduleType } from './ScheduleStoreHooks'
 
-export interface Schedule {
-  id: string
-  year: number
-  month: number
-  date: number
-  start: number
-  breakTime: number
-  type: ScheduleType
-  workoutTimes: number
-  beforeTime: number
-  exerciseList: ExerciseData[]
-}
-
 type ScheduleStoreState = {
   store: { [key: string]: Schedule }
 };
@@ -26,9 +13,10 @@ type ScheduleStoreAction = {
   createSchedule: (year: number, month: number, date: number) => string
   setStartTime: (id: string, v: number) => void
   updateTimer: (id: string) => void
-  addExercise: (id: string, exercise: ExerciseData | ExerciseData[]) => void
+  addExercise: (id: string, exercise: string | string[]) => void
   startSchedule: (id: string) => void
-  pauseTimer: (id: string) => void
+  pauseSchedule: (id: string) => void
+  successSchedule: (id: string) => void
   setBreakDay: (id: string) => void
   updateBreakTime: (id: string, t: number) => void
 }
@@ -86,10 +74,10 @@ export const useScheduleInfoStore = create<ScheduleStoreState & ScheduleStoreAct
     },
     updateTimer: (id) => {
       get().baseFunction(id, (schedule) => {
-        if (schedule.type !== ScheduleType.STARTED) return schedule
+        if (schedule.type !== ScheduleType.STARTED) return
 
-        const nowTime = Math.floor(new Date().getTime() / 1000)
-        schedule.workoutTimes = nowTime - (schedule.beforeTime ?? schedule.start)
+        const nowTime = new Date().getTime()
+        schedule.workoutTimes += nowTime - (schedule.beforeTime ?? schedule.start)
         schedule.beforeTime = nowTime
       })
     },
@@ -101,21 +89,29 @@ export const useScheduleInfoStore = create<ScheduleStoreState & ScheduleStoreAct
     addExercise: (id, exercise) => {
       get().baseFunction(id, (schedule) => {
         if (Array.isArray(exercise)) {
-          schedule.exerciseList = ([] as ExerciseData[]).concat(exercise)
+          schedule.exerciseList = ([] as string[]).concat(exercise)
         } else {
-          schedule.exerciseList = ([] as ExerciseData[]).concat(schedule.exerciseList, exercise)
+          schedule.exerciseList = ([] as string[]).concat(schedule.exerciseList, exercise)
         }
       })
     },
+
     startSchedule: (id) => {
       get().baseFunction(id, (schedule) => {
-        schedule.start = Math.floor(new Date().getTime() / 1000)
+        const now = new Date().getTime()
+        schedule.start = schedule.start || now
+        schedule.beforeTime = now
         schedule.type = ScheduleType.STARTED
       })
     },
-    pauseTimer: (id) => {
+    pauseSchedule: (id) => {
       get().baseFunction(id, (schedule) => {
         schedule.type = ScheduleType.PAUSED
+      })
+    },
+    successSchedule: (id) => {
+      get().baseFunction(id, (schedule) => {
+        schedule.type = ScheduleType.FINISH
       })
     },
     setBreakDay: (id) => {

@@ -1,7 +1,6 @@
 import { Accordion, AccordionItem, Button } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
-import { Schedule } from '../../service/Store/ScheduleInfoStore'
 
 interface ScheduleDisplayProps {
   schedule: Schedule
@@ -21,7 +20,7 @@ export default function ScheduleDisplay({ date, id, schedule, index }: ScheduleD
   return <Accordion variant='bordered'>
     <AccordionItem title={`Part ${index}`}>
       <div className="flex flex-col gap-y-2">
-        <SimpleFitnessList list={schedule.exerciseList} />
+        <SimpleFitnessList exerciseDataIdxList={schedule.exerciseList} />
         <div className="grid grid-cols-2 gap-x-4">
           <Button onClick={gotoModify}>Modify</Button>
           <Button onClick={startSchedule}>Start</Button>
