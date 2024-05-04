@@ -93,10 +93,12 @@ const useScheduleStore = () => {
     scheduleInfoStore.addExercise(scheduleIdx, tempArray)
     exerciseDataIdxList.forEach(v => scheduleExerciseDataStore.removeExerciseData(v))
   }
-  // const createSet = (scheduleId, exerciseIdx) => {
-  //   const id = scheduleSetStore.createSet()
-  //   scheduleInfoStore.getSchedule(scheduleId)
-  // }
+
+  const appendSetByExerciseDataIdx = (exerciseDataIdx: string) => {
+    const setId = scheduleSetStore.createSet()
+    scheduleExerciseDataStore.appendSetByExerciseDataIdx(exerciseDataIdx, setId)
+  }
+
   return {
     getScheduleByData,
     getSchedule,
@@ -104,6 +106,7 @@ const useScheduleStore = () => {
     setBreakDay,
     addExerciseListByScheduleWithExerciseData,
     deleteExerciseDataBySchedule,
+    appendSetByExerciseDataIdx,
 
     getRelationByDate: scheduleKeyStore.getRelationByDate,
     updateScheduleTimer: scheduleInfoStore.updateTimer,
@@ -114,7 +117,10 @@ const useScheduleStore = () => {
     // ExerciseData methods
     createExerciseData: scheduleExerciseDataStore.createExerciseData,
     getExerciseData: scheduleExerciseDataStore.getExerciseData,
+    removeSetByExerciseDataIdx: scheduleExerciseDataStore.removeSetByExerciseDataIdx,
+
     // sets methods
+    getSetData: scheduleSetStore.getSet,
     updateSetWeight: scheduleSetStore.updateSetWeight,
     updateSetWeightUnit: scheduleSetStore.updateSetWeightUnit,
     updateSetIsDone: scheduleSetStore.updateSetIsDone,

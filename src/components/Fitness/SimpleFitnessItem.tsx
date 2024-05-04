@@ -14,12 +14,15 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
   const exerciseDisplay = useMemo(() => {
     return getExerciseByIdx(exerciseData.exercise)
   }, [exerciseData])
+  const setData = useMemo(() => {
+    return exerciseData.sets.map(v => scheduleStore.getSetData(v))
+  }, [exerciseData, scheduleStore])
   const progress = useMemo(() => {
-    if (!exerciseData.sets.length) return undefined
-    const doneCount = exerciseData.sets.filter(v => v.isDone)
-    if (doneCount.length !== exerciseData.sets.length) {
+    if (!setData.length) return undefined
+    const doneCount = setData.filter(v => v.isDone)
+    if (doneCount.length !== setData.length) {
       return <div>
-        {doneCount.length}/{exerciseData.sets.length}
+        {doneCount.length}/{setData.length}
       </div>
     }
     return <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">

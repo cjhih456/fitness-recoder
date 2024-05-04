@@ -17,7 +17,8 @@ interface Sets {
 interface ExerciseData {
   /** IExercise.idx */
   exercise: number,
-  sets: Sets[]
+  /** Set store idx */
+  sets: string[]
 }
 
 interface ExercisePreset {

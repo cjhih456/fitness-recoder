@@ -7,6 +7,7 @@ type ScheduleSetStoreType = {
 }
 
 type ScheduleSetStoreAction = {
+  getSet: (setId: string) => Sets
   baseFunction: (id: string, fn: (scheduleSet: Sets) => void) => void
   createSet: () => string
   updateSetWeight: (id: string, weight: number) => void
@@ -19,6 +20,9 @@ type ScheduleSetStoreAction = {
 export const useScheduleSetStore = create<ScheduleSetStoreType & ScheduleSetStoreAction>()(
   persist((set, get) => ({
     store: {},
+    getSet: (setId) => {
+      return get().store[setId]
+    },
     createSet: () => {
       const id = uuidv4()
       set(state => {

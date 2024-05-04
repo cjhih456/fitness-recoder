@@ -12,6 +12,8 @@ type ScheduleExerciseDataStoreAction = {
   getExerciseData: (id: string) => ExerciseData
   changeExerciseById: (id: string, exercise: number) => void
   removeExerciseData: (exerciseDataIdx: string) => void
+  appendSetByExerciseDataIdx: (id: string, setId: string) => void
+  removeSetByExerciseDataIdx: (id: string, setId: string) => void
 }
 
 export const useScheduleExerciseDataStore = create<ScheduleExerciseDataStoreType & ScheduleExerciseDataStoreAction>()(
@@ -56,7 +58,17 @@ export const useScheduleExerciseDataStore = create<ScheduleExerciseDataStoreType
         ...state,
         store: exerciseData
       }))
-    }
+    },
+    appendSetByExerciseDataIdx: (id, setIdx) => {
+      get().baseFunction(id, (exerciseData) => {
+        exerciseData.sets = [...exerciseData.sets, setIdx]
+      })
+    },
+    removeSetByExerciseDataIdx: (id, setIdx) => {
+      get().baseFunction(id, (exerciseData) => {
+        exerciseData.sets = exerciseData.sets.filter(v => v !== setIdx)
+      })
+    },
   }), {
     name: 'fitness-exercise-data',
     storage: createJSONStorage(() => localStorage)
