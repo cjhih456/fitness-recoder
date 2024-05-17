@@ -8,6 +8,7 @@ type ScheduleSetStoreType = {
 
 type ScheduleSetStoreAction = {
   getSet: (setId: string) => Sets
+  getSetList: (setIds: string[]) => Sets[]
   baseFunction: (id: string, fn: (scheduleSet: Sets) => void) => void
   createSet: () => string
   updateSetWeight: (id: string, weight: number) => void
@@ -23,10 +24,14 @@ export const useScheduleSetStore = create<ScheduleSetStoreType & ScheduleSetStor
     getSet: (setId) => {
       return get().store[setId]
     },
+    getSetList: (setIds) => {
+      return setIds.map(v => get().store[v])
+    },
     createSet: () => {
       const id = uuidv4()
       set(state => {
         const tempObj = {
+          id,
           isDone: false,
           repeat: 10,
           weightUnit: 'kg',

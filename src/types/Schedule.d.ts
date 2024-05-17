@@ -7,8 +7,9 @@ enum IScheduleType {
 }
 
 interface Sets {
-  repeat: number,
-  isDone: boolean,
+  id: string
+  repeat: number
+  isDone: boolean
   weightUnit: WeightUnit
   weight?: number
   duration?: number
@@ -16,7 +17,7 @@ interface Sets {
 
 interface ExerciseData {
   /** IExercise.idx */
-  exercise: number,
+  exercise: number
   /** Set store idx */
   sets: string[]
 }

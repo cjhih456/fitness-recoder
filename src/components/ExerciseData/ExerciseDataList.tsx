@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import ExerciseDataDisplay from './ExerciseDataDisplay';
 import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 
 interface ExerciseDataListProps {
@@ -12,6 +12,7 @@ export default function ExerciseDataList({
   scheduleIdx
 }: ExerciseDataListProps) {
   const scheduleStore = useScheduleStore()
+  const [selectedKeys, changeSelectedKeys] = useState<'all' | string[]>([])
   const scheduleData = useMemo(() => {
     return scheduleStore.getSchedule(scheduleIdx)
   }, [scheduleStore, scheduleIdx])
@@ -25,16 +26,31 @@ export default function ExerciseDataList({
         name: exercise.name
       }
     })
-
   }, [scheduleStore, scheduleData])
-  return <Accordion selectionBehavior="replace" variant='splitted'>
-    {exerciseList.map((exerciseData) => {
+
+  function changeSelection(key: string) {
+    if (selectedKeys[0] === key) {
+      changeSelectedKeys([])
+    } else {
+      changeSelectedKeys([key])
+    }
+  }
+
+  function gotoNextExercise(index: number) {
+    if (exerciseList[index + 1]) {
+      changeSelectedKeys([exerciseList[index + 1].idx])
+    }
+  }
+
+  return <Accordion selectionBehavior="replace" variant='splitted' selectedKeys={selectedKeys}>
+    {exerciseList.map((exerciseData, index) => {
       return <AccordionItem
         key={`${exerciseData.idx}`}
         title={exerciseData.name}
         classNames={{ heading: 'font-bold' }}
+        onPress={() => changeSelection(exerciseData.idx)}
       >
-        <ExerciseDataDisplay exerciseDataIdx={exerciseData.idx}></ExerciseDataDisplay>
+        <ExerciseDataDisplay exerciseDataIdx={exerciseData.idx} hasDoneLastSet={() => gotoNextExercise(index)}></ExerciseDataDisplay>
       </AccordionItem>
     })}
   </Accordion>

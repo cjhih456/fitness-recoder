@@ -5,30 +5,40 @@ import SetRow from './SetRow';
 
 interface ExerciseDataDisplayProps {
   exerciseDataIdx: string
+  hasDoneLastSet?: () => void
 }
 
 export default function ExerciseDataDisplay({
-  exerciseDataIdx
+  exerciseDataIdx,
+  hasDoneLastSet
 }: ExerciseDataDisplayProps) {
   const scheduleStore = useScheduleStore()
+
   const exerciseData = useMemo(() => {
     return scheduleStore.getExerciseData(exerciseDataIdx)
   }, [scheduleStore, exerciseDataIdx])
-  const setList = useMemo(() => {
-    return exerciseData.sets.map((setId, index) => {
-      return <SetRow key={setId} index={index + 1} setId={setId}></SetRow>
-    })
-  }, [exerciseData.sets])
+  const setData = useMemo(() => {
+    return scheduleStore.getSetListData(exerciseData.sets)
+  }, [exerciseData, scheduleStore])
+
   function appendSet() {
     scheduleStore.appendSetByExerciseDataIdx(exerciseDataIdx)
   }
 
+  function checkAllSetDone(idx: string, isDone: boolean) {
+    if (isDone && (!setData.filter(v => !v.isDone).filter(v => v.id !== idx).length)) {
+      hasDoneLastSet && hasDoneLastSet()
+    }
+  }
+
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
-      {setList}
+      {exerciseData.sets.map((setId, index) => {
+        return <SetRow key={setId} index={index + 1} setId={setId} isDoneChange={(v) => { checkAllSetDone(setId, v) }}></SetRow>
+      })}
     </div>
     <div className="flex flex-row gap-x-2">
-      <Button className="flex-1" onClick={appendSet}>Append Set</Button>
+      <Button className="flex-1" onClick={appendSet}>+ Append Set</Button>
     </div>
   </div>
 }

@@ -6,9 +6,10 @@ import { MdClear } from 'react-icons/md'
 interface SetRowProps {
   setId: string
   index: number
+  isDoneChange?: (isDone: boolean) => void
 }
 
-export default function SetRow({ setId, index }: SetRowProps) {
+export default function SetRow({ setId, index, isDoneChange }: SetRowProps) {
   const scheduleStore = useScheduleStore()
   const set = useMemo(() => scheduleStore.getSetData(setId), [scheduleStore, setId])
   function changeRepeat(v: string) {
@@ -19,6 +20,7 @@ export default function SetRow({ setId, index }: SetRowProps) {
   }
   function changeIsDone(v: boolean) {
     scheduleStore.updateSetIsDone(setId, v)
+    isDoneChange && isDoneChange(v)
   }
 
   return <div className="flex gap-x-2 items-center justify-center">

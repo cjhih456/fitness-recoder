@@ -121,6 +121,7 @@ const useScheduleStore = () => {
 
     // sets methods
     getSetData: scheduleSetStore.getSet,
+    getSetListData: scheduleSetStore.getSetList,
     updateSetWeight: scheduleSetStore.updateSetWeight,
     updateSetWeightUnit: scheduleSetStore.updateSetWeightUnit,
     updateSetIsDone: scheduleSetStore.updateSetIsDone,
