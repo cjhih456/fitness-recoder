@@ -24,6 +24,16 @@ export default function DisplayWorkout() {
       clearInterval(interval)
     }
   }, [])
+
+  const scheduleDate = useMemo(() => {
+    return `${schedule.year}-${schedule.month}-${schedule.date}`
+  }, [schedule])
+
+  /** display formated duration time */
+  const timer = useMemo(() => {
+    return dayjs.duration(schedule?.workoutTimes).format('HH:mm:ss.SSS')
+  }, [schedule])
+
   function startSchedule() {
     if (!id) return
     scheduleStore.startSchedule(id)
@@ -32,13 +42,12 @@ export default function DisplayWorkout() {
     if (!id) return
     scheduleStore.pauseSchedule(id)
   }
-  const scheduleDate = useMemo(() => {
-    return `${schedule.year}-${schedule.month}-${schedule.date}`
-  }, [schedule])
-  const timer = useMemo(() => {
-    return dayjs.duration(schedule?.workoutTimes).format('HH:mm:ss.SSS')
-  }, [schedule])
-
+  function finishSchedule() {
+    if (!id) return
+    // TODO: need confirm when schedule have not finished set
+    scheduleStore.successSchedule(id)
+    navigate('/')
+  }
   const scheduleProcessBtn = useMemo(() => {
     if (schedule.type === 'STARTED') {
       return <Button onClick={pauseSchedule}>Pause Schedule</Button>
@@ -46,6 +55,7 @@ export default function DisplayWorkout() {
       return <Button onClick={startSchedule}>Start Schedule</Button>
     }
   }, [schedule])
+
   return <div className='relative pt-16 h-screen'>
     <div className="absolute top-0 left-0 right-0 h-16 flex justify-center items-center">
       {scheduleDate}
@@ -61,6 +71,7 @@ export default function DisplayWorkout() {
 
     <div className='absolute bottom-0 w-full left-0 right-0'>
       {scheduleProcessBtn}
+      <Button onClick={finishSchedule}>Finish Schedule</Button>
     </div>
   </div>
 }
