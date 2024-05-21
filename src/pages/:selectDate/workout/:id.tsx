@@ -4,16 +4,19 @@ import useScheduleStore from '../../../service/Store/ScheduleStoreHooks'
 import { Button } from '@nextui-org/react'
 import dayjs from '../../../hooks/dayjs'
 import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
+import { useAlert } from '../../../components/provider/Alert/useAlert'
 
 export default function DisplayWorkout() {
   const { id } = useParams()
   const navigate = useNavigate()
   const scheduleStore = useScheduleStore()
-  const schedule = useMemo(() => scheduleStore.getSchedule(id || ''), [scheduleStore, id])
+  const alert = useAlert()
+  const schedule = useMemo<Schedule | undefined>(() => scheduleStore.getSchedule(id || ''), [scheduleStore, id])
   useEffect(() => {
     if (!schedule) {
-      alert('Don\'t have schedule. Please, check again')
-      navigate('/')
+      alert.showAlert('WARNING', 'Don\'t have schedule. Please, check again', false).then(() => {
+        navigate('/')
+      })
       return
     }
     const interval = setInterval(() => {
@@ -26,12 +29,14 @@ export default function DisplayWorkout() {
   }, [])
 
   const scheduleDate = useMemo(() => {
-    return `${schedule.year}-${schedule.month}-${schedule.date}`
+    return `${schedule?.year}-${schedule?.month}-${schedule?.date}`
   }, [schedule])
 
   /** display formated duration time */
   const timer = useMemo(() => {
-    return dayjs.duration(schedule?.workoutTimes).format('HH:mm:ss.SSS')
+    if (schedule?.workoutTimes)
+      return dayjs.duration(schedule?.workoutTimes).format('HH:mm:ss.SSS')
+    return '00:00:00.000'
   }, [schedule])
 
   function startSchedule() {
@@ -44,12 +49,13 @@ export default function DisplayWorkout() {
   }
   function finishSchedule() {
     if (!id) return
+
     // TODO: need confirm when schedule have not finished set
     scheduleStore.successSchedule(id)
     navigate('/')
   }
   const scheduleProcessBtn = useMemo(() => {
-    if (schedule.type === 'STARTED') {
+    if (schedule?.type === 'STARTED') {
       return <Button onClick={pauseSchedule}>Pause Schedule</Button>
     } else {
       return <Button onClick={startSchedule}>Start Schedule</Button>
@@ -65,7 +71,7 @@ export default function DisplayWorkout() {
         {timer}
       </div>
       <div>
-        {id && <ExerciseDataList key={id} scheduleIdx={id}></ExerciseDataList>}
+        {id && schedule && <ExerciseDataList key={id} scheduleIdx={id}></ExerciseDataList>}
       </div>
     </div>
 
