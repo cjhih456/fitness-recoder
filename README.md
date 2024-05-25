@@ -1,30 +1,58 @@
-# React + TypeScript + Vite
+# Fitness recoder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## TODO list
+1. add alert, confirm provider - Done!
+3. update ui/ux
+4. categorize workout
+5. manage workout preset
 
-Currently, two official plugins are available:
+## featured
+1. save / load recode data as json file
+2. record training data with form
+3. display recorded data by date or workout type
+4. create graph of progress
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 개발 환경 설정
 
-## Expanding the ESLint configuration
+* OS: macOS Mojave
+* IDE: Visual Studio Code
+* Node version: v18
+* Library: React, Zustand, MobX
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 사용법
 
-- Configure the top-level `parserOptions` property like this:
+1. https://cjhih456.github.io/fitness-recoder으로 접속한다.
+2. 운동할 
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## 화면 구성
+1. 메인 - 달력형식
+  - 운동한 날에는 숫자 아래에 운동 횟수를 점으로 표시
+  - 쉬는 날의 경우 특수 색으로 글자를 표시 (warning-500, font: content3)
+  - 달력에서 오늘의 경우 강조 필요 (success-300)
+  - 달력에서 특정 날짜를 선택하면 하단에 해당 날짜의 내역을 보여줌
+    - 운동 안한 날인 경우
+      - 운동하지 않음 표시, 운동 추가 / 쉬는 날 지정 버튼 표시
+    - 운동 진행중 인 경우
+      - 운동추가
+    - 운동 한 날인 경우
+      - 운동시간, 종류, 운동 부위별 총 무개를 보여줌
+2. 특정 날짜의 운동 기록 - 예정인/기록된 운동 목록
+  - 운동의 detail한 정보를 볼 수 있다.
+  - 운동을 추가를 위해 [운동 리스트 - 운동 추가용]가 dialog 형식으로 뛰어진다.
+  - 운동을 완료한 경우 체크박스를 표시하고, 상태를 저장한다.
+  - 선택한 날짜가 오늘이 아닌 경우 변경 작업을 할 수 없다.
+  - 운동 제목을 클릭하면 운동의 상세정보를 볼 수 있다.
+3. 저장 => 다이얼로그
+  - json 파일에서 데이터를 불러오거나, save할 수 있다.
+4. 운동 리스트
+  - 기록 가능한 운동들의 목록을 확인할 수 있습니다.
+  - 선택하면 detail 화면이 나오고 detail에서는 운동의 설명데이터를 확인할 수 있다.
+5. 운동 리스트 - 운동 추가용
+  - 추가하고자 하는 운동을 선택하여 상단에 추가 버튼을 눌러 추가할 수 있다.
+6. 운동 상세정보 => 다이얼로그 형식
+  - 운동 리스트에서 운동 이름, 이미지영역을 누른경우 보여진다.
+  - 운동의 설명데이터를 확인할 수 있습니다.
+7. 통계 페이지
+  - 각 부위별 운동량을 그래프로 표시
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
