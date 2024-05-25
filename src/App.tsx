@@ -4,31 +4,58 @@ import FitnessList from './pages/FitnessList'
 import CreateSchedule from './pages/:selectDate/schedule/create'
 import DisplaySchedule from './pages/:selectDate/schedule/:id'
 import DisplayWorkout from './pages/:selectDate/workout/:id'
-import DisplayDetail from './pages/:selectDate/detail/:id'
+import { Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
+import { useState } from 'react'
+
+interface Menu {
+  name: string
+  route: string
+}
 
 function App() {
-  return <div className="dark flex justify-center">
-    <main className="w-[420px]">
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/fitnessList' element={<FitnessList />} />
-          <Route path="/:selectDate">
-            <Route path='schedule'>
-              <Route path='create' element={<CreateSchedule />} />
-              <Route path=':id' element={<DisplaySchedule />} />
+  const [menuDisplay, setMenuDisplay] = useState(false)
+  const [menuList] = useState<Menu[]>([{
+    name: 'Home',
+    route: '/',
+  }, {
+    name: 'Fitness',
+    route: '/fitnessList'
+  }])
+  return <>
+    <Navbar onMenuOpenChange={setMenuDisplay}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
+        ></NavbarMenuToggle>
+      </NavbarContent>
+      <NavbarMenu>
+        {
+          menuList.map(v => <NavbarMenuItem key={v.name}>
+            <Link href={v.route}>{v.name}</Link>
+          </NavbarMenuItem>)
+        }
+      </NavbarMenu>
+    </Navbar>
+    <main className="dark flex justify-center">
+      <div className="w-[420px]">
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/fitnessList' element={<FitnessList />} />
+            <Route path="/:selectDate">
+              <Route path='schedule'>
+                <Route path='create' element={<CreateSchedule />} />
+                <Route path=':id' element={<DisplaySchedule />} />
+              </Route>
+              <Route path='workout'>
+                <Route path=":id" element={<DisplayWorkout />}></Route>
+              </Route>
             </Route>
-            <Route path='workout'>
-              <Route path=":id" element={<DisplayWorkout />}></Route>
-            </Route>
-            <Route path='detail'>
-              <Route path=":id" element={<DisplayDetail />}></Route>
-            </Route>
-          </Route>
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </div>
     </main>
-  </div>
+  </>
 }
 
 export default App
