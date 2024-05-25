@@ -15,7 +15,7 @@ export default function ExerciseDataDisplay({
   const scheduleStore = useScheduleStore()
 
   const exerciseData = useMemo(() => {
-    return scheduleStore.getExerciseData(exerciseDataIdx)
+    return scheduleStore.getExerciseData(exerciseDataIdx) || { sets: [] }
   }, [scheduleStore, exerciseDataIdx])
   const setData = useMemo(() => {
     return scheduleStore.getSetListData(exerciseData.sets)

@@ -7,7 +7,7 @@ type ScheduleSetStoreType = {
 }
 
 type ScheduleSetStoreAction = {
-  getSet: (setId: string) => Sets
+  getSet: (setId: string) => Sets | undefined
   getSetList: (setIds: string[]) => Sets[]
   baseFunction: (id: string, fn: (scheduleSet: Sets) => void) => void
   createSet: () => string

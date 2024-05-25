@@ -8,7 +8,7 @@ type ScheduleStoreState = {
 };
 
 type ScheduleStoreAction = {
-  getSchedule: (id: string) => Schedule
+  getSchedule: (id: string) => Schedule | undefined
   baseFunction: (id: string, fn: (schedule: Schedule) => void) => void
   createSchedule: (year: number, month: number, date: number) => string
   setStartTime: (id: string, v: number) => void

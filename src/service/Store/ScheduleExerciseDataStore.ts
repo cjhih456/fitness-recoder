@@ -9,7 +9,7 @@ type ScheduleExerciseDataStoreType = {
 type ScheduleExerciseDataStoreAction = {
   baseFunction: (id: string, fn: (exerciseData: ExerciseData) => void) => void
   createExerciseData: (exercise: number) => string
-  getExerciseData: (id: string) => ExerciseData
+  getExerciseData: (id: string) => ExerciseData | undefined
   changeExerciseById: (id: string, exercise: number) => void
   removeExerciseData: (exerciseDataIdx: string) => void
   appendSetByExerciseDataIdx: (id: string, setId: string) => void

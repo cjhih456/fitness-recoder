@@ -10,7 +10,7 @@ export default function DisplaySchedule() {
   const navigate = useNavigate()
   const scheduleStore = useScheduleStore()
   const selectedSchedule = useMemo(() => scheduleStore.getSchedule(id || ''), [scheduleStore, id])
-  const savedExerciseDataList = useMemo(() => selectedSchedule?.exerciseList.map(v => scheduleStore.getExerciseData(v)), [selectedSchedule])
+  const savedExerciseDataList = useMemo(() => selectedSchedule?.exerciseList.map(v => scheduleStore.getExerciseData(v)).filter(Boolean) as ExerciseData[], [selectedSchedule])
   const savedExerciseIdxList = useMemo(() => savedExerciseDataList.map(v => v.exercise), [savedExerciseDataList]);
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {

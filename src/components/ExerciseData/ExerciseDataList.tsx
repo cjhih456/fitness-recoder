@@ -8,6 +8,13 @@ interface ExerciseDataListProps {
   scheduleIdx: string
 }
 
+interface TempExerciseData {
+  idx: string;
+  name: string;
+  exercise: number;
+  sets: string[];
+}
+
 export default function ExerciseDataList({
   scheduleIdx
 }: ExerciseDataListProps) {
@@ -17,15 +24,17 @@ export default function ExerciseDataList({
     return scheduleStore.getSchedule(scheduleIdx)
   }, [scheduleStore, scheduleIdx])
   const exerciseList = useMemo(() => {
+    if (!scheduleData) return [] as TempExerciseData[]
     return scheduleData.exerciseList.map(exerciseIdx => {
       const exerciseData = scheduleStore.getExerciseData(exerciseIdx)
+      if (!exerciseData) return undefined
       const exercise = getExerciseByIdx(exerciseData.exercise)
       return {
         ...exerciseData,
         idx: exerciseIdx,
         name: exercise.name
       }
-    })
+    }).filter(Boolean) as TempExerciseData[]
   }, [scheduleStore, scheduleData])
 
   function changeSelection(key: string) {

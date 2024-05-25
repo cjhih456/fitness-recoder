@@ -45,7 +45,7 @@ const useScheduleStore = () => {
   const scheduleSetStore = useScheduleSetStore()
   const getScheduleByData = (year: number, month: number, date: number) => {
     const keyList = scheduleKeyStore.getRelationByDate(year, month, date)
-    return keyList.map(v => scheduleInfoStore.getSchedule(v))
+    return keyList.map(v => scheduleInfoStore.getSchedule(v)).filter(Boolean) as Schedule[]
   }
   const getSchedule = (id: string) => {
     return scheduleInfoStore.getSchedule(id)
@@ -61,7 +61,8 @@ const useScheduleStore = () => {
   }
   const addExerciseListByScheduleWithExerciseData = (scheduleIdx: string, exerciseIdxList: number[]) => {
     const scheduleInfo = scheduleInfoStore.getSchedule(scheduleIdx)
-    const savedExerciseDataList = scheduleInfo.exerciseList.map(v => scheduleExerciseDataStore.getExerciseData(v))
+    if (!scheduleInfo) return
+    const savedExerciseDataList = scheduleInfo.exerciseList.map(v => scheduleExerciseDataStore.getExerciseData(v)).filter(Boolean) as ExerciseData[]
     // TODO: calculate remove need & keep exercise list
     const removeNeedExerciseDataIdxList = [] as string[]
     const keepExerciseDataIdxList = [] as string[]
@@ -89,6 +90,7 @@ const useScheduleStore = () => {
 
   const deleteExerciseDataBySchedule = (scheduleIdx: string, exerciseDataIdxList: string[]) => {
     const scheduleInfo = scheduleInfoStore.getSchedule(scheduleIdx)
+    if (!scheduleInfo) return
     const tempArray = scheduleInfo.exerciseList.filter(v => !exerciseDataIdxList.includes(v))
     scheduleInfoStore.addExercise(scheduleIdx, tempArray)
     exerciseDataIdxList.forEach(v => scheduleExerciseDataStore.removeExerciseData(v))

@@ -10,12 +10,12 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
   const scheduleStore = useScheduleStore()
   const exerciseData = useMemo(() => {
     return scheduleStore.getExerciseData(exerciseDataIdx)
-  }, [exerciseDataIdx])
+  }, [exerciseDataIdx, scheduleStore])
   const exerciseDisplay = useMemo(() => {
-    return getExerciseByIdx(exerciseData.exercise)
+    return getExerciseByIdx(exerciseData?.exercise || -1)
   }, [exerciseData])
   const setData = useMemo(() => {
-    return exerciseData.sets.map(v => scheduleStore.getSetData(v))
+    return exerciseData?.sets.map(v => scheduleStore.getSetData(v)).filter(Boolean) as Sets[]
   }, [exerciseData, scheduleStore])
   const progress = useMemo(() => {
     if (!setData.length) return undefined
@@ -28,9 +28,10 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
     return <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">
       <MdCheck size="0.75rem"></MdCheck>
     </div>
-  }, [exerciseData])
-  return <div className="flex justify-between items-center">
-    <div>{exerciseDisplay.name}</div>
-    <div>{progress}</div>
-  </div>
+  }, [setData])
+  return exerciseData ?
+    <div className="flex justify-between items-center">
+      <div>{exerciseDisplay.name}</div>
+      <div>{progress}</div>
+    </div> : <></>
 } 
