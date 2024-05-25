@@ -17,13 +17,18 @@ export default function ScheduleDisplay({ date, id, schedule, index }: ScheduleD
   function startSchedule() {
     navigate(`${date}/workout/${id}`)
   }
+  function gotoDetail() {
+    navigate(`${date}/detail/${id}`)
+  }
   return <Accordion variant='bordered'>
     <AccordionItem title={`Part ${index}`}>
       <div className="flex flex-col gap-y-2">
         <SimpleFitnessList exerciseDataIdxList={schedule.exerciseList} />
         <div className="grid grid-cols-2 gap-x-4">
           <Button onClick={gotoModify}>Modify</Button>
-          <Button onClick={startSchedule}>Start</Button>
+          {
+            schedule.type === 'FINISH' ? <Button onClick={gotoDetail}>Detail</Button> : <Button onClick={startSchedule}>Start</Button>
+          }
         </div>
       </div>
     </AccordionItem>

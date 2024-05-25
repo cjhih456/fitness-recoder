@@ -6,11 +6,13 @@ import SetRow from './SetRow';
 interface ExerciseDataDisplayProps {
   exerciseDataIdx: string
   hasDoneLastSet?: () => void
+  readonly?: boolean
 }
 
 export default function ExerciseDataDisplay({
   exerciseDataIdx,
-  hasDoneLastSet
+  hasDoneLastSet,
+  readonly
 }: ExerciseDataDisplayProps) {
   const scheduleStore = useScheduleStore()
 
@@ -34,11 +36,11 @@ export default function ExerciseDataDisplay({
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
       {exerciseData.sets.map((setId, index) => {
-        return <SetRow key={setId} index={index + 1} setId={setId} isDoneChange={(v) => { checkAllSetDone(setId, v) }}></SetRow>
+        return <SetRow key={setId} index={index + 1} setId={setId} isDoneChange={(v) => { checkAllSetDone(setId, v) }} readonly={readonly}></SetRow>
       })}
     </div>
-    <div className="flex flex-row gap-x-2">
+    {readonly ? undefined : <div className="flex flex-row gap-x-2">
       <Button className="flex-1" onClick={appendSet}>+ Append Set</Button>
-    </div>
+    </div>}
   </div>
 }

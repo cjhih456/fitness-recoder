@@ -6,6 +6,7 @@ import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 
 interface ExerciseDataListProps {
   scheduleIdx: string
+  readonly?: boolean
 }
 
 interface TempExerciseData {
@@ -16,7 +17,8 @@ interface TempExerciseData {
 }
 
 export default function ExerciseDataList({
-  scheduleIdx
+  scheduleIdx,
+  readonly
 }: ExerciseDataListProps) {
   const scheduleStore = useScheduleStore()
   const [selectedKeys, changeSelectedKeys] = useState<'all' | string[]>([])
@@ -59,7 +61,7 @@ export default function ExerciseDataList({
         classNames={{ heading: 'font-bold' }}
         onPress={() => changeSelection(exerciseData.idx)}
       >
-        <ExerciseDataDisplay exerciseDataIdx={exerciseData.idx} hasDoneLastSet={() => gotoNextExercise(index)}></ExerciseDataDisplay>
+        <ExerciseDataDisplay exerciseDataIdx={exerciseData.idx} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
       </AccordionItem>
     })}
   </Accordion>
