@@ -12,7 +12,7 @@ interface DateCalanderProps {
   onChange: (v: number) => void
 }
 
-const dateStr = ['일', '월', '화', '수', '목', '금', '토']
+const dateStr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 export default function DateCalander({ year, month, date, startDate, endDate, onChange }: DateCalanderProps) {
   // Store
