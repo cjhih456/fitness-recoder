@@ -12,7 +12,7 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
     return scheduleStore.getExerciseData(exerciseDataIdx)
   }, [exerciseDataIdx, scheduleStore])
   const exerciseDisplay = useMemo(() => {
-    return getExerciseByIdx(exerciseData?.exercise || -1)
+    return getExerciseByIdx(exerciseData?.exercise ?? -1)
   }, [exerciseData])
   const setData = useMemo(() => {
     return exerciseData?.sets.map(v => scheduleStore.getSetData(v)).filter(Boolean) as Sets[]
@@ -31,7 +31,7 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
   }, [setData])
   return exerciseData ?
     <div className="flex justify-between items-center">
-      <div>{exerciseDisplay.name}</div>
+      <div>{exerciseDisplay?.name}</div>
       <div>{progress}</div>
     </div> : <></>
 } 

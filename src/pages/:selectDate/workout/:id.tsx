@@ -71,13 +71,16 @@ export default function DisplayWorkout() {
         {timer}
       </div>
       <div>
-        {id && schedule && <ExerciseDataList key={id} scheduleIdx={id}></ExerciseDataList>}
+        {id && schedule && <ExerciseDataList key={id} scheduleIdx={id} readonly={schedule?.type === 'FINISH'}></ExerciseDataList>}
       </div>
     </div>
+    {
+      schedule?.type !== 'FINISH' &&
+      <div className='absolute bottom-0 w-full left-0 right-0'>
+        {scheduleProcessBtn}
+        <Button onClick={finishSchedule}>Finish Schedule</Button>
+      </div>
+    }
 
-    <div className='absolute bottom-0 w-full left-0 right-0'>
-      {scheduleProcessBtn}
-      <Button onClick={finishSchedule}>Finish Schedule</Button>
-    </div>
   </div>
 }

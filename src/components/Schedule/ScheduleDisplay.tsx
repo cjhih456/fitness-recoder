@@ -1,6 +1,7 @@
 import { Accordion, AccordionItem, Button } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
+import { useMemo } from 'react'
 
 interface ScheduleDisplayProps {
   schedule: Schedule
@@ -17,18 +18,18 @@ export default function ScheduleDisplay({ date, id, schedule, index }: ScheduleD
   function startSchedule() {
     navigate(`${date}/workout/${id}`)
   }
-  function gotoDetail() {
-    navigate(`${date}/detail/${id}`)
-  }
+  const displayText = useMemo(() => {
+    return schedule.type === 'FINISH' ? 'Detail' : 'Start'
+  }, [schedule])
   return <Accordion variant='bordered'>
     <AccordionItem title={`Part ${index}`}>
       <div className="flex flex-col gap-y-2">
         <SimpleFitnessList exerciseDataIdxList={schedule.exerciseList} />
         <div className="grid grid-cols-2 gap-x-4">
           <Button onClick={gotoModify}>Modify</Button>
-          {
-            schedule.type === 'FINISH' ? <Button onClick={gotoDetail}>Detail</Button> : <Button onClick={startSchedule}>Start</Button>
-          }
+          <Button onClick={startSchedule}>
+            {displayText}
+          </Button>
         </div>
       </div>
     </AccordionItem>
