@@ -22,7 +22,7 @@ function App() {
     route: '/fitnessList'
   }])
   return <>
-    <Navbar onMenuOpenChange={setMenuDisplay}>
+    <Navbar onMenuOpenChange={setMenuDisplay} maxWidth='sm'>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
@@ -37,7 +37,7 @@ function App() {
       </NavbarMenu>
     </Navbar>
     <main className="dark flex justify-center">
-      <div className="w-[420px]">
+      <div className="max-w-[640px] w-[640px]">
         <Router>
           <Routes>
             <Route path='/' element={<Home />} />

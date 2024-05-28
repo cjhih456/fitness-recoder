@@ -39,14 +39,13 @@ export default function DateCalander({ year, month, date, startDate, endDate, on
         isDisabled={disable}
         variant='bordered'
         onClick={() => onChange(todayDate)}
-        className={['flex-1 px-0 max-w-[40px]', calanderColor(year, month, todayDate, year, month, date, scheduleStore.getScheduleByData(year, month, todayDate))].join(' ')}
-        isIconOnly
+        className={['flex-1 px-0 min-w-[40px]', calanderColor(year, month, todayDate, year, month, date, scheduleStore.getScheduleByData(year, month, todayDate))].join(' ')}
         radius='full'
       >{todayDate}</Button>)
     }
   }
-  return <div className="grid grid-rows-7 grid-cols-7 gap-y-2 flex-col">
-    {dateStr.map((v, i) => <div key={`date-week-${i}`} className="flex-1 flex justify-center items-center w-10 h-10">{v}</div>)}
+  return <div className="grid grid-rows-7 grid-cols-7 gap-2 justify-items-stretch min-w-[320px]">
+    {dateStr.map((v, i) => <div key={`date-week-${i}`} className="flex-1 flex justify-center items-center min-w-10 h-10">{v}</div>)}
     {temp}
   </div>
 }
