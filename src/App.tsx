@@ -4,6 +4,8 @@ import FitnessList from './pages/FitnessList'
 import CreateSchedule from './pages/:selectDate/schedule/create'
 import DisplaySchedule from './pages/:selectDate/schedule/:id'
 import DisplayWorkout from './pages/:selectDate/workout/:id'
+import PresetListPage from './pages/preset'
+import PresetDetailPage from './pages/preset/:id'
 import { Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import { useState } from 'react'
 
@@ -20,6 +22,9 @@ function App() {
   }, {
     name: 'Fitness',
     route: '/fitnessList'
+  }, {
+    name: 'Preset',
+    route: '/preset'
   }])
   return <>
     <Navbar onMenuOpenChange={setMenuDisplay} maxWidth='sm'>
@@ -50,6 +55,10 @@ function App() {
               <Route path='workout'>
                 <Route path=":id" element={<DisplayWorkout />}></Route>
               </Route>
+            </Route>
+            <Route path='/preset'>
+              <Route index element={<PresetListPage />}></Route>
+              <Route path=":id" element={<PresetDetailPage />}></Route>
             </Route>
           </Routes>
         </Router>

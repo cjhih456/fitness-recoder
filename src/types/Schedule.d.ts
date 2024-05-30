@@ -23,6 +23,7 @@ interface ExerciseData {
 }
 
 interface ExercisePreset {
+  id: string
   name: string
   /** ExerciseData key */
   exerciseList: string[]
