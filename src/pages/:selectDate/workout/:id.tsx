@@ -5,6 +5,7 @@ import { Button } from '@nextui-org/react'
 import dayjs from '../../../hooks/dayjs'
 import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
 import { useAlert } from '../../../components/provider/Alert/useAlert'
+import { useHeaderContext } from '../../../components/provider/Header/useHeaderContext'
 
 export default function DisplayWorkout() {
   const { id } = useParams()
@@ -61,11 +62,14 @@ export default function DisplayWorkout() {
       return <Button onClick={startSchedule}>Start Schedule</Button>
     }
   }, [schedule])
-
-  return <div className='relative pt-16 h-screen'>
-    <div className="absolute top-0 left-0 right-0 h-16 flex justify-center items-center">
-      {scheduleDate}
-    </div>
+  const headerContext = useHeaderContext()
+  useEffect(() => {
+    headerContext.setHeader([<span className="font-bold text-lg" key="title">{scheduleDate}</span>])
+    return () => {
+      headerContext.setHeader([])
+    }
+  }, [])
+  return <>
     <div className="flex flex-col">
       <div>
         {timer}
@@ -82,5 +86,5 @@ export default function DisplayWorkout() {
       </div>
     }
 
-  </div>
+  </>
 }

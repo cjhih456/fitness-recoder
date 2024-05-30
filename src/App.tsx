@@ -7,7 +7,8 @@ import DisplayWorkout from './pages/:selectDate/workout/:id'
 import PresetListPage from './pages/preset'
 import PresetDetailPage from './pages/preset/:id'
 import { Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { useHeaderContext } from './components/provider/Header/useHeaderContext'
 
 interface Menu {
   name: string
@@ -26,12 +27,21 @@ function App() {
     name: 'Preset',
     route: '/preset'
   }])
-  return <>
+  const headerContext = useHeaderContext()
+  const headerContent = useMemo(() => {
+    return headerContext.getHeaderContent()
+  }, [headerContext])
+  return <div className="flex flex-col h-screen">
     <Navbar onMenuOpenChange={setMenuDisplay} maxWidth='sm'>
-      <NavbarContent>
+      <NavbarContent justify='start'>
         <NavbarMenuToggle
           aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
         ></NavbarMenuToggle>
+      </NavbarContent>
+      <NavbarContent justify="center">
+        {headerContent}
+      </NavbarContent>
+      <NavbarContent justify="end">
       </NavbarContent>
       <NavbarMenu>
         {
@@ -41,8 +51,8 @@ function App() {
         }
       </NavbarMenu>
     </Navbar>
-    <main className="dark flex justify-center">
-      <div className="max-w-[640px] w-[640px]">
+    <main className="dark flex flex-1 justify-center">
+      <div className="max-w-[640px] w-[640px] relative">
         <Router>
           <Routes>
             <Route path='/' element={<Home />} />
@@ -64,7 +74,7 @@ function App() {
         </Router>
       </div>
     </main>
-  </>
+  </div>
 }
 
 export default App
