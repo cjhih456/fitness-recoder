@@ -27,7 +27,14 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   function addSchedule() {
     navigate(`${choosenDate}/schedule/create`)
   }
-
+  function gotoModify(id: string, date?: string) {
+    if (!date) return
+    navigate(`${date}/schedule/${id}`)
+  }
+  function startSchedule(id: string, date?: string) {
+    if (!date) return
+    navigate(`${date}/workout/${id}`)
+  }
   const displaySchedule = useMemo(() => {
     const breakSchedule = scheduleList.find(v => v.type === ScheduleType.BREAK)
     const displayList = []
@@ -38,7 +45,16 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
       return displayList
     } else if (scheduleList) {
       displayList.push(scheduleList.map((schedule, idx) => {
-        return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} index={idx + 1} ></ScheduleDisplay>
+        return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={`Part ${idx + 1}`} >
+          {(id, type, date) => (
+            <div className="grid grid-cols-2 gap-x-4">
+              <Button onClick={() => gotoModify(id, date)}>Modify</Button>
+              <Button onClick={() => startSchedule(id, date)}>
+                {type === 'FINISH' ? 'Detail' : 'Start'}
+              </Button>
+            </div>
+          )}
+        </ScheduleDisplay>
       }))
     }
     displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4">

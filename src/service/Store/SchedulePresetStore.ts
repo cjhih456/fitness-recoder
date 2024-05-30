@@ -8,6 +8,7 @@ type SchedulePresetStoreState = {
 };
 type SchedulePresetStoreAction = {
   getSchedulePreset: (id: string) => ExercisePreset | undefined
+  getSchedulePresetList: () => ExercisePreset[]
   baseFunction: (id: string, fn: (preset: ExercisePreset) => void) => void
   createSchedulePreset: (name: string) => string
   addExercise: (id: string, exercise: string | string[]) => void
@@ -18,6 +19,9 @@ export const useSchedulePresetStore = create<SchedulePresetStoreState & Schedule
   persist((set, get) => ({
     store: {},
     getSchedulePreset: (id) => get().store[id],
+    getSchedulePresetList: () => {
+      return Object.keys(get().store).map(v => get().getSchedulePreset(v)).filter(Boolean) as ExercisePreset[]
+    },
     baseFunction: (id, fn) => {
       if (!get().store[id]) return
       const schedule = Object.assign({}, get().store[id])

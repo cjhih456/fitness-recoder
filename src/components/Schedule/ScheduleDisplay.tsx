@@ -1,36 +1,21 @@
-import { Accordion, AccordionItem, Button } from '@nextui-org/react'
-import { useNavigate } from 'react-router-dom'
+import { Accordion, AccordionItem } from '@nextui-org/react'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
-import { useMemo } from 'react'
 
 interface ScheduleDisplayProps {
-  schedule: Schedule
-  index: number
-  date: string
-  id: string
+  id: string,
+  title: string,
+  schedule?: Schedule
+  exerciseList?: string[]
+  date?: string
+  children?: (id: string, type?: keyof typeof IScheduleType, date?: string) => React.ReactNode
 }
 
-export default function ScheduleDisplay({ date, id, schedule, index }: ScheduleDisplayProps) {
-  const navigate = useNavigate()
-  function gotoModify() {
-    navigate(`${date}/schedule/${id}`)
-  }
-  function startSchedule() {
-    navigate(`${date}/workout/${id}`)
-  }
-  const displayText = useMemo(() => {
-    return schedule.type === 'FINISH' ? 'Detail' : 'Start'
-  }, [schedule])
+export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {
   return <Accordion variant='bordered'>
-    <AccordionItem title={`Part ${index}`}>
+    <AccordionItem title={title}>
       <div className="flex flex-col gap-y-2">
-        <SimpleFitnessList exerciseDataIdxList={schedule.exerciseList} />
-        <div className="grid grid-cols-2 gap-x-4">
-          <Button onClick={gotoModify}>Modify</Button>
-          <Button onClick={startSchedule}>
-            {displayText}
-          </Button>
-        </div>
+        <SimpleFitnessList exerciseDataIdxList={schedule?.exerciseList || exerciseList || []} />
+        {children && children(id, schedule?.type, date)}
       </div>
     </AccordionItem>
   </Accordion>
