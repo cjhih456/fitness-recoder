@@ -39,15 +39,21 @@ function getDisplayMonths(startMonth?: number, endMonth?: number) {
 function getDisplayDates(startDate?: number, endDate?: number) {
   const todayDate = new Date().getDate()
   return {
-    displayStartDate: startDate||todayDate, 
+    displayStartDate: startDate || todayDate,
     displayEndDate: endDate || todayDate
   }
 }
+
+export function baseURL(url?: string) {
+  return (import.meta.env.VITE_URL_ROOT + (url ?? '')).replace(/\/\//g, '/')
+}
+
 export default {
   calcWeek,
   isLeapYear,
   getDaysByMonth,
   getDisplayYears,
   getDisplayMonths,
-  getDisplayDates
+  getDisplayDates,
+  baseURL
 }

@@ -60,4 +60,4 @@
 
 
 ### Reference
-- exercise list : https://github.com/wrkout/exercises.json/blob/master/CONTRIBUTING.md
+- exercise list : https://github.com/wrkout/exercises.json/

@@ -7,6 +7,7 @@ import DisplayWorkout from './pages/:selectDate/workout/:id'
 import PresetListPage from './pages/preset'
 import PresetDetailPage from './pages/preset/:id'
 import { Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
+import { baseURL } from './components/utils'
 import { useMemo, useState } from 'react'
 import { useHeaderContext } from './components/provider/Header/useHeaderContext'
 
@@ -19,13 +20,13 @@ function App() {
   const [menuDisplay, setMenuDisplay] = useState(false)
   const [menuList] = useState<Menu[]>([{
     name: 'Home',
-    route: '/',
+    route: baseURL('/'),
   }, {
     name: 'Fitness',
-    route: '/fitnessList'
+    route: baseURL('/fitnessList')
   }, {
     name: 'Preset',
-    route: '/preset'
+    route: baseURL('/preset')
   }])
   const headerContext = useHeaderContext()
   const headerContent = useMemo(() => {
@@ -53,7 +54,7 @@ function App() {
     </Navbar>
     <main className="dark flex flex-1 justify-center">
       <div className="max-w-[640px] w-[640px] relative">
-        <Router>
+        <Router basename={baseURL()}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/fitnessList' element={<FitnessList />} />
