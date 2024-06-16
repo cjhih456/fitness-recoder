@@ -63,7 +63,7 @@ export default function ScheduleListEditor({
       selectedExerciseIdx={lazyExerciseIdxList}
       onChangeExerciseIdxList={changeSelectedExerciseIdxList}
     ></FitnessSearchModal>
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 px-4">
       <div className="flex flex-col gap-y-2">
         <FitnessList list={lazyExerciseIdxList}></FitnessList>
       </div>

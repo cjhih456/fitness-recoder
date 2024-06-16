@@ -3,8 +3,10 @@ import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor'
 import { useMemo, useState } from 'react';
 import { Button } from '@nextui-org/react';
 import useScheduleStore from '../../../service/Store/ScheduleStoreHooks';
+import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext';
 
 export default function DisplaySchedule() {
+  HeaderHandler(['Schedule'])
 
   const { selectDate, id } = useParams()
   const navigate = useNavigate()

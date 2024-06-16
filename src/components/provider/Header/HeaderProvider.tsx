@@ -4,8 +4,6 @@ export interface HeaderProviderProps {
   children: ReactNode
 }
 
-type HeaderContentType = (string | ReactNode)[] | undefined
-
 type HeaderContextType = {
   setHeader: (contents: HeaderContentType) => void
   getHeaderContent: () => HeaderContentType
@@ -34,3 +32,4 @@ export const HeaderProvider = ({ children }: HeaderProviderProps) => {
     </HeaderContext.Provider>
   )
 }
+

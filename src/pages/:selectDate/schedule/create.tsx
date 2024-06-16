@@ -3,8 +3,11 @@ import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
 import useScheduleStore from '../../../service/Store/ScheduleStoreHooks';
+import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext';
 
 export default function CreateSchedule() {
+  HeaderHandler(['Create Schedule'])
+
   const navigate = useNavigate()
   const { selectDate } = useParams()
   const scheduleStore = useScheduleStore()
