@@ -25,7 +25,7 @@ export default function FitnessSearchModal({
   }, [selectedExerciseIdx, isOpen])
   return <Modal
     isOpen={isOpen}
-    placement='bottom-center'
+    placement='top'
     scrollBehavior="inside"
     onOpenChange={(v) => onOpenChange(v)}
   >
