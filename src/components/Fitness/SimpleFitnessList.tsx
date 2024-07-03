@@ -1,6 +1,6 @@
 import SimpleFitnessItem from './SimpleFitnessItem'
 
-interface SimpleFitnessListProps {
+export interface SimpleFitnessListProps {
   exerciseDataIdxList: string[]
 }
 

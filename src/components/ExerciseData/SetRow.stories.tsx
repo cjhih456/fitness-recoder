@@ -12,8 +12,6 @@ const meta = {
   decorators: [
     (Story, options) => {
       ScheduleSetDataMockVer()
-      const id = '00000000-0000-0000-0000-000000000001'
-      Object.assign(options.args, { setId: id })
       return <div>
         < Story {...options} />
       </div >
@@ -27,13 +25,15 @@ export default meta
 export const CustomAble: Story = {
   args: {
     index: 1,
+    setId: '00000000-0000-0001-0000-000000000000',
     readonly: false
   }
 }
 
 export const ReadOnly: Story = {
   args: {
-    index: 2,
+    index: 1,
+    setId: '00000000-0000-0002-0000-000000000000',
     readonly: true
   }
 }

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { ScheduleType } from './ScheduleStoreHooks'
 
-type ScheduleStoreState = {
+export type ScheduleInfoStoreState = {
   store: { [key: string]: Schedule }
 };
 
@@ -21,7 +21,7 @@ type ScheduleStoreAction = {
   updateBreakTime: (id: string, t: number) => void
 }
 
-const createSchedule = (id: string, year: number, month: number, date: number, beforeData?: Schedule) => ({
+export const createSchedule = (id: string, year: number, month: number, date: number, beforeData?: Schedule) => ({
   id,
   year,
   month,
@@ -36,7 +36,7 @@ const createSchedule = (id: string, year: number, month: number, date: number, b
 
 
 
-export const useScheduleInfoStore = create<ScheduleStoreState & ScheduleStoreAction>()(
+export const useScheduleInfoStore = create<ScheduleInfoStoreState & ScheduleStoreAction>()(
   persist((set, get) => ({
     store: {},
     getSchedule(id) {

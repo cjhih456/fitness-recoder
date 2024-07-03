@@ -1,43 +1,89 @@
-import { useScheduleSetStore } from '../service/Store/ScheduleSetStore'
+import { create } from 'zustand'
+import { ScheduleSetStoreType, useScheduleSetStore } from '../service/Store/ScheduleSetStore'
 import { jest } from '@storybook/jest'
 
-const scheduleSetData = {
-  '00000000-0000-0000-0000-000000000001': {
-    id: '00000000-0000-0000-0000-000000000001',
-    isDone: true,
-    repeat: 3,
-    weightUnit: 'kg',
-    weight: 10
+const useScheduleSetData = create<ScheduleSetStoreType & MockStoreActions<Sets>>((set, get) => ({
+  store: {
+    '00000000-0000-0001-0000-000000000000': {
+      id: '00000000-0000-0001-0000-000000000000',
+      isDone: true,
+      repeat: 3,
+      weightUnit: 'kg',
+      weight: 10
+    },
+    '00000000-0000-0002-0000-000000000000': {
+      id: '00000000-0000-0002-0000-000000000000',
+      isDone: false,
+      repeat: 3,
+      weightUnit: 'kg',
+      weight: 10
+    },
+    '00000000-0000-0003-0000-000000000000': {
+      id: '00000000-0000-0003-0000-000000000000',
+      isDone: true,
+      repeat: 3,
+      weightUnit: 'kg',
+      weight: 10
+    },
+    '00000000-0000-0004-0000-000000000000': {
+      id: '00000000-0000-0004-0000-000000000000',
+      isDone: false,
+      repeat: 3,
+      weightUnit: 'kg',
+      weight: 10
+    }
   },
-  '00000000-0000-0000-0000-000000000002': {
-    id: '00000000-0000-0000-0000-000000000002',
-    isDone: false,
-    repeat: 3,
-    weightUnit: 'kg',
-    weight: 10
+  setStore(id, obj) {
+    set((state) => ({
+      ...state,
+      store: {
+        ...state.store,
+        [id]: obj
+      }
+    }), true)
   },
-  '00000000-0000-0000-0000-000000000003': {
-    id: '00000000-0000-0000-0000-000000000003',
-    isDone: true,
-    repeat: 3,
-    weightUnit: 'kg',
-    weight: 10
+  getData(id) {
+    return get().store[id]
   },
-  '00000000-0000-0000-0000-000000000004': {
-    id: '00000000-0000-0000-0000-000000000004',
-    isDone: false,
-    repeat: 3,
-    weightUnit: 'kg',
-    weight: 10
+  deleteData(id) {
+    set((state) => {
+      const store = Object.assign({}, state.store)
+      delete store[id]
+      return {
+        ...state,
+        store: store
+      }
+    })
   }
-} as { [id: string]: Sets }
+}))
 
 export default function ScheduleSetDataMockVer() {
   const scheduleSetStore = useScheduleSetStore()
+  const scheduleSetData = useScheduleSetData()
+  jest.spyOn(scheduleSetStore, 'createSet').mockImplementation(() => {
+    const number = Object.keys(scheduleSetData.store).length + 1
+    const id = `00000000-0000-${String(number).padStart(4, '0')}-0000-000000000000`
+    scheduleSetData.setStore(id, {
+      id,
+      isDone: false,
+      repeat: 10,
+      weightUnit: 'kg',
+      weight: 0,
+      duration: 0
+    })
+    return id
+  })
+  jest.spyOn(scheduleSetStore, 'baseFunction').mockImplementation((id, fn) => {
+    if (!scheduleSetData.getData(id)) return
+    const schedule = Object.assign({}, scheduleSetData.getData(id))
+    fn(schedule)
+    scheduleSetData.setStore(id, schedule)
+  })
+
   jest.spyOn(scheduleSetStore, 'getSet').mockImplementation((id) => {
-    return scheduleSetData[id]
+    return scheduleSetData.getData(id)
   })
   jest.spyOn(scheduleSetStore, 'getSetList').mockImplementation((ids) => {
-    return ids.map(id => scheduleSetData[id])
+    return ids.map(id => scheduleSetData.getData(id))
   })
 }

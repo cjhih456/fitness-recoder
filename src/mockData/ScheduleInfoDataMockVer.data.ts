@@ -1,27 +1,62 @@
-import { useScheduleInfoStore } from '../service/Store/ScheduleInfoStore';
+import { ScheduleInfoStoreState, createSchedule, useScheduleInfoStore } from '../service/Store/ScheduleInfoStore';
 import { jest } from '@storybook/jest'
 import ScheduleExerciseDataMockVer from './ScheduleExerciseDataMockVer.data';
+import { create } from 'zustand';
 
-const scheduleInfoData = {
-  '00000000-0000-0000-0001-000000000000': {
-    id: '00000000-0000-0000-0001-000000000000',
-    exerciseList: ['00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001'],
-    type: 'STARTED',
-    workoutTimes: 0,
-    year: 2024,
-    month: 5,
-    date: 10,
-    beforeTime: 0,
-    breakTime: 60,
-    start: new Date().getTime()
+const useScheduleInfoData = create<ScheduleInfoStoreState & MockStoreActions<Schedule>>((set, get) => ({
+  store: {
+    '00000001-0000-0000-0000-000000000000': {
+      id: '00000001-0000-0000-0000-000000000000',
+      exerciseList: ['00000000-0001-0000-0000-000000000000', '00000000-0002-0000-0000-000000000001'],
+      type: 'STARTED',
+      workoutTimes: 0,
+      year: 2024,
+      month: 5,
+      date: 10,
+      beforeTime: 0,
+      breakTime: 60,
+      start: new Date().getTime()
+    }
+  },
+  setStore(id, obj) {
+    set((state) => ({
+      ...state,
+      store: {
+        ...state.store,
+        [id]: obj
+      }
+    }), true)
+  },
+  getData(id) {
+    return get().store[id]
+  },
+  deleteData(id) {
+    set((state) => {
+      const store = Object.assign({}, state.store)
+      delete store[id]
+      return {
+        ...state,
+        store: store
+      }
+    })
   }
-} as { [id: string]: Schedule }
+}))
 
 export default function ScheduleInfoDataMockVer() {
   const scheduleInfoStore = useScheduleInfoStore()
-
-  jest.spyOn(scheduleInfoStore, 'getSchedule').mockImplementation((id) => {
-    return scheduleInfoData[id]
+  const scheduleInfoData = useScheduleInfoData()
+  jest.spyOn(scheduleInfoStore, 'getSchedule').mockImplementation((id) => scheduleInfoData.getData(id))
+  jest.spyOn(scheduleInfoStore, 'createSchedule').mockImplementation((year, month, date) => {
+    const number = Object.keys(scheduleInfoData.store).length + 1
+    const id = `${String(number).padStart(8, '0')}-0000-0000-0000-000000000000`
+    scheduleInfoData.setStore(id, createSchedule(id, year, month, date))
+    return id
+  })
+  jest.spyOn(scheduleInfoStore, 'baseFunction').mockImplementation((id, fn) => {
+    if (!scheduleInfoData.getData(id)) return
+    const schedule = Object.assign({}, scheduleInfoData.getData(id))
+    fn(schedule)
+    scheduleInfoData.setStore(id, schedule)
   })
   ScheduleExerciseDataMockVer()
 }

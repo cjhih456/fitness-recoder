@@ -26,20 +26,16 @@ export const useSchedulePresetStore = create<SchedulePresetStoreState & Schedule
       if (!get().store[id]) return
       const schedule = Object.assign({}, get().store[id])
       fn(schedule)
-      set((state) => ({
-        ...state,
+      set(() => ({
         store: {
-          ...state.store,
           [id]: schedule
         }
       }))
     },
     createSchedulePreset: (name) => {
       const id = uuidv4()
-      set((state) => ({
-        ...state,
+      set(() => ({
         store: {
-          ...state.store,
           [id]: {
             id,
             name: name,
@@ -60,13 +56,13 @@ export const useSchedulePresetStore = create<SchedulePresetStoreState & Schedule
     },
     deletePreset: (id) => {
       set((state) => {
-        const store = { ...state.store }
+        const store = Object.assign({}, state.store)
         delete store[id]
         return {
           ...state,
           store: store
         }
-      })
+      }, true)
     }
   }), {
     name: 'fitness-preset-data',

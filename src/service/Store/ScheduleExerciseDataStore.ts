@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid'
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-type ScheduleExerciseDataStoreType = {
+export type ScheduleExerciseDataStoreType = {
   store: { [key: string]: ExerciseData }
 }
 

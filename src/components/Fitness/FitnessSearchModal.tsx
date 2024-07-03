@@ -2,7 +2,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 import FitnessListSearch from './FitnessListSearch'
 import { useEffect, useState } from 'react'
 
-interface FitnessSearchModalProps {
+export interface FitnessSearchModalProps {
   selectedExerciseIdx: number[]
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void

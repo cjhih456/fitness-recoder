@@ -3,7 +3,7 @@ import { MdCheck } from 'react-icons/md'
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas'
 import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
 
-interface SimpleFitnessItemProps {
+export interface SimpleFitnessItemProps {
   exerciseDataIdx: string
 }
 export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItemProps) {
@@ -15,7 +15,7 @@ export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItem
     return getExerciseByIdx(exerciseData?.exercise ?? -1)
   }, [exerciseData])
   const setData = useMemo(() => {
-    return exerciseData?.sets.map(v => scheduleStore.getSetData(v)).filter(Boolean) as Sets[]
+    return (exerciseData?.sets || []).map(v => scheduleStore.getSetData(v)).filter(Boolean) as Sets[]
   }, [exerciseData, scheduleStore])
   const progress = useMemo(() => {
     if (!setData.length) return undefined

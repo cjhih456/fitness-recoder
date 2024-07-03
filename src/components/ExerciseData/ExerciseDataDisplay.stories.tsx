@@ -12,7 +12,7 @@ const meta = {
   decorators: [
     (Story, options) => {
       ScheduleExerciseDataMockVer()
-      const id = '00000000-0000-0000-0000-000000000000'
+      const id = '00000000-0001-0000-0000-000000000000'
       Object.assign(options.args, { exerciseDataIdx: id })
       return <div>
         < Story {...options} />
