@@ -36,7 +36,16 @@ export default function ExerciseDataDisplay({
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
       {exerciseData.sets.map((setId, index) => {
-        return <SetRow key={setId} index={index + 1} setId={setId} isDoneChange={(v) => { checkAllSetDone(setId, v) }} readonly={readonly}></SetRow>
+        return <SetRow
+          key={setId}
+          index={index + 1}
+          setId={setId}
+          isDoneChange={(v) => { checkAllSetDone(setId, v) }}
+          readonly={readonly}
+          onRemoveSet={(id) => {
+            scheduleStore.removeSetByExerciseDataIdx(exerciseDataIdx, id)
+          }}
+        ></SetRow>
       })}
     </div>
     {readonly ? undefined : <div className="flex flex-row gap-x-2">

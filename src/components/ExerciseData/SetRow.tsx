@@ -7,7 +7,7 @@ export interface SetRowProps {
   setId: string
   index: number
   isDoneChange?: (isDone: boolean) => void
-  onRemoveSet?: () => void
+  onRemoveSet?: (id: string) => void
   readonly?: boolean
 }
 
@@ -25,7 +25,7 @@ export default function SetRow({ setId, index, isDoneChange, onRemoveSet, readon
     isDoneChange && isDoneChange(v)
   }
   function removeSet() {
-    onRemoveSet && onRemoveSet()
+    onRemoveSet && onRemoveSet(setId)
   }
 
   return set ? <div className="flex gap-x-2 items-center justify-center">
