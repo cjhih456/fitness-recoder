@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useIntersectionObserver from '../../hooks/IntersectionObserver';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
-interface FitnessListProps {
+export interface FitnessListProps {
   list: number[]
   selectedList?: number[]
   changeSelectedList?: (selectedList: number[]) => void

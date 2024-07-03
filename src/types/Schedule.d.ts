@@ -10,7 +10,7 @@ interface Sets {
   id: string
   repeat: number
   isDone: boolean
-  weightUnit: WeightUnit
+  weightUnit: keyof typeof WeightUnit
   weight?: number
   duration?: number
 }

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
 import SetRow from './SetRow';
 
-interface ExerciseDataDisplayProps {
+export interface ExerciseDataDisplayProps {
   exerciseDataIdx: string
   hasDoneLastSet?: () => void
   readonly?: boolean

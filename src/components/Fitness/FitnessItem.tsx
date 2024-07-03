@@ -4,7 +4,7 @@ import { FitnessListSelectedProps } from './FitnessList';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 import { useMemo } from 'react';
 
-interface FitnessItemProps {
+export interface FitnessItemProps {
   selectedExercise: FitnessListSelectedProps
   useSelect?: boolean
   onClick?: (exercise: FitnessListSelectedProps, selected: boolean) => void

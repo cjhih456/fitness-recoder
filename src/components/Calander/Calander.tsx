@@ -6,7 +6,7 @@ import MonthCalander from './MonthCalander';
 import YearCalander from './YearCalander';
 
 type Mode = 'date' | 'month' | 'year'
-interface CalanderProps {
+export interface CalanderProps {
   startYear?: number
   endYear?: number
   startMonth?: number

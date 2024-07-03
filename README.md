@@ -17,7 +17,7 @@
 * OS: macOS Mojave
 * IDE: Visual Studio Code
 * Node version: v18
-* Library: React, Zustand, MobX
+* Library: React, Zustand, Storybook, Jest
 
 ## 사용법
 

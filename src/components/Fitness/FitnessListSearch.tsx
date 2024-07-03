@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import { categoryList, filterExcercises, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
 import { Category, Muscle } from '../../service/Fitness/FitnessDataEnums'
-interface FitnessListSearchProps {
+export interface FitnessListSearchProps {
   searchPrefix?: JSX.Element
   selectedList?: number[]
   changeSelectedList?: (list: number[]) => void

@@ -3,7 +3,7 @@ import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
 import { Button, Checkbox, Input } from '@nextui-org/react'
 import { MdClear } from 'react-icons/md'
 
-interface SetRowProps {
+export interface SetRowProps {
   setId: string
   index: number
   isDoneChange?: (isDone: boolean) => void

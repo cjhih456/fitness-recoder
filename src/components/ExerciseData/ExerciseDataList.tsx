@@ -4,7 +4,7 @@ import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
 import { useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 
-interface ExerciseDataListProps {
+export interface ExerciseDataListProps {
   scheduleIdx: string
   readonly?: boolean
 }
