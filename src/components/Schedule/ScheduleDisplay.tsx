@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
 
-interface ScheduleDisplayProps {
+export interface ScheduleDisplayProps {
   id: string,
   title: string,
   schedule?: Schedule

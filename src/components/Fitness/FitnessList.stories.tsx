@@ -9,7 +9,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    changeSelectedList: fn()
+    onChangeSelectedList: fn()
   } as Partial<FitnessListProps>,
   component: FitnessList,
   decorators: [

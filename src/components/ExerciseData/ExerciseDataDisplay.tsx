@@ -40,7 +40,7 @@ export default function ExerciseDataDisplay({
           key={setId}
           index={index + 1}
           setId={setId}
-          isDoneChange={(v) => { checkAllSetDone(setId, v) }}
+          hasDoneChange={(v) => { checkAllSetDone(setId, v) }}
           readonly={readonly}
           onRemoveSet={(id) => {
             scheduleStore.removeSetByExerciseDataIdx(exerciseDataIdx, id)

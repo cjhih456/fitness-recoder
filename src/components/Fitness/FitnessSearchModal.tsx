@@ -34,7 +34,7 @@ export default function FitnessSearchModal({
         <>
           <ModalHeader>Select Exercises</ModalHeader>
           <ModalBody>
-            <FitnessListSearch selectedList={lazySelectedExerciseIdx} changeSelectedList={changeLazySelectedExerciseIdx}></FitnessListSearch>
+            <FitnessListSearch selectedList={lazySelectedExerciseIdx} onChangeSelectedList={changeLazySelectedExerciseIdx}></FitnessListSearch>
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => {

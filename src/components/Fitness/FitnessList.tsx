@@ -7,10 +7,10 @@ export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
   list: number[]
   selectedList?: number[]
-  changeSelectedList?: (selectedList: number[]) => void
+  onChangeSelectedList?: (selectedList: number[]) => void
 }
 
-export default function FitnessList({ list, selectedList, changeSelectedList }: FitnessListProps) {
+export default function FitnessList({ list, selectedList, onChangeSelectedList }: FitnessListProps) {
   const [page, changePage] = useState(1)
   const [observe, disconnect] = useIntersectionObserver(() => {
     changePage((v) => v + 1)
@@ -38,11 +38,11 @@ export default function FitnessList({ list, selectedList, changeSelectedList }: 
     }
   }, [list])
   function selectExercise(exercise: FitnessListSelectedProps, selected: boolean) {
-    if (changeSelectedList) {
+    if (onChangeSelectedList) {
       if (selected) {
-        changeSelectedList(([] as number[]).concat(selectedList || [], exercise.idx))
+        onChangeSelectedList(([] as number[]).concat(selectedList || [], exercise.idx))
       } else {
-        changeSelectedList(selectedList?.filter(e => e !== exercise.idx) || [])
+        onChangeSelectedList(selectedList?.filter(e => e !== exercise.idx) || [])
       }
     }
   }

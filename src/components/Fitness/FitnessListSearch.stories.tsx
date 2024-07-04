@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    changeSelectedList: fn()
+    onChangeSelectedList: fn()
   } as Partial<FitnessListSearchProps>,
   component: FitnessListSearch,
   decorators: [

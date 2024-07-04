@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Calender, { CalanderProps } from './Calander'
+import { fn } from '@storybook/test';
 
 const date = new Date()
 
@@ -23,7 +24,8 @@ const meta = {
     }
   },
   args: {
-    value: nowDate
+    value: nowDate,
+    onChange: fn()
   } as Partial<CalanderProps>,
   component: Calender
 } satisfies Meta<typeof Calender>;

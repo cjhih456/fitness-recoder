@@ -6,13 +6,13 @@ import { Category, Muscle } from '../../service/Fitness/FitnessDataEnums'
 export interface FitnessListSearchProps {
   searchPrefix?: JSX.Element
   selectedList?: number[]
-  changeSelectedList?: (list: number[]) => void
+  onChangeSelectedList?: (list: number[]) => void
   searchAreaBg?: boolean
   needSpace?: boolean
 }
 
 
-export default function FitnessListSearch({ searchPrefix, selectedList, changeSelectedList, needSpace = false, searchAreaBg = false }: FitnessListSearchProps) {
+export default function FitnessListSearch({ searchPrefix, selectedList, onChangeSelectedList, needSpace = false, searchAreaBg = false }: FitnessListSearchProps) {
   const [searchValue, changeSearchValue] = useState('')
   const [selectedCategoryList, changeCategory] = useState<Category[]>([])
   const [selectedMuscleList, changeMuscle] = useState<Muscle[]>([])
@@ -60,7 +60,7 @@ export default function FitnessListSearch({ searchPrefix, selectedList, changeSe
       </div>
     </div>
     <div className={`overflow-scroll ${xSpacing}`}>
-      <FitnessList list={fitnessList} selectedList={selectedList} changeSelectedList={changeSelectedList}></FitnessList>
+      <FitnessList list={fitnessList} selectedList={selectedList} onChangeSelectedList={onChangeSelectedList}></FitnessList>
     </div>
   </div>
 }

@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import useScheduleStore, { ScheduleType } from '../../service/Store/ScheduleStoreHooks';
 
-interface ScheduleListProps {
+export interface ScheduleListProps {
   choosenDate: string
 }
 

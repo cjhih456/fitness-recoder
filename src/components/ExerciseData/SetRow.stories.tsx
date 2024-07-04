@@ -1,13 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import SetRow, { SetRowProps } from './SetRow';
 import ScheduleSetDataMockVer from '../../mockData/ScheduleSetDataMockVer.data';
+import { fn } from '@storybook/test';
 const meta = {
   title: 'ExerciseData/SetRow',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  args: {} as Partial<SetRowProps>,
+  args: {
+    hasDoneChange: fn(),
+    onRemoveSet: fn()
+  } as Partial<SetRowProps>,
   component: SetRow,
   decorators: [
     (Story, options) => {

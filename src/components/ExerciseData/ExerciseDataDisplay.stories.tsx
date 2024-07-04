@@ -1,13 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataDisplay, { ExerciseDataDisplayProps } from './ExerciseDataDisplay';
 import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
+import { fn } from '@storybook/test';
 const meta = {
   title: 'ExerciseData/ExerciseDataDisplay',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
+    actions: {
+      argTypesRegex: '^(has).*'
+    }
   },
-  args: {} as Partial<ExerciseDataDisplayProps>,
+  args: {
+    hasDoneLastSet: fn()
+  } as Partial<ExerciseDataDisplayProps>,
   component: ExerciseDataDisplay,
   decorators: [
     (Story, options) => {

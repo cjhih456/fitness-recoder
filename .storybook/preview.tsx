@@ -14,6 +14,9 @@ const preview: Preview = {
     backgrounds: {
       default: 'dark'
     },
+    actions: {
+      argTypesRegex: '^(has|on).*'
+    }
   },
   decorators: [
     (Story) => {

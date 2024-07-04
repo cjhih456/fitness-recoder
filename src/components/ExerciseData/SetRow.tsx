@@ -6,12 +6,12 @@ import { MdClear } from 'react-icons/md'
 export interface SetRowProps {
   setId: string
   index: number
-  isDoneChange?: (isDone: boolean) => void
+  hasDoneChange?: (isDone: boolean) => void
   onRemoveSet?: (id: string) => void
   readonly?: boolean
 }
 
-export default function SetRow({ setId, index, isDoneChange, onRemoveSet, readonly }: SetRowProps) {
+export default function SetRow({ setId, index, hasDoneChange, onRemoveSet, readonly }: SetRowProps) {
   const scheduleStore = useScheduleStore()
   const set = useMemo(() => scheduleStore.getSetData(setId), [scheduleStore, setId])
   function changeRepeat(v: string) {
@@ -22,7 +22,7 @@ export default function SetRow({ setId, index, isDoneChange, onRemoveSet, readon
   }
   function changeIsDone(v: boolean) {
     scheduleStore.updateSetIsDone(setId, v)
-    isDoneChange && isDoneChange(v)
+    hasDoneChange && hasDoneChange(v)
   }
   function removeSet() {
     onRemoveSet && onRemoveSet(setId)
