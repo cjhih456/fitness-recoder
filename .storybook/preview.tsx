@@ -3,6 +3,7 @@ import '../src/index.css';
 import React from 'react'
 import { NextUIProvider } from '@nextui-org/react'
 
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -13,9 +14,6 @@ const preview: Preview = {
     },
     backgrounds: {
       default: 'dark'
-    },
-    actions: {
-      argTypesRegex: '^(has|on).*'
     }
   },
   decorators: [
