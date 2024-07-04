@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import FitnessListSearch, { FitnessListSearchProps } from './FitnessListSearch'
 import { MdHome } from 'react-icons/md';
 import { Button } from '@nextui-org/react';
+import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Fitness/FitnessListSearch',
@@ -9,7 +10,9 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<FitnessListSearchProps>,
+  args: {
+    changeSelectedList: fn()
+  } as Partial<FitnessListSearchProps>,
   component: FitnessListSearch,
   decorators: [
     (Story) => {

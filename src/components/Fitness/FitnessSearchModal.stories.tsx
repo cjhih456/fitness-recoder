@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import FitnessSearchModal, { FitnessSearchModalProps } from './FitnessSearchModal'
 import { useState } from 'react';
 import { Button } from '@nextui-org/react';
+import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Fitness/FitnessSearchModal',
@@ -9,11 +10,13 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<FitnessSearchModalProps>,
+  args: {
+    onChangeExerciseIdxList: fn(),
+  } as Partial<FitnessSearchModalProps>,
   component: FitnessSearchModal,
   decorators: [
     (Story, options) => {
-      const [isOpen, changeState] = useState(false)
+      const [isOpen, changeState] = useState(options.args.isOpen)
       Object.assign(options.args, { isOpen: isOpen, onOpenChange: changeState })
 
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">

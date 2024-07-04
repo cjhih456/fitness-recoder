@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import FitnessList, { FitnessListProps } from './FitnessList'
+import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Fitness/FitnessList',
@@ -7,7 +8,9 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<FitnessListProps>,
+  args: {
+    changeSelectedList: fn()
+  } as Partial<FitnessListProps>,
   component: FitnessList,
   decorators: [
     (Story) => {

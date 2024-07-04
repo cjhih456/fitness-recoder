@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { ScheduleSetStoreType, useScheduleSetStore } from '../service/Store/ScheduleSetStore'
-import { jest } from '@storybook/jest'
+import { spyOn } from '@storybook/test'
 
 const useScheduleSetData = create<ScheduleSetStoreType & MockStoreActions<Sets>>((set, get) => ({
   store: {
@@ -60,7 +60,7 @@ const useScheduleSetData = create<ScheduleSetStoreType & MockStoreActions<Sets>>
 export default function ScheduleSetDataMockVer() {
   const scheduleSetStore = useScheduleSetStore()
   const scheduleSetData = useScheduleSetData()
-  jest.spyOn(scheduleSetStore, 'createSet').mockImplementation(() => {
+  spyOn(scheduleSetStore, 'createSet').mockImplementation(() => {
     const number = Object.keys(scheduleSetData.store).length + 1
     const id = `00000000-0000-${String(number).padStart(4, '0')}-0000-000000000000`
     scheduleSetData.setStore(id, {
@@ -73,17 +73,17 @@ export default function ScheduleSetDataMockVer() {
     })
     return id
   })
-  jest.spyOn(scheduleSetStore, 'baseFunction').mockImplementation((id, fn) => {
+  spyOn(scheduleSetStore, 'baseFunction').mockImplementation((id, fn) => {
     if (!scheduleSetData.getData(id)) return
     const schedule = Object.assign({}, scheduleSetData.getData(id))
     fn(schedule)
     scheduleSetData.setStore(id, schedule)
   })
 
-  jest.spyOn(scheduleSetStore, 'getSet').mockImplementation((id) => {
+  spyOn(scheduleSetStore, 'getSet').mockImplementation((id) => {
     return scheduleSetData.getData(id)
   })
-  jest.spyOn(scheduleSetStore, 'getSetList').mockImplementation((ids) => {
+  spyOn(scheduleSetStore, 'getSetList').mockImplementation((ids) => {
     return ids.map(id => scheduleSetData.getData(id))
   })
 }

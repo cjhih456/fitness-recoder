@@ -1,5 +1,5 @@
 import { ScheduleInfoStoreState, createSchedule, useScheduleInfoStore } from '../service/Store/ScheduleInfoStore';
-import { jest } from '@storybook/jest'
+import { spyOn } from '@storybook/test'
 import ScheduleExerciseDataMockVer from './ScheduleExerciseDataMockVer.data';
 import { create } from 'zustand';
 
@@ -45,14 +45,14 @@ const useScheduleInfoData = create<ScheduleInfoStoreState & MockStoreActions<Sch
 export default function ScheduleInfoDataMockVer() {
   const scheduleInfoStore = useScheduleInfoStore()
   const scheduleInfoData = useScheduleInfoData()
-  jest.spyOn(scheduleInfoStore, 'getSchedule').mockImplementation((id) => scheduleInfoData.getData(id))
-  jest.spyOn(scheduleInfoStore, 'createSchedule').mockImplementation((year, month, date) => {
+  spyOn(scheduleInfoStore, 'getSchedule').mockImplementation((id) => scheduleInfoData.getData(id))
+  spyOn(scheduleInfoStore, 'createSchedule').mockImplementation((year, month, date) => {
     const number = Object.keys(scheduleInfoData.store).length + 1
     const id = `${String(number).padStart(8, '0')}-0000-0000-0000-000000000000`
     scheduleInfoData.setStore(id, createSchedule(id, year, month, date))
     return id
   })
-  jest.spyOn(scheduleInfoStore, 'baseFunction').mockImplementation((id, fn) => {
+  spyOn(scheduleInfoStore, 'baseFunction').mockImplementation((id, fn) => {
     if (!scheduleInfoData.getData(id)) return
     const schedule = Object.assign({}, scheduleInfoData.getData(id))
     fn(schedule)

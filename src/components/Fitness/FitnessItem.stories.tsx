@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import FitnessItem, { FitnessItemProps } from './FitnessItem'
+import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Fitness/FitnessItem',
@@ -7,7 +8,9 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<FitnessItemProps>,
+  args: {
+    onClick: fn()
+  } as Partial<FitnessItemProps>,
   component: FitnessItem,
   decorators: [
     (Story) => {
