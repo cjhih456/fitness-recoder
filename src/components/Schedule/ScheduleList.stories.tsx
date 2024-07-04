@@ -1,18 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleList, { ScheduleListProps } from './ScheduleList'
-import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
-
+import ScheduleKeyMockVer from '../../mockData/ScheduleKeyMockVer.data';
+import { withRouter } from 'storybook-addon-react-router-v6'
 const meta = {
   title: 'Schedule/ScheduleList',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered'
   },
+  argTypes: {
+    choosenDate: {
+      control: 'text'
+    }
+  },
   args: {} as Partial<ScheduleListProps>,
   component: ScheduleList,
   decorators: [
+    withRouter,
     (Story) => {
-      ScheduleExerciseDataMockVer()
+      ScheduleKeyMockVer()
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <div>
           <Story />

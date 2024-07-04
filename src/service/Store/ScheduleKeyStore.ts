@@ -2,16 +2,15 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 
-type ScheduleStoreState = {
+export type ScheduleStoreState = {
   store: { [key: string]: string[] }
 };
 
-type ScheduleStoreAction = {
+export type ScheduleStoreAction = {
   getRelationByDate: (year: number, month: number, date: number) => string[]
   addRelationByDate: (year: number, month: number, date: number, id: string) => void
   removeRelationByDate: (year: number, month: number, date: number, id: string) => void
 }
-
 
 export const useScheduleKeyStore = create<ScheduleStoreState & ScheduleStoreAction>()(
   persist(
@@ -29,7 +28,7 @@ export const useScheduleKeyStore = create<ScheduleStoreState & ScheduleStoreActi
             ...state.store,
             [`${year}-${month}-${date}`]: ([] as string[]).concat(before, id)
           }
-        }))
+        }), true)
       },
       removeRelationByDate: (year, month, date, id) => {
         const before = get().getRelationByDate(year, month, date)
@@ -40,7 +39,7 @@ export const useScheduleKeyStore = create<ScheduleStoreState & ScheduleStoreActi
             ...state.store,
             [`${year}-${month}-${date}`]: before.filter(v => v !== id)
           }
-        }))
+        }), true)
       }
     }),
     {
