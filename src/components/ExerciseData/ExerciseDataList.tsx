@@ -3,9 +3,11 @@ import ExerciseDataDisplay from './ExerciseDataDisplay';
 import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
 import { useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
+import { useSchedulePresetStore } from '../../service/Store/SchedulePresetStore';
 
 export interface ExerciseDataListProps {
-  scheduleIdx: string
+  scheduleIdx?: string
+  schedulePresetIdx?: string
   readonly?: boolean
 }
 
@@ -18,13 +20,17 @@ interface TempExerciseData {
 
 export default function ExerciseDataList({
   scheduleIdx,
+  schedulePresetIdx,
   readonly
 }: ExerciseDataListProps) {
   const scheduleStore = useScheduleStore()
+  const schedulePresetStore = useSchedulePresetStore()
   const [selectedKeys, changeSelectedKeys] = useState<'all' | string[]>([])
   const scheduleData = useMemo(() => {
-    return scheduleStore.getSchedule(scheduleIdx)
-  }, [scheduleStore, scheduleIdx])
+    if (scheduleIdx) return scheduleStore.getSchedule(scheduleIdx)
+    if (schedulePresetIdx) return schedulePresetStore.getSchedulePreset(schedulePresetIdx)
+    return { exerciseList: [] }
+  }, [scheduleStore, schedulePresetStore, scheduleIdx, schedulePresetIdx])
   const exerciseList = useMemo(() => {
     if (!scheduleData) return [] as TempExerciseData[]
     return scheduleData.exerciseList.map(exerciseIdx => {

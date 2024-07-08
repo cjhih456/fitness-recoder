@@ -3,6 +3,7 @@
 import { useScheduleExerciseDataStore } from './ScheduleExerciseDataStore'
 import { useScheduleInfoStore } from './ScheduleInfoStore'
 import { useScheduleKeyStore } from './ScheduleKeyStore'
+import { useSchedulePresetStore } from './SchedulePresetStore'
 import { useScheduleSetStore } from './ScheduleSetStore'
 
 
@@ -41,6 +42,7 @@ export const calanderColor = (year: number, month: number, date: number, selecte
 const useScheduleStore = () => {
   const scheduleKeyStore = useScheduleKeyStore()
   const scheduleInfoStore = useScheduleInfoStore()
+  const schedulePresetStore = useSchedulePresetStore()
   const scheduleExerciseDataStore = useScheduleExerciseDataStore()
   const scheduleSetStore = useScheduleSetStore()
   const getScheduleByData = (year: number, month: number, date: number) => {
@@ -59,33 +61,50 @@ const useScheduleStore = () => {
     const id = createSchedule(year, month, date)
     scheduleInfoStore.setBreakDay(id)
   }
-  const addExerciseListByScheduleWithExerciseData = (scheduleIdx: string, exerciseIdxList: number[]) => {
-    const scheduleInfo = scheduleInfoStore.getSchedule(scheduleIdx)
-    if (!scheduleInfo) return
-    const savedExerciseDataList = scheduleInfo.exerciseList.map(v => scheduleExerciseDataStore.getExerciseData(v)).filter(Boolean) as ExerciseData[]
-    // TODO: calculate remove need & keep exercise list
+
+  const saveExerciseList = (newExerciseList: number[], oldExerciseList: string[]) => {
     const removeNeedExerciseDataIdxList = [] as string[]
     const keepExerciseDataIdxList = [] as string[]
+
+    const savedExerciseDataList = oldExerciseList.map(v => scheduleExerciseDataStore.getExerciseData(v)).filter(Boolean) as ExerciseData[]
+
+    // TODO: calculate remove need & keep exercise list
     savedExerciseDataList.forEach((v, i) => {
-      if (!exerciseIdxList.includes(v.exercise)) {
-        removeNeedExerciseDataIdxList.push(scheduleInfo.exerciseList[i])
+      if (!newExerciseList.includes(v.exercise)) {
+        removeNeedExerciseDataIdxList.push(oldExerciseList[i])
       } else {
-        keepExerciseDataIdxList.push(scheduleInfo.exerciseList[i])
+        keepExerciseDataIdxList.push(oldExerciseList[i])
       }
     })
 
     // TODO: make new exerciseData 
     const savedExerciseList = savedExerciseDataList.map(v => v.exercise)
-    const newExerciseList = [] as string[]
-    exerciseIdxList.forEach((v) => {
+    const newGeneratedExerciseList = [] as string[]
+    newExerciseList.forEach((v) => {
       if (!savedExerciseList.includes(v)) {
-        newExerciseList.push(scheduleExerciseDataStore.createExerciseData(v))
+        newGeneratedExerciseList.push(scheduleExerciseDataStore.createExerciseData(v))
       }
     })
 
     // TODO: make new exercise list & remove exerciseData
-    scheduleInfoStore.addExercise(scheduleIdx, ([] as string[]).concat(keepExerciseDataIdxList, newExerciseList))
     removeNeedExerciseDataIdxList.forEach(v => scheduleExerciseDataStore.removeExerciseData(v))
+    return ([] as string[]).concat(keepExerciseDataIdxList, newGeneratedExerciseList)
+  }
+
+  const addExerciseListByScheduleWithExerciseData = (scheduleIdx: string, exerciseIdxList: number[]) => {
+    const scheduleInfo = scheduleInfoStore.getSchedule(scheduleIdx)
+    if (!scheduleInfo) return
+
+    // TODO: save new 
+    scheduleInfoStore.addExercise(scheduleIdx, saveExerciseList(exerciseIdxList, scheduleInfo.exerciseList))
+  }
+  const addExerciseListByPresetWithExerciseData = (presetId: string, exerciseIdxList: number[]) => {
+    const scheduleInfo = schedulePresetStore.getSchedulePreset(presetId)
+    if (!scheduleInfo) return
+
+    // TODO: save new 
+    schedulePresetStore.addExercise(presetId, saveExerciseList(exerciseIdxList, scheduleInfo.exerciseList))
+
   }
 
   const deleteExerciseDataBySchedule = (scheduleIdx: string, exerciseDataIdxList: string[]) => {
@@ -128,7 +147,10 @@ const useScheduleStore = () => {
     updateSetWeightUnit: scheduleSetStore.updateSetWeightUnit,
     updateSetIsDone: scheduleSetStore.updateSetIsDone,
     updateSetRepeat: scheduleSetStore.updateSetRepeat,
-    updateSetDuration: scheduleSetStore.updateSetDuration
+    updateSetDuration: scheduleSetStore.updateSetDuration,
+
+    // Preset methods
+    addExerciseListByPresetWithExerciseData
   }
 }
 
