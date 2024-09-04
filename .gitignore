@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Auto generate file
+public/manifest.webmanifest
+
+# ssl files
+ssl/server.crt
+ssl/server.key
