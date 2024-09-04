@@ -5,7 +5,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 
 export function createScheduleTable(db: Sqlite3) {
   db.exec(`CREATE TABLE IF NOT EXISTS schedule (
-      id TEXT PRIMARY KEY,
+      id TEXT PRIMARY KEY AUTOINCREMENT,
       year INTEGER,
       month INTEGER,
       date INTEGER,
@@ -63,9 +63,8 @@ export const schema = makeExecutableSchema({
           dbTransitionBus?.sendTransaction(
             context.client,
             'insert',
-            'insert into schedule (id, year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?,?)',
+            'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
             [
-              schedule.id,
               schedule.year,
               schedule.month,
               schedule.date,
@@ -76,9 +75,10 @@ export const schema = makeExecutableSchema({
               schedule.type
             ],
             (result) => {
-              return result ? resolve(schedule) : reject(null)
+              return result ? resolve({ ...result, ...schedule }) : reject(null)
             }
           )
+
         })
       },
       updateSchedule() {

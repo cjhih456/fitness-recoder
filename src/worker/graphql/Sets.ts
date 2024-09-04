@@ -5,7 +5,7 @@ import SetsSchema from './Sets.gql'
 
 export const createSetTable = (db: Sqlite3) => {
   db.exec(`CREATE TABLE IF NOT EXISTS sets (
-      id TEXT PRIMARY KEY,
+      id TEXT PRIMARY KEY AUTOINCREMENT,
       exerciseId TEXT REFERENCES exercise(id),
       repeat INTEGER,
       isDone INTEGER,
@@ -70,9 +70,8 @@ export const schema = makeExecutableSchema({
         return new Promise((resolve, reject) => {
           dbTransitionBus?.sendTransaction(
             context.client,
-            'insert', 'INSERT INTO sets (id, repeat, isDone, weightUnit, weight, duration) values (?,?,?,?,?,?)',
+            'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration) values (?,?,?,?,?)',
             [
-              sets.id,
               sets.repeat,
               sets.isDone ? 0 : 1,
               sets.weightUnit,
@@ -80,7 +79,7 @@ export const schema = makeExecutableSchema({
               sets.duration
             ],
             (result: any) => {
-              !result ? reject(null) : resolve(sets)
+              result ? resolve({ ...result, ...sets }) : reject(null)
             }
           )
         })

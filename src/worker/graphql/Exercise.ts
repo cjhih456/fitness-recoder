@@ -5,12 +5,12 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 
 export const createExerciseTable = (db: Sqlite3) => {
   db.exec(`CREATE TABLE IF NOT EXISTS exercise (
-      id TEXT PRIMARY KEY,
+      id TEXT PRIMARY KEY AUTOINCREMENT,
       exercise INTEGER,
       deps INTEGER
     )`)
   db.exec(`CREATE TABLE IF NOT EXISTS exercisePreset (
-      id TEXT PRIMARY KEY,
+      id TEXT PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       deps INTEGER,
       createdAt INTEGER

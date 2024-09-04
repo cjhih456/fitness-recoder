@@ -26,7 +26,7 @@ self.addEventListener('message', (e: MessageEvent) => {
       parent.db?.exec(data.query, data.bindArgs)
       const result = parent.db?.exec('select last_insert_rowid() as id')
       self.postMessage({
-        object: result ? 'done' : null,
+        object: result ? { id: result } : null,
         txid: data.txid,
         type: data.type
       } as SqliteResultType)
