@@ -33,7 +33,7 @@ function App() {
     return headerContext.getHeaderContent()
   }, [headerContext])
   return <div className="flex flex-col h-screen">
-    <Navbar onMenuOpenChange={setMenuDisplay} maxWidth='sm'>
+    <Navbar onMenuOpenChange={setMenuDisplay} isMenuOpen={menuDisplay} maxWidth='sm'>
       <NavbarContent justify='start'>
         <NavbarMenuToggle
           aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
