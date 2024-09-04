@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa'
+import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
 import makeManifest from './manifest/MakeManifest'
 
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       makeManifest(),
+      GraphqlLoader(),
       VitePWA({
         srcDir: 'src/worker',
         filename: 'GraphqlApi.ts',
