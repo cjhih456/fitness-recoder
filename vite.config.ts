@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa'
 import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
-import makeManifest from './manifest/MakeManifest'
+import makeManifest from './vitePlugin/Manifest/MakeManifest'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

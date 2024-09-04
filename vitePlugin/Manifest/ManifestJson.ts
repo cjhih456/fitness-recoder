@@ -1,5 +1,5 @@
 import type { Manifest } from 'webextension-polyfill';
-import pkg from '../package.json';
+import pkg from '../../package.json';
 
 const url = new URL('/src/worker/GraphqlApi.worker.ts', import.meta.url).href
 
