@@ -1,0 +1,42 @@
+type Exercise {
+  id: ID!
+  exercise: Int!
+}
+
+type ExercisePreset {
+  id: ID!
+  name: String!
+}
+
+type ExerciseList {
+  exerciseList: [Exercise!]
+}
+
+union ExercisePresetWithList = ExercisePreset | ExerciseList
+
+type Query {
+  getExerciseByIds(ids: [ID!]): [Exercise!]
+  getExerciseById(id: ID): Exercise
+  getExerciseByExercisePresetId(id: ID): [Exercise!]
+
+  # ExercisePreset
+  getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]
+  getExercisePresetById(id: ID): ExercisePreset
+  
+}
+
+input CreateExerciseInput {
+  id: String!
+  exerciseId: Int!
+}
+
+input UpdateExerciseInput {
+  id: String!
+  exerciseId: Int!
+}
+
+type Mutation {
+  createExercise(exercise: CreateExerciseInput): Exercise
+  updateExercise(exercise: UpdateExerciseInput): Exercise
+  deleteExerciseById(id: ID): String
+}

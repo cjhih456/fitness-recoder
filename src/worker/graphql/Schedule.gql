@@ -1,0 +1,59 @@
+type Exercise {
+  id: ID!
+  exercise: Int!
+}
+
+enum ScheduleType {
+  BREAK
+  SCHEDULED
+  STARTED
+  PAUSED
+  FINISH
+}
+
+type ScheduleData {
+  id: ID!
+  year: Int!
+  month: Int!
+  date: Int!
+  beforeTime: Int!
+  start: Int!
+  breakTime: Int!
+  workoutTimes: Int!
+  type: ScheduleType!
+}
+
+input CreateScheduleDataInput {
+  id: ID!
+  year: Int!
+  month: Int!
+  date: Int!
+  beforeTime: Int!
+  start: Int!
+  breakTime: Int!
+  workoutTimes: Int!
+  type: ScheduleType!
+}
+
+input UpdateScheduleDataInput {
+  id: ID!
+  year: Int!
+  month: Int!
+  date: Int!
+  beforeTime: Int!
+  start: Int!
+  breakTime: Int!
+  workoutTimes: Int!
+  type: ScheduleType!
+}
+
+type Query {
+  getScheduleById(id: ID!): ScheduleData
+  getScheduleByDate(year: Int!, month: Int!, date: Int!): [ScheduleData!]
+}
+
+type Mutation {
+  createSchedule(schedule:CreateScheduleDataInput): ScheduleData
+  updateSchedule(schedule:UpdateScheduleDataInput): ScheduleData
+  deleteSchedule(id: ID!): ScheduleData
+}

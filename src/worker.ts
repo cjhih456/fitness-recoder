@@ -1,6 +1,6 @@
 if (window) {
   const url = new URL('/src/worker/GraphqlApi.ts', import.meta.url).href
-  const sqliteUrl = new URL('/src/worker/Sqlite.ts', import.meta.url).href
+  const sqliteUrl = new URL('/src/worker/SqliteWorker.ts', import.meta.url).href
   if ('serviceWorker' in navigator) {
     (async () => {
       /**
@@ -34,10 +34,3 @@ if (window) {
 
   }
 }
-
-
-// query SetsQuery {
-//   Sets(id: "1") {
-//     id
-//   }
-// }

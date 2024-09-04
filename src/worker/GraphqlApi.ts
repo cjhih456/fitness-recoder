@@ -1,6 +1,10 @@
 import { createHandler } from 'graphql-http/lib/use/fetch'
+import { mergeSchemas } from '@graphql-tools/schema'
 import Sqlite3 from './Sqlite3'
-import { schema as SetsSchema, init as SetsInit } from './graphql/Sets.worker'
+import { schema as SetsSchema, init as SetsInit } from './graphql/Sets'
+import { schema as ExerciseSchema, init as ExerciseInit } from './graphql/Exercise'
+import { schema as ScheduleSchema, init as ScheduleInit } from './graphql/Schedule'
+
 import MessageTransactionBus from './transaction/MessageTransactionBus'
 
 declare const self: ServiceWorkerGlobalScope
@@ -29,9 +33,8 @@ self.onmessage = (e) => {
 }
 
 self.onactivate = (event) => {
-  SetsInit(dbTransitionBus)
   parent.handlers.set = createHandler({
-    schema: SetsSchema,
+    schema: mergeSchemas({ schemas: [SetsSchema, ExerciseSchema, ScheduleSchema] }),
     context: (req) => {
       if (typeof req.headers.get === 'function') {
         const client = req.headers.get('x-client')
@@ -40,8 +43,10 @@ self.onactivate = (event) => {
       return {}
     }
   })
+  SetsInit(dbTransitionBus)
+  ExerciseInit(dbTransitionBus)
+  ScheduleInit(dbTransitionBus)
   event.waitUntil(self.clients.claim())
-
 }
 
 self.onfetch = async (event) => {

@@ -1,5 +1,7 @@
 import Sqlite3 from './Sqlite3'
-import { createSetTable } from './graphql/Sets.worker'
+import { createExerciseTable } from './graphql/Exercise'
+import { createSetTable } from './graphql/Sets'
+import { createScheduleTable } from './graphql/Schedule'
 
 const parent = { db: undefined, handlers: {}, origin: '' } as {
   db: Sqlite3 | undefined
@@ -10,6 +12,8 @@ const parent = { db: undefined, handlers: {}, origin: '' } as {
 parent.db = new Sqlite3()
 parent.db.init().then(async () => {
   if (parent.db) {
+    createExerciseTable(parent.db)
+    createScheduleTable(parent.db)
     createSetTable(parent.db)
   }
 })
