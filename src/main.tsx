@@ -11,6 +11,16 @@ import { link } from './HttpLink.ts'
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  },
   devtools: {
     enabled: true
   }
