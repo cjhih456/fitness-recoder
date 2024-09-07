@@ -7,6 +7,6 @@
     "allowSyntheticDefaultImports": true,
     "strict": true
   },
-  "include": ["vite.config.ts", "./manifest"],
-  "exclude": ["src/worker"]
+  "include": ["vite.config.ts", "vitePlugin", "src/worker/graphql/**/*.ts"],
+  "exclude": ["src/worker/*.ts"]
 }

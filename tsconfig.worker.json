@@ -9,5 +9,5 @@
     "strict": true,
 
   },
-  "include": ["src/worker/**/*.ts"]
+  "include": ["src/worker/**/*.ts", "types/gql.d.ts"]
 }

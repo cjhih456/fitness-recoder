@@ -4,6 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
+import GraphqlServer from './vitePlugin/GraphqlServer'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -22,7 +23,7 @@ export default defineConfig(({ mode }) => {
       https: {
         cert: fs.readFileSync('./ssl/server.crt'),
         key: fs.readFileSync('./ssl/server.key')
-      }
+      },
     },
     worker: {
       format: 'es'
@@ -38,7 +39,17 @@ export default defineConfig(({ mode }) => {
         filename: 'GraphqlApi.ts',
         useCredentials: true,
         injectRegister: 'script',
-      }), react()],
+      }),
+      react(),
+      GraphqlServer({
+        path: '/__graphql',
+        modulePath: [
+          './src/worker/graphql/Schedule',
+          './src/worker/graphql/Sets',
+          './src/worker/graphql/Exercise'
+        ]
+      })
+    ],
     base: env.VITE_URL_ROOT,
   }
 })
