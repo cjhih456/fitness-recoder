@@ -20,7 +20,6 @@ if (window) {
           const w = v.active || v.installing || v.waiting
           return w?.scriptURL === url
         })
-        console.log(e.data, worker)
         if (worker) {
           sqliteWorker.postMessage(e.data)
         }

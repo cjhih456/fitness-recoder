@@ -66,7 +66,7 @@ class Sqlite3 {
     bind?: BindingSpec
   ) {
     if (!this.db) return
-    return this.db.exec({ sql: query, bind })
+    return this.db.exec({ sql: query, bind, returnValue: 'resultRows', rowMode: 'object', resultRows: [] }) as object[]
   }
 
   close() {

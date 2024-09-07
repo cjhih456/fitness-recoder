@@ -23,10 +23,9 @@ self.addEventListener('message', (e: MessageEvent) => {
 
   switch (data.type) {
     case 'insert': {
-      parent.db?.exec(data.query, data.bindArgs)
-      const result = parent.db?.exec('select last_insert_rowid() as id')
+      const result = parent.db?.exec(data.query + 'RETURNING *', data.bindArgs)
       self.postMessage({
-        object: result ? { id: result } : null,
+        object: result ? result[0] || null : null,
         txid: data.txid,
         type: data.type
       } as SqliteResultType)
