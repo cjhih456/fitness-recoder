@@ -4,7 +4,7 @@ import { PluginOption } from 'vite'
 import manifest from './ManifestJson';
 const { resolve } = path;
 
-const outDir = resolve(__dirname, '..', 'public');
+const outDir = resolve(__dirname, '..', '..', 'public');
 
 export default function makeManifest(): PluginOption {
   return {
