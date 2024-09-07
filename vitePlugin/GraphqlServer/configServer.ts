@@ -67,15 +67,13 @@ export default async function init(server: ViteDevServer, _path: string = '/grap
   } else {
     startServer()
   }
-  return async () => {
-    server.watcher.on('all', async (eventName) => {
-      if (eventName === 'add' || eventName === 'change') {
-        if (obj.closer) {
-          await obj.closer(startServer)
-        } else {
-          startServer()
-        }
+  server.watcher.on('all', async (eventName) => {
+    if (eventName === 'add' || eventName === 'change') {
+      if (obj.closer) {
+        await obj.closer(startServer)
+      } else {
+        startServer()
       }
-    });
-  }
+    }
+  });
 }
