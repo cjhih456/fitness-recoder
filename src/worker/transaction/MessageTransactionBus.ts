@@ -7,8 +7,9 @@ type PromiseResolve<R> = (data: R | PromiseLike<R>) => void
 export default class MessageTransactionBus<R> {
 
   private bus = new Map<string, PromiseResolve<R>>()
-  private clients
-  constructor(clients: Clients) {
+  private clients: Clients | undefined
+  constructor() { }
+  setClients(clients: Clients) {
     this.clients = clients
   }
   registTransition(callBack: TransactionCallBack<R>) {
@@ -29,6 +30,7 @@ export default class MessageTransactionBus<R> {
     const client = await this.clients?.get(clientId)
     if (client) {
       const txid = this.registTransition(callBack)
+      console.log(client, { type, query, txid, bindArgs })
       client.postMessage({ type, query, txid, bindArgs })
     }
   }

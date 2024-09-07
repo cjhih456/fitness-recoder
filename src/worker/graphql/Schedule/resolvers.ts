@@ -10,7 +10,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select', 'select * from schedule where id=?',
           [id],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -23,8 +22,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'selects', 'select * from schedule where year=? and month=? and date=?',
           [year, month, date],
           (result: any) => {
-            console.log(result)
-            !result ? reject(null) : resolve(result)
+            !result ? reject([]) : resolve(result)
           }
         )
       })

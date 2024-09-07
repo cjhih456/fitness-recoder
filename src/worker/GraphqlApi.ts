@@ -1,9 +1,9 @@
 import { createHandler } from 'graphql-http/lib/use/fetch'
 import { mergeSchemas } from '@graphql-tools/schema'
 import Sqlite3 from './Sqlite3'
-import { schema as SetsSchema, init as SetsInit } from './graphql/Sets'
-import { schema as ExerciseSchema, init as ExerciseInit } from './graphql/Exercise'
-import { schema as ScheduleSchema, init as ScheduleInit } from './graphql/Schedule'
+import SetsInit from './graphql/Sets'
+import ExerciseInit from './graphql/Exercise'
+import ScheduleInit from './graphql/Schedule'
 
 import MessageTransactionBus from './transaction/MessageTransactionBus'
 
@@ -13,13 +13,14 @@ export type Version = number
 
 export const version: Version = 1
 
-const dbTransitionBus = new MessageTransactionBus<any>(self.clients)
+let dbTransitionBus: MessageTransactionBus<any> | undefined = undefined
 
 const parent = { db: undefined, handlers: {}, origin: '' } as {
   db: Sqlite3 | undefined
   handlers: { set: (r: Request) => Promise<Response> }
   origin: string
 }
+
 
 self.oninstall = () => {
   self.skipWaiting()
@@ -28,13 +29,22 @@ self.oninstall = () => {
 self.onmessage = (e) => {
   if ('txid' in e.data && 'object' in e.data && 'type' in e.data) {
     const result = e.data as SqliteResultType
-    dbTransitionBus.gotResult(result.txid, result.object)
+    dbTransitionBus && dbTransitionBus.gotResult(result.txid, result.object)
   }
 }
 
 self.onactivate = (event) => {
+  dbTransitionBus = new MessageTransactionBus<any>()
+  dbTransitionBus.setClients(self.clients)
+
   parent.handlers.set = createHandler({
-    schema: mergeSchemas({ schemas: [SetsSchema, ExerciseSchema, ScheduleSchema] }),
+    schema: mergeSchemas({
+      schemas: [
+        SetsInit(dbTransitionBus),
+        ExerciseInit(dbTransitionBus),
+        ScheduleInit(dbTransitionBus)
+      ]
+    }),
     context: (req) => {
       if (typeof req.headers.get === 'function') {
         const client = req.headers.get('x-client')
@@ -43,9 +53,7 @@ self.onactivate = (event) => {
       return {}
     }
   })
-  SetsInit(dbTransitionBus)
-  ExerciseInit(dbTransitionBus)
-  ScheduleInit(dbTransitionBus)
+
   event.waitUntil(self.clients.claim())
 }
 
@@ -62,7 +70,7 @@ self.onfetch = async (event) => {
       const request = new Request(event.request, {
         headers: newHeaders
       })
-      event.respondWith(parent.handlers.set(request))
+      event.respondWith(parent.handlers?.set(request))
     }
   }
 }

@@ -1,7 +1,7 @@
 import Sqlite3 from './Sqlite3'
-import { createExerciseTable } from './graphql/Exercise'
-import { createSetTable } from './graphql/Sets'
-import { createScheduleTable } from './graphql/Schedule'
+import createExerciseTable from './graphql/Exercise/create'
+import createSetTable from './graphql/Sets/create'
+import createScheduleTable from './graphql/Schedule/create'
 
 const parent = { db: undefined, handlers: {}, origin: '' } as {
   db: Sqlite3 | undefined

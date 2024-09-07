@@ -3,12 +3,9 @@ import { makeExecutableSchema } from '@graphql-tools/schema'
 import SetsSchema from './query.gql'
 import resolvers from './resolvers'
 
-let dbTransitionBus: MessageTransactionBus<any> | undefined = undefined
-export function init(txBus: MessageTransactionBus<any>) {
-  dbTransitionBus = txBus
+export default function init(txBus: MessageTransactionBus<any>) {
+  return makeExecutableSchema({
+    typeDefs: SetsSchema,
+    resolvers: resolvers(txBus)
+  })
 }
-
-export const schema = makeExecutableSchema({
-  typeDefs: SetsSchema,
-  resolvers: resolvers(dbTransitionBus)
-})
