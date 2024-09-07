@@ -1,5 +1,5 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import ExerciseSchema from './Exercise.gql'
+import ExerciseSchema from './query.gql'
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import resolvers from './resolvers';
 

@@ -1,6 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import SetsSchema from './Sets.gql'
+import SetsSchema from './query.gql'
 import resolvers from './resolvers'
 
 let dbTransitionBus: MessageTransactionBus<any> | undefined = undefined
