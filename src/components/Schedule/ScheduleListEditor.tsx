@@ -31,8 +31,8 @@ export default function ScheduleListEditor({
     changeLazyExerciseIdxList(() => {
       return ([] as number[]).concat(exerciseIdxList, savedIdxData ?? [])
     })
-  }, [])
-
+    onChangeExerciseIdxList && onChangeExerciseIdxList(lazyExerciseIdxList)
+  }, [savedIdxData])
 
   /**
    * update seleted list

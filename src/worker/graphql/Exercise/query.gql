@@ -15,9 +15,10 @@ type ExerciseList {
 union ExercisePresetWithList = ExercisePreset | ExerciseList
 
 type Query {
-  getExerciseByIds(ids: [ID!]): [Exercise!]
+  getExerciseListByIds(ids: [ID!]): [Exercise!]
   getExerciseById(id: ID): Exercise
   getExerciseByExercisePresetId(id: ID): [Exercise!]
+  getExerciseListByScheduleId(scheduleId: ID): [Exercise!]
 
   # ExercisePreset
   getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]

@@ -1,13 +1,13 @@
 import SimpleFitnessItem from './SimpleFitnessItem'
 
 export interface SimpleFitnessListProps {
-  exerciseDataIdxList: string[]
+  exerciseDataList: ExerciseData[]
 }
 
-export default function SimpleFitnessList({ exerciseDataIdxList }: SimpleFitnessListProps) {
+export default function SimpleFitnessList({ exerciseDataList }: SimpleFitnessListProps) {
   return <div className="flex flex-col gap-y-2">
-    {exerciseDataIdxList.map(exerciseDataIdx => (
-      <SimpleFitnessItem key={exerciseDataIdx} exerciseDataIdx={exerciseDataIdx} />
+    {exerciseDataList.map(exerciseData => (
+      <SimpleFitnessItem key={exerciseData.id} exerciseData={exerciseData} />
     ))}
   </div>
 }

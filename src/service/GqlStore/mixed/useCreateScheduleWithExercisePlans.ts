@@ -1,3 +1,4 @@
+import { ScheduleType } from '../../Store/ScheduleStoreHooks'
 import { useCreateExercise } from '../Exercise'
 import { useCreateSchedule } from '../Schedule'
 
@@ -8,15 +9,15 @@ export function useCreateScheduleWithExercisePlans() {
     const schedule = await createSchedule({
       variables: {
         'schedule': {
-          'beforeTime': 0,
-          'breakTime': 0,
-          'year': year,
-          'date': date,
-          'month': month,
-          'start': 0,
-          'type': 'SCHEDULED',
+          beforeTime: 0,
+          breakTime: 0,
+          year,
+          date,
+          month,
+          start: 0,
+          type: ScheduleType.SCHEDULED,
           workoutTimes: 0
-        } as Schedule
+        }
       }
     })
 

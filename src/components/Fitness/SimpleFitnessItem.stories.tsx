@@ -25,6 +25,10 @@ export default meta
 
 export const Display: Story = {
   args: {
-    exerciseDataIdx: '00000000-0001-0000-0000-000000000000'
+    exerciseData: {
+      id: 1,
+      exercise: 0,
+      deps: 0
+    }
   }
 }

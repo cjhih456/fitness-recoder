@@ -29,11 +29,11 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   function addSchedule() {
     navigate(`${choosenDate}/schedule/create`)
   }
-  function gotoModify(id: string, date?: string) {
+  function gotoModify(id: number, date?: string) {
     if (!date) return
     navigate(`${date}/schedule/${id}`)
   }
-  function startSchedule(id: string, date?: string) {
+  function startSchedule(id: number, date?: string) {
     if (!date) return
     navigate(`${date}/workout/${id}`)
   }

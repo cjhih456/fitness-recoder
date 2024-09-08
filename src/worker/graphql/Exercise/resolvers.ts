@@ -16,7 +16,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
         )
       })
     },
-    getExerciseByIds(_source, { ids }, context) {
+    getExerciseListByIds(_source, { ids }, context) {
       return new Promise((resolve, reject) => {
         const temp = new Array(ids.length).fill('?').join(', ')
         dbTransitionBus?.sendTransaction(
@@ -26,6 +26,18 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           ids,
           (result: any) => {
             !result ? reject(null) : resolve(result)
+          }
+        )
+      })
+    },
+    getExerciseListByScheduleId(_source, { scheduleId }, context) {
+      return new Promise((resolve, reject) => {
+        dbTransitionBus?.sendTransaction(context.client,
+          'selects',
+          'select e.* from exercise e left join schedule_exercise se on se.exerciseId = e.id where se.scheduleId = ?',
+          [scheduleId],
+          (result: any) => {
+            result ? resolve(result) : reject(null)
           }
         )
       })
@@ -100,6 +112,19 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'update',
           'update set exercise exerciseId=? where id=?',
           [exerciseId, id],
+          (result: any) => {
+            result ? resolve(result) : reject(null)
+          }
+        )
+      })
+    },
+    deleteExerciseById(_source, { id }, content) {
+      return new Promise((resolve, reject) => {
+        dbTransitionBus?.sendTransaction(
+          content.client,
+          'delete',
+          'delete from exercise where id=?',
+          [id],
           (result: any) => {
             result ? resolve(result) : reject(null)
           }

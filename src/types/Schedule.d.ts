@@ -16,10 +16,10 @@ interface Sets {
 }
 
 interface ExerciseData {
+  id: number
   /** IExercise.idx */
   exercise: number
-  /** Set store idx */
-  sets: string[]
+  deps: number
 }
 
 interface ExercisePreset {
@@ -39,7 +39,7 @@ interface ScheduleData {
 }
 
 type Schedule = {
-  id?: number
+  id: number
   year: number
   month: number
   date: number

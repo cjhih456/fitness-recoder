@@ -15,25 +15,20 @@ query GetScheduleByDate($year: Int!, $month: Int!, $date: Int!) {
   }
 }
 `
-
-interface GetScheduleByDateReturnObj {
-  getScheduleByDate: Schedule[]
-}
-
 export function useScheduleByDate(year: number, month: number, date: number) {
-  return useQuery<GetScheduleByDateReturnObj>(getScheduleByDateGql, {
+  return useQuery<{ getScheduleByDate: Schedule[] }>(getScheduleByDateGql, {
     variables: {
       year, month, date
     }
   })
 }
-
 export function useLazyScheduleByDate() {
-  return useLazyQuery<GetScheduleByDateReturnObj>(getScheduleByDateGql)
+  return useLazyQuery<{ getScheduleByDate: Schedule[] }>(getScheduleByDateGql)
 }
 
+
 const getScheduleByIdGql = gql`
-query GetScheduleById($id: Int!) {
+query GetScheduleById($id: ID!) {
   getScheduleById(id: $id) {
     id
     year
@@ -47,15 +42,16 @@ query GetScheduleById($id: Int!) {
   }
 }
 `
-
-export function useScheduleById(id: number) {
-  return useQuery(getScheduleByIdGql, {
-    variables: { id }
+export function useGetScheduleById(id: number) {
+  return useQuery<{ getScheduleById: Schedule }>(getScheduleByIdGql, {
+    variables: { id: Number(id) }
   })
 }
-export function useLazyScheduleById() {
-  return useLazyQuery(getScheduleByIdGql)
+export function useGetLazyScheduleById() {
+  return useLazyQuery<{ getScheduleById: Schedule }>(getScheduleByIdGql)
 }
+
+
 const createScheduleGql = gql`
 mutation CreateSchedule($schedule: CreateScheduleDataInput) {
   createSchedule(schedule: $schedule) {
@@ -74,6 +70,8 @@ mutation CreateSchedule($schedule: CreateScheduleDataInput) {
 export function useCreateSchedule() {
   return useMutation<{ createSchedule: Schedule }>(createScheduleGql)
 }
+
+
 const updateScheduleGql = gql`
 mutation UpdateSchedule($id: Int!, $year: Int, $month: Int, $date: Int, $beforeTime: String, $start: String, $breakTime: String, $workoutTimes: Int!, $type: Int) {
   updateSchedule(id: $id, year: $year, month: $month, date: $date, beforeTime: $beforeTime, start: $start, breakTime: $breakTime, workoutTimes: $workoutTimes, type: $type) {
@@ -84,6 +82,8 @@ mutation UpdateSchedule($id: Int!, $year: Int, $month: Int, $date: Int, $beforeT
 export function useUpdateSchedule() {
   return useMutation(updateScheduleGql)
 }
+
+
 const deleteScheduleGql = gql`
 mutation DeleteSchedule($id: Int!) {
   deleteSchedule(id: $id) {

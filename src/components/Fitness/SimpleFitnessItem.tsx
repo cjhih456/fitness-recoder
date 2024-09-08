@@ -1,22 +1,19 @@
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas'
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
+import { useGetSetListByExerciseId } from '../../service/GqlStore/Set'
 
 export interface SimpleFitnessItemProps {
-  exerciseDataIdx: string
+  exerciseData: ExerciseData
 }
-export default function SimpleFitnessItem({ exerciseDataIdx }: SimpleFitnessItemProps) {
-  const scheduleStore = useScheduleStore()
-  const exerciseData = useMemo(() => {
-    return scheduleStore.getExerciseData(exerciseDataIdx)
-  }, [exerciseDataIdx, scheduleStore])
+export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemProps) {
   const exerciseDisplay = useMemo(() => {
     return getExerciseByIdx(exerciseData?.exercise ?? -1)
   }, [exerciseData])
+  const { loading, data, called } = useGetSetListByExerciseId(exerciseData.id)
   const setData = useMemo(() => {
-    return (exerciseData?.sets || []).map(v => scheduleStore.getSetData(v)).filter(Boolean) as Sets[]
-  }, [exerciseData, scheduleStore])
+    return called && !loading ? data?.getSetListByExerciseId || [] : []
+  }, [loading, data])
   const progress = useMemo(() => {
     if (!setData.length) return undefined
     const doneCount = setData.filter(v => v.isDone)
