@@ -23,7 +23,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select', 'select * from sets where id=?',
           [id],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -36,7 +35,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'selects', 'select * from sets where exerciseId=?',
           [id],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )

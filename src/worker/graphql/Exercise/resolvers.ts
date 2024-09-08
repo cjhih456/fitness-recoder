@@ -11,7 +11,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select * from exercise where id=?',
           [id],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -26,7 +25,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           `select * from exercise where id in (${temp})`,
           ids,
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -40,7 +38,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
           id,
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -55,7 +52,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           `select * from exercisePreset where id in (${temp})`,
           ids,
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
@@ -69,8 +65,43 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select * from exercisePreset where id=?',
           [id],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
+          }
+        )
+      })
+    }
+  },
+  Mutation: {
+    createExercise(_source, { exercise }, context) {
+      return new Promise((resolve, reject) => {
+        dbTransitionBus?.sendTransaction(
+          context.client,
+          'insert',
+          'insert into exercise (exercise) values (?)',
+          [exercise.exerciseId],
+          (result: any) => {
+            dbTransitionBus?.sendTransaction(
+              context.client,
+              'insert',
+              'insert into schedule_exercise (exerciseId, scheduleId) values (?, ?)',
+              [result.id, exercise.scheduleId],
+              (result2: any) => {
+                result2 ? resolve(result) : reject(null)
+              }
+            )
+          }
+        )
+      })
+    },
+    updateExercise(_source, { id, exerciseId }, context) {
+      return new Promise((resolve, reject) => {
+        dbTransitionBus?.sendTransaction(
+          context.client,
+          'update',
+          'update set exercise exerciseId=? where id=?',
+          [exerciseId, id],
+          (result: any) => {
+            result ? resolve(result) : reject(null)
           }
         )
       })

@@ -30,7 +30,6 @@ export default class MessageTransactionBus<R> {
     const client = await this.clients?.get(clientId)
     if (client) {
       const txid = this.registTransition(callBack)
-      console.log(client, { type, query, txid, bindArgs })
       client.postMessage({ type, query, txid, bindArgs })
     }
   }

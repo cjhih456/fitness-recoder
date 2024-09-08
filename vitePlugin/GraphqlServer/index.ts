@@ -15,7 +15,6 @@ export default function GraphqlServer(options: options): PluginOption {
     name: 'GraphqlServer',
     apply: 'serve',
     async configureServer(server) {
-      // return async () => {
       const schemas = await (Promise.all(options.modulePath.map(async (path) => {
         const gqlFile = String(fs.readFileSync(`${path}/query.gql`))
         const schema = makeExecutableSchema({

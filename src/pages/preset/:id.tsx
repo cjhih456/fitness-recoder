@@ -23,7 +23,6 @@ export default function PresetDetailPage() {
 
   function savePreset() {
     if (!id) return
-    console.log(exerciseIdxList)
     scheduleStore.addExerciseListByPresetWithExerciseData(id, exerciseIdxList)
   }
 

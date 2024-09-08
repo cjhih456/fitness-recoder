@@ -1,8 +1,9 @@
 import ScheduleDisplay from './ScheduleDisplay';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
-import useScheduleStore, { ScheduleType } from '../../service/Store/ScheduleStoreHooks';
+import { ScheduleType } from '../../service/Store/ScheduleStoreHooks';
+import { useLazyScheduleByDate } from '../../service/GqlStore/Schedule';
 
 export interface ScheduleListProps {
   choosenDate: string
@@ -10,19 +11,20 @@ export interface ScheduleListProps {
 
 export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   const navigate = useNavigate()
-  // Schedule Store
-  const scheduleStore = useScheduleStore()
-  const [parsedDate, scheduleList] = useMemo(() => {
-    if (choosenDate) {
-      const [year, month, date] = choosenDate.split('-').map(v => +v)
-      const scheduleList = scheduleStore.getScheduleByData(year, month, date)
-      return [[year, month, date], scheduleList]
-    }
-    return [[], []]
-  }, [choosenDate])
+  const [loadScheduleList, { data: scheduleList }] = useLazyScheduleByDate()
+  useEffect(() => {
+    const [year, month, date] = choosenDate.split('-').map(v => +v)
+    if (year && month && date)
+      loadScheduleList({
+        variables: {
+          year, month, date
+        }
+      })
+  }, [choosenDate, loadScheduleList])
 
   function addBreakDaySchedule() {
-    scheduleStore.setBreakDay(parsedDate[0], parsedDate[1], parsedDate[2])
+
+    // scheduleStore.setBreakDay(parsedDate[0], parsedDate[1], parsedDate[2])
   }
   function addSchedule() {
     navigate(`${choosenDate}/schedule/create`)
@@ -36,15 +38,14 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
     navigate(`${date}/workout/${id}`)
   }
   const displaySchedule = useMemo(() => {
-    const breakSchedule = scheduleList.find(v => v.type === ScheduleType.BREAK)
+    const breakSchedule = scheduleList?.getScheduleByDate?.find(v => v.type === ScheduleType.BREAK)
     const displayList = []
-
 
     if (breakSchedule) {
       displayList.push(<div key="breakday-list"></div>)
       return displayList
-    } else if (scheduleList) {
-      displayList.push(scheduleList.map((schedule, idx) => {
+    } else if (scheduleList?.getScheduleByDate) {
+      displayList.push(scheduleList?.getScheduleByDate.map((schedule, idx) => {
         return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={`Part ${idx + 1}`} >
           {(id, type, date) => (
             <div className="grid grid-cols-2 gap-x-4">
@@ -61,7 +62,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
       <Button className="bg-success-300" onClick={addSchedule}>
         Add Schedule
       </Button>
-      <Button className="bg-danger-400" isDisabled={Boolean(scheduleList.length)} onClick={addBreakDaySchedule}>
+      <Button className="bg-danger-400" isDisabled={Boolean(scheduleList?.getScheduleByDate.length)} onClick={addBreakDaySchedule}>
         Set Break Day
       </Button>
     </div>)
