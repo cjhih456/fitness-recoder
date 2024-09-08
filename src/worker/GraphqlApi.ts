@@ -34,30 +34,32 @@ self.onmessage = (e) => {
 }
 
 self.onactivate = (event) => {
-  dbTransitionBus = new MessageTransactionBus<any>()
-  dbTransitionBus.setClients(self.clients)
-
-  parent.handlers.set = createHandler({
-    schema: mergeSchemas({
-      schemas: [
-        SetsInit(dbTransitionBus),
-        ExerciseInit(dbTransitionBus),
-        ScheduleInit(dbTransitionBus)
-      ]
-    }),
-    context: (req) => {
-      if (typeof req.headers.get === 'function') {
-        const client = req.headers.get('x-client')
-        return { client }
-      }
-      return {}
-    }
-  })
-
   event.waitUntil(self.clients.claim())
 }
 
 self.onfetch = async (event) => {
+  if (!(dbTransitionBus && parent.handlers.set)) {
+    dbTransitionBus = new MessageTransactionBus<any>()
+    dbTransitionBus.setClients(self.clients)
+
+    parent.handlers.set = createHandler({
+      schema: mergeSchemas({
+        schemas: [
+          SetsInit(dbTransitionBus),
+          ExerciseInit(dbTransitionBus),
+          ScheduleInit(dbTransitionBus)
+        ]
+      }),
+      context: (req) => {
+        if (typeof req.headers.get === 'function') {
+          const client = req.headers.get('x-client')
+          return { client }
+        }
+        return {}
+      }
+    })
+  }
+
   const url = event.request.url
   if (url.match(/\/db/)) {
     if (event.clientId) {
