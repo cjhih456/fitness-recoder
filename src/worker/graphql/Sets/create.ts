@@ -4,7 +4,7 @@ export default function createSetTable(db: Sqlite3) {
   // TODO: add migration steps by Process Version
 
   db.exec(`CREATE TABLE IF NOT EXISTS sets (
-      id TEXT PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       exerciseId TEXT REFERENCES exercise(id),
       repeat INTEGER,
       isDone INTEGER,

@@ -24,7 +24,6 @@ type ScheduleData {
 }
 
 input CreateScheduleDataInput {
-  id: ID!
   year: Int!
   month: Int!
   date: Int!

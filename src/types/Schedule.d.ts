@@ -23,10 +23,10 @@ interface ExerciseData {
 }
 
 interface ExercisePreset {
-  id: string
+  id: number
   name: string
   /** ExerciseData key */
-  exerciseList: string[]
+  exerciseList: ExerciseData[]
 }
 
 interface ScheduleData {
@@ -35,11 +35,11 @@ interface ScheduleData {
   workoutTimes: number
   type: keyof typeof IScheduleType
   /** ExerciseData key */
-  exerciseList: string[]
+  exerciseList?: ExerciseData[]
 }
 
 type Schedule = {
-  id: string
+  id?: number
   year: number
   month: number
   date: number

@@ -26,8 +26,8 @@ type Query {
 }
 
 input CreateExerciseInput {
-  id: String!
   exerciseId: Int!
+  scheduleId: Int!
 }
 
 input UpdateExerciseInput {
