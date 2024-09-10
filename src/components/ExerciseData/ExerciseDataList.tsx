@@ -25,7 +25,7 @@ export default function ExerciseDataList({
   const [selectedKeys, changeSelectedKeys] = useState<'all' | number[]>([])
   useEffect(() => {
     getExerciseSchedule({ variables: { scheduleId: schedule?.id || 0 } })
-  }, [schedule, getExerciseSchedule])
+  }, [schedule?.id, getExerciseSchedule])
   const scheduleData = useMemo(() => {
     if (schedule) return {
       exerciseList: exerciseDataBySchedule?.getExerciseListByScheduleId || []

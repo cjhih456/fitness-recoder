@@ -1,3 +1,5 @@
+scalar Timestamp
+
 type Exercise {
   id: ID!
   exercise: Int!
@@ -16,10 +18,10 @@ type ScheduleData {
   year: Int!
   month: Int!
   date: Int!
-  beforeTime: Int!
-  start: Int!
+  beforeTime: Timestamp!
+  start: Timestamp!
   breakTime: Int!
-  workoutTimes: Int!
+  workoutTimes: Timestamp!
   type: ScheduleType!
 }
 
@@ -27,10 +29,10 @@ input CreateScheduleDataInput {
   year: Int!
   month: Int!
   date: Int!
-  beforeTime: Int!
-  start: Int!
+  beforeTime: Timestamp!
+  start: Timestamp!
   breakTime: Int!
-  workoutTimes: Int!
+  workoutTimes: Timestamp!
   type: ScheduleType!
 }
 
@@ -39,10 +41,10 @@ input UpdateScheduleDataInput {
   year: Int!
   month: Int!
   date: Int!
-  beforeTime: Int!
-  start: Int!
+  beforeTime: Timestamp!
+  start: Timestamp!
   breakTime: Int!
-  workoutTimes: Int!
+  workoutTimes: Timestamp!
   type: ScheduleType!
 }
 
@@ -52,7 +54,7 @@ type Query {
 }
 
 type Mutation {
-  createSchedule(schedule:CreateScheduleDataInput): ScheduleData
-  updateSchedule(schedule:UpdateScheduleDataInput): ScheduleData
+  createSchedule(schedule: CreateScheduleDataInput): ScheduleData
+  updateSchedule(schedule: UpdateScheduleDataInput): ScheduleData
   deleteSchedule(id: ID!): ScheduleData
 }

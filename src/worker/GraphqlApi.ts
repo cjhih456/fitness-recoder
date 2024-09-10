@@ -6,6 +6,7 @@ import ExerciseInit from './graphql/Exercise'
 import ScheduleInit from './graphql/Schedule'
 
 import MessageTransactionBus from './transaction/MessageTransactionBus'
+import { TimestampSchema } from './graphql/ScalaType/Timestamp'
 
 declare const self: ServiceWorkerGlobalScope
 
@@ -45,6 +46,7 @@ self.onfetch = async (event) => {
     parent.handlers.set = createHandler({
       schema: mergeSchemas({
         schemas: [
+          TimestampSchema,
           SetsInit(dbTransitionBus),
           ExerciseInit(dbTransitionBus),
           ScheduleInit(dbTransitionBus)
