@@ -22,7 +22,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'selects', 'select * from schedule where year=? and month=? and date=?',
           [year, month, date],
           (result: any) => {
-            !result ? reject([]) : resolve(result)
+            result ? resolve(result) : reject([])
           }
         )
       })
@@ -52,8 +52,28 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
 
       })
     },
-    updateSchedule() {
-
+    updateSchedule(_source, { schedule }, context) {
+      return new Promise((resolve, reject) => {
+        dbTransitionBus?.sendTransaction(
+          context.client,
+          'update',
+          'update schedule set year=?, month=?, date=?, beforeTime=?, start=?, breakTime=?, workoutTimes=?, type=? where id=?',
+          [
+            schedule.year,
+            schedule.month,
+            schedule.date,
+            schedule.beforeTime,
+            schedule.start,
+            schedule.breakTime,
+            schedule.workoutTimes,
+            schedule.type,
+            schedule.id
+          ],
+          (result) => {
+            return result && result[0] ? resolve(result[0]) : reject(null)
+          }
+        )
+      })
     },
     deleteSchedule() {
 

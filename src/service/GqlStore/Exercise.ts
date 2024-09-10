@@ -22,12 +22,12 @@ query GetExerciseListByScheduleId($scheduleId: ID) {
 }
 `
 export function useGetExerciseListByScheduleId(scheduleId: number) {
-  return useQuery<{ getExerciseListByScheduleId: ExerciseData[] }>(GetExerciseListByScheduleIdGql, {
+  return useQuery<{ getExerciseListByScheduleId: ExerciseData[] }, { scheduleId: number }>(GetExerciseListByScheduleIdGql, {
     variables: { scheduleId: Number(scheduleId) }
   })
 }
 export function useLazyGetExerciseListByScheduleId() {
-  return useLazyQuery<{ getExerciseListByScheduleId: ExerciseData[] }>(GetExerciseListByScheduleIdGql)
+  return useLazyQuery<{ getExerciseListByScheduleId: ExerciseData[] }, { scheduleId: number }>(GetExerciseListByScheduleIdGql)
 }
 
 

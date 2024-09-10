@@ -1,51 +1,54 @@
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import ExerciseDataDisplay from './ExerciseDataDisplay';
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
-import { useSchedulePresetStore } from '../../service/Store/SchedulePresetStore';
+import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
 
 export interface ExerciseDataListProps {
-  scheduleIdx?: string
-  schedulePresetIdx?: string
+  schedule?: Schedule
+  schedulePresetIdx?: number
   readonly?: boolean
 }
 
-interface TempExerciseData {
-  idx: string;
+type TempExerciseData = {
   name: string;
-  exercise: number;
   sets: string[];
-}
+} & ExerciseData
 
 export default function ExerciseDataList({
-  scheduleIdx,
-  schedulePresetIdx,
+  schedule,
+  // schedulePresetIdx,
   readonly
 }: ExerciseDataListProps) {
-  const scheduleStore = useScheduleStore()
-  const schedulePresetStore = useSchedulePresetStore()
-  const [selectedKeys, changeSelectedKeys] = useState<'all' | string[]>([])
+  const [getExerciseSchedule, { data: exerciseDataBySchedule }] = useLazyGetExerciseListByScheduleId()
+  // const [getSchedulePreset, {data: eerciseDataBySchedulePreset}] = useLazyGetExerciseListBySchedulePresetId()
+  const [selectedKeys, changeSelectedKeys] = useState<'all' | number[]>([])
+  useEffect(() => {
+    getExerciseSchedule({ variables: { scheduleId: schedule?.id || 0 } })
+  }, [schedule, getExerciseSchedule])
   const scheduleData = useMemo(() => {
-    if (scheduleIdx) return scheduleStore.getSchedule(scheduleIdx)
-    if (schedulePresetIdx) return schedulePresetStore.getSchedulePreset(schedulePresetIdx)
+    if (schedule) return {
+      exerciseList: exerciseDataBySchedule?.getExerciseListByScheduleId || []
+    }
+    // if(schedulePresetIdx) return {
+    //   exerciseList: exerciseDataBySchedulePreset?.getExerciseListBySchedulePresetId || []
+    // }
     return { exerciseList: [] }
-  }, [scheduleStore, schedulePresetStore, scheduleIdx, schedulePresetIdx])
+  }, [schedule, exerciseDataBySchedule])
+
   const exerciseList = useMemo(() => {
     if (!scheduleData) return [] as TempExerciseData[]
-    return scheduleData.exerciseList.map(exerciseIdx => {
-      const exerciseData = scheduleStore.getExerciseData(exerciseIdx)
-      if (!exerciseData) return undefined
+    return scheduleData.exerciseList.map(exerciseData => {
       const exercise = getExerciseByIdx(exerciseData.exercise)
       return {
         ...exerciseData,
-        idx: exerciseIdx,
+        id: exerciseData.id,
         name: exercise.name
       }
     }).filter(Boolean) as TempExerciseData[]
-  }, [scheduleStore, scheduleData])
+  }, [scheduleData])
 
-  function changeSelection(key: string) {
+  function changeSelection(key: number) {
     if (selectedKeys[0] === key) {
       changeSelectedKeys([])
     } else {
@@ -55,19 +58,19 @@ export default function ExerciseDataList({
 
   function gotoNextExercise(index: number) {
     if (exerciseList[index + 1]) {
-      changeSelectedKeys([exerciseList[index + 1].idx])
+      changeSelectedKeys([exerciseList[index + 1].id])
     }
   }
 
   return <Accordion selectionBehavior="replace" variant='splitted' selectedKeys={selectedKeys}>
     {exerciseList.map((exerciseData, index) => {
       return <AccordionItem
-        key={`${exerciseData.idx}`}
+        key={`${exerciseData.id}`}
         title={exerciseData.name}
         classNames={{ heading: 'font-bold' }}
-        onPress={() => changeSelection(exerciseData.idx)}
+        onPress={() => changeSelection(exerciseData.id)}
       >
-        <ExerciseDataDisplay exerciseDataIdx={exerciseData.idx} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
+        <ExerciseDataDisplay exerciseData={exerciseData} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
       </AccordionItem>
     })}
   </Accordion>

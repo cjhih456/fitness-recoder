@@ -6,14 +6,19 @@ enum IScheduleType {
   FINISH = 'FINISH',
 }
 
-interface Sets {
-  id: string
+interface SetsCreateType {
+  exerciseId: number
   repeat: number
   isDone: boolean
   weightUnit: keyof typeof WeightUnit
   weight?: number
   duration?: number
 }
+
+interface Sets extends SetsCreateType {
+  id: number
+}
+
 
 interface ExerciseData {
   id: number

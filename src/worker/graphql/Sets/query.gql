@@ -9,27 +9,27 @@ type Sets {
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
-  weight: Float!
-  duration: Int!
+  weight: Float
+  duration: Int
 }
 
 input CreateSetsInput {
-  id: ID!
   exerciseId: ID!
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
-  weight: Float!
-  duration: Int!
+  weight: Float
+  duration: Int
 }
 
 input UpdateSetsInput {
   id: ID!
+  exerciseId: ID
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
-  weight: Float!
-  duration: Int!
+  weight: Float
+  duration: Int
 }
 
 type Query {
@@ -41,5 +41,5 @@ type Query {
 type Mutation {
   createSet(sets: CreateSetsInput!): Sets
   updateSet(sets: UpdateSetsInput!): Sets
-  deleteSetById(id: ID): String
+  deleteSetById(id: ID!): String
 }

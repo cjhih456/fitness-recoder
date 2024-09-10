@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
-import { useGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
-import { useMemo } from 'react'
+import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
+import { useEffect, useMemo } from 'react'
 
 export interface ScheduleDisplayProps {
   id: number,
@@ -13,7 +13,14 @@ export interface ScheduleDisplayProps {
 }
 
 export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {
-  const { data } = useGetExerciseListByScheduleId(schedule?.id || 0)
+  const [getExerciseList, { data }] = useLazyGetExerciseListByScheduleId()
+  useEffect(() => {
+    getExerciseList({
+      variables: {
+        scheduleId: schedule?.id || 0
+      }
+    })
+  }, [schedule, getExerciseList])
   const lazyExerciseList = useMemo(() => {
     return exerciseList ? exerciseList : data?.getExerciseListByScheduleId || []
   }, [exerciseList, data])

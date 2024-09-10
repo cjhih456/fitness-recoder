@@ -48,9 +48,9 @@ self.addEventListener('message', (e: MessageEvent) => {
     } break
     case 'delete':
     case 'update': {
-      const result = parent.db?.exec(data.query, data.bindArgs)
+      const result = parent.db?.exec(data.query + 'RETURNING *', data.bindArgs)
       self.postMessage({
-        object: result ? 'done' : null,
+        object: result ? result : null,
         txid: data.txid,
         type: data.type
       } as SqliteResultType)

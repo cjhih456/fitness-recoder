@@ -47,14 +47,14 @@ export function useGetScheduleById(id: number) {
     variables: { id: Number(id) }
   })
 }
-export function useGetLazyScheduleById() {
-  return useLazyQuery<{ getScheduleById: Schedule }>(getScheduleByIdGql)
+export function useLazyGetScheduleById() {
+  return useLazyQuery<{ getScheduleById: Schedule }, { id: number }>(getScheduleByIdGql)
 }
 
 
 const createScheduleGql = gql`
-mutation CreateSchedule($schedule: CreateScheduleDataInput) {
-  createSchedule(schedule: $schedule) {
+mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
+  createSchedule(schedule: $createSchedule) {
     id
     year
     month
@@ -68,19 +68,27 @@ mutation CreateSchedule($schedule: CreateScheduleDataInput) {
 }
 `
 export function useCreateSchedule() {
-  return useMutation<{ createSchedule: Schedule }>(createScheduleGql)
+  return useMutation<{ createSchedule: Schedule }, { createSchedule: Schedule }>(createScheduleGql)
 }
 
 
 const updateScheduleGql = gql`
-mutation UpdateSchedule($id: Int!, $year: Int, $month: Int, $date: Int, $beforeTime: String, $start: String, $breakTime: String, $workoutTimes: Int!, $type: Int) {
-  updateSchedule(id: $id, year: $year, month: $month, date: $date, beforeTime: $beforeTime, start: $start, breakTime: $breakTime, workoutTimes: $workoutTimes, type: $type) {
+mutation Mutation($updateSchedule: UpdateScheduleDataInput) {
+  updateSchedule(schedule:$updateSchedule) {
     id
+    year
+    month
+    date
+    beforeTime
+    start
+    breakTime
+    workoutTimes
+    type
   }
 }
 `
 export function useUpdateSchedule() {
-  return useMutation(updateScheduleGql)
+  return useMutation<{ updateSchedule: Schedule }, { updateSchedule: Schedule }>(updateScheduleGql)
 }
 
 

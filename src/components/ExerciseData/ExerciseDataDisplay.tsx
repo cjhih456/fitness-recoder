@@ -1,49 +1,75 @@
 import { Button } from '@nextui-org/react';
-import { useMemo } from 'react';
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks';
+import { useEffect, useMemo } from 'react';
 import SetRow from './SetRow';
+import { useCreateSet, useDeleteSet, useLazyGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
 
 export interface ExerciseDataDisplayProps {
-  exerciseDataIdx: string
+  exerciseData: ExerciseData
   hasDoneLastSet?: () => void
   readonly?: boolean
 }
 
 export default function ExerciseDataDisplay({
-  exerciseDataIdx,
+  exerciseData,
   hasDoneLastSet,
   readonly
 }: ExerciseDataDisplayProps) {
-  const scheduleStore = useScheduleStore()
+  const [getSetByExerciseId, { data: setDatas }] = useLazyGetSetListByExerciseId()
+  const [createSet] = useCreateSet()
+  const [updateSet] = useUpdateSet()
+  const [deleteSet] = useDeleteSet()
+  useEffect(() => {
+    getSetByExerciseId({ variables: { id: exerciseData.id } })
+  }, [exerciseData, getSetByExerciseId])
 
-  const exerciseData = useMemo(() => {
-    return scheduleStore.getExerciseData(exerciseDataIdx) || { sets: [] }
-  }, [scheduleStore, exerciseDataIdx])
   const setData = useMemo(() => {
-    return scheduleStore.getSetListData(exerciseData.sets)
-  }, [exerciseData, scheduleStore])
+    return setDatas?.getSetListByExerciseId || []
+  }, [setDatas])
 
   function appendSet() {
-    scheduleStore.appendSetByExerciseDataIdx(exerciseDataIdx)
+    createSet({
+      variables: {
+        sets: {
+          exerciseId: exerciseData.id,
+          repeat: 10,
+          isDone: false,
+          weightUnit: 'kg',
+          weight: 10
+        }
+      }
+    }).then(() => {
+      getSetByExerciseId({ variables: { id: exerciseData.id } })
+    })
+    // scheduleStore.appendSetByExerciseDataIdx(exerciseDataIdx)
   }
 
-  function checkAllSetDone(idx: string, isDone: boolean) {
-    if (isDone && (!setData.filter(v => !v.isDone).filter(v => v.id !== idx).length)) {
+  function checkAllSetDone(id: number, isDone: boolean) {
+    if (isDone && (!setData.filter(v => !v.isDone).filter(v => v.id !== id).length)) {
       hasDoneLastSet && hasDoneLastSet()
     }
   }
 
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
-      {exerciseData.sets.map((setId, index) => {
+      {setData.map((set, index) => {
         return <SetRow
-          key={setId}
+          key={set.id}
           index={index + 1}
-          setId={setId}
-          hasDoneChange={(v) => { checkAllSetDone(setId, v) }}
+          set={set}
+          hasSetChange={(setData) => {
+            const data = { ...setData }
+            // @ts-ignore
+            delete data.__typename
+            updateSet({ variables: { sets: data } }).then(() => {
+              getSetByExerciseId({ variables: { id: exerciseData.id } })
+            })
+          }}
+          hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
           readonly={readonly}
           onRemoveSet={(id) => {
-            scheduleStore.removeSetByExerciseDataIdx(exerciseDataIdx, id)
+            deleteSet({ variables: { id: id } }).then(() => {
+              getSetByExerciseId({ variables: { id: exerciseData.id } })
+            })
           }}
         ></SetRow>
       })}

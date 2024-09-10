@@ -8,7 +8,7 @@ export function useCreateScheduleWithExercisePlans() {
   return async (year: number, month: number, date: number, exerciseList: number[]) => {
     const schedule = await createSchedule({
       variables: {
-        'schedule': {
+        createSchedule: {
           beforeTime: 0,
           breakTime: 0,
           year,

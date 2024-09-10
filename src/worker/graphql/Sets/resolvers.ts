@@ -23,7 +23,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'select', 'select * from sets where id=?',
           [id],
           (result: any) => {
-            !result ? reject(null) : resolve(result)
+            result ? resolve(result) : reject(null)
           }
         )
       })
@@ -35,7 +35,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'selects', 'select * from sets where exerciseId=?',
           [id],
           (result: any) => {
-            !result ? reject(null) : resolve(result)
+            result ? resolve(result) : reject(null)
           }
         )
       })
@@ -46,13 +46,14 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
       return new Promise((resolve, reject) => {
         dbTransitionBus?.sendTransaction(
           context.client,
-          'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration) values (?,?,?,?,?)',
+          'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
           [
             sets.repeat,
             sets.isDone ? 0 : 1,
             sets.weightUnit,
             sets.weight,
-            sets.duration
+            sets.duration,
+            sets.exerciseId
           ],
           (result: any) => {
             result ? resolve({ ...result, ...sets }) : reject(null)
@@ -67,14 +68,14 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
           [
             sets.repeat,
-            sets.isDone ? 0 : 1,
+            sets.isDone ? 1 : 0,
             sets.weightUnit,
             sets.weight,
             sets.duration,
             sets.id
           ],
           (result: any) => {
-            !result ? reject(null) : resolve(sets)
+            result ? resolve(sets) : reject(null)
           }
         )
       })

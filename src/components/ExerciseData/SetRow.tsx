@@ -1,38 +1,72 @@
-import { useMemo } from 'react'
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
+import { useEffect, useState } from 'react'
 import { Button, Checkbox, Input } from '@nextui-org/react'
 import { MdClear } from 'react-icons/md'
-
+import { useDebounce } from '../../hooks/useDebounce'
 export interface SetRowProps {
-  setId: string
+  set: Sets
   index: number
+  hasSetChange?: (set: Sets) => void
   hasDoneChange?: (isDone: boolean) => void
-  onRemoveSet?: (id: string) => void
+  onRemoveSet?: (id: number) => void
   readonly?: boolean
 }
 
-export default function SetRow({ setId, index, hasDoneChange, onRemoveSet, readonly }: SetRowProps) {
-  const scheduleStore = useScheduleStore()
-  const set = useMemo(() => scheduleStore.getSetData(setId), [scheduleStore, setId])
+export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly }: SetRowProps) {
+  const [lazyValue, setLazyValue] = useState<Sets>({
+    weight: 0,
+    isDone: false,
+    repeat: 0,
+    exerciseId: 0,
+    id: 0,
+    weightUnit: 'kg'
+  })
+  const debouncedLazyValue = useDebounce(lazyValue, 200)
+  useEffect(() => {
+    if (JSON.stringify(set) !== JSON.stringify(debouncedLazyValue)) {
+      if (debouncedLazyValue.id) {
+        hasSetChange && hasSetChange(debouncedLazyValue)
+        if (set.isDone !== debouncedLazyValue.isDone) {
+          hasDoneChange && hasDoneChange(debouncedLazyValue.isDone)
+        }
+      }
+    }
+  }, [debouncedLazyValue])
+  useEffect(() => {
+    if (JSON.stringify(set) !== JSON.stringify(lazyValue)) {
+      setLazyValue(Object.assign({}, set))
+    }
+  }, [set])
+
   function changeRepeat(v: string) {
-    scheduleStore.updateSetRepeat(setId, Number(v))
+    setLazyValue((before) => {
+      const temp = { ...before }
+      temp.repeat = Number(v)
+      return temp
+    })
   }
   function changeWeight(v: string) {
-    scheduleStore.updateSetWeight(setId, Number(v))
+    setLazyValue((before) => {
+      const temp = { ...before }
+      temp.weight = Number(v)
+      return temp
+    })
   }
   function changeIsDone(v: boolean) {
-    scheduleStore.updateSetIsDone(setId, v)
-    hasDoneChange && hasDoneChange(v)
+    setLazyValue((before) => {
+      const temp = { ...before }
+      temp.isDone = v
+      return temp
+    })
   }
   function removeSet() {
-    onRemoveSet && onRemoveSet(setId)
+    onRemoveSet && onRemoveSet(set.id)
   }
 
   return set ? <div className="flex gap-x-2 items-center justify-center">
     <span className='min-w-12'>Set {index}</span>
-    <Input value={String(set.repeat)} className="w-28" onValueChange={changeRepeat} isReadOnly={readonly}></Input>
-    <Input value={String(set.weight)} className="w-28" onValueChange={changeWeight} isReadOnly={readonly}></Input>
-    <Checkbox classNames={{ wrapper: 'mr-0' }} isSelected={set.isDone} size='lg' onValueChange={changeIsDone} isReadOnly={readonly} radius='full'></Checkbox>
+    <Input value={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} isReadOnly={readonly}></Input>
+    <Input value={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} isReadOnly={readonly}></Input>
+    <Checkbox classNames={{ wrapper: 'mr-0' }} isSelected={lazyValue?.isDone} size='lg' onValueChange={changeIsDone} isReadOnly={readonly} radius='full'></Checkbox>
     {readonly ? undefined : <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onClick={removeSet}>
       <MdClear size="1.5rem"></MdClear>
     </Button>}
