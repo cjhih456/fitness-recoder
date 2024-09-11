@@ -25,8 +25,7 @@ const apolloClient = new ApolloClient({
     enabled: true
   }
 })
-Worker().then((result) => {
-  console.log(result)
+Worker().then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <NextUIProvider>
