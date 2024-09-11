@@ -28,9 +28,11 @@ export default class MessageTransactionBus<R> {
 
   async sendTransaction(clientId: string, type: SqliteMessageType, query: string, bindArgs: any[], callBack: TransactionCallBack<R>) {
     const client = await this.clients?.get(clientId)
-    if (client) {
-      const txid = this.registTransition(callBack)
-      client.postMessage({ type, query, txid, bindArgs })
-    }
+    return new Promise((resolve) => {
+      if (client) {
+        const txid = this.registTransition((result) => { callBack(result); resolve(result) })
+        client.postMessage({ type, query, txid, bindArgs })
+      }
+    })
   }
 }

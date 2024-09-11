@@ -3,9 +3,20 @@ type ExercisePreset {
   name: String!
   deps: Int!
 }
+type Exercise {
+  id: ID!
+  exercise: Int!
+}
+
+type ExercisePresetWithList {
+  id: ID!
+  name: String!
+  deps: Int!
+  exerciseList: [Exercise!]
+}
 
 type Query {
-  getExercisePresetList(page: Int, size: Int): [ExercisePreset!]
+  getExercisePresetList(page: Int, size: Int): [ExercisePresetWithList!]
   getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]
   getExercisePresetById(id: ID): ExercisePreset
 }

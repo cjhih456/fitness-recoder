@@ -1,10 +1,5 @@
 scalar Timestamp
 
-type Exercise {
-  id: ID!
-  exercise: Int!
-}
-
 enum ScheduleType {
   BREAK
   SCHEDULED

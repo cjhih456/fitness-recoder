@@ -5,15 +5,18 @@ query GetExercisePresetList($page: Int, $size: Int) {
   getExercisePresetList(page: $page, size: $size) {
     id
     name
-    deps
+    exerciseList {
+      id
+      exercise
+    }
   }
 }
 `
 export function useLazyGetExercisePresetList() {
-  return useLazyQuery<{ getExercisePresetList: ExercisePreset[] }, { page: number, size: number }>(getExercisePresetListGql)
+  return useLazyQuery<{ getExercisePresetList: ExercisePresetWithExerciseList[] }, { page: number, size: number }>(getExercisePresetListGql)
 }
 export function useGetExercisePresetList(page: number, size: number) {
-  return useQuery<{ getExercisePresetList: ExercisePreset[] }, { page: number, size: number }>(getExercisePresetListGql, {
+  return useQuery<{ getExercisePresetList: ExercisePresetWithExerciseList[] }, { page: number, size: number }>(getExercisePresetListGql, {
     variables: { page, size }
   })
 }

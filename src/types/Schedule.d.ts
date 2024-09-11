@@ -32,6 +32,9 @@ interface ExercisePreset {
   name: string
   deps: number
 }
+interface ExercisePresetWithExerciseList extends ExercisePreset {
+  exerciseList?: ExerciseData[]
+}
 
 interface ScheduleData {
   start: number

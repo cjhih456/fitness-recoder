@@ -8,10 +8,29 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
         dbTransitionBus?.sendTransaction(
           context.client,
           'selects',
-          'select * from exercisePreset where id in order by deps limit ?,?',
+          'select * from exercisePreset order by deps limit ?,?',
           [(page - 1) * size, size],
-          (result: any) => {
-            result ? resolve(result) : reject(null)
+          async (result: any[]) => {
+            if (!result) {
+              return reject(null)
+            }
+            const temp = await Promise.all(result.map((obj) => {
+              return new Promise((resolve2) => {
+                dbTransitionBus.sendTransaction(
+                  context.client,
+                  'selects',
+                  'select * from exercisePreset_exercise where exercisePresetId=?',
+                  [obj.id],
+                  (result: any[]) => {
+                    obj.exerciseList = result
+                    resolve2(obj)
+                  }
+                )
+              })
+              return
+            }))
+            console.log(temp)
+            resolve(temp)
           }
         )
       })
@@ -50,11 +69,12 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
         dbTransitionBus?.sendTransaction(
           context.client,
           'insert',
-          'insert into exercisePreset set (name) values (?)',
+          'insert into exercisePreset (name, deps) values (?, (select count(*) from exercisePreset))',
           [
             exercisePreset.name
           ],
           (result: any) => {
+            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
