@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleDisplay, { ScheduleDisplayProps } from './ScheduleDisplay'
 import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
-import { ScheduleType } from '../../service/Store/ScheduleStoreHooks';
+import { ScheduleType } from '../../utils';
 
 const meta = {
   title: 'Schedule/ScheduleDisplay',

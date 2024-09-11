@@ -1,4 +1,4 @@
-import { ScheduleType } from '../../Store/ScheduleStoreHooks'
+import { ScheduleType } from '../../../utils'
 import { useCreateExercise } from '../Exercise'
 import { useCreateSchedule } from '../Schedule'
 

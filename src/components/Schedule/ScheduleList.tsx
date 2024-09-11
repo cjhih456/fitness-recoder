@@ -2,7 +2,7 @@ import ScheduleDisplay from './ScheduleDisplay';
 import { useEffect, useMemo } from 'react';
 import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
-import { ScheduleType } from '../../service/Store/ScheduleStoreHooks';
+import { ScheduleType } from '../../utils';
 import { useLazyScheduleByDate } from '../../service/GqlStore/Schedule';
 
 export interface ScheduleListProps {
