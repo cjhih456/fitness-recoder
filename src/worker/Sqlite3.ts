@@ -9,6 +9,7 @@ const error = console.error;
 class Sqlite3 {
   db: undefined | Database | OpfsDatabase
   dbPromise: undefined | Promise<Database | OpfsDatabase>
+  ready: boolean = false
   constructor() {
     if (sqlite) return sqlite
     // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -24,6 +25,7 @@ class Sqlite3 {
         resolve(sqlite3.oo1.OpfsDb
           ? new sqlite3.oo1.OpfsDb('worker.sqlite3')
           : new sqlite3.oo1.DB('workout.sqlite3', 'ct'))
+        this.ready = true
       }).catch(e => {
         console.error('InitError', e)
       })

@@ -10,18 +10,17 @@ const parent = { db: undefined, handlers: {}, origin: '' } as {
   origin: string
 }
 
-parent.db = new Sqlite3()
-parent.db.init().then(async () => {
-  if (parent.db) {
-    createExerciseTable(parent.db)
-    createExercisePresetTable(parent.db)
-    createScheduleTable(parent.db)
-    createSetTable(parent.db)
-  }
-})
-
-self.addEventListener('message', (e: MessageEvent) => {
+self.addEventListener('message', async (e: MessageEvent) => {
   const data = e.data as SqliteMessage
+  if (!parent.db?.ready)
+    await new Promise<void>((resolve) => {
+      setInterval(() => {
+        if (parent.db?.ready) {
+          resolve()
+        }
+      }, 50)
+    })
+
 
   switch (data.type) {
     case 'insert': {
@@ -57,5 +56,15 @@ self.addEventListener('message', (e: MessageEvent) => {
         type: data.type
       } as SqliteResultType)
     } break
+  }
+})
+
+parent.db = new Sqlite3()
+parent.db.init().then(async () => {
+  if (parent.db) {
+    createExerciseTable(parent.db)
+    createExercisePresetTable(parent.db)
+    createScheduleTable(parent.db)
+    createSetTable(parent.db)
   }
 })
