@@ -4,6 +4,7 @@ import Sqlite3 from './Sqlite3'
 import SetsInit from './graphql/Sets'
 import ExerciseInit from './graphql/Exercise'
 import ScheduleInit from './graphql/Schedule'
+import ExercisePresetInit from './graphql/ExercisePreset'
 
 import MessageTransactionBus from './transaction/MessageTransactionBus'
 import { TimestampSchema } from './graphql/ScalaType/Timestamp'
@@ -49,6 +50,7 @@ self.onfetch = async (event) => {
           TimestampSchema,
           SetsInit(dbTransitionBus),
           ExerciseInit(dbTransitionBus),
+          ExercisePresetInit(dbTransitionBus),
           ScheduleInit(dbTransitionBus)
         ]
       }),

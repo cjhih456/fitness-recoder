@@ -54,33 +54,6 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
           }
         )
       })
-    },
-    getExercisePresetByIds(_source, { ids }, context) {
-      return new Promise((resolve, reject) => {
-        const temp = new Array(ids.length).fill('?').join(', ')
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'select',
-          `select * from exercisePreset where id in (${temp})`,
-          ids,
-          (result: any) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
-    },
-    getExercisePresetById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'select',
-          'select * from exercisePreset where id=?',
-          [id],
-          (result: any) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
     }
   },
   Mutation: {

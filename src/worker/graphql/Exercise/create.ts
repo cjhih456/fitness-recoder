@@ -8,14 +8,4 @@ export default function createExerciseTable(db: Sqlite3) {
       exercise INTEGER,
       deps INTEGER
     )`)
-  db.exec(`CREATE TABLE IF NOT EXISTS exercisePreset (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      deps INTEGER,
-      createdAt INTEGER
-    )`)
-  db.exec(`CREATE TABLE IF NOT EXISTS exercisePreset_exercise (
-      exercisePresetId TEXT REFERENCES exercisePreset(id),
-      exerciseId TEXT REFERENCES exercise(id)
-    )`)
 }

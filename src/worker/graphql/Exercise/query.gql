@@ -3,27 +3,16 @@ type Exercise {
   exercise: Int!
 }
 
-type ExercisePreset {
-  id: ID!
-  name: String!
-}
-
 type ExerciseList {
   exerciseList: [Exercise!]
 }
 
-union ExercisePresetWithList = ExercisePreset | ExerciseList
 
 type Query {
   getExerciseListByIds(ids: [ID!]): [Exercise!]
   getExerciseById(id: ID): Exercise
   getExerciseByExercisePresetId(id: ID): [Exercise!]
   getExerciseListByScheduleId(scheduleId: ID): [Exercise!]
-
-  # ExercisePreset
-  getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]
-  getExercisePresetById(id: ID): ExercisePreset
-  
 }
 
 input CreateExerciseInput {

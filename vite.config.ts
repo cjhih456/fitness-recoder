@@ -46,7 +46,8 @@ export default defineConfig(({ mode }) => {
         modulePath: [
           './src/worker/graphql/Schedule',
           './src/worker/graphql/Sets',
-          './src/worker/graphql/Exercise'
+          './src/worker/graphql/Exercise',
+          './src/worker/graphql/ExercisePreset'
         ]
       })
     ],

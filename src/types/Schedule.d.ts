@@ -30,8 +30,7 @@ interface ExerciseData {
 interface ExercisePreset {
   id: number
   name: string
-  /** ExerciseData key */
-  exerciseList: ExerciseData[]
+  deps: number
 }
 
 interface ScheduleData {

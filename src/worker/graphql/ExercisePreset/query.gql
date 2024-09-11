@@ -1,0 +1,19 @@
+type ExercisePreset {
+  id: ID!
+  name: String!
+  deps: Int!
+}
+
+type Query {
+  getExercisePresetList(page: Int, size: Int): [ExercisePreset!]
+  getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]
+  getExercisePresetById(id: ID): ExercisePreset
+}
+
+input CreateExercisePresetInput {
+  name: String!
+}
+
+type Mutation {
+  createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePreset
+}

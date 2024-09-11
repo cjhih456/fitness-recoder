@@ -1,4 +1,5 @@
 import Sqlite3 from './Sqlite3'
+import createExercisePresetTable from './graphql/ExercisePreset/create'
 import createExerciseTable from './graphql/Exercise/create'
 import createSetTable from './graphql/Sets/create'
 import createScheduleTable from './graphql/Schedule/create'
@@ -13,6 +14,7 @@ parent.db = new Sqlite3()
 parent.db.init().then(async () => {
   if (parent.db) {
     createExerciseTable(parent.db)
+    createExercisePresetTable(parent.db)
     createScheduleTable(parent.db)
     createSetTable(parent.db)
   }
