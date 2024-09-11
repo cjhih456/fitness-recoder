@@ -41,7 +41,7 @@ self.addEventListener('message', (e: MessageEvent) => {
     case 'selects': {
       const result = parent.db?.selectObjects(data.query, data.bindArgs)
       self.postMessage({
-        object: result,
+        object: result || [],
         txid: data.txid,
         type: data.type
       } as SqliteResultType)
