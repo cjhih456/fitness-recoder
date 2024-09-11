@@ -68,7 +68,7 @@ mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
 }
 `
 export function useCreateSchedule() {
-  return useMutation<{ createSchedule: Schedule }, { createSchedule: Schedule }>(createScheduleGql)
+  return useMutation<{ createSchedule: Schedule }, { createSchedule: CreateSchedule }>(createScheduleGql)
 }
 
 
@@ -93,7 +93,7 @@ export function useUpdateSchedule() {
 
 
 const deleteScheduleGql = gql`
-mutation DeleteSchedule($id: Int!) {
+mutation DeleteSchedule($id: ID!) {
   deleteSchedule(id: $id) {
     id
   }

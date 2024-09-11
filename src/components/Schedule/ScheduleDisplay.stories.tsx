@@ -33,9 +33,17 @@ export default meta
 
 export const Display: Story = {
   args: {
-    exerciseList: ['00000000-0001-0000-0000-000000000000', '00000000-0002-0000-0000-000000000000'],
+    exerciseList: [{
+      id: 1,
+      deps: 1,
+      exercise: 0
+    }, {
+      id: 2,
+      deps: 1,
+      exercise: 0
+    }],
     date: '2024-01-01',
-    id: '0000001-0000-0000-0000-000000000000',
+    id: 1,
     title: 'Title'
   }
 }
@@ -44,18 +52,26 @@ export const WithSchedule: Story = {
   args: {
     date: '2024-01-01',
     schedule: {
-      id: '0000001-0000-0000-0000-000000000000',
+      id: 1,
       beforeTime: 0,
       breakTime: 0,
       date: 1,
       month: 1,
       year: 2024,
       type: ScheduleType.SCHEDULED,
-      exerciseList: ['00000000-0001-0000-0000-000000000000', '00000000-0002-0000-0000-000000000000'],
+      exerciseList: [{
+        id: 1,
+        deps: 1,
+        exercise: 0
+      }, {
+        id: 2,
+        deps: 1,
+        exercise: 0
+      }],
       start: 0,
       workoutTimes: 0
     },
-    id: '0000001-0000-0000-0000-000000000000',
+    id: 1,
     title: 'Title'
   }
 }

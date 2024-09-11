@@ -12,8 +12,25 @@ const meta = {
   decorators: [
     (Story, options) => {
       ScheduleInfoDataMockVer()
-      const id = '00000001-0000-0000-0000-000000000000'
-      Object.assign(options.args, { scheduleIdx: id })
+      const id = {
+        id: 1,
+        beforeTime: 0,
+        breakTime: 0,
+        exerciseList: [
+          {
+            id: 1,
+            exercise: 0,
+            deps: 1
+          },
+          {
+            id: 2,
+            exercise: 1,
+            deps: 2
+          }
+        ],
+        type: 'SCHEDULED'
+      } as Schedule
+      Object.assign(options.args, { schedule: id })
       return <div>
         < Story {...options} />
       </div >

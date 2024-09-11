@@ -43,13 +43,16 @@ interface ScheduleData {
   exerciseList?: ExerciseData[]
 }
 
-type Schedule = {
-  id: number
+interface CreateSchedule extends ScheduleData {
   year: number
   month: number
   date: number
   beforeTime: number
-} & ScheduleData
+}
+
+interface Schedule extends CreateSchedule {
+  id: number
+}
 
 interface ScheduleStore {
   [date: string]: { [id: string]: Schedule }
