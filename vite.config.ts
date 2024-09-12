@@ -10,7 +10,7 @@ import GraphqlServer from './vitePlugin/GraphqlServer'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    server: {
+    server: mode === 'development' ? {
       headers: {
         'Cross-Origin-Opener-Policy': 'same-origin',
         'Cross-Origin-Resource-Policy': 'same-origin',
@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
         cert: fs.readFileSync('./ssl/server.crt'),
         key: fs.readFileSync('./ssl/server.key')
       },
-    },
+    } : {},
     worker: {
       format: 'es'
     },
