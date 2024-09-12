@@ -1,4 +1,4 @@
-enum IMuscle {
+declare enum IMuscle {
   abdominals = 'abdominals',
   hamstrings = 'hamstrings',
   calves = 'calves',
@@ -18,24 +18,24 @@ enum IMuscle {
   neck = 'neck',
 }
 
-enum IForce {
+declare enum IForce {
   pull = 'pull',
   push = 'push',
   static = 'static',
 }
 
-enum ILevel {
+declare enum ILevel {
   beginner = 'beginner',
   intermediate = 'intermediate',
   expert = 'expert',
 }
 
-enum IMechanic {
+declare enum IMechanic {
   compound = 'compound',
   isolation = 'isolation',
 }
 
-enum IEquipment {
+declare enum IEquipment {
   body_only = 'body only',
   machine = 'machine',
   kettlebells = 'kettlebells',
@@ -49,7 +49,7 @@ enum IEquipment {
   foam_roll = 'foam roll',
 }
 
-enum ICategory {
+declare enum ICategory {
   strength = 'strength',
   stretching = 'stretching',
   plyometrics = 'plyometrics',

@@ -13,7 +13,7 @@ export type Version = number
 
 export const version: Version = 1
 
-let dbTransitionBus: MessageTransactionBus<any> | undefined = undefined
+let dbTransitionBus: MessageTransactionBus | undefined = undefined
 
 const parent = { db: undefined, handlers: {}, origin: '' } as {
   db: Sqlite3 | undefined
@@ -39,7 +39,7 @@ self.onactivate = (event) => {
 
 self.onfetch = async (event) => {
   if (!(dbTransitionBus && parent.handlers.set)) {
-    dbTransitionBus = new MessageTransactionBus<any>()
+    dbTransitionBus = new MessageTransactionBus()
     dbTransitionBus.setClients(self.clients)
 
     parent.handlers.set = createHandler({

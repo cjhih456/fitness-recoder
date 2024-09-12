@@ -1,19 +1,19 @@
-enum WeightModifier {
+declare enum WeightModifier {
   positive = 'positive',
   negative = 'negative',
 }
 
-enum WeightUnit {
+declare enum WeightUnit {
   kg = 'kg',
   lbs = 'lbs',
 }
 
-enum DistanceUnit {
+declare enum DistanceUnit {
   km = 'km',
   miles = 'miles',
 }
 
-enum IFields {
+declare enum IFields {
   reps = 'reps',
   time = 'time',
   distance = 'distance',
