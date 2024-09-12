@@ -1,7 +1,7 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 
-export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResolvers<any, any> => ({
+export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
     getSetByIds(_source, { ids }, context) {
       return new Promise((resolve, reject) => {

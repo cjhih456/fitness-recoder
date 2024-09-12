@@ -5,7 +5,7 @@ import resolvers from './resolvers';
 import TimestampType from '../ScalaType/Timestamp';
 
 
-export default function init(txBus: MessageTransactionBus<any>) {
+export default function init(txBus: MessageTransactionBus) {
   return makeExecutableSchema({
     typeDefs: ScheduleSchema,
     resolvers: { Timestamp: TimestampType, ...resolvers(txBus) }

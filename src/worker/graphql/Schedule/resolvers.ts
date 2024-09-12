@@ -1,7 +1,7 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 
-export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResolvers<any, any> => ({
+export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
     getScheduleById(_source, { id }, context) {
       return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ export default (dbTransitionBus: MessageTransactionBus<any> | undefined): IResol
             schedule.type
           ],
           (result) => {
-            return result ? resolve({ ...result, ...schedule }) : reject(null)
+            return result ? resolve({ ...result[0], ...schedule }) : reject(null)
           }
         )
 

@@ -1,38 +1,33 @@
 import { v4 as uuid } from 'uuid'
 
-type TransactionCallBack<R> = (result: R) => any
+type TransactionCallBack<T> = (result: T) => any
 
-type PromiseResolve<R> = (data: R | PromiseLike<R>) => void
+type PromiseResolve = (data: any) => void
 
-export default class MessageTransactionBus<R> {
+export default class MessageTransactionBus {
 
-  private bus = new Map<string, PromiseResolve<R>>()
+  private bus = new Map<string, PromiseResolve>()
   private clients: Clients | undefined
   constructor() { }
+
   setClients(clients: Clients) {
     this.clients = clients
   }
-  registTransition(callBack: TransactionCallBack<R>) {
-    const txid = uuid()
-    new Promise<R>((resolve) => {
-      this.bus.set(txid, resolve)
-    }).then((result: R) => {
-      callBack(result)
-    })
-    return txid
-  }
-  gotResult(txid: string, resultData: R) {
+  gotResult(txid: string, resultData: any) {
     const tx = this.bus.get(txid)
-    if (tx) tx(resultData)
+    if (tx) tx(resultData || null)
   }
 
-  async sendTransaction(clientId: string, type: SqliteMessageType, query: string, bindArgs: any[], callBack: TransactionCallBack<R>) {
+  async sendTransaction<T = any>(clientId: string, type: SqliteMessageType, query: string, bindArgs: any[], callBack?: TransactionCallBack<T | null>): Promise<T | null> {
     const client = await this.clients?.get(clientId)
-    return new Promise((resolve) => {
-      if (client) {
-        const txid = this.registTransition((result) => { callBack(result); resolve(result) })
-        client.postMessage({ type, query, txid, bindArgs })
-      }
+    const txid = uuid()
+    return new Promise<T | null>((resolve) => {
+      if (!client) return resolve(null)
+      this.bus.set(txid, (result: T) => {
+        callBack && callBack(result)
+        resolve(result)
+      })
+      client.postMessage({ type, query, txid, bindArgs })
     })
   }
 }
