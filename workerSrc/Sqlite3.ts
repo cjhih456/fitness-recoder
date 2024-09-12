@@ -24,7 +24,7 @@ class Sqlite3 {
       }).then((sqlite3) => {
         resolve(sqlite3.oo1.OpfsDb
           ? new sqlite3.oo1.OpfsDb('worker.sqlite3')
-          : new sqlite3.oo1.DB('workout.sqlite3', 'ct'))
+          : new sqlite3.oo1.DB('workout.sqlite3', 'c'))
         this.ready = true
       }).catch(e => {
         console.error('InitError', e)
