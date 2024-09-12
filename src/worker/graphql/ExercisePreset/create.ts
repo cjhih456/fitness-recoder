@@ -9,7 +9,7 @@ export default function createExerciseTable(db: Sqlite3) {
       createdAt INTEGER
     )`)
   db.exec(`CREATE TABLE IF NOT EXISTS exercisePreset_exercise (
-      exercisePresetId TEXT REFERENCES exercisePreset(id),
-      exerciseId TEXT REFERENCES exercise(id)
+      exercisePresetId INTEGER REFERENCES exercisePreset(id),
+      exerciseId INTEGER REFERENCES exercise(id)
     )`)
 }
