@@ -1,9 +1,9 @@
-import { useCreateExercise, useDeleteExerciseById, useLazyGetExerciseListByScheduleId } from '../Exercise';
+import { useCreateExerciseBySchedule, useDeleteExerciseById, useLazyGetExerciseListByScheduleId } from '../Exercise';
 
 export function useUpdateExerciseListBySchedule() {
   const [callOldList] = useLazyGetExerciseListByScheduleId()
   const [deleteExerciseData] = useDeleteExerciseById()
-  const [createExerciseData] = useCreateExercise()
+  const [createExerciseData] = useCreateExerciseBySchedule()
   return async (scheduleId: number, exerciseList: number[]) => {
     const removeNeedExerciseData = [] as ExerciseData[]
     const keepExerciseData = [] as ExerciseData[]
@@ -33,16 +33,14 @@ export function useUpdateExerciseListBySchedule() {
       }))
     }
     if (createNeedExerciseId.length) {
-      await Promise.all(createNeedExerciseId.map((id) => {
-        return createExerciseData({
-          variables: {
-            exercise: {
-              exerciseId: id,
-              scheduleId: scheduleId
-            }
+      return await createExerciseData({
+        variables: {
+          exercise: {
+            exerciseId: createNeedExerciseId,
+            scheduleId: scheduleId
           }
-        })
-      }))
+        }
+      })
     }
   }
 }

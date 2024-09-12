@@ -12,16 +12,14 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       if (!exercisePresetList) return []
       if (Array.isArray(exercisePresetList)) {
-        await Promise.all(exercisePresetList.map((obj) => {
-          return dbTransitionBus?.sendTransaction(
+        await Promise.all(exercisePresetList.map(async (obj) => {
+          const list = await dbTransitionBus?.sendTransaction(
             context.client,
             'selects',
             'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId=?)',
-            [obj.id],
-            (result: any[]) => {
-              obj.exerciseList = result
-            }
+            [obj.id]
           )
+          obj.exerciseList = list
         }))
         return exercisePresetList
       }
@@ -65,38 +63,32 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
             exercisePreset.name
           ],
           (result: any) => {
-            console.log(result)
             !result ? reject(null) : resolve(result)
           }
         )
       })
     },
-    // async setExerciseListByExercisePreset(_source, { id, exerciseList }, context) {
-    //   const list = await dbTransitionBus?.sendTransaction(
-    //     context.client,
-    //     'selects',
-    //     'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId=?)',
-    //     [id]
-    //   )
-    //   const deleteNeed = []
-    //   const createNeed = []
-
-    //   exerciseList
-
-    //   return new Promise(async (resolve, reject) => {
-    //     // dbTransitionBus?.sendTransaction(
-    //     //   context.client,
-    //     //   'insert',
-    //     //   'insert into exercise (name, deps) values (?)',
-    //     //   [
-    //     //     exercisePreset.name
-    //     //   ],
-    //     //   (result: any) => {
-    //     //     console.log(result)
-    //     //     !result ? reject(null) : resolve(result)
-    //     //   }
-    //     // )
-    //   })
-    // }
+    async updateExercisePreset(_source, { exercisePreset }, context) {
+      const updatedResult = await dbTransitionBus?.sendTransaction(
+        context.client,
+        'update',
+        'update exercisePreset set name=?, deps=? where id=?',
+        [
+          exercisePreset.name,
+          exercisePreset.deps,
+          exercisePreset.id
+        ]
+      )
+      return updatedResult
+    },
+    async deleteExercisePreset(_source, { id }, context) {
+      await dbTransitionBus?.sendTransaction(
+        context.client,
+        'delete',
+        'delete from exercisePreset where id=?',
+        [id]
+      )
+      return `delete - exercisePreset - ${id}`
+    }
   }
 })

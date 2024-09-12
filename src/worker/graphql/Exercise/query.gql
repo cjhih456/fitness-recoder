@@ -15,9 +15,13 @@ type Query {
   getExerciseListByScheduleId(scheduleId: ID): [Exercise!]
 }
 
-input CreateExerciseInput {
-  exerciseId: Int!
+input CreateExerciseByScheduleInput {
   scheduleId: Int!
+  exerciseId: [Int!]
+}
+input CreateExerciseByExercisePresetInput {
+  exercisePresetId: Int!
+  exerciseId: [Int!]
 }
 
 input UpdateExerciseInput {
@@ -26,7 +30,11 @@ input UpdateExerciseInput {
 }
 
 type Mutation {
-  createExercise(exercise: CreateExerciseInput): Exercise
+  createExerciseBySchedule(exercise: CreateExerciseByScheduleInput): Exercise
+  createExerciseByExercisePreset(exercise: CreateExerciseByExercisePresetInput): Exercise
+
   updateExercise(exercise: UpdateExerciseInput): Exercise
+  upcateExerciseListBySchedule(newExercise: [Int!], deleteExercise: [Exercise!]): Exercise
+
   deleteExerciseById(id: ID): String
 }

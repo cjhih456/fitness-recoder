@@ -25,6 +25,14 @@ input CreateExercisePresetInput {
   name: String!
 }
 
+input UpdateExercisePresetInput {
+  id: ID!
+  name: String!
+  deps: Int!
+}
+
 type Mutation {
   createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePreset
+  updateExercisePreset(exercisePreset: UpdateExercisePresetInput): ExercisePreset
+  deleteExercisePreset(id: ID!): String
 }

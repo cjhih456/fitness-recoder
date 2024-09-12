@@ -26,7 +26,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
     case 'insert': {
       const result = parent.db?.exec(data.query + 'RETURNING *', data.bindArgs)
       self.postMessage({
-        object: result ? result[0] || null : null,
+        object: result ? result || null : null,
         txid: data.txid,
         type: data.type
       } as SqliteResultType)
