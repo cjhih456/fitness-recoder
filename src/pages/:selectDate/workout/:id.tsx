@@ -6,7 +6,7 @@ import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
 import { useAlert } from '../../../components/provider/Alert/useAlert'
 import { useHeaderContext } from '../../../components/provider/Header/useHeaderContext'
 import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
-import { ScheduleType } from '../../../utils'
+import { ScheduleType } from '../../../components/utils'
 
 export default function DisplayWorkout() {
   const { id } = useParams()
