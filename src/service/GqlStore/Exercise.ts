@@ -4,6 +4,7 @@ const CreateExerciseByScheduleGql = gql`
 mutation CreateExerciseBySchedule ($exercise: CreateExerciseByScheduleInput!) {
   createExerciseBySchedule(exercise: $exercise) {
     id
+    deps
     exercise
   }
 }
@@ -38,6 +39,7 @@ const CreateExerciseByExercisePreset = gql`
 mutation CreateExerciseByExercisePreset($exercise: CreateExerciseByExercisePresetInput!) {
   createExerciseByExercisePreset(exercise: $exercise) {
     id
+    deps
     exercise
   }
 }`
@@ -49,8 +51,8 @@ export function useCreateExerciseByExercisePreset() {
 }
 
 const updateExerciseListByExercisePresetIdGql = gql`
-mutation UpdateExerciseListByExercisePresetId($exercisePresetId: Int, $newExercise: [Int!], $deleteExercise: [Int!]) {
-  updateExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId, newExercise: $newExercise, deleteExercise: $deleteExercise) {
+mutation UpdateExerciseListByExercisePresetId($exercisePresetId: Int, $newExercise: [Int!], $deleteExerciseId: [Int!]) {
+  updateExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId, newExercise: $newExercise, deleteExerciseId: $deleteExerciseId) {
     id
     deps
     exercise
@@ -61,8 +63,8 @@ export function useUpdateExerciseListByExercisePresetId() {
     updateExerciseListByExercisePresetId: ExerciseData[]
   }, {
     exercisePresetId: number,
-    newExercise: number,
-    deleteExercise: number
+    newExercise: number[],
+    deleteExerciseId: number[]
   }>(updateExerciseListByExercisePresetIdGql)
 }
 
@@ -70,6 +72,7 @@ const GetExerciseListByScheduleIdGql = gql`
 query GetExerciseListByScheduleId($scheduleId: ID) {
   getExerciseListByScheduleId(scheduleId: $scheduleId) {
     id
+    deps
     exercise
   }
 }
@@ -85,9 +88,10 @@ export function useLazyGetExerciseListByScheduleId() {
 
 
 const GetExerciseListByExercisePresetIdGql = gql`
-query GetExerciseByExercisePresetId($id: ID) {
-  getExerciseListByExercisePresetId(exercisePresetId: $id) {
+query GetExerciseByExercisePresetId($exercisePresetId: ID) {
+  getExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId) {
     id
+    deps
     exercise
   }
 }`

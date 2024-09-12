@@ -15,11 +15,12 @@ export interface ScheduleDisplayProps {
 export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {
   const [getExerciseList, { data }] = useLazyGetExerciseListByScheduleId()
   useEffect(() => {
-    getExerciseList({
-      variables: {
-        scheduleId: schedule?.id || 0
-      }
-    })
+    if (schedule)
+      getExerciseList({
+        variables: {
+          scheduleId: schedule?.id || 0
+        }
+      })
   }, [schedule, getExerciseList])
   const lazyExerciseList = useMemo(() => {
     return exerciseList ? exerciseList : data?.getExerciseListByScheduleId || []

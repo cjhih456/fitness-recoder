@@ -62,7 +62,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
             exercisePreset.name
           ],
           (result: any) => {
-            !result ? reject(null) : resolve(result)
+            !result ? reject(null) : resolve(result[0])
           }
         )
       })

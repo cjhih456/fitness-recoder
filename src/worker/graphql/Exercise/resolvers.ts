@@ -22,7 +22,7 @@ export async function getExerciseListByExercisePresetIdTemp(
   if (!dbBus) return Promise.resolve(null)
   return dbBus?.sendTransaction<ExerciseData[]>(client,
     'selects',
-    'select * from exercise id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
+    'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
     [exercisePresetId]
   )
 }

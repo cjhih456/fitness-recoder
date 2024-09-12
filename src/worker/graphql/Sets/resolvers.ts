@@ -49,14 +49,14 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
           [
             sets.repeat,
-            sets.isDone ? 0 : 1,
+            sets.isDone ? 1 : 0,
             sets.weightUnit,
             sets.weight,
             sets.duration,
             sets.exerciseId
           ],
           (result: any) => {
-            result ? resolve({ ...result, ...sets }) : reject(null)
+            result ? resolve({ ...result[0], ...sets }) : reject(null)
           }
         )
       })

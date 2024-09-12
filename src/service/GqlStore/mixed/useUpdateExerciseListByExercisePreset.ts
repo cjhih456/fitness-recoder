@@ -1,8 +1,8 @@
-import { useUpdateExerciseListByScheduleId } from '../Exercise';
+import { useUpdateExerciseListByExercisePresetId } from '../Exercise';
 
-export function useUpdateExerciseListBySchedule() {
-  const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()
-  return async (scheduleId: number, oldExerciseList: ExerciseData[], exerciseList: number[]) => {
+export function useUpdateExerciseListByExercisePreset() {
+  const [updateList] = useUpdateExerciseListByExercisePresetId()
+  return async (exercisePresetId: number, oldExerciseList: ExerciseData[], exerciseList: number[]) => {
     const removeNeedExerciseData = [] as ExerciseData[]
     const keepExerciseData = [] as ExerciseData[]
     const createNeedExerciseId = [] as number[]
@@ -20,11 +20,11 @@ export function useUpdateExerciseListBySchedule() {
         createNeedExerciseId.push(newExerciseId)
       }
     })
-    updateListByScheduleId({
+    updateList({
       variables: {
-        scheduleId: scheduleId,
+        exercisePresetId: exercisePresetId,
+        newExercise: createNeedExerciseId,
         deleteExerciseId: removeNeedExerciseData.map(v => Number(v.id)),
-        newExercise: createNeedExerciseId
       }
     })
   }

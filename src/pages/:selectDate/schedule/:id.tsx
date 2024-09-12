@@ -27,7 +27,7 @@ export default function DisplaySchedule() {
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {
     if (!selectDate || !selectedSchedule) return
-    updateExerciseList(Number(id || 0), exerciseIdxList)
+    updateExerciseList(Number(id || 0), savedExercise, exerciseIdxList)
     navigate('/')
   }
 
