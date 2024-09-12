@@ -9,12 +9,30 @@ mutation CreateExerciseBySchedule ($exercise: CreateExerciseByScheduleInput!) {
 }
 `
 export function useCreateExerciseBySchedule() {
-  return useMutation<
-    { createExerciseBySchedule: ExerciseData },
-    { exercise: { scheduleId: number, exerciseId: number[] } }
-  >(CreateExerciseByScheduleGql)
+  return useMutation<{
+    createExerciseBySchedule: ExerciseData
+  }, {
+    exercise: { scheduleId: number, exerciseId: number[] }
+  }>(CreateExerciseByScheduleGql)
 }
 
+const UpdateExerciseListByScheduleIdGql = gql`
+mutation UpdateExerciseListByScheduleId($scheduleId: Int, $newExercise: [Int!], $deleteExercise: [Int!]) {
+  updateExerciseListByScheduleId(scheduleId: $scheduleId, newExercise: $newExercise, deleteExercise: $deleteExercise){
+    id
+    deps
+    exercise
+  }
+}`
+export function useUpdateExerciseListByScheduleId() {
+  return useMutation<{
+    updateExerciseListByScheduleId: ExerciseData
+  }, {
+    scheduleId: number,
+    newExercise: number[],
+    deleteExercise: number[]
+  }>(UpdateExerciseListByScheduleIdGql)
+}
 
 const CreateExerciseByExercisePreset = gql`
 mutation CreateExerciseByExercisePreset($exercise: CreateExerciseByExercisePresetInput!) {
@@ -22,8 +40,7 @@ mutation CreateExerciseByExercisePreset($exercise: CreateExerciseByExercisePrese
     id
     exercise
   }
-}
-`
+}`
 export function useCreateExerciseByExercisePreset() {
   return useMutation<
     { createExerciseByExercisePreset: ExerciseData },
@@ -31,6 +48,23 @@ export function useCreateExerciseByExercisePreset() {
   >(CreateExerciseByExercisePreset)
 }
 
+const updateExerciseListByExercisePresetIdGql = gql`
+mutation UpdateExerciseListByExercisePresetId($exercisePresetId: Int, $newExercise: [Int!], $deleteExercise: [Int!]) {
+  updateExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId, newExercise: $newExercise, deleteExercise: $deleteExercise) {
+    id
+    deps
+    exercise
+  }
+}`
+export function useUpdateExerciseListByExercisePresetId() {
+  return useMutation<{
+    updateExerciseListByExercisePresetId: ExerciseData[]
+  }, {
+    exercisePresetId: number,
+    newExercise: number,
+    deleteExercise: number
+  }>(updateExerciseListByExercisePresetIdGql)
+}
 
 const GetExerciseListByScheduleIdGql = gql`
 query GetExerciseListByScheduleId($scheduleId: ID) {

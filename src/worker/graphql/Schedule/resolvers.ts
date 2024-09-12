@@ -1,5 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
+import { deleteExerciseByIdsTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -75,8 +76,24 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         )
       })
     },
-    deleteSchedule() {
-
+    async deleteSchedule(_source, { id }, context) {
+      const list = await getExerciseListByScheduleIdTemp(
+        dbTransitionBus,
+        context.client,
+        id
+      )
+      await deleteExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        list?.map(v => v.id) || []
+      )
+      await dbTransitionBus?.sendTransaction(
+        context.client,
+        'delete',
+        'delete from schedule where id=?',
+        [id]
+      )
+      return `delete - schedule - ${id}`
     }
   }
 })

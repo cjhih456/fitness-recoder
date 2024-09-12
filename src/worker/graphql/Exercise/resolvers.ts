@@ -1,7 +1,7 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 
-async function getExerciseListByScheduleIdTemp(
+export async function getExerciseListByScheduleIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number
@@ -9,8 +9,21 @@ async function getExerciseListByScheduleIdTemp(
   if (!dbBus) return Promise.resolve(null)
   return dbBus?.sendTransaction<ExerciseData[]>(client,
     'selects',
-    'select e.* from exercise e left join schedule_exercise se on se.exerciseId = e.id where se.scheduleId = ?',
+    'select * from exercise id in (select exerciseId from schedule_exercise where scheduleId = ?)',
     [scheduleId]
+  )
+}
+
+export async function getExerciseListByExercisePresetIdTemp(
+  dbBus: MessageTransactionBus | undefined,
+  client: string,
+  exercisePresetId: number
+) {
+  if (!dbBus) return Promise.resolve(null)
+  return dbBus?.sendTransaction<ExerciseData[]>(client,
+    'selects',
+    'select * from exercise id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
+    [exercisePresetId]
   )
 }
 
@@ -29,7 +42,7 @@ async function createExerciseByIdsTemp(
   return Array.isArray(result) ? result : result ? [result] : []
 }
 
-async function createExerciseWithSchedule(
+async function createExerciseRelationWithSchedule(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number,
@@ -45,7 +58,7 @@ async function createExerciseWithSchedule(
   )
 }
 
-async function createExerciseWithExercisePreset(
+async function createExerciseRelationWithExercisePreset(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   exercisePresetId: number,
@@ -61,7 +74,7 @@ async function createExerciseWithExercisePreset(
   )
 }
 
-async function deleteExerciseByIdsTemp(
+export async function deleteExerciseByIdsTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   ids: number | number[]
@@ -122,13 +135,11 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     async getExerciseListByScheduleId(_source, { scheduleId }, context) {
       return await getExerciseListByScheduleIdTemp(dbTransitionBus, context.client, scheduleId)
     },
-    async getExerciseByExercisePresetId(_source, { id }, context) {
-      if (!dbTransitionBus) return null
-      return await dbTransitionBus?.sendTransaction<ExerciseData[]>(
+    async getExerciseListByExercisePresetId(_source, { exercisePresetId }, context) {
+      return await getExerciseListByExercisePresetIdTemp(
+        dbTransitionBus,
         context.client,
-        'selects',
-        'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
-        id
+        exercisePresetId
       )
     }
   },
@@ -140,13 +151,74 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         context.client,
         exercise.exerciseId
       )
-      await createExerciseWithSchedule(
+      await createExerciseRelationWithSchedule(
         dbTransitionBus,
         context.client,
         exercise.scheduleId,
         newExerciseList
       )
       return newExerciseList[0]
+    },
+    async updateExerciseListByScheduleId(_source, { scheduleId, newExercise, deleteExercise }, context) {
+      await deleteExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        deleteExercise
+      )
+      const createdExercise = await createExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        newExercise
+      )
+      await createExerciseRelationWithSchedule(
+        dbTransitionBus,
+        context.client,
+        scheduleId,
+        createdExercise
+      )
+      return await getExerciseListByScheduleIdTemp(
+        dbTransitionBus,
+        context.client,
+        scheduleId
+      )
+    },
+    async createExerciseByExercisePreset(_source, { exercise }, context) {
+      if (!dbTransitionBus) return null
+      const newExerciseList = await createExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        exercise.exerciseId
+      )
+      await createExerciseRelationWithExercisePreset(
+        dbTransitionBus,
+        context.client,
+        exercise.exercisePresetId,
+        newExerciseList
+      )
+      return newExerciseList[0]
+    },
+    async updateExerciseListByExercisePresetId(_source, { exercisePresetId, newExercise, deleteExercise }, context) {
+      await deleteExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        deleteExercise
+      )
+      const createdExercise = await createExerciseByIdsTemp(
+        dbTransitionBus,
+        context.client,
+        newExercise
+      )
+      await createExerciseRelationWithExercisePreset(
+        dbTransitionBus,
+        context.client,
+        exercisePresetId,
+        createdExercise
+      )
+      return await getExerciseListByExercisePresetIdTemp(
+        dbTransitionBus,
+        context.client,
+        exercisePresetId
+      )
     },
     updateExercise(_source, { id, exerciseId }, context) {
       return dbTransitionBus?.sendTransaction<ExerciseData>(
@@ -158,38 +230,6 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     },
     async deleteExerciseById(_source, { id }, context) {
       return deleteExerciseByIdsTemp(dbTransitionBus, context, id)
-    },
-    async createExerciseByExercisePreset(_source, { exercise }, context) {
-      if (!dbTransitionBus) return null
-      const newExerciseList = await createExerciseByIdsTemp(
-        dbTransitionBus,
-        context.client,
-        exercise.exerciseId
-      )
-      await createExerciseWithExercisePreset(
-        dbTransitionBus,
-        context.client,
-        exercise.exercisePresetId,
-        newExerciseList
-      )
-      return newExerciseList[0]
-    },
-    // async updateExerciseListByScheduleId(_source, { scheduleId, exerciseList }, context) {
-    //   const oldList = await getExerciseListByScheduleIdTemp(dbTransitionBus, context, scheduleId)
-    //   const removeNeedExerciseData = [] as ExerciseData[]
-    //   const keepExerciseData = [] as ExerciseData[]
-    //   oldList.forEach((e: any) => {
-    //     if (exerciseList.includes(e.exercise)) {
-    //       keepExerciseData.push(e)
-    //     } else {
-    //       removeNeedExerciseData.push(e)
-    //     }
-    //   })
-    //   const keepExerciseDataExercises = keepExerciseData.map(v => v.exercise)
-    //   const createNeedExerciseId = exerciseList.filter((exerciseId: number) => {
-    //     return !keepExerciseDataExercises.includes(exerciseId)
-    //   })
-
-    // }
+    }
   }
 })

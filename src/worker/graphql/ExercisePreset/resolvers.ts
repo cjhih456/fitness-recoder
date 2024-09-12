@@ -1,5 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
+import { getExerciseListByExercisePresetIdTemp } from '../Exercise/resolvers';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -13,13 +14,11 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       if (!exercisePresetList) return []
       if (Array.isArray(exercisePresetList)) {
         await Promise.all(exercisePresetList.map(async (obj) => {
-          const list = await dbTransitionBus?.sendTransaction(
+          return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
+            dbTransitionBus,
             context.client,
-            'selects',
-            'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId=?)',
-            [obj.id]
+            obj.id
           )
-          obj.exerciseList = list
         }))
         return exercisePresetList
       }
