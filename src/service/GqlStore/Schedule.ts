@@ -51,6 +51,15 @@ export function useLazyGetScheduleById() {
   return useLazyQuery<{ getScheduleById: Schedule }, { id: number }>(getScheduleByIdGql)
 }
 
+const getScheduleStatusByDateGql = gql`
+query GetScheduleStatusByDate($year: Int!, $month: Int!) {
+  getScheduleStatusByDate(year: $year, month: $month)
+}
+`
+export function useLazyGetScheduleStateByDate() {
+  return useLazyQuery<{ getScheduleStatusByDate: string[] }, { year: number, month: number }>(getScheduleStatusByDateGql)
+}
+
 
 const createScheduleGql = gql`
 mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {

@@ -1,8 +1,8 @@
 import { Button } from '@nextui-org/react'
 import utils from '../utils'
-import { useMemo } from 'react'
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
+import { useEffect, useMemo, useState } from 'react'
 import { calanderColor } from '../../utils'
+import { useLazyGetScheduleStateByDate } from '../../service/GqlStore/Schedule'
 interface DateCalanderProps {
   year: number
   month: number
@@ -15,14 +15,17 @@ interface DateCalanderProps {
 const dateStr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 export default function DateCalander({ year, month, date, startDate, endDate, onChange }: DateCalanderProps) {
-  // Store
-  const scheduleStore = useScheduleStore()
-
+  const [getScheduleStateByDate] = useLazyGetScheduleStateByDate()
   const displayStartDate = useMemo(() => startDate || 0, [startDate])
   const displayEndDate = useMemo(() => endDate || 32, [endDate])
-
+  const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const daysCount = utils.getDaysByMonth(year)
   const startTemp = utils.calcWeek(year, month)
+  useEffect(() => {
+    getScheduleStateByDate({ variables: { month, year } }).then((result) => {
+      result.data && setMonthlyState(result.data?.getScheduleStatusByDate)
+    })
+  }, [year, month])
 
   const temp = [[], [], [], [], [], []] as JSX.Element[][]
   const largeNum = daysCount[month - 1] + startTemp
@@ -39,7 +42,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, on
         isDisabled={disable}
         variant='bordered'
         onClick={() => onChange(todayDate)}
-        className={['flex-1 px-0 min-w-[40px]', calanderColor(year, month, todayDate, year, month, date, scheduleStore.getScheduleByData(year, month, todayDate))].join(' ')}
+        className={['flex-1 px-0 min-w-[40px]', calanderColor(year, month, todayDate, year, month, date, monthlyStatus[todayDate])].join(' ')}
         radius='full'
       >{todayDate}</Button>)
     }

@@ -27,6 +27,17 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           }
         )
       })
+    },
+    async getScheduleStatusByDate(_source, { year, month }, context) {
+      const result = await dbTransitionBus?.sendTransaction(
+        context.client,
+        'selects', 'select year, month, date, group_concat(type) as type from schedule where year=? and month=? group by year, month, date',
+        [year, month]
+      ) as { year: number, month: number, date: number, type: string }[]
+      return result.reduce((acc, cur) => {
+        acc[cur.date] = cur.type
+        return acc
+      }, [] as string[])
     }
   },
   Mutation: {

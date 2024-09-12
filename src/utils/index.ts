@@ -6,14 +6,15 @@ export const enum ScheduleType {
   FINISH = 'FINISH',
 }
 
-export const calanderColor = (year: number, month: number, date: number, selectedYear: number, selectedMonth: number, selectedDate: number, scheduleList: ScheduleData[]) => {
+export const calanderColor = (year: number, month: number, date: number, selectedYear: number, selectedMonth: number, selectedDate: number, type: string) => {
   if (
     year === selectedYear &&
     month === selectedMonth &&
     date === selectedDate
   ) return 'bg-primary'
-  if (scheduleList.length) {
-    switch (scheduleList[0].type) {
+  const tempType = (type || '').split(',')
+  if (tempType.length) {
+    switch (tempType[0]) {
       case ScheduleType.BREAK:
         return 'bg-warning-500 text-default'
       case ScheduleType.FINISH:
