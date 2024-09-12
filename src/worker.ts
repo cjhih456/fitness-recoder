@@ -1,3 +1,4 @@
+import { baseURL } from './components/utils'
 export default () => {
   return new Promise<boolean>((resolve) => {
     if (window) {
@@ -6,9 +7,9 @@ export default () => {
           /**
            * Create Service worker & Sqlite Worker
            */
-          const GraphqlApiUrl = import.meta.env.DEV ? new URL('/src/worker/GraphqlApi.ts?url', import.meta.url) : import.meta.env.VITE_URL_ROOT + 'graphqlWorker.js'
-          const sqliteWorkerUrl = import.meta.env.DEV ? new URL('/src/worker/SqliteWorker.ts?url', import.meta.url) : import.meta.env.VITE_URL_ROOT + 'sqliteWorker.js'
-          const workerRegistration = await navigator.serviceWorker.register(GraphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: import.meta.env.VITE_URL_ROOT })
+          const GraphqlApiUrl = import.meta.env.DEV ? new URL('/src/worker/GraphqlApi.ts?url', import.meta.url) : baseURL('graphqlWorker.js')
+          const sqliteWorkerUrl = import.meta.env.DEV ? new URL('/src/worker/SqliteWorker.ts?url', import.meta.url) : baseURL('/sqliteWorker.js')
+          const workerRegistration = await navigator.serviceWorker.register(GraphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') })
           const originServiceWorker = workerRegistration.active || workerRegistration.installing || workerRegistration.waiting
           const sqliteWorker = new Worker(sqliteWorkerUrl, { type: 'module', credentials: 'same-origin', name: 'sqlite' })
 

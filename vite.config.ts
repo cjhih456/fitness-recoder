@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
       'worker/GraphqlApi.ts'
     ],
     plugins: [
-      makeManifest(),
+      makeManifest(env),
       GraphqlLoader(),
       react(),
       GraphqlServer({

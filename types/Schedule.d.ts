@@ -1,4 +1,4 @@
-declare enum IScheduleType {
+enum IScheduleType {
   BREAK = 'BREAK',
   SCHEDULED = 'SCHEDULED',
   STARTED = 'STARTED',

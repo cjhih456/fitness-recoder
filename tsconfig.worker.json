@@ -7,7 +7,7 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-
+    "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src/worker/**/*.ts", "types/gql.d.ts", "types/Sqlite.d.ts"]
+  "include": ["./types/**/*", "workerSrc/**/*.ts"]
 }

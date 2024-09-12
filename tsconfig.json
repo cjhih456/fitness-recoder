@@ -18,7 +18,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [],
   "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.worker.json" }]
