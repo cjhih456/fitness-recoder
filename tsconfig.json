@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
   },
-  "include": ["src", "vitePlugin"],
+  "include": [],
   "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.worker.json" }]
 }
