@@ -7,7 +7,7 @@ import GraphqlServer from './vitePlugin/GraphqlServer'
 import Inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isPreview }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     server: mode === 'development' ? {
@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
         key: fs.readFileSync('./ssl/server.key')
       },
     } : undefined,
-    preview: mode === 'production' ? {
+    preview: isPreview && mode === 'product' ? {
       cors: true,
       port: 443,
       https: {
