@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleDisplay, { ScheduleDisplayProps } from './ScheduleDisplay'
-import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
 import { ScheduleType } from '../../utils';
 
 const meta = {
@@ -18,7 +17,6 @@ const meta = {
   component: ScheduleDisplay,
   decorators: [
     (Story) => {
-      ScheduleExerciseDataMockVer()
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <div>
           <Story />

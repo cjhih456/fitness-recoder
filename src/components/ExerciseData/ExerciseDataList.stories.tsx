@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataList, { ExerciseDataListProps } from './ExerciseDataList';
-import ScheduleInfoDataMockVer from '../../mockData/ScheduleInfoDataMockVer.data';
 const meta = {
   title: 'ExerciseData/ExerciseDataList',
   tags: ['autodocs'],
@@ -11,7 +10,6 @@ const meta = {
   component: ExerciseDataList,
   decorators: [
     (Story, options) => {
-      ScheduleInfoDataMockVer()
       const id = {
         id: 1,
         beforeTime: 0,

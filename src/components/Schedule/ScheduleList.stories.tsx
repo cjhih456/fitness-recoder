@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleList, { ScheduleListProps } from './ScheduleList'
-import ScheduleKeyMockVer from '../../mockData/ScheduleKeyMockVer.data';
 import { withRouter } from 'storybook-addon-react-router-v6'
 const meta = {
   title: 'Schedule/ScheduleList',
@@ -18,7 +17,6 @@ const meta = {
   decorators: [
     withRouter,
     (Story) => {
-      ScheduleKeyMockVer()
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <div>
           <Story />

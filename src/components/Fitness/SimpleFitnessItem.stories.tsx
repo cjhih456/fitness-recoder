@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import SimpleFitnessItem, { SimpleFitnessItemProps } from './SimpleFitnessItem'
-import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
 
 const meta = {
   title: 'Fitness/SimpleFitnessItem',
@@ -12,7 +11,6 @@ const meta = {
   component: SimpleFitnessItem,
   decorators: [
     (Story) => {
-      ScheduleExerciseDataMockVer()
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <Story />
       </div>

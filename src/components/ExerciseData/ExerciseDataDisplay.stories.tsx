@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataDisplay, { ExerciseDataDisplayProps } from './ExerciseDataDisplay';
-import ScheduleExerciseDataMockVer from '../../mockData/ScheduleExerciseDataMockVer.data';
 import { fn } from '@storybook/test';
 const meta = {
   title: 'ExerciseData/ExerciseDataDisplay',
@@ -17,7 +16,6 @@ const meta = {
   component: ExerciseDataDisplay,
   decorators: [
     (Story, options) => {
-      ScheduleExerciseDataMockVer()
       const obj = {
         id: 1,
         exercise: 1,
