@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-// import { VitePWA } from 'vite-plugin-pwa'
 import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
@@ -33,21 +32,16 @@ export default defineConfig(({ mode }) => {
         key: fs.readFileSync('./ssl/server.key')
       },
     } : {},
-    worker: {
-      format: 'es',
-    },
     optimizeDeps: {
       exclude: ['@sqlite.org/sqlite-wasm'],
     },
+    assetsInclude: [
+      'worker/SqliteWorker.ts',
+      'worker/GraphqlApi.ts'
+    ],
     plugins: [
       makeManifest(),
       GraphqlLoader(),
-      // VitePWA({
-      //   srcDir: 'src/worker',
-      //   filename: 'GraphqlApi.ts',
-      //   useCredentials: true,
-      //   injectRegister: 'script-defer',
-      // }),
       react(),
       GraphqlServer({
         path: '/__graphql',
@@ -59,12 +53,22 @@ export default defineConfig(({ mode }) => {
         ]
       })
     ],
+    define: {
+      'process.env.NODE_ENV': '"production"'
+    },
     build: {
+      lib: {
+        entry: ['./src/worker/SqliteWorker.ts', './src/worker/GraphqlApi.ts'],
+        formats: ['es', 'es']
+      },
       rollupOptions: {
         input: {
           app: './index.html',
           sqliteWorker: './src/worker/SqliteWorker.ts',
           graphqlWorker: './src/worker/GraphqlApi.ts'
+        },
+        output: {
+          format: 'es'
         }
       }
     },
