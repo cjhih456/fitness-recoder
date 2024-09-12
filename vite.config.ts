@@ -4,6 +4,7 @@ import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
 import GraphqlServer from './vitePlugin/GraphqlServer'
+import Inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -24,7 +25,7 @@ export default defineConfig(({ mode }) => {
         key: fs.readFileSync('./ssl/server.key')
       },
     } : undefined,
-    preview: mode === 'development' ? {
+    preview: mode === 'production' ? {
       cors: true,
       port: 443,
       https: {
@@ -35,21 +36,18 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       exclude: ['@sqlite.org/sqlite-wasm'],
     },
-    assetsInclude: [
-      'worker/SqliteWorker.ts',
-      'worker/GraphqlApi.ts'
-    ],
     plugins: [
-      makeManifest(env),
+      Inspect(),
+      makeManifest(mode),
       GraphqlLoader(),
       react(),
       GraphqlServer({
         path: '/__graphql',
         modulePath: [
-          './src/worker/graphql/Schedule',
-          './src/worker/graphql/Sets',
-          './src/worker/graphql/Exercise',
-          './src/worker/graphql/ExercisePreset'
+          './workerSrc/graphql/Schedule',
+          './workerSrc/graphql/Sets',
+          './workerSrc/graphql/Exercise',
+          './workerSrc/graphql/ExercisePreset'
         ]
       })
     ],
@@ -57,18 +55,20 @@ export default defineConfig(({ mode }) => {
       'process.env.NODE_ENV': '"production"'
     },
     build: {
-      lib: {
-        entry: ['./src/worker/SqliteWorker.ts', './src/worker/GraphqlApi.ts'],
-        formats: ['es', 'es']
-      },
+      sourcemap: 'hidden',
       rollupOptions: {
         input: {
           app: './index.html',
-          sqliteWorker: './src/worker/SqliteWorker.ts',
-          graphqlWorker: './src/worker/GraphqlApi.ts'
+          sqliteWorker: './workerSrc/SqliteWorker.ts',
+          graphqlWorker: './workerSrc/GraphqlApi.ts',
         },
         output: {
-          format: 'es'
+          entryFileNames(info) {
+            if (info.facadeModuleId?.endsWith('SqliteWorker.ts') || info.facadeModuleId?.endsWith('GraphqlApi.ts')) {
+              return '[name].js'
+            }
+            return 'assets/[name]-[hash].js'
+          }
         }
       }
     },

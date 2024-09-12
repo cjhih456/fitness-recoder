@@ -75,6 +75,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-graphql-loader": "^4.0.4",
+    "vite-plugin-inspect": "^0.8.7",
     "vite-plugin-pwa": "^0.20.0",
     "webextension-polyfill": "^0.12.0"
   },

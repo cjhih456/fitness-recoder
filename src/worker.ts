@@ -4,23 +4,30 @@ export default () => {
     if (window) {
       if ('serviceWorker' in navigator) {
         (async () => {
+          let graphqlApiUrl = '../workerSrc/GraphqlApi.ts'
+          let sqliteWorkerUrl = '../workerSrc/SqliteWorker.ts'
+          if (!import.meta.env.DEV) {
+            graphqlApiUrl = baseURL('/graphqlWorker.js')
+            sqliteWorkerUrl = baseURL('/sqliteWorker.js')
+          } else {
+            graphqlApiUrl = new URL(graphqlApiUrl, import.meta.url).href
+            sqliteWorkerUrl = new URL(sqliteWorkerUrl, import.meta.url).href
+          }
           /**
-           * Create Service worker & Sqlite Worker
-           */
-          const GraphqlApiUrl = import.meta.env.DEV ? new URL('/src/worker/GraphqlApi.ts?url', import.meta.url) : baseURL('graphqlWorker.js')
-          const sqliteWorkerUrl = import.meta.env.DEV ? new URL('/src/worker/SqliteWorker.ts?url', import.meta.url) : baseURL('/sqliteWorker.js')
-          const workerRegistration = await navigator.serviceWorker.register(GraphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') })
+             * Create Service worker & Sqlite Worker
+             */
+          const workerRegistration = await navigator.serviceWorker.register(graphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') })
           const originServiceWorker = workerRegistration.active || workerRegistration.installing || workerRegistration.waiting
           const sqliteWorker = new Worker(sqliteWorkerUrl, { type: 'module', credentials: 'same-origin', name: 'sqlite' })
 
           /**
-           * Bridge between Service worker & Sqlite Worker
-           * used Message Channel
-           */
+             * Bridge between Service worker & Sqlite Worker
+             * used Message Channel
+             */
           navigator.serviceWorker.addEventListener('message', async (e: MessageEvent<SqliteMessage>) => {
             const workers = await navigator.serviceWorker.getRegistrations()
             const worker = workers.find(v => {
-              if (v.scope !== location.origin + '/') return false
+              if (v.scope !== location.origin + baseURL('/')) return false
               const w = v.active || v.installing || v.waiting
               return w?.scriptURL === originServiceWorker?.scriptURL
             })
