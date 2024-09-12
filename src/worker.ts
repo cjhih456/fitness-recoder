@@ -8,7 +8,7 @@ export default () => {
           /**
            * Create Service worker & Sqlite Worker
            */
-          const workerRegistration = await navigator.serviceWorker.register(url, { type: 'module', updateViaCache: 'imports', scope: '/' })
+          const workerRegistration = await navigator.serviceWorker.register(url, { type: 'module', updateViaCache: 'imports', scope: import.meta.env.VITE_URL_ROOT })
           const sqliteWorker = new Worker(sqliteUrl, { type: 'module', credentials: 'same-origin', name: 'sqlite' })
 
           /**
