@@ -25,14 +25,14 @@ export default defineConfig(({ mode }) => {
         key: fs.readFileSync('./ssl/server.key')
       },
     } : undefined,
-    preview: {
+    preview: mode === 'development' ? {
       cors: true,
       port: 443,
       https: {
         cert: fs.readFileSync('./ssl/server.crt'),
         key: fs.readFileSync('./ssl/server.key')
       },
-    },
+    } : {},
     worker: {
       format: 'es',
     },
