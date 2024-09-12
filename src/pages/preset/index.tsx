@@ -18,7 +18,6 @@ export default function PresetListPage() {
       }
     }).then((result) => {
       if (result.data) {
-        console.log(result.data)
         setPresetList(result.data?.getExercisePresetList)
       }
     })

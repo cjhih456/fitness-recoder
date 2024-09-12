@@ -32,7 +32,7 @@ type Mutation {
 
   updateExercise(exercise: UpdateExerciseInput): Exercise
   updateExerciseListByScheduleId(scheduleId: Int, newExercise: [Int!], deleteExerciseId: [Int!]): [Exercise]
-  updateExerciseListByExercisePresetId(exercisePresetId: Int, newExercise: [Int!], deleteExercise: [Int!]): [Exercise]
+  updateExerciseListByExercisePresetId(exercisePresetId: Int, newExercise: [Int!], deleteExerciseId: [Int!]): [Exercise]
 
   deleteExerciseById(id: ID): String
 }

@@ -17,8 +17,8 @@ export function useCreateExerciseBySchedule() {
 }
 
 const UpdateExerciseListByScheduleIdGql = gql`
-mutation UpdateExerciseListByScheduleId($scheduleId: Int, $newExercise: [Int!], $deleteExercise: [Int!]) {
-  updateExerciseListByScheduleId(scheduleId: $scheduleId, newExercise: $newExercise, deleteExercise: $deleteExercise){
+mutation UpdateExerciseListByScheduleId($scheduleId: Int, $newExercise: [Int!], $deleteExerciseId: [Int!]) {
+  updateExerciseListByScheduleId(scheduleId: $scheduleId, newExercise: $newExercise, deleteExerciseId: $deleteExerciseId){
     id
     deps
     exercise
@@ -30,7 +30,7 @@ export function useUpdateExerciseListByScheduleId() {
   }, {
     scheduleId: number,
     newExercise: number[],
-    deleteExercise: number[]
+    deleteExerciseId: number[]
   }>(UpdateExerciseListByScheduleIdGql)
 }
 
@@ -86,18 +86,18 @@ export function useLazyGetExerciseListByScheduleId() {
 
 const GetExerciseListByExercisePresetIdGql = gql`
 query GetExerciseByExercisePresetId($id: ID) {
-  getExerciseByExercisePresetId(id: $id) {
+  getExerciseListByExercisePresetId(exercisePresetId: $id) {
     id
     exercise
   }
 }`
 export function useGetExerciseListByExercisePresetId(exercisePresetId: number) {
-  return useQuery<{ getExerciseByExercisePresetId: ExerciseData[] }, { id: number }>(GetExerciseListByExercisePresetIdGql, {
-    variables: { id: Number(exercisePresetId) }
+  return useQuery<{ getExerciseListByExercisePresetId: ExerciseData[] }, { exercisePresetId: number }>(GetExerciseListByExercisePresetIdGql, {
+    variables: { exercisePresetId: Number(exercisePresetId) }
   })
 }
 export function useLazyGetExerciseListByExercisePresetId() {
-  return useLazyQuery<{ getExerciseByExercisePresetId: ExerciseData[] }, { id: number }>(GetExerciseListByExercisePresetIdGql)
+  return useLazyQuery<{ getExerciseListByExercisePresetId: ExerciseData[] }, { exercisePresetId: number }>(GetExerciseListByExercisePresetIdGql)
 }
 
 

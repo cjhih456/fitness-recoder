@@ -1,34 +1,41 @@
 import { useParams } from 'react-router-dom'
 import { HeaderHandler } from '../../components/provider/Header/useHeaderContext'
-import { useMemo, useState } from 'react'
-import { useSchedulePresetStore } from '../../service/Store/SchedulePresetStore'
+import { useEffect, useMemo, useState } from 'react'
 import ScheduleListEditor from '../../components/Schedule/ScheduleListEditor'
-import useScheduleStore from '../../service/Store/ScheduleStoreHooks'
 import { Button } from '@nextui-org/react'
+import { useLazyGetExercisePresetById } from '../../service/GqlStore/ExercisePreset'
+import { useLazyGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
 
 
 export default function PresetDetailPage() {
   const params = useParams()
-  const scheduleStore = useScheduleStore()
-  const schedulePresetStore = useSchedulePresetStore()
   const id = useMemo(() => params.id, [params])
-  const schedulePreset = useMemo(() => {
-    return schedulePresetStore.getSchedulePreset(id ?? '')
-  }, [id, schedulePresetStore])
-  const savedExerciseDataList = useMemo(() => schedulePreset?.exerciseList.map(v => scheduleStore.getExerciseData(v)).filter(Boolean) as ExerciseData[], [schedulePreset])
-  const savedExerciseIdxList = useMemo(() => {
-    return savedExerciseDataList.map(exercise => exercise.exercise)
-  }, [schedulePreset])
+  const [loadExercisePreset] = useLazyGetExercisePresetById()
+  const [loadExerciseByExercisePreset] = useLazyGetExerciseListByExercisePresetId()
+  const [exercisePreset, setExercisePreset] = useState<ExercisePreset | undefined>()
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
+  useEffect(() => {
+    loadExercisePreset({ variables: { id: Number(id) } }).then((result) => {
+      if (result.data) {
+        setExercisePreset(result.data?.getExercisePresetById)
+      }
+    })
+    loadExerciseByExercisePreset({ variables: { exercisePresetId: Number(id) } }).then((result) => {
+      if (result.data) {
+        changeExerciseIdxList(result.data?.getExerciseListByExercisePresetId.map(v => v.exercise))
+      }
+    })
+  }, [])
 
   function savePreset() {
     if (!id) return
-    scheduleStore.addExerciseListByPresetWithExerciseData(id, exerciseIdxList)
+
+    // scheduleStore.addExerciseListByPresetWithExerciseData(id, exerciseIdxList)
   }
 
-  HeaderHandler([<p key="title">{schedulePreset?.name}</p>])
+  HeaderHandler([<p key="title">{exercisePreset?.name}</p>])
   return <ScheduleListEditor
-    savedIdxData={savedExerciseIdxList}
+    // savedIdxData={savedExerciseIdxList}
     exerciseIdxList={exerciseIdxList}
     onChangeExerciseIdxList={changeExerciseIdxList}>
     <Button onClick={savePreset}>Save Preset</Button>

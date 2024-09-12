@@ -21,6 +21,7 @@ export function useGetExercisePresetList(page: number, size: number) {
   })
 }
 
+
 const createExercisePresetGql = gql`
 mutation CreateExercisePreset($exercisePreset: CreateExercisePresetInput) {
   createExercisePreset(exercisePreset: $exercisePreset) {
@@ -32,4 +33,20 @@ mutation CreateExercisePreset($exercisePreset: CreateExercisePresetInput) {
 `
 export function useCreateExercisePreset() {
   return useMutation<{ createExercisePreset: ExercisePreset }, { exercisePreset: { name: string } }>(createExercisePresetGql)
+}
+
+
+const getExercisePresetByIdGql = gql`
+query GetExercisePresetById($id: ID!) {
+  getExercisePresetById(id:$id) {
+    id
+    name
+  }
+}
+`
+export function useLazyGetExercisePresetById() {
+  return useLazyQuery<{ getExercisePresetById: ExercisePreset }, { id: number }>(getExercisePresetByIdGql)
+}
+export function useGetExercisePresetById(id: number) {
+  return useQuery<{ getExercisePresetById: ExercisePreset }, { id: number }>(getExercisePresetByIdGql, { variables: { id: id } })
 }
