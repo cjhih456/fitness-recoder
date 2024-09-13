@@ -3,27 +3,51 @@ import { useEffect, useMemo } from 'react';
 import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { ScheduleType } from '../utils';
-import { useLazyScheduleByDate } from '../../service/GqlStore/Schedule';
+import { useCreateSchedule, useLazyScheduleByDate } from '../../service/GqlStore/Schedule';
 
 export interface ScheduleListProps {
   choosenDate: string
+  onChangeSchedule: () => void
 }
 
-export default function ScheduleList({ choosenDate }: ScheduleListProps) {
+export default function ScheduleList({ choosenDate, onChangeSchedule }: ScheduleListProps) {
   const navigate = useNavigate()
   const [loadScheduleList, { data: scheduleList }] = useLazyScheduleByDate()
+  const [createSchedule] = useCreateSchedule()
+  const [year, month, date] = useMemo(() => {
+    return choosenDate.split('-').map(v => +v)
+  }, [choosenDate])
   useEffect(() => {
-    const [year, month, date] = choosenDate.split('-').map(v => +v)
     if (year && month && date)
       loadScheduleList({
         variables: {
           year, month, date
         }
       })
-  }, [choosenDate, loadScheduleList])
+  }, [year, month, date])
 
   function addBreakDaySchedule() {
-
+    createSchedule({
+      variables: {
+        createSchedule: {
+          date,
+          month,
+          year,
+          beforeTime: 0,
+          breakTime: 0,
+          start: 0,
+          workoutTimes: 0,
+          type: ScheduleType.BREAK
+        }
+      }
+    }).then(() => {
+      onChangeSchedule()
+      loadScheduleList({
+        variables: {
+          year, month, date
+        }
+      })
+    })
     // scheduleStore.setBreakDay(parsedDate[0], parsedDate[1], parsedDate[2])
   }
   function addSchedule() {

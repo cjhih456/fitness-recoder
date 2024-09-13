@@ -15,6 +15,7 @@ export interface CalanderProps {
   endDate?: number
   mode?: Mode
   value: string
+  statesByDate?: string[],
   onChange: (v: string) => void
 }
 export default function Calender({
@@ -26,6 +27,7 @@ export default function Calender({
   endDate,
   mode: startMode,
   value,
+  statesByDate = [],
   onChange
 }: CalanderProps) {
   const todayDate = new Date().getDate()
@@ -120,7 +122,7 @@ export default function Calender({
           <Button className='font-bold' onClick={() => setMode('month')}>{`${choosenDay.year} - ${String(choosenDay.month).padStart(2, '0')}`}</Button>
           <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month + 1)}> + </Button>
         </div>,
-        <DateCalander key="date-picker" year={choosenDay.year} month={choosenDay.month} startDate={displayStartDate} date={choosenDay.date} endDate={displayEndDate} onChange={changeDate} />
+        <DateCalander key="date-picker" year={choosenDay.year} month={choosenDay.month} startDate={displayStartDate} date={choosenDay.date} endDate={displayEndDate} statesByDate={statesByDate} onChange={changeDate} />
       ]}
     </div>
   );
