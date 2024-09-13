@@ -95,8 +95,8 @@ self.onfetch = async (event) => {
         newHeaders.set('Cross-Origin-Opener-Policy', 'same-origin')
 
         return new Response(response.body, {
-          status: response.status,
-          statusText: response.statusText,
+          status: 200,
+          statusText: 'OK',
           headers: newHeaders
         })
       }))
