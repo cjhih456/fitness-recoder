@@ -25,7 +25,7 @@ export default defineConfig(({ mode, isPreview }) => {
         key: fs.readFileSync('./ssl/server.key')
       },
     } : undefined,
-    preview: isPreview && mode === 'product' ? {
+    preview: isPreview && mode === 'production' ? {
       cors: true,
       port: 443,
       https: {
