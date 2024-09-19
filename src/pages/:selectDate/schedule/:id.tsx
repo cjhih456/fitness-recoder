@@ -6,6 +6,7 @@ import { HeaderHandler } from '../../../components/provider/Header/useHeaderCont
 import { useGetScheduleById } from '../../../service/GqlStore/Schedule';
 import { useLazyGetExerciseListByScheduleId } from '../../../service/GqlStore/Exercise';
 import { useUpdateExerciseListBySchedule } from '../../../service/GqlStore/mixed/useUpdateExerciseListBySchedule';
+import { LogEvent } from '../../../service/firebase';
 
 export default function DisplaySchedule() {
   HeaderHandler(['Schedule'])
@@ -17,11 +18,15 @@ export default function DisplaySchedule() {
   const updateExerciseList = useUpdateExerciseListBySchedule()
   const [savedExercise, setSavedExercise] = useState<ExerciseData[]>([])
   useEffect(() => {
+    LogEvent('visit_schedule_detail')
     loadExerciseList({ variables: { scheduleId: Number(id || 0) } }).then((result) => {
       if (result.data) {
         setSavedExercise(result.data?.getExerciseListByScheduleId)
       }
     })
+    return () => {
+      LogEvent('exit_schedule_detail')
+    }
   }, [])
   const savedExerciseIdxList = useMemo(() => savedExercise.map(v => v.exercise) || [], [savedExercise]);
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
