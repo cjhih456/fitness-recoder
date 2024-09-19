@@ -13,6 +13,10 @@ export type Version = number
 
 export const version: Version = 1
 
+function baseURL(url?: string) {
+  return (import.meta.env.VITE_URL_ROOT + (url ?? '')).replace(/\/\//g, '/')
+}
+
 let dbTransitionBus: MessageTransactionBus | undefined = undefined
 
 const parent = { db: undefined, handlers: {}, origin: '' } as {
@@ -38,6 +42,8 @@ self.onactivate = (event) => {
 }
 
 self.onfetch = async (event) => {
+  const path = new URL(self.serviceWorker.scriptURL)
+  if (!event.request.url.startsWith(path.origin + baseURL('/'))) return
   if (!(dbTransitionBus && parent.handlers.set)) {
     dbTransitionBus = new MessageTransactionBus()
     dbTransitionBus.setClients(self.clients)
@@ -60,9 +66,8 @@ self.onfetch = async (event) => {
       }
     })
   }
-
   const url = event.request.url
-  if (url.match(/\/db/)) {
+  if (url === path.origin + baseURL('/db')) {
     if (event.clientId) {
       const newHeaders = new Headers(event.request.headers)
       /**
