@@ -7,6 +7,7 @@ import { HeaderProvider } from './components/provider/Header/HeaderProvider.tsx'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink.ts'
 import Worker from './worker.ts'
+import Firebase from './service/firebase.ts'
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
@@ -25,6 +26,7 @@ const apolloClient = new ApolloClient({
   }
 })
 Worker().then(() => {
+  Firebase()
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <NextUIProvider>

@@ -14,16 +14,16 @@ export default () => {
             sqliteWorkerUrl = new URL(sqliteWorkerUrl, import.meta.url).href
           }
           /**
-             * Create Service worker & Sqlite Worker
-             */
+           * Create Service worker & Sqlite Worker
+           */
           const workerRegistration = await navigator.serviceWorker.register(graphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') })
           const originServiceWorker = workerRegistration.active || workerRegistration.installing || workerRegistration.waiting
           const sqliteWorker = new Worker(sqliteWorkerUrl, { type: 'module', credentials: 'same-origin', name: 'sqlite' })
 
           /**
-             * Bridge between Service worker & Sqlite Worker
-             * used Message Channel
-             */
+           * Bridge between Service worker & Sqlite Worker
+           * used Message Channel
+           */
           navigator.serviceWorker.addEventListener('message', async (e: MessageEvent<SqliteMessage>) => {
             const workers = await navigator.serviceWorker.getRegistrations()
             const worker = workers.find(v => {
