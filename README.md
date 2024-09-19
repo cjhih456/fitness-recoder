@@ -1,28 +1,39 @@
 # Fitness recoder
 
 ## TODO list
-1. add alert, confirm provider - Done!
-3. update ui/ux
-4. categorize workout
-5. manage workout preset
+1. update ui/ux
+2. categorize workout
 
 ## featured
-1. save / load recode data as json file
-2. record training data with 
-3. display recorded data by date or workout type
-4. create graph of progress
+1. clone schedule & preset
+2. save / load recode data as json file
+3. record training data with 
+4. display recorded data by date or workout type
+5. create graph of progress
 
-## 개발 환경 설정
+## Development Environment
 
 * OS: macOS Mojave
 * IDE: Visual Studio Code
-* Node version: v18
-* Library: React, Zustand, Storybook, Jest
+* Node version: v20
+* Library: React, Sqlite3(Worker), Graphql(Service worker), Storybook, Jest
 
-## 사용법
+## When you develop more?
+1. This Project are need to use HTTPS protocol. Because of opfs, that is depends on Browser security.
+2. If you don't want to use opfs just reconfig vite.config.js
+3. If you want use opfs. Follow this command. That will be make self signed ssl.
+```
+On Mac book's terminal
+mkdir ./ssl
+openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
 
-1. https://cjhih456.github.io/fitness-recoder으로 접속한다.
-2. 운동할 
+## Preview
+
+1. Connect to https://cjhih456.github.io/fitness-recoder/
 
 ## 화면 구성
 1. 메인 - 달력형식 -- done
@@ -43,7 +54,9 @@
   - 선택한 날짜가 오늘이 아닌 경우 변경 작업을 할 수 없다.
   - 운동 제목을 클릭하면 운동의 상세정보를 볼 수 있다. -> 6번 사항
 3. 저장 => 다이얼로그
-  - json 파일에서 데이터를 불러오거나, save할 수 있다.
+  - json 파일에서 데이터를 불러오거나, save할 수 있다. 
+    -> 기록된 이력은 sqlite형태로 opfs에 저장 중!
+    -> 백업 필요시 json타입으로 db의 총 데이터를 dump하여 저장 가능하게 하면 될듯
 4. 운동 리스트 -- done
   - 기록 가능한 운동들의 목록을 확인할 수 있습니다. - done
   - 선택하면 detail 화면이 나오고 detail에서는 운동의 설명데이터를 확인할 수 있다.
