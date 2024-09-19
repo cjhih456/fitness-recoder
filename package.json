@@ -24,7 +24,7 @@
     "@sqlite.org/sqlite-wasm": "^3.46.0-build2",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "dayjs": "^1.11.10",
-    "firebase": "^10.9.0",
+    "firebase": "^10.13.2",
     "framer-motion": "^11.0.14",
     "graphql": "^16.9.0",
     "graphql-http": "^1.22.1",
