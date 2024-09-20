@@ -28,7 +28,10 @@ export default function DisplayWorkout() {
           navigate('/')
         })
       } else {
-        updateLazySchedule(result.data?.getScheduleById)
+        const obj = result.data?.getScheduleById
+        // @ts-ignore
+        delete obj.__typename
+        updateLazySchedule(obj)
       }
     })
     return () => {
