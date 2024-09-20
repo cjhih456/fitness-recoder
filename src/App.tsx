@@ -8,7 +8,7 @@ import PresetListPage from './pages/preset'
 import PresetDetailPage from './pages/preset/:id'
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import { baseURL } from './components/utils'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useHeaderContext } from './components/provider/Header/useHeaderContext'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
 
@@ -19,7 +19,7 @@ interface Menu {
 
 function App() {
   const [menuDisplay, setMenuDisplay] = useState(false)
-  const [isDarkMode, setDarkMode] = useState(false)
+  const [isDarkMode, setDarkMode] = useState(true)
   const [menuList] = useState<Menu[]>([{
     name: 'Home',
     route: baseURL('/'),
@@ -34,7 +34,11 @@ function App() {
   const headerContent = useMemo(() => {
     return headerContext.getHeaderContent()
   }, [headerContext])
-  return <div className={`flex flex-col h-screen bg-background ${isDarkMode ? 'dark' : 'light'}`}>
+  const [rootDocument, setRootDocument] = useState<Element | undefined>()
+  useEffect(() => {
+    setRootDocument(document.querySelector('#root > div > div.app') || document.body)
+  }, [])
+  return <div className={`app flex flex-col h-screen bg-background ${isDarkMode ? 'dark' : 'light'} max-h-full`}>
     <Navbar onMenuOpenChange={setMenuDisplay} isMenuOpen={menuDisplay} maxWidth='sm'>
       <NavbarContent justify='start'>
         <NavbarMenuToggle
@@ -52,7 +56,7 @@ function App() {
           {isDarkMode ? <MdDarkMode></MdDarkMode> : <MdLightMode></MdLightMode>}
         </Button>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu portalContainer={rootDocument}>
         {
           menuList.map(v => <NavbarMenuItem key={v.name}>
             <Link href={v.route}>{v.name}</Link>
@@ -60,7 +64,7 @@ function App() {
         }
       </NavbarMenu>
     </Navbar>
-    <main className="flex flex-1 justify-center">
+    <main className="flex flex-1 justify-center max-h-[calc(100%-4rem)] overflow-hidden">
       <div className="max-w-[640px] w-[640px] relative">
         <Router basename={baseURL()}>
           <Routes>

@@ -33,8 +33,8 @@ export default function FitnessSearchModal({
       {(onCloseAction) => (
         <>
           <ModalHeader>Select Exercises</ModalHeader>
-          <ModalBody>
-            <FitnessListSearch selectedList={lazySelectedExerciseIdx} onChangeSelectedList={changeLazySelectedExerciseIdx}></FitnessListSearch>
+          <ModalBody className="overflow-y-hidden -mx-4">
+            <FitnessListSearch selectedList={lazySelectedExerciseIdx} onChangeSelectedList={changeLazySelectedExerciseIdx} needSpace></FitnessListSearch>
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => {

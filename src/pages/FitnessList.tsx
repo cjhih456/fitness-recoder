@@ -3,7 +3,7 @@ import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
 function FitnessList() {
   HeaderHandler(['Search Exercises'])
 
-  return <div className="grid h-screen overflow-hiden">
+  return <div className="grid h-full max-h-full overflow-hidden">
     <FitnessListSearch needSpace></FitnessListSearch>
   </div>
 }

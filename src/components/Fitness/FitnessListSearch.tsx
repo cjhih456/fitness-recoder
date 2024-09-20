@@ -20,8 +20,8 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
     return filterExcercises(searchValue, selectedCategoryList, [], undefined, selectedMuscleList)
   }, [searchValue, selectedCategoryList, selectedMuscleList])
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
-  const xSpacing = needSpace ? 'mx-4' : ''
-  return <div className="flex flex-col flex-nowrap relative overflow-hidden">
+  const xSpacing = needSpace ? 'px-4' : ''
+  return <div className="flex flex-col flex-nowrap relative overflow-y-hidden overflow-x-visible">
     <div className={`flex flex-col sticky top-0 left-0 right-0 gap-y-2 mt-1 ${xSpacing} ${bgString}`}>
       <div className="flex justify-center items-center gap-x-4">
         {searchPrefix ?? undefined}
@@ -59,7 +59,7 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
         </Select>
       </div>
     </div>
-    <div className={`overflow-scroll ${xSpacing}`}>
+    <div className={`overflow-y-scroll overflow-x-visible ${xSpacing} snap-y scroll-smooth mt-4 will-change-auto`}>
       <FitnessList list={fitnessList} selectedList={selectedList} onChangeSelectedList={onChangeSelectedList}></FitnessList>
     </div>
   </div>
