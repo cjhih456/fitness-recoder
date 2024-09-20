@@ -1,6 +1,7 @@
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import FitnessListSearch from './FitnessListSearch'
 import { useEffect, useState } from 'react'
+import CModal from '../CustomComponent/CModal'
 
 export interface FitnessSearchModalProps {
   selectedExerciseIdx: number[]
@@ -23,7 +24,7 @@ export default function FitnessSearchModal({
   useEffect(() => {
     changeLazySelectedExerciseIdx(selectedExerciseIdx)
   }, [selectedExerciseIdx, isOpen])
-  return <Modal
+  return <CModal
     isOpen={isOpen}
     placement='top'
     scrollBehavior="inside"
@@ -48,5 +49,5 @@ export default function FitnessSearchModal({
         </>
       )}
     </ModalContent>
-  </Modal>
+  </CModal>
 }

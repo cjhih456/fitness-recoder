@@ -1,5 +1,6 @@
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
+import CModal from '../../CustomComponent/CModal'
 
 enum AlertType {
   SUCCESS = 'SUCCESS',
@@ -89,7 +90,8 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
 
   return (
     <AlertContext.Provider value={contextValue}>
-      <Modal isOpen={displayAlert} onOpenChange={alertAisplayChanged}>
+      {children}
+      <CModal isOpen={displayAlert} onOpenChange={alertAisplayChanged}>
         <ModalContent>
           {() => (<>
             <ModalHeader>Alert!!</ModalHeader>
@@ -114,8 +116,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
             </ModalFooter>
           </>)}
         </ModalContent>
-      </Modal>
-      {children}
+      </CModal>
     </AlertContext.Provider>
   )
 }
