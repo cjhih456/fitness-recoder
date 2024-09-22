@@ -63,7 +63,7 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
   }
 
   return set ? <div className="flex gap-x-2 items-center justify-center">
-    <span className='min-w-12 text-default-700'>Set {index}</span>
+    <span className='min-w-12'>Set {index}</span>
     <Input value={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} isReadOnly={readonly}></Input>
     <Input value={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} isReadOnly={readonly}></Input>
     <Checkbox classNames={{ wrapper: 'mr-0' }} isSelected={lazyValue?.isDone} size='lg' onValueChange={changeIsDone} isReadOnly={readonly} radius='full'></Checkbox>

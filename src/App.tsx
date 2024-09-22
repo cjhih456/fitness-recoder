@@ -38,15 +38,14 @@ function App() {
   useEffect(() => {
     setRootDocument(document.querySelector('#root > div > div.app') || document.body)
   }, [])
-  return <div className={`app flex flex-col h-screen bg-background ${isDarkMode ? 'dark' : 'light'} max-h-full`}>
+  return <div className={`app flex flex-col h-screen bg-background ${isDarkMode ? 'dark' : 'light'} max-h-full text-default-700`}>
     <Navbar onMenuOpenChange={setMenuDisplay} isMenuOpen={menuDisplay} maxWidth='sm'>
       <NavbarContent justify='start'>
         <NavbarMenuToggle
-          className='font-black text-default-700'
           aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
         ></NavbarMenuToggle>
       </NavbarContent>
-      <NavbarContent justify="center" className="text-default-700">
+      <NavbarContent justify="center">
         {headerContent}
       </NavbarContent>
       <NavbarContent justify="end">
