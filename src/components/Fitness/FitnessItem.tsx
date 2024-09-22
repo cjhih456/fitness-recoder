@@ -40,7 +40,6 @@ export default function FitnessItem({ selectedExercise, onClick, useSelect }: Fi
           })}
         </div>
       </div>
-
     </CardBody>
   </Card >
 }

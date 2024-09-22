@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { NextUIProvider } from '@nextui-org/react'
 import { AlertProvider } from './components/provider/Alert/AlertProvider.tsx'
 import { HeaderProvider } from './components/provider/Header/HeaderProvider.tsx'
+import ExerciseDataInfoModal from './components/provider/ExerciseDataModal/ExerciseDataInfoModal.tsx'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink.ts'
 import Worker from './worker.ts'
@@ -32,9 +33,11 @@ Worker().then(() => {
       <NextUIProvider>
         <ApolloProvider client={apolloClient}>
           <HeaderProvider>
-            <AlertProvider>
-              <App />
-            </AlertProvider>
+            <ExerciseDataInfoModal>
+              <AlertProvider>
+                <App />
+              </AlertProvider>
+            </ExerciseDataInfoModal>
           </HeaderProvider>
         </ApolloProvider>
       </NextUIProvider>
