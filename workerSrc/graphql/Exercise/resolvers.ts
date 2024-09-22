@@ -198,22 +198,26 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return newExerciseList[0]
     },
     async updateExerciseListByExercisePresetId(_source, { exercisePresetId, newExercise, deleteExerciseId }, context) {
-      await deleteExerciseByIdsTemp(
-        dbTransitionBus,
-        context.client,
-        deleteExerciseId
-      )
-      const createdExercise = await createExerciseByIdsTemp(
-        dbTransitionBus,
-        context.client,
-        newExercise
-      )
-      await createExerciseRelationWithExercisePreset(
-        dbTransitionBus,
-        context.client,
-        exercisePresetId,
-        createdExercise
-      )
+      if (deleteExerciseId.length) {
+        await deleteExerciseByIdsTemp(
+          dbTransitionBus,
+          context.client,
+          deleteExerciseId
+        )
+      }
+      if (newExercise.length) {
+        const createdExercise = await createExerciseByIdsTemp(
+          dbTransitionBus,
+          context.client,
+          newExercise
+        )
+        await createExerciseRelationWithExercisePreset(
+          dbTransitionBus,
+          context.client,
+          exercisePresetId,
+          createdExercise
+        )
+      }
       return await getExerciseListByExercisePresetIdTemp(
         dbTransitionBus,
         context.client,

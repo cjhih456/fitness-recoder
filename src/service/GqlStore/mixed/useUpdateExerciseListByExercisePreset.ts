@@ -20,7 +20,8 @@ export function useUpdateExerciseListByExercisePreset() {
         createNeedExerciseId.push(newExerciseId)
       }
     })
-    updateList({
+    if (!createNeedExerciseId.length && !removeNeedExerciseData.length) return Promise.resolve()
+    return updateList({
       variables: {
         exercisePresetId: exercisePresetId,
         newExercise: createNeedExerciseId,
