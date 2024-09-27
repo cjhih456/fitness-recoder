@@ -5,7 +5,7 @@ export default function createSetTable(db: Sqlite3) {
 
   db.exec(`CREATE TABLE IF NOT EXISTS sets (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      exerciseId TEXT REFERENCES exercise(id),
+      exerciseId INTEGER REFERENCES exercise(id),
       repeat INTEGER,
       isDone INTEGER,
       weightUnit TEXT,
