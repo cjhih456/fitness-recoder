@@ -3,7 +3,7 @@ import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
 
-function Home() {
+function CalanderPage() {
   const [choosenDate, changeDate] = useState('')
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
@@ -37,4 +37,4 @@ function Home() {
   )
 }
 
-export default Home
+export default CalanderPage

@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+import CalanderPage from './pages/CalanderPage'
 import FitnessList from './pages/FitnessList'
 import CreateSchedule from './pages/:selectDate/schedule/create'
 import DisplaySchedule from './pages/:selectDate/schedule/:id'
@@ -10,7 +10,7 @@ import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, Navbar
 import { baseURL } from './components/utils'
 import { useEffect, useMemo, useState } from 'react'
 import { useHeaderContext } from './components/provider/Header/useHeaderContext'
-import { MdDarkMode, MdLightMode } from 'react-icons/md'
+import { MdClose, MdDarkMode, MdLightMode, MdMenu } from 'react-icons/md'
 
 interface Menu {
   name: string
@@ -23,6 +23,9 @@ function App() {
   const [menuList] = useState<Menu[]>([{
     name: 'Home',
     route: baseURL('/'),
+  }, {
+    name: 'Calander',
+    route: baseURL('/calander'),
   }, {
     name: 'Fitness',
     route: baseURL('/fitnessList')
@@ -42,7 +45,11 @@ function App() {
     <Navbar onMenuOpenChange={setMenuDisplay} isMenuOpen={menuDisplay} maxWidth='sm'>
       <NavbarContent justify='start'>
         <NavbarMenuToggle
-          aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
+          className="w-unit-10"
+          icon={(isOpen: boolean) => {
+            return isOpen ? <MdClose size="2.5rem" preserveAspectRatio="xMidYMid slice"></MdClose> : <MdMenu size="2.5rem" preserveAspectRatio="xMidYMid slice"></MdMenu>
+          }}
+        // aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
         ></NavbarMenuToggle>
       </NavbarContent>
       <NavbarContent justify="center">
@@ -67,7 +74,8 @@ function App() {
       <div className="max-w-[640px] w-[640px] relative">
         <Router basename={baseURL()}>
           <Routes>
-            <Route path='/' element={<Home />} />
+            {/* <Route path='/' element={ } /> */}
+            <Route path='/calander' element={<CalanderPage />} />
             <Route path='/fitnessList' element={<FitnessList />} />
             <Route path="/:selectDate">
               <Route path='schedule'>
@@ -86,6 +94,9 @@ function App() {
         </Router>
       </div>
     </main>
+    <footer>
+
+    </footer>
   </div>
 }
 
