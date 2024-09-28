@@ -1,4 +1,4 @@
-import { Input, Select, SelectItem } from '@nextui-org/react'
+import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
 import { categoryList, filterExcercises, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
@@ -59,8 +59,8 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
         </Select>
       </div>
     </div>
-    <div className={`overflow-y-scroll overflow-x-visible ${xSpacing} snap-y scroll-smooth mt-4 will-change-auto`}>
+    <ScrollShadow className={`${xSpacing} snap-y scroll-smooth mt-4`}>
       <FitnessList list={fitnessList} selectedList={selectedList} onChangeSelectedList={onChangeSelectedList}></FitnessList>
-    </div>
+    </ScrollShadow>
   </div>
 }
