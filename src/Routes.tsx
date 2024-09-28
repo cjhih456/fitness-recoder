@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { useMemo } from 'react';
+import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { baseURL } from './components/utils'
 import Main from './pages/Main';
 import CalanderPage from './pages/CalanderPage';
@@ -12,79 +12,68 @@ import PresetDetailPage from './pages/preset/:id';
 import { BottomNaviProvider } from './components/provider/BottomNavi/BottomNaviProvider';
 
 export default function useRouters() {
-  const BottomNaviProviderCallback = useCallback((args: { children: any }) => {
-    return <BottomNaviProvider key="bottom-navi" {...args} />
-  }, [])
   const router = useMemo(() => {
     return createBrowserRouter([
       {
-        index: true,
-        element: <BottomNaviProviderCallback>
-          <Main />
-        </BottomNaviProviderCallback>,
-      },
-      {
-        path: 'calander',
-        element: <BottomNaviProviderCallback>
-          <CalanderPage />
-        </BottomNaviProviderCallback>
-      },
-      {
-        path: 'fitnessList',
-        element: <BottomNaviProviderCallback>
-          <FitnessList />
-        </BottomNaviProviderCallback>
-      },
-      {
-        path: ':selectDate',
-        children: [
-          {
-            path: 'schedule',
-            children: [
-              {
-                path: 'create',
-                element: <BottomNaviProviderCallback>
-                  <CreateSchedule />
-                </BottomNaviProviderCallback>
-              },
-              {
-                path: ':id',
-                element: <BottomNaviProviderCallback>
-                  <DisplaySchedule />
-                </BottomNaviProviderCallback>
-              }
-            ]
-          },
-          {
-            path: 'workout',
-            children: [
-              {
-                path: ':id',
-                element: <BottomNaviProviderCallback>
-                  <DisplayWorkout />
-                </BottomNaviProviderCallback>
-              }
-            ]
-          }
-        ]
-      },
-      {
-        path: 'preset',
+        element: <BottomNaviProvider>
+          <Outlet />
+        </BottomNaviProvider>,
         children: [
           {
             index: true,
-            element: <BottomNaviProviderCallback>
-              <PresetListPage />
-            </BottomNaviProviderCallback>
+            element: <Main />
           },
           {
-            path: ':id',
-            element: <BottomNaviProviderCallback>
-              <PresetDetailPage />
-            </BottomNaviProviderCallback>
+            path: 'calander',
+            element: <CalanderPage />
+          },
+          {
+            path: 'fitnessList',
+            element: <FitnessList />
+          },
+          {
+            path: ':selectDate',
+            children: [
+              {
+                path: 'schedule',
+                children: [
+                  {
+                    path: 'create',
+                    element: <CreateSchedule />
+                  },
+                  {
+                    path: ':id',
+                    element: <DisplaySchedule />
+                  }
+                ]
+              },
+              {
+                path: 'workout',
+                children: [
+                  {
+                    path: ':id',
+                    element: <DisplayWorkout />
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: 'preset',
+            children: [
+              {
+                index: true,
+                element: <PresetListPage />
+              },
+              {
+                path: ':id',
+                element: <PresetDetailPage />
+              }
+            ]
           }
         ]
-      }
+      },
+
     ], {
       basename: baseURL()
     })

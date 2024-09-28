@@ -25,7 +25,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   }, [])
 
   const changeBottomNaviVisible = useCallback(
-    _.throttle((v) => setBottomNaviVisible(v), 100),
+    _.debounce((v) => setBottomNaviVisible(v), 100),
     []
   )
 
