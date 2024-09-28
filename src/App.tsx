@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Main from './pages/Main'
 import CalanderPage from './pages/CalanderPage'
 import FitnessList from './pages/FitnessList'
 import CreateSchedule from './pages/:selectDate/schedule/create'
@@ -49,7 +50,6 @@ function App() {
           icon={(isOpen: boolean) => {
             return isOpen ? <MdClose size="2.5rem" preserveAspectRatio="xMidYMid slice"></MdClose> : <MdMenu size="2.5rem" preserveAspectRatio="xMidYMid slice"></MdMenu>
           }}
-        // aria-label={menuDisplay ? 'Close menu' : 'Open menu'}
         ></NavbarMenuToggle>
       </NavbarContent>
       <NavbarContent justify="center">
@@ -74,7 +74,7 @@ function App() {
       <div className="max-w-[640px] w-[640px] relative">
         <Router basename={baseURL()}>
           <Routes>
-            {/* <Route path='/' element={ } /> */}
+            <Route path='/' element={<Main />} />
             <Route path='/calander' element={<CalanderPage />} />
             <Route path='/fitnessList' element={<FitnessList />} />
             <Route path="/:selectDate">
