@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
+import BottomNavi from '../components/CustomComponent/BottomNavi'
 
 function CalanderPage() {
   const [choosenDate, changeDate] = useState('')
@@ -33,6 +34,7 @@ function CalanderPage() {
       <div className='grid gap-y-3'>
         <ScheduleList choosenDate={choosenDate} onChangeSchedule={updateScheduleList}></ScheduleList>
       </div>
+      <BottomNavi />
     </div>
   )
 }

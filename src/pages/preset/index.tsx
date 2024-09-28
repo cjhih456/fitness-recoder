@@ -4,6 +4,7 @@ import { Button } from '@nextui-org/react';
 import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
+import BottomNavi from '../../components/CustomComponent/BottomNavi';
 
 export default function PresetListPage() {
   const [createExercisePreset] = useCreateExercisePreset()
@@ -41,12 +42,13 @@ export default function PresetListPage() {
     </ScheduleDisplay>)}
     <div>
       <PresetNameInputDialog onChange={hasInputNewName}>
-        {(openFn) => <div className='absolute bottom-4 left-4 right-4'>
-          <Button onClick={openFn}>Create</Button>
+        {(openFn) => <div className='grid mt-4'>
+          <Button onClick={openFn} size="lg">Create Preset</Button>
         </div>
         }
       </PresetNameInputDialog>
     </div>
 
+    <BottomNavi />
   </div>
 }

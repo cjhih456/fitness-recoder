@@ -94,9 +94,6 @@ function App() {
         </Router>
       </div>
     </main>
-    <footer>
-
-    </footer>
   </div>
 }
 
