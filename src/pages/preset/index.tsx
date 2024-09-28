@@ -37,7 +37,7 @@ export default function PresetListPage() {
   function gotoDetail(id: number) {
     navigator(`/preset/${id}`)
   }
-  return <div className="pt-4 px-4">
+  return <div className="pt-4 px-4 flex flex-col gap-y-4">
     {presetList.map(preset => <ScheduleDisplay key={preset.id} id={preset.id} title={preset.name} exerciseList={preset.exerciseList}>
       {(id: number) => <div>
         <Button onClick={() => gotoDetail(id)}>Detail</Button>
@@ -45,7 +45,7 @@ export default function PresetListPage() {
     </ScheduleDisplay>)}
     <div>
       <PresetNameInputDialog onChange={hasInputNewName}>
-        {(openFn) => <div className='grid mt-4'>
+        {(openFn) => <div className='grid'>
           <Button onClick={openFn} size="lg">Create Preset</Button>
         </div>
         }
