@@ -4,9 +4,10 @@ import { Button } from '@nextui-org/react';
 import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
-import BottomNavi from '../../components/CustomComponent/BottomNavi';
+import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
 
 export default function PresetListPage() {
+  useBottomNavi()
   const [createExercisePreset] = useCreateExercisePreset()
   const [getExerciseList] = useLazyGetExercisePresetList()
   const navigator = useNavigate()
@@ -48,7 +49,5 @@ export default function PresetListPage() {
         }
       </PresetNameInputDialog>
     </div>
-
-    <BottomNavi />
   </div>
 }

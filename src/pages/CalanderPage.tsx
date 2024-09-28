@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
-import BottomNavi from '../components/CustomComponent/BottomNavi'
+import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 
 function CalanderPage() {
+  useBottomNavi()
   const [choosenDate, changeDate] = useState('')
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
@@ -34,7 +35,6 @@ function CalanderPage() {
       <div className='grid gap-y-3'>
         <ScheduleList choosenDate={choosenDate} onChangeSchedule={updateScheduleList}></ScheduleList>
       </div>
-      <BottomNavi />
     </div>
   )
 }

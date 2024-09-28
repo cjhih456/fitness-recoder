@@ -4,9 +4,10 @@ import { useLazyScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
 import { Button } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
-import BottomNavi from '../components/CustomComponent/BottomNavi'
+import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 
 export default function Main() {
+  useBottomNavi()
   const navigate = useNavigate()
   const header = useHeaderContext()
   const [scheduleList, setScheduleList] = useState<Schedule[]>([])
@@ -84,6 +85,5 @@ export default function Main() {
       What's my today schedule?
     </h2>
     {displaySchedule}
-    <BottomNavi />
   </div>
 }
