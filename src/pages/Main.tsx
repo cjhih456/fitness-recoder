@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useHeaderContext } from '../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
 import { useLazyScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
 import { Button } from '@nextui-org/react'
@@ -9,12 +9,11 @@ import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 export default function Main() {
   useBottomNavi()
   const navigate = useNavigate()
-  const header = useHeaderContext()
   const [scheduleList, setScheduleList] = useState<Schedule[]>([])
   const [loadScheduleData] = useLazyScheduleByDate()
+  HeaderHandler(['Main'])
   useEffect(() => {
     const today = new Date()
-    header.setHeader(['Main'])
     loadScheduleData({
       variables: {
         year: today.getFullYear(),
@@ -26,9 +25,6 @@ export default function Main() {
         setScheduleList(result.data.getScheduleByDate)
       }
     })
-    return () => {
-      header.setHeader([])
-    }
   }, [])
 
   function addSchedule() {

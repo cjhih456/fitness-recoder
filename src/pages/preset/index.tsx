@@ -5,9 +5,11 @@ import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
 import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
+import { HeaderHandler } from '../../components/provider/Header/useHeaderContext';
 
 export default function PresetListPage() {
   useBottomNavi()
+  HeaderHandler(['Preset List'])
   const [createExercisePreset] = useCreateExercisePreset()
   const [getExerciseList] = useLazyGetExercisePresetList()
   const navigator = useNavigate()

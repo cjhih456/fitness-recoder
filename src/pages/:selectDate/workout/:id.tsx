@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/react'
 import dayjs from '../../../hooks/dayjs'
 import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
 import { useAlert } from '../../../components/provider/Alert/useAlert'
-import { useHeaderContext } from '../../../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext'
 import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
 import { ScheduleType } from '../../../components/utils'
 
@@ -15,10 +15,6 @@ export default function DisplayWorkout() {
   const [getSchedule] = useLazyGetScheduleById()
   const [lazySchedule, updateLazySchedule] = useState<Schedule | undefined>()
   const [updateSchedule] = useUpdateSchedule()
-  const scheduleDate = useMemo(() => {
-    return `${lazySchedule?.year}-${lazySchedule?.month}-${lazySchedule?.date}`
-  }, [lazySchedule?.year, lazySchedule?.month, lazySchedule?.date])
-
 
   // Load Data 
   useEffect(() => {
@@ -42,15 +38,6 @@ export default function DisplayWorkout() {
       }
     }
   }, [])
-
-  // Set Header
-  const HeaderContext = useHeaderContext()
-  useEffect(() => {
-    HeaderContext.setHeader([scheduleDate])
-    return () => {
-      HeaderContext.setHeader([])
-    }
-  }, [scheduleDate])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,6 +63,8 @@ export default function DisplayWorkout() {
       return dayjs.duration(lazySchedule?.workoutTimes).format('HH:mm:ss.SSS')
     return '00:00:00.000'
   }, [lazySchedule])
+
+  HeaderHandler([timer])
 
   function updateState(type: ScheduleType) {
     if (!id) return Promise.resolve()
@@ -120,9 +109,6 @@ export default function DisplayWorkout() {
 
   return <>
     <div className="flex flex-col">
-      <div>
-        {timer}
-      </div>
       <div>
         {id && lazySchedule && <ExerciseDataList key={id} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
       </div>
