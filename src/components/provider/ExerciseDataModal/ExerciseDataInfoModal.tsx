@@ -2,6 +2,7 @@ import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@next
 import { createContext, useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../../service/Fitness/FitnessDatas';
 import CModal from '../../CustomComponent/CModal';
+import ExercisePreviewVideo from './ExercisePreviewVideo';
 
 type ModalContextType = {
   showModal: (exerciseId: number) => void
@@ -21,6 +22,7 @@ export default function ExerciseDataInfoModal({
 
   const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
   const [exerciseData, setExerciseData] = useState<IExercise | undefined>()
+  const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
   const instructions = useMemo(() => {
     const tempList = Array.isArray(exerciseData?.instructions) ? exerciseData?.instructions : [exerciseData?.instructions]
     return tempList.filter(Boolean)
@@ -29,7 +31,9 @@ export default function ExerciseDataInfoModal({
   useEffect(() => {
     const temp = typeof exerciseDataId === 'number'
     if (temp) {
-      setExerciseData(getExerciseByIdx(exerciseDataId))
+      const exercise = getExerciseByIdx(exerciseDataId)
+      setExerciseData(exercise)
+      ExercisePreviewVideo(exercise.name).then(result => setExerciseVideoId(result))
     }
     setLazyOpen(temp)
   }, [exerciseDataId])
@@ -57,10 +61,23 @@ export default function ExerciseDataInfoModal({
         {(onCloseAction) => (<>
           <ModalHeader>
             {exerciseData?.name || ''}
-            {/* Exercise name */}
           </ModalHeader>
           <ModalBody>
             {/* Preview Images */}
+            {exerciseVideoId && <div >
+              <iframe
+                width="100%"
+                height="315"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                src={`https://www.youtube.com/embed/${exerciseVideoId}`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                credentialless="true"
+              ></iframe>
+            </div>}
             {/* Training History - optional */}
             <div className="max-w-full overflow-x-scroll">
 
