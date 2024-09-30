@@ -1,5 +1,5 @@
 import { Button } from '@nextui-org/react';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SetRow from './SetRow';
 import { useCreateSet, useDeleteSet, useLazyGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
 
@@ -14,11 +14,14 @@ export default function ExerciseDataDisplay({
   hasDoneLastSet,
   readonly
 }: ExerciseDataDisplayProps) {
+  const [exerciseDataId, setExerciseDataId] = useState<number>(0)
   const [getSetByExerciseId, { data: setDatas }] = useLazyGetSetListByExerciseId()
   const [createSet] = useCreateSet()
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
   useEffect(() => {
+    if (exerciseData.id === exerciseDataId) return
+    setExerciseDataId(exerciseData.id)
     getSetByExerciseId({ variables: { id: exerciseData.id } })
   }, [exerciseData, getSetByExerciseId])
 
