@@ -1,8 +1,9 @@
-import { ReactNode, createContext, useCallback, useEffect, useState } from 'react'
+import { ReactNode, createContext, useCallback, useState } from 'react'
 import MenuButton from '../../CustomComponent/MenuButton'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import { createPortal } from 'react-dom'
 import _ from 'lodash'
+import { useRoot } from '../RootProvider/useRoot'
 
 export interface BottomNaviProviderProps {
   children: ReactNode
@@ -18,11 +19,7 @@ export const BottomNavi = createContext<BottomNaviType>({
 
 export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
-  const [rootDocument, setRootDocument] = useState<Element>(document.body)
-
-  useEffect(() => {
-    setRootDocument(document.querySelector('#root > div > div.app') || document.body)
-  }, [])
+  const { getRoot } = useRoot()
 
   const changeBottomNaviVisible = useCallback(
     _.debounce((v) => setBottomNaviVisible(v), 100),
@@ -43,7 +40,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
           <MenuButton name='Exercise' Icon={MdList} path='/fitnessList' />
           <MenuButton name='Preset' Icon={MdOutlineDataset} path='/preset' />
         </div>
-      </footer> : <div></div>, rootDocument, 'bottom-navi')}
+      </footer> : <div></div>, getRoot(), 'bottom-navi')}
     </BottomNavi.Provider>
   )
 }

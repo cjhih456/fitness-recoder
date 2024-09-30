@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import { NextUIProvider } from '@nextui-org/react'
-import { AlertProvider } from './components/provider/Alert/AlertProvider.tsx'
 import { HeaderProvider } from './components/provider/Header/HeaderProvider.tsx'
-import ExerciseDataInfoModal from './components/provider/ExerciseDataModal/ExerciseDataInfoModal.tsx'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink.ts'
 import Worker from './worker.ts'
 import Firebase from './service/firebase.ts'
+import { ThemaProvider } from './components/provider/ThemaProvider/ThemaProvider.tsx'
+import { RootProvider } from './components/provider/RootProvider/RootProvider.tsx'
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
@@ -30,17 +29,15 @@ Worker().then(() => {
   Firebase()
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <NextUIProvider>
-        <ApolloProvider client={apolloClient}>
-          <HeaderProvider>
-            <ExerciseDataInfoModal>
-              <AlertProvider>
-                <App />
-              </AlertProvider>
-            </ExerciseDataInfoModal>
-          </HeaderProvider>
-        </ApolloProvider>
-      </NextUIProvider>
+      <ThemaProvider>
+        <HeaderProvider>
+          <RootProvider>
+            <ApolloProvider client={apolloClient}>
+              <App />
+            </ApolloProvider>
+          </RootProvider>
+        </HeaderProvider>
+      </ThemaProvider>
     </React.StrictMode>,
   )
 })

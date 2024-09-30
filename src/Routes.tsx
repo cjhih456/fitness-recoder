@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { baseURL } from './components/utils'
 import Main from './pages/Main';
@@ -10,14 +10,32 @@ import DisplayWorkout from './pages/:selectDate/workout/:id';
 import PresetListPage from './pages/preset';
 import PresetDetailPage from './pages/preset/:id';
 import { BottomNaviProvider } from './components/provider/BottomNavi/BottomNaviProvider';
+import DefaultLayout from './layout/DefaultLayout';
+import { NextUIProvider } from '@nextui-org/react';
+import ExerciseDataInfoModal from './components/provider/ExerciseDataModal/ExerciseDataInfoModal';
+import { AlertProvider } from './components/provider/Alert/AlertProvider';
+
 
 export default function useRouters() {
+  const routeRef = useRef<any>(null)
   const router = useMemo(() => {
-    return createBrowserRouter([
+    function tempNavigate(...args: any) {
+      routeRef.current?.navigate(...args)
+    }
+    routeRef.current = createBrowserRouter([
       {
-        element: <BottomNaviProvider>
-          <Outlet />
-        </BottomNaviProvider>,
+        element:
+          <NextUIProvider navigate={tempNavigate} className="app-root h-screen max-h-full flex flex-col">
+            <ExerciseDataInfoModal>
+              <AlertProvider>
+                <DefaultLayout>
+                  <BottomNaviProvider>
+                    <Outlet />
+                  </BottomNaviProvider>
+                </DefaultLayout>
+              </AlertProvider>
+            </ExerciseDataInfoModal>
+          </NextUIProvider>,
         children: [
           {
             index: true,
@@ -77,6 +95,8 @@ export default function useRouters() {
     ], {
       basename: baseURL()
     })
+
+    return routeRef.current
   }, [])
   return router
 }
