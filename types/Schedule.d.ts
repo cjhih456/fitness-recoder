@@ -27,6 +27,20 @@ interface ExerciseData {
   deps: number
 }
 
+interface ExerciseHistoryData {
+  id: number,
+  year: number,
+  month: number,
+  date: number,
+  type: string,
+  exercise: number,
+  cnt: number,
+  hasDone: number
+  weights: string,
+  repeats: string,
+  weightUnit: string
+}
+
 interface ExercisePreset {
   id: number
   name: string

@@ -1,14 +1,12 @@
 import { Modal, ModalProps } from '@nextui-org/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useRoot } from '../provider/RootProvider/useRoot';
 
 function CModal(args: ModalProps) {
-  const [rootDocument, setRootDocument] = useState<Element | undefined>()
-  useEffect(() => {
-    setRootDocument(document.querySelector('#root > div > div.app') || document.body)
-  }, [])
+  const { getRoot } = useRoot()
   const { children, ...customArgs } = useMemo(() => {
-    return { ...args, portalContainer: rootDocument }
-  }, [args, rootDocument])
+    return { ...args, portalContainer: getRoot() }
+  }, [args, getRoot])
   return <Modal {...customArgs}>
     {children}
   </Modal>

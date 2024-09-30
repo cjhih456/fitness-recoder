@@ -2,8 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
+import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
+import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
 
-function Home() {
+function CalanderPage() {
+  useBottomNavi()
+  HeaderHandler(['Calander'])
   const [choosenDate, changeDate] = useState('')
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
@@ -37,4 +41,4 @@ function Home() {
   )
 }
 
-export default Home
+export default CalanderPage

@@ -141,6 +141,42 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         context.client,
         exercisePresetId
       )
+    },
+    async getExerciseFinishHistory(_source, { exerciseId }, context) {
+      const result = await dbTransitionBus?.sendTransaction<ExerciseHistoryData[]>(
+        context.client,
+        'selects',
+        `select
+          e.id as id,
+          e.exercise as exercise,
+          sch.year,
+          sch.month,
+          sch.date,
+          sch.type,
+          count(s.id) as cnt,
+          SUM(
+            CASE WHEN s.isDone > 0 THEN 1 ELSE 0 END
+          ) as hasDone,
+          group_concat(s.weight, ',') as weights,
+          group_concat(s.repeat, ',') as repeats,
+          s.weightUnit as weightUnit
+        from exercise as e
+        inner join 
+          sets as s,
+          schedule_exercise sche,
+          schedule sch
+          on
+            e.id = s.exerciseId and
+            sche.exerciseId = e.id and
+            sch.id = sche.scheduleId
+        where e.exercise=?
+        group by s.exerciseId
+        having cnt != 0 and hasDone = cnt
+        order by e.id
+        limit 10`,
+        [exerciseId]
+      )
+      return result
     }
   },
   Mutation: {

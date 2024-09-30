@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { v4 as uuid } from 'uuid'
 import { Analytics, getAnalytics, logEvent, setUserId } from 'firebase/analytics';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyA__s2QPo2g6tWxODULkpf7FK8q9LhlCUk',
   authDomain: 'fitness-recoder-9683a.firebaseapp.com',
   databaseURL: 'https://fitness-recoder-9683a-default-rtdb.firebaseio.com',

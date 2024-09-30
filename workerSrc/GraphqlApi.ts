@@ -96,8 +96,11 @@ self.onfetch = async (event) => {
           return response
         }
         const newHeaders = new Headers(response.headers)
-        newHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp')
         newHeaders.set('Cross-Origin-Opener-Policy', 'same-origin')
+        newHeaders.set('Cross-Origin-Resource-Policy', 'same-origin')
+        newHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp')
+        // newHeaders.set('Access-Control-Allow-Origin', 'https://www.youtube.com')
+        newHeaders.set('Service-Worker-Allowed', baseURL('/'))
 
         return new Response(response.body, {
           status: 200,

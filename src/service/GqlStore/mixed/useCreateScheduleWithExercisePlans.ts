@@ -31,6 +31,8 @@ export function useCreateScheduleWithExercisePlans() {
           }
         }
       })
+      return schedule.data?.createSchedule
     }
+    return undefined
   }
 }

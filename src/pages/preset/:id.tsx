@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { HeaderHandler, useHeaderContext } from '../../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../../components/provider/Header/useHeaderContext'
 import { useEffect, useMemo, useState } from 'react'
 import ScheduleListEditor from '../../components/Schedule/ScheduleListEditor'
 import { Button } from '@nextui-org/react'
@@ -19,18 +19,22 @@ export default function PresetDetailPage() {
   const [exerciseIdxList, changeExerciseIdxList] = useState<ExerciseData[]>([])
   const [newExerciseList, changeNewExerciseList] = useState<number[]>([])
   const oldExerciseList = useMemo(() => exerciseIdxList.map(v => v.exercise), [exerciseIdxList])
-  const headerContext = useHeaderContext()
 
   useEffect(() => {
     loadExercisePreset({ variables: { id: Number(id) } }).then((result) => {
       if (!result.data) return
       setExercisePreset(result.data.getExercisePresetById)
-      headerContext.setHeader([result.data.getExercisePresetById.name])
     })
     loadExerciseByExercisePreset({ variables: { exercisePresetId: Number(id) } }).then((result) => {
       result.data && changeExerciseIdxList(result.data.getExerciseListByExercisePresetId)
     })
   }, [])
+
+  const header = useMemo(() => {
+    return [exercisePreset?.name]
+  }, [exercisePreset])
+
+  HeaderHandler(header)
 
   function savePreset() {
     if (!id) return
@@ -38,8 +42,6 @@ export default function PresetDetailPage() {
       navigate('/preset')
     })
   }
-
-  HeaderHandler([<p key="title">{exercisePreset?.name}</p>])
   return <ScheduleListEditor
     savedIdxData={oldExerciseList}
     exerciseIdxList={newExerciseList}

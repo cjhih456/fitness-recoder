@@ -16,7 +16,17 @@ export default () => {
           /**
            * Create Service worker & Sqlite Worker
            */
-          const workerRegistration = await navigator.serviceWorker.register(graphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') })
+          const workerRegistration = await navigator.serviceWorker.register(graphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') }).then((registration) => {
+            registration.addEventListener('updatefound', () => {
+              console.log('Reloading page to update Graphql Service Worker.')
+              window.location.reload()
+            })
+            if (registration.active && !navigator.serviceWorker.controller) {
+              console.log('Reloading page to make use of GraphQL Service Worker.')
+              window.location.reload()
+            }
+            return registration
+          })
           const originServiceWorker = workerRegistration.active || workerRegistration.installing || workerRegistration.waiting
           const sqliteWorker = new Worker(sqliteWorkerUrl, { type: 'module', credentials: 'same-origin', name: 'sqlite' })
 

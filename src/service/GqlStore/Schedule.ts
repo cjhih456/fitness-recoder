@@ -15,15 +15,16 @@ query GetScheduleByDate($year: Int!, $month: Int!, $date: Int!) {
   }
 }
 `
+type ScheduleByDateParams = { year: number, month: number, date: number }
 export function useScheduleByDate(year: number, month: number, date: number) {
-  return useQuery<{ getScheduleByDate: Schedule[] }>(getScheduleByDateGql, {
+  return useQuery<{ getScheduleByDate: Schedule[] }, ScheduleByDateParams>(getScheduleByDateGql, {
     variables: {
       year, month, date
     }
   })
 }
 export function useLazyScheduleByDate() {
-  return useLazyQuery<{ getScheduleByDate: Schedule[] }>(getScheduleByDateGql)
+  return useLazyQuery<{ getScheduleByDate: Schedule[] }, ScheduleByDateParams>(getScheduleByDateGql)
 }
 
 

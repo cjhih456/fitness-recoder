@@ -51,15 +51,15 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
     // scheduleStore.setBreakDay(parsedDate[0], parsedDate[1], parsedDate[2])
   }
   function addSchedule() {
-    navigate(`${choosenDate}/schedule/create`)
+    navigate(`/${choosenDate}/schedule/create`)
   }
   function gotoModify(id: number, date?: string) {
     if (!date) return
-    navigate(`${date}/schedule/${id}`)
+    navigate(`/${date}/schedule/${id}`)
   }
   function startSchedule(id: number, date?: string) {
     if (!date) return
-    navigate(`${date}/workout/${id}`)
+    navigate(`/${date}/workout/${id}`)
   }
   const displaySchedule = useMemo(() => {
     const breakSchedule = scheduleList?.getScheduleByDate?.find(v => v.type === ScheduleType.BREAK)
