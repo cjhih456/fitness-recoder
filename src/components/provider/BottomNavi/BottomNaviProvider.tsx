@@ -35,6 +35,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
 
   return (
     <BottomNavi.Provider value={contextValue}>
+      {children}
       {createPortal(bottomNaviVisible ? <footer className="sticky flex justify-center">
         <div className="max-w-[640px] w-[640px] flex justify-center gap-x-1">
           <MenuButton name='Home' Icon={MdHome} path='/' />
@@ -43,7 +44,6 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
           <MenuButton name='Preset' Icon={MdOutlineDataset} path='/preset' />
         </div>
       </footer> : <div></div>, rootDocument, 'bottom-navi')}
-      {children}
     </BottomNavi.Provider>
   )
 }

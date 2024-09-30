@@ -34,7 +34,7 @@ export default function ExerciseDataInfoModal({
   const [lazyOpen, setLazyOpen] = useState(false)
   useEffect(() => {
     const temp = typeof exerciseDataId === 'number'
-    if (temp) {
+    if (temp && exerciseData?.idx !== exerciseDataId) {
       const exercise = getExerciseByIdx(exerciseDataId)
       setExerciseData(exercise)
       loadHistory({

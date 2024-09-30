@@ -20,10 +20,13 @@ export default function ExerciseDataList({
   // schedulePresetIdx,
   readonly
 }: ExerciseDataListProps) {
+  const [scheduleId, setScheduleId] = useState(-1)
   const [getExerciseSchedule, { data: exerciseDataBySchedule }] = useLazyGetExerciseListByScheduleId()
   // const [getSchedulePreset, {data: eerciseDataBySchedulePreset}] = useLazyGetExerciseListBySchedulePresetId()
   const [selectedKeys, changeSelectedKeys] = useState<'all' | number[]>([])
   useEffect(() => {
+    if (scheduleId === schedule?.id) return
+    setScheduleId(schedule?.id || 0)
     getExerciseSchedule({ variables: { scheduleId: schedule?.id || 0 } })
   }, [schedule?.id, getExerciseSchedule])
   const scheduleData = useMemo(() => {
