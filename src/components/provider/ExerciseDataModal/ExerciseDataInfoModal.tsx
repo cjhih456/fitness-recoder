@@ -1,8 +1,10 @@
-import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react';
+import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
 import { createContext, useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../../service/Fitness/FitnessDatas';
 import CModal from '../../CustomComponent/CModal';
 import ExercisePreviewVideo from './ExercisePreviewVideo';
+import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';
+import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
 
 type ModalContextType = {
   showModal: (exerciseId: number) => void
@@ -20,9 +22,11 @@ export default function ExerciseDataInfoModal({
   children
 }: ExerciseDataInfoModal) {
 
+  const [loadHistory] = useLazyGetExerciseFinishHistory()
   const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
   const [exerciseData, setExerciseData] = useState<IExercise | undefined>()
   const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
+  const [history, setHistory] = useState<ExerciseHistoryData[]>([])
   const instructions = useMemo(() => {
     const tempList = Array.isArray(exerciseData?.instructions) ? exerciseData?.instructions : [exerciseData?.instructions]
     return tempList.filter(Boolean)
@@ -33,14 +37,24 @@ export default function ExerciseDataInfoModal({
     if (temp) {
       const exercise = getExerciseByIdx(exerciseDataId)
       setExerciseData(exercise)
+      loadHistory({
+        variables: {
+          exerciseId: exerciseDataId
+        }
+      }).then((result) => {
+        if (result.data) {
+          setHistory(result.data?.getExerciseFinishHistory || [])
+        }
+      })
       ExercisePreviewVideo(exercise.name).then(result => setExerciseVideoId(result))
     }
     setLazyOpen(temp)
   }, [exerciseDataId])
-  // useEffect(() => {
-  //   if (isOpen === lazyOpen) return
-  //   setLazyOpen(isOpen)
-  // }, [isOpen])
+
+  const historyList = useMemo(() => {
+    return history.map((h) => (<DisplayExerciseFinishHistory history={h} key={h.id} />))
+  }, [history])
+
   const contextValue = {
     showModal(exerciseId) {
       setExerciseDataId(exerciseId)
@@ -63,7 +77,7 @@ export default function ExerciseDataInfoModal({
             {exerciseData?.name || ''}
           </ModalHeader>
           <ModalBody>
-            {/* Preview Images */}
+            {/* Preview Video */}
             {exerciseVideoId && <div >
               <iframe
                 width="100%"
@@ -79,15 +93,23 @@ export default function ExerciseDataInfoModal({
               ></iframe>
             </div>}
             {/* Training History - optional */}
-            <div className="max-w-full overflow-x-scroll">
-
+            {history.length ? <div className="max-w-full">
+              <p className="font-bold text-lg">
+                History
+              </p>
+              <ScrollShadow orientation='horizontal'>
+                {historyList}
+              </ScrollShadow>
+            </div> : undefined}
+            {/* Instructions */}
+            <div>
+              <p className="font-bold text-lg">Instructions</p>
+              <ol className="max-w-full list-decimal list-outside">
+                {instructions.map((line, idx) => {
+                  return <li className="ml-6" key={`${exerciseData?.idx}-${idx}`}>{line}</li>
+                })}
+              </ol>
             </div>
-            {/* Info - height - 400px */}
-            <ol className="max-h-[400px] overflow-y-scroll max-w-full list-decimal list-outside">
-              {instructions.map((line, idx) => {
-                return <li className="ml-6" key={`${exerciseData?.idx}-${idx}`}>{line}</li>
-              })}
-            </ol>
           </ModalBody>
           <ModalFooter>
             {/* CloseBtn */}

@@ -105,6 +105,30 @@ export function useLazyGetExerciseListByExercisePresetId() {
 }
 
 
+const getExerciseFinishHistoryGql = gql`
+query GetExerciseFinishHistory($exerciseId: ID) {
+  getExerciseFinishHistory(exerciseId: $exerciseId) {
+    id
+    type
+    year
+    month
+    date
+    exercise
+    cnt
+    hasDone
+    weights
+    repeats
+    weightUnit
+  }
+}
+`
+export function useLazyGetExerciseFinishHistory() {
+  return useLazyQuery<
+    { getExerciseFinishHistory: ExerciseHistoryData[] },
+    { exerciseId: number }
+  >(getExerciseFinishHistoryGql)
+}
+
 const DeleteExerciseByIdGql = gql`
 mutation DeleteExerciseById($id: ID) {
   deleteExerciseById(id: $id)

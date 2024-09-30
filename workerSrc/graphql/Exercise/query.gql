@@ -4,12 +4,27 @@ type Exercise {
   deps: Int
 }
 
+type ExerciseHistoryData {
+  id: ID!
+  year: Int!
+  month: Int!
+  date: Int!
+  type: String!
+  exercise: Int!
+  cnt: Int!
+  hasDone: Int!
+  weights: String!
+  repeats: String!
+  weightUnit: String!
+}
+
 
 type Query {
   getExerciseListByIds(ids: [ID!]): [Exercise!]
   getExerciseById(id: ID): Exercise
   getExerciseListByScheduleId(scheduleId: ID): [Exercise!]
   getExerciseListByExercisePresetId(exercisePresetId: ID): [Exercise!]
+  getExerciseFinishHistory(exerciseId: ID): [ExerciseHistoryData!]
 }
 
 input CreateExerciseByScheduleInput {

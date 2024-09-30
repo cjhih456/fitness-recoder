@@ -40,8 +40,8 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
       - What to do on today?
         - If have schedule 
           - If that schedule is break day - display break day Image
-          - Else display plans
-        - Else - Display direct start schedule btn
+          - Else display plans - Done
+        - Else - Display direct start schedule btn - Done
       - What did i do on last week?
         - Display neally schedule of weeks
           - Start with Schedule
@@ -74,9 +74,9 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
 4. Workout list
     - Workout Detail page - ~ing
       - muscle usage
-      - preview Images
+      - preview Images -> change as youtube video - Done
       - display instructions - Done
-      - display recorded newest history (Max. 10 items)
+      - display recorded newest history (Max. 10 items) - Done
 
 5. Share Fallback page
     - shared schedule clone page
