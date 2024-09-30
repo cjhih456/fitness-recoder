@@ -109,13 +109,13 @@ export default function DisplayWorkout() {
 
   return <>
     <div className="flex flex-col">
-      <div>
+      <div className="px-4">
         {id && lazySchedule && <ExerciseDataList key={id} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
       </div>
     </div>
     {
       lazySchedule?.type !== ScheduleType.FINISH &&
-      <div className='absolute bottom-0 w-full left-0 right-0'>
+      <div className='absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-x-4'>
         {scheduleProcessBtn}
         <Button onClick={finishSchedule}>Finish Schedule</Button>
       </div>
