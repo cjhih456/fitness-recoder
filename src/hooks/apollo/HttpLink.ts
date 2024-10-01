@@ -1,7 +1,7 @@
 import { ApolloLink, FetchResult, Observable, Operation } from '@apollo/client';
 import { print } from 'graphql';
 import { Client, ClientOptions, createClient } from 'graphql-http';
-import { baseURL } from './components/utils';
+import { baseURL } from '../../components/utils';
 
 class HttpLink extends ApolloLink {
   private client: Client
