@@ -8,6 +8,8 @@ import Worker from './worker.ts'
 import Firebase from './service/firebase.ts'
 import { ThemaProvider } from './components/provider/ThemaProvider/ThemaProvider.tsx'
 import { RootProvider } from './components/provider/RootProvider/RootProvider.tsx'
+import { BrowserRouter } from 'react-router-dom'
+import { baseURL } from './components/utils.ts'
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: link,
@@ -29,15 +31,17 @@ Worker().then(() => {
   Firebase()
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <ThemaProvider>
-        <HeaderProvider>
-          <RootProvider>
-            <ApolloProvider client={apolloClient}>
-              <App />
-            </ApolloProvider>
-          </RootProvider>
-        </HeaderProvider>
-      </ThemaProvider>
+      <BrowserRouter basename={baseURL('/')}>
+        <ThemaProvider>
+          <HeaderProvider>
+            <RootProvider>
+              <ApolloProvider client={apolloClient}>
+                <App />
+              </ApolloProvider>
+            </RootProvider>
+          </HeaderProvider>
+        </ThemaProvider>
+      </BrowserRouter>
     </React.StrictMode>,
   )
 })
