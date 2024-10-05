@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { ScheduleType } from '../utils';
-import { useCreateSchedule, useLazyScheduleByDate } from '../../service/GqlStore/Schedule';
+import { useCreateSchedule, useLazyGetScheduleByDate } from '../../service/GqlStore/Schedule';
 
 export interface ScheduleListProps {
   choosenDate: string
@@ -12,7 +12,7 @@ export interface ScheduleListProps {
 
 export default function ScheduleList({ choosenDate, onChangeSchedule }: ScheduleListProps) {
   const navigate = useNavigate()
-  const [loadScheduleList, { data: scheduleList }] = useLazyScheduleByDate()
+  const [loadScheduleList, { data: scheduleList }] = useLazyGetScheduleByDate()
   const [createSchedule] = useCreateSchedule()
   const [year, month, date] = useMemo(() => {
     return choosenDate.split('-').map(v => +v)
