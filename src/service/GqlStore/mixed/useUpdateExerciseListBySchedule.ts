@@ -1,4 +1,4 @@
-import { useUpdateExerciseListByScheduleId } from '../Exercise';
+import { useUpdateExerciseListByScheduleId } from '../Exercise'
 
 export function useUpdateExerciseListBySchedule() {
   const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()
