@@ -20,7 +20,7 @@ mutation createSetByExercise($sets: CreateSetsInput!) {
 export function useCreateSet() {
   return useMutation<CreateSetResponse, CreateSetVariable>(createSetGql)
 }
-export const CreatesetMock: MockedResponse<CreateSetResponse, CreateSetVariable> = {
+export const CreateSetMock: MockedResponse<CreateSetResponse, CreateSetVariable> = {
   request: {
     query: createSetGql
   },

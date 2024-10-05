@@ -11,7 +11,7 @@ mutation deleteSet($id: ID!) {
 export function useDeleteSet() {
   return useMutation<DeleteSetResponse, DeleteSetVariable>(deleteSetGql)
 }
-export const UpdateSetMock: MockedResponse<DeleteSetResponse, DeleteSetVariable> = {
+export const DeleteSetMock: MockedResponse<DeleteSetResponse, DeleteSetVariable> = {
   request: {
     query: deleteSetGql,
   },

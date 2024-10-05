@@ -1,7 +1,7 @@
 import { useCreateExerciseByExercisePreset } from './CreateExerciseByExercisePreset'
 import { useCreateExerciseBySchedule } from './CreateExerciseBySchedule'
 import { useDeleteExerciseById } from './DeleteExerciseById'
-import { useGetExerciseListByExercisePresetId, useLazyGetExerciseListByExercisePresetId } from './GetExerciseByExercisePresetId'
+import { useGetExerciseListByExercisePresetId, useLazyGetExerciseListByExercisePresetId } from './GetExerciseListByExercisePresetId'
 import { useGetExerciseFinishHistory, useLazyGetExerciseFinishHistory } from './GetExerciseFinishHistory'
 import { useGetExerciseListByScheduleId, useLazyGetExerciseListByScheduleId } from './GetExerciseListByScheduleId'
 import { useUpdateExerciseListByExercisePresetId } from './UpdateExerciseListByExercisePresetId'
