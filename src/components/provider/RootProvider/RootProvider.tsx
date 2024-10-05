@@ -7,16 +7,17 @@ type RootContextType = {
 
 export interface RootProviderProps {
   children: ReactNode
+  selector?: string
 }
 
 export const RootProviderContext = createContext<RootContextType>({
   getRoot: () => document.body
 })
 
-export const RootProvider = ({ children }: RootProviderProps) => {
+export const RootProvider = ({ children, selector }: RootProviderProps) => {
   const [root, setRoot] = useState<Element>(document.body)
   useEffect(() => {
-    setRoot(document.querySelector('#root > div.app > div.app-root') || document.body)
+    setRoot(document.querySelector(selector || '#root > div.app > div.app-root') || document.body)
   }, [])
   const context = {
     getRoot: () => root
