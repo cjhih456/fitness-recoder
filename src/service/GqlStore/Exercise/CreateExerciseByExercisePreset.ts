@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
+import { ExerciseMockData } from '.'
 
 type CreateExerciseByExercisePresetResponse = {
   createExerciseByExercisePreset: ExerciseData
@@ -29,10 +30,16 @@ export const CreateExerciseByExercisePresetMock: MockedResponse<
   request: {
     query: CreateExerciseByExercisePresetGql,
   },
-  result: () => {
+  result: (args) => {
+    const idx = Math.max(...Object.keys(ExerciseMockData).map(Number)) + 1
+    const obj: ExerciseData = {
+      id: idx,
+      deps: 0,
+      exercise: args.exercise.exerciseId[0]
+    }
     return {
       data: {
-        createExerciseByExercisePreset: {} as ExerciseData
+        createExerciseByExercisePreset: obj
       }
     }
   }

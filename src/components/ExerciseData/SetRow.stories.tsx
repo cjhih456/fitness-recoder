@@ -27,13 +27,29 @@ export default meta
 export const CustomAble: Story = {
   args: {
     index: 1,
-    readonly: false
+    readonly: false,
+    set: {
+      exerciseId: 1,
+      id: 1,
+      isDone: false,
+      weightUnit: 'kg',
+      repeat: 10,
+      weight: 20
+    }
   }
 }
 
 export const ReadOnly: Story = {
   args: {
     index: 1,
-    readonly: true
+    readonly: true,
+    set: {
+      exerciseId: 1,
+      id: 1,
+      isDone: false,
+      weightUnit: 'kg',
+      repeat: 10,
+      weight: 20
+    },
   }
 }

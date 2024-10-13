@@ -40,7 +40,18 @@ export const GetExerciseListByExercisePresetIdMock: MockedResponse<
   result: () => {
     return {
       data: {
-        getExerciseListByExercisePresetId: []
+        getExerciseListByExercisePresetId: [
+          {
+            id: 1,
+            exercise: 1,
+            deps: 0
+          },
+          {
+            id: 2,
+            exercise: 2,
+            deps: 0
+          }
+        ]
       }
     }
   }
