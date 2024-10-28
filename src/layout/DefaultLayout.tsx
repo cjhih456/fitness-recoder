@@ -38,6 +38,7 @@ export default function DefaultLayout({
     route: baseURL('/preset')
   }])
   const { getRoot } = useRoot()
+  const child = useMemo(() => children, [children])
 
   return <>
     <Navbar onMenuOpenChange={setMenuDisplay} isMenuOpen={menuDisplay} maxWidth='sm'>
@@ -69,7 +70,7 @@ export default function DefaultLayout({
     </Navbar>
     <main className="flex flex-1 justify-center max-h-[calc(100%-4rem)] overflow-hidden">
       <div className="max-w-[640px] w-[640px] relative">
-        {children}
+        {child}
       </div>
     </main>
   </>
