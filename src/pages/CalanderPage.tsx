@@ -14,13 +14,6 @@ function CalanderPage() {
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
   const [getScheduleStateByDate] = useLazyGetScheduleStateByDate()
-  useEffect(() => {
-    const today = new Date()
-    const month = String(today.getMonth() + 1).padStart(2, '0')
-    const date = String(today.getDate()).padStart(2, '0')
-    const todayStr = `${today.getFullYear()}-${month}-${date}`
-    changeDate(todayStr)
-  }, [])
 
   useEffect(() => {
     if (year && month) {
