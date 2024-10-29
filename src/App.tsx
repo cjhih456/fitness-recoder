@@ -35,9 +35,9 @@ function App() {
                     <Route path="create" Component={CreateSchedule} />
                     <Route path=":id" Component={DisplaySchedule} />
                   </Route>
-                </Route>
-                <Route path="workout">
-                  <Route path=":id" Component={DisplayWorkout} />
+                  <Route path="workout">
+                    <Route path=":id" Component={DisplayWorkout} />
+                  </Route>
                 </Route>
                 <Route path="preset">
                   <Route index Component={PresetListPage} />
