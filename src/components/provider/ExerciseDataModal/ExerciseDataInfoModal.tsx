@@ -5,6 +5,7 @@ import CModal from '../../CustomComponent/CModal';
 import ExercisePreviewVideo from './ExercisePreviewVideo';
 import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';
 import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
+import { useTranslation } from 'react-i18next';
 
 type ModalContextType = {
   showModal: (exerciseId: number) => void
@@ -21,7 +22,7 @@ interface ExerciseDataInfoModal {
 export default function ExerciseDataInfoModal({
   children
 }: ExerciseDataInfoModal) {
-
+  const { t } = useTranslation(['exerciseDataInfo', 'common'])
   const [loadHistory] = useLazyGetExerciseFinishHistory()
   const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
   const [exerciseData, setExerciseData] = useState<IExercise | undefined>()
@@ -95,7 +96,7 @@ export default function ExerciseDataInfoModal({
             {/* Training History - optional */}
             {history.length ? <div className="max-w-full">
               <p className="font-bold text-lg">
-                History
+                {t('history')}
               </p>
               <ScrollShadow orientation='horizontal'>
                 {historyList}
@@ -103,7 +104,7 @@ export default function ExerciseDataInfoModal({
             </div> : undefined}
             {/* Instructions */}
             <div>
-              <p className="font-bold text-lg">Instructions</p>
+              <p className="font-bold text-lg">{t('instructions')}</p>
               <ol className="max-w-full list-decimal list-outside">
                 {instructions.map((line, idx) => {
                   return <li className="ml-6" key={`${exerciseData?.idx}-${idx}`}>{line}</li>
@@ -115,7 +116,9 @@ export default function ExerciseDataInfoModal({
             {/* CloseBtn */}
             <Button onClick={() => {
               onCloseAction()
-            }}>Close</Button>
+            }}>
+              {t('close')}
+            </Button>
           </ModalFooter>
         </>)}
       </ModalContent>

@@ -4,6 +4,7 @@ import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { ScheduleType } from '../utils';
 import { useCreateSchedule, useLazyGetScheduleByDate } from '../../service/GqlStore/Schedule';
+import { useTranslation } from 'react-i18next';
 
 export interface ScheduleListProps {
   choosenDate: string
@@ -12,6 +13,7 @@ export interface ScheduleListProps {
 
 export default function ScheduleList({ choosenDate, onChangeSchedule }: ScheduleListProps) {
   const navigate = useNavigate()
+  const { t } = useTranslation('scheduleList')
   const [loadScheduleList, { data: scheduleList }] = useLazyGetScheduleByDate()
   const [createSchedule] = useCreateSchedule()
   const [year, month, date] = useMemo(() => {
@@ -70,24 +72,30 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
       return displayList
     } else if (scheduleList?.getScheduleByDate) {
       displayList.push(scheduleList?.getScheduleByDate.map((schedule, idx) => {
-        return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={`Part ${idx + 1}`} >
-          {(id, type, date) => (
-            <div className="grid grid-cols-2 gap-x-4">
-              <Button onClick={() => gotoModify(id, date)}>Modify</Button>
-              <Button onClick={() => startSchedule(id, date)}>
-                {type === 'FINISH' ? 'Detail' : 'Start'}
-              </Button>
+        return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
+          {(id, type, date) => {
+            const btnList = []
+            if (type !== 'FINISH') {
+              btnList.push(<Button key={`${id}-modify`} onClick={() => gotoModify(id, date)}>
+                {t('schedule.actionBtn.modify')}
+              </Button>)
+            }
+            btnList.push(<Button key={`${id}-detail`} onClick={() => startSchedule(id, date)}>
+              {type === 'FINISH' ? t('schedule.actionBtn.detail') : t('schedule.actionBtn.start')}
+            </Button>)
+            return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>
+              {btnList}
             </div>
-          )}
+          }}
         </ScheduleDisplay>
       }))
     }
     displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4">
       <Button className="bg-success-300" onClick={addSchedule}>
-        Add Schedule
+        {t('schedule.bottomBtn.addSchedule')}
       </Button>
       <Button className="bg-danger-400" isDisabled={Boolean(scheduleList?.getScheduleByDate.length)} onClick={addBreakDaySchedule}>
-        Set Break Day
+        {t('schedule.bottomBtn.setBreakDay')}
       </Button>
     </div>)
     return displayList
