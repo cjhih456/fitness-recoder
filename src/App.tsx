@@ -14,37 +14,41 @@ import DisplayWorkout from './pages/:selectDate/workout/:id'
 import PresetListPage from './pages/preset'
 import PresetDetailPage from './pages/preset/:id'
 import { useMemo } from 'react'
+import { I18nextProvider } from 'react-i18next'
+import i18n from './i18n'
 
 function App() {
   const { getThema } = useThema()
   const navigate = useNavigate()
   const main = useMemo(() => <NextUIProvider navigate={navigate} className="app-root h-screen max-h-full flex flex-col">
-    <ExerciseDataInfoModal>
-      <AlertProvider>
-        <DefaultLayout>
-          <BottomNaviProvider>
-            <Routes>
-              <Route index Component={Main} />
-              <Route path="calander" Component={CalanderPage} />
-              <Route path="fitnessList" Component={FitnessList} />
-              <Route path=":selectDate">
-                <Route path="schedule">
-                  <Route path="create" Component={CreateSchedule} />
-                  <Route path=":id" Component={DisplaySchedule} />
+    <I18nextProvider i18n={i18n}>
+      <ExerciseDataInfoModal>
+        <AlertProvider>
+          <DefaultLayout>
+            <BottomNaviProvider>
+              <Routes>
+                <Route index Component={Main} />
+                <Route path="calander" Component={CalanderPage} />
+                <Route path="fitnessList" Component={FitnessList} />
+                <Route path=":selectDate">
+                  <Route path="schedule">
+                    <Route path="create" Component={CreateSchedule} />
+                    <Route path=":id" Component={DisplaySchedule} />
+                  </Route>
                 </Route>
-              </Route>
-              <Route path="workout">
-                <Route path=":id" Component={DisplayWorkout} />
-              </Route>
-              <Route path="preset">
-                <Route index Component={PresetListPage} />
-                <Route path=":id" Component={PresetDetailPage} />
-              </Route>
-            </Routes>
-          </BottomNaviProvider>
-        </DefaultLayout>
-      </AlertProvider>
-    </ExerciseDataInfoModal>
+                <Route path="workout">
+                  <Route path=":id" Component={DisplayWorkout} />
+                </Route>
+                <Route path="preset">
+                  <Route index Component={PresetListPage} />
+                  <Route path=":id" Component={PresetDetailPage} />
+                </Route>
+              </Routes>
+            </BottomNaviProvider>
+          </DefaultLayout>
+        </AlertProvider>
+      </ExerciseDataInfoModal>
+    </I18nextProvider>
   </NextUIProvider>, [])
   return <div className={`app bg-background ${getThema()} h-screen max-h-full text-default-700`}>
     {main}

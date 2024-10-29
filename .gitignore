@@ -29,3 +29,6 @@ public/manifest.webmanifest
 # ssl files
 ssl/server.crt
 ssl/server.key
+
+# i18n generated files
+src/i18n/**/*.json

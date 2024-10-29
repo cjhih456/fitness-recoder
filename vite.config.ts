@@ -5,6 +5,7 @@ import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
 import GraphqlServer from './vitePlugin/GraphqlServer'
 import Inspect from 'vite-plugin-inspect'
+import LanguagePackExporter from './vitePlugin/LanguagePackExport'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
@@ -38,6 +39,10 @@ export default defineConfig(({ mode, isPreview }) => {
     },
     plugins: [
       Inspect(),
+      LanguagePackExporter({
+        fileName: './LanguagePack.xlsx',
+        outputPath: './src/i18n'
+      }),
       makeManifest(mode),
       GraphqlLoader(),
       react(),

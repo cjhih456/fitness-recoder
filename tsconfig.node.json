@@ -10,6 +10,8 @@
     "strict": true,
     "jsx": "react-jsx",
     "typeRoots": ["./node_modules/@types"],
+
+    "preserveSymlinks": true
   },
   "include": ["vite.config.ts", "vitePlugin", "./types/**/*", "./src/**/*"],
   "exclude": ["workerSrc/**/*.ts"]
