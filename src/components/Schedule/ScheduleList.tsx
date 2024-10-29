@@ -13,7 +13,7 @@ export interface ScheduleListProps {
 
 export default function ScheduleList({ choosenDate, onChangeSchedule }: ScheduleListProps) {
   const navigate = useNavigate()
-  const { t } = useTranslation('scheduleList')
+  const { t } = useTranslation(['scheduleList', 'common'])
   const [loadScheduleList, { data: scheduleList }] = useLazyGetScheduleByDate()
   const [createSchedule] = useCreateSchedule()
   const [year, month, date] = useMemo(() => {
@@ -77,11 +77,11 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
             const btnList = []
             if (type !== 'FINISH') {
               btnList.push(<Button key={`${id}-modify`} onClick={() => gotoModify(id, date)}>
-                {t('schedule.actionBtn.modify')}
+                {t('common:modify')}
               </Button>)
             }
             btnList.push(<Button key={`${id}-detail`} onClick={() => startSchedule(id, date)}>
-              {type === 'FINISH' ? t('schedule.actionBtn.detail') : t('schedule.actionBtn.start')}
+              {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
             </Button>)
             return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>
               {btnList}

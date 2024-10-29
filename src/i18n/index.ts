@@ -13,12 +13,13 @@ const i18nFiles = import.meta.glob('./(ko|en)/*.json', {
 
 i18n.use(initReactI18next).init({
   defaultNS: 'common',
+  debug: import.meta.env.DEV,
   ns: 'common',
+  lng: 'en',
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false
   },
-  fallbackNS: [],
   saveMissing: true,
   updateMissing: true,
   react: {

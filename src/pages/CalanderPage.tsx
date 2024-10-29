@@ -4,10 +4,12 @@ import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
+import { useTranslation } from 'react-i18next'
 
 function CalanderPage() {
+  const { t } = useTranslation('title')
   useBottomNavi()
-  HeaderHandler(['Calander'])
+  HeaderHandler([t('calander')])
   const [choosenDate, changeDate] = useState('')
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
