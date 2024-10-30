@@ -7,8 +7,11 @@ import { useAlert } from '../../../components/provider/Alert/useAlert'
 import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext'
 import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
 import { ScheduleType } from '../../../components/utils'
+import { useTranslation } from 'react-i18next'
+import { LogEvent } from '../../../service/firebase'
 
 export default function DisplayWorkout() {
+  const { t } = useTranslation(['workout', 'error'])
   const { id } = useParams()
   const navigate = useNavigate()
   const alert = useAlert()
@@ -18,9 +21,11 @@ export default function DisplayWorkout() {
 
   // Load Data 
   useEffect(() => {
+    LogEvent('visit_workout')
+
     getSchedule({ variables: { id: Number(id) } }).then((result) => {
       if (!result.data?.getScheduleById) {
-        alert.showAlert('WARNING', 'Don\'t have schedule. Please, check again', false).then(() => {
+        alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
           navigate('/')
         })
       } else {
@@ -31,6 +36,7 @@ export default function DisplayWorkout() {
       }
     })
     return () => {
+      LogEvent('exit_workout')
       if (lazySchedule) {
         updateSchedule({
           variables: { updateSchedule: lazySchedule }
@@ -101,9 +107,9 @@ export default function DisplayWorkout() {
   }
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === 'STARTED') {
-      return <Button onClick={pauseSchedule}>Pause Schedule</Button>
+      return <Button onClick={pauseSchedule}>{t('actionBtn.pause')}</Button>
     } else {
-      return <Button onClick={startSchedule}>Start Schedule</Button>
+      return <Button onClick={startSchedule}>{t('actionBtn.start')}</Button>
     }
   }, [lazySchedule])
 
@@ -117,7 +123,7 @@ export default function DisplayWorkout() {
       lazySchedule?.type !== ScheduleType.FINISH &&
       <div className='absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-x-4'>
         {scheduleProcessBtn}
-        <Button onClick={finishSchedule}>Finish Schedule</Button>
+        <Button onClick={finishSchedule}>{t('actionBtn.finish')}</Button>
       </div>
     }
   </>
