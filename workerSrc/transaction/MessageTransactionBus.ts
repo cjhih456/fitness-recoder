@@ -26,6 +26,7 @@ export default class MessageTransactionBus {
       this.bus.set(txid, (result: T) => {
         callBack && callBack(result)
         resolve(result)
+        this.bus.delete(txid)
       })
       client.postMessage({ type, query, txid, bindArgs })
     })

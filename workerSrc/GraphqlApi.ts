@@ -38,16 +38,18 @@ self.onmessage = (e) => {
 }
 
 self.onactivate = (event) => {
+  if (!dbTransitionBus) {
+    dbTransitionBus = new MessageTransactionBus()
+  }
+  dbTransitionBus.setClients(self.clients)
   event.waitUntil(self.clients.claim())
 }
 
 self.onfetch = async (event) => {
   const path = new URL(self.serviceWorker.scriptURL)
   if (!event.request.url.startsWith(path.origin + baseURL('/'))) return
-  if (!(dbTransitionBus && parent.handlers.set)) {
-    dbTransitionBus = new MessageTransactionBus()
-    dbTransitionBus.setClients(self.clients)
-
+  if (!parent.handlers.set) {
+    if (!dbTransitionBus) return
     parent.handlers.set = createHandler({
       schema: mergeSchemas({
         schemas: [
