@@ -1,5 +1,5 @@
 import { isValidElement, useContext, useEffect, useMemo, useState } from 'react'
-import { HeaderContext } from './HeaderProvider'
+import { HeaderContext, HeaderMenuType } from './HeaderProvider'
 
 
 export const useHeaderContext = () => {
@@ -8,6 +8,23 @@ export const useHeaderContext = () => {
     throw new Error('Wrong position')
   }
   return context
+}
+
+export const HeaderMenuHandler = (menu: HeaderMenuType[]) => {
+  const { setHeaderMenu } = useHeaderContext()
+  const [lazyHeaderMenu, setLazyHeaderMenu] = useState<HeaderMenuType[]>([])
+  useEffect(() => {
+    if (JSON.stringify(lazyHeaderMenu) === JSON.stringify(menu)) {
+      return
+    }
+    setLazyHeaderMenu(menu)
+  }, [menu])
+  useEffect(() => {
+    setHeaderMenu(lazyHeaderMenu)
+    return () => {
+      setHeaderMenu([])
+    }
+  }, [lazyHeaderMenu])
 }
 
 export const HeaderHandler = (header: HeaderContentType) => {
@@ -26,9 +43,9 @@ export const HeaderHandler = (header: HeaderContentType) => {
     })
   }, [header])
   useEffect(() => {
-    headerProvider.setHeader(headerTemp)
+    headerProvider.setHeaderContent(headerTemp)
     return () => {
-      headerProvider.setHeader([])
+      headerProvider.setHeaderContent([])
     }
   }, [lazyHeader])
 }

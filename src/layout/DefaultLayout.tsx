@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
 import { baseURL } from '../components/utils'
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
-import { MdArrowBackIosNew, MdClose, MdDarkMode, MdLightMode, MdMenu } from 'react-icons/md'
+import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useHeaderContext } from '../components/provider/Header/useHeaderContext'
-import { useThema } from '../components/provider/ThemaProvider/useThema'
 import { useRoot } from '../components/provider/RootProvider/useRoot'
 import { useLocation, useNavigate } from 'react-router-dom'
+import HeaderMenu from '../components/HeaderMenu/HeaderMenu'
 
 interface DefaultLayoutProps {
   children: React.ReactNode
@@ -20,7 +20,6 @@ export default function DefaultLayout({
   children
 }: DefaultLayoutProps) {
   const navigate = useNavigate()
-  const { setThema, getThema } = useThema()
   const headerContext = useHeaderContext()
   const headerContent = useMemo(() => {
     return headerContext.getHeaderContent()
@@ -69,11 +68,7 @@ export default function DefaultLayout({
         {headerContent}
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button isIconOnly radius='full' onClick={() => {
-          setThema(getThema() === 'dark' ? 'light' : 'dark')
-        }}>
-          {getThema() === 'dark' ? <MdDarkMode /> : <MdLightMode />}
-        </Button>
+        <HeaderMenu />
       </NavbarContent>
       <NavbarMenu portalContainer={getRoot()}>
         {
