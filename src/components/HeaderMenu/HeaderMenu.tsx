@@ -14,7 +14,10 @@ export default function HeaderMenu() {
     return headerContext.getHeaderContent()
   }, [headerContext])
   const headerMenu = useMemo(() => headerContext.getHeaderMenu().map(menu => {
-    return <HeaderMenuItem key={menu.key} text={menu.name} onClick={menu.action}></HeaderMenuItem>
+    return <HeaderMenuItem key={menu.key} text={menu.name} onClick={() => {
+      menu.action()
+      setIsOpen(false)
+    }}></HeaderMenuItem>
   }), [headerContext])
   const { getRoot } = useRoot()
   const singleVersion = useMemo(() => <Button isIconOnly radius='full' onClick={() => {
@@ -37,7 +40,6 @@ export default function HeaderMenu() {
           endContent={<MdDarkMode />}
           onValueChange={() => {
             setThema(getThema() === 'dark' ? 'light' : 'dark')
-            console.log(getThema())
           }}
         ></Switch>
       </HeaderMenuItem>

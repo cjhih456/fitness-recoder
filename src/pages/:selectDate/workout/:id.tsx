@@ -4,11 +4,12 @@ import { Button } from '@nextui-org/react'
 import dayjs from '../../../hooks/dayjs'
 import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
 import { useAlert } from '../../../components/provider/Alert/useAlert'
-import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext'
+import { HeaderHandler, HeaderMenuHandler } from '../../../components/provider/Header/useHeaderContext'
 import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
 import { ScheduleType } from '../../../components/utils'
 import { useTranslation } from 'react-i18next'
 import { LogEvent } from '../../../service/firebase'
+import { useCloneSchedule } from '../../../service/GqlStore/Schedule/CloneSchedule'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
@@ -18,6 +19,37 @@ export default function DisplayWorkout() {
   const [getSchedule] = useLazyGetScheduleById()
   const [lazySchedule, updateLazySchedule] = useState<Schedule | undefined>()
   const [updateSchedule] = useUpdateSchedule()
+  const [cloneSchedule] = useCloneSchedule()
+
+  function makeAsPreset() {
+    alert.showAlert('ERROR', 'On Featured process', false)
+  }
+  async function cloneAsSchedule() {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = today.getMonth() + 1
+    const date = today.getDate()
+    const result = await cloneSchedule({ variables: { id: Number(id), targetDate: { year, month, date } } })
+    if (result.data?.cloneSchedule) {
+      const id = result.data.cloneSchedule.id
+      alert.showAlert(
+        'SUCCESS',
+        'Clone Schedule Success',
+        false,
+        { message: 'Goto Workout', colorClass: 'text-green-500' },
+        { message: 'Cancel', colorClass: 'text-red-500' }
+      ).then((value) => {
+        if (value) navigate(`/${year}-${month}-${date}/workout/${id}`)
+      })
+    }
+  }
+  function shareSchedule() {
+    alert.showAlert('ERROR', 'On Featured process', false)
+    // TODO: schedule data as json
+    // TODO: encode json as base64
+    // TODO: make QR code
+
+  }
 
   // Load Data 
   useEffect(() => {
@@ -43,7 +75,26 @@ export default function DisplayWorkout() {
         })
       }
     }
-  }, [])
+  }, [id])
+
+  const headerMenuList = useMemo(() => lazySchedule?.type === 'FINISH' ? [
+    {
+      key: 'make',
+      name: t('actionBtn.make'),
+      action: makeAsPreset
+    },
+    {
+      key: 'clone',
+      name: t('actionBtn.clone'),
+      action: cloneAsSchedule
+    },
+    {
+      key: 'share',
+      name: t('actionBtn.share'),
+      action: shareSchedule
+    }
+  ] : [], [lazySchedule])
+  HeaderMenuHandler(headerMenuList)
 
   useEffect(() => {
     const interval = setInterval(() => {
