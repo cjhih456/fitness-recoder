@@ -70,7 +70,16 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
     if (breakSchedule) {
       displayList.push(<div key="breakday-list"></div>)
       return displayList
-    } else if (scheduleList?.getScheduleByDate) {
+    }
+    displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
+      <Button className="bg-success-300" onClick={addSchedule}>
+        {t('schedule.bottomBtn.addSchedule')}
+      </Button>
+      <Button className="bg-danger-400" isDisabled={Boolean(scheduleList?.getScheduleByDate.length)} onClick={addBreakDaySchedule}>
+        {t('schedule.bottomBtn.setBreakDay')}
+      </Button>
+    </div>)
+    if (scheduleList?.getScheduleByDate) {
       displayList.push(scheduleList?.getScheduleByDate.map((schedule, idx) => {
         return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
           {(id, type, date) => {
@@ -90,14 +99,7 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
         </ScheduleDisplay>
       }))
     }
-    displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4">
-      <Button className="bg-success-300" onClick={addSchedule}>
-        {t('schedule.bottomBtn.addSchedule')}
-      </Button>
-      <Button className="bg-danger-400" isDisabled={Boolean(scheduleList?.getScheduleByDate.length)} onClick={addBreakDaySchedule}>
-        {t('schedule.bottomBtn.setBreakDay')}
-      </Button>
-    </div>)
+
     return displayList
   }, [scheduleList])
 

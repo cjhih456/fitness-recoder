@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
 import { useLazyGetScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
-import { Button } from '@nextui-org/react'
+import { Button, ScrollShadow } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { useTranslation } from 'react-i18next'
@@ -76,12 +76,14 @@ export default function Main() {
         </div>
       ]
     }
-  }, [scheduleList])
+  }, [scheduleList, t])
 
-  return <div className="flex flex-col items-stretch gap-y-3 px-4">
+  return <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
     <h2>
       {t('todaySchedule')}
     </h2>
-    {displaySchedule}
-  </div>
+    <ScrollShadow className="flex flex-col items-stretch gap-y-3">
+      {displaySchedule}
+    </ScrollShadow>
+  </div >
 }

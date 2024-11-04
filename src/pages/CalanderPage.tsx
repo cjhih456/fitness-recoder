@@ -4,6 +4,7 @@ import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
+import { ScrollShadow } from '@nextui-org/react'
 import { useTranslation } from 'react-i18next'
 
 function CalanderPage() {
@@ -26,12 +27,21 @@ function CalanderPage() {
     })
   }
 
+  const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
+  function scrollShadowChange(visibility: string) {
+    if (visibility === 'bottom') {
+      setScrollShadow('bottom')
+    } else {
+      setScrollShadow('none')
+    }
+  }
+
   return (
-    <div className="flex flex-col items-stretch gap-y-3 px-4">
+    <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
       <Calender value={choosenDate} mode='date' onChange={changeDate} startMonth={1} startDate={1} endMonth={12} endDate={31} statesByDate={monthlyStatus} />
-      <div className='grid gap-y-3'>
+      <ScrollShadow className="flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
         <ScheduleList choosenDate={choosenDate} onChangeSchedule={updateScheduleList}></ScheduleList>
-      </div>
+      </ScrollShadow>
     </div>
   )
 }
