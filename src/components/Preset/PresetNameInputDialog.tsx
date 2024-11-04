@@ -3,14 +3,14 @@ import { ReactNode, useEffect, useState } from 'react'
 import CModal from '../CustomComponent/CModal'
 
 interface IonChange {
-  (v: false): void
-  (v: true, inputValue: string): void
+  (v: false): void | Promise<void>
+  (v: true, inputValue: string): void | Promise<void>
 }
 
 interface PresetNameInputDialogProp {
   isOpen?: boolean
   onChange: IonChange
-  children: (openFn: () => void) => ReactNode
+  children?: (openFn: () => void) => ReactNode
 }
 
 export default function PresetNameInputDialog({ isOpen, onChange, children }: PresetNameInputDialogProp) {

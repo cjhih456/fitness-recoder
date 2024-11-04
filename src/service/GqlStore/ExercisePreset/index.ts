@@ -1,13 +1,15 @@
 import { useCreateExercisePreset } from './CreateExercisePreset';
 import { useGetExercisePresetById, useLazyGetExercisePresetById } from './GetExercisePresetById';
 import { useGetExercisePresetList, useLazyGetExercisePresetList } from './GetExercisePresetList';
+import { useSaveScheduleAsExercisePreset } from './SaveScheduleAsExercisePreset';
 
 export {
   useCreateExercisePreset,
   useGetExercisePresetList,
   useLazyGetExercisePresetList,
   useGetExercisePresetById,
-  useLazyGetExercisePresetById
+  useLazyGetExercisePresetById,
+  useSaveScheduleAsExercisePreset
 }
 
 export const ExercisePresetMockData: { [key: number]: ExercisePreset } = Array(20).fill(0).reduce((acc, cur, i) => {

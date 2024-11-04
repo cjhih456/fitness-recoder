@@ -9,7 +9,9 @@ import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlS
 import { ScheduleType } from '../../../components/utils'
 import { useTranslation } from 'react-i18next'
 import { LogEvent } from '../../../service/firebase'
-import { useCloneSchedule } from '../../../service/GqlStore/Schedule/CloneSchedule'
+import { useCloneSchedule } from '../../../service/GqlStore/Schedule'
+import { useSaveScheduleAsExercisePreset } from '../../../service/GqlStore/ExercisePreset'
+import PresetNameInputDialog from '../../../components/Preset/PresetNameInputDialog'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
@@ -20,10 +22,27 @@ export default function DisplayWorkout() {
   const [lazySchedule, updateLazySchedule] = useState<Schedule | undefined>()
   const [updateSchedule] = useUpdateSchedule()
   const [cloneSchedule] = useCloneSchedule()
+  const [saveScheduleAsExercisePreset] = useSaveScheduleAsExercisePreset()
 
+
+  const [isSaveScheduleAsPresetOpen, setSaveScheduleAsPresetOpen] = useState(false)
   function makeAsPreset() {
-    alert.showAlert('ERROR', 'On Featured process', false)
+    setSaveScheduleAsPresetOpen(true)
   }
+
+  async function saveScheduleAsPreset(v: boolean, presetName?: string) {
+    console.log(v, presetName)
+    if (!presetName) return
+    if (!v) return
+    setSaveScheduleAsPresetOpen(!v)
+    const result = await saveScheduleAsExercisePreset({ variables: { scheduleId: Number(id), name: presetName } })
+    if (result.data?.saveScheduleAsExercisePreset) {
+      navigate(`/preset/${result.data.saveScheduleAsExercisePreset.id}`)
+    } else {
+      alert.showAlert('ERROR', 'Save Schedule As Preset Failed', false)
+    }
+  }
+
   async function cloneAsSchedule() {
     const today = new Date()
     const year = today.getFullYear()
@@ -177,5 +196,6 @@ export default function DisplayWorkout() {
         <Button onClick={finishSchedule}>{t('actionBtn.finish')}</Button>
       </div>
     }
+    <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onChange={saveScheduleAsPreset} />
   </>
 }

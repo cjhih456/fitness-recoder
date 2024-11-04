@@ -1,6 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
-import { getExerciseListByExercisePresetIdTemp } from '../Exercise/resolvers';
+import { getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -88,6 +88,57 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         [id]
       )
       return `delete - exercisePreset - ${id}`
+    },
+    async saveScheduleAsExercisePreset(_source, { scheduleId, name }, context) {
+      const schedule = await dbTransitionBus?.sendTransaction<Schedule>(
+        context.client,
+        'select',
+        'select * from schedule where id=?',
+        [scheduleId]
+      )
+      if (!schedule) return null;
+
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset[]>(
+        context.client,
+        'insert',
+        'insert into exercisePreset (name) values (?)',
+        [name]
+      )
+      const exercises = await getExerciseListByScheduleIdTemp(
+        dbTransitionBus,
+        context.client,
+        scheduleId
+      );
+      if (exercises && exercises.length > 0 && exercisePreset && exercisePreset[0]) {
+        for (const exercise of exercises) {
+          const newExercise = await dbTransitionBus?.sendTransaction<ExerciseData[]>(
+            context.client,
+            'insert',
+            'insert into exercise (exercise) values (?)',
+            [exercise.exercise]
+          );
+
+          if (newExercise && newExercise[0]) {
+            await dbTransitionBus?.sendTransaction(
+              context.client,
+              'insert',
+              'insert into exercisePreset_exercise (exercisePresetId, exerciseId) values (?,?)',
+              [exercisePreset[0].id, newExercise[0].id]
+            );
+
+            await dbTransitionBus?.sendTransaction(
+              context.client,
+              'insert',
+              'insert into sets (repeat, isDone, weightUnit, weight, duration, exerciseId) select repeat, 0, weightUnit, weight, duration, ? from sets where exerciseId=?',
+              [
+                newExercise[0].id,
+                exercise.id
+              ]
+            )
+          }
+        }
+      }
+      return exercisePreset && exercisePreset[0] ? exercisePreset[0] : null
     }
   }
 })
