@@ -43,6 +43,12 @@ input UpdateScheduleDataInput {
   type: ScheduleType!
 }
 
+input TargetDateInput {
+  year: Int!
+  month: Int!
+  date: Int!
+}
+
 type Query {
   getScheduleById(id: ID!): ScheduleData
   getScheduleByDate(year: Int!, month: Int!, date: Int!): [ScheduleData!]
@@ -53,4 +59,5 @@ type Mutation {
   createSchedule(schedule: CreateScheduleDataInput): ScheduleData
   updateSchedule(schedule: UpdateScheduleDataInput): ScheduleData
   deleteSchedule(id: ID!): ScheduleData
+  cloneSchedule(id: ID!, targetDate: TargetDateInput): ScheduleData
 }
