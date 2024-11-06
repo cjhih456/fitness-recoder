@@ -60,4 +60,5 @@ type Mutation {
   updateSchedule(schedule: UpdateScheduleDataInput): ScheduleData
   deleteSchedule(id: ID!): ScheduleData
   cloneSchedule(id: ID!, targetDate: TargetDateInput): ScheduleData
+  cloneScheduleFromPreset(presetId: ID!, targetDate: TargetDateInput): ScheduleData
 }

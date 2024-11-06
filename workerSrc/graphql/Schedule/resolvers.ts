@@ -1,6 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
-import { deleteExerciseByIdsTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
+import { cloneExerciseList, deleteExerciseByIdsTemp, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -134,34 +134,54 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       );
 
       if (exercises && exercises.length > 0) {
-        for (const exercise of exercises) {
-          const newExercise = await dbTransitionBus?.sendTransaction<ExerciseData[]>(
-            context.client,
-            'insert',
-            'insert into exercise (exercise) values (?)',
-            [exercise.exercise]
-          );
+        const newExerciseList = await cloneExerciseList(dbTransitionBus, context.client, exercises)
+        const values = newExerciseList.map(v => [newSchedule[0].id, v.id])
+        const sqlPattern = Array(values.length).fill('(?,?)').join(',')
+        await dbTransitionBus?.sendTransaction(
+          context.client,
+          'insert',
+          `insert into schedule_exercise (scheduleId, exerciseId) values ${sqlPattern}`,
+          values.flat()
+        );
+      }
 
-          if (newExercise && newExercise[0]) {
-            await dbTransitionBus?.sendTransaction(
-              context.client,
-              'insert',
-              'insert into schedule_exercise (scheduleId, exerciseId) values (?,?)',
-              [newSchedule[0].id, newExercise[0].id]
-            );
+      return newSchedule[0];
+    },
+    async cloneScheduleFromPreset(_source, { presetId, targetDate }, context) {
+      const preset = await dbTransitionBus?.sendTransaction<ExercisePreset>(
+        context.client,
+        'select',
+        'select * from exercisePreset where id=?',
+        [presetId]
+      )
+      if (!preset) {
+        throw new Error('Cannot find ExercisePreset')
+      }
 
-            await dbTransitionBus?.sendTransaction(
-              context.client,
-              'insert',
-              'insert into sets (repeat, isDone, weightUnit, weight, duration, exerciseId) select repeat, 0, weightUnit, weight, duration, ? from sets where exerciseId=?',
-              [
-                newExercise[0].id,
-                exercise.id
-              ]
-            )
-          }
+      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule[]>(
+        context.client,
+        'insert',
+        'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
+        [targetDate.year, targetDate.month, targetDate.date, 0, 0, 0, 0, 'SCHEDULED']
+      )
 
-        }
+      if (!newSchedule || !newSchedule[0]) return null
+      const exercises = await getExerciseListByExercisePresetIdTemp(
+        dbTransitionBus,
+        context.client,
+        presetId
+      );
+
+      if (exercises && exercises.length > 0) {
+        const newExerciseList = await cloneExerciseList(dbTransitionBus, context.client, exercises)
+        const values = newExerciseList.map(v => [newSchedule[0].id, v.id])
+        const sqlPattern = Array(values.length).fill('(?,?)').join(',')
+        await dbTransitionBus?.sendTransaction(
+          context.client,
+          'insert',
+          `insert into schedule_exercise (scheduleId, exerciseId) values ${sqlPattern}`,
+          values.flat()
+        );
       }
 
       return newSchedule[0];

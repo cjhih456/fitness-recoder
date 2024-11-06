@@ -27,6 +27,33 @@ export async function getExerciseListByExercisePresetIdTemp(
   )
 }
 
+
+export async function cloneExerciseList(
+  dbBus: MessageTransactionBus | undefined,
+  client: string,
+  exerciseList: ExerciseData[]
+): Promise<ExerciseData[]> {
+  return await Promise.all(exerciseList.map(async (exercise) => {
+    const newExercise = await dbBus?.sendTransaction<ExerciseData[]>(
+      client,
+      'insert',
+      'insert into exercise (exercise) values (?)',
+      [exercise.exercise]
+    );
+    if (!newExercise || !newExercise[0]) return null
+    await dbBus?.sendTransaction(
+      client,
+      'insert',
+      'insert into sets (repeat, isDone, weightUnit, weight, duration, exerciseId) select repeat, 0, weightUnit, weight, duration, ? from sets where exerciseId=?',
+      [
+        newExercise[0].id,
+        exercise.id
+      ]
+    )
+    return newExercise[0]
+  })).then(v => v.filter(v => v !== null))
+}
+
 async function createExerciseByIdsTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,

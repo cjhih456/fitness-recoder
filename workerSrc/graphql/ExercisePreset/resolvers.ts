@@ -1,6 +1,6 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
-import { getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
+import { cloneExerciseList, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -109,34 +109,17 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         context.client,
         scheduleId
       );
+
       if (exercises && exercises.length > 0 && exercisePreset && exercisePreset[0]) {
-        for (const exercise of exercises) {
-          const newExercise = await dbTransitionBus?.sendTransaction<ExerciseData[]>(
-            context.client,
-            'insert',
-            'insert into exercise (exercise) values (?)',
-            [exercise.exercise]
-          );
-
-          if (newExercise && newExercise[0]) {
-            await dbTransitionBus?.sendTransaction(
-              context.client,
-              'insert',
-              'insert into exercisePreset_exercise (exercisePresetId, exerciseId) values (?,?)',
-              [exercisePreset[0].id, newExercise[0].id]
-            );
-
-            await dbTransitionBus?.sendTransaction(
-              context.client,
-              'insert',
-              'insert into sets (repeat, isDone, weightUnit, weight, duration, exerciseId) select repeat, 0, weightUnit, weight, duration, ? from sets where exerciseId=?',
-              [
-                newExercise[0].id,
-                exercise.id
-              ]
-            )
-          }
-        }
+        const newExerciseList = await cloneExerciseList(dbTransitionBus, context.client, exercises)
+        const values = newExerciseList.map(v => [exercisePreset[0].id, v.id])
+        const sqlPattern = Array(values.length).fill('(?,?)').join(',')
+        await dbTransitionBus?.sendTransaction(
+          context.client,
+          'insert',
+          `insert into exercisePreset_exercise (exercisePresetId, exerciseId) values ${sqlPattern}`,
+          values.flat()
+        );
       }
       return exercisePreset && exercisePreset[0] ? exercisePreset[0] : null
     }
