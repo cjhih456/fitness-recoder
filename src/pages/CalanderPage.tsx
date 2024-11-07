@@ -3,22 +3,18 @@ import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
-import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
+import { ScrollShadow } from '@nextui-org/react'
+import { useTranslation } from 'react-i18next'
 
 function CalanderPage() {
+  const { t } = useTranslation('title')
   useBottomNavi()
-  HeaderHandler(['Calander'])
+  HeaderHandler([t('calander')])
   const [choosenDate, changeDate] = useState('')
   const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
   const [getScheduleStateByDate] = useLazyGetScheduleStateByDate()
-  useEffect(() => {
-    const today = new Date()
-    const month = String(today.getMonth() + 1).padStart(2, '0')
-    const date = String(today.getDate()).padStart(2, '0')
-    const todayStr = `${today.getFullYear()}-${month}-${date}`
-    changeDate(todayStr)
-  }, [])
 
   useEffect(() => {
     if (year && month) {
@@ -31,12 +27,21 @@ function CalanderPage() {
     })
   }
 
+  const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
+  function scrollShadowChange(visibility: string) {
+    if (visibility === 'bottom') {
+      setScrollShadow('bottom')
+    } else {
+      setScrollShadow('none')
+    }
+  }
+
   return (
-    <div className="flex flex-col items-stretch gap-y-3 px-4">
+    <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
       <Calender value={choosenDate} mode='date' onChange={changeDate} startMonth={1} startDate={1} endMonth={12} endDate={31} statesByDate={monthlyStatus} />
-      <div className='grid gap-y-3'>
+      <ScrollShadow className="flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
         <ScheduleList choosenDate={choosenDate} onChangeSchedule={updateScheduleList}></ScheduleList>
-      </div>
+      </ScrollShadow>
     </div>
   )
 }

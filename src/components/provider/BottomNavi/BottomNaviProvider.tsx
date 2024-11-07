@@ -4,6 +4,7 @@ import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/m
 import { createPortal } from 'react-dom'
 import _ from 'lodash'
 import { useRoot } from '../RootProvider/useRoot'
+import { useTranslation } from 'react-i18next'
 
 export interface BottomNaviProviderProps {
   children: ReactNode
@@ -18,6 +19,7 @@ export const BottomNavi = createContext<BottomNaviType>({
 })
 
 export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
+  const { t } = useTranslation('bottom')
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
   const { getRoot } = useRoot()
 
@@ -35,10 +37,10 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
       {children}
       {createPortal(bottomNaviVisible ? <footer className="sticky flex justify-center">
         <div className="max-w-[640px] w-[640px] flex justify-center gap-x-1">
-          <MenuButton name='Home' Icon={MdHome} path='/' />
-          <MenuButton name='Calander' Icon={MdCalendarToday} path='/calander' />
-          <MenuButton name='Exercise' Icon={MdList} path='/fitnessList' />
-          <MenuButton name='Preset' Icon={MdOutlineDataset} path='/preset' />
+          <MenuButton name={t('home')} Icon={MdHome} path='/' />
+          <MenuButton name={t('calander')} Icon={MdCalendarToday} path='/calander' />
+          <MenuButton name={t('exercise')} Icon={MdList} path='/fitnessList' />
+          <MenuButton name={t('preset')} Icon={MdOutlineDataset} path='/preset' />
         </div>
       </footer> : <div></div>, getRoot(), 'bottom-navi')}
     </BottomNavi.Provider>

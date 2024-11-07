@@ -87,7 +87,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           'update', 'DELETE FROM sets where id=?',
           [id],
           (result: any) => {
-            !result ? reject(null) : resolve(`Sets - delete - ${id}`)
+            !result ? reject(null) : resolve(`delete - sets - ${id}`)
           }
         )
       })

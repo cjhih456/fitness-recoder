@@ -1,17 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
-import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
-import { useLazyScheduleByDate } from '../service/GqlStore/Schedule'
+import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
+import { useLazyGetScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
-import { Button } from '@nextui-org/react'
+import { Button, ScrollShadow } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
+import { useTranslation } from 'react-i18next'
 
 export default function Main() {
   useBottomNavi()
+  const { t } = useTranslation(['main', 'common', 'scheduleList', 'title'])
   const navigate = useNavigate()
   const [scheduleList, setScheduleList] = useState<Schedule[]>([])
-  const [loadScheduleData] = useLazyScheduleByDate()
-  HeaderHandler(['Main'])
+  const [loadScheduleData] = useLazyGetScheduleByDate()
+  HeaderHandler([t('title:home')])
   useEffect(() => {
     const today = new Date()
     loadScheduleData({
@@ -51,12 +53,12 @@ export default function Main() {
     if (scheduleList.length) {
       return scheduleList.map((schedule, idx) => {
         const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
-        return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} id={schedule.id} date={choosenDate} title={`Part ${idx + 1}`} >
+        return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} id={schedule.id} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
           {(id, type, date) => (
             <div className="grid grid-cols-2 gap-x-4">
-              <Button onClick={() => gotoModify(id, date)}>Modify</Button>
+              <Button onClick={() => gotoModify(id, date)}>{t('common:modify')}</Button>
               <Button onClick={() => startSchedule(id, date)}>
-                {type === 'FINISH' ? 'Detail' : 'Start'}
+                {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
               </Button>
             </div>
           )}
@@ -65,21 +67,23 @@ export default function Main() {
     } else {
       return [
         <div className="text-center" key="empty-schedule-desc">
-          <p>Don't have Schedule Yet.</p>
-          <p>Add Schedule or Check Presets</p>
+          <p>{t('empty.schedule.l1')}</p>
+          <p>{t('empty.schedule.l2')}</p>
         </div>,
         <div className="grid grid-cols-2 gap-x-4" key="empty-schedule-options">
-          <Button onClick={addSchedule}>Create Schedule</Button>
-          <Button onClick={gotoPresetPage}>Check Preset List</Button>
+          <Button onClick={addSchedule}>{t('empty.schedule.actionBtn.createSchedule')}</Button>
+          <Button onClick={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
         </div>
       ]
     }
-  }, [scheduleList])
+  }, [scheduleList, t])
 
-  return <div className="flex flex-col items-stretch gap-y-3 px-4">
+  return <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
     <h2>
-      What's my today schedule?
+      {t('todaySchedule')}
     </h2>
-    {displaySchedule}
-  </div>
+    <ScrollShadow className="flex flex-col items-stretch gap-y-3">
+      {displaySchedule}
+    </ScrollShadow>
+  </div >
 }

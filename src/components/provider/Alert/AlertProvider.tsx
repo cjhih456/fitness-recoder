@@ -1,6 +1,7 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
 import CModal from '../../CustomComponent/CModal'
+import { useTranslation } from 'react-i18next'
 
 enum AlertType {
   SUCCESS = 'SUCCESS',
@@ -41,6 +42,7 @@ export const AlertContext = createContext<AlertContextType>({
 })
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
+  const { t } = useTranslation('alert')
   const [alertMessageBuffer, appendAlertMessage] = useState<AlertData[]>([])
   const [displayMessage, setDisplayMessage] = useState<AlertData | undefined>()
 
@@ -94,7 +96,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
       <CModal isOpen={displayAlert} onOpenChange={alertAisplayChanged}>
         <ModalContent>
           {() => (<>
-            <ModalHeader>Alert!!</ModalHeader>
+            <ModalHeader>{t('modal.title')}</ModalHeader>
             <ModalBody>
               <div>
                 {displayMessage?.message}

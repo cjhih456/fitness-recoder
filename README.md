@@ -1,21 +1,16 @@
 # Fitness recoder
 
-## TODO list
-1. update ui/ux
-2. categorize workout
-
 ## featured
 1. clone schedule & preset
 2. save / load recode data as json file
-3. record training data with 
-4. display recorded data by date or workout type
-5. create graph of progress
+3. display recorded data by date or workout type(ex: target muscle)
+4. rendering graph by history of weight.
 
 ## Development Environment
 * OS: macOS Mojave
 * IDE: Visual Studio Code
 * Node version: v20
-* Library: React, Sqlite3(Worker), Graphql(Service worker), Storybook, Jest
+* Library: React, Sqlite3(Worker), Graphql(Service worker), i18next, Storybook
 
 ## Please, Follow this, when you want develop more
 1. This Project are need to use HTTPS protocol. Because of opfs, that is depends on Browser security.
@@ -31,7 +26,6 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
 ```
 
 ## Preview
-
 1. Connect to https://cjhih456.github.io/fitness-recoder/
 
 ## Site map
@@ -50,26 +44,31 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
     - Schedule List page
       - content
         - calander - date
-        - display Step list
+        - display schedule list - done
           - menu
-            - Quick start with this Schedule
+            - Detail of Schedule - done
+            - Start Schedule - done
+            - Modify Schedule - done
             - Share this schedule (QR code)
-            - Modify Step
-            - Delete Step
-          - onClick
-            - goto Workout page
+            - Delete Schedule
     - Create / Modify Page
       - top menu
         - load preset
       - content
-        - selected exercise list
-    - Workout Page
-      - content
+        - selected exercise list - done
+      - Workout modal - done
+        - content
 
 3. Schedule Preset List
-    - Detail Page
-    - Modify Page
-    - Create Dialog
+    - Detail Page - done
+      - display exercise list
+      - menu
+        - start workout with this preset - done
+        - save as new preset
+        - delete this preset - done
+    - Modify Page - done
+      - display exercise list
+    - Create Dialog - done
 
 4. Workout list
     - Workout Detail page - ~ing
@@ -81,7 +80,11 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
 5. Share Fallback page
     - shared schedule clone page
       - choice save as Preset or Schedule of date
-    - 
+
+6. Share QR page
+    - render QR code of preset or schedule.
+    - what if possible, shareing image(WebRTC protocol).
+
 
 ### Reference
 - exercise list : https://github.com/wrkout/exercises.json/

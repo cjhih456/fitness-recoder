@@ -5,11 +5,13 @@ import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
 import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
-import { HeaderHandler } from '../../components/provider/Header/useHeaderContext';
+import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
+import { useTranslation } from 'react-i18next';
 
 export default function PresetListPage() {
+  const { t } = useTranslation(['preset', 'title', 'common'])
   useBottomNavi()
-  HeaderHandler(['Preset List'])
+  HeaderHandler([t('title:preset')])
   const [createExercisePreset] = useCreateExercisePreset()
   const [getExerciseList] = useLazyGetExercisePresetList()
   const navigator = useNavigate()
@@ -40,13 +42,13 @@ export default function PresetListPage() {
   return <div className="pt-4 px-4 flex flex-col gap-y-4">
     {presetList.map(preset => <ScheduleDisplay key={preset.id} id={preset.id} title={preset.name} exerciseList={preset.exerciseList}>
       {(id: number) => <div>
-        <Button onClick={() => gotoDetail(id)}>Detail</Button>
+        <Button onClick={() => gotoDetail(id)}>{t('common:detail')}</Button>
       </div>}
     </ScheduleDisplay>)}
     <div>
       <PresetNameInputDialog onChange={hasInputNewName}>
         {(openFn) => <div className='grid'>
-          <Button onClick={openFn} size="lg">Create Preset</Button>
+          <Button onClick={openFn} size="lg">{t('actionBtn.create')}</Button>
         </div>
         }
       </PresetNameInputDialog>

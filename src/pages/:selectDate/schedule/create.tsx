@@ -2,7 +2,7 @@ import { Button } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
-import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext';
+import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
 import { useCreateScheduleWithExercisePlans } from '../../../service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
 import { LogEvent } from '../../../service/firebase';
 import { useAlert } from '../../../components/provider/Alert/useAlert';

@@ -4,6 +4,7 @@ import utils from '../utils';
 import DateCalander from './DateCalander';
 import MonthCalander from './MonthCalander';
 import YearCalander from './YearCalander';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type Mode = 'date' | 'month' | 'year'
 export interface CalanderProps {
@@ -30,12 +31,18 @@ export default function Calender({
   statesByDate = [],
   onChange
 }: CalanderProps) {
+  const location = useLocation()
+  const navigate = useNavigate()
   const todayDate = new Date().getDate()
+
+  const tempValue = location.hash.replace('#', '') || `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${todayDate}`
+  const [year, month, date] = tempValue.split('-').map(v => +v)
+
   const [mode, setMode] = useState<Mode>('year')
   const [choosenDay, setChoosenDay] = useState({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    date: todayDate
+    year: year,
+    month: month,
+    date: date,
   })
 
   const { displayStartYear, displayEndYear } = useMemo(() => {
@@ -101,7 +108,13 @@ export default function Calender({
     setMode('date')
   }
   function changeDate(v: number) {
-    setChoosenDay((pre) => ({ ...pre, date: Math.min(Math.max(displayStartDate, v), displayEndDate) }))
+    const date = Math.min(Math.max(displayStartDate, v), displayEndDate)
+    const newPath = location.pathname + (location.search.startsWith('?') ? '' : '?') + location.search
+
+    navigate(newPath + '#' + choosenDay.year + '-' + choosenDay.month + '-' + date, {
+      replace: true
+    })
+    setChoosenDay((pre) => ({ ...pre, date: date }))
   }
 
 
