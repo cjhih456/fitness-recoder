@@ -41,8 +41,8 @@ export default defineConfig(({ mode, isPreview }) => {
     plugins: [
       Inspect(),
       LanguagePackExporter({
-        fileName: resolve('./LanguagePack.xlsx'),
-        outputPath: resolve('./src/i18n')
+        fileName: './LanguagePack.xlsx',
+        outputPath: './src/i18n'
       }),
       makeManifest(mode),
       GraphqlLoader(),

@@ -31,7 +31,7 @@ export default function LanguagePackExporter(options: options): PluginOption {
     for (const lang of Object.keys(langObj)) {
       for (const ns of Object.keys(langObj[lang])) {
         if (options.outputPath) {
-          fs.writeFileSync(resolve(options.outputPath, lang, `${ns}.json`), JSON.stringify(langObj[lang][ns]))
+          fs.writeFileSync(resolve(__dirname, '../..', options.outputPath, lang, `${ns}.json`), JSON.stringify(langObj[lang][ns]))
         }
       }
     }
@@ -40,7 +40,7 @@ export default function LanguagePackExporter(options: options): PluginOption {
     name: 'LanguagePackExporter',
     buildStart() {
       if (options.fileName) {
-        fileName = resolve(options.fileName)
+        fileName = resolve(__dirname, '../..', options.fileName)
       }
       if (fileName) {
         this.addWatchFile(fileName)
