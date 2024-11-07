@@ -5,6 +5,7 @@ import { NextUIProvider } from '@nextui-org/react'
 import { I18nextProvider } from 'react-i18next'
 import AllMockedProvider from '../src/service/GqlStore/AllMockedProvider'
 import { RootProvider } from '../src/components/provider/RootProvider/RootProvider'
+import { withRouter } from 'storybook-addon-react-router-v6'
 import i18n from '../src/i18n'
 
 const preview: Preview = {
@@ -20,6 +21,7 @@ const preview: Preview = {
     }
   },
   decorators: [
+    withRouter,
     (Story) => {
       return <React.StrictMode>
         <I18nextProvider i18n={i18n}>
