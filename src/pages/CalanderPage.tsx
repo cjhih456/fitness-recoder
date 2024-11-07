@@ -3,7 +3,7 @@ import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
-import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
 import { ScrollShadow } from '@nextui-org/react'
 import { useTranslation } from 'react-i18next'
 

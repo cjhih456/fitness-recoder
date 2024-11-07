@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@nextui-org/react';
-import { HeaderHandler } from '../../../components/provider/Header/useHeaderContext';
+import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
 import { useGetScheduleById } from '../../../service/GqlStore/Schedule';
 import { useLazyGetExerciseListByScheduleId } from '../../../service/GqlStore/Exercise';
 import { useUpdateExerciseListBySchedule } from '../../../service/GqlStore/mixed/useUpdateExerciseListBySchedule';

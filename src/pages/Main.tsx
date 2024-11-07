@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { HeaderHandler } from '../components/provider/Header/useHeaderContext'
+import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
 import { useLazyGetScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
 import { Button, ScrollShadow } from '@nextui-org/react'
