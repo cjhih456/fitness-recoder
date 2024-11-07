@@ -6,6 +6,7 @@ import { useGetScheduleById, useLazyGetScheduleById } from './GetScheduleById'
 import { useLazyGetScheduleStateByDate } from './GetScheduleStatusByDate'
 import { useUpdateSchedule } from './UpdateSchedule'
 import { useCloneSchedule } from './CloneSchedule'
+import { useCloneScheduleFromPreset } from './cloneScheduleFromPreset'
 
 export {
   useCreateSchedule,
@@ -16,7 +17,8 @@ export {
   useLazyGetScheduleById,
   useLazyGetScheduleStateByDate,
   useUpdateSchedule,
-  useCloneSchedule
+  useCloneSchedule,
+  useCloneScheduleFromPreset
 }
 const today = new Date()
 const month = today.getMonth() + 1

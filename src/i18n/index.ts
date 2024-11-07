@@ -29,7 +29,7 @@ i18n.use(initReactI18next).init({
   async missingKeyHandler(lngs: readonly string[], ns: string) {
     for (const lng of lngs) {
       if (!i18n.hasResourceBundle(lng, ns)) {
-        if (i18nFiles[`./${lng}/${ns}.json`]) {
+        if (typeof i18nFiles[`./${lng}/${ns}.json`] === 'function') {
           const obj = await i18nFiles[`./${lng}/${ns}.json`]()
           i18n.addResourceBundle(lng, ns, obj, true, true)
         }

@@ -81,6 +81,34 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return updatedResult
     },
     async deleteExercisePreset(_source, { id }, context) {
+      const relations = await dbTransitionBus?.sendTransaction<{ exerciseId: number }[]>(
+        context.client,
+        'select',
+        'select exerciseId from exercisePreset_exercise where exercisePresetId=?',
+        [id]
+      ) || []
+      const keyList = relations.map(v => v.exerciseId).join(',')
+      // delete Sets
+      await dbTransitionBus?.sendTransaction(
+        context.client,
+        'delete',
+        `delete from sets where exerciseId in (${keyList})`,
+        relations.map(v => v.exerciseId)
+      )
+      // delete exercisePreset_exercise
+      await dbTransitionBus?.sendTransaction(
+        context.client,
+        'delete',
+        'delete from exercisePreset_exercise where exercisePresetId=?',
+        [id]
+      )
+      // delete exercises
+      await dbTransitionBus?.sendTransaction(
+        context.client,
+        'delete',
+        'delete from exercise where id in (${keyList})',
+        relations.map(v => v.exerciseId)
+      )
       await dbTransitionBus?.sendTransaction(
         context.client,
         'delete',
