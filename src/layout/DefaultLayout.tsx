@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { baseURL } from '../components/utils'
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useHeaderContext } from '../components/provider/Header/useHeaderContext'
@@ -27,16 +26,16 @@ export default function DefaultLayout({
   const [menuDisplay, setMenuDisplay] = useState(false)
   const [menuList] = useState<Menu[]>([{
     name: 'Home',
-    route: baseURL('/'),
+    route: '/',
   }, {
     name: 'Calander',
-    route: baseURL('/calander'),
+    route: '/calander',
   }, {
     name: 'Fitness',
-    route: baseURL('/fitnessList')
+    route: '/fitnessList'
   }, {
     name: 'Preset',
-    route: baseURL('/preset')
+    route: '/preset'
   }])
   const { getRoot } = useRoot()
   const location = useLocation()
