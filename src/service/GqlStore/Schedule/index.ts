@@ -6,7 +6,7 @@ import { useGetScheduleById, useLazyGetScheduleById } from './GetScheduleById'
 import { useLazyGetScheduleStateByDate } from './GetScheduleStatusByDate'
 import { useUpdateSchedule } from './UpdateSchedule'
 import { useCloneSchedule } from './CloneSchedule'
-import { useCloneScheduleFromPreset } from './cloneScheduleFromPreset'
+import { useCloneScheduleFromPreset } from './CloneScheduleFromPreset'
 
 export {
   useCreateSchedule,
