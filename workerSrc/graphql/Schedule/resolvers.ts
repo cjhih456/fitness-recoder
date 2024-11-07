@@ -121,7 +121,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           originalSchedule.start,
           originalSchedule.breakTime,
           originalSchedule.workoutTimes,
-          originalSchedule.type
+          'SCHEDULED'
         ]
       );
 
