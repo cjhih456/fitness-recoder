@@ -44,26 +44,31 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
     - Schedule List page
       - content
         - calander - date
-        - display Step list
+        - display schedule list - done
           - menu
-            - Quick start with this Schedule
+            - Detail of Schedule - done
+            - Start Schedule - done
+            - Modify Schedule - done
             - Share this schedule (QR code)
-            - Modify Step
-            - Delete Step
-          - onClick
-            - goto Workout page
+            - Delete Schedule
     - Create / Modify Page
       - top menu
         - load preset
       - content
-        - selected exercise list
-    - Workout Page
-      - content
+        - selected exercise list - done
+      - Workout modal - done
+        - content
 
 3. Schedule Preset List
-    - Detail Page
-    - Modify Page
-    - Create Dialog
+    - Detail Page - done
+      - display exercise list
+      - menu
+        - start workout with this preset - done
+        - save as new preset
+        - delete this preset - done
+    - Modify Page - done
+      - display exercise list
+    - Create Dialog - done
 
 4. Workout list
     - Workout Detail page - ~ing
