@@ -31,7 +31,9 @@ export default function LanguagePackExporter(options: options): PluginOption {
     for (const lang of Object.keys(langObj)) {
       for (const ns of Object.keys(langObj[lang])) {
         if (options.outputPath) {
-          fs.writeFileSync(resolve(__dirname, '../..', options.outputPath, lang, `${ns}.json`), JSON.stringify(langObj[lang][ns]))
+          const path = resolve(__dirname, '../..', options.outputPath, lang)
+          if (!fs.existsSync(path)) fs.mkdirSync(path, { recursive: true })
+          fs.writeFileSync(resolve(path, `${ns}.json`), JSON.stringify(langObj[lang][ns]))
         }
       }
     }
