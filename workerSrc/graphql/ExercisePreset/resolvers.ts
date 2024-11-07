@@ -106,7 +106,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       await dbTransitionBus?.sendTransaction(
         context.client,
         'delete',
-        'delete from exercise where id in (${keyList})',
+        `delete from exercise where id in (${keyList})`,
         relations.map(v => v.exerciseId)
       )
       await dbTransitionBus?.sendTransaction(
