@@ -23,49 +23,37 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         return exercisePresetList
       }
     },
-    getExercisePresetByIds(_source, { ids }, context) {
-      return new Promise((resolve, reject) => {
-        const temp = new Array(ids.length).fill('?').join(', ')
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'select',
-          `select * from exercisePreset where id in (${temp})`,
-          ids,
-          (result: any) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getExercisePresetByIds(_source, { ids }, context) {
+      const temp = new Array(ids.length).fill('?').join(', ')
+      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset[]>(
+        context.client,
+        'select',
+        `select * from exercisePreset where id in (${temp})`,
+        ids
+      )
+      return exercisePresetList || []
     },
-    getExercisePresetById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'select',
-          'select * from exercisePreset where id=?',
-          [id],
-          (result: any) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getExercisePresetById(_source, { id }, context) {
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset>(
+        context.client,
+        'select',
+        'select * from exercisePreset where id=?',
+        [id]
+      )
+      return exercisePreset || null
     }
   },
   Mutation: {
-    createExercisePreset(_source, { exercisePreset }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'insert',
-          'insert into exercisePreset (name, deps) values (?, (select count(*) from exercisePreset))',
-          [
-            exercisePreset.name
-          ],
-          (result: any) => {
-            !result ? reject(null) : resolve(result[0])
-          }
-        )
-      })
+    async createExercisePreset(_source, { exercisePreset }, context) {
+      const createdResult = await dbTransitionBus?.sendTransaction(
+        context.client,
+        'insert',
+        'insert into exercisePreset (name, deps) values (?, (select count(*) from exercisePreset))',
+        [
+          exercisePreset.name
+        ],
+      )
+      return createdResult && createdResult[0] ? createdResult[0] : null
     },
     async updateExercisePreset(_source, { exercisePreset }, context) {
       const updatedResult = await dbTransitionBus?.sendTransaction(

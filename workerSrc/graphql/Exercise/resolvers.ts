@@ -74,10 +74,10 @@ async function createExerciseRelationWithSchedule(
   client: string,
   scheduleId: number,
   exerciseList: ExerciseData[]
-): Promise<any> {
+) {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [scheduleId, v.id])
-  return dbBus?.sendTransaction(
+  return await dbBus?.sendTransaction<{ scheduleId: number, exerciseId: number }[]>(
     client,
     'insert',
     `insert into schedule_exercise (scheduleId, exerciseId) values ${temp}`,
@@ -93,7 +93,7 @@ async function createExerciseRelationWithExercisePreset(
 ) {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [exercisePresetId, v.id])
-  return dbBus?.sendTransaction(
+  return await dbBus?.sendTransaction<{ exercisePresetId: number, exerciseId: number }[]>(
     client,
     'insert',
     `insert into exercisePreset_exercise (exercisePresetId, exerciseId) values ${temp}`,
@@ -123,7 +123,7 @@ export async function deleteExerciseByIdsTemp(
     `delete from sets where exerciseId in (${tempQuestion})`,
     temp
   )
-  return dbBus?.sendTransaction(client,
+  return await dbBus?.sendTransaction<ExerciseData[]>(client,
     'delete',
     `delete from exercise where id in (${tempQuestion})`,
     temp
@@ -139,7 +139,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           'select',
           'select * from exercise where id=?',
           [id],
-          (result: any) => {
+          (result) => {
             !result ? reject(null) : resolve(result)
           }
         )
@@ -153,7 +153,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           'select',
           `select * from exercise where id in (${temp})`,
           ids,
-          (result: any) => {
+          (result) => {
             !result ? reject(null) : resolve(result)
           }
         )

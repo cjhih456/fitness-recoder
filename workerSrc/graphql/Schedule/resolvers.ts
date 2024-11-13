@@ -4,29 +4,21 @@ import { cloneExerciseList, deleteExerciseByIdsTemp, getExerciseListByExercisePr
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    getScheduleById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction<Schedule>(
-          context.client,
-          'select', 'select * from schedule where id=?',
-          [id],
-          (result) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getScheduleById(_source, { id }, context) {
+      const schedule = await dbTransitionBus?.sendTransaction<Schedule>(
+        context.client,
+        'select', 'select * from schedule where id=?',
+        [id]
+      )
+      return schedule || null
     },
-    getScheduleByDate(_source, { year, month, date }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction<Schedule[]>(
-          context.client,
-          'selects', 'select * from schedule where year=? and month=? and date=?',
-          [year, month, date],
-          (result: any) => {
-            result ? resolve(result) : reject([])
-          }
-        )
-      })
+    async getScheduleByDate(_source, { year, month, date }, context) {
+      const scheduleList = await dbTransitionBus?.sendTransaction<Schedule[]>(
+        context.client,
+        'selects', 'select * from schedule where year=? and month=? and date=?',
+        [year, month, date]
+      )
+      return scheduleList || []
     },
     async getScheduleStatusByDate(_source, { year, month }, context) {
       const result = await dbTransitionBus?.sendTransaction<{ year: number, month: number, date: number, type: string }[]>(

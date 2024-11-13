@@ -3,94 +3,70 @@ import { IResolvers } from '@graphql-tools/utils';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    getSetByIds(_source, { ids }, context) {
-      return new Promise((resolve, reject) => {
-        const temp = new Array(ids.length).fill('?').join(', ')
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'selects', `select * from sets where id in (${temp})`,
-          ids,
-          (result: any) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getSetByIds(_source, { ids }, context) {
+      const temp = new Array(ids.length).fill('?').join(', ')
+      const setList = await dbTransitionBus?.sendTransaction<Sets[]>(
+        context.client,
+        'selects', `select * from sets where id in (${temp})`,
+        ids
+      )
+      return setList || []
     },
-    getSetById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'select', 'select * from sets where id=?',
-          [id],
-          (result: any) => {
-            result ? resolve(result) : reject(null)
-          }
-        )
-      })
+    async getSetById(_source, { id }, context) {
+      const set = await dbTransitionBus?.sendTransaction<Sets>(
+        context.client,
+        'select', 'select * from sets where id=?',
+        [id]
+      )
+      return set || null
     },
-    getSetListByExerciseId(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'selects', 'select * from sets where exerciseId=?',
-          [id],
-          (result: any) => {
-            result ? resolve(result) : reject(null)
-          }
-        )
-      })
+    async getSetListByExerciseId(_source, { id }, context) {
+      const setList = await dbTransitionBus?.sendTransaction<Sets[]>(
+        context.client,
+        'selects', 'select * from sets where exerciseId=?',
+        [id]
+      )
+      return setList || []
     }
   },
   Mutation: {
-    createSet(_source, { sets }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
-          [
-            sets.repeat,
-            sets.isDone ? 1 : 0,
-            sets.weightUnit,
-            sets.weight,
-            sets.duration,
-            sets.exerciseId
-          ],
-          (result: any) => {
-            result ? resolve({ ...result[0], ...sets }) : reject(null)
-          }
-        )
-      })
+    async createSet(_source, { sets }, context) {
+      const createdResult = await dbTransitionBus?.sendTransaction(
+        context.client,
+        'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
+        [
+          sets.repeat,
+          sets.isDone ? 1 : 0,
+          sets.weightUnit,
+          sets.weight,
+          sets.duration,
+          sets.exerciseId
+        ],
+      )
+      return createdResult && createdResult[0] ? createdResult[0] : null
     },
-    updateSet(_source, { sets }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
-          [
-            sets.repeat,
-            sets.isDone ? 1 : 0,
-            sets.weightUnit,
-            sets.weight,
-            sets.duration,
-            sets.id
-          ],
-          (result: any) => {
-            result ? resolve(sets) : reject(null)
-          }
-        )
-      })
+    async updateSet(_source, { sets }, context) {
+      const updateResult = await dbTransitionBus?.sendTransaction<Sets>(
+        context.client,
+        'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
+        [
+          sets.repeat,
+          sets.isDone ? 1 : 0,
+          sets.weightUnit,
+          sets.weight,
+          sets.duration,
+          sets.id
+        ]
+      )
+      return updateResult || null
     },
-    deleteSetById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction(
-          context.client,
-          'update', 'DELETE FROM sets where id=?',
-          [id],
-          (result: any) => {
-            !result ? reject(null) : resolve(`delete - sets - ${id}`)
-          }
-        )
-      })
+    async deleteSetById(_source, { id }, context) {
+      const result = await dbTransitionBus?.sendTransaction(
+        context.client,
+        'update', 'DELETE FROM sets where id=?',
+        [id]
+      )
+      return result ? `delete - sets - ${id}` : null
     }
   }
 })
