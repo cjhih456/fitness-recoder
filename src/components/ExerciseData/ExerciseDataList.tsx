@@ -65,8 +65,8 @@ export default function ExerciseDataList({
     }
   }
 
-  return <Accordion selectionBehavior="replace" variant='splitted' selectedKeys={selectedKeys}>
-    {exerciseList.map((exerciseData, index) => {
+  const exerciseListDisplay = useMemo(() => {
+    return exerciseList.map((exerciseData, index) => {
       return <AccordionItem
         key={`${exerciseData.id}`}
         title={exerciseData.name}
@@ -75,6 +75,10 @@ export default function ExerciseDataList({
       >
         <ExerciseDataDisplay exerciseData={exerciseData} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
       </AccordionItem>
-    })}
+    })
+  }, [exerciseList, readonly])
+
+  return <Accordion selectionBehavior="replace" variant='splitted' selectedKeys={selectedKeys}>
+    {exerciseListDisplay}
   </Accordion>
 }
