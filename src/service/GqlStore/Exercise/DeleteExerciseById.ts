@@ -26,10 +26,10 @@ export const DeleteExerciseByIdMock: MockedResponse<
   request: {
     query: DeleteExerciseByIdGql,
   },
-  result: () => {
+  result: (v) => {
     return {
       data: {
-        deleteExerciseById: ''
+        deleteExerciseById: `delete - exercise - ${v.id}`
       }
     }
   }

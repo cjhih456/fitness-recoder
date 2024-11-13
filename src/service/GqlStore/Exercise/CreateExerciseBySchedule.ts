@@ -33,7 +33,11 @@ export const CreateExerciseByScheduleMock: MockedResponse<
   result: () => {
     return {
       data: {
-        createExerciseBySchedule: {} as ExerciseData
+        createExerciseBySchedule: {
+          id: 1,
+          deps: 0,
+          exercise: 1
+        }
       }
     }
   }

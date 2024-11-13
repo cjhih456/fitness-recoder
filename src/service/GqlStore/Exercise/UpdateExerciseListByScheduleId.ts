@@ -31,7 +31,13 @@ export const UpdateExerciseListByScheduleIdMock: MockedResponse<
   result: () => {
     return {
       data: {
-        updateExerciseListByScheduleId: []
+        updateExerciseListByScheduleId: [
+          {
+            id: 1,
+            deps: 0,
+            exercise: 1
+          }
+        ]
       }
     }
   }

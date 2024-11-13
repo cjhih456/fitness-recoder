@@ -123,11 +123,12 @@ export async function deleteExerciseByIdsTemp(
     `delete from sets where exerciseId in (${tempQuestion})`,
     temp
   )
-  return await dbBus?.sendTransaction<ExerciseData[]>(client,
+  await dbBus?.sendTransaction<ExerciseData[]>(client,
     'delete',
     `delete from exercise where id in (${tempQuestion})`,
     temp
   )
+  return `delete - exercise - ${temp.join(',')}`
 }
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
