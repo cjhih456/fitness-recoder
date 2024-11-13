@@ -1,10 +1,20 @@
-import i18n from 'i18next';
+import i18n, { CustomTypeOptions } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 
-const i18nFiles = import.meta.glob('./(ko|en)/*.json', {
+const i18nFiles: Record<string, () => Promise<Record<string, string>>> = import.meta.glob<Record<string, string>>('./(ko|en)/*.json', {
   import: 'default'
 })
+
+type ResourceKey = keyof CustomTypeOptions['resources']
+
+async function loadNamespace(lng: string, ns: ResourceKey): Promise<void> {
+  const key = `./${lng}/${ns}.json`
+  if (typeof i18nFiles[key] === 'function') {
+    const translations = await i18nFiles[key]()
+    i18n.addResourceBundle(lng, ns, translations, true, true)
+  }
+}
 
 i18n.use(initReactI18next).init({
   defaultNS: 'common',
@@ -24,10 +34,7 @@ i18n.use(initReactI18next).init({
   async missingKeyHandler(lngs: readonly string[], ns: string) {
     for (const lng of lngs) {
       if (!i18n.hasResourceBundle(lng, ns)) {
-        if (typeof i18nFiles[`./${lng}/${ns}.json`] === 'function') {
-          const obj = await i18nFiles[`./${lng}/${ns}.json`]()
-          i18n.addResourceBundle(lng, ns, obj, true, true)
-        }
+        await loadNamespace(lng, ns as ResourceKey)
       }
     }
   },
