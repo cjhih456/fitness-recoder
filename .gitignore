@@ -32,3 +32,4 @@ ssl/server.key
 
 # i18n generated files
 src/i18n/**/*.json
+src/i18n/i18n.d.ts
