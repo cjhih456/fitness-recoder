@@ -45,5 +45,20 @@
     "export",
     "i18next"
   ],
-  "license": "GPL-3.0-only"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjhih456/fitness-recoder.git",
+    "directory": "packages/vite-plugin-i18next-language-pack-loader"
+  },
+  "license": "GPL-3.0-only",
+  "tsup": {
+    "entry": ["src/index.ts"],
+    "dts": true,
+    "minify": false,
+    "sourcemap": true,
+    "clean": true,
+    "bundle": false,
+    "target": "node14",
+    "format": ["cjs", "esm"]
+  }
 }
