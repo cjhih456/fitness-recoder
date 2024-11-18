@@ -5,7 +5,7 @@ import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
 import GraphqlServer from './vitePlugin/GraphqlServer'
 import Inspect from 'vite-plugin-inspect'
-import LanguagePackExporter from './vitePlugin/LanguagePackExport'
+import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
