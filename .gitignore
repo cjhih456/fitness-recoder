@@ -1,3 +1,6 @@
+#turbo
+.turbo
+
 # Logs
 logs
 *.log
@@ -24,12 +27,12 @@ dist-ssr
 *.sw?
 
 # Auto generate file
-public/manifest.webmanifest
+apps/web/public/manifest.webmanifest
 
 # ssl files
-ssl/server.crt
-ssl/server.key
+apps/web/ssl/server.crt
+apps/web/ssl/server.key
 
 # i18n generated files
-src/i18n/**/*.json
-src/i18n/i18n.d.ts
+apps/web/src/i18n/**/*.json
+apps/web/src/i18n/i18n.d.ts
