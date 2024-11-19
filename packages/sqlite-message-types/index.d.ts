@@ -1,6 +1,6 @@
 type SqliteMessageSingleResultType = 'update' | 'select'
 
-type SqliteMessageType = SqliteMessageSingleResultType | 'selects' | 'insert' | 'delete'
+type SqliteMessageType = SqliteMessageSingleResultType | 'selects' | 'insert' | 'delete' | 'init'
 interface SqliteMessage {
   type: SqliteMessageType
   txid: string

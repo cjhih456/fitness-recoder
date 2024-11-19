@@ -1,6 +1,6 @@
-import Sqlite3 from '../../Sqlite3'
+import type Sqlite3 from '../Sqlite3'
 
-export default function createScheduleTable(db: Sqlite3) {
+export default function create(db: Sqlite3) {
   // TODO: add migration steps by Process Version
 
   db.exec(`CREATE TABLE IF NOT EXISTS schedule (

@@ -1,4 +1,5 @@
-import Sqlite3InitModule, { BindingSpec, Database, OpfsDatabase } from '@sqlite.org/sqlite-wasm';
+import Sqlite3InitModule from '@sqlite.org/sqlite-wasm';
+import type { BindingSpec, Database, OpfsDatabase } from '@sqlite.org/sqlite-wasm';
 
 // Singleton instance
 let sqlite: Sqlite3 | undefined = undefined
@@ -7,29 +8,29 @@ const log = console.log;
 const error = console.error;
 
 class Sqlite3 {
-  db: undefined | Database | OpfsDatabase
-  dbPromise: undefined | Promise<Database | OpfsDatabase>
-  ready: boolean = false
+  private db: undefined | Database | OpfsDatabase
+  public ready: boolean = false
+
   constructor() {
     if (sqlite) return sqlite
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     sqlite = this
   }
   async init() {
-    if (this.db) return
-    this.db = await new Promise<Database | OpfsDatabase>((resolve) => {
-      Sqlite3InitModule({
+    if (this.db) return false
+    try {
+      const sqlite3Module = await Sqlite3InitModule({
         print: log,
-        printErr: error,
-      }).then((sqlite3) => {
-        resolve(sqlite3.oo1.OpfsDb
-          ? new sqlite3.oo1.OpfsDb('worker.sqlite3')
-          : new sqlite3.oo1.DB('workout.sqlite3', 'c'))
-        this.ready = true
-      }).catch(e => {
-        console.error('InitError', e)
+        printErr: error
       })
-    })
+      this.db = sqlite3Module.oo1.OpfsDb
+        ? new sqlite3Module.oo1.OpfsDb('worker.sqlite3', "c")
+        : new sqlite3Module.oo1.DB('workout.sqlite3', 'c')
+      this.ready = true
+    } catch (e) {
+      console.error('InitError', e)
+    }
+    return true
   }
 
   selectObject(

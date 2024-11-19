@@ -1,0 +1,37 @@
+{
+  "name": "@fitness/sqlite-worker",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./sqlite3.wasm": "./dist/sqlite3.wasm"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@sqlite.org/sqlite-wasm": "3.46.0-build2"
+  },
+  "devDependencies": {
+    "@types/sqlite-message-types": "*",
+    "typescript": "^5.2.2",
+    "vite": "^5.4.11",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-top-level-await": "^1.4.4",
+    "vite-plugin-wasm": "^3.3.0"
+  }
+}

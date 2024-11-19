@@ -1,6 +1,5 @@
 import { createHandler } from 'graphql-http/lib/use/fetch'
 import { mergeSchemas } from '@graphql-tools/schema'
-import Sqlite3 from './Sqlite3'
 import SetsInit from './graphql/Sets'
 import ExerciseInit from './graphql/Exercise'
 import ScheduleInit from './graphql/Schedule'
@@ -19,10 +18,8 @@ function baseURL(url?: string) {
 
 let dbTransitionBus: MessageTransactionBus | undefined = undefined
 
-const parent = { db: undefined, handlers: {}, origin: '' } as {
-  db: Sqlite3 | undefined
+const parent = { handlers: {} } as {
   handlers: { set: (r: Request) => Promise<Response> }
-  origin: string
 }
 
 
@@ -47,7 +44,7 @@ self.onactivate = (event) => {
 
 self.onfetch = async (event) => {
   const path = new URL(self.serviceWorker.scriptURL)
-  if (!event.request.url.startsWith(path.origin + baseURL('/'))) return
+  if (event.request.url.match(/(json|svg|(j|t)sx|css|wasm)/)) return
   if (!dbTransitionBus) {
     dbTransitionBus = new MessageTransactionBus()
   }

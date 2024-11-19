@@ -1,0 +1,8 @@
+{
+    "name": "@types/sqlite-message-types",
+    "private": "true",
+    "version": "0.1.0",
+    "types": "index.d.ts",
+    "scripts": {},
+    "dependencies": {}
+}

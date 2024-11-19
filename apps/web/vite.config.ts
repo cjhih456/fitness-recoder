@@ -35,7 +35,7 @@ export default defineConfig(({ mode, isPreview }) => {
       },
     } : {},
     optimizeDeps: {
-      exclude: ['@sqlite.org/sqlite-wasm'],
+      exclude: ['@fitness/sqlite-worker']
     },
     plugins: [
       Inspect(),
@@ -64,12 +64,11 @@ export default defineConfig(({ mode, isPreview }) => {
       rollupOptions: {
         input: {
           app: './index.html',
-          sqliteWorker: './workerSrc/SqliteWorker.ts',
           graphqlWorker: './workerSrc/GraphqlApi.ts',
         },
         output: {
           entryFileNames(info) {
-            if (info.facadeModuleId?.endsWith('SqliteWorker.ts') || info.facadeModuleId?.endsWith('GraphqlApi.ts')) {
+            if (info.facadeModuleId?.endsWith('GraphqlApi.ts')) {
               return '[name].js'
             }
             return 'assets/[name]-[hash].js'
@@ -78,5 +77,10 @@ export default defineConfig(({ mode, isPreview }) => {
       }
     },
     base: env.VITE_URL_ROOT,
+    worker: {
+      rollupOptions: {
+        treeshake: false
+      }
+    }
   }
 })
