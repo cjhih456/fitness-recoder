@@ -58,7 +58,7 @@
     "sourcemap": true,
     "clean": true,
     "bundle": false,
-    "target": "node14",
+    "target": "node20",
     "format": ["cjs", "esm"]
   }
 }

@@ -6,8 +6,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "typeRoots": ["./node_modules/@types"]
+    "strict": true
   },
   "include": ["./types/**/*", "workerSrc/**/*.ts"]
 }
