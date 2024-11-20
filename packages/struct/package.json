@@ -1,0 +1,32 @@
+{
+  "name": "@types/fitness-struct",
+  "private": "true",
+  "version": "0.1.0",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {},
+  "tsup": {
+    "entry": [
+      "index.ts"
+    ],
+    "dts": true,
+    "minify": false,
+    "sourcemap": true,
+    "clean": true,
+    "bundle": false,
+    "target": "node20",
+    "format": [
+      "cjs",
+      "esm"
+    ]
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  }
+}
