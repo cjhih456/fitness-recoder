@@ -1,18 +1,12 @@
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
-
-
-type RootContextType = {
-  getRoot: () => Element
-}
+import { ReactNode, useEffect, useMemo, useState } from 'react';
+import RootProviderContext from './RootProviderContext';
 
 export interface RootProviderProps {
   children: ReactNode
   selector?: string
 }
 
-export const RootProviderContext = createContext<RootContextType>({
-  getRoot: () => document.body
-})
+
 
 export const RootProvider = ({ children, selector }: RootProviderProps) => {
   const [root, setRoot] = useState<Element>(document.body)

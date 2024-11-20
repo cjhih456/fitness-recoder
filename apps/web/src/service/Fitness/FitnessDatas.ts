@@ -3,7 +3,7 @@ import Data from './FitnessData.json'
 import { Category, Equipment, Force, Level, Mechanic, Muscle } from './FitnessDataEnums'
 export const exercises = (Data as Exercise.IExercise[]).map((v, idx) => { v.idx = idx; return v })
 
-export const muscleList: { value: Muscle, text: string }[] = [
+export const muscleList: { value: Exercise.IMuscle, text: string }[] = [
   { value: Muscle.abdominals, text: 'Abdominals' },
   { value: Muscle.hamstrings, text: 'Hamstrings' },
   { value: Muscle.calves, text: 'Calves' },
@@ -22,7 +22,7 @@ export const muscleList: { value: Muscle, text: string }[] = [
   { value: Muscle.lats, text: 'Lats' },
   { value: Muscle.neck, text: 'Neck' },
 ]
-export const categoryList: { value: Category, text: string }[] = [
+export const categoryList: { value: Exercise.ICategory, text: string }[] = [
   { value: Category.strength, text: 'Strength' },
   { value: Category.stretching, text: 'Stretching' },
   { value: Category.plyometrics, text: 'Plyometrics' },

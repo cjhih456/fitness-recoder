@@ -5,7 +5,7 @@ export declare namespace Sets {
     exerciseId: number
     repeat: number
     isDone: boolean
-    weightUnit: keyof typeof Measure.WeightUnit
+    weightUnit: Measure.WeightUnit
     weight?: number
     duration?: number
   }

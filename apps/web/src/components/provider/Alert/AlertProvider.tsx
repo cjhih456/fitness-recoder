@@ -1,52 +1,15 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import CModal from '../../CustomComponent/CModal'
 import { useTranslation } from 'react-i18next'
-
-enum AlertType {
-  SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
-  ERROR = 'ERROR',
-}
-
-export interface BtnType {
-  message: string
-  colorClass: string
-}
-
-export interface AlertProviderProps {
-  children: ReactNode
-}
-
-export interface AlertData {
-  type: keyof typeof AlertType
-  message: string
-  important: boolean
-  confirm: BtnType | false
-  cancel: BtnType | false
-  resolver: ((_value: boolean | PromiseLike<boolean>) => void) | undefined
-}
-
-type AlertContextType = {
-  showAlert: (
-    _type: keyof typeof AlertType,
-    _message: string,
-    _important: boolean,
-    _confirm?: BtnType | false,
-    _cancel?: BtnType | false,
-  ) => Promise<boolean>
-}
-
-export const AlertContext = createContext<AlertContextType>({
-  showAlert: () => { return Promise.resolve(false) }
-})
+import AlertContext, { AlertContextType, AlertData, AlertProviderProps } from './AlertContext'
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
   const { t } = useTranslation('alert')
   const [alertMessageBuffer, appendAlertMessage] = useState<AlertData[]>([])
   const [displayMessage, setDisplayMessage] = useState<AlertData | undefined>()
 
-  const contextValue = {
+  const contextValue: AlertContextType = {
     showAlert: (type, message, important, confirm, cancel) => {
       const tempObj = {
         type,
@@ -62,7 +25,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
       appendAlertMessage([...alertMessageBuffer, tempObj])
       return promiser
     }
-  } as AlertContextType
+  }
 
   useEffect(() => {
     if (!displayMessage && alertMessageBuffer.length) {

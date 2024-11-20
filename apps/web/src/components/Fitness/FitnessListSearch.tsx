@@ -2,11 +2,11 @@ import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
 import { ReactNode, useMemo, useState } from 'react'
 import { categoryList, filterExcercises, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
-import { Category, Muscle } from '../../service/Fitness/FitnessDataEnums'
+import { Exercise } from 'fitness-struct'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode
   selectedList?: number[]
-  onChangeSelectedList?: (list: number[]) => void
+  onChangeSelectedList?: (_list: number[]) => void
   searchAreaBg?: boolean
   needSpace?: boolean
 }
@@ -14,8 +14,8 @@ export interface FitnessListSearchProps {
 
 export default function FitnessListSearch({ searchPrefix, selectedList, onChangeSelectedList, needSpace = false, searchAreaBg = false }: FitnessListSearchProps) {
   const [searchValue, changeSearchValue] = useState('')
-  const [selectedCategoryList, changeCategory] = useState<Category[]>([])
-  const [selectedMuscleList, changeMuscle] = useState<Muscle[]>([])
+  const [selectedCategoryList, changeCategory] = useState<Exercise.ICategory[]>([])
+  const [selectedMuscleList, changeMuscle] = useState<Exercise.IMuscle[]>([])
   const fitnessList = useMemo(() => {
     return filterExcercises(searchValue, selectedCategoryList, [], undefined, selectedMuscleList)
   }, [searchValue, selectedCategoryList, selectedMuscleList])
@@ -39,7 +39,7 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
           value={selectedCategoryList}
           items={categoryList}
           onSelectionChange={(v) => {
-            changeCategory(v === 'all' ? [] : Array.from(v) as Category[])
+            changeCategory(v === 'all' ? [] : Array.from(v) as Exercise.ICategory[])
           }}
           selectionMode='multiple'
           label="Workout Category"
@@ -50,7 +50,7 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
           value={selectedMuscleList}
           items={muscleList}
           onSelectionChange={(v) => {
-            changeMuscle(v === 'all' ? [] : Array.from(v) as Muscle[])
+            changeMuscle(v === 'all' ? [] : Array.from(v) as Exercise.IMuscle[])
           }}
           selectionMode='multiple'
           label="Target Muscle"

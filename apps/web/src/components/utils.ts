@@ -1,4 +1,4 @@
-
+export const enumify = <T extends { [index: string]: U }, U extends string>(x: T): T => x;
 // Zeller’s congruence
 function calcWeek(year: number, month: number, d: number = 1) {
   let m = month
@@ -48,13 +48,13 @@ export function baseURL(url?: string) {
   return (import.meta.env.VITE_URL_ROOT + (url ?? '')).replace(/\/\//g, '/')
 }
 
-export const enum ScheduleType {
-  BREAK = 'BREAK',
-  SCHEDULED = 'SCHEDULED',
-  STARTED = 'STARTED',
-  PAUSED = 'PAUSED',
-  FINISH = 'FINISH',
-}
+export const ScheduleType = enumify({
+  BREAK: 'BREAK',
+  SCHEDULED: 'SCHEDULED',
+  STARTED: 'STARTED',
+  PAUSED: 'PAUSED',
+  FINISH: 'FINISH',
+})
 
 export const calanderColor = (year: number, month: number, date: number, selectedYear: number, selectedMonth: number, selectedDate: number, type: string) => {
   if (

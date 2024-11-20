@@ -6,9 +6,9 @@ import { Sets } from 'fitness-struct'
 export interface SetRowProps {
   set: Sets.Sets
   index: number
-  hasSetChange?: (set: Sets.Sets) => void
-  hasDoneChange?: (isDone: boolean) => void
-  onRemoveSet?: (id: number) => void
+  hasSetChange?: (_set: Sets.Sets) => void
+  hasDoneChange?: (_isDone: boolean) => void
+  onRemoveSet?: (_id: number) => void
   readonly?: boolean
 }
 

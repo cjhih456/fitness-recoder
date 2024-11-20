@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { RootProviderContext } from './RootProvider'
+import RootProviderContext from './RootProviderContext'
 
 export const useRoot = () => {
   const context = useContext(RootProviderContext)

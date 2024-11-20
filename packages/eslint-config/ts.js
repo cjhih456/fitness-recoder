@@ -16,6 +16,7 @@ export default [{
     'typescript-eslint': tseslint.plugin
   },
   files: ['**/*.ts', '**/*.tsx'],
+  ignores: ["**/*.d.ts"],
   rules: {
     "typescript-eslint/ban-ts-comment": "off",
     "typescript-eslint/no-explicit-any": "off",

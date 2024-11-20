@@ -9,7 +9,7 @@ interface DateCalanderProps {
   startDate?: number
   endDate?: number
   statesByDate?: string[]
-  onChange: (v: number) => void
+  onChange: (_v: number) => void
 }
 
 const dateStr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
@@ -20,7 +20,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, st
   const daysCount = utils.getDaysByMonth(year)
   const startTemp = utils.calcWeek(year, month)
 
-  const temp = [[], [], [], [], [], []] as ReactNode[][]
+  const temp: ReactNode[][] = [[], [], [], [], [], []]
   const largeNum = daysCount[month - 1] + startTemp
   const times = 42
   for (let i = 0; i < times; i++) {

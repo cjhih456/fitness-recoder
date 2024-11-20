@@ -10,7 +10,7 @@ export interface ScheduleDisplayProps {
   schedule?: Schedule.Schedule
   exerciseList?: Exercise.Data[]
   date?: string
-  children?: (_id: number, _type?: keyof typeof Schedule.IType, _date?: string) => ReactNode
+  children?: (_id: number, _type?: Schedule.IType, _date?: string) => ReactNode
 }
 
 export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {

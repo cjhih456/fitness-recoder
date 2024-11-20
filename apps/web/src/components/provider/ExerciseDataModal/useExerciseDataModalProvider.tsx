@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ModalContext } from './ExerciseDataInfoModal'
+import { ModalContext } from './ExerciseDataModalContext'
 
 export const useExerciseDataModalProvider = () => {
   const context = useContext(ModalContext)

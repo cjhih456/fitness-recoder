@@ -19,9 +19,9 @@ function baseURL(url?: string) {
 
 let dbTransitionBus: MessageTransactionBus | undefined = undefined
 
-const parent = { handlers: {} } as {
-  handlers: { set: (_r: Request) => Promise<Response> }
-}
+const parent: {
+  handlers?: (_r: Request) => Promise<Response>
+} = { handlers: undefined }
 
 
 self.oninstall = () => {
@@ -49,8 +49,8 @@ self.onfetch = async (event) => {
   if (!dbTransitionBus) {
     dbTransitionBus = new MessageTransactionBus()
   }
-  if (!parent.handlers.set) {
-    parent.handlers.set = createHandler({
+  if (!parent.handlers) {
+    parent.handlers = createHandler({
       schema: mergeSchemas({
         schemas: [
           SetsInit(dbTransitionBus),
@@ -81,7 +81,7 @@ self.onfetch = async (event) => {
       const request = new Request(event.request, {
         headers: newHeaders
       })
-      event.respondWith(parent.handlers?.set(request))
+      event.respondWith(parent.handlers(request))
     }
   } else {
     const r = event.request

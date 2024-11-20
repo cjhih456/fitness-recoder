@@ -1,5 +1,5 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
-import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../../service/Fitness/FitnessDatas';
 import CModal from '../../CustomComponent/CModal';
 import ExercisePreviewVideo from './ExercisePreviewVideo';
@@ -7,14 +7,8 @@ import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exerc
 import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
 import { Exercise } from 'fitness-struct';
+import { ModalContext, ModalContextType } from './ExerciseDataModalContext';
 
-type ModalContextType = {
-  showModal: (exerciseId: number) => void
-}
-
-export const ModalContext = createContext<ModalContextType>({
-  showModal: () => { }
-})
 
 interface ExerciseDataInfoModalProps {
   children: ReactNode

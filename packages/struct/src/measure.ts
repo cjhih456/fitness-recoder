@@ -1,32 +1,24 @@
 export declare namespace Measure {
-  enum WeightModifier {
-    positive = 'positive',
-    negative = 'negative',
-  }
+  type WeightModifier = 'positive' |
+    'negative'
 
-  enum WeightUnit {
-    kg = 'kg',
-    lbs = 'lbs',
-  }
+  type WeightUnit = 'kg' |
+    'lbs'
 
-  enum DistanceUnit {
-    km = 'km',
-    miles = 'miles',
-  }
+  type DistanceUnit = 'km' |
+    'miles'
 
-  enum IFields {
-    reps = 'reps',
-    time = 'time',
-    distance = 'distance',
-    weight = 'weight',
-  }
+  type IFields = 'reps' |
+    'time' |
+    'distance' |
+    'weight'
 
   interface Measure {
-    requiredFields: (keyof typeof IFields)[];
-    optionalFields?: (keyof typeof IFields)[];
-    weightModifier?: keyof typeof WeightModifier;
-    weightUnit?: keyof typeof WeightUnit;
-    distanceUnit?: keyof typeof DistanceUnit;
+    requiredFields: IFields[];
+    optionalFields?: IFields[];
+    weightModifier?: WeightModifier;
+    weightUnit?: WeightUnit;
+    distanceUnit?: DistanceUnit;
   }
 }
 

@@ -5,7 +5,7 @@ interface YearCalanderProps {
   year: number
   startYear?: number,
   endYear?: number,
-  onChange?: (newYear: number) => void
+  onChange?: (_newYear: number) => void
 }
 export default function YearCalander({ year, startYear, endYear, onChange }: YearCalanderProps) {
   const displayStartYear = useMemo(() => startYear || 1900, [startYear])
@@ -29,8 +29,8 @@ export default function YearCalander({ year, startYear, endYear, onChange }: Yea
     }
     return temp
   }, [year, displayStartYear, displayEndYear, onChange])
-  
+
   return <div className="overflow-hidden flex flex-col gap-y-2">
     {displayList}
-  </div> 
+  </div>
 }

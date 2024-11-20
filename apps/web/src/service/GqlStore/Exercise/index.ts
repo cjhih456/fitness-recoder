@@ -27,10 +27,11 @@ export {
 
 export const ExerciseMockData: { [key: number]: Exercise.Data } = Array(20).fill(0).reduce((acc, cur, i) => {
   const id = i + 1
-  acc[id] = {
+  const temp: Exercise.Data = {
     deps: 0,
     exercise: i,
     id
-  } as Exercise.Data
+  }
+  acc[id] = temp
   return acc
 }, {})

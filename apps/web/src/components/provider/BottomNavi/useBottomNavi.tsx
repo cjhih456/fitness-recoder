@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react'
-import { BottomNavi } from './BottomNaviProvider'
+import BottomNaviContext from './BottomNaviContext'
 
 
 export const useBottomNaviContext = () => {
-  const context = useContext(BottomNavi)
+  const context = useContext(BottomNaviContext)
   if (!context) {
     throw new Error('Wrong position')
   }

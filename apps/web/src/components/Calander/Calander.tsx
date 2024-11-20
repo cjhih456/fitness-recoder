@@ -17,7 +17,7 @@ export interface CalanderProps {
   mode?: Mode
   value: string
   statesByDate?: string[],
-  onChange: (v: string) => void
+  onChange: (_v: string) => void
 }
 export default function Calender({
   startYear,

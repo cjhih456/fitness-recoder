@@ -5,7 +5,7 @@ interface MonthCalanderProps {
   startMonth?: number
   endMonth?: number
   month: number
-  onChange: (v: number) => void
+  onChange: (_v: number) => void
 }
 
 export default function MonthCalander({

@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 export interface FitnessItemProps {
   selectedExercise: FitnessListSelectedProps
   useSelect?: boolean
-  onClick?: (exercise: FitnessListSelectedProps, selected: boolean, isDetail: boolean) => void
+  onClick?: (_exercise: FitnessListSelectedProps, _selected: boolean, _isDetail: boolean) => void
 }
 export default function FitnessItem({ selectedExercise, onClick, useSelect }: FitnessItemProps) {
   const exerciseData = useMemo(() => {

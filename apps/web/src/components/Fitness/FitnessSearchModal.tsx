@@ -6,8 +6,8 @@ import CModal from '../CustomComponent/CModal'
 export interface FitnessSearchModalProps {
   selectedExerciseIdx: number[]
   isOpen: boolean
-  onOpenChange: (isOpen: boolean) => void
-  onChangeExerciseIdxList?: (exerciseList: number[]) => void
+  onOpenChange: (_isOpen: boolean) => void
+  onChangeExerciseIdxList?: (_exerciseList: number[]) => void
 }
 
 export default function FitnessSearchModal({
