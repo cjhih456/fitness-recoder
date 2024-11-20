@@ -1,7 +1,6 @@
 {
   "name": "vite-plugin-i18next-language-pack-loader",
   "type": "module",
-  "private": true,
   "version": "0.1.0",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
