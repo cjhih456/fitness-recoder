@@ -1,8 +1,9 @@
+import { SqliteMessage } from 'sqlite-message-types'
 import { v4 as uuid } from 'uuid'
 
-type TransactionCallBack<T> = (result: T) => any
+type TransactionCallBack<T> = (_result: T) => void
 
-type PromiseResolve = (data: any) => void
+type PromiseResolve = (_data: any) => void
 
 export default class MessageTransactionBus {
 
@@ -18,7 +19,7 @@ export default class MessageTransactionBus {
     if (tx) tx(resultData || null)
   }
 
-  async sendTransaction<T = any>(clientId: string, type: SqliteMessageType, query: string, bindArgs: any[], callBack?: TransactionCallBack<T | null>): Promise<T | null> {
+  async sendTransaction<T = any>(clientId: string, type: SqliteMessage.Type, query: string, bindArgs: any[], callBack?: TransactionCallBack<T | null>): Promise<T | null> {
     const client = await this.clients?.get(clientId)
     const txid = uuid()
     return new Promise<T | null>((resolve) => {

@@ -3,10 +3,13 @@
     "composite": true,
     "skipLibCheck": true,
     "lib": ["ES2020", "WebWorker"],
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "strict": true
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": "."
   },
-  "include": ["./types/**/*", "workerSrc/**/*.ts"]
+  "files": ["package.json"],
+  "include": ["./types/**/*", "src/**/*"]
 }

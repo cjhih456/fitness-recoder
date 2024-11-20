@@ -5,6 +5,7 @@ import ExerciseInit from './graphql/Exercise'
 import ScheduleInit from './graphql/Schedule'
 import ExercisePresetInit from './graphql/ExercisePreset'
 import MessageTransactionBus from './transaction/MessageTransactionBus'
+import { SqliteMessage } from 'sqlite-message-types'
 
 declare const self: ServiceWorkerGlobalScope
 
@@ -19,7 +20,7 @@ function baseURL(url?: string) {
 let dbTransitionBus: MessageTransactionBus | undefined = undefined
 
 const parent = { handlers: {} } as {
-  handlers: { set: (r: Request) => Promise<Response> }
+  handlers: { set: (_r: Request) => Promise<Response> }
 }
 
 
@@ -29,7 +30,7 @@ self.oninstall = () => {
 
 self.onmessage = (e) => {
   if ('txid' in e.data && 'object' in e.data && 'type' in e.data) {
-    const result = e.data as SqliteResultType
+    const result = e.data as SqliteMessage.Result
     dbTransitionBus && dbTransitionBus.gotResult(result.txid, result.object)
   }
 }

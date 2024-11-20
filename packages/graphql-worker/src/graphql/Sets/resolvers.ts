@@ -1,3 +1,4 @@
+import { Sets } from 'fitness-struct';
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 
@@ -5,7 +6,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   Query: {
     async getSetByIds(_source, { ids }, context) {
       const temp = new Array(ids.length).fill('?').join(', ')
-      const setList = await dbTransitionBus?.sendTransaction<Sets[]>(
+      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
         context.client,
         'selects', `select * from sets where id in (${temp})`,
         ids
@@ -13,7 +14,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return setList || []
     },
     async getSetById(_source, { id }, context) {
-      const set = await dbTransitionBus?.sendTransaction<Sets>(
+      const set = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'select', 'select * from sets where id=?',
         [id]
@@ -21,7 +22,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return set || null
     },
     async getSetListByExerciseId(_source, { id }, context) {
-      const setList = await dbTransitionBus?.sendTransaction<Sets[]>(
+      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
         context.client,
         'selects', 'select * from sets where exerciseId=?',
         [id]
@@ -46,7 +47,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return createdResult && createdResult[0] ? createdResult[0] : null
     },
     async updateSet(_source, { sets }, context) {
-      const updateResult = await dbTransitionBus?.sendTransaction<Sets>(
+      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
         [

@@ -1,13 +1,14 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
+import { Exercise } from 'fitness-struct'
 
 export async function getExerciseListByScheduleIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number
-): Promise<ExerciseData[] | null> {
+): Promise<Exercise.Data[] | null> {
   if (!dbBus) return Promise.resolve(null)
-  return dbBus?.sendTransaction<ExerciseData[]>(client,
+  return dbBus?.sendTransaction<Exercise.Data[]>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from schedule_exercise where scheduleId = ?)',
     [scheduleId]
@@ -20,7 +21,7 @@ export async function getExerciseListByExercisePresetIdTemp(
   exercisePresetId: number
 ) {
   if (!dbBus) return Promise.resolve(null)
-  return dbBus?.sendTransaction<ExerciseData[]>(client,
+  return dbBus?.sendTransaction<Exercise.Data[]>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
     [exercisePresetId]
@@ -31,10 +32,10 @@ export async function getExerciseListByExercisePresetIdTemp(
 export async function cloneExerciseList(
   dbBus: MessageTransactionBus | undefined,
   client: string,
-  exerciseList: ExerciseData[]
-): Promise<ExerciseData[]> {
+  exerciseList: Exercise.Data[]
+): Promise<Exercise.Data[]> {
   return await Promise.all(exerciseList.map(async (exercise) => {
-    const newExercise = await dbBus?.sendTransaction<ExerciseData[]>(
+    const newExercise = await dbBus?.sendTransaction<Exercise.Data[]>(
       client,
       'insert',
       'insert into exercise (exercise) values (?)',
@@ -58,10 +59,10 @@ async function createExerciseByIdsTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   exerciseIds: number[] | number
-): Promise<ExerciseData[]> {
+): Promise<Exercise.Data[]> {
   const temp = Array.isArray(exerciseIds) ? exerciseIds : [exerciseIds]
   const tempQuestion = new Array(temp.length).fill('(?)').join(',')
-  const result = await dbBus?.sendTransaction<ExerciseData | ExerciseData[]>(client,
+  const result = await dbBus?.sendTransaction<Exercise.Data | Exercise.Data[]>(client,
     'insert',
     `insert into exercise (exercise) values ${tempQuestion}`,
     temp
@@ -73,7 +74,7 @@ async function createExerciseRelationWithSchedule(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number,
-  exerciseList: ExerciseData[]
+  exerciseList: Exercise.Data[]
 ) {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [scheduleId, v.id])
@@ -89,7 +90,7 @@ async function createExerciseRelationWithExercisePreset(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   exercisePresetId: number,
-  exerciseList: ExerciseData[]
+  exerciseList: Exercise.Data[]
 ) {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [exercisePresetId, v.id])
@@ -123,7 +124,7 @@ export async function deleteExerciseByIdsTemp(
     `delete from sets where exerciseId in (${tempQuestion})`,
     temp
   )
-  await dbBus?.sendTransaction<ExerciseData[]>(client,
+  await dbBus?.sendTransaction<Exercise.Data[]>(client,
     'delete',
     `delete from exercise where id in (${tempQuestion})`,
     temp
@@ -135,7 +136,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   Query: {
     getExerciseById(_source, { id }, context) {
       return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction<ExerciseData>(
+        dbTransitionBus?.sendTransaction<Exercise.Data>(
           context.client,
           'select',
           'select * from exercise where id=?',
@@ -149,7 +150,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     getExerciseListByIds(_source, { ids }, context) {
       return new Promise((resolve, reject) => {
         const temp = new Array(ids.length).fill('?').join(', ')
-        dbTransitionBus?.sendTransaction<ExerciseData[]>(
+        dbTransitionBus?.sendTransaction<Exercise.Data[]>(
           context.client,
           'select',
           `select * from exercise where id in (${temp})`,
@@ -171,7 +172,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
     },
     async getExerciseFinishHistory(_source, { exerciseId }, context) {
-      const result = await dbTransitionBus?.sendTransaction<ExerciseHistoryData[]>(
+      const result = await dbTransitionBus?.sendTransaction<Exercise.HistoryData[]>(
         context.client,
         'selects',
         `select
@@ -289,7 +290,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
     },
     updateExercise(_source, { id, exerciseId }, context) {
-      return dbTransitionBus?.sendTransaction<ExerciseData>(
+      return dbTransitionBus?.sendTransaction<Exercise.Data>(
         context.client,
         'update',
         'update set exercise exerciseId=? where id=?',

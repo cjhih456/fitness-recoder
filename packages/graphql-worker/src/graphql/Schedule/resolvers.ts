@@ -1,11 +1,12 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 import { cloneExerciseList, deleteExerciseByIdsTemp, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
+import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
     async getScheduleById(_source, { id }, context) {
-      const schedule = await dbTransitionBus?.sendTransaction<Schedule>(
+      const schedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'select', 'select * from schedule where id=?',
         [id]
@@ -13,7 +14,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return schedule || null
     },
     async getScheduleByDate(_source, { year, month, date }, context) {
-      const scheduleList = await dbTransitionBus?.sendTransaction<Schedule[]>(
+      const scheduleList = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
         context.client,
         'selects', 'select * from schedule where year=? and month=? and date=?',
         [year, month, date]
@@ -34,7 +35,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   },
   Mutation: {
     async createSchedule(_source, { schedule }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Schedule[]>(
+      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
@@ -52,7 +53,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return result && result[0] ? { ...result[0], ...schedule } : null
     },
     async updateSchedule(_source, { schedule }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Schedule[]>(
+      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
         context.client,
         'update',
         'update schedule set year=?, month=?, date=?, beforeTime=?, start=?, breakTime=?, workoutTimes=?, type=? where id=?',
@@ -90,7 +91,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return `delete - schedule - ${id}`
     },
     async cloneSchedule(_source, { id, targetDate }, context) {
-      const originalSchedule = await dbTransitionBus?.sendTransaction<Schedule>(
+      const originalSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'select',
         'select * from schedule where id=?',
@@ -101,7 +102,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         throw new Error('Cannot find Schedule');
       }
 
-      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule[]>(
+      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
@@ -140,7 +141,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return newSchedule[0];
     },
     async cloneScheduleFromPreset(_source, { presetId, targetDate }, context) {
-      const preset = await dbTransitionBus?.sendTransaction<ExercisePreset>(
+      const preset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
         'select',
         'select * from exercisePreset where id=?',
@@ -150,7 +151,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         throw new Error('Cannot find ExercisePreset')
       }
 
-      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule[]>(
+      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',

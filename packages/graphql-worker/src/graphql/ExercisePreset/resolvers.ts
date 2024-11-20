@@ -1,6 +1,7 @@
 import MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { IResolvers } from '@graphql-tools/utils';
 import { cloneExerciseList, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
+import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -25,7 +26,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     },
     async getExercisePresetByIds(_source, { ids }, context) {
       const temp = new Array(ids.length).fill('?').join(', ')
-      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset[]>(
+      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset[]>(
         context.client,
         'select',
         `select * from exercisePreset where id in (${temp})`,
@@ -34,7 +35,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return exercisePresetList || []
     },
     async getExercisePresetById(_source, { id }, context) {
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset>(
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
         'select',
         'select * from exercisePreset where id=?',
@@ -106,7 +107,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return `delete - exercisePreset - ${id}`
     },
     async saveScheduleAsExercisePreset(_source, { scheduleId, name }, context) {
-      const schedule = await dbTransitionBus?.sendTransaction<Schedule>(
+      const schedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'select',
         'select * from schedule where id=?',
@@ -114,7 +115,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       if (!schedule) return null;
 
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset[]>(
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset[]>(
         context.client,
         'insert',
         'insert into exercisePreset (name) values (?)',

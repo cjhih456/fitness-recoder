@@ -1,22 +1,18 @@
+import { SqliteMessage } from 'sqlite-message-types'
 import { baseURL } from './components/utils'
+import graphqlWorkerUrl from '@fitness/graphql-worker?worker&url'
 import sqliteWorkerUrl from '@fitness/sqlite-worker?worker&url'
 export default () => {
   return new Promise<boolean>((resolve) => {
     if (window) {
       if ('serviceWorker' in navigator) {
         (async () => {
-          let graphqlApiUrl = '../workerSrc/GraphqlApi.ts'
-          if (!import.meta.env.DEV) {
-            graphqlApiUrl = baseURL('/graphqlWorker.js')
-          } else {
-            graphqlApiUrl = new URL(graphqlApiUrl, import.meta.url).href
-          }
           /**
            * Create Service worker & Sqlite Worker
            */
           const sqliteWorker = new Worker(sqliteWorkerUrl, { name: 'sqlite', credentials: 'same-origin', type: 'module' })
           sqliteWorker.postMessage({ type: 'init' })
-          const workerRegistration = await navigator.serviceWorker.register(graphqlApiUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') }).then((registration) => {
+          const workerRegistration = await navigator.serviceWorker.register(graphqlWorkerUrl, { type: 'module', updateViaCache: 'imports', scope: baseURL('/') }).then((registration) => {
             registration.addEventListener('updatefound', () => {
               console.log('Reloading page to update Graphql Service Worker.')
               window.location.reload()
@@ -33,7 +29,7 @@ export default () => {
            * Bridge between Service worker & Sqlite Worker
            * used Message Channel
            */
-          navigator.serviceWorker.addEventListener('message', async (e: MessageEvent<SqliteMessage>) => {
+          navigator.serviceWorker.addEventListener('message', async (e: MessageEvent<SqliteMessage.Message>) => {
             const workers = await navigator.serviceWorker.getRegistrations()
             const worker = workers.find(v => {
               if (v.scope !== location.origin + baseURL('/')) return false
@@ -45,7 +41,7 @@ export default () => {
             }
           })
 
-          sqliteWorker.addEventListener('message', (e: MessageEvent<SqliteResultType>) => {
+          sqliteWorker.addEventListener('message', (e: MessageEvent<SqliteMessage.Result>) => {
             const worker = workerRegistration.active || workerRegistration.installing || workerRegistration.waiting
             worker?.postMessage(e.data)
           })

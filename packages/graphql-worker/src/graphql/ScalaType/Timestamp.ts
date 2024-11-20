@@ -17,12 +17,10 @@ function parseDate(value: any) {
   if (value === null) {
     return null;
   }
-
-  try {
+  if (typeof value === 'number') {
     return Math.trunc(value);
-  } catch (err) {
-    return null;
   }
+  return null
 }
 
 function parseDateFromLiteral(ast: any) {

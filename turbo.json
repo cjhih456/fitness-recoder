@@ -3,12 +3,20 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "env": ["VITE_URL_ROOT", "/fitness-recoder"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^vite-plugin-i18next-language-pack-loader#build"]
+      "dependsOn": [
+        "^@types/sqlite-message-types#build",
+        "^@types/fitness-struct#build",
+        "^vite-plugin-i18next-language-pack-loader#build",
+        "^@fitness/graphql-worker#build",
+        "^@fitness/sqlite-worker#build"
+      ],
+      "env": ["VITE_URL_ROOT", "/"]
     }
   },
   "ui": "stream"
