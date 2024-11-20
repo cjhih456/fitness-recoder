@@ -24,16 +24,16 @@ export interface AlertData {
   important: boolean
   confirm: BtnType | false
   cancel: BtnType | false
-  resolver: ((value: boolean | PromiseLike<boolean>) => void) | undefined
+  resolver: ((_value: boolean | PromiseLike<boolean>) => void) | undefined
 }
 
 type AlertContextType = {
   showAlert: (
-    type: keyof typeof AlertType,
-    message: string,
-    important: boolean,
-    confirm?: BtnType | false,
-    cancel?: BtnType | false,
+    _type: keyof typeof AlertType,
+    _message: string,
+    _important: boolean,
+    _confirm?: BtnType | false,
+    _cancel?: BtnType | false,
   ) => Promise<boolean>
 }
 

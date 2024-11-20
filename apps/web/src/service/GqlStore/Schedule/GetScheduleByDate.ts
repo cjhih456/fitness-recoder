@@ -1,9 +1,10 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
+import { Schedule } from 'fitness-struct'
 
 
-type GetScheduleByDateResponse = { getScheduleByDate: Schedule[] }
+type GetScheduleByDateResponse = { getScheduleByDate: Schedule.Schedule[] }
 type GetScheduleByDateVariable = { year: number, month: number, date: number }
 const getScheduleByDateGql = gql`
 query GetScheduleByDate($year: Int!, $month: Int!, $date: Int!) {

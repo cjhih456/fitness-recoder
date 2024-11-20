@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataDisplay, { ExerciseDataDisplayProps } from './ExerciseDataDisplay';
 import { fn } from '@storybook/test';
+import { Exercise } from 'fitness-struct';
 const meta = {
   title: 'ExerciseData/ExerciseDataDisplay',
   tags: ['autodocs'],
@@ -20,7 +21,7 @@ const meta = {
         id: 1,
         exercise: 1,
         deps: 0
-      } as ExerciseData
+      } as Exercise.Data
       Object.assign(options.args, { exerciseData: obj })
       return <div>
         < Story {...options} />

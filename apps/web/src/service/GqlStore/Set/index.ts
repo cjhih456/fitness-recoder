@@ -2,6 +2,7 @@ import { useGetSetListByExerciseId, useLazyGetSetListByExerciseId } from './GetS
 import { useCreateSet } from './CreateSet'
 import { useUpdateSet } from './UpdateSet'
 import { useDeleteSet } from './DeleteSet'
+import { Sets } from 'fitness-struct'
 
 export {
   useGetSetListByExerciseId,
@@ -11,7 +12,7 @@ export {
   useDeleteSet,
 }
 
-export const SetMockData: { [key: number]: Sets } = Array(20).fill(0).reduce((acc, cur, idx) => {
+export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce((acc, cur, idx) => {
   const id = idx + 1
   acc[id] = {
     id: id,

@@ -1,10 +1,11 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
+import { Schedule } from 'fitness-struct'
 
 
-type CreateScheduleResponse = { createSchedule: Schedule }
-type CreaetScheduleVariable = { createSchedule: CreateSchedule }
+type CreateScheduleResponse = { createSchedule: Schedule.Schedule }
+type CreaetScheduleVariable = { createSchedule: Schedule.ICreate }
 const CreateScheduleGql = gql`
 mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
   createSchedule(schedule: $createSchedule) {

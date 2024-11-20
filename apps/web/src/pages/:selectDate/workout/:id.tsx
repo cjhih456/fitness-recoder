@@ -12,6 +12,7 @@ import { LogEvent } from '../../../service/firebase'
 import { useCloneSchedule } from '../../../service/GqlStore/Schedule'
 import { useSaveScheduleAsExercisePreset } from '../../../service/GqlStore/ExercisePreset'
 import PresetNameInputDialog from '../../../components/Preset/PresetNameInputDialog'
+import { Schedule } from 'fitness-struct'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
@@ -19,7 +20,7 @@ export default function DisplayWorkout() {
   const navigate = useNavigate()
   const alert = useAlert()
   const [getSchedule] = useLazyGetScheduleById()
-  const [lazySchedule, updateLazySchedule] = useState<Schedule | undefined>()
+  const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule | undefined>()
   const [updateSchedule] = useUpdateSchedule()
   const [cloneSchedule] = useCloneSchedule()
   const [saveScheduleAsExercisePreset] = useSaveScheduleAsExercisePreset()

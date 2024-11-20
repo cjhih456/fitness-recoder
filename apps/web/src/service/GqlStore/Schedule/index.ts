@@ -7,7 +7,7 @@ import { useLazyGetScheduleStateByDate } from './GetScheduleStatusByDate'
 import { useUpdateSchedule } from './UpdateSchedule'
 import { useCloneSchedule } from './CloneSchedule'
 import { useCloneScheduleFromPreset } from './CloneScheduleFromPreset'
-
+import { Schedule } from 'fitness-struct'
 export {
   useCreateSchedule,
   useDeleteSchedule,
@@ -25,7 +25,7 @@ const month = today.getMonth() + 1
 const year = today.getFullYear()
 const daysByMonth = utils.getDaysByMonth(year)
 const typeTemp = [ScheduleType.BREAK, ScheduleType.FINISH, ScheduleType.PAUSED, ScheduleType.SCHEDULED, ScheduleType.STARTED]
-export const ScheduleMockData: { [key: number]: Schedule } = Array(daysByMonth[month] - 1).fill(0).reduce((acc, cur, i) => {
+export const ScheduleMockData: { [key: number]: Schedule.Schedule } = Array(daysByMonth[month] - 1).fill(0).reduce((acc, cur, i) => {
   const id = i + 1
   acc[id] = {
     date: id,
@@ -37,6 +37,6 @@ export const ScheduleMockData: { [key: number]: Schedule } = Array(daysByMonth[m
     breakTime: 0,
     start: 0,
     workoutTimes: 0
-  } as Schedule
+  } as Schedule.Schedule
   return acc
 }, {})

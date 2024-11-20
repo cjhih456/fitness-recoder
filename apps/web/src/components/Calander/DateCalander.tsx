@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/react'
 import utils from '../utils'
-import { useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { calanderColor } from '../utils'
 interface DateCalanderProps {
   year: number
@@ -20,7 +20,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, st
   const daysCount = utils.getDaysByMonth(year)
   const startTemp = utils.calcWeek(year, month)
 
-  const temp = [[], [], [], [], [], []] as JSX.Element[][]
+  const temp = [[], [], [], [], [], []] as ReactNode[][]
   const largeNum = daysCount[month - 1] + startTemp
   const times = 42
   for (let i = 0; i < times; i++) {

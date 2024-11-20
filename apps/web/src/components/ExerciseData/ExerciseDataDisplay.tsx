@@ -2,9 +2,10 @@ import { Button } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
 import SetRow from './SetRow';
 import { useCreateSet, useDeleteSet, useLazyGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
+import { Exercise } from 'fitness-struct';
 
 export interface ExerciseDataDisplayProps {
-  exerciseData: ExerciseData
+  exerciseData: Exercise.Data
   hasDoneLastSet?: () => void
   readonly?: boolean
 }

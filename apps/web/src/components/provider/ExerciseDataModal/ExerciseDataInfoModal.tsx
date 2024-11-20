@@ -1,11 +1,12 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../../service/Fitness/FitnessDatas';
 import CModal from '../../CustomComponent/CModal';
 import ExercisePreviewVideo from './ExercisePreviewVideo';
 import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';
 import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
+import { Exercise } from 'fitness-struct';
 
 type ModalContextType = {
   showModal: (exerciseId: number) => void
@@ -15,19 +16,19 @@ export const ModalContext = createContext<ModalContextType>({
   showModal: () => { }
 })
 
-interface ExerciseDataInfoModal {
-  children: React.ReactNode
+interface ExerciseDataInfoModalProps {
+  children: ReactNode
 }
 
 export default function ExerciseDataInfoModal({
   children
-}: ExerciseDataInfoModal) {
+}: ExerciseDataInfoModalProps) {
   const { t } = useTranslation(['exerciseDataInfo', 'common'])
   const [loadHistory] = useLazyGetExerciseFinishHistory()
   const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
-  const [exerciseData, setExerciseData] = useState<IExercise | undefined>()
+  const [exerciseData, setExerciseData] = useState<Exercise.IExercise | undefined>()
   const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
-  const [history, setHistory] = useState<ExerciseHistoryData[]>([])
+  const [history, setHistory] = useState<Exercise.HistoryData[]>([])
   const instructions = useMemo(() => {
     const tempList = Array.isArray(exerciseData?.instructions) ? exerciseData?.instructions : [exerciseData?.instructions]
     return tempList.filter(Boolean)
@@ -117,7 +118,7 @@ export default function ExerciseDataInfoModal({
             <Button onClick={() => {
               onCloseAction()
             }}>
-              {t('close')}
+              {t('common:close')}
             </Button>
           </ModalFooter>
         </>)}

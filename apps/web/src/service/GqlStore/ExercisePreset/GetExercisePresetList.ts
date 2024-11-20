@@ -1,8 +1,9 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
+import { ExercisePreset } from 'fitness-struct'
 
-type GetExercisePresetListResponse = { getExercisePresetList: ExercisePresetWithExerciseList[] }
+type GetExercisePresetListResponse = { getExercisePresetList: ExercisePreset.PresetWithExerciseList[] }
 type GetExercisePresetListVariable = { page: number, size: number }
 const getExercisePresetListGql = gql`
 query GetExercisePresetList($page: Int, $size: Int) {

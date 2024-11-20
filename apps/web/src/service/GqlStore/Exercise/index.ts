@@ -6,6 +6,7 @@ import { useGetExerciseFinishHistory, useLazyGetExerciseFinishHistory } from './
 import { useGetExerciseListByScheduleId, useLazyGetExerciseListByScheduleId } from './GetExerciseListByScheduleId'
 import { useUpdateExerciseListByExercisePresetId } from './UpdateExerciseListByExercisePresetId'
 import { useUpdateExerciseListByScheduleId } from './UpdateExerciseListByScheduleId'
+import { Exercise } from 'fitness-struct'
 
 
 export {
@@ -24,12 +25,12 @@ export {
   useUpdateExerciseListByExercisePresetId,
 }
 
-export const ExerciseMockData: { [key: number]: ExerciseData } = Array(20).fill(0).reduce((acc, cur, i) => {
+export const ExerciseMockData: { [key: number]: Exercise.Data } = Array(20).fill(0).reduce((acc, cur, i) => {
   const id = i + 1
   acc[id] = {
     deps: 0,
     exercise: i,
     id
-  } as ExerciseData
+  } as Exercise.Data
   return acc
 }, {})

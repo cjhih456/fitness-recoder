@@ -1,9 +1,10 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
+import { Exercise } from 'fitness-struct'
 
 
 type UpdateExerciseListByExercisePresetIdResponse = {
-  updateExerciseListByExercisePresetId: ExerciseData[]
+  updateExerciseListByExercisePresetId: Exercise.Data[]
 }
 type UpdateExerciseListByExercisePresetIdVariable = {
   exercisePresetId: number,

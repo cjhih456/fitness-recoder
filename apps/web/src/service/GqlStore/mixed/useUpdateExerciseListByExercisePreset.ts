@@ -1,10 +1,11 @@
+import { Exercise } from 'fitness-struct';
 import { useUpdateExerciseListByExercisePresetId } from '../Exercise';
 
 export function useUpdateExerciseListByExercisePreset() {
   const [updateList] = useUpdateExerciseListByExercisePresetId()
-  return async (exercisePresetId: number, oldExerciseList: ExerciseData[], exerciseList: number[]) => {
-    const removeNeedExerciseData = [] as ExerciseData[]
-    const keepExerciseData = [] as ExerciseData[]
+  return async (exercisePresetId: number, oldExerciseList: Exercise.Data[], exerciseList: number[]) => {
+    const removeNeedExerciseData = [] as Exercise.Data[]
+    const keepExerciseData = [] as Exercise.Data[]
     const createNeedExerciseId = [] as number[]
 
     oldExerciseList.forEach((e) => {

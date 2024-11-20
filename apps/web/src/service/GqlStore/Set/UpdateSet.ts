@@ -1,9 +1,10 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { SetMockData } from '.'
+import { Sets } from 'fitness-struct'
 
-type updateSetResponse = { updateSet: Sets }
-type updateSetVariable = { sets: Sets }
+type updateSetResponse = { updateSet: Sets.Sets }
+type updateSetVariable = { sets: Sets.Sets }
 const updateSetGql = gql`
 mutation updateSet($sets: UpdateSetsInput!) {
   updateSet(sets: $sets) {

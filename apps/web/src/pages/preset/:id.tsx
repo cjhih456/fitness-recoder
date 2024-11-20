@@ -9,6 +9,7 @@ import { useUpdateExerciseListByExercisePreset } from '../../service/GqlStore/mi
 import { useTranslation } from 'react-i18next'
 import { useCloneScheduleFromPreset } from '../../service/GqlStore/Schedule'
 import { useDeleteExercisePreset } from '../../service/GqlStore/ExercisePreset'
+import { Exercise, ExercisePreset } from 'fitness-struct'
 
 
 export default function PresetDetailPage() {
@@ -21,8 +22,8 @@ export default function PresetDetailPage() {
   const [cloneScheduleFromPreset] = useCloneScheduleFromPreset()
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
   const [deleteExercisePreset] = useDeleteExercisePreset()
-  const [exercisePreset, setExercisePreset] = useState<ExercisePreset | undefined>()
-  const [exerciseIdxList, changeExerciseIdxList] = useState<ExerciseData[]>([])
+  const [exercisePreset, setExercisePreset] = useState<ExercisePreset.Preset | undefined>()
+  const [exerciseIdxList, changeExerciseIdxList] = useState<Exercise.Data[]>([])
   const [newExerciseList, changeNewExerciseList] = useState<number[]>([])
   const oldExerciseList = useMemo(() => exerciseIdxList.map(v => v.exercise), [exerciseIdxList])
 

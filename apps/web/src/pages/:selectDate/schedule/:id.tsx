@@ -7,6 +7,7 @@ import { useGetScheduleById } from '../../../service/GqlStore/Schedule';
 import { useLazyGetExerciseListByScheduleId } from '../../../service/GqlStore/Exercise';
 import { useUpdateExerciseListBySchedule } from '../../../service/GqlStore/mixed/useUpdateExerciseListBySchedule';
 import { LogEvent } from '../../../service/firebase';
+import { Exercise } from 'fitness-struct';
 
 export default function DisplaySchedule() {
   HeaderHandler(['Schedule'])
@@ -16,7 +17,7 @@ export default function DisplaySchedule() {
   const { data: selectedSchedule } = useGetScheduleById(Number(id || 0))
   const [loadExerciseList] = useLazyGetExerciseListByScheduleId()
   const updateExerciseList = useUpdateExerciseListBySchedule()
-  const [savedExercise, setSavedExercise] = useState<ExerciseData[]>([])
+  const [savedExercise, setSavedExercise] = useState<Exercise.Data[]>([])
   useEffect(() => {
     LogEvent('visit_schedule_detail')
     loadExerciseList({ variables: { scheduleId: Number(id || 0) } }).then((result) => {

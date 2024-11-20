@@ -6,12 +6,13 @@ import { Button, ScrollShadow } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { useTranslation } from 'react-i18next'
+import { Schedule } from 'fitness-struct'
 
 export default function Main() {
   useBottomNavi()
   const { t } = useTranslation(['main', 'common', 'scheduleList', 'title'])
   const navigate = useNavigate()
-  const [scheduleList, setScheduleList] = useState<Schedule[]>([])
+  const [scheduleList, setScheduleList] = useState<Schedule.Schedule[]>([])
   const [loadScheduleData] = useLazyGetScheduleByDate()
   HeaderHandler([t('title:home')])
   useEffect(() => {

@@ -1,10 +1,10 @@
 import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
-import { useMemo, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { categoryList, filterExcercises, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
 import { Category, Muscle } from '../../service/Fitness/FitnessDataEnums'
 export interface FitnessListSearchProps {
-  searchPrefix?: JSX.Element
+  searchPrefix?: ReactNode
   selectedList?: number[]
   onChangeSelectedList?: (list: number[]) => void
   searchAreaBg?: boolean

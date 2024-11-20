@@ -1,7 +1,8 @@
+import { Exercise } from 'fitness-struct'
 import SimpleFitnessItem from './SimpleFitnessItem'
 
 export interface SimpleFitnessListProps {
-  exerciseDataList: ExerciseData[]
+  exerciseDataList: Exercise.Data[]
 }
 
 export default function SimpleFitnessList({ exerciseDataList }: SimpleFitnessListProps) {

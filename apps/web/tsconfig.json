@@ -8,8 +8,10 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    "preserveSymlinks": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
@@ -20,6 +22,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["vite.config.ts", "vitePlugin", "./types/**/*", "./src/**/*"],
 }

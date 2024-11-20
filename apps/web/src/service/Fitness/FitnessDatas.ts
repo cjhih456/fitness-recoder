@@ -1,6 +1,7 @@
+import { Exercise } from 'fitness-struct';
 import Data from './FitnessData.json'
 import { Category, Equipment, Force, Level, Mechanic, Muscle } from './FitnessDataEnums'
-export const exercises = (Data as IExercise[]).map((v, idx) => { v.idx = idx; return v })
+export const exercises = (Data as Exercise.IExercise[]).map((v, idx) => { v.idx = idx; return v })
 
 export const muscleList: { value: Muscle, text: string }[] = [
   { value: Muscle.abdominals, text: 'Abdominals' },

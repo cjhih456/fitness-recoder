@@ -1,9 +1,10 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
+import { Schedule } from 'fitness-struct'
 
 
-type CloneScheduleResponse = { cloneSchedule: Schedule }
+type CloneScheduleResponse = { cloneSchedule: Schedule.Schedule }
 type CloneScheduleVariable = { id: number, targetDate: { year: number, month: number, date: number } }
 const CloneScheduleGql = gql`
 mutation CloneSchedule($id: ID!, $targetDate: TargetDateInput) {
@@ -30,7 +31,7 @@ export const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneSched
   result: (v) => {
     const id = Math.max(...Object.keys(ScheduleMockData).map(Number)) + 1
     ScheduleMockData[id] = {
-      ...(ScheduleMockData[v.id] as Schedule),
+      ...(ScheduleMockData[v.id] as Schedule.Schedule),
       id,
       year: v.targetDate.year,
       month: v.targetDate.month,

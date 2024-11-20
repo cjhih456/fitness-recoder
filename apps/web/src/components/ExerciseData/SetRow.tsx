@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react'
 import { Button, Checkbox, Input } from '@nextui-org/react'
 import { MdClear } from 'react-icons/md'
 import { useDebounce } from '../../hooks/useDebounce'
+import { Sets } from 'fitness-struct'
 export interface SetRowProps {
-  set: Sets
+  set: Sets.Sets
   index: number
-  hasSetChange?: (set: Sets) => void
+  hasSetChange?: (set: Sets.Sets) => void
   hasDoneChange?: (isDone: boolean) => void
   onRemoveSet?: (id: number) => void
   readonly?: boolean
 }
 
 export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly }: SetRowProps) {
-  const [lazyValue, setLazyValue] = useState<Sets>({
+  const [lazyValue, setLazyValue] = useState<Sets.Sets>({
     weight: 0,
     isDone: false,
     repeat: 0,

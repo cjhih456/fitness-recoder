@@ -1,9 +1,10 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ExerciseMockData } from '.'
+import { Exercise } from 'fitness-struct'
 
 type CreateExerciseByExercisePresetResponse = {
-  createExerciseByExercisePreset: ExerciseData
+  createExerciseByExercisePreset: Exercise.Data
 }
 type CreateExerciseByExercisePresetVariable = {
   exercise: { exercisePreset: number, exerciseId: number[] }
@@ -32,7 +33,7 @@ export const CreateExerciseByExercisePresetMock: MockedResponse<
   },
   result: (args) => {
     const idx = Math.max(...Object.keys(ExerciseMockData).map(Number)) + 1
-    const obj: ExerciseData = {
+    const obj: Exercise.Data = {
       id: idx,
       deps: 0,
       exercise: args.exercise.exerciseId[0]

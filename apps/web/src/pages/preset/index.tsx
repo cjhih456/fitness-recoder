@@ -7,6 +7,7 @@ import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../ser
 import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
 import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
 import { useTranslation } from 'react-i18next';
+import { ExercisePreset } from 'fitness-struct';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
@@ -15,7 +16,7 @@ export default function PresetListPage() {
   const [createExercisePreset] = useCreateExercisePreset()
   const [getExerciseList] = useLazyGetExercisePresetList()
   const navigator = useNavigate()
-  const [presetList, setPresetList] = useState<ExercisePresetWithExerciseList[]>([])
+  const [presetList, setPresetList] = useState<ExercisePreset.PresetWithExerciseList[]>([])
   useEffect(() => {
     getExerciseList({
       variables: {

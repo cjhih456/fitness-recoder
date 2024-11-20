@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { HeaderContext } from './HeaderProvider'
+import HeaderContext from './HeaderContext'
 
 
 export const useHeaderContext = () => {

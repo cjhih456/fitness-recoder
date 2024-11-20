@@ -1,28 +1,12 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, useState } from 'react'
+import HeaderContext, { HeaderContentType, HeaderContextType, HeaderMenuType } from './HeaderContext'
 
-export type HeaderMenuType = {
-  key: string
-  name: string
-  action: () => void
-}
 
 export interface HeaderProviderProps {
   children: ReactNode
 }
 
-type HeaderContextType = {
-  setHeaderContent: (contents: HeaderContentType) => void
-  getHeaderContent: () => HeaderContentType
-  setHeaderMenu: (menu: HeaderMenuType[]) => void
-  getHeaderMenu: () => HeaderMenuType[]
-}
 
-export const HeaderContext = createContext<HeaderContextType>({
-  setHeaderContent: () => { },
-  getHeaderContent: () => [],
-  setHeaderMenu: () => { },
-  getHeaderMenu: () => []
-})
 
 export const HeaderProvider = ({ children }: HeaderProviderProps) => {
   const [headerContent, setHeaderContent] = useState<HeaderContentType>([])

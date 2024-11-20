@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, isValidElement } from 'react'
-import { HeaderMenuType } from './HeaderProvider'
 import { useHeaderContext } from './useHeaderContext'
+import { HeaderContentType, HeaderMenuType } from './HeaderContext'
 
 export const HeaderMenuHandler = (menu: HeaderMenuType[]) => {
   const { setHeaderMenu } = useHeaderContext()

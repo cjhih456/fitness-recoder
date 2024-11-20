@@ -1,4 +1,5 @@
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
+import { ReactNode } from 'react';
 
 const list = import.meta.glob('./**/*.ts')
 const mocks: MockedResponse[] = []
@@ -12,7 +13,7 @@ Object.entries(list).forEach(async ([key, value]) => {
   })
 })
 
-export default function AllMockedProvider({ children }: { children: React.ReactNode }) {
+export default function AllMockedProvider({ children }: { children: ReactNode }) {
   const tempMocks = mocks.map(v => {
     v.variableMatcher = v.variableMatcher ? v.variableMatcher : () => true
     return v

@@ -1,9 +1,10 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
+import { Exercise } from 'fitness-struct'
 
 
 type GetExerciseListByScheduleIdResponse = {
-  getExerciseListByScheduleId: ExerciseData[]
+  getExerciseListByScheduleId: Exercise.Data[]
 }
 type GetExerciseListByScheduleIdVariable = {
   scheduleId: number

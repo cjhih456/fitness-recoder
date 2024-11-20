@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataList, { ExerciseDataListProps } from './ExerciseDataList';
+import { Schedule } from 'fitness-struct';
 const meta = {
   title: 'ExerciseData/ExerciseDataList',
   tags: ['autodocs'],
@@ -27,7 +28,7 @@ const meta = {
           }
         ],
         type: 'SCHEDULED'
-      } as Schedule
+      } as Schedule.Schedule
       Object.assign(options.args, { schedule: id })
       return <div>
         < Story {...options} />

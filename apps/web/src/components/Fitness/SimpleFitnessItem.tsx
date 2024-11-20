@@ -2,9 +2,10 @@ import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas'
 import { useGetSetListByExerciseId } from '../../service/GqlStore/Set'
+import { Exercise } from 'fitness-struct'
 
 export interface SimpleFitnessItemProps {
-  exerciseData: ExerciseData
+  exerciseData: Exercise.Data
 }
 export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemProps) {
   const exerciseDisplay = useMemo(() => {

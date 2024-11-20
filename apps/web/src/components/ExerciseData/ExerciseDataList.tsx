@@ -3,9 +3,10 @@ import ExerciseDataDisplay from './ExerciseDataDisplay';
 import { useEffect, useMemo, useState } from 'react';
 import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
+import { Exercise, Schedule } from 'fitness-struct';
 
 export interface ExerciseDataListProps {
-  schedule?: Schedule
+  schedule?: Schedule.Schedule
   schedulePresetIdx?: number
   readonly?: boolean
 }
@@ -13,7 +14,7 @@ export interface ExerciseDataListProps {
 type TempExerciseData = {
   name: string;
   sets: string[];
-} & ExerciseData
+} & Exercise.Data
 
 export default function ExerciseDataList({
   schedule,

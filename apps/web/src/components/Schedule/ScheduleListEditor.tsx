@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import FitnessSearchModal from '../Fitness/FitnessSearchModal'
 import FitnessList from '../Fitness/FitnessList'
 import { Button } from '@nextui-org/react'
@@ -6,8 +6,8 @@ import { Button } from '@nextui-org/react'
 interface ScheduleListEditorProps {
   savedIdxData?: number[]
   exerciseIdxList: number[]
-  onChangeExerciseIdxList?: React.Dispatch<React.SetStateAction<number[]>>
-  children?: JSX.Element
+  onChangeExerciseIdxList?: Dispatch<SetStateAction<number[]>>
+  children?: ReactNode
 }
 
 export default function ScheduleListEditor({

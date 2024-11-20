@@ -1,15 +1,16 @@
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
-import { useEffect, useMemo } from 'react'
+import { ReactNode, useEffect, useMemo } from 'react'
+import { Exercise, Schedule } from 'fitness-struct'
 
 export interface ScheduleDisplayProps {
   id: number,
   title: string,
-  schedule?: Schedule
-  exerciseList?: ExerciseData[]
+  schedule?: Schedule.Schedule
+  exerciseList?: Exercise.Data[]
   date?: string
-  children?: (id: number, type?: keyof typeof IScheduleType, date?: string) => React.ReactNode
+  children?: (_id: number, _type?: keyof typeof Schedule.IType, _date?: string) => ReactNode
 }
 
 export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {
