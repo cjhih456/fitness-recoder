@@ -1,6 +1,6 @@
 {
   "name": "@types/sqlite-message-types",
-  "private": "true",
+  "private": true,
   "version": "0.1.0",
   "type": "module",
   "types": "dist/index.d.ts",

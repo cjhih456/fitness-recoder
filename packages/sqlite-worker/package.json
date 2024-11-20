@@ -1,6 +1,7 @@
 {
   "name": "@fitness/sqlite-worker",
   "type": "module",
+  "private": true,
   "version": "1.0.0",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
