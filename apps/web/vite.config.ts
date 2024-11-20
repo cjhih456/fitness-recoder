@@ -51,15 +51,6 @@ export default defineConfig(({ mode, isPreview }) => {
       rollupOptions: {
         input: {
           app: './index.html',
-          graphqlWorker: './workerSrc/GraphqlApi.ts',
-        },
-        output: {
-          entryFileNames(info) {
-            if (info.facadeModuleId?.endsWith('GraphqlApi.ts')) {
-              return '[name].js'
-            }
-            return 'assets/[name]-[hash].js'
-          }
         }
       }
     },

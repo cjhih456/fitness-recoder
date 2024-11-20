@@ -1,7 +1,7 @@
 {
   "name": "@fitness/web",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "displayName": "Fitness Recoder",
   "description": "Let's recode workout history.",
@@ -40,7 +40,7 @@
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@types/sqlite-message-types": "*",
-    "@types/webextension-polyfill": "^0.12.0",
+    "@types/web-app-manifest": "^1.0.8",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.15.0",
@@ -52,8 +52,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.4.11",
     "vite-plugin-i18next-language-pack-loader": "*",
-    "vite-plugin-inspect": "^0.8.7",
-    "webextension-polyfill": "^0.12.0"
+    "vite-plugin-inspect": "^0.8.7"
   },
   "homepage": "https://cjhih456.github.io/fitness-recoder"
 }

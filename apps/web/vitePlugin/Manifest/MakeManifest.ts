@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import { resolve } from 'path';
 import { PluginOption } from 'vite'
-import type { Manifest } from 'webextension-polyfill';
 import pkg from '../../package.json';
+import { WebAppManifest } from 'web-app-manifest';
 
 const outDir = resolve(__dirname, '..', '..', 'public');
 
@@ -15,22 +15,17 @@ export default function makeManifest(mode: string): PluginOption {
       }
       const manifestPath = resolve(outDir, 'manifest.webmanifest');
 
-      const url = mode !== 'development' ? '/graphqlWorker.js' : new URL('/workerSrc/GraphqlApi.ts', import.meta.url).href
+      const url = new URL('@fitness/graphql-worker', import.meta.url).href
 
-      const manifest: Manifest.WebExtensionManifest = {
-        manifest_version: 3,
+      const manifest: WebAppManifest = {
         name: pkg.displayName,
         short_name: pkg.displayName,
-        version: pkg.version,
         description: pkg.description,
-        author: pkg.author.name,
-        background: {
-          service_worker: url.replace('file://', ''),
-          type: 'module',
-        },
-        content_security_policy: {
-          extension_pages: 'script-src \'self\' \'wasm-unsafe-eval\'',
-        }
+        display: 'minimal-ui',
+        orientation: 'portrait',
+        start_url: '/',
+        categories: ['fitness', 'health'],
+        icons: []
       };
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
     }
