@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleList, { ScheduleListProps } from './ScheduleList'
-import { withRouter } from 'storybook-addon-react-router-v6'
+import { withRouter } from 'storybook-addon-remix-react-router'
 const meta = {
   title: 'Schedule/ScheduleList',
   tags: ['autodocs'],
