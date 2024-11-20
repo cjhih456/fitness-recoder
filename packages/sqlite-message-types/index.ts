@@ -1,23 +1,25 @@
-type SqliteMessageSingleResultType = 'update' | 'select'
+export declare namespace SqliteMessage {
+  type SingleType = 'update' | 'select'
+  type Type = SingleType | 'selects' | 'insert' | 'delete' | 'init'
 
-type SqliteMessageType = SqliteMessageSingleResultType | 'selects' | 'insert' | 'delete' | 'init'
-interface SqliteMessage {
-  type: SqliteMessageType
-  txid: string
-  query: string
-  bindArgs: any[]
+  type Result = {
+    type: 'selects' | 'insert'
+    txid: string
+    object: any[]
+  } | {
+    type: | 'delete'
+    txid: string
+    object: string | null
+  } | {
+    type: SingleType
+    txid: string
+    object: any
+  }
+  interface Message {
+    type: Type
+    txid: string
+    query: string
+    bindArgs: any[]
+  }
 }
 
-type SqliteResultType = {
-  type: 'selects' | 'insert'
-  txid: string
-  object: any[]
-} | {
-  type: | 'delete'
-  txid: string
-  object: string | null
-} | {
-  type: SqliteMessageSingleResultType
-  txid: string
-  object: any
-}
