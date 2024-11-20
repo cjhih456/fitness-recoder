@@ -1,0 +1,46 @@
+{
+  "name": "@fitness/vite-plugin-graphql-server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "@apollo/server": "^4.11.2",
+    "@graphql-tools/schema": "^10.0.8",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0",
+    "http2-express-bridge": "^1.0.7",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "dts": true,
+    "minify": false,
+    "sourcemap": true,
+    "clean": true,
+    "bundle": false,
+    "target": "node20",
+    "format": [
+      "cjs",
+      "esm"
+    ]
+  }
+}
