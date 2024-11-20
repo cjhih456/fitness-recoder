@@ -12,7 +12,7 @@ export default defineConfig({
     topLevelAwait()
   ],
   experimental: {
-    renderBuiltUrl(filename, type) {
+    renderBuiltUrl(filename) {
       console.log(filename)
       return './' + filename
     }
@@ -32,7 +32,7 @@ export default defineConfig({
     }
   },
   worker: {
-    format: "iife",
+    format: 'iife',
     rollupOptions: {
       treeshake: false,
       output: {

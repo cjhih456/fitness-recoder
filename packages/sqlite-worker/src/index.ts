@@ -3,10 +3,11 @@ import createExercisePresetTable from './create/ExercisePreset'
 import createExerciseTable from './create/Exercise'
 import createSetTable from './create/Sets'
 import createScheduleTable from './create/Schedule'
+import { SqliteMessage } from 'sqlite-message-types'
 
 self.addEventListener('message', async (e: MessageEvent) => {
   const db = new Sqlite3()
-  const data = e.data as SqliteMessage
+  const data = e.data as SqliteMessage.Message
   if (data.type === 'init') {
     db.init().then(async (create) => {
       if (create) {
@@ -35,7 +36,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
         object: result ? result || null : null,
         txid: data.txid,
         type: data.type
-      } as SqliteResultType)
+      } as SqliteMessage.Result)
     } break
     case 'select': {
       const result = db?.selectObject(data.query, data.bindArgs)
@@ -43,7 +44,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
         object: result,
         txid: data.txid,
         type: data.type
-      } as SqliteResultType)
+      } as SqliteMessage.Result)
     } break
     case 'selects': {
       const result = db?.selectObjects(data.query, data.bindArgs)
@@ -51,7 +52,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
         object: result || [],
         txid: data.txid,
         type: data.type
-      } as SqliteResultType)
+      } as SqliteMessage.Result)
     } break
     case 'delete':
     case 'update': {
@@ -60,7 +61,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
         object: result ? result : null,
         txid: data.txid,
         type: data.type
-      } as SqliteResultType)
+      } as SqliteMessage.Result)
     } break
   }
 })

@@ -13,7 +13,6 @@ class Sqlite3 {
 
   constructor() {
     if (sqlite) return sqlite
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
     sqlite = this
   }
   async init() {
@@ -24,7 +23,7 @@ class Sqlite3 {
         printErr: error
       })
       this.db = sqlite3Module.oo1.OpfsDb
-        ? new sqlite3Module.oo1.OpfsDb('worker.sqlite3', "c")
+        ? new sqlite3Module.oo1.OpfsDb('worker.sqlite3', 'c')
         : new sqlite3Module.oo1.DB('workout.sqlite3', 'c')
       this.ready = true
     } catch (e) {
