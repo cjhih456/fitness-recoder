@@ -1,0 +1,17 @@
+{
+  "name": "@fitness/eslint-config",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./ts.js": "./ts.js",
+    "./graphql.js": "./graphql.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "typescript-eslint": "^8.15.0"
+  }
+}
