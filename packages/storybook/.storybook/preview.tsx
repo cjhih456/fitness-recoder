@@ -16,9 +16,9 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    backgrounds: {
-      default: 'dark'
-    }
+    globals: {
+      theme: 'dark'
+    },
   },
   decorators: [
     withRouter,
