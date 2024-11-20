@@ -1,7 +1,7 @@
 import { Measure } from "./measure"
 
 export declare namespace Sets {
-  interface SetsCreateType {
+  interface CreateType {
     exerciseId: number
     repeat: number
     isDone: boolean
@@ -10,7 +10,7 @@ export declare namespace Sets {
     duration?: number
   }
 
-  interface Sets extends SetsCreateType {
+  interface Sets extends CreateType {
     id: number
   }
 }

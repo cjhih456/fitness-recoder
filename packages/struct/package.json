@@ -13,7 +13,8 @@
   "dependencies": {},
   "tsup": {
     "entry": [
-      "index.ts"
+      "index.ts",
+      "src/**/*.ts"
     ],
     "dts": true,
     "minify": false,

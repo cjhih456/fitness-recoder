@@ -1,6 +1,5 @@
 import { Exercise } from "./exercise"
 
-
 export declare namespace Schedule {
   enum IType {
     BREAK = 'BREAK',
