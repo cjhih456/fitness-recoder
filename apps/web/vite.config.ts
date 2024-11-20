@@ -1,15 +1,12 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import GraphqlLoader from 'vite-plugin-graphql-loader'
 import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
-import GraphqlServer from './vitePlugin/GraphqlServer'
 import Inspect from 'vite-plugin-inspect'
 import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
-  const env = loadEnv(mode, process.cwd(), '')
   return {
     server: mode === 'development' ? {
       headers: {
@@ -44,17 +41,7 @@ export default defineConfig(({ mode, isPreview }) => {
         outputPath: './src/i18n'
       }),
       makeManifest(mode),
-      GraphqlLoader(),
-      react(),
-      GraphqlServer({
-        path: '/__graphql',
-        modulePath: [
-          './workerSrc/graphql/Schedule',
-          './workerSrc/graphql/Sets',
-          './workerSrc/graphql/Exercise',
-          './workerSrc/graphql/ExercisePreset'
-        ]
-      })
+      react()
     ],
     define: {
       'process.env.NODE_ENV': '"production"'
@@ -76,7 +63,7 @@ export default defineConfig(({ mode, isPreview }) => {
         }
       }
     },
-    base: env.VITE_URL_ROOT,
+    base: process.env.VITE_URL_ROOT,
     worker: {
       rollupOptions: {
         treeshake: false

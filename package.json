@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "show": "turbo show",
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build": "dotenvx run --env-file=.env.production turbo build",
+    "dev": "dotenvx run --env-file=.env turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -15,6 +15,8 @@
   ],
   "author": "In-hwan Choi <cjhih43@gmail.com>",
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.24.2",
+    "dotenv": "^16.4.5",
     "eslint": "^9.15.0",
     "prettier": "^3.3.3",
     "turbo": "^2.3.0"

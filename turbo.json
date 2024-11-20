@@ -3,8 +3,11 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
-      "env": ["VITE_URL_ROOT", "/fitness-recoder"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.production"
+      ],
+      "env": ["VITE_URL_ROOT"]
     },
     "dev": {
       "cache": false,
@@ -16,7 +19,11 @@
         "^@fitness/graphql-worker#build",
         "^@fitness/sqlite-worker#build"
       ],
-      "env": ["VITE_URL_ROOT", "/"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env"
+      ],
+      "env": ["VITE_URL_ROOT"]
     }
   },
   "ui": "stream"
