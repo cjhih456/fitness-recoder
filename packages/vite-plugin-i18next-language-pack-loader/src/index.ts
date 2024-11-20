@@ -1,4 +1,4 @@
-import { type Plugin } from 'vite';
+import { Plugin } from 'vite';
 import { resolve } from 'path';
 import * as fs from 'fs';
 import xlsx from 'xlsx'

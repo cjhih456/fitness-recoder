@@ -4650,6 +4650,11 @@
     browser-assert "^1.2.1"
     ts-dedent "^2.0.0"
 
+"@storybook/channels@^8.4.4":
+  version "8.4.4"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-8.4.4.tgz#64ec3ebae4f2635e9c7f796afa696a545035b3cc"
+  integrity sha512-WlQsAHg7ZITtvX0nk8T/+VPooPssdRyxJeHTNIdRTFN/FK6BSRwv1fZeuEpV5q0WKgtR98xUAdIXn1zkTNXvDA==
+
 "@storybook/components@8.4.4":
   version "8.4.4"
   resolved "https://registry.yarnpkg.com/@storybook/components/-/components-8.4.4.tgz#487c5d89061519bd3f8f3dcb7cbf052d032ea744"
@@ -4659,6 +4664,11 @@
   version "8.4.4"
   resolved "https://registry.yarnpkg.com/@storybook/core-common/-/core-common-8.4.4.tgz#73a669c8f4f6829d9e1a024e70eec7224ff0bb65"
   integrity sha512-7/4G9zrycIFFewwPArXrkJaQJEX433f1BVw6mocaL3VYt3oZxGkEwTj+S+nixnezcO5MUVYrgLcNJFEGJalmlg==
+
+"@storybook/core-events@^8.4.4":
+  version "8.4.4"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-8.4.4.tgz#4eb761d90ef374534b831de7e72ed29361217794"
+  integrity sha512-pkwr0UU95WSJtn9Q7q5ip0x8WxerLf5z4CWonvymGu9Z0bZyMXeA+GOEt/YQIJgqI4fbTK8Jqi+suC6ibUu9oQ==
 
 "@storybook/core@8.4.4":
   version "8.4.4"
@@ -5215,7 +5225,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/webextension-polyfill@^0.12.0", "@types/webextension-polyfill@^0.12.1":
+"@types/webextension-polyfill@^0.12.0":
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/@types/webextension-polyfill/-/webextension-polyfill-0.12.1.tgz#8dae244fe094cbb541005362e8e22f16671f6054"
   integrity sha512-xPTFWwQ8BxPevPF2IKsf4hpZNss4LxaOLZXypQH4E63BDLmcwX/RMGdI4tB4VO4Nb6xDBH3F/p4gz4wvof1o9w==
@@ -10431,10 +10441,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-storybook-addon-react-router-v6@^2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/storybook-addon-react-router-v6/-/storybook-addon-react-router-v6-2.0.15.tgz#01f890ce92f0af8de070fc3a25a9dfaf2bf13752"
-  integrity sha512-4vOYIQwehlQLyXaCT9K0Iu0po2Z+pANGsqkfm/BQuAEjE9MoN7vrsrQLHINhKbmQVtNMmuS/oBR3GGNbqQ1gew==
+storybook-addon-remix-react-router@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/storybook-addon-remix-react-router/-/storybook-addon-remix-react-router-3.0.1.tgz#e646c06592a5f00d5344ce96e4cd0b4df6300690"
+  integrity sha512-3tXvjDXFEZCfhGcoX6zdx6jRGH+QciDtSjmc0M8M4DlgEpwhflHwbS4J2NqaFmFTlsRXuh2+qjLfVzp4bkCixg==
   dependencies:
     compare-versions "^6.0.0"
     react-inspector "6.0.2"

@@ -26,6 +26,8 @@
     "@storybook/addon-onboarding": "^8.4.4",
     "@storybook/addon-themes": "^8.4.4",
     "@storybook/builder-vite": "^8.4.4",
+    "@storybook/channels": "^8.4.4",
+    "@storybook/core-events": "^8.4.4",
     "@storybook/react": "^8.4.4",
     "@storybook/react-vite": "^8.4.4",
     "@storybook/test": "^8.4.4",
@@ -33,7 +35,7 @@
     "@storybook/testing-library": "^0.2.2",
     "chromatic": "^11.5.4",
     "storybook": "^8.4.4",
-    "storybook-addon-react-router-v6": "^2.0.15",
+    "storybook-addon-remix-react-router": "^3.0.1",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.2.2",
     "vite": "^5.4.11"

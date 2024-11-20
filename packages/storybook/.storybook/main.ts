@@ -10,7 +10,7 @@ const config: StorybookConfig = {
     "@storybook/addon-themes",
     '@storybook/addon-jest',
     "@chromatic-com/storybook",
-    "storybook-addon-react-router-v6",
+    "storybook-addon-remix-react-router",
   ],
   framework: '@storybook/react-vite',
   staticDirs: ["../../../apps/web/public"],
