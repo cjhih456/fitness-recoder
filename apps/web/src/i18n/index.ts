@@ -6,13 +6,14 @@ const i18nFiles: Record<string, () => Promise<Record<string, string>>> = import.
   import: 'default'
 })
 
+// @ts-ignore
 type ResourceKey = keyof CustomTypeOptions['resources']
 
 async function loadNamespace(lng: string, ns: ResourceKey): Promise<void> {
-  const key = `./${lng}/${ns}.json`
+  const key = `./${lng}/${String(ns)}.json`
   if (typeof i18nFiles[key] === 'function') {
     const translations = await i18nFiles[key]()
-    i18n.addResourceBundle(lng, ns, translations, true, true)
+    i18n.addResourceBundle(lng, String(ns), translations, true, true)
   }
 }
 

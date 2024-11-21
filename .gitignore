@@ -36,4 +36,4 @@ apps/web/ssl/server.key
 
 # i18n generated files
 apps/web/src/i18n/**/*.json
-apps/web/src/i18n/i18n.d.ts
+apps/web/src/i18n/i18next.d.ts

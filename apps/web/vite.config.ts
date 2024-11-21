@@ -38,7 +38,10 @@ export default defineConfig(({ mode, isPreview }) => {
       Inspect(),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',
-        outputPath: './src/i18n'
+        outputPath: './src/i18n',
+        defaultNS: 'common',
+        useDts: true,
+        langs: ['en', 'ko']
       }),
       makeManifest(),
       react()
