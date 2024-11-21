@@ -16,7 +16,8 @@
     }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "clean": "rm -rf ./dist ./.turbo"
   },
   "devDependencies": {
     "@apollo/server": "^4.11.2",

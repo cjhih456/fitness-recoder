@@ -20,7 +20,8 @@
     }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
     "i18next": "^23.16.6",

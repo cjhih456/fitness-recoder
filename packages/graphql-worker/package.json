@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build": "vite build",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
     "@graphql-tools/schema": "^10.0.8",
