@@ -54,6 +54,15 @@ export default defineConfig(({ mode, isPreview }) => {
       rollupOptions: {
         input: {
           app: './index.html',
+          graphqlWorker: '@fitness/graphql-worker'
+        },
+        output: {
+          entryFileNames(info) {
+            if (info.facadeModuleId?.includes('packages/graphql-worker')) {
+              return '[name].js'
+            }
+            return 'assets/[name]-[hash].js'
+          }
         }
       }
     },
