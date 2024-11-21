@@ -54,22 +54,27 @@ export default defineConfig(({ mode, isPreview }) => {
       rollupOptions: {
         input: {
           app: './index.html',
-          graphqlWorker: '@fitness/graphql-worker'
         },
-        output: {
-          entryFileNames(info) {
-            if (info.facadeModuleId?.includes('packages/graphql-worker')) {
-              return '[name].js'
-            }
-            return 'assets/[name]-[hash].js'
-          }
-        }
       }
     },
     base: process.env.VITE_URL_ROOT,
     worker: {
       rollupOptions: {
-        treeshake: false
+        treeshake: false,
+        input: {
+          graphqlWorker: '@fitness/graphql-worker',
+          sqliteWorker: '@fitness/sqlite-worker'
+        },
+        output: {
+          entryFileNames(info) {
+            if (info.facadeModuleId?.includes('packages/graphql-worker')) {
+              return 'graphql-worker.js'
+            } else if (info.facadeModuleId?.includes('packages/sqlite-worker')) {
+              return 'sqlite-worker.js'
+            }
+            return 'assets/[name]-[hash].js'
+          }
+        }
       }
     }
   }
