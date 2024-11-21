@@ -53,7 +53,7 @@ export default defineConfig(({ mode, isPreview }) => {
       sourcemap: 'hidden',
       rollupOptions: {
         input: {
-          app: './index.html',
+          app: './index.html'
         },
       }
     },
@@ -68,8 +68,6 @@ export default defineConfig(({ mode, isPreview }) => {
         output: {
           entryFileNames(info) {
             if (info.facadeModuleId?.includes('packages/graphql-worker')) {
-              return '[name].js'
-            } else if (info.facadeModuleId?.includes('packages/sqlite-worker')) {
               return '[name].js'
             }
             return 'assets/[name]-[hash].js'

@@ -14,27 +14,20 @@ export default defineConfig({
   },
   build: {
     assetsInlineLimit: 0,
+    assetsDir: '',
     rollupOptions: {
       treeshake: false,
       input: {
         index: './src/index.ts'
       },
       output: {
-        assetFileNames: '[name].[ext]',
-        chunkFileNames: '[name].js',
         entryFileNames: '[name].js'
       }
     }
   },
   worker: {
-    format: 'iife',
     rollupOptions: {
       treeshake: false,
-      output: {
-        assetFileNames: '[name].[ext]',
-        chunkFileNames: '[name].js',
-        entryFileNames: '[name].js'
-      },
     }
   }
 })
