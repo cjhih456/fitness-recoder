@@ -13,9 +13,38 @@
 1. [vite-plugin-i18next-language-pack-loader](#language-pack-loader)
 1. [@fitness/storybook](#storybook)
 
+### commands
+
+#### Install packages
+```sh
+yarn install
+```
+
+#### Build Process
+```sh
+yarn build
+```
+
+#### Dev Process
+```sh
+yarn dev
+# or
+sudo yarn dev
+```
+
+#### Check Eslint
+```sh
+yarn lint
+```
+
+### define ENV
+This project are used global .env configurations.
+Please config env on `./.env.development` and `./.env.production`.
+
 ## Descriptions
 
 ### <a id="web"></a> @fitness/web
+Fitness recording service. This project will use Sqlite, GraphqlServer on Web Worker and Service Worker.
 
 
 ### <a id="struct"></a> @types/fitness-struct
@@ -23,6 +52,7 @@ Typescript global object structures.
 This package will be give effect on [@fitness/web](#web), [@fitness/graphql-worker](#graphql-worker).
 
 ### <a id="sqlite-message-types"></a> @types/sqlite-message-types
+Typescript objects of sqlite transition.
 
 ### <a id="eslint-config"></a> @fitness/eslint-config
 Global eslint configurations have. 
