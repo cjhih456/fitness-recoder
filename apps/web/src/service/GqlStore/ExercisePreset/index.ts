@@ -15,7 +15,7 @@ export {
   useDeleteExercisePreset
 }
 
-export const ExercisePresetMockData: { [key: number]: ExercisePreset.Preset } = Array(20).fill(0).reduce((acc, cur, i) => {
+export const ExercisePresetMockData: { [key: number]: ExercisePreset.Preset } = Array(20).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
   acc[id] = {
     id: id,

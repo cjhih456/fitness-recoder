@@ -6,7 +6,7 @@ import { WebAppManifest } from 'web-app-manifest';
 
 const outDir = resolve(__dirname, '..', '..', 'public');
 
-export default function makeManifest(mode: string): PluginOption {
+export default function makeManifest(): PluginOption {
   return {
     name: 'make-manifest',
     buildStart() {
@@ -14,8 +14,6 @@ export default function makeManifest(mode: string): PluginOption {
         fs.mkdirSync(outDir);
       }
       const manifestPath = resolve(outDir, 'manifest.webmanifest');
-
-      const url = new URL('@fitness/graphql-worker', import.meta.url).href
 
       const manifest: WebAppManifest = {
         name: pkg.displayName,

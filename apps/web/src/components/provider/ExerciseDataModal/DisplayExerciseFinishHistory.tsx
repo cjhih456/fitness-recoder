@@ -13,7 +13,7 @@ export default function DisplayExerciseFinishHistory({ history }: DisplayExercis
   const rows = useMemo(() => {
     const repeats = history.repeats.split(',')
     const weights = history.weights.split(',')
-    const temp = Array(history.cnt).fill(0).map((v, idx) => {
+    const temp = Array(history.cnt).fill(0).map((_v, idx) => {
       return {
         idx: `${history.id}-${idx}`,
         weight: weights[idx],

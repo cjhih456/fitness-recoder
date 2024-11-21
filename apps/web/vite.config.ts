@@ -40,7 +40,7 @@ export default defineConfig(({ mode, isPreview }) => {
         fileName: './LanguagePack.xlsx',
         outputPath: './src/i18n'
       }),
-      makeManifest(mode),
+      makeManifest(),
       react()
     ],
     define: {

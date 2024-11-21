@@ -1,6 +1,6 @@
 import { Exercise } from 'fitness-struct';
 import Data from './FitnessData.json'
-import { Category, Equipment, Force, Level, Mechanic, Muscle } from './FitnessDataEnums'
+import { Category, Muscle } from './FitnessDataEnums'
 export const exercises = (Data as Exercise.IExercise[]).map((v, idx) => { v.idx = idx; return v })
 
 export const muscleList: { value: Exercise.IMuscle, text: string }[] = [
@@ -39,16 +39,16 @@ export function getExerciseByIdx(idx: number) {
   return exercises[idx]
 }
 
-export function filterExcercises(name: string, category: Category[], force?: Force[], level?: Level[], muscle?: Muscle[], mechanic?: Mechanic[], equipment?: Equipment[]) {
+export function filterExcercises(name: string, category: Exercise.ICategory[], force?: Exercise.IForce[], level?: Exercise.ILevel[], muscle?: Exercise.IMuscle[], mechanic?: Exercise.IMechanic[], equipment?: Exercise.IEquipment[]) {
   return exercises.filter((exer) => {
     if (name && exer.name.indexOf(name) === -1) return false
-    if (category.length && !category.includes(exer.category as Category)) return false
-    if (level && level.length && !level.includes(exer.level as Level)) return false
+    if (category.length && !category.includes(exer.category)) return false
+    if (level && level.length && !level.includes(exer.level)) return false
     if (force && force.length) {
-      if (!(exer.force && !force.includes(exer.force as Force))) return false
+      if (!(exer.force && !force.includes(exer.force))) return false
     }
     if (muscle && muscle.length) {
-      const temp = ([] as Muscle[]).concat(exer.primaryMuscles as Muscle[], exer.secondaryMuscles as Muscle[])
+      const temp = ([] as Exercise.IMuscle[]).concat(exer.primaryMuscles, exer.secondaryMuscles)
       let found = 0
       for (const m of muscle) {
         if (temp.includes(m)) {
@@ -59,11 +59,11 @@ export function filterExcercises(name: string, category: Category[], force?: For
     }
 
     if (mechanic && mechanic.length) {
-      if (exer.mechanic && !mechanic.includes(exer.mechanic as Mechanic)) return false
+      if (exer.mechanic && !mechanic.includes(exer.mechanic)) return false
     }
 
     if (equipment && equipment.length) {
-      if (exer.equipment && !equipment.includes(exer.equipment as Equipment)) return false
+      if (exer.equipment && !equipment.includes(exer.equipment)) return false
     }
     return true
   }).map(v => v.idx)

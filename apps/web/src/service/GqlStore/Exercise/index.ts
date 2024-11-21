@@ -25,7 +25,7 @@ export {
   useUpdateExerciseListByExercisePresetId,
 }
 
-export const ExerciseMockData: { [key: number]: Exercise.Data } = Array(20).fill(0).reduce((acc, cur, i) => {
+export const ExerciseMockData: { [key: number]: Exercise.Data } = Array(20).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
   const temp: Exercise.Data = {
     deps: 0,

@@ -11,9 +11,9 @@ export declare namespace Exercise {
     "abductors" |
     "triceps" |
     "chest" |
-    "lower back" |
+    "lower_back" |
     "traps" |
-    "middle back" |
+    "middle_back" |
     "lats" |
     "neck"
 
@@ -28,17 +28,17 @@ export declare namespace Exercise {
   type IMechanic = 'compound' |
     'isolation'
 
-  type IEquipment = 'body only' |
+  type IEquipment = 'body_only' |
     'machine' |
     'kettlebells' |
     'dumbbell' |
     'cable' |
     'barbell' |
     'bands' |
-    'medicine ball' |
-    'exercise ball' |
-    'e-z curl bar' |
-    'foam roll'
+    'medicine_ball' |
+    'exercise_ball' |
+    'e-z_curl_bar' |
+    'foam_roll'
 
   type ICategory = 'strength' |
     'stretching' |
@@ -46,10 +46,10 @@ export declare namespace Exercise {
     'strongman' |
     'powerlifting' |
     'cardio' |
-    'olympic weightlifting' |
+    'olympic_weightlifting' |
     'crossfit' |
-    'weighted bodyweight' |
-    'assisted bodyweight'
+    'weighted_bodyweight' |
+    'assisted_bodyweight'
   interface IExercise {
     idx: number
     name: string;

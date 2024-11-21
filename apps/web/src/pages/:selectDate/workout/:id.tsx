@@ -143,7 +143,7 @@ export default function DisplayWorkout() {
 
   HeaderHandler([timer])
 
-  function updateState(type: ScheduleType) {
+  function updateState(type: Schedule.IType) {
     if (!id) return Promise.resolve()
     if (lazySchedule) {
       const obj = {

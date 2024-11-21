@@ -12,7 +12,7 @@ export {
   useDeleteSet,
 }
 
-export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce((acc, cur, idx) => {
+export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce((acc, _cur, idx) => {
   const id = idx + 1
   acc[id] = {
     id: id,

@@ -34,7 +34,7 @@ export const GetSetListByExerciseIdMock: MockedResponse<GetSetListByExerciseIdRe
   result: () => {
     return {
       data: {
-        getSetListByExerciseId: Array(4).fill(0).map((v, i) => {
+        getSetListByExerciseId: Array(4).fill(0).map((_v, i) => {
           return SetMockData[i + 1]
         })
       }

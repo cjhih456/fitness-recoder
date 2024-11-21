@@ -25,7 +25,7 @@ const month = today.getMonth() + 1
 const year = today.getFullYear()
 const daysByMonth = utils.getDaysByMonth(year)
 const typeTemp = [ScheduleType.BREAK, ScheduleType.FINISH, ScheduleType.PAUSED, ScheduleType.SCHEDULED, ScheduleType.STARTED]
-export const ScheduleMockData: { [key: number]: Schedule.Schedule } = Array(daysByMonth[month] - 1).fill(0).reduce((acc, cur, i) => {
+export const ScheduleMockData: { [key: number]: Schedule.Schedule } = Array(daysByMonth[month] - 1).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
   acc[id] = {
     date: id,
