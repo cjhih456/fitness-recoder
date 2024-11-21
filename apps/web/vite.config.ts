@@ -68,9 +68,9 @@ export default defineConfig(({ mode, isPreview }) => {
         output: {
           entryFileNames(info) {
             if (info.facadeModuleId?.includes('packages/graphql-worker')) {
-              return 'graphql-worker.js'
+              return '[name].js'
             } else if (info.facadeModuleId?.includes('packages/sqlite-worker')) {
-              return 'sqlite-worker.js'
+              return '[name].js'
             }
             return 'assets/[name]-[hash].js'
           }

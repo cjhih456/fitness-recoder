@@ -23,7 +23,7 @@ class Sqlite3 {
         printErr: error
       })
       this.db = sqlite3Module.oo1.OpfsDb
-        ? new sqlite3Module.oo1.OpfsDb('worker.sqlite3', 'c')
+        ? new sqlite3Module.oo1.OpfsDb('worker.sqlite3')
         : new sqlite3Module.oo1.DB('workout.sqlite3', 'c')
       this.ready = true
     } catch (e) {

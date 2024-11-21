@@ -1,19 +1,14 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import wasm from 'vite-plugin-wasm'
-import topLevelAwait from 'vite-plugin-top-level-await'
 
 export default defineConfig({
   plugins: [
     dts({
       insertTypesEntry: true
     }),
-    wasm(),
-    topLevelAwait()
   ],
   experimental: {
     renderBuiltUrl(filename) {
-      console.log(filename)
       return './' + filename
     }
   },
@@ -40,10 +35,6 @@ export default defineConfig({
         chunkFileNames: '[name].js',
         entryFileNames: '[name].js'
       },
-    },
-    plugins: () => [
-      wasm(),
-      topLevelAwait()
-    ]
+    }
   }
 })
