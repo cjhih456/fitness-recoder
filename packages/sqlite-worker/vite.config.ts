@@ -16,18 +16,12 @@ export default defineConfig({
     assetsInlineLimit: 0,
     assetsDir: '',
     rollupOptions: {
-      treeshake: false,
       input: {
         index: './src/index.ts'
       },
       output: {
         entryFileNames: '[name].js'
       }
-    }
-  },
-  worker: {
-    rollupOptions: {
-      treeshake: false,
     }
   }
 })

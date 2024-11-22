@@ -60,7 +60,6 @@ export default defineConfig(({ mode, isPreview }) => {
     base: process.env.VITE_URL_ROOT,
     worker: {
       rollupOptions: {
-        treeshake: false,
         input: {
           graphqlWorker: '@fitness/graphql-worker',
           sqliteWorker: '@fitness/sqlite-worker'
