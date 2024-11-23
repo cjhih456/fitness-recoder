@@ -50,7 +50,7 @@ export declare namespace Exercise {
     'crossfit' |
     'weighted_bodyweight' |
     'assisted_bodyweight'
-  interface IExercise {
+  interface IFitness {
     idx: number
     name: string;
     aliases?: string[];
@@ -65,11 +65,11 @@ export declare namespace Exercise {
     description?: string;
     tips?: string[];
   }
-  type SelectedExercise = IExercise & { selected: boolean }
+  type SelectedExercise = IFitness & { selected: boolean }
 
   interface Data {
     id: number
-    /** IExercise.idx */
+    /** IFitness.idx */
     exercise: number
     deps: number
   }

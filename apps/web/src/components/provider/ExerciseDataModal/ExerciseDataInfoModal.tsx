@@ -20,7 +20,7 @@ export default function ExerciseDataInfoModal({
   const { t } = useTranslation(['exerciseDataInfo', 'common'])
   const [loadHistory] = useLazyGetExerciseFinishHistory()
   const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
-  const [exerciseData, setExerciseData] = useState<Exercise.IExercise | undefined>()
+  const [exerciseData, setExerciseData] = useState<Exercise.IFitness | undefined>()
   const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
   const [history, setHistory] = useState<Exercise.HistoryData[]>([])
   const instructions = useMemo(() => {
