@@ -10,7 +10,9 @@ export default [...tsconfig, {
   languageOptions: {
     globals: {
       ...GLOBALS_BROWSER_FIX,
-      ...globals.worker
+      ...globals.worker,
+      __APP_VERSION__: false,
+      Versions: false
     }
   }
 }];

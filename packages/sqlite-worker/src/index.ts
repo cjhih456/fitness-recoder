@@ -1,9 +1,18 @@
 import Sqlite3 from './Sqlite3'
-import createExercisePresetTable from './create/ExercisePreset'
-import createExerciseTable from './create/Exercise'
-import createSetTable from './create/Sets'
-import createScheduleTable from './create/Schedule'
+import createVersionTable, { getVersion, updateVersion } from './create/Version'
+import createExerciseTable, { migrate as migrateExercise } from './create/Exercise'
+import createExercisePresetTable, { migrate as migrateExercisePreset } from './create/ExercisePreset'
+import createFitnessTable, { migrate as migrateFitness } from './create/Fitness'
+import createScheduleTable, { migrate as migrateSchedule } from './create/Schedule'
+import createSetTable, { migrate as migrateSets } from './create/Sets'
 import { SqliteMessage } from 'sqlite-message-types'
+import sort from 'version-sort'
+
+export interface QueryType {
+  sql: string,
+  args: any[]
+}
+export type MigrationQueryBus = Map<Versions, Promise<QueryType>[]>
 
 self.addEventListener('message', async (e: MessageEvent) => {
   const db = new Sqlite3()
@@ -11,10 +20,33 @@ self.addEventListener('message', async (e: MessageEvent) => {
   if (data.type === 'init') {
     db.init().then(async (create) => {
       if (create) {
+        createVersionTable(db)
         createExerciseTable(db)
         createExercisePresetTable(db)
+        createFitnessTable(db)
         createScheduleTable(db)
         createSetTable(db)
+      }
+      const currentVersion = getVersion(db)
+      if (__APP_VERSION__ !== currentVersion) {
+        const queryStacksByVersion: MigrationQueryBus = new Map()
+        migrateFitness(queryStacksByVersion, currentVersion)
+        migrateExercise(queryStacksByVersion, currentVersion)
+        migrateExercisePreset(queryStacksByVersion, currentVersion)
+        migrateSets(queryStacksByVersion, currentVersion)
+        migrateSchedule(queryStacksByVersion, currentVersion)
+        const result = sort<Versions>(Array.from(queryStacksByVersion.keys()))
+        for (let v of result) {
+          const list = queryStacksByVersion.get(v)
+          if (list) {
+            await Promise.all(list).then((quryObjList) => {
+              for (let i = 0; i < quryObjList.length; i++) {
+                db.exec(quryObjList[i].sql, quryObjList[i].args)
+              }
+            })
+          }
+        }
+        updateVersion(db, __APP_VERSION__)
       }
     })
     return

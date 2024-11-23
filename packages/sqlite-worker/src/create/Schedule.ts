@@ -1,3 +1,4 @@
+import { MigrationQueryBus } from '..'
 import type Sqlite3 from '../Sqlite3'
 
 export default function create(db: Sqlite3) {
@@ -19,3 +20,5 @@ export default function create(db: Sqlite3) {
       exerciseId INTEGER REFERENCES exercise(id)
     )`)
 }
+
+export function migrate(_db: MigrationQueryBus, _v: Versions) { }

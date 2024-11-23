@@ -1,3 +1,4 @@
+import { MigrationQueryBus } from '..'
 import type Sqlite3 from '../Sqlite3'
 
 export default function createSetTable(db: Sqlite3) {
@@ -13,3 +14,5 @@ export default function createSetTable(db: Sqlite3) {
       duration INTEGER
     )`)
 }
+
+export function migrate(_db: MigrationQueryBus, _v: Versions) { }

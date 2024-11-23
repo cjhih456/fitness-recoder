@@ -5,10 +5,11 @@
     "lib": ["ES2020", "WebWorker"],
     "target": "ESNext",
     "module": "ESNext",
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "strict": true,
+    "strict": true
   },
   "files": ["package.json"],
-  "include": ["src/**/*"]
+  "include": ["vite.config.ts", "./types/**/*", "src/**/*", "src/**/*.json"]
 }
