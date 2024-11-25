@@ -15,7 +15,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./sqlite3.wasm": "./dist/sqlite3.wasm"
+    "./sqlite3.wasm": "./dist/sqlite3.wasm",
+    "./fitness-flat-data.json": "./dist/fitness-flat-data.js"
   },
   "scripts": {
     "build": "vite build",

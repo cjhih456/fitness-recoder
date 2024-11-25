@@ -27,8 +27,11 @@ export default defineConfig(() => {
         },
         output: {
           entryFileNames: '[name].js',
-          manualChunks: {
-            'data': ['./src/create/fitness-datas/fitness-flat-data.json']
+          assetFileNames: (info) => {
+            if (info.names.includes('fitness-flat-data.json')) {
+              return '[name].[ext]'
+            }
+            return '[name]-[hash].[ext]'
           }
         }
       }
