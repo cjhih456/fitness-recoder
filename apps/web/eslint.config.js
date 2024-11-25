@@ -15,7 +15,9 @@ export default [...tsconfig, ...graphqlConfig, {
     globals: {
       ...GLOBALS_BROWSER_FIX,
       ...globals.node,
-      ...globals.es2020
+      ...globals.es2020,
+      RequestInfo: false,
+      RequestInit: false
     }
   },
   plugins: {

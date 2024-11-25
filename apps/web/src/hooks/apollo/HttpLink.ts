@@ -1,30 +1,36 @@
-import { ApolloLink, FetchResult, Observable, Operation } from '@apollo/client';
-import { print } from 'graphql';
-import { Client, ClientOptions, createClient } from 'graphql-http';
+import { ApolloLink, createHttpLink } from '@apollo/client';
 import { baseURL } from '../../components/utils';
+import { onError } from '@apollo/client/link/error';
 
-class HttpLink extends ApolloLink {
-  private client: Client
-  constructor(options: ClientOptions) {
-    super()
-    this.client = createClient(options)
-  }
-
-  public request(operation: Operation): Observable<FetchResult> {
-    return new Observable<FetchResult>((sink) => {
-      return this.client.subscribe<FetchResult>(
-        { ...operation, query: print(operation.query) },
-        {
-          // @ts-ignore
-          next: sink.next.bind(sink),
-          complete: sink.complete.bind(sink),
-          error: sink.error.bind(sink),
-        },
-      );
-    });
-  }
+function fetchTimeout(uri: URL | RequestInfo, options: RequestInit | undefined, time = 5000) {
+  return new Promise<Response>((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error('Request Time out'))
+    }, time)
+    fetch(uri, options).then((response) => {
+      clearTimeout(timer)
+      resolve(response)
+    }, (err) => {
+      clearTimeout(timer)
+      reject(err)
+    })
+  })
 }
 
-export const link = new HttpLink({
-  url: baseURL('/db'),
-});
+const httpLink = createHttpLink({
+  uri: baseURL('/db'),
+  fetch(uri, options) {
+    return fetchTimeout(uri, options);
+  }
+})
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (networkError) {
+    console.error(`Network Error: ${networkError.message}`);
+  }
+  if (graphQLErrors) {
+    const errMsg = graphQLErrors.map((error) => JSON.stringify(error));
+    console.error(`GraphQL Error: ${errMsg}`);
+  }
+})
+
+export const link = ApolloLink.from([httpLink, errorLink])
