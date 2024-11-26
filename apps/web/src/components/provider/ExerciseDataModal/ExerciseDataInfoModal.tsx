@@ -18,51 +18,57 @@ export default function ExerciseDataInfoModal({
   children
 }: ExerciseDataInfoModalProps) {
   const { t } = useTranslation(['exerciseDataInfo', 'common'])
-  const [loadHistory] = useLazyGetExerciseFinishHistory()
-  const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
-  const [exerciseData, setExerciseData] = useState<Exercise.IFitness | undefined>()
-  const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
-  const [history, setHistory] = useState<Exercise.HistoryData[]>([])
-  const [getFitnessById] = useLazyGetFitnessById()
-  const instructions = useMemo(() => {
-    const tempList = Array.isArray(exerciseData?.instructions) ? exerciseData?.instructions : [exerciseData?.instructions]
-    return tempList.filter(Boolean)
-  }, [exerciseData])
+  // Modal Display Context
   const [lazyOpen, setLazyOpen] = useState(false)
-  useEffect(() => {
-    if (exerciseData?.id !== exerciseDataId && exerciseDataId) {
-      getFitnessById({
-        variables: {
-          id: exerciseDataId
-        }
-      }).then(result => {
-        setExerciseData(result.data?.getFitnessById)
-        if (result.data?.getFitnessById.name)
-          ExercisePreviewVideo(result.data?.getFitnessById.name).then(result => setExerciseVideoId(result))
-        else setExerciseVideoId(undefined)
-      })
-      loadHistory({
-        variables: {
-          exerciseId: exerciseDataId
-        }
-      }).then((result) => {
-        if (result.data) {
-          setHistory(result.data?.getExerciseFinishHistory || [])
-        }
-      })
-    }
-    setLazyOpen(Boolean(exerciseDataId))
-  }, [exerciseDataId])
-
-  const historyList = useMemo(() => {
-    return history.map((h) => (<DisplayExerciseFinishHistory history={h} key={h.id} />))
-  }, [history])
-
+  const [exerciseDataId, setExerciseDataId] = useState<number | undefined>()
   const contextValue = {
     showModal(exerciseId) {
       setExerciseDataId(exerciseId)
     }
   } as ModalContextType
+
+  // History Datas
+  const [loadHistory, { data: historyData }] = useLazyGetExerciseFinishHistory()
+  const history = useMemo(() => {
+    return historyData?.getExerciseFinishHistory || []
+  }, [historyData])
+  const historyList = useMemo(() => {
+    return history.map((h) => (<DisplayExerciseFinishHistory history={h} key={h.id} />))
+  }, [history])
+
+  // Fitness Datas
+  const [getFitnessById, { data: fitnessData }] = useLazyGetFitnessById()
+  const fitnessId = useMemo(() => fitnessData?.getFitnessById.id, [fitnessData])
+  const fitnessInstructions = useMemo(() => {
+    return fitnessData?.getFitnessById.instructions || []
+  }, [fitnessData])
+  const fitnessName = useMemo(() => {
+    return fitnessData?.getFitnessById.name || ''
+  }, [fitnessData])
+
+  // Fitness Youtube Video
+  const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
+  useEffect(() => {
+    if (fitnessName)
+      ExercisePreviewVideo(fitnessName).then(result => setExerciseVideoId(result))
+    else setExerciseVideoId(undefined)
+  }, [fitnessName])
+
+  useEffect(() => {
+    if (fitnessId !== exerciseDataId && exerciseDataId) {
+      getFitnessById({
+        variables: {
+          id: exerciseDataId
+        }
+      })
+      loadHistory({
+        variables: {
+          exerciseId: exerciseDataId
+        }
+      })
+    }
+    setLazyOpen(Boolean(exerciseDataId))
+  }, [exerciseDataId])
 
   return <ModalContext.Provider value={contextValue}>
     {children}
@@ -77,7 +83,7 @@ export default function ExerciseDataInfoModal({
       <ModalContent>
         {(onCloseAction) => (<>
           <ModalHeader>
-            {exerciseData?.name || ''}
+            {fitnessName || ''}
           </ModalHeader>
           <ModalBody>
             {/* Preview Video */}
@@ -108,8 +114,8 @@ export default function ExerciseDataInfoModal({
             <div>
               <p className="font-bold text-lg">{t('instructions')}</p>
               <ol className="max-w-full list-decimal list-outside">
-                {instructions.map((line, idx) => {
-                  return <li className="ml-6" key={`${exerciseData?.id}-${idx}`}>{line}</li>
+                {fitnessInstructions.map((line, idx) => {
+                  return <li className="ml-6" key={`${fitnessId}-${idx}`}>{line}</li>
                 })}
               </ol>
             </div>

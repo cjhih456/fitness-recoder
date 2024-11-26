@@ -12,20 +12,24 @@ function CalanderPage() {
   useBottomNavi()
   HeaderHandler([t('calander')])
   const [choosenDate, changeDate] = useState('')
-  const [monthlyStatus, setMonthlyState] = useState<string[]>([])
   const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
-  const [getScheduleStateByDate] = useLazyGetScheduleStateByDate()
 
+  const [getScheduleStateByDate, { data: monthlyStatusLoaded }] = useLazyGetScheduleStateByDate()
+  const monthlyStatus = useMemo(() => monthlyStatusLoaded?.getScheduleStatusByDate, [monthlyStatusLoaded])
+
+  /**
+   * will be called 
+   * 1. Year, Month is changes
+   * 2. created new Schedule
+   */
+  function updateScheduleList() {
+    getScheduleStateByDate({ variables: { year, month } })
+  }
   useEffect(() => {
     if (year && month) {
       updateScheduleList()
     }
   }, [year, month])
-  function updateScheduleList() {
-    getScheduleStateByDate({ variables: { year, month } }).then((result) => {
-      result.data && setMonthlyState(result.data?.getScheduleStatusByDate)
-    })
-  }
 
   const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
   function scrollShadowChange(visibility: string) {

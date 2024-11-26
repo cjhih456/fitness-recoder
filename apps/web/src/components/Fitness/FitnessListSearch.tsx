@@ -42,7 +42,7 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
   useEffect(() => {
     setFitnessList([])
     fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, 0)
-  }, [searchValue, selectedCategoryList, selectedMuscleList])
+  }, [searchValue, selectedCategoryList, selectedMuscleList, fitnessLoadCallback])
 
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
   const xSpacing = needSpace ? 'px-4' : ''

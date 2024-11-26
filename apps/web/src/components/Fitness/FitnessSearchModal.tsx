@@ -17,13 +17,17 @@ export default function FitnessSearchModal({
   onChangeExerciseIdxList
 }: FitnessSearchModalProps) {
   const [lazySelectedExerciseIdx, changeLazySelectedExerciseIdx] = useState<number[]>([])
+  useEffect(() => {
+    if (isOpen) changeLazySelectedExerciseIdx(selectedExerciseIdx)
+  }, [isOpen, selectedExerciseIdx])
+  /**
+   * Save changes when action save button
+   * @returns void
+   */
   function saveSelectedExercise() {
     if (!selectedExerciseIdx) return
     onChangeExerciseIdxList && onChangeExerciseIdxList(lazySelectedExerciseIdx)
   }
-  useEffect(() => {
-    changeLazySelectedExerciseIdx(selectedExerciseIdx)
-  }, [selectedExerciseIdx, isOpen])
   return <CModal
     isOpen={isOpen}
     placement='top'
