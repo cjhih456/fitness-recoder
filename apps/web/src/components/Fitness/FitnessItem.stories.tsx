@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import FitnessItem, { FitnessItemProps } from './FitnessItem'
+import FitnessData from '../../service/Fitness/FitnessData.json'
 import { fn } from '@storybook/test';
+import { Exercise } from 'fitness-struct';
 
 const meta = {
   title: 'Fitness/FitnessItem',
@@ -26,9 +28,10 @@ export default meta
 
 export const Display: Story = {
   args: {
-    selectedExercise: {
-      idx: 1,
-      selected: false
-    }
+    fitnessData: {
+      id: 1,
+      ...FitnessData[0]
+    } as Exercise.IFitness,
+    isSelected: false
   }
 }

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import FitnessList, { FitnessListProps } from './FitnessList'
+import FitnessData from '../../service/Fitness/FitnessData.json'
 import { fn } from '@storybook/test';
+import { Exercise } from 'fitness-struct';
 
 const meta = {
   title: 'Fitness/FitnessList',
@@ -26,7 +28,10 @@ export default meta
 
 export const Display: Story = {
   args: {
-    list: [0, 1, 2, 3, 4],
+    list: FitnessData.slice(0, 5).map((v, i) => ({
+      ...v,
+      id: i + 1
+    })) as Exercise.IFitness[],
     selectedList: [1]
   }
 }
