@@ -8,7 +8,7 @@ import { ExercisePreset, Schedule } from 'fitness-struct'
 type CloneScheduleFromPresetResponse = { cloneScheduleFromPreset: Schedule.Schedule }
 type CloneScheduleFromPresetVariable = { presetId: number, targetDate: { year: number, month: number, date: number } }
 const CloneScheduleFromPresetGql = gql`
-mutation CloneScheduleFromPreset($presetId: ID!, $targetDate: TargetDateInput) {
+mutation CloneScheduleFromPreset($presetId: Int!, $targetDate: TargetDateInput) {
   cloneScheduleFromPreset(presetId: $presetId, targetDate: $targetDate) {
     id
     year

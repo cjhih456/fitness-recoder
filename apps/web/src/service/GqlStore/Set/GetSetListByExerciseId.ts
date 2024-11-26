@@ -6,7 +6,7 @@ import { Sets } from 'fitness-struct'
 type GetSetListByExerciseIdResponse = { getSetListByExerciseId: Sets.Sets[] }
 type GetSetListByExerciseIdVariable = { id: number }
 const getSetListByExerciseIdGql = gql`
-query GetSetListByExerciseId($id: ID!) {
+query GetSetListByExerciseId($id: Int!) {
   getSetListByExerciseId(id: $id) {
     duration
     exerciseId

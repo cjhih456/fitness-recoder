@@ -64,7 +64,7 @@ enum ICategory {
 }
 
 type Fitness {
-  id: ID!
+  id: Int!
   name: String!
   aliases: [String]
   primaryMuscles: [IMuscle]
@@ -80,8 +80,8 @@ type Fitness {
 }
 
 type Query {
-  getFitnessListByIds(ids: [ID!]): [Fitness!]
-  getFitnessById(id: ID): Fitness
+  getFitnessListByIds(ids: [Int!]): [Fitness!]
+  getFitnessById(id: Int): Fitness
   getFitnessListByKeywords(
     name: String,
     category: [ICategory],

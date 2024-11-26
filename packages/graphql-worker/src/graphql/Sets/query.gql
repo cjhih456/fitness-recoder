@@ -4,8 +4,8 @@ enum WeightUnit {
 }
 
 type Sets {
-  id: ID!
-  exerciseId: ID!
+  id: Int!
+  exerciseId: Int!
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
@@ -14,7 +14,7 @@ type Sets {
 }
 
 input CreateSetsInput {
-  exerciseId: ID!
+  exerciseId: Int!
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
@@ -23,8 +23,8 @@ input CreateSetsInput {
 }
 
 input UpdateSetsInput {
-  id: ID!
-  exerciseId: ID
+  id: Int!
+  exerciseId: Int
   repeat: Int!
   isDone: Boolean!
   weightUnit: WeightUnit!
@@ -33,13 +33,13 @@ input UpdateSetsInput {
 }
 
 type Query {
-  getSetByIds(ids: [ID!]): [Sets!]
-  getSetById(id: ID!): Sets
-  getSetListByExerciseId(id: ID!): [Sets!]
+  getSetByIds(ids: [Int!]): [Sets!]
+  getSetById(id: Int!): Sets
+  getSetListByExerciseId(id: Int!): [Sets!]
 }
 
 type Mutation {
   createSet(sets: CreateSetsInput!): Sets
   updateSet(sets: UpdateSetsInput!): Sets
-  deleteSetById(id: ID!): String
+  deleteSetById(id: Int!): String
 }

@@ -9,7 +9,7 @@ type DeleteExerciseByIdVariable = {
   id: number
 }
 const DeleteExerciseByIdGql = gql`
-mutation DeleteExerciseById($id: ID) {
+mutation DeleteExerciseById($id: Int) {
   deleteExerciseById(id: $id)
 }
 `

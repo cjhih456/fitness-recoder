@@ -10,7 +10,7 @@ type GetExerciseFinishHistoryVariable = {
   exerciseId: number
 }
 const GetExerciseFinishHistoryGql = gql`
-query GetExerciseFinishHistory($exerciseId: ID) {
+query GetExerciseFinishHistory($exerciseId: Int) {
   getExerciseFinishHistory(exerciseId: $exerciseId) {
     id
     type

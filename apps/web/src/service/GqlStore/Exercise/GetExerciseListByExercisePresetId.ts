@@ -10,7 +10,7 @@ type GetExerciseByExercisePresetIdVariable = {
   exercisePresetId: number
 }
 const GetExerciseListByExercisePresetIdGql = gql`
-query GetExerciseByExercisePresetId($exercisePresetId: ID) {
+query GetExerciseByExercisePresetId($exercisePresetId: Int) {
   getExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId) {
     id
     deps

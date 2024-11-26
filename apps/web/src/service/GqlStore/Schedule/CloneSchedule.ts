@@ -7,7 +7,7 @@ import { Schedule } from 'fitness-struct'
 type CloneScheduleResponse = { cloneSchedule: Schedule.Schedule }
 type CloneScheduleVariable = { id: number, targetDate: { year: number, month: number, date: number } }
 const CloneScheduleGql = gql`
-mutation CloneSchedule($id: ID!, $targetDate: TargetDateInput) {
+mutation CloneSchedule($id: Int!, $targetDate: TargetDateInput) {
   cloneSchedule(id: $id, targetDate: $targetDate) {
     id
     year

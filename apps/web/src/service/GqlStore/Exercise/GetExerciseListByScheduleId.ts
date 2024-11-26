@@ -10,7 +10,7 @@ type GetExerciseListByScheduleIdVariable = {
   scheduleId: number
 }
 const GetExerciseListByScheduleIdGql = gql`
-query GetExerciseListByScheduleId($scheduleId: ID) {
+query GetExerciseListByScheduleId($scheduleId: Int) {
   getExerciseListByScheduleId(scheduleId: $scheduleId) {
     id
     deps

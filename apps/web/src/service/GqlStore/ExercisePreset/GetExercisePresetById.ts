@@ -7,7 +7,7 @@ import { ExercisePreset } from 'fitness-struct'
 export type GetExercisePresetResponse = { getExercisePresetById: ExercisePreset.Preset }
 export type GetExercisePresetVariable = { id: number }
 export const getExercisePresetByIdGql = gql`
-query GetExercisePresetById($id: ID!) {
+query GetExercisePresetById($id: Int!) {
   getExercisePresetById(id:$id) {
     id
     name

@@ -5,7 +5,7 @@ import { ExercisePresetMockData } from '.'
 type DeleteExercisePresetResponse = { deleteExercisePreset: string }
 type DeleteExercisePresetVariable = { id: number }
 const deleteExercisePresetGql = gql`
-mutation DeleteExercisePreset($id: ID!) {
+mutation DeleteExercisePreset($id: Int!) {
   deleteExercisePreset(id: $id)
 }
 `

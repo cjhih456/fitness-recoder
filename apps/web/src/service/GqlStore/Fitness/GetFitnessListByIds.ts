@@ -7,7 +7,7 @@ import { MockedResponse } from '@apollo/client/testing'
 type GetFitnessListByIdsResponse = { getFitnessListByIds: Exercise.IFitness[] }
 type GetFitnessListByIdsVariable = { ids: number[] }
 const getFitnessByIdGql = gql`
-query GetFitnessListByIds($ids: [ID!]) {
+query GetFitnessListByIds($ids: [Int!]) {
   getFitnessListByIds(ids: $ids) {
     id
     name

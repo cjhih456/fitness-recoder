@@ -7,7 +7,7 @@ import { Schedule } from 'fitness-struct'
 type GetScheduleByIdResponse = { getScheduleById: Schedule.Schedule }
 type GetScheduleByIdVAriable = { id: number }
 const getScheduleByIdGql = gql`
-query GetScheduleById($id: ID!) {
+query GetScheduleById($id: Int!) {
   getScheduleById(id: $id) {
     id
     year

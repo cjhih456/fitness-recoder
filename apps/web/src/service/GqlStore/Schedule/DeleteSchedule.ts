@@ -6,7 +6,7 @@ import { ScheduleMockData } from '.'
 type DeleteScheduleResponse = { deleteSchedule: string }
 type DeleteScheduleVariable = { id: number }
 const deleteScheduleGql = gql`
-mutation DeleteSchedule($id: ID!) {
+mutation DeleteSchedule($id: Int!) {
   deleteSchedule(id: $id) {
     id
   }

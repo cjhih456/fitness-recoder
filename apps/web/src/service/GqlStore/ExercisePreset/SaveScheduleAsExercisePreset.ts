@@ -6,7 +6,7 @@ import { ExercisePreset } from 'fitness-struct'
 type SaveScheduleAsExercisePresetResponse = { saveScheduleAsExercisePreset: ExercisePreset.Preset }
 type SaveScheduleAsExercisePresetVariable = { scheduleId: number, name: string }
 const saveScheduleAsExercisePresetGql = gql`
-mutation SaveScheduleAsExercisePreset($scheduleId: ID!, $name: String!) {
+mutation SaveScheduleAsExercisePreset($scheduleId: Int!, $name: String!) {
   saveScheduleAsExercisePreset(scheduleId: $scheduleId, name: $name) {
     id
     name

@@ -5,7 +5,7 @@ import { SetMockData } from '.';
 type DeleteSetResponse = { deleteSetById: string }
 type DeleteSetVariable = { id: number }
 const deleteSetGql = gql`
-mutation deleteSet($id: ID!) {
+mutation deleteSet($id: Int!) {
   deleteSetById(id: $id)
 }`
 export function useDeleteSet() {

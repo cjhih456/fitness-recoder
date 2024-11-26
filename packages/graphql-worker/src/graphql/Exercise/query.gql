@@ -1,11 +1,11 @@
 type Exercise {
-  id: ID!
+  id: Int!
   exercise: Int!
   deps: Int
 }
 
 type ExerciseHistoryData {
-  id: ID!
+  id: Int!
   year: Int!
   month: Int!
   date: Int!
@@ -20,11 +20,11 @@ type ExerciseHistoryData {
 
 
 type Query {
-  getExerciseListByIds(ids: [ID!]): [Exercise!]
-  getExerciseById(id: ID): Exercise
-  getExerciseListByScheduleId(scheduleId: ID): [Exercise!]
-  getExerciseListByExercisePresetId(exercisePresetId: ID): [Exercise!]
-  getExerciseFinishHistory(exerciseId: ID): [ExerciseHistoryData!]
+  getExerciseListByIds(ids: [Int!]): [Exercise!]
+  getExerciseById(id: Int): Exercise
+  getExerciseListByScheduleId(scheduleId: Int): [Exercise!]
+  getExerciseListByExercisePresetId(exercisePresetId: Int): [Exercise!]
+  getExerciseFinishHistory(exerciseId: Int): [ExerciseHistoryData!]
 }
 
 input CreateExerciseByScheduleInput {
@@ -49,5 +49,5 @@ type Mutation {
   updateExerciseListByScheduleId(scheduleId: Int, newExercise: [Int!], deleteExerciseId: [Int!]): [Exercise]
   updateExerciseListByExercisePresetId(exercisePresetId: Int, newExercise: [Int!], deleteExerciseId: [Int!]): [Exercise]
 
-  deleteExerciseById(id: ID): String
+  deleteExerciseById(id: Int): String
 }

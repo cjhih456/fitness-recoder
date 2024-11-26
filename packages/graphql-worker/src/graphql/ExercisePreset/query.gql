@@ -1,15 +1,15 @@
 type ExercisePreset {
-  id: ID!
+  id: Int!
   name: String!
   deps: Int!
 }
 type Exercise {
-  id: ID!
+  id: Int!
   exercise: Int!
 }
 
 type ExercisePresetWithList {
-  id: ID!
+  id: Int!
   name: String!
   deps: Int!
   exerciseList: [Exercise!]
@@ -17,8 +17,8 @@ type ExercisePresetWithList {
 
 type Query {
   getExercisePresetList(page: Int, size: Int): [ExercisePresetWithList!]
-  getExercisePresetByIds(ids: [ID!]): [ExercisePreset!]
-  getExercisePresetById(id: ID): ExercisePreset
+  getExercisePresetByIds(ids: [Int!]): [ExercisePreset!]
+  getExercisePresetById(id: Int): ExercisePreset
 }
 
 input CreateExercisePresetInput {
@@ -26,7 +26,7 @@ input CreateExercisePresetInput {
 }
 
 input UpdateExercisePresetInput {
-  id: ID!
+  id: Int!
   name: String!
   deps: Int!
 }
@@ -34,6 +34,6 @@ input UpdateExercisePresetInput {
 type Mutation {
   createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePreset
   updateExercisePreset(exercisePreset: UpdateExercisePresetInput): ExercisePreset
-  deleteExercisePreset(id: ID!): String
-  saveScheduleAsExercisePreset(scheduleId: ID!, name: String!): ExercisePreset
+  deleteExercisePreset(id: Int!): String
+  saveScheduleAsExercisePreset(scheduleId: Int!, name: String!): ExercisePreset
 }

@@ -9,7 +9,7 @@ enum ScheduleType {
 }
 
 type ScheduleData {
-  id: ID!
+  id: Int!
   year: Int!
   month: Int!
   date: Int!
@@ -32,7 +32,7 @@ input CreateScheduleDataInput {
 }
 
 input UpdateScheduleDataInput {
-  id: ID!
+  id: Int!
   year: Int!
   month: Int!
   date: Int!
@@ -50,7 +50,7 @@ input TargetDateInput {
 }
 
 type Query {
-  getScheduleById(id: ID!): ScheduleData
+  getScheduleById(id: Int!): ScheduleData
   getScheduleByDate(year: Int!, month: Int!, date: Int!): [ScheduleData!]
   getScheduleStatusByDate(year: Int!, month: Int!): [String]
 }
@@ -58,7 +58,7 @@ type Query {
 type Mutation {
   createSchedule(schedule: CreateScheduleDataInput): ScheduleData
   updateSchedule(schedule: UpdateScheduleDataInput): ScheduleData
-  deleteSchedule(id: ID!): ScheduleData
-  cloneSchedule(id: ID!, targetDate: TargetDateInput): ScheduleData
-  cloneScheduleFromPreset(presetId: ID!, targetDate: TargetDateInput): ScheduleData
+  deleteSchedule(id: Int!): ScheduleData
+  cloneSchedule(id: Int!, targetDate: TargetDateInput): ScheduleData
+  cloneScheduleFromPreset(presetId: Int!, targetDate: TargetDateInput): ScheduleData
 }
