@@ -4,6 +4,7 @@ import SetsInit from './graphql/Sets'
 import ExerciseInit from './graphql/Exercise'
 import ScheduleInit from './graphql/Schedule'
 import ExercisePresetInit from './graphql/ExercisePreset'
+import FitnessInit from './graphql/Fitness'
 import MessageTransactionBus from './transaction/MessageTransactionBus'
 import { SqliteMessage } from 'sqlite-message-types'
 
@@ -43,9 +44,19 @@ self.onactivate = (event) => {
   event.waitUntil(self.clients.claim())
 }
 
+function timeout() {
+  return new Promise<Response>(resolve => {
+    setTimeout(() => {
+      resolve(new Response(null, {
+        status: 408,
+      }))
+    }, 3000)
+  })
+}
+
 self.onfetch = async (event) => {
   const path = new URL(self.serviceWorker.scriptURL)
-  if (event.request.url.match(/(json|svg|(j|t)sx|css|wasm)/)) return
+  if (event.request.url.match(/(json|svg|(j|t)sx?|css|wasm)/)) return
   if (!dbTransitionBus) {
     dbTransitionBus = new MessageTransactionBus()
   }
@@ -56,7 +67,8 @@ self.onfetch = async (event) => {
           SetsInit(dbTransitionBus),
           ExerciseInit(dbTransitionBus),
           ExercisePresetInit(dbTransitionBus),
-          ScheduleInit(dbTransitionBus)
+          ScheduleInit(dbTransitionBus),
+          FitnessInit(dbTransitionBus)
         ]
       }),
       context: (req) => {
@@ -81,7 +93,12 @@ self.onfetch = async (event) => {
       const request = new Request(event.request, {
         headers: newHeaders
       })
-      event.respondWith(parent.handlers(request))
+      event.respondWith(
+        Promise.race([
+          timeout(),
+          parent.handlers(request)
+        ])
+      )
     }
   } else {
     const r = event.request
@@ -93,23 +110,27 @@ self.onfetch = async (event) => {
         credentials: 'omit'
       })
       : r
-    event.respondWith(fetch(request)
-      .then((response) => {
-        if (response.status === 0) {
-          return response
-        }
-        const newHeaders = new Headers(response.headers)
-        newHeaders.set('Cross-Origin-Opener-Policy', 'same-origin')
-        newHeaders.set('Cross-Origin-Resource-Policy', 'same-origin')
-        newHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp')
-        // newHeaders.set('Access-Control-Allow-Origin', 'https://www.youtube.com')
-        newHeaders.set('Service-Worker-Allowed', baseURL('/'))
-
-        return new Response(response.body, {
-          status: 200,
-          statusText: 'OK',
-          headers: newHeaders
-        })
-      }))
+    event.respondWith(
+      Promise.race([
+        timeout(),
+        fetch(request)
+          .then((response) => {
+            if (response.status === 0) {
+              return response
+            }
+            const newHeaders = new Headers(response.headers)
+            newHeaders.set('Cross-Origin-Opener-Policy', 'same-origin')
+            newHeaders.set('Cross-Origin-Resource-Policy', 'same-origin')
+            newHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp')
+            // newHeaders.set('Access-Control-Allow-Origin', 'https://www.youtube.com')
+            newHeaders.set('Service-Worker-Allowed', baseURL('/'))
+            return new Response(response.body, {
+              status: 200,
+              statusText: 'OK',
+              headers: newHeaders
+            })
+          })
+      ])
+    )
   }
 }

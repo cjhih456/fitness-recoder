@@ -7,7 +7,7 @@ import GraphqlLoader from 'vite-plugin-graphql-loader'
 export default defineConfig({
   plugins: [
     dts({
-      insertTypesEntry: true
+      rollupTypes: true
     }),
     wasm(),
     topLevelAwait(),
