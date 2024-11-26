@@ -67,12 +67,12 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           argsQuery.push(`%${m}%`)
         })
       }
-      const query = `select * from fitness where ${whereQuery.join(' and ')} limit ? offset ?`
+      const query = `select * from fitness ${whereQuery.length ? 'where ' + whereQuery.join(' and ') : ''} limit ?,?`
       const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB[]>(
         client,
         'selects',
         query,
-        [...argsQuery, limit, offset]
+        [...argsQuery, offset, limit]
       )
       if (!result) return []
       return result.map(res => {

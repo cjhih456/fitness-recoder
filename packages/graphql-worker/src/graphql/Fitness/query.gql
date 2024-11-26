@@ -47,6 +47,7 @@ enum IEquipment {
   exercise_ball
   e_z_curl_bar
   foam_roll
+  other
 }
 
 enum ICategory {

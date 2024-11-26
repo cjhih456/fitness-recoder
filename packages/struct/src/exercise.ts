@@ -38,7 +38,8 @@ export declare namespace Exercise {
     'medicine_ball' |
     'exercise_ball' |
     'e-z_curl_bar' |
-    'foam_roll'
+    'foam_roll' |
+    'other'
 
   type ICategory = 'strength' |
     'stretching' |
@@ -51,7 +52,7 @@ export declare namespace Exercise {
     'weighted_bodyweight' |
     'assisted_bodyweight'
   interface IFitness {
-    idx: number
+    id: number
     name: string;
     aliases?: string[];
     primaryMuscles: IMuscle[];
@@ -64,6 +65,13 @@ export declare namespace Exercise {
     instructions: string[];
     description?: string;
     tips?: string[];
+  }
+  type IFitnessDB = IFitness & {
+    aliases: string
+    primaryMuscles: string
+    secondaryMuscles: string
+    instructions: string
+    tips: string
   }
   type SelectedExercise = IFitness & { selected: boolean }
 

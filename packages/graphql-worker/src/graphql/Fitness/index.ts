@@ -52,6 +52,7 @@ export default function init(txBus: MessageTransactionBus) {
         exercise_ball: 'exercise_ball',
         e_z_curl_bar: 'e-z_curl_bar',
         foam_roll: 'foam_roll',
+        other: 'other'
       },
       ICategory: {
         strength: 'strength',

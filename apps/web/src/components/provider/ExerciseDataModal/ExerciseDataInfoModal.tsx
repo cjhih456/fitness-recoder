@@ -8,6 +8,7 @@ import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
 import { Exercise } from 'fitness-struct';
 import { ModalContext, ModalContextType } from './ExerciseDataModalContext';
+import { useLazyGetFitnessById } from '../../../service/GqlStore/Fitness';
 
 
 interface ExerciseDataInfoModalProps {
@@ -23,16 +24,24 @@ export default function ExerciseDataInfoModal({
   const [exerciseData, setExerciseData] = useState<Exercise.IFitness | undefined>()
   const [exerciseVideoId, setExerciseVideoId] = useState<string | undefined>()
   const [history, setHistory] = useState<Exercise.HistoryData[]>([])
+  const [getFitnessById] = useLazyGetFitnessById()
   const instructions = useMemo(() => {
     const tempList = Array.isArray(exerciseData?.instructions) ? exerciseData?.instructions : [exerciseData?.instructions]
     return tempList.filter(Boolean)
   }, [exerciseData])
   const [lazyOpen, setLazyOpen] = useState(false)
   useEffect(() => {
-    const temp = typeof exerciseDataId === 'number'
-    if (temp && exerciseData?.idx !== exerciseDataId) {
-      const exercise = getExerciseByIdx(exerciseDataId)
-      setExerciseData(exercise)
+    if (exerciseData?.id !== exerciseDataId && exerciseDataId) {
+      getFitnessById({
+        variables: {
+          id: exerciseDataId
+        }
+      }).then(result => {
+        setExerciseData(result.data?.getFitnessById)
+        if (result.data?.getFitnessById.name)
+          ExercisePreviewVideo(result.data?.getFitnessById.name).then(result => setExerciseVideoId(result))
+        else setExerciseVideoId(undefined)
+      })
       loadHistory({
         variables: {
           exerciseId: exerciseDataId
@@ -42,9 +51,8 @@ export default function ExerciseDataInfoModal({
           setHistory(result.data?.getExerciseFinishHistory || [])
         }
       })
-      ExercisePreviewVideo(exercise.name).then(result => setExerciseVideoId(result))
     }
-    setLazyOpen(temp)
+    setLazyOpen(Boolean(exerciseDataId))
   }, [exerciseDataId])
 
   const historyList = useMemo(() => {
@@ -102,7 +110,7 @@ export default function ExerciseDataInfoModal({
               <p className="font-bold text-lg">{t('instructions')}</p>
               <ol className="max-w-full list-decimal list-outside">
                 {instructions.map((line, idx) => {
-                  return <li className="ml-6" key={`${exerciseData?.idx}-${idx}`}>{line}</li>
+                  return <li className="ml-6" key={`${exerciseData?.id}-${idx}`}>{line}</li>
                 })}
               </ol>
             </div>
