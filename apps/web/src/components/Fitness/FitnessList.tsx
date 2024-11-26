@@ -1,6 +1,6 @@
 import { Spinner } from '@nextui-org/react';
 import FitnessItem from './FitnessItem';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useExerciseDataModalProvider } from '../provider/ExerciseDataModal/useExerciseDataModalProvider';
 import { Exercise } from 'fitness-struct';
 import { useIntersectionObserver } from 'usehooks-ts';
@@ -38,8 +38,10 @@ export default function FitnessList({ list, selectedList, onChangeSelectedList, 
       return
     }
     setLazySelectedList((prev) => updateLazySelectedList(prev, fitnessId))
-    onChangeSelectedList(Array.from(lazySelectedList))
   }
+  useEffect(() => {
+    onChangeSelectedList && onChangeSelectedList(Array.from(lazySelectedList))
+  }, [lazySelectedList, onChangeSelectedList])
 
   useEffect(() => {
     setLazySelectedList(new Set(selectedList || []))
@@ -52,7 +54,7 @@ export default function FitnessList({ list, selectedList, onChangeSelectedList, 
   }, [list])
   return (<div className="flex flex-col gap-y-4">
     {list.map(fitness => (
-      <FitnessItem key={fitness.id} fitnessData={fitness} useSelect={useSelect} onClick={selectExercise}></FitnessItem>
+      <FitnessItem key={fitness.id} fitnessData={fitness} useSelect={useSelect} isSelected={lazySelectedList.has(fitness.id)} onClick={selectExercise}></FitnessItem>
     ))}
     {spinner}
   </div>)

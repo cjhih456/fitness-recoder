@@ -1,6 +1,5 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
-import { getExerciseByIdx } from '../../../service/Fitness/FitnessDatas';
 import CModal from '../../CustomComponent/CModal';
 import ExercisePreviewVideo from './ExercisePreviewVideo';
 import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';

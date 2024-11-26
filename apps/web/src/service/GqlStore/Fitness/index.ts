@@ -1,13 +1,16 @@
 import { Exercise } from 'fitness-struct';
 
 import { useGetFitnessById, useLazyGetFitnessById } from './GetFitnessById'
+import { useGetFitnessListByIds, useLazyGetFitnessListByIds } from './GetFitnessListByIds'
 import { useGetFitnessListByKeywords, useLazyGetFitnessListByKeywords } from './GetFitnessListByKeywords'
 
 export {
   useGetFitnessById,
   useLazyGetFitnessById,
+  useGetFitnessListByIds,
+  useLazyGetFitnessListByIds,
   useGetFitnessListByKeywords,
-  useLazyGetFitnessListByKeywords
+  useLazyGetFitnessListByKeywords,
 }
 
 export const FitnessMockData: { [key: number]: Exercise.IFitness } = {

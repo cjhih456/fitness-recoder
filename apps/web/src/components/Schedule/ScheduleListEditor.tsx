@@ -1,7 +1,9 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
 import FitnessSearchModal from '../Fitness/FitnessSearchModal'
 import FitnessList from '../Fitness/FitnessList'
+import { useLazyGetFitnessListByIds } from '../../service/GqlStore/Fitness'
 import { Button } from '@nextui-org/react'
+import { Exercise } from 'fitness-struct'
 
 interface ScheduleListEditorProps {
   savedIdxData?: number[]
@@ -16,7 +18,7 @@ export default function ScheduleListEditor({
   onChangeExerciseIdxList,
   children
 }: ScheduleListEditorProps) {
-
+  const [getFitnessListByIds] = useLazyGetFitnessListByIds()
   const [dialogState, changeDialogState] = useState(false)
   /**
    * Open Search Dialog
@@ -26,13 +28,23 @@ export default function ScheduleListEditor({
   }
 
   const [lazyExerciseIdxList, changeLazyExerciseIdxList] = useState<number[]>([])
-
+  const [lazyExerciseList, changeLazyExerciseList] = useState<Exercise.IFitness[]>([])
   useEffect(() => {
     changeLazyExerciseIdxList(() => {
       return ([] as number[]).concat(exerciseIdxList, savedIdxData ?? [])
     })
     onChangeExerciseIdxList && onChangeExerciseIdxList(lazyExerciseIdxList)
   }, [savedIdxData])
+
+  useEffect(() => {
+    getFitnessListByIds({
+      variables: {
+        ids: lazyExerciseIdxList
+      }
+    }).then((result) => {
+      changeLazyExerciseList(result.data?.getFitnessListByIds || [])
+    })
+  }, [lazyExerciseIdxList])
 
   /**
    * update seleted list
@@ -65,7 +77,7 @@ export default function ScheduleListEditor({
     ></FitnessSearchModal>
     <div className="flex flex-col gap-y-4 px-4">
       <div className="flex flex-col gap-y-2">
-        <FitnessList list={lazyExerciseIdxList}></FitnessList>
+        <FitnessList list={lazyExerciseList}></FitnessList>
       </div>
       <div className="grid grid-cols-2 gap-x-2">
         <Button onClick={openSearchDialog}>Add Exercise</Button>
