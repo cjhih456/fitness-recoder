@@ -12,7 +12,7 @@ export interface QueryType {
   sql: string,
   args: any[]
 }
-export type MigrationQueryBus = Map<Versions, Promise<QueryType>[]>
+export type MigrationQueryBus = Map<Versions, (Promise<QueryType> | QueryType)[]>
 
 self.addEventListener('message', async (e: MessageEvent) => {
   const db = new Sqlite3()

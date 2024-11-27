@@ -33,7 +33,7 @@ export function migrate(bus: MigrationQueryBus, v: Versions) {
           value: json_loaded
         }
       }
-      const list = bus.get(v) || []
+      const list = bus.get('0.1.0') || []
       list.push(loadData().then(({ sql, value }) => {
         return {
           sql: `insert into fitness (

@@ -11,4 +11,15 @@ export default function create(db: Sqlite3) {
     )`)
 }
 
-export function migrate(_db: MigrationQueryBus, _v: Versions) { }
+export function migrate(bus: MigrationQueryBus, v: Versions) {
+  switch (v) {
+    case '0.1.0': {
+      const queryList = bus.get('0.1.0') || []
+      queryList.push({
+        sql: 'update exercise set exercise=exercise+1',
+        args: []
+      })
+      bus.set('0.1.0', queryList)
+    } break
+  }
+}
