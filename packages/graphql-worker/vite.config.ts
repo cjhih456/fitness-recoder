@@ -15,7 +15,6 @@ export default defineConfig({
   ],
   experimental: {
     renderBuiltUrl(filename) {
-      console.log(filename)
       return './' + filename
     }
   },

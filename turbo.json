@@ -12,12 +12,7 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env.production"
-      ],
-      "env": ["VITE_URL_ROOT"]
+      "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
@@ -28,12 +23,7 @@
         "^vite-plugin-i18next-language-pack-loader#build",
         "^@fitness/graphql-worker#build",
         "^@fitness/sqlite-worker#build"
-      ],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env"
-      ],
-      "env": ["VITE_URL_ROOT"]
+      ]
     }
   },
   "ui": "stream"
