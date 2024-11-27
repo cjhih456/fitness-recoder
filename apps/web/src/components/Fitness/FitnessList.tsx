@@ -1,6 +1,6 @@
 import { Spinner } from '@nextui-org/react';
 import FitnessItem from './FitnessItem';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useExerciseDataModalProvider } from '../provider/ExerciseDataModal/useExerciseDataModalProvider';
 import { Exercise } from 'fitness-struct';
 import { useIntersectionObserver } from 'usehooks-ts';
@@ -8,47 +8,35 @@ import { useIntersectionObserver } from 'usehooks-ts';
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
   list: Exercise.IFitness[]
-  selectedList?: number[]
-  onChangeSelectedList?: (_selectedList: number[]) => void
+  selectedFitnessIds?: number[]
+  onChangeSelectedFitnessIds?: (_selectedList: number[]) => void
+  onToggleFitnessIds?: (_id: number) => void
   onLoadMore?: () => void
 }
 
-export default function FitnessList({ list, selectedList, onChangeSelectedList, onLoadMore }: FitnessListProps) {
+export default function FitnessList({ list,
+  selectedFitnessIds,
+  onChangeSelectedFitnessIds,
+  onToggleFitnessIds,
+  onLoadMore }: FitnessListProps) {
   const { showModal } = useExerciseDataModalProvider()
 
-  const useSelect = useMemo(() => Boolean(selectedList), [selectedList])
-  // Selected
-  const [lazySelectedList, setLazySelectedList] = useState(new Set<number>(selectedList))
-  /**
-   * Toggle value on Set container
-   * @param prevSet prev Set datas
-   * @param id toggle target fitness Data
-   * @returns new Set
-   */
-  function toggleIdOnSet(prevSet: Set<number>, id: number) {
-    const newSet = new Set(prevSet)
-    newSet.has(id) ? newSet.delete(id) : newSet.add(id)
-    return newSet
-  }
+  const useSelect = useMemo(() => Boolean(selectedFitnessIds), [selectedFitnessIds])
+
   /**
    * 
    * @param fitnessId Fitness Id
-   * @param isDetail 
+   * @param isDetail
    * @returns 
    */
   function clickFitness(fitnessId: number, isDetail: boolean) {
-    if (isDetail || !onChangeSelectedList) {
+    if (isDetail || (!onChangeSelectedFitnessIds && !onToggleFitnessIds)) {
       showModal(fitnessId)
       return
     }
-    setLazySelectedList((prev) => toggleIdOnSet(prev, fitnessId))
+    onToggleFitnessIds && onToggleFitnessIds(fitnessId)
+    onChangeSelectedFitnessIds && onChangeSelectedFitnessIds(([] as number[]).concat(selectedFitnessIds || [], fitnessId))
   }
-  useEffect(() => {
-    onChangeSelectedList && onChangeSelectedList(Array.from(lazySelectedList))
-  }, [lazySelectedList, onChangeSelectedList])
-  useEffect(() => {
-    setLazySelectedList(new Set(selectedList || []))
-  }, [])
 
   // Spinner Intersection
   const { ref: spinnerRef } = useIntersectionObserver({
@@ -73,7 +61,7 @@ export default function FitnessList({ list, selectedList, onChangeSelectedList, 
         key={fitness.id}
         fitnessData={fitness}
         useSelect={useSelect}
-        isSelected={lazySelectedList.has(fitness.id)}
+        isSelected={selectedFitnessIds?.includes(fitness.id)}
         onClick={clickFitness}
       ></FitnessItem>
     ))}

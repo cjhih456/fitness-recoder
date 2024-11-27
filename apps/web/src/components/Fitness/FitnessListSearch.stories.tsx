@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    onChangeSelectedList: fn()
+    onChangeSelectedFitnessIds: fn()
   } as Partial<FitnessListSearchProps>,
   component: FitnessListSearch,
   decorators: [
@@ -28,7 +28,7 @@ export default meta
 
 export const Display: Story = {
   args: {
-    selectedList: [1],
+    selectedFitnessIds: [1],
   }
 }
 export const NeedSpace: Story = {

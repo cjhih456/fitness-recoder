@@ -1,9 +1,9 @@
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import ExerciseDataDisplay from './ExerciseDataDisplay';
 import { useEffect, useMemo, useState } from 'react';
-import { getExerciseByIdx } from '../../service/Fitness/FitnessDatas';
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
 import { Exercise, Schedule } from 'fitness-struct';
+import { useGetFitnessListByIds } from '../../service/GqlStore/Fitness';
 
 export interface ExerciseDataListProps {
   schedule?: Schedule.Schedule
@@ -18,12 +18,10 @@ type TempExerciseData = {
 
 export default function ExerciseDataList({
   schedule,
-  // schedulePresetIdx,
   readonly
 }: ExerciseDataListProps) {
   const [scheduleId, setScheduleId] = useState(-1)
   const [getExerciseSchedule, { data: exerciseDataBySchedule }] = useLazyGetExerciseListByScheduleId()
-  // const [getSchedulePreset, {data: eerciseDataBySchedulePreset}] = useLazyGetExerciseListBySchedulePresetId()
   const [selectedKeys, changeSelectedKeys] = useState<'all' | number[]>([])
   useEffect(() => {
     if (scheduleId === schedule?.id) return
@@ -34,23 +32,28 @@ export default function ExerciseDataList({
     if (schedule) return {
       exerciseList: exerciseDataBySchedule?.getExerciseListByScheduleId || []
     }
-    // if(schedulePresetIdx) return {
-    //   exerciseList: exerciseDataBySchedulePreset?.getExerciseListBySchedulePresetId || []
-    // }
     return { exerciseList: [] }
   }, [schedule, exerciseDataBySchedule])
+
+  const fitnessIdList = useMemo(() => {
+    return scheduleData.exerciseList.map(v => v.exercise) || []
+  }, [scheduleData])
+  const fitnessListOrigin = useGetFitnessListByIds(fitnessIdList)
+  const fitnessList = useMemo(() => {
+    return fitnessListOrigin.data?.getFitnessListByIds || []
+  }, [fitnessListOrigin])
 
   const exerciseList = useMemo(() => {
     if (!scheduleData) return [] as TempExerciseData[]
     return scheduleData.exerciseList.map(exerciseData => {
-      const exercise = getExerciseByIdx(exerciseData.exercise)
+      const exercise = fitnessList.find(v => v.id === exerciseData.exercise) || { name: '' }
       return {
         ...exerciseData,
         id: exerciseData.id,
         name: exercise.name
       }
     }).filter(Boolean) as TempExerciseData[]
-  }, [scheduleData])
+  }, [scheduleData, fitnessList])
 
   function changeSelection(key: number) {
     if (selectedKeys[0] === key) {

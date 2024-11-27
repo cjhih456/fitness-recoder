@@ -8,14 +8,22 @@ import _ from 'lodash'
 import { useDebounceCallback } from 'usehooks-ts'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode
-  selectedList?: number[]
-  onChangeSelectedList?: (_list: number[]) => void
+  selectedFitnessIds?: number[]
+  onChangeSelectedFitnessIds?: (_list: number[]) => void
+  onToggleFitnessIds?: (_id: number) => void
   searchAreaBg?: boolean
   needSpace?: boolean
 }
 
 
-export default function FitnessListSearch({ searchPrefix, selectedList, onChangeSelectedList, needSpace = false, searchAreaBg = false }: FitnessListSearchProps) {
+export default function FitnessListSearch({
+  searchPrefix,
+  selectedFitnessIds,
+  onChangeSelectedFitnessIds,
+  onToggleFitnessIds,
+  needSpace = false,
+  searchAreaBg = false
+}: FitnessListSearchProps) {
   const [searchValue, changeSearchValue] = useState('')
   const [selectedCategoryList, changeCategory] = useState<Exercise.ICategory[]>([])
   const [selectedMuscleList, changeMuscle] = useState<Exercise.IMuscle[]>([])
@@ -43,7 +51,6 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
     setFitnessList([])
     fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, 0)
   }, [searchValue, selectedCategoryList, selectedMuscleList, fitnessLoadCallback])
-
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
   const xSpacing = needSpace ? 'px-4' : ''
   return <div className="flex flex-col flex-nowrap relative overflow-y-hidden overflow-x-visible">
@@ -85,9 +92,15 @@ export default function FitnessListSearch({ searchPrefix, selectedList, onChange
       </div>
     </div>
     <ScrollShadow className={`${xSpacing} snap-y scroll-smooth mt-4`}>
-      <FitnessList list={fitnessList} selectedList={selectedList} onChangeSelectedList={onChangeSelectedList} onLoadMore={() => {
-        fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, fitnessList.length)
-      }}></FitnessList>
+      <FitnessList
+        list={fitnessList}
+        selectedFitnessIds={selectedFitnessIds}
+        onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
+        onToggleFitnessIds={onToggleFitnessIds}
+        onLoadMore={() => {
+          fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, fitnessList.length)
+        }}
+      ></FitnessList>
     </ScrollShadow>
   </div>
 }

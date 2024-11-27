@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    onChangeExerciseIdxList: fn(),
+    onChangeFitnessIds: fn(),
   } as Partial<FitnessSearchModalProps>,
   component: FitnessSearchModal,
   decorators: [

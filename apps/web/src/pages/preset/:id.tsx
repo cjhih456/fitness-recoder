@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { HeaderHandler, HeaderMenuHandler } from '../../components/provider/Header/HeaderHandler'
 import { useEffect, useMemo, useState } from 'react'
-import ScheduleListEditor from '../../components/Schedule/ScheduleListEditor'
+import FitnessListEditor from '../../components/Fitness/FitnessListEditor'
 import { Button } from '@nextui-org/react'
 import { useLazyGetExercisePresetById } from '../../service/GqlStore/ExercisePreset'
 import { useLazyGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
@@ -76,10 +76,10 @@ export default function PresetDetailPage() {
       navigate('/preset')
     })
   }
-  return <ScheduleListEditor
+  return <FitnessListEditor
     savedIdxData={oldExerciseList}
     exerciseIdxList={newExerciseList}
     onChangeExerciseIdxList={changeNewExerciseList}>
     <Button onClick={savePreset}>Save Preset</Button>
-  </ScheduleListEditor>
+  </FitnessListEditor>
 }

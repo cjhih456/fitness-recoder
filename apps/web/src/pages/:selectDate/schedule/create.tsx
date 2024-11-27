@@ -1,7 +1,7 @@
 import { Button } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
+import FitnessListEditor from '../../../components/Fitness/FitnessListEditor';
 import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
 import { useCreateScheduleWithExercisePlans } from '../../../service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
 import { LogEvent } from '../../../service/firebase';
@@ -42,7 +42,7 @@ export default function CreateSchedule() {
     }
   }
 
-  return <ScheduleListEditor exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
+  return <FitnessListEditor exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
     <Button onClick={startFitnessTime}>Save Exercise</Button>
-  </ScheduleListEditor>
+  </FitnessListEditor>
 }

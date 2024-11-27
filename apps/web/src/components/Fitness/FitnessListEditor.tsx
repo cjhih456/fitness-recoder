@@ -4,19 +4,19 @@ import FitnessList from '../Fitness/FitnessList'
 import { useLazyGetFitnessListByIds } from '../../service/GqlStore/Fitness'
 import { Button } from '@nextui-org/react'
 
-interface ScheduleListEditorProps {
+interface FitnessListEditorProps {
   savedIdxData?: number[]
   exerciseIdxList: number[]
   onChangeExerciseIdxList?: Dispatch<SetStateAction<number[]>>
   children?: ReactNode
 }
 
-export default function ScheduleListEditor({
+export default function FitnessListEditor({
   savedIdxData,
   exerciseIdxList,
   onChangeExerciseIdxList,
   children
-}: ScheduleListEditorProps) {
+}: FitnessListEditorProps) {
   const [getFitnessListByIds, { data: fitnessList }] = useLazyGetFitnessListByIds()
   const [dialogState, changeDialogState] = useState(false)
   /**
@@ -26,35 +26,34 @@ export default function ScheduleListEditor({
     changeDialogState(true)
   }
 
-  const [lazyExerciseIdxList, changeLazyExerciseIdxList] = useState<number[]>([])
+  const [lazyFitnessIds, changeLazyFitnessIds] = useState<number[]>([])
   useEffect(() => {
-    changeLazyExerciseIdxList(() => {
+    changeLazyFitnessIds(() => {
       return ([] as number[]).concat(exerciseIdxList, savedIdxData ?? [])
     })
-    onChangeExerciseIdxList && onChangeExerciseIdxList(lazyExerciseIdxList)
-  }, [savedIdxData])
+  }, [savedIdxData, exerciseIdxList])
 
   useEffect(() => {
     getFitnessListByIds({
       variables: {
-        ids: lazyExerciseIdxList
+        ids: lazyFitnessIds
       }
     })
-  }, [lazyExerciseIdxList])
+  }, [lazyFitnessIds, getFitnessListByIds])
 
   /**
    * update seleted list
-   * @param selectedExerciseList new selected list of exercise index
+   * @param fitnessIds new selected list of exercise index
    */
-  function changeSelectedExerciseIdxList(selectedExerciseList: number[]) {
-    changeLazyExerciseIdxList((current) => {
+  function changeSelectedFitnessIds(fitnessIds: number[]) {
+    changeLazyFitnessIds((current) => {
       const tempList = [] as number[]
       current.forEach(data => {
-        if (selectedExerciseList.includes(data)) {
+        if (fitnessIds.includes(data)) {
           tempList.push(data)
         }
       })
-      selectedExerciseList.forEach(v => {
+      fitnessIds.forEach(v => {
         if (!tempList.includes(v)) {
           tempList.push(v)
         }
@@ -68,8 +67,8 @@ export default function ScheduleListEditor({
     <FitnessSearchModal
       isOpen={dialogState}
       onOpenChange={changeDialogState}
-      selectedExerciseIdx={lazyExerciseIdxList}
-      onChangeExerciseIdxList={changeSelectedExerciseIdxList}
+      selectedFitnessIds={lazyFitnessIds}
+      onChangeFitnessIds={changeSelectedFitnessIds}
     ></FitnessSearchModal>
     <div className="flex flex-col gap-y-4 px-4">
       <div className="flex flex-col gap-y-2">

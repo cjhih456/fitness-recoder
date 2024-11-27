@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    onChangeSelectedList: fn()
+    onChangeSelectedFitnessIds: fn()
   } as Partial<FitnessListProps>,
   component: FitnessList,
   decorators: [
@@ -32,6 +32,6 @@ export const Display: Story = {
       ...v,
       id: i + 1
     })) as Exercise.IFitness[],
-    selectedList: [1]
+    selectedFitnessIds: [1]
   }
 }

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import ScheduleListEditor from '../../../components/Schedule/ScheduleListEditor';
+import FitnessListEditor from '../../../components/Fitness/FitnessListEditor';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@nextui-org/react';
 import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
@@ -12,15 +12,16 @@ import { Exercise } from 'fitness-struct';
 export default function DisplaySchedule() {
   HeaderHandler(['Schedule'])
 
-  const { selectDate, id } = useParams()
+  const { selectDate, id: idParam } = useParams()
+  const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const { data: selectedSchedule } = useGetScheduleById(Number(id || 0))
+  const { data: selectedSchedule } = useGetScheduleById(scheduleId)
   const [loadExerciseList] = useLazyGetExerciseListByScheduleId()
   const updateExerciseList = useUpdateExerciseListBySchedule()
   const [savedExercise, setSavedExercise] = useState<Exercise.Data[]>([])
   useEffect(() => {
     LogEvent('visit_schedule_detail')
-    loadExerciseList({ variables: { scheduleId: Number(id || 0) } }).then((result) => {
+    loadExerciseList({ variables: { scheduleId: scheduleId } }).then((result) => {
       if (result.data) {
         setSavedExercise(result.data?.getExerciseListByScheduleId)
       }
@@ -33,11 +34,11 @@ export default function DisplaySchedule() {
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
   function startFitnessTime() {
     if (!selectDate || !selectedSchedule) return
-    updateExerciseList(Number(id || 0), savedExercise, exerciseIdxList)
+    updateExerciseList(scheduleId, savedExercise, exerciseIdxList)
     navigate('/')
   }
 
-  return <ScheduleListEditor savedIdxData={savedExerciseIdxList} exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
+  return <FitnessListEditor savedIdxData={savedExerciseIdxList} exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
     <Button onClick={startFitnessTime}>Save Exercise</Button>
-  </ScheduleListEditor>
+  </FitnessListEditor>
 }

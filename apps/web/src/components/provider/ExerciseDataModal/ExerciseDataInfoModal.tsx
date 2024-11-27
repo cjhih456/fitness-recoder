@@ -5,7 +5,6 @@ import ExercisePreviewVideo from './ExercisePreviewVideo';
 import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';
 import DisplayExerciseFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
-import { Exercise } from 'fitness-struct';
 import { ModalContext, ModalContextType } from './ExerciseDataModalContext';
 import { useLazyGetFitnessById } from '../../../service/GqlStore/Fitness';
 

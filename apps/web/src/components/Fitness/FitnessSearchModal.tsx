@@ -1,32 +1,33 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import FitnessListSearch from './FitnessListSearch'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import CModal from '../CustomComponent/CModal'
+import useIdToggle from '../../hooks/useIdToggle'
 
 export interface FitnessSearchModalProps {
-  selectedExerciseIdx: number[]
+  selectedFitnessIds: number[]
   isOpen: boolean
   onOpenChange: (_isOpen: boolean) => void
-  onChangeExerciseIdxList?: (_exerciseList: number[]) => void
+  onChangeFitnessIds?: (_exerciseList: number[]) => void
 }
 
 export default function FitnessSearchModal({
   isOpen,
   onOpenChange,
-  selectedExerciseIdx,
-  onChangeExerciseIdxList
+  selectedFitnessIds,
+  onChangeFitnessIds
 }: FitnessSearchModalProps) {
-  const [lazySelectedExerciseIdx, changeLazySelectedExerciseIdx] = useState<number[]>([])
+  const [lazySelectedFitnessIds, setLazySelectedExerciseIds, toggleSelectedFitnessIds] = useIdToggle()
   useEffect(() => {
-    if (isOpen) changeLazySelectedExerciseIdx(selectedExerciseIdx)
-  }, [isOpen, selectedExerciseIdx])
+    if (isOpen) setLazySelectedExerciseIds(new Set(selectedFitnessIds))
+  }, [isOpen, selectedFitnessIds])
   /**
    * Save changes when action save button
    * @returns void
    */
   function saveSelectedExercise() {
-    if (!selectedExerciseIdx) return
-    onChangeExerciseIdxList && onChangeExerciseIdxList(lazySelectedExerciseIdx)
+    if (!selectedFitnessIds) return
+    onChangeFitnessIds && onChangeFitnessIds(lazySelectedFitnessIds)
   }
   return <CModal
     isOpen={isOpen}
@@ -39,7 +40,7 @@ export default function FitnessSearchModal({
         <>
           <ModalHeader>Select Exercises</ModalHeader>
           <ModalBody className="overflow-y-hidden -mx-4">
-            <FitnessListSearch selectedList={lazySelectedExerciseIdx} onChangeSelectedList={changeLazySelectedExerciseIdx} needSpace></FitnessListSearch>
+            <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => {
