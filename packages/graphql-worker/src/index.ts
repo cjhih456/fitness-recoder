@@ -56,7 +56,7 @@ function timeout() {
 
 self.onfetch = async (event) => {
   const path = new URL(self.serviceWorker.scriptURL)
-  if (event.request.url.match(/(json|svg|(j|t)sx?|css|wasm)/)) return
+  if (event.request.url.match(/(json|svg|(j|t)sx|css|wasm|jpg|png|manifest)/)) return
   if (!dbTransitionBus) {
     dbTransitionBus = new MessageTransactionBus()
   }

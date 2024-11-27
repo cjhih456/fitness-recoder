@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.4",
+    "@fitness/graphql-worker": "*",
     "@fitness/sqlite-worker": "*",
     "@nextui-org/react": "^2.4.8",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
