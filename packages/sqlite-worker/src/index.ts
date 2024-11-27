@@ -63,7 +63,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
 
   switch (data.type) {
     case 'insert': {
-      const result = db?.exec(data.query + 'RETURNING *', data.bindArgs)
+      const result = db?.exec(data.query + ' RETURNING *', data.bindArgs)
       self.postMessage({
         object: result ? result || null : null,
         txid: data.txid,
@@ -88,7 +88,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
     } break
     case 'delete':
     case 'update': {
-      const result = db?.exec(data.query + 'RETURNING *', data.bindArgs)
+      const result = db?.exec(data.query + ' RETURNING *', data.bindArgs)
       self.postMessage({
         object: result ? result : null,
         txid: data.txid,
