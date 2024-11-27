@@ -16,7 +16,8 @@ import { Schedule } from 'fitness-struct'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
-  const { id } = useParams()
+  const { id: idParam } = useParams()
+  const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
   const alert = useAlert()
   const [getSchedule] = useLazyGetScheduleById()
@@ -32,11 +33,10 @@ export default function DisplayWorkout() {
   }
 
   async function saveScheduleAsPreset(v: boolean, presetName?: string) {
-    console.log(v, presetName)
     if (!presetName) return
     if (!v) return
     setSaveScheduleAsPresetOpen(!v)
-    const result = await saveScheduleAsExercisePreset({ variables: { scheduleId: Number(id), name: presetName } })
+    const result = await saveScheduleAsExercisePreset({ variables: { scheduleId: scheduleId, name: presetName } })
     if (result.data?.saveScheduleAsExercisePreset) {
       navigate(`/preset/${result.data.saveScheduleAsExercisePreset.id}`)
     } else {
@@ -49,9 +49,9 @@ export default function DisplayWorkout() {
     const year = today.getFullYear()
     const month = today.getMonth() + 1
     const date = today.getDate()
-    const result = await cloneSchedule({ variables: { id: Number(id), targetDate: { year, month, date } } })
+    const result = await cloneSchedule({ variables: { id: scheduleId, targetDate: { year, month, date } } })
     if (result.data?.cloneSchedule) {
-      const id = result.data.cloneSchedule.id
+      const clonedScheduleId = result.data.cloneSchedule.id
       alert.showAlert(
         'SUCCESS',
         'Clone Schedule Success',
@@ -59,7 +59,7 @@ export default function DisplayWorkout() {
         { message: 'Goto Workout', colorClass: 'text-green-500' },
         { message: 'Cancel', colorClass: 'text-red-500' }
       ).then((value) => {
-        if (value) navigate(`/${year}-${month}-${date}/workout/${id}`)
+        if (value) navigate(`/${year}-${month}-${date}/workout/${clonedScheduleId}`)
       })
     }
   }
@@ -75,7 +75,7 @@ export default function DisplayWorkout() {
   useEffect(() => {
     LogEvent('visit_workout')
 
-    getSchedule({ variables: { id: Number(id) } }).then((result) => {
+    getSchedule({ variables: { id: scheduleId } }).then((result) => {
       if (!result.data?.getScheduleById) {
         alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
           navigate('/')
@@ -95,7 +95,7 @@ export default function DisplayWorkout() {
         })
       }
     }
-  }, [id])
+  }, [scheduleId])
 
   const headerMenuList = useMemo(() => lazySchedule?.type === 'FINISH' ? [
     {
@@ -118,7 +118,7 @@ export default function DisplayWorkout() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!id) return
+      if (!scheduleId) return
       if (lazySchedule && lazySchedule.type === 'STARTED') {
         const tempSchedule = { ...lazySchedule }
         const nowTime = new Date().getTime()
@@ -144,7 +144,7 @@ export default function DisplayWorkout() {
   HeaderHandler([timer])
 
   function updateState(type: Schedule.IType) {
-    if (!id) return Promise.resolve()
+    if (!scheduleId) return Promise.resolve()
     if (lazySchedule) {
       const obj = {
         ...lazySchedule,
@@ -187,7 +187,7 @@ export default function DisplayWorkout() {
   return <>
     <div className="flex flex-col">
       <div className="px-4">
-        {id && lazySchedule && <ExerciseDataList key={id} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
+        {scheduleId && lazySchedule && <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
       </div>
     </div>
     {
