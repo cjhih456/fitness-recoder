@@ -1,10 +1,10 @@
-import { ReactNode, useMemo, useState } from 'react'
+import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
-import { useHeaderContext } from '../components/provider/Header/useHeaderContext'
 import { useRoot } from '../components/provider/RootProvider/useRoot'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeaderMenu from '../components/HeaderMenu/HeaderMenu'
+import HeaderMenu from '../components/Header/HeaderMenu'
+import HeaderContent from '../components/Header/HeaderContent'
 
 interface DefaultLayoutProps {
   children: ReactNode
@@ -19,10 +19,6 @@ export default function DefaultLayout({
   children
 }: DefaultLayoutProps) {
   const navigate = useNavigate()
-  const headerContext = useHeaderContext()
-  const headerContent = useMemo(() => {
-    return headerContext.getHeaderContent()
-  }, [headerContext])
   const [menuDisplay, setMenuDisplay] = useState(false)
   const [menuList] = useState<Menu[]>([{
     name: 'Home',
@@ -39,9 +35,9 @@ export default function DefaultLayout({
   }])
   const { getRoot } = useRoot()
   const location = useLocation()
-  const fallback = () => {
+  const fallback = useCallback(() => {
     navigate(-1)
-  }
+  }, [navigate])
   const menuBtn = useMemo(() => {
     if (location.pathname.split('/').length > 2) {
       return <Button isIconOnly variant='light' size='sm' onClick={fallback} >
@@ -55,7 +51,7 @@ export default function DefaultLayout({
         }}
       ></NavbarMenuToggle>
     }
-  }, [location.pathname])
+  }, [location.pathname, fallback])
   const child = useMemo(() => children, [children])
 
   return <>
@@ -64,7 +60,7 @@ export default function DefaultLayout({
         {menuBtn}
       </NavbarContent>
       <NavbarContent justify="center">
-        {headerContent}
+        <HeaderContent />
       </NavbarContent>
       <NavbarContent justify="end">
         <HeaderMenu />

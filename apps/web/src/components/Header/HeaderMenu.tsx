@@ -10,9 +10,6 @@ export default function HeaderMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const { getThema, setThema } = useThema()
   const headerContext = useHeaderContext()
-  const headerContent = useMemo(() => {
-    return headerContext.getHeaderContent()
-  }, [headerContext])
   const headerMenu = useMemo(() => headerContext.getHeaderMenu().map(menu => {
     return <HeaderMenuItem key={menu.key} text={menu.name} onClick={() => {
       menu.action()
@@ -24,7 +21,7 @@ export default function HeaderMenu() {
     setThema(getThema() === 'dark' ? 'light' : 'dark')
   }}>
     {getThema() === 'dark' ? <MdDarkMode /> : <MdLightMode />}
-  </Button>, [getThema])
+  </Button>, [getThema, setThema])
   const multiVersion = useMemo(() => <Popover isOpen={isOpen} portalContainer={getRoot()} onOpenChange={(open) => setIsOpen(open)}>
     <PopoverTrigger>
       <Button isIconOnly variant='light' radius='full' >
@@ -44,7 +41,7 @@ export default function HeaderMenu() {
         ></Switch>
       </HeaderMenuItem>
     </PopoverContent>
-  </Popover>, [headerContent, getThema, isOpen])
+  </Popover>, [getThema, getRoot, isOpen, setThema, headerMenu])
   return <>
     {headerMenu.length ? multiVersion : singleVersion}
   </>

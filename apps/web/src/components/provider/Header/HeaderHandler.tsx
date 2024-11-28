@@ -10,13 +10,13 @@ export const HeaderMenuHandler = (menu: HeaderMenuType[]) => {
       return
     }
     setLazyHeaderMenu(menu)
-  }, [menu])
+  }, [menu, lazyHeaderMenu])
   useEffect(() => {
     setHeaderMenu(lazyHeaderMenu)
     return () => {
       setHeaderMenu([])
     }
-  }, [lazyHeaderMenu])
+  }, [lazyHeaderMenu, setHeaderMenu])
 }
 
 export const HeaderHandler = (header: HeaderContentType) => {
@@ -27,7 +27,7 @@ export const HeaderHandler = (header: HeaderContentType) => {
       return
     }
     setLazyHeader(header)
-  }, [header])
+  }, [header, lazyHeader])
   const headerTemp = useMemo(() => {
     return header?.map((v, i) => {
       if (isValidElement(v)) return v
