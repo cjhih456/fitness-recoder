@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Calender from '../components/Calander/Calander'
 import ScheduleList from '../components/Schedule/ScheduleList'
 import { useLazyGetScheduleStateByDate } from '../service/GqlStore/Schedule'
@@ -22,14 +22,14 @@ function CalanderPage() {
    * 1. Year, Month is changes
    * 2. created new Schedule
    */
-  function updateScheduleList() {
-    getScheduleStateByDate({ variables: { year, month } })
-  }
-  useEffect(() => {
+  const updateScheduleList = useCallback(() => {
     if (year && month) {
-      updateScheduleList()
+      getScheduleStateByDate({ variables: { year, month } })
     }
-  }, [year, month])
+  }, [getScheduleStateByDate, year, month])
+  useEffect(() => {
+    updateScheduleList()
+  }, [updateScheduleList])
 
   const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
   function scrollShadowChange(visibility: string) {

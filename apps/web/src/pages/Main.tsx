@@ -1,34 +1,30 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
-import { useLazyGetScheduleByDate } from '../service/GqlStore/Schedule'
+import { useGetScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
 import { Button, ScrollShadow } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { useTranslation } from 'react-i18next'
-import { Schedule } from 'fitness-struct'
+import usePageTracker from '../hooks/usePageTracker'
 
 export default function Main() {
   useBottomNavi()
+  usePageTracker('main')
   const { t } = useTranslation(['main', 'common', 'scheduleList', 'title'])
   const navigate = useNavigate()
-  const [scheduleList, setScheduleList] = useState<Schedule.Schedule[]>([])
-  const [loadScheduleData] = useLazyGetScheduleByDate()
-  HeaderHandler([t('title:home')])
-  useEffect(() => {
+
+  const todayInfo = useMemo(() => {
     const today = new Date()
-    loadScheduleData({
-      variables: {
-        year: today.getFullYear(),
-        month: today.getMonth() + 1,
-        date: today.getDate()
-      }
-    }).then(result => {
-      if (result.data) {
-        setScheduleList(result.data.getScheduleByDate)
-      }
-    })
+    return {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      date: today.getDate()
+    }
   }, [])
+  const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
+  const scheduleList = useMemo(() => scheduleListData?.getScheduleByDate || [], [scheduleListData])
+  HeaderHandler([t('title:home')])
 
   const addSchedule = useCallback(() => {
     const today = new Date()
