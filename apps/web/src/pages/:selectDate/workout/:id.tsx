@@ -1,188 +1,106 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button } from '@nextui-org/react'
 import dayjs from '../../../hooks/dayjs'
 import ExerciseDataList from '../../../components/ExerciseData/ExerciseDataList'
 import { useAlert } from '../../../components/provider/Alert/useAlert'
-import { HeaderHandler, HeaderMenuHandler } from '../../../components/provider/Header/HeaderHandler'
-import { useLazyGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
+import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler'
+import { useGetScheduleById, useUpdateSchedule } from '../../../service/GqlStore/Schedule'
 import { ScheduleType } from '../../../components/utils'
 import { useTranslation } from 'react-i18next'
-import { LogEvent } from '../../../service/firebase'
-import { useCloneSchedule } from '../../../service/GqlStore/Schedule'
-import { useSaveScheduleAsExercisePreset } from '../../../service/GqlStore/ExercisePreset'
 import PresetNameInputDialog from '../../../components/Preset/PresetNameInputDialog'
 import { Schedule } from 'fitness-struct'
+import usePageTracker from '../../../hooks/usePageTracker'
+import { useAnimationFrame } from 'framer-motion'
+import useScheduleHeaderMenu from '../../../components/Header/Schedule/useScheduleHeaderMenu'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
   const { id: idParam } = useParams()
+  usePageTracker('workout_detail')
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
   const alert = useAlert()
-  const [getSchedule] = useLazyGetScheduleById()
-  const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule | undefined>()
+  const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
+  const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
+  const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
+  const [timerText, setTimerText] = useState('00:00:00.000')
+
   const [updateSchedule] = useUpdateSchedule()
-  const [cloneSchedule] = useCloneSchedule()
-  const [saveScheduleAsExercisePreset] = useSaveScheduleAsExercisePreset()
-
-
-  const [isSaveScheduleAsPresetOpen, setSaveScheduleAsPresetOpen] = useState(false)
-  function makeAsPreset() {
-    setSaveScheduleAsPresetOpen(true)
-  }
-
-  async function saveScheduleAsPreset(v: boolean, presetName?: string) {
-    if (!presetName) return
-    if (!v) return
-    setSaveScheduleAsPresetOpen(!v)
-    const result = await saveScheduleAsExercisePreset({ variables: { scheduleId: scheduleId, name: presetName } })
-    if (result.data?.saveScheduleAsExercisePreset) {
-      navigate(`/preset/${result.data.saveScheduleAsExercisePreset.id}`)
-    } else {
-      alert.showAlert('ERROR', 'Save Schedule As Preset Failed', false)
+  const updateState = useCallback((type: Schedule.IType, lazySchedule?: Schedule.Schedule) => {
+    if (!lazySchedule) return Promise.resolve()
+    const now = new Date().getTime()
+    let workoutTimes = lazySchedule.workoutTimes
+    if (lazySchedule.type === ScheduleType.STARTED) {
+      workoutTimes += now - lazySchedule.beforeTime
     }
-  }
-
-  async function cloneAsSchedule() {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth() + 1
-    const date = today.getDate()
-    const result = await cloneSchedule({ variables: { id: scheduleId, targetDate: { year, month, date } } })
-    if (result.data?.cloneSchedule) {
-      const clonedScheduleId = result.data.cloneSchedule.id
-      alert.showAlert(
-        'SUCCESS',
-        'Clone Schedule Success',
-        false,
-        { message: 'Goto Workout', colorClass: 'text-green-500' },
-        { message: 'Cancel', colorClass: 'text-red-500' }
-      ).then((value) => {
-        if (value) navigate(`/${year}-${month}-${date}/workout/${clonedScheduleId}`)
-      })
+    const obj = {
+      ...lazySchedule,
+      type,
+      beforeTime: now,
+      workoutTimes: workoutTimes
     }
-  }
-  function shareSchedule() {
-    alert.showAlert('ERROR', 'On Featured process', false)
-    // TODO: schedule data as json
-    // TODO: encode json as base64
-    // TODO: make QR code
-
-  }
-
-  // Load Data 
-  useEffect(() => {
-    LogEvent('visit_workout')
-
-    getSchedule({ variables: { id: scheduleId } }).then((result) => {
-      if (!result.data?.getScheduleById) {
-        alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
-          navigate('/')
-        })
-      } else {
-        const obj = result.data?.getScheduleById
-        // @ts-ignore
-        delete obj.__typename
-        updateLazySchedule(obj)
-      }
+    updateLazySchedule(obj)
+    return updateSchedule({
+      variables: { updateSchedule: obj }
     })
-    return () => {
-      LogEvent('exit_workout')
-      if (lazySchedule) {
-        updateSchedule({
-          variables: { updateSchedule: lazySchedule }
-        })
-      }
-    }
-  }, [scheduleId])
+  }, [updateLazySchedule, updateSchedule])
+  const startSchedule = useCallback(
+    () => updateState(ScheduleType.STARTED, lazySchedule),
+    [lazySchedule, updateState]
+  )
+  const pauseSchedule = useCallback(
+    () => updateState(ScheduleType.PAUSED, lazySchedule),
+    [lazySchedule, updateState]
+  )
+  const finishSchedule = useCallback(
+    () => updateState(ScheduleType.FINISH, lazySchedule).then(() => navigate('/')),
+    [lazySchedule, updateState, navigate]
+  )
 
-  const headerMenuList = useMemo(() => lazySchedule?.type === 'FINISH' ? [
-    {
-      key: 'make',
-      name: t('actionBtn.make'),
-      action: makeAsPreset
-    },
-    {
-      key: 'clone',
-      name: t('actionBtn.clone'),
-      action: cloneAsSchedule
-    },
-    {
-      key: 'share',
-      name: t('actionBtn.share'),
-      action: shareSchedule
+  function calcTimeText(schedule: Schedule.Schedule) {
+    let time = schedule.workoutTimes
+    if (schedule.type === ScheduleType.STARTED) {
+      const nowTime = new Date().getTime()
+      time += nowTime - schedule.beforeTime
     }
-  ] : [], [lazySchedule])
-  HeaderMenuHandler(headerMenuList)
+    return dayjs.duration(time).format('HH:mm:ss.SSS')
+  }
 
+  // initations
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!scheduleId) return
-      if (lazySchedule && lazySchedule.type === 'STARTED') {
-        const tempSchedule = { ...lazySchedule }
-        const nowTime = new Date().getTime()
-        tempSchedule.workoutTimes += nowTime - (tempSchedule.beforeTime ?? tempSchedule.start)
-        tempSchedule.beforeTime = nowTime
-        // @ts-ignore
-        delete tempSchedule.__typename
-        updateLazySchedule(tempSchedule)
+    if (error) {
+      alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
+        navigate('/')
+      })
+    } else if (loadedScheduleData) {
+      if (!lazySchedule) {
+        const temp = Object.create(null)
+        Object.assign(temp, loadedScheduleData)
+        delete temp.__typename
+        updateLazySchedule(temp)
+        setTimerText(calcTimeText(temp))
       }
-    }, 100)
-    return () => {
-      clearInterval(interval)
     }
-  }, [lazySchedule])
+  }, [error, alert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
 
   /** display formated duration time */
-  const timer = useMemo(() => {
-    if (lazySchedule?.workoutTimes)
-      return dayjs.duration(lazySchedule?.workoutTimes).format('HH:mm:ss.SSS')
-    return '00:00:00.000'
-  }, [lazySchedule])
+  useAnimationFrame(() => {
+    if (!lazySchedule || lazySchedule.type !== 'STARTED') return
+    setTimerText(calcTimeText(lazySchedule))
+  })
 
-  HeaderHandler([timer])
+  HeaderHandler([timerText])
 
-  function updateState(type: Schedule.IType) {
-    if (!scheduleId) return Promise.resolve()
-    if (lazySchedule) {
-      const obj = {
-        ...lazySchedule,
-        type,
-      }
-      if (type === ScheduleType.STARTED) {
-        obj.start = obj.beforeTime = new Date().getTime()
-      }
-      // @ts-ignore
-      delete obj.__typename
-      return updateSchedule({
-        variables: { updateSchedule: obj }
-      }).then(() => {
-        updateLazySchedule(obj)
-      })
-    } else {
-      return Promise.resolve()
-    }
-  }
-
-  function startSchedule() {
-    updateState(ScheduleType.STARTED)
-  }
-  function pauseSchedule() {
-    updateState(ScheduleType.PAUSED)
-  }
-  function finishSchedule() {
-    updateState(ScheduleType.FINISH).then(() => {
-      navigate('/')
-    })
-  }
   const scheduleProcessBtn = useMemo(() => {
-    if (lazySchedule?.type === 'STARTED') {
+    if (lazySchedule?.type === ScheduleType.STARTED) {
       return <Button onClick={pauseSchedule}>{t('actionBtn.pause')}</Button>
     } else {
       return <Button onClick={startSchedule}>{t('actionBtn.start')}</Button>
     }
-  }, [lazySchedule])
+  }, [lazySchedule, pauseSchedule, startSchedule, t])
+
+  const [isSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(scheduleId, loadedScheduleData)
 
   return <>
     <div className="flex flex-col">
