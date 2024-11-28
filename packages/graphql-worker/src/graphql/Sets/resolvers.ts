@@ -47,7 +47,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return createdResult && createdResult[0] ? createdResult[0] : null
     },
     async updateSet(_source, { sets }, context) {
-      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
+      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
         context.client,
         'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
         [
@@ -59,7 +59,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           sets.id
         ]
       )
-      return updateResult || null
+      return updateResult ? updateResult[0] : null
     },
     async deleteSetById(_source, { id }, context) {
       const result = await dbTransitionBus?.sendTransaction(
