@@ -11,7 +11,7 @@ export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemPro
   // load Fitness data
   const fitnessData = useGetFitnessById(exerciseData?.exercise)
   const fitnessName = useMemo(() => {
-    return fitnessData.data?.getFitnessById.name
+    return fitnessData.data?.getFitnessById.name || ''
   }, [fitnessData])
 
   // load Set Data

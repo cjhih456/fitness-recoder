@@ -1,4 +1,3 @@
-import { Accordion, AccordionItem } from '@nextui-org/react';
 import ExerciseDataDisplay from './ExerciseDataDisplay';
 import { useEffect, useMemo, useState } from 'react';
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
@@ -23,7 +22,6 @@ export default function ExerciseDataList({
 }: ExerciseDataListProps) {
   const [scheduleId, setScheduleId] = useState(-1)
   const [getExerciseSchedule, { data: exerciseDataBySchedule }] = useLazyGetExerciseListByScheduleId()
-  const [selectedKeys, changeSelectedKeys] = useState<'all' | number[]>([])
   useEffect(() => {
     if (scheduleId === schedule?.id) return
     setScheduleId(schedule?.id || 0)
@@ -56,26 +54,12 @@ export default function ExerciseDataList({
     }).filter(Boolean) as TempExerciseData[]
   }, [scheduleData, fitnessList])
 
-  function changeSelection(key: number) {
-    if (selectedKeys[0] === key) {
-      changeSelectedKeys([])
-    } else {
-      changeSelectedKeys([key])
-    }
-  }
-
-  function gotoNextExercise(index: number) {
-    if (exerciseList[index + 1]) {
-      changeSelectedKeys([exerciseList[index + 1].id])
-    }
-  }
-
   const exerciseListDisplay = useMemo(() => {
-    return exerciseList.map((exerciseData, index) => {
+    return exerciseList.map((exerciseData) => {
       return <MenuableAccordion key={`${exerciseData.id}`}>
         {() => ({
           title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
-          content: <ExerciseDataDisplay exerciseData={exerciseData} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
+          content: <ExerciseDataDisplay exerciseData={exerciseData} readonly={readonly}></ExerciseDataDisplay>
         })}
 
       </MenuableAccordion>

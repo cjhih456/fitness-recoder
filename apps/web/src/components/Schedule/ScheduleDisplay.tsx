@@ -1,4 +1,3 @@
-import { Accordion, AccordionItem } from '@nextui-org/react'
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
 import { ReactNode, useEffect, useMemo } from 'react'
