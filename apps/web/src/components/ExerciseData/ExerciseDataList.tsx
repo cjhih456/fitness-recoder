@@ -1,6 +1,6 @@
 import ExerciseDataDisplay from './ExerciseDataDisplay';
 import { useEffect, useMemo, useState } from 'react';
-import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
+import { useGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
 import { Exercise, Schedule } from 'fitness-struct';
 import { useGetFitnessListByIds } from '../../service/GqlStore/Fitness';
 import MenuableAccordion from '../CustomComponent/MenuableAccordion';
@@ -20,31 +20,30 @@ export default function ExerciseDataList({
   schedule,
   readonly
 }: ExerciseDataListProps) {
-  const [scheduleId, setScheduleId] = useState(-1)
-  const [getExerciseSchedule, { data: exerciseDataBySchedule }] = useLazyGetExerciseListByScheduleId()
+  const [scheduleId, setScheduleId] = useState(0)
   useEffect(() => {
     if (scheduleId === schedule?.id) return
-    setScheduleId(schedule?.id || 0)
-    getExerciseSchedule({ variables: { scheduleId: schedule?.id || 0 } })
-  }, [schedule?.id, getExerciseSchedule])
+    const newScheduleId = schedule?.id || 0
+    setScheduleId(newScheduleId)
+  }, [schedule?.id, scheduleId, setScheduleId])
+
+  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(scheduleId)
+
   const scheduleData = useMemo(() => {
-    if (schedule) return {
-      exerciseList: exerciseDataBySchedule?.getExerciseListByScheduleId || []
-    }
-    return { exerciseList: [] }
-  }, [schedule, exerciseDataBySchedule])
+    return getExerciseListByScheduleIdData?.getExerciseListByScheduleId || []
+  }, [getExerciseListByScheduleIdData])
 
   const fitnessIdList = useMemo(() => {
-    return scheduleData.exerciseList.map(v => v.exercise) || []
+    return scheduleData.map(v => v.exercise) || []
   }, [scheduleData])
-  const fitnessListOrigin = useGetFitnessListByIds(fitnessIdList)
+  const { data: getFitnessListByIdsData } = useGetFitnessListByIds(fitnessIdList)
   const fitnessList = useMemo(() => {
-    return fitnessListOrigin.data?.getFitnessListByIds || []
-  }, [fitnessListOrigin])
+    return getFitnessListByIdsData?.getFitnessListByIds || []
+  }, [getFitnessListByIdsData])
 
-  const exerciseList = useMemo(() => {
+  const exerciseDataList = useMemo(() => {
     if (!scheduleData) return [] as TempExerciseData[]
-    return scheduleData.exerciseList.map(exerciseData => {
+    return scheduleData.map(exerciseData => {
       const exercise = fitnessList.find(v => v.id === exerciseData.exercise) || { name: '' }
       return {
         ...exerciseData,
@@ -56,9 +55,8 @@ export default function ExerciseDataList({
 
   const [focusExercise, changeFocus] = useState(0)
 
-
   const exerciseListDisplay = useMemo(() => {
-    return exerciseList.map((exerciseData) => {
+    return exerciseDataList.map((exerciseData) => {
       return <MenuableAccordion
         key={`${exerciseData.id}`}
         isFocus={focusExercise === exerciseData.id}
@@ -73,7 +71,7 @@ export default function ExerciseDataList({
 
       </MenuableAccordion>
     })
-  }, [exerciseList, readonly, focusExercise])
+  }, [exerciseDataList, readonly, focusExercise])
 
   return <div className="flex flex-col gap-y-3">
     {exerciseListDisplay}
