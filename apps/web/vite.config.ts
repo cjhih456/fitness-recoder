@@ -9,15 +9,8 @@ import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 export default defineConfig(({ mode, isPreview }) => {
   return {
     server: mode === 'development' ? {
-      headers: {
-        'Cross-Origin-Opener-Policy': 'same-origin',
-        'Cross-Origin-Resource-Policy': 'same-origin',
-        'Cross-Origin-Embedder-Policy': 'require-corp',
-        // 'Access-Control-Allow-Origin': '*',
-        'Service-Worker-Allowed': '/'
-      },
       cors: true,
-      port: 443,
+      port: 4443,
       https: {
         cert: fs.readFileSync('./ssl/server.crt'),
         key: fs.readFileSync('./ssl/server.key')
@@ -25,7 +18,7 @@ export default defineConfig(({ mode, isPreview }) => {
     } : undefined,
     preview: isPreview && mode === 'production' ? {
       cors: true,
-      port: 443,
+      port: 4443,
       https: {
         cert: fs.readFileSync('./ssl/server.crt'),
         key: fs.readFileSync('./ssl/server.key')

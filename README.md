@@ -28,8 +28,6 @@ yarn build
 #### Dev Process
 ```sh
 yarn dev
-# or
-sudo yarn dev
 ```
 
 #### Check Eslint
