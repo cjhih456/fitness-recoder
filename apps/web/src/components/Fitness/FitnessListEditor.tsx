@@ -70,7 +70,7 @@ export default function FitnessListEditor({
       selectedFitnessIds={lazyFitnessIds}
       onChangeFitnessIds={changeSelectedFitnessIds}
     ></FitnessSearchModal>
-    <div className="flex flex-col gap-y-4 px-4">
+    <div className="flex flex-col gap-y-4 px-4 pt-4">
       <div className="flex flex-col gap-y-2">
         <FitnessList list={fitnessList?.getFitnessListByIds || []}></FitnessList>
       </div>

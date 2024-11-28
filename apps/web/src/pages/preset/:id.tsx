@@ -76,10 +76,12 @@ export default function PresetDetailPage() {
       navigate('/preset')
     })
   }
-  return <FitnessListEditor
-    savedIdxData={oldExerciseList}
-    exerciseIdxList={newExerciseList}
-    onChangeExerciseIdxList={changeNewExerciseList}>
-    <Button onClick={savePreset}>Save Preset</Button>
-  </FitnessListEditor>
+  return <div>
+    <FitnessListEditor
+      savedIdxData={oldExerciseList}
+      exerciseIdxList={newExerciseList}
+      onChangeExerciseIdxList={changeNewExerciseList}>
+      <Button onClick={savePreset}>Save Preset</Button>
+    </FitnessListEditor>
+  </div>
 }

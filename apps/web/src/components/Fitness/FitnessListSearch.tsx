@@ -90,7 +90,7 @@ export default function FitnessListSearch({
         </Select>
       </div>
     </div>
-    <ScrollShadow className={`${xSpacing} snap-y scroll-smooth mt-4`}>
+    <ScrollShadow className={`${xSpacing} scroll-smooth pt-4`}>
       <FitnessList
         list={fitnessList}
         selectedFitnessIds={selectedFitnessIds}

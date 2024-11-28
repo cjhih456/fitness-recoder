@@ -75,11 +75,11 @@ export default function Main() {
     }
   }, [scheduleList, t, gotoPresetPage, addSchedule, startSchedule, gotoModify])
 
-  return <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
-    <h2>
+  return <div className="flex flex-col items-stretch h-full pt-4">
+    <h2 className="text-xl font-semibold px-4">
       {t('todaySchedule')}
     </h2>
-    <ScrollShadow className="flex flex-col items-stretch gap-y-3">
+    <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
       {displaySchedule}
     </ScrollShadow>
   </div >

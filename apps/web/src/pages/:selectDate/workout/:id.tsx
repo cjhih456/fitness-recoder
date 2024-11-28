@@ -103,7 +103,7 @@ export default function DisplayWorkout() {
   const [isSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(scheduleId, loadedScheduleData)
 
   return <>
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-4">
       <div className="px-4">
         {scheduleId && lazySchedule && <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
       </div>

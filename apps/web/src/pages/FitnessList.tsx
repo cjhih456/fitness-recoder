@@ -7,7 +7,7 @@ function FitnessList() {
   useBottomNavi()
   HeaderHandler([t('exercise')])
 
-  return <div className="grid h-full max-h-full overflow-hidden">
+  return <div className="grid h-full max-h-full overflow-hidden pt-4">
     <FitnessListSearch needSpace></FitnessListSearch>
   </div>
 }
