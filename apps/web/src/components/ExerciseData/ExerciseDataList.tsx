@@ -54,9 +54,18 @@ export default function ExerciseDataList({
     }).filter(Boolean) as TempExerciseData[]
   }, [scheduleData, fitnessList])
 
+  const [focusExercise, changeFocus] = useState(0)
+
+
   const exerciseListDisplay = useMemo(() => {
     return exerciseList.map((exerciseData) => {
-      return <MenuableAccordion key={`${exerciseData.id}`}>
+      return <MenuableAccordion
+        key={`${exerciseData.id}`}
+        isFocus={focusExercise === exerciseData.id}
+        onFocusChange={(v) => {
+          changeFocus(v ? exerciseData.id : 0)
+        }}
+      >
         {() => ({
           title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
           content: <ExerciseDataDisplay exerciseData={exerciseData} readonly={readonly}></ExerciseDataDisplay>
@@ -64,7 +73,7 @@ export default function ExerciseDataList({
 
       </MenuableAccordion>
     })
-  }, [exerciseList, readonly])
+  }, [exerciseList, readonly, focusExercise])
 
   return <div className="flex flex-col gap-y-3">
     {exerciseListDisplay}

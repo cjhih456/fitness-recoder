@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-import { ReactNode, useMemo, useRef, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
 
@@ -9,17 +9,33 @@ interface MenuableAccordionProps {
     content: ReactNode
   },
   menu?: Record<string, () => void>
+  isFocus?: boolean | undefined
+  onFocusChange?: (_t: boolean) => void
 }
 
-export default function MenuableAccordion({ children, menu }: MenuableAccordionProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+export default function MenuableAccordion({ children, menu, isFocus, onFocusChange }: MenuableAccordionProps) {
+  const [isSingleOpen, setIsLazyOpen] = useState<boolean>(false);
   const onToggleIsOpen = () => {
-    setIsOpen(prev => !prev)
+    setIsLazyOpen(prev => {
+      onFocusChange && onFocusChange(!prev)
+      return !prev
+    })
   };
   const cardRef = useRef<HTMLDivElement | null>(null)
   useOnClickOutside([cardRef], () => {
-    setIsOpen(false)
+    typeof isFocus === 'undefined' && setIsLazyOpen(false)
   })
+  useEffect(() => {
+    setIsLazyOpen(typeof isFocus === 'undefined' ? false : isFocus)
+  }, [isFocus])
+
+  const isOpen = useMemo(() => {
+    if (typeof isFocus === 'undefined') {
+      return isSingleOpen
+    } else {
+      return isFocus
+    }
+  }, [isFocus, isSingleOpen])
 
   const { content: childNode, title: titleNode } = useMemo(() => {
     return children(onToggleIsOpen)
