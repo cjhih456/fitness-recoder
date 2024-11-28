@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
 import { Exercise, Schedule } from 'fitness-struct';
 import { useGetFitnessListByIds } from '../../service/GqlStore/Fitness';
+import MenuableAccordion from '../CustomComponent/MenuableAccordion';
 
 export interface ExerciseDataListProps {
   schedule?: Schedule.Schedule
@@ -71,18 +72,17 @@ export default function ExerciseDataList({
 
   const exerciseListDisplay = useMemo(() => {
     return exerciseList.map((exerciseData, index) => {
-      return <AccordionItem
-        key={`${exerciseData.id}`}
-        title={exerciseData.name}
-        classNames={{ heading: 'font-bold' }}
-        onPress={() => changeSelection(exerciseData.id)}
-      >
-        <ExerciseDataDisplay exerciseData={exerciseData} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
-      </AccordionItem>
+      return <MenuableAccordion key={`${exerciseData.id}`}>
+        {() => ({
+          title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
+          content: <ExerciseDataDisplay exerciseData={exerciseData} hasDoneLastSet={() => gotoNextExercise(index)} readonly={readonly}></ExerciseDataDisplay>
+        })}
+
+      </MenuableAccordion>
     })
   }, [exerciseList, readonly])
 
-  return <Accordion selectionBehavior="replace" variant='splitted' selectedKeys={selectedKeys}>
+  return <div className="flex flex-col gap-y-3">
     {exerciseListDisplay}
-  </Accordion>
+  </div>
 }
