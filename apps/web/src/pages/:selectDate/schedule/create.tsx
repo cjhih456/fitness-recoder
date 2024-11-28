@@ -1,11 +1,12 @@
 import { Button } from '@nextui-org/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '../../../components/Fitness/FitnessListEditor';
 import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
 import { useCreateScheduleWithExercisePlans } from '../../../service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
 import { LogEvent } from '../../../service/firebase';
 import { useAlert } from '../../../components/provider/Alert/useAlert';
+import usePageTracker from '../../../hooks/usePageTracker';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
@@ -13,12 +14,7 @@ const defaultSearchParams = createSearchParams({
 
 export default function CreateSchedule() {
   HeaderHandler(['Create Schedule'])
-  useEffect(() => {
-    LogEvent('visit_create_schedule')
-    return () => {
-      LogEvent('exit_create_schedule')
-    }
-  }, [])
+  usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)

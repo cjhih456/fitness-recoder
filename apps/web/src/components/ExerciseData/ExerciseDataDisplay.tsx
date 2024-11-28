@@ -1,7 +1,7 @@
 import { Button } from '@nextui-org/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import SetRow from './SetRow';
-import { useCreateSet, useDeleteSet, useLazyGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
+import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
 import { Exercise } from 'fitness-struct';
 
 export interface ExerciseDataDisplayProps {
@@ -15,16 +15,10 @@ export default function ExerciseDataDisplay({
   hasDoneLastSet,
   readonly
 }: ExerciseDataDisplayProps) {
-  const [exerciseDataId, setExerciseDataId] = useState<number>(0)
-  const [getSetByExerciseId, { data: setDatas }] = useLazyGetSetListByExerciseId()
+  const { data: setDatas, refetch: getSetByExerciseId } = useGetSetListByExerciseId(exerciseData.id)
   const [createSet] = useCreateSet()
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
-  useEffect(() => {
-    if (exerciseData.id === exerciseDataId) return
-    setExerciseDataId(exerciseData.id)
-    getSetByExerciseId({ variables: { id: exerciseData.id } })
-  }, [exerciseData, getSetByExerciseId])
 
   const setData = useMemo(() => {
     return setDatas?.getSetListByExerciseId || []
@@ -42,9 +36,8 @@ export default function ExerciseDataDisplay({
         }
       }
     }).then(() => {
-      getSetByExerciseId({ variables: { id: exerciseData.id } })
+      getSetByExerciseId({ id: exerciseData.id })
     })
-    // scheduleStore.appendSetByExerciseDataIdx(exerciseDataIdx)
   }
 
   function checkAllSetDone(id: number, isDone: boolean) {
@@ -65,14 +58,14 @@ export default function ExerciseDataDisplay({
             // @ts-ignore
             delete data.__typename
             updateSet({ variables: { sets: data } }).then(() => {
-              getSetByExerciseId({ variables: { id: exerciseData.id } })
+              getSetByExerciseId({ id: exerciseData.id })
             })
           }}
           hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
           readonly={readonly}
           onRemoveSet={(id) => {
             deleteSet({ variables: { id: id } }).then(() => {
-              getSetByExerciseId({ variables: { id: exerciseData.id } })
+              getSetByExerciseId({ id: exerciseData.id })
             })
           }}
         ></SetRow>

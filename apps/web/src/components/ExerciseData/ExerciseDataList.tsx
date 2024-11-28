@@ -1,13 +1,12 @@
 import ExerciseDataDisplay from './ExerciseDataDisplay';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise';
 import { Exercise, Schedule } from 'fitness-struct';
 import { useGetFitnessListByIds } from '../../service/GqlStore/Fitness';
 import MenuableAccordion from '../CustomComponent/MenuableAccordion';
 
 export interface ExerciseDataListProps {
-  schedule?: Schedule.Schedule
-  schedulePresetIdx?: number
+  schedule: Schedule.Schedule
   readonly?: boolean
 }
 
@@ -20,14 +19,7 @@ export default function ExerciseDataList({
   schedule,
   readonly
 }: ExerciseDataListProps) {
-  const [scheduleId, setScheduleId] = useState(0)
-  useEffect(() => {
-    if (scheduleId === schedule?.id) return
-    const newScheduleId = schedule?.id || 0
-    setScheduleId(newScheduleId)
-  }, [schedule?.id, scheduleId, setScheduleId])
-
-  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(scheduleId)
+  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id || 0)
 
   const scheduleData = useMemo(() => {
     return getExerciseListByScheduleIdData?.getExerciseListByScheduleId || []
