@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
 import { useLazyGetScheduleByDate } from '../service/GqlStore/Schedule'
 import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
@@ -30,7 +30,7 @@ export default function Main() {
     })
   }, [])
 
-  function addSchedule() {
+  const addSchedule = useCallback(() => {
     const today = new Date()
     const choosenDate = [
       today.getFullYear(),
@@ -38,18 +38,18 @@ export default function Main() {
       today.getDate()
     ].join('-')
     navigate(`/${choosenDate}/schedule/create?directStart=1`)
-  }
-  function gotoPresetPage() {
+  }, [navigate])
+  const gotoPresetPage = useCallback(() => {
     navigate('/preset')
-  }
-  function gotoModify(id: number, date?: string) {
+  }, [navigate])
+  const gotoModify = useCallback((id: number, date?: string) => {
     if (!date) return
     navigate(`/${date}/schedule/${id}`)
-  }
-  function startSchedule(id: number, date?: string) {
+  }, [navigate])
+  const startSchedule = useCallback((id: number, date?: string) => {
     if (!date) return
     navigate(`/${date}/workout/${id}`)
-  }
+  }, [navigate])
   const displaySchedule = useMemo(() => {
     if (scheduleList.length) {
       return scheduleList.map((schedule, idx) => {
@@ -77,7 +77,7 @@ export default function Main() {
         </div>
       ]
     }
-  }, [scheduleList, t])
+  }, [scheduleList, t, gotoPresetPage, addSchedule, startSchedule, gotoModify])
 
   return <div className="flex flex-col items-stretch gap-y-3 px-4 h-full">
     <h2>

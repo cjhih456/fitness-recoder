@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
 
@@ -15,12 +15,12 @@ interface MenuableAccordionProps {
 
 export default function MenuableAccordion({ children, menu, isFocus, onFocusChange }: MenuableAccordionProps) {
   const [isSingleOpen, setIsLazyOpen] = useState<boolean>(false);
-  const onToggleIsOpen = () => {
+  const onToggleIsOpen = useCallback(() => {
     setIsLazyOpen(prev => {
       onFocusChange && onFocusChange(!prev)
       return !prev
     })
-  };
+  }, [onFocusChange]);
   const cardRef = useRef<HTMLDivElement | null>(null)
   useOnClickOutside([cardRef], () => {
     typeof isFocus === 'undefined' && setIsLazyOpen(false)
@@ -39,7 +39,7 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
 
   const { content: childNode, title: titleNode } = useMemo(() => {
     return children(onToggleIsOpen)
-  }, [children])
+  }, [children, onToggleIsOpen])
 
   const menuItem = useMemo(() => {
     if (!menu) return []
@@ -55,8 +55,7 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
         </Button>
       </DropdownTrigger>
       <DropdownMenu>
-        <DropdownItem>Edit</DropdownItem>
-        <DropdownItem>Delete</DropdownItem>
+        {menuItem}
       </DropdownMenu>
     </Dropdown> : <></>
   }, [menuItem])

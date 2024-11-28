@@ -34,7 +34,7 @@ export default function PresetNameInputDialog({ isOpen, onChange, children }: Pr
     if (typeof isOpen !== 'boolean') return
     if (isOpen === lazyOpen) return
     setLazyOpen(isOpen)
-  }, [isOpen])
+  }, [isOpen, lazyOpen])
 
   return (
     <>

@@ -4,7 +4,6 @@ import { categoryList, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
 import { Exercise } from 'fitness-struct'
 import { useLazyGetFitnessListByKeywords } from '../../service/GqlStore/Fitness'
-import _ from 'lodash'
 import { useDebounceCallback } from 'usehooks-ts'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode

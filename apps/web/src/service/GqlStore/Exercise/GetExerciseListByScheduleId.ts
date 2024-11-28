@@ -23,7 +23,7 @@ export function useGetExerciseListByScheduleId(scheduleId: number) {
     GetExerciseListByScheduleIdResponse,
     GetExerciseListByScheduleIdVariable
   >(GetExerciseListByScheduleIdGql, {
-    variables: { scheduleId: Number(scheduleId) }
+    variables: { scheduleId }
   })
 }
 export function useLazyGetExerciseListByScheduleId() {

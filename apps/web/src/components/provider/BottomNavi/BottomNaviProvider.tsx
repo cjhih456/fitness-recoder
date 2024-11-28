@@ -2,10 +2,10 @@ import { ReactNode, useCallback, useState } from 'react'
 import MenuButton from '../../CustomComponent/MenuButton'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import { createPortal } from 'react-dom'
-import _ from 'lodash'
 import { useRoot } from '../RootProvider/useRoot'
 import { useTranslation } from 'react-i18next'
 import BottomNaviContext, { BottomNaviType } from './BottomNaviContext'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export interface BottomNaviProviderProps {
   children: ReactNode
@@ -17,10 +17,8 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
   const { getRoot } = useRoot()
 
-  const changeBottomNaviVisible = useCallback(
-    _.debounce((v) => setBottomNaviVisible(v), 100),
-    []
-  )
+  const changeBottomNaviVisibleFunc = useCallback((v: boolean) => setBottomNaviVisible(v), [])
+  const changeBottomNaviVisible = useDebounceCallback(changeBottomNaviVisibleFunc, 100)
 
   const contextValue = {
     setBottomNavi: changeBottomNaviVisible

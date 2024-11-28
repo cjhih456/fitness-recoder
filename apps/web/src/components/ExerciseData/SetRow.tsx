@@ -31,12 +31,12 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
         }
       }
     }
-  }, [debouncedLazyValue])
+  }, [debouncedLazyValue, set, hasDoneChange, hasSetChange])
   useEffect(() => {
     if (JSON.stringify(set) !== JSON.stringify(lazyValue)) {
       setLazyValue(Object.assign({}, set))
     }
-  }, [set])
+  }, [set, lazyValue])
 
   function changeRepeat(v: string) {
     setLazyValue((before) => {
