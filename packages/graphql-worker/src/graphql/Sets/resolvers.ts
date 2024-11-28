@@ -6,7 +6,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   Query: {
     async getSetByIds(_source, { ids }, context) {
       const temp = new Array(ids.length).fill('?').join(', ')
-      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
+      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'selects', `select * from sets where id in (${temp})`,
         ids
@@ -22,7 +22,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return set || null
     },
     async getSetListByExerciseId(_source, { id }, context) {
-      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
+      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'selects', 'select * from sets where exerciseId=?',
         [id]
@@ -32,7 +32,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   },
   Mutation: {
     async createSet(_source, { sets }, context) {
-      const createdResult = await dbTransitionBus?.sendTransaction(
+      const createdResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
         [
@@ -47,7 +47,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return createdResult && createdResult[0] ? createdResult[0] : null
     },
     async updateSet(_source, { sets }, context) {
-      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets[]>(
+      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
         [
@@ -62,7 +62,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return updateResult ? updateResult[0] : null
     },
     async deleteSetById(_source, { id }, context) {
-      const result = await dbTransitionBus?.sendTransaction(
+      const result = await dbTransitionBus?.sendTransaction<Sets.Sets>(
         context.client,
         'update', 'DELETE FROM sets where id=?',
         [id]

@@ -33,7 +33,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     },
     async getFitnessListByIds(_source, { ids }: getFitnessByIdsArgs, { client }) {
       const temp = new Array(ids.length).fill('?').join(', ')
-      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB[]>(
+      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
         client,
         'selects',
         `select * from fitness where id in (${temp})`,
@@ -68,7 +68,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         })
       }
       const query = `select * from fitness ${whereQuery.length ? 'where ' + whereQuery.join(' and ') : ''} limit ?,?`
-      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB[]>(
+      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
         client,
         'selects',
         query,

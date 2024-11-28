@@ -14,7 +14,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return schedule || null
     },
     async getScheduleByDate(_source, { year, month, date }, context) {
-      const scheduleList = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
+      const scheduleList = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'selects', 'select * from schedule where year=? and month=? and date=?',
         [year, month, date]
@@ -22,7 +22,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return scheduleList || []
     },
     async getScheduleStatusByDate(_source, { year, month }, context) {
-      const result = await dbTransitionBus?.sendTransaction<{ year: number, month: number, date: number, type: string }[]>(
+      const result = await dbTransitionBus?.sendTransaction<{ year: number, month: number, date: number, type: string }>(
         context.client,
         'selects', 'select year, month, date, group_concat(type) as type from schedule where year=? and month=? group by year, month, date',
         [year, month]
@@ -35,7 +35,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   },
   Mutation: {
     async createSchedule(_source, { schedule }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
+      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
@@ -53,7 +53,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       return result && result[0] ? { ...result[0], ...schedule } : null
     },
     async updateSchedule(_source, { schedule }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
+      const result = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'update',
         'update schedule set year=?, month=?, date=?, beforeTime=?, start=?, breakTime=?, workoutTimes=?, type=? where id=?',
@@ -102,7 +102,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         throw new Error('Cannot find Schedule');
       }
 
-      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
+      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',
@@ -151,7 +151,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         throw new Error('Cannot find ExercisePreset')
       }
 
-      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule[]>(
+      const newSchedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'insert',
         'insert into schedule (year, month, date, beforeTime, start, breakTime, workoutTimes, type) values (?,?,?,?,?,?,?,?)',

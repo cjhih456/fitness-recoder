@@ -6,26 +6,28 @@ export async function getExerciseListByScheduleIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number
-): Promise<Exercise.Data[] | null> {
-  if (!dbBus) return Promise.resolve(null)
-  return dbBus?.sendTransaction<Exercise.Data[]>(client,
+): Promise<Exercise.Data[]> {
+  if (!dbBus) return []
+  const result = await dbBus?.sendTransaction<Exercise.Data>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from schedule_exercise where scheduleId = ?)',
     [scheduleId]
   )
+  return result || []
 }
 
 export async function getExerciseListByExercisePresetIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   exercisePresetId: number
-) {
-  if (!dbBus) return Promise.resolve(null)
-  return dbBus?.sendTransaction<Exercise.Data[]>(client,
+): Promise<Exercise.Data[]> {
+  if (!dbBus) return []
+  const result = await dbBus?.sendTransaction<Exercise.Data>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
     [exercisePresetId]
   )
+  return result || []
 }
 
 
@@ -35,7 +37,7 @@ export async function cloneExerciseList(
   exerciseList: Exercise.Data[]
 ): Promise<Exercise.Data[]> {
   return await Promise.all(exerciseList.map(async (exercise) => {
-    const newExercise = await dbBus?.sendTransaction<Exercise.Data[]>(
+    const newExercise = await dbBus?.sendTransaction<Exercise.Data>(
       client,
       'insert',
       'insert into exercise (exercise) values (?)',
@@ -62,12 +64,12 @@ async function createExerciseByIdsTemp(
 ): Promise<Exercise.Data[]> {
   const temp = Array.isArray(exerciseIds) ? exerciseIds : [exerciseIds]
   const tempQuestion = new Array(temp.length).fill('(?)').join(',')
-  const result = await dbBus?.sendTransaction<Exercise.Data | Exercise.Data[]>(client,
+  const result = await dbBus?.sendTransaction<Exercise.Data>(client,
     'insert',
     `insert into exercise (exercise) values ${tempQuestion}`,
     temp
   )
-  return Array.isArray(result) ? result : result ? [result] : []
+  return result || []
 }
 
 async function createExerciseRelationWithSchedule(
@@ -75,15 +77,16 @@ async function createExerciseRelationWithSchedule(
   client: string,
   scheduleId: number,
   exerciseList: Exercise.Data[]
-) {
+): Promise<{ scheduleId: number, exerciseId: number }[]> {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [scheduleId, v.id])
-  return await dbBus?.sendTransaction<{ scheduleId: number, exerciseId: number }[]>(
+  const result = await dbBus?.sendTransaction<{ scheduleId: number, exerciseId: number }>(
     client,
     'insert',
     `insert into schedule_exercise (scheduleId, exerciseId) values ${temp}`,
     bindData.flat()
   )
+  return result || []
 }
 
 async function createExerciseRelationWithExercisePreset(
@@ -91,22 +94,23 @@ async function createExerciseRelationWithExercisePreset(
   client: string,
   exercisePresetId: number,
   exerciseList: Exercise.Data[]
-) {
+): Promise<{ exercisePresetId: number, exerciseId: number }[]> {
   const temp = Array(exerciseList.length).fill('(?,?)').join(',')
   const bindData = exerciseList.map(v => [exercisePresetId, v.id])
-  return await dbBus?.sendTransaction<{ exercisePresetId: number, exerciseId: number }[]>(
+  const result = await dbBus?.sendTransaction<{ exercisePresetId: number, exerciseId: number }>(
     client,
     'insert',
     `insert into exercisePreset_exercise (exercisePresetId, exerciseId) values ${temp}`,
     bindData.flat()
   )
+  return result || []
 }
 
 export async function deleteExerciseByIdsTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   ids: number | number[]
-) {
+): Promise<string> {
   const temp = Array.isArray(ids) ? ids : [ids]
   const tempQuestion = new Array(temp.length).fill('?').join(',')
   await dbBus?.sendTransaction(client,
@@ -124,7 +128,7 @@ export async function deleteExerciseByIdsTemp(
     `delete from sets where exerciseId in (${tempQuestion})`,
     temp
   )
-  await dbBus?.sendTransaction<Exercise.Data[]>(client,
+  await dbBus?.sendTransaction(client,
     'delete',
     `delete from exercise where id in (${tempQuestion})`,
     temp
@@ -134,35 +138,31 @@ export async function deleteExerciseByIdsTemp(
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    getExerciseById(_source, { id }, context) {
-      return new Promise((resolve, reject) => {
-        dbTransitionBus?.sendTransaction<Exercise.Data>(
-          context.client,
-          'select',
-          'select * from exercise where id=?',
-          [id],
-          (result) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getExerciseById(_source, { id }, context) {
+      const result = await dbTransitionBus?.sendTransaction<Exercise.Data>(
+        context.client,
+        'select',
+        'select * from exercise where id=?',
+        [id],
+      )
+      return result || null
     },
-    getExerciseListByIds(_source, { ids }, context) {
-      return new Promise((resolve, reject) => {
-        const temp = new Array(ids.length).fill('?').join(', ')
-        dbTransitionBus?.sendTransaction<Exercise.Data[]>(
-          context.client,
-          'select',
-          `select * from exercise where id in (${temp})`,
-          ids,
-          (result) => {
-            !result ? reject(null) : resolve(result)
-          }
-        )
-      })
+    async getExerciseListByIds(_source, { ids }, context) {
+      const temp = new Array(ids.length).fill('?').join(', ')
+      const result = await dbTransitionBus?.sendTransaction<Exercise.Data>(
+        context.client,
+        'selects',
+        `select * from exercise where id in (${temp})`,
+        ids,
+      )
+      return result || []
     },
     async getExerciseListByScheduleId(_source, { scheduleId }, context) {
-      return await getExerciseListByScheduleIdTemp(dbTransitionBus, context.client, scheduleId)
+      return await getExerciseListByScheduleIdTemp(
+        dbTransitionBus,
+        context.client,
+        scheduleId
+      )
     },
     async getExerciseListByExercisePresetId(_source, { exercisePresetId }, context) {
       return await getExerciseListByExercisePresetIdTemp(
@@ -172,7 +172,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
     },
     async getExerciseFinishHistory(_source, { exerciseId }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Exercise.HistoryData[]>(
+      const result = await dbTransitionBus?.sendTransaction<Exercise.HistoryData>(
         context.client,
         'selects',
         `select
@@ -205,7 +205,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         limit 10`,
         [exerciseId]
       )
-      return result
+      return result || []
     }
   },
   Mutation: {
@@ -222,7 +222,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         exercise.scheduleId,
         newExerciseList
       )
-      return newExerciseList[0]
+      return newExerciseList[0] || null
     },
     async updateExerciseListByScheduleId(_source, { scheduleId, newExercise, deleteExerciseId }, context) {
       await deleteExerciseByIdsTemp(
@@ -260,7 +260,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         exercise.exercisePresetId,
         newExerciseList
       )
-      return newExerciseList[0]
+      return newExerciseList[0] || null
     },
     async updateExerciseListByExercisePresetId(_source, { exercisePresetId, newExercise, deleteExerciseId }, context) {
       if (deleteExerciseId.length) {
@@ -289,13 +289,14 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         exercisePresetId
       )
     },
-    updateExercise(_source, { id, exerciseId }, context) {
-      return dbTransitionBus?.sendTransaction<Exercise.Data>(
+    async updateExercise(_source, { id, exerciseId }, context) {
+      const result = await dbTransitionBus?.sendTransaction<Exercise.Data>(
         context.client,
         'update',
         'update set exercise exerciseId=? where id=?',
         [exerciseId, id]
       )
+      return result ? result[0] || null : null
     },
     async deleteExerciseById(_source, { id }, context) {
       return deleteExerciseByIdsTemp(dbTransitionBus, context, id)

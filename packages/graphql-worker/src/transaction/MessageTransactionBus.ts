@@ -19,6 +19,8 @@ export default class MessageTransactionBus {
     if (tx) tx(resultData || null)
   }
 
+  async sendTransaction<T = any>(_clientId: string, _type: 'select', _query: string, _bindArgs: any[], _callBack?: TransactionCallBack<T | null>): Promise<T | null>;
+  async sendTransaction<T = any>(_clientId: string, _type: 'selects' | 'insert' | 'update' | 'delete', _query: string, _bindArgs: any[], _callBack?: TransactionCallBack<T | null>): Promise<T[] | null>;
   async sendTransaction<T = any>(clientId: string, type: SqliteMessage.Type, query: string, bindArgs: any[], callBack?: TransactionCallBack<T | null>): Promise<T | null> {
     const client = await this.clients?.get(clientId)
     const txid = uuid()

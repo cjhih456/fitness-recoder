@@ -1,6 +1,6 @@
 export declare namespace SqliteMessage {
-  type SingleType = 'update' | 'select'
-  type Type = SingleType | 'selects' | 'insert' | 'delete' | 'init'
+  type SingleType = 'select';
+  type Type = SingleType | 'update' | 'selects' | 'insert' | 'delete' | 'init';
 
   type Result = {
     type: 'selects' | 'insert'

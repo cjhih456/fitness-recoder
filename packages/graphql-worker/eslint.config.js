@@ -13,5 +13,8 @@ export default [...tsconfig, ...graphqlConfig, {
       ...GLOBALS_BROWSER_FIX,
       ...globals.serviceworker
     }
+  },
+  rules: {
+    'no-dupe-class-members': 'off'
   }
 }];

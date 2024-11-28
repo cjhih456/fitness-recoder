@@ -6,29 +6,27 @@ import { ExercisePreset, Schedule } from 'fitness-struct';
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
     async getExercisePresetList(_source, { page = 1, size = 10 }, context) {
-      const exercisePresetList = await dbTransitionBus?.sendTransaction(
+      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
         context.client,
         'selects',
         'select * from exercisePreset order by deps limit ?,?',
         [(page - 1) * size, size]
       )
       if (!exercisePresetList) return []
-      if (Array.isArray(exercisePresetList)) {
-        await Promise.all(exercisePresetList.map(async (obj) => {
-          return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
-            dbTransitionBus,
-            context.client,
-            obj.id
-          )
-        }))
-        return exercisePresetList
-      }
+      await Promise.all(exercisePresetList.map(async (obj) => {
+        return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
+          dbTransitionBus,
+          context.client,
+          obj.id
+        )
+      }))
+      return exercisePresetList
     },
     async getExercisePresetByIds(_source, { ids }, context) {
       const temp = new Array(ids.length).fill('?').join(', ')
-      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset[]>(
+      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
-        'select',
+        'selects',
         `select * from exercisePreset where id in (${temp})`,
         ids
       )
@@ -46,7 +44,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   },
   Mutation: {
     async createExercisePreset(_source, { exercisePreset }, context) {
-      const createdResult = await dbTransitionBus?.sendTransaction(
+      const createdResult = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
         'insert',
         'insert into exercisePreset (name, deps) values (?, (select count(*) from exercisePreset))',
@@ -54,10 +52,10 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           exercisePreset.name
         ],
       )
-      return createdResult && createdResult[0] ? createdResult[0] : null
+      return createdResult ? createdResult[0] : null
     },
     async updateExercisePreset(_source, { exercisePreset }, context) {
-      const updatedResult = await dbTransitionBus?.sendTransaction(
+      const updatedResult = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
         'update',
         'update exercisePreset set name=?, deps=? where id=?',
@@ -67,12 +65,12 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           exercisePreset.id
         ]
       )
-      return updatedResult
+      return updatedResult ? updatedResult[0] : null
     },
     async deleteExercisePreset(_source, { id }, context) {
-      const relations = await dbTransitionBus?.sendTransaction<{ exerciseId: number }[]>(
+      const relations = await dbTransitionBus?.sendTransaction<{ exerciseId: number }>(
         context.client,
-        'select',
+        'selects',
         'select exerciseId from exercisePreset_exercise where exercisePresetId=?',
         [id]
       ) || []
@@ -115,7 +113,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       if (!schedule) return null;
 
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset[]>(
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
         context.client,
         'insert',
         'insert into exercisePreset (name) values (?)',
@@ -138,7 +136,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
           values.flat()
         );
       }
-      return exercisePreset && exercisePreset[0] ? exercisePreset[0] : null
+      return exercisePreset ? exercisePreset[0] : null
     }
   }
 })
