@@ -1,10 +1,10 @@
 import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { categoryList, muscleList } from '../../service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
 import { Exercise } from 'fitness-struct'
-import { useLazyGetFitnessListByKeywords } from '../../service/GqlStore/Fitness'
-import { useDebounceCallback } from 'usehooks-ts'
+import { useGetFitnessListByKeywords } from '../../service/GqlStore/Fitness'
+import { useDebounceValue } from 'usehooks-ts'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode
   selectedFitnessIds?: number[]
@@ -26,30 +26,16 @@ export default function FitnessListSearch({
   const [searchValue, changeSearchValue] = useState('')
   const [selectedCategoryList, changeCategory] = useState<Exercise.ICategory[]>([])
   const [selectedMuscleList, changeMuscle] = useState<Exercise.IMuscle[]>([])
-  const [fitnessList, setFitnessList] = useState<Exercise.IFitness[]>([])
-  const [getFitnessListByKeywords] = useLazyGetFitnessListByKeywords()
-  const callFunction = useCallback((name: string, category: string[], muscle: string[], offset: number) => {
-    getFitnessListByKeywords({
-      variables: {
-        name,
-        category,
-        muscle,
-        limit: 20,
-        offset
-      }
-    }).then(result => {
-      setFitnessList(
-        (pre) => {
-          return [...pre, ...(result.data?.getFitnessListByKeywords || [])]
-        }
-      )
-    })
-  }, [])
-  const fitnessLoadCallback = useDebounceCallback(callFunction)
-  useEffect(() => {
-    setFitnessList([])
-    fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, 0)
-  }, [searchValue, selectedCategoryList, selectedMuscleList, fitnessLoadCallback])
+  const [debouncedOptions] = useDebounceValue<Parameters<typeof useGetFitnessListByKeywords>>([
+    searchValue,
+    selectedCategoryList,
+    selectedMuscleList,
+    20,
+    0
+  ], 500)
+  const { data: fitnessListData, fetchMore } = useGetFitnessListByKeywords(...debouncedOptions)
+  const fitnessList = useMemo(() => fitnessListData?.getFitnessListByKeywords || [], [fitnessListData])
+
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
   const xSpacing = needSpace ? 'px-4' : ''
   return <div className="flex flex-col flex-nowrap relative overflow-y-hidden overflow-x-visible">
@@ -97,7 +83,11 @@ export default function FitnessListSearch({
         onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
         onToggleFitnessIds={onToggleFitnessIds}
         onLoadMore={() => {
-          fitnessLoadCallback(searchValue, selectedCategoryList, selectedMuscleList, fitnessList.length)
+          fetchMore({
+            variables: {
+              offset: fitnessList.length
+            }
+          })
         }}
       ></FitnessList>
     </ScrollShadow>

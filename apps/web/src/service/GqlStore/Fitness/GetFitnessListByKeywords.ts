@@ -7,8 +7,8 @@ import { FitnessMockData } from '.'
 type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: Exercise.IFitness[] }
 type GetFitnessListByKeywordsVariable = {
   name: string,
-  category: string[],
-  muscle: string[],
+  category: Exercise.ICategory[],
+  muscle: Exercise.IMuscle[],
   limit: number,
   offset: number
 }
@@ -30,10 +30,9 @@ query GetFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [
     tips
   }
 }
-
 `
 
-export function useGetFitnessListByKeywords(name: string, category: string[], muscle: string[], limit: number, offset: number) {
+export function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
   return useQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(getFitnessListByKeywordsGql, {
     variables: {
       name,

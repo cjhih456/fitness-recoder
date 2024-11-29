@@ -2,16 +2,28 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink'
 
 export const useApollo = () => {
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          getFitnessListByKeywords: {
+            keyArgs: ['name', 'category', 'muscle'],
+            merge(existing = [], incoming) {
+              return [...existing, ...incoming]
+            }
+          }
+        }
+      }
+    }
+  })
   return new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: cache,
     link: link,
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'no-cache',
         errorPolicy: 'ignore',
       },
       query: {
-        fetchPolicy: 'no-cache',
         errorPolicy: 'all',
       },
     },

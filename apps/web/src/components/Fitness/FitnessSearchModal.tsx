@@ -20,7 +20,7 @@ export default function FitnessSearchModal({
   const [lazySelectedFitnessIds, setLazySelectedExerciseIds, toggleSelectedFitnessIds] = useIdToggle()
   useEffect(() => {
     if (isOpen) setLazySelectedExerciseIds(new Set(selectedFitnessIds))
-  }, [isOpen, selectedFitnessIds])
+  }, [isOpen, setLazySelectedExerciseIds, selectedFitnessIds])
   /**
    * Save changes when action save button
    * @returns void
