@@ -8,7 +8,7 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "test": "test-storybook",
-    "clean": "rm -rf dist .turbo storybook-static"
+    "clean": "rm -rf dist .turbo storybook-static ./node_modules/.cache/"
   },
   "dependencies": {
     "@fitness/web": "*",
