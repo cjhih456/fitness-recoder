@@ -9,6 +9,9 @@ import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 export default defineConfig(({ mode, isPreview }) => {
   return {
     server: mode === 'development' ? {
+      headers: {
+        'Service-Worker-Allowed': '/'
+      },
       cors: true,
       port: 4443,
       https: {
