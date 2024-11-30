@@ -34,6 +34,7 @@ query GetFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [
 
 export function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
   return useQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(getFitnessListByKeywordsGql, {
+    fetchPolicy: 'cache-first',
     variables: {
       name,
       category,
