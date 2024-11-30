@@ -1,13 +1,13 @@
-import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
 import { ExercisePreset } from 'fitness-struct'
 
 type GetExercisePresetListResponse = { getExercisePresetList: ExercisePreset.PresetWithExerciseList[] }
-type GetExercisePresetListVariable = { page: number, size: number }
+type GetExercisePresetListVariable = { offset: number, size: number }
 const getExercisePresetListGql = gql`
-query GetExercisePresetList($page: Int, $size: Int) {
-  getExercisePresetList(page: $page, size: $size) {
+query GetExercisePresetList($offset: Int, $size: Int) {
+  getExercisePresetList(offset: $offset, size: $size) {
     id
     name
     exerciseList {
@@ -17,19 +17,13 @@ query GetExercisePresetList($page: Int, $size: Int) {
   }
 }
 `
-export function useGetExercisePresetList(page: number, size: number) {
+export function useGetExercisePresetList(offset: number, size: number) {
   return useQuery<
     GetExercisePresetListResponse,
     GetExercisePresetListVariable
   >(getExercisePresetListGql, {
-    variables: { page, size }
+    variables: { offset, size }
   })
-}
-export function useLazyGetExercisePresetList() {
-  return useLazyQuery<
-    GetExercisePresetListResponse,
-    GetExercisePresetListVariable
-  >(getExercisePresetListGql)
 }
 export const GetExercisePresetListMock: MockedResponse<
   GetExercisePresetListResponse,
@@ -41,7 +35,7 @@ export const GetExercisePresetListMock: MockedResponse<
   result: (v) => {
     return {
       data: {
-        getExercisePresetList: Object.values(ExercisePresetMockData).splice(0, v.size)
+        getExercisePresetList: Object.values(ExercisePresetMockData).splice(v.offset, v.size)
       }
     }
   }

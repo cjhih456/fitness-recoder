@@ -6,6 +6,11 @@ export const useApollo = () => {
     typePolicies: {
       Query: {
         fields: {
+          getExercisePresetList: {
+            merge(existing = [], incoming) {
+              return [...existing, ...incoming]
+            }
+          },
           getFitnessListByKeywords: {
             keyArgs: ['name', 'category', 'muscle'],
             merge(existing = [], incoming) {

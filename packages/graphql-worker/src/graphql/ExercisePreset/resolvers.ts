@@ -5,12 +5,12 @@ import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    async getExercisePresetList(_source, { page = 1, size = 10 }, context) {
+    async getExercisePresetList(_source, { offset = 0, size = 10 }, context) {
       const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
         context.client,
         'selects',
         'select * from exercisePreset order by deps limit ?,?',
-        [(page - 1) * size, size]
+        [offset, size]
       )
       if (!exercisePresetList) return []
       await Promise.all(exercisePresetList.map(async (obj) => {

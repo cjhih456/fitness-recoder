@@ -2,13 +2,12 @@ import { ExercisePreset } from 'fitness-struct';
 import { useCreateExercisePreset } from './CreateExercisePreset';
 import { useDeleteExercisePreset } from './DeleteExercisePreset';
 import { useGetExercisePresetById, useLazyGetExercisePresetById } from './GetExercisePresetById';
-import { useGetExercisePresetList, useLazyGetExercisePresetList } from './GetExercisePresetList';
+import { useGetExercisePresetList } from './GetExercisePresetList';
 import { useSaveScheduleAsExercisePreset } from './SaveScheduleAsExercisePreset';
 
 export {
   useCreateExercisePreset,
   useGetExercisePresetList,
-  useLazyGetExercisePresetList,
   useGetExercisePresetById,
   useLazyGetExercisePresetById,
   useSaveScheduleAsExercisePreset,

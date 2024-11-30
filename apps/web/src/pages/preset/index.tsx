@@ -1,34 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import ScheduleDisplay from '../../components/Schedule/ScheduleDisplay';
-import { Button } from '@nextui-org/react';
+import { Button, ScrollShadow } from '@nextui-org/react';
 import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
-import { useCreateExercisePreset, useLazyGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
+import { useCreateExercisePreset, useGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
 import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
 import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
 import { useTranslation } from 'react-i18next';
-import { ExercisePreset } from 'fitness-struct';
+import useSpinner from '../../hooks/useSpinner';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
   useBottomNavi()
   HeaderHandler([t('title:preset')])
-  const [createExercisePreset] = useCreateExercisePreset()
-  const [getExerciseList] = useLazyGetExercisePresetList()
+
   const navigator = useNavigate()
-  const [presetList, setPresetList] = useState<ExercisePreset.PresetWithExerciseList[]>([])
-  useEffect(() => {
-    getExerciseList({
-      variables: {
-        page: 1,
-        size: 20
-      }
-    }).then((result) => {
-      if (result.data) {
-        setPresetList(result.data?.getExercisePresetList)
-      }
-    })
-  }, [])
+  function gotoDetail(id: number) {
+    navigator(`/preset/${id}`)
+  }
+
+  const [createExercisePreset] = useCreateExercisePreset()
   function hasInputNewName(open: boolean, presetName?: string) {
     if (!open || !presetName) return
     createExercisePreset({ variables: { exercisePreset: { name: presetName } } }).then((result) => {
@@ -37,15 +28,16 @@ export default function PresetListPage() {
       }
     })
   }
-  function gotoDetail(id: number) {
-    navigator(`/preset/${id}`)
-  }
+
+  const { data: presetListData, fetchMore, loading } = useGetExercisePresetList(0, 20)
+  const presetList = useMemo(() => presetListData?.getExercisePresetList || [], [presetListData])
+  const loadMore = useCallback(() => {
+    fetchMore({ variables: { offset: presetList.length } })
+  }, [fetchMore, presetList])
+
+  const [spinner] = useSpinner(presetList.length, loading, loadMore)
+
   return <div className="pt-4 px-4 flex flex-col gap-y-4">
-    {presetList.map(preset => <ScheduleDisplay key={preset.id} id={preset.id} title={preset.name} exerciseList={preset.exerciseList}>
-      {(id: number) => <div>
-        <Button onClick={() => gotoDetail(id)}>{t('common:detail')}</Button>
-      </div>}
-    </ScheduleDisplay>)}
     <div>
       <PresetNameInputDialog onChange={hasInputNewName}>
         {(openFn) => <div className='grid'>
@@ -54,5 +46,16 @@ export default function PresetListPage() {
         }
       </PresetNameInputDialog>
     </div>
+    <ScrollShadow>
+      <div className='flex flex-col gap-y-3 flex-nowrap'>
+        {presetList.map(preset => <ScheduleDisplay key={preset.id} id={preset.id} title={preset.name} exerciseList={preset.exerciseList}>
+          {(id: number) => <div>
+            <Button onClick={() => gotoDetail(id)}>{t('common:detail')}</Button>
+          </div>}
+        </ScheduleDisplay>)}
+        {spinner}
+      </div>
+    </ScrollShadow>
+
   </div>
 }
