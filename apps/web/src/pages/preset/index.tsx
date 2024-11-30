@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react';
-import ScheduleDisplay from '../../components/Schedule/ScheduleDisplay';
 import { Button, ScrollShadow } from '@nextui-org/react';
 import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNav
 import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
 import { useTranslation } from 'react-i18next';
 import useSpinner from '../../hooks/useSpinner';
+import PresetDisplay from '../../components/Preset/PresetDisplay';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
@@ -15,9 +15,6 @@ export default function PresetListPage() {
   HeaderHandler([t('title:preset')])
 
   const navigator = useNavigate()
-  function gotoDetail(id: number) {
-    navigator(`/preset/${id}`)
-  }
 
   const [createExercisePreset] = useCreateExercisePreset()
   function hasInputNewName(open: boolean, presetName?: string) {
@@ -48,11 +45,7 @@ export default function PresetListPage() {
     </div>
     <ScrollShadow>
       <div className='flex flex-col gap-y-3 flex-nowrap'>
-        {presetList.map(preset => <ScheduleDisplay key={preset.id} id={preset.id} title={preset.name} exerciseList={preset.exerciseList}>
-          {(id: number) => <div>
-            <Button onClick={() => gotoDetail(id)}>{t('common:detail')}</Button>
-          </div>}
-        </ScheduleDisplay>)}
+        {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} preset={preset} />)}
         {spinner}
       </div>
     </ScrollShadow>

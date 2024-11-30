@@ -44,13 +44,14 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
   const menuItem = useMemo(() => {
     if (!menu) return []
     return Object.keys(menu).map((name, idx) => {
-      return <DropdownItem key={`menu-${idx}`} onClick={menu[name]}>{name}</DropdownItem>
+      return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={menu[name]}>{name}</DropdownItem>
     })
   }, [menu])
+
   const menuCache = useMemo(() => {
-    return menuItem.length ? <Dropdown className="absolute top-0 right-0">
+    return menuItem.length ? <Dropdown type="menu" portalContainer={cardRef.current || document.body}>
       <DropdownTrigger>
-        <Button isIconOnly variant="light" size="sm">
+        <Button role="menu" isIconOnly variant="light" size="sm" className="absolute top-3 right-3" >
           <MdMoreVert className="w-5 h-5 text-gray-400" />
         </Button>
       </DropdownTrigger>
@@ -68,10 +69,10 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
     <Card ref={(ref) => cardRef.current = ref}>
       <CardBody className="relative overflow-hidden">
         {menuCache}
-        <div className="">
+        <figure className="">
           {titleNode}
-        </div>
-        <div className={`transition-height duration-300 ease-in-out ${isOpen ? 'h-[var(--menuable-accordion-height)]' : 'h-0'}`}
+        </figure>
+        <figcaption className={`transition-height duration-300 ease-in-out ${isOpen ? 'h-[var(--menuable-accordion-height)]' : 'h-0'}`}
           style={{
             '--menuable-accordion-height': contentHeight
           }}
@@ -80,7 +81,7 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
           <div ref={(ref) => contentRef.current = ref}>
             {childNode}
           </div>
-        </div>
+        </figcaption>
       </CardBody>
       <CardFooter className="p-0 flex-col">
         <Divider />
