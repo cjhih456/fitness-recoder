@@ -11,12 +11,17 @@
       "cache": false,
       "persistent": true
     },
+    "@fitness/graphql-worker#build": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
-      "persistent": true,
+      "persistent": true
+    },
+    "dev_on": {
       "dependsOn": [
         "^@types/sqlite-message-types#build",
         "^@types/fitness-struct#build",
