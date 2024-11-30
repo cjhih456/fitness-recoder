@@ -18,9 +18,11 @@ export const useApollo = () => {
     link: link,
     defaultOptions: {
       watchQuery: {
+        fetchPolicy: 'no-cache',
         errorPolicy: 'ignore',
       },
       query: {
+        fetchPolicy: 'no-cache',
         errorPolicy: 'all',
       },
     },

@@ -22,6 +22,7 @@ export function useGetExercisePresetList(offset: number, size: number) {
     GetExercisePresetListResponse,
     GetExercisePresetListVariable
   >(getExercisePresetListGql, {
+    fetchPolicy: 'cache-first',
     variables: { offset, size }
   })
 }
