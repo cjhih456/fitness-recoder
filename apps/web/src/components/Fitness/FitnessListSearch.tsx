@@ -32,8 +32,12 @@ export default function FitnessListSearch({
     selectedMuscleList,
     20,
     0
-  ], 500)
-  const { data: fitnessListData, fetchMore } = useGetFitnessListByKeywords(...debouncedOptions)
+  ], 1000, {
+    equalityFn: (l, r) => {
+      return JSON.stringify(l) === JSON.stringify(r)
+    }
+  })
+  const { data: fitnessListData, fetchMore, called } = useGetFitnessListByKeywords(...debouncedOptions)
   const fitnessList = useMemo(() => fitnessListData?.getFitnessListByKeywords || [], [fitnessListData])
 
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
@@ -79,6 +83,7 @@ export default function FitnessListSearch({
     <ScrollShadow className={`${xSpacing} scroll-smooth pt-4`}>
       <FitnessList
         list={fitnessList}
+        isLoadingVisible={called}
         selectedFitnessIds={selectedFitnessIds}
         onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
         onToggleFitnessIds={onToggleFitnessIds}

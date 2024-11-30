@@ -1,21 +1,23 @@
-import { Spinner } from '@nextui-org/react';
 import FitnessItem from './FitnessItem';
 import { useMemo } from 'react';
 import { useExerciseDataModalProvider } from '../provider/ExerciseDataModal/useExerciseDataModalProvider';
 import { Exercise } from 'fitness-struct';
-import { useIntersectionObserver } from 'usehooks-ts';
+import useSpinner from '../../hooks/useSpinner';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
   list: Exercise.IFitness[]
   selectedFitnessIds?: number[]
+  isLoadingVisible: boolean,
   onChangeSelectedFitnessIds?: (_selectedList: number[]) => void
   onToggleFitnessIds?: (_id: number) => void
   onLoadMore?: () => void
 }
 
-export default function FitnessList({ list,
+export default function FitnessList({
+  list,
   selectedFitnessIds,
+  isLoadingVisible,
   onChangeSelectedFitnessIds,
   onToggleFitnessIds,
   onLoadMore }: FitnessListProps) {
@@ -38,22 +40,7 @@ export default function FitnessList({ list,
     onChangeSelectedFitnessIds && onChangeSelectedFitnessIds(([] as number[]).concat(selectedFitnessIds || [], fitnessId))
   }
 
-  // Spinner Intersection
-  const { ref: spinnerRef } = useIntersectionObserver({
-    threshold: 1,
-    onChange(isIntersecting) {
-      if (isIntersecting) {
-        onLoadMore && onLoadMore()
-      }
-    },
-  })
-  // Spinner
-  const spinner = useMemo(() => {
-    if (list.length <= 10) return undefined
-    return <div className="flex justify-center">
-      <Spinner ref={spinnerRef} color="primary" size="lg"></Spinner>
-    </div>
-  }, [list])
+  const [spinner] = useSpinner(list.length, isLoadingVisible, onLoadMore)
 
   return (<div className="flex flex-col gap-y-4">
     {list.map(fitness => (
