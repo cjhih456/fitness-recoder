@@ -3,7 +3,7 @@ import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
 import { ExercisePreset } from 'fitness-struct'
 
-type GetExercisePresetListResponse = { getExercisePresetList: ExercisePreset.PresetWithExerciseList[] }
+export type GetExercisePresetListResponse = { getExercisePresetList: ExercisePreset.PresetWithExerciseList[] }
 type GetExercisePresetListVariable = { offset: number, size: number }
 const getExercisePresetListGql = gql`
 query GetExercisePresetList($offset: Int, $size: Int) {

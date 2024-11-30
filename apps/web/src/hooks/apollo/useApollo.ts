@@ -1,22 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink'
+import { offsetLimitPagination } from '@apollo/client/utilities'
 
 export const useApollo = () => {
   const cache = new InMemoryCache({
     typePolicies: {
       Query: {
         fields: {
-          getExercisePresetList: {
-            merge(existing = [], incoming) {
-              return [...existing, ...incoming]
-            }
-          },
-          getFitnessListByKeywords: {
-            keyArgs: ['name', 'category', 'muscle'],
-            merge(existing = [], incoming) {
-              return [...existing, ...incoming]
-            }
-          }
+          getExercisePresetList: offsetLimitPagination(),
+          getFitnessListByKeywords: offsetLimitPagination(['name', 'category', 'muscle']),
         }
       }
     }

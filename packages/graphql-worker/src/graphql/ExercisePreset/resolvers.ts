@@ -9,7 +9,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
         context.client,
         'selects',
-        'select * from exercisePreset order by deps limit ?,?',
+        'select * from exercisePreset order by deps desc limit ?,?',
         [offset, size]
       )
       if (!exercisePresetList) return []
