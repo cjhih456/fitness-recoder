@@ -66,12 +66,12 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
 
   return (
     <Card ref={(ref) => cardRef.current = ref}>
-      <CardBody className="relative">
+      <CardBody className="relative overflow-hidden">
         {menuCache}
         <div className="">
           {titleNode}
         </div>
-        <div className={`transition-[height,opacity] duration-300 ease-in-out ${isOpen ? 'h-[var(--menuable-accordion-height)]' : 'h-0'}`}
+        <div className={`transition-height duration-300 ease-in-out ${isOpen ? 'h-[var(--menuable-accordion-height)]' : 'h-0'}`}
           style={{
             '--menuable-accordion-height': contentHeight
           }}

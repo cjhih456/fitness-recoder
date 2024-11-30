@@ -11,12 +11,12 @@ export interface FitnessItemProps {
 export default function FitnessItem({ fitnessData, isSelected, onClick, useSelect }: FitnessItemProps) {
   return <Card className="fitness-item scroll-mb-4 snap-start">
     <CardBody className="flex flex-row">
-      <div className="flex-[100px] flex-grow-0 flex-shrink-0" onClick={() => {
+      <div role="img" className="flex-[100px] flex-grow-0 flex-shrink-0" onClick={() => {
         onClick && onClick(fitnessData.id, true)
       }}>
         {/* TODO: add image files */}
       </div>
-      <div className="flex flex-col flex-1 gap-y-2" onClick={() => {
+      <div role="contentinfo" className="flex flex-col flex-1 gap-y-2" onClick={() => {
         onClick && onClick(fitnessData.id, false)
       }}>
         <h3 className="font-semibold"><span>{fitnessData.name}</span> {

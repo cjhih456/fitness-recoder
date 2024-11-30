@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import FitnessItem, { FitnessItemProps } from './FitnessItem'
 import FitnessData from '../../service/Fitness/FitnessData.json'
-import { fn } from '@storybook/test';
+import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
 import { Exercise } from 'fitness-struct';
 
 const meta = {
@@ -33,5 +33,16 @@ export const Display: Story = {
       ...FitnessData[0]
     } as Exercise.IFitness,
     isSelected: false
+  },
+  play: async ({ canvasElement, args, step }) => {
+    const canvas = within(canvasElement)
+    await step('click image area', async () => {
+      await userEvent.click(canvas.getByRole('img'))
+      await waitFor(() => expect(args.onClick).toHaveBeenCalledWith(args.fitnessData.id, true))
+    })
+    await step('click content area', async () => {
+      await userEvent.click(canvas.getByRole('contentinfo'))
+      await waitFor(() => expect(args.onClick).toHaveBeenCalledWith(args.fitnessData.id, false))
+    })
   }
 }
