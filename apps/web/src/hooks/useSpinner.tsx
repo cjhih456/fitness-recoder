@@ -1,14 +1,12 @@
 import { Spinner } from '@nextui-org/react'
 import { useMemo } from 'react'
-import { useIntersectionObserver, useIsMounted } from 'usehooks-ts'
+import { useIntersectionObserver } from 'usehooks-ts'
 
 export default function useSpinner(length: number, loadingVisible: boolean, onLoadMore?: () => void) {
-  const isMounted = useIsMounted()
   const { ref: spinnerRef } = useIntersectionObserver({
     threshold: 1,
-    freezeOnceVisible: true,
     onChange(isIntersecting) {
-      if (isIntersecting && loadingVisible && length && isMounted()) {
+      if (isIntersecting && loadingVisible && length) {
         onLoadMore && onLoadMore()
       }
     },

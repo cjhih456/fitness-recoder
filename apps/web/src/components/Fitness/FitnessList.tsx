@@ -8,7 +8,7 @@ export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
   list: Exercise.IFitness[]
   selectedFitnessIds?: number[]
-  isLoadingVisible: boolean,
+  isLoadingVisible?: boolean,
   onChangeSelectedFitnessIds?: (_selectedList: number[]) => void
   onToggleFitnessIds?: (_id: number) => void
   onLoadMore?: () => void
@@ -40,7 +40,7 @@ export default function FitnessList({
     onChangeSelectedFitnessIds && onChangeSelectedFitnessIds(([] as number[]).concat(selectedFitnessIds || [], fitnessId))
   }
 
-  const [spinner] = useSpinner(list.length, isLoadingVisible, onLoadMore)
+  const [spinner] = useSpinner(list.length, Boolean(isLoadingVisible), onLoadMore)
 
   return (<div className="flex flex-col gap-y-4">
     {list.map(fitness => (
