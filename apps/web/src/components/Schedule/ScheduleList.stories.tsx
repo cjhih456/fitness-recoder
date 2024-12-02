@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleList, { ScheduleListProps } from './ScheduleList'
-import { withRouter } from 'storybook-addon-remix-react-router'
 const meta = {
   title: 'Schedule/ScheduleList',
   tags: ['autodocs'],
@@ -15,7 +14,6 @@ const meta = {
   args: {} as Partial<ScheduleListProps>,
   component: ScheduleList,
   decorators: [
-    withRouter,
     (Story) => {
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <div>

@@ -12,12 +12,13 @@ export {
   useDeleteSet,
 }
 
-export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce((acc, _cur, idx) => {
+export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce<{ [k: number]: Sets.Sets }>((acc, _cur, idx) => {
   const id = idx + 1
   acc[id] = {
     id: id,
     exerciseId: idx,
     isDone: idx % 2 ? true : false,
+    duration: 0,
     repeat: 10,
     weightUnit: 'kg',
     weight: 20
