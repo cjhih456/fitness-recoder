@@ -1,19 +1,21 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import usePresetActions from './usePresetActions'
+import { MenuType } from '../../components/provider/Header/HeaderContext'
 
-
-function usePresetMenu(id: number): { [k: string]: () => void } {
+export default function usePresetMenu(id: number): MenuType[] {
   const { t } = useTranslation(['preset'])
 
   const { startWorkoutWithPresetAction, deletePresetAction } = usePresetActions()
 
-  const menu = useMemo(() => ({
-    [t('menu.startWorkoutWithPreset')]: () => startWorkoutWithPresetAction(id),
-    [t('menu.deletePreset')]: () => deletePresetAction(id)
-  }), [t, id, startWorkoutWithPresetAction, deletePresetAction])
-
-  return menu
+  return useMemo(() => [
+    {
+      name: t('menu.startWorkoutWithPreset'),
+      action: () => startWorkoutWithPresetAction(id)
+    },
+    {
+      name: t('menu.deletePreset'),
+      action: () => deletePresetAction(id)
+    }
+  ], [t, id, startWorkoutWithPresetAction, deletePresetAction])
 }
-
-export default usePresetMenu

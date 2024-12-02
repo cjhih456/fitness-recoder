@@ -7,7 +7,7 @@ import { useGetExercisePresetById } from '../../service/GqlStore/ExercisePreset'
 import { useGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
 import { useUpdateExerciseListByExercisePreset } from '../../service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
 import { useTranslation } from 'react-i18next'
-import usePresetHeaderMenu from '../../hooks/usePreset/usePresetHeaderMenu'
+import usePresetMenu from '../../hooks/usePreset/usePresetMenu'
 
 
 export default function PresetDetailPage() {
@@ -27,7 +27,7 @@ export default function PresetDetailPage() {
   const header = useMemo(() => {
     return [exercisePreset?.name]
   }, [exercisePreset])
-  const headerMenu = usePresetHeaderMenu(id)
+  const headerMenu = usePresetMenu(id)
 
   HeaderHandler(header)
   HeaderMenuHandler(headerMenu)

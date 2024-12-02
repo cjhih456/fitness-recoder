@@ -29,7 +29,7 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
   const lazyExerciseList = useMemo(() => {
     return data?.getExerciseListByScheduleId || []
   }, [data])
-  const scheduleMenu = useScheduleMenu('menu', scheduleId)
+  const scheduleMenu = useScheduleMenu(schedule)
   return <MenuableAccordion menu={scheduleMenu}>
     {() => {
       return {

@@ -2,8 +2,7 @@ import { createContext, ReactNode } from 'react'
 
 export type HeaderContentType = (string | ReactNode)[] | undefined
 
-export type HeaderMenuType = {
-  key: string
+export type MenuType = {
   name: string
   action: () => void
 }
@@ -11,8 +10,8 @@ export type HeaderMenuType = {
 export type HeaderContextType = {
   setHeaderContent: (_contents: HeaderContentType) => void
   getHeaderContent: () => HeaderContentType
-  setHeaderMenu: (_menu: HeaderMenuType[]) => void
-  getHeaderMenu: () => HeaderMenuType[]
+  setHeaderMenu: (_menu: MenuType[]) => void
+  getHeaderMenu: () => MenuType[]
 }
 
 const HeaderContext = createContext<HeaderContextType>({

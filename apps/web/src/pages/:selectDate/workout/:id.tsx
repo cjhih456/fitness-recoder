@@ -100,7 +100,7 @@ export default function DisplayWorkout() {
     }
   }, [lazySchedule, pauseSchedule, startSchedule, t])
 
-  const [isSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(scheduleId, loadedScheduleData)
+  const [isSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(loadedScheduleData)
 
   return <>
     <div className="flex flex-col pt-4">

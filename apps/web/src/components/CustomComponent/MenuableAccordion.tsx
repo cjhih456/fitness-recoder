@@ -2,13 +2,14 @@ import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, Dr
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
+import { MenuType } from '../provider/Header/HeaderContext';
 
 interface MenuableAccordionProps {
   children: (_toggleAction?: () => void) => {
     title: ReactNode
     content: ReactNode
   },
-  menu?: Record<string, () => void>
+  menu?: MenuType[]
   isFocus?: boolean | undefined
   onFocusChange?: (_t: boolean) => void
 }
@@ -43,8 +44,8 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
 
   const menuItem = useMemo(() => {
     if (!menu) return []
-    return Object.keys(menu).map((name, idx) => {
-      return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={menu[name]}>{name}</DropdownItem>
+    return menu.map((item, idx) => {
+      return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={item.action}>{item.name}</DropdownItem>
     })
   }, [menu])
 

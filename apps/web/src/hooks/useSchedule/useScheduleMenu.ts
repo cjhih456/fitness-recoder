@@ -1,44 +1,36 @@
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next';
+import useScheduleActions from './useScheduleActions';
+import { Schedule } from 'fitness-struct';
+import { MenuType } from '../../components/provider/Header/HeaderContext';
 
-import { useCallback, useMemo } from 'react'
-import { useDeleteSchedule } from '../../service/GqlStore/Schedule'
-import { useTranslation } from 'react-i18next'
 
 
-function useScheduleMenu(_type: 'menu', _id: number): { [k: string]: () => void }
-// eslint-disable-next-line no-redeclare
-function useScheduleMenu(_type: 'headmenu', _id: number): {
-  key: string;
-  name: string;
-  action: () => void;
-}[]
+export default function useScheduleMenu(schedule?: Schedule.Schedule): MenuType[] {
+  const { t } = useTranslation(['workout', 'common'])
 
-// eslint-disable-next-line no-redeclare
-function useScheduleMenu(type: string, id: number) {
-  const { t } = useTranslation(['common'])
+  const {
+    deleteScheduleAction,
+    cloneScheduleAction,
+    shareScheduleAction
+  } = useScheduleActions()
 
-  const [deleteSchedule] = useDeleteSchedule()
-
-  const deleteScheduleAction = useCallback((id: number) => {
-    deleteSchedule({ variables: { id } })
-  }, [deleteSchedule])
-
-  const menu = useMemo(() => ({
-    [t('delete')]: () => deleteScheduleAction(id)
-  }), [t, id, deleteScheduleAction])
-
-  const headMenu = useMemo(() => [
-    {
-      key: 'deleteSchedule',
-      name: t('delete'),
-      action: () => deleteScheduleAction(id)
+  return useMemo(() => {
+    const tempList: MenuType[] = []
+    if (!schedule) return tempList
+    if (schedule.type === 'FINISH') {
+      tempList.push({
+        name: t('actionBtn.clone'),
+        action: () => cloneScheduleAction(schedule.id)
+      }, {
+        name: t('actionBtn.share'),
+        action: () => shareScheduleAction()
+      })
     }
-  ], [t, id, deleteScheduleAction])
-
-  if (type === 'menu') {
-    return menu
-  } else if (type === 'headmenu') {
-    return headMenu
-  }
+    tempList.push({
+      name: t('common:delete'),
+      action: () => deleteScheduleAction(schedule.id)
+    })
+    return tempList
+  }, [t, schedule, deleteScheduleAction, cloneScheduleAction, shareScheduleAction])
 }
-
-export default useScheduleMenu

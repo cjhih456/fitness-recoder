@@ -10,8 +10,8 @@ export default function HeaderMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const { getThema, setThema } = useThema()
   const headerContext = useHeaderContext()
-  const headerMenu = useMemo(() => headerContext.getHeaderMenu().map(menu => {
-    return <HeaderMenuItem key={menu.key} text={menu.name} onClick={() => {
+  const headerMenu = useMemo(() => headerContext.getHeaderMenu().map((menu, idx) => {
+    return <HeaderMenuItem key={`menu-${idx}`} text={menu.name} onClick={() => {
       menu.action()
       setIsOpen(false)
     }}></HeaderMenuItem>
