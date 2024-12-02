@@ -24,7 +24,7 @@ export default memo(function PresetDisplay({
   const exerciseList = useMemo(() => preset.exerciseList || [], [preset])
   const exerciseListCount = useMemo(() => exerciseList.length || 0, [exerciseList])
 
-  const presetMenu = usePresetMenu('menu', preset.id)
+  const presetMenu = usePresetMenu(preset.id)
   const menuObj = useMemo(() => presetMenu, [presetMenu])
 
   return <MenuableAccordion menu={menuObj}>
