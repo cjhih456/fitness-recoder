@@ -1,21 +1,22 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useThema } from './components/provider/ThemaProvider/useThema'
-import { NextUIProvider } from '@nextui-org/react'
+import { NextUIProvider, Spinner } from '@nextui-org/react'
 import ExerciseDataInfoModal from './components/provider/ExerciseDataModal/ExerciseDataInfoModal'
 import { AlertProvider } from './components/provider/Alert/AlertProvider'
 import DefaultLayout from './layout/DefaultLayout'
 import { BottomNaviProvider } from './components/provider/BottomNavi/BottomNaviProvider'
-import Main from './pages/Main'
-import CalanderPage from './pages/CalanderPage'
-import FitnessList from './pages/FitnessList'
-import CreateSchedule from './pages/:selectDate/schedule/create'
-import DisplaySchedule from './pages/:selectDate/schedule/:id'
-import DisplayWorkout from './pages/:selectDate/workout/:id'
-import PresetListPage from './pages/preset'
-import PresetDetailPage from './pages/preset/:id'
-import { useMemo } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
+
+const Main = lazy(() => import('./pages/Main'))
+const CalanderPage = lazy(() => import('./pages/CalanderPage'))
+const FitnessList = lazy(() => import('./pages/FitnessList'))
+const CreateSchedule = lazy(() => import('./pages/:selectDate/schedule/create'))
+const DisplaySchedule = lazy(() => import('./pages/:selectDate/schedule/:id'))
+const DisplayWorkout = lazy(() => import('./pages/:selectDate/workout/:id'))
+const PresetListPage = lazy(() => import('./pages/preset'))
+const PresetDetailPage = lazy(() => import('./pages/preset/:id'))
 
 function App() {
   const { getThema } = useThema()
@@ -26,24 +27,18 @@ function App() {
         <AlertProvider>
           <DefaultLayout>
             <BottomNaviProvider>
-              <Routes>
-                <Route index Component={Main} />
-                <Route path="calander" Component={CalanderPage} />
-                <Route path="fitnessList" Component={FitnessList} />
-                <Route path=":selectDate">
-                  <Route path="schedule">
-                    <Route path="create" Component={CreateSchedule} />
-                    <Route path=":id" Component={DisplaySchedule} />
-                  </Route>
-                  <Route path="workout">
-                    <Route path=":id" Component={DisplayWorkout} />
-                  </Route>
-                </Route>
-                <Route path="preset">
-                  <Route index Component={PresetListPage} />
-                  <Route path=":id" Component={PresetDetailPage} />
-                </Route>
-              </Routes>
+              <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><Spinner /></div>}>
+                <Routes>
+                  <Route index Component={Main} />
+                  <Route path="calander" Component={CalanderPage} />
+                  <Route path="fitnessList" Component={FitnessList} />
+                  <Route path=":selectDate/schedule/create" Component={CreateSchedule} />
+                  <Route path=":selectDate/schedule/:id" Component={DisplaySchedule} />
+                  <Route path=":selectDate/workout/:id" Component={DisplayWorkout} />
+                  <Route path="preset" Component={PresetListPage} />
+                  <Route path="preset/:id" Component={PresetDetailPage} />
+                </Routes>
+              </Suspense>
             </BottomNaviProvider>
           </DefaultLayout>
         </AlertProvider>
