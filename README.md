@@ -10,8 +10,9 @@
 1. [@fitness/eslint-config](#eslint-config)
 1. [@fitness/sqlite-worker](#sqlite-worker)
 1. [@fitness/graphql-worker](#graphql-worker)
-1. [vite-plugin-i18next-language-pack-loader](#language-pack-loader)
 1. [@fitness/storybook](#storybook)
+1. [@fitness/vite-plugin-graphql-server](#graphql-server)
+1. [vite-plugin-i18next-language-pack-loader](#language-pack-loader)
 
 ### Used Tech
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
@@ -74,6 +75,9 @@ This package will be used in [@fitness/web](apps/web/src/worker.ts).
 ### <a id="graphql-worker"></a> @fitness/graphql-worker
 Service worker package, will launch graphql on service worker. 
 This package will be used in [@fitness/web](apps/web/src/worker.ts).
+
+### <a id="graphql-server"></a> @fitness/vite-plugin-graphql-server
+Vite plugin for Graphql Server & Graphql Possible type.
 
 ### <a id="language-pack-loader"></a> vite-plugin-i18next-language-pack-loader
 Vite plugin for loading language packs with i18next.

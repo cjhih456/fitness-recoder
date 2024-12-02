@@ -30,6 +30,10 @@ dist-ssr
 # Auto generate file
 apps/web/public/manifest.webmanifest
 
+#graphql PossibleType
+apps/web/src/hooks/apollo/possibleTypes.json
+
+
 # ssl files
 apps/web/ssl/server.crt
 apps/web/ssl/server.key

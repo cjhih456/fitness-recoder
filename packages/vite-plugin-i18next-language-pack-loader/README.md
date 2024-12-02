@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
 ```
 ### i18n file
 ```javascript
-const i18nFiles: Record<string, Record<string, string>> = import.meta.glob<Record<string, string>>('./(en|{langs...})/*{ns}.json', {
+const i18nFiles = import.meta.glob<Record<string, string>>('./(en|{langs...})/*{ns}.json', {
   import: 'default',
   eager: true // if you want lazy load, set as false 
 })

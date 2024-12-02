@@ -41,7 +41,7 @@ const autogenType = `{
 export default async function GraphqlServer(options: options): Promise<Plugin[]> {
 
   const schemas = await (Promise.all(options.modulePath.map(async (path) => {
-    const gqlFile = String(fs.readFileSync(resolve(path, 'query.gql')))
+    const gqlFile = String(fs.readFileSync(resolve(path)))
     const schema = makeExecutableSchema({
       typeDefs: gqlFile,
     })
