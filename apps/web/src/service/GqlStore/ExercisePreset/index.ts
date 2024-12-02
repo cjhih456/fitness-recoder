@@ -1,7 +1,7 @@
 import { ExercisePreset } from 'fitness-struct';
 import { useCreateExercisePreset } from './CreateExercisePreset';
 import { useDeleteExercisePreset } from './DeleteExercisePreset';
-import { useGetExercisePresetById, useLazyGetExercisePresetById } from './GetExercisePresetById';
+import { useGetExercisePresetById } from './GetExercisePresetById';
 import { useGetExercisePresetList } from './GetExercisePresetList';
 import { useSaveScheduleAsExercisePreset } from './SaveScheduleAsExercisePreset';
 import { StoreObject } from '@apollo/client';
@@ -10,7 +10,6 @@ export {
   useCreateExercisePreset,
   useGetExercisePresetList,
   useGetExercisePresetById,
-  useLazyGetExercisePresetById,
   useSaveScheduleAsExercisePreset,
   useDeleteExercisePreset
 }

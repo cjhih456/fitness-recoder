@@ -1,4 +1,4 @@
-import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
 import { ExercisePreset } from 'fitness-struct'
@@ -18,13 +18,7 @@ export function useGetExercisePresetById(id: number) {
   return useQuery<
     GetExercisePresetResponse,
     GetExercisePresetVariable
-  >(getExercisePresetByIdGql, { variables: { id: id } })
-}
-export function useLazyGetExercisePresetById() {
-  return useLazyQuery<
-    GetExercisePresetResponse,
-    GetExercisePresetVariable
-  >(getExercisePresetByIdGql)
+  >(getExercisePresetByIdGql, { variables: { id: id }, fetchPolicy: 'cache-first' })
 }
 export const GetExercisePresetByIdMock: MockedResponse<
   GetExercisePresetResponse,
