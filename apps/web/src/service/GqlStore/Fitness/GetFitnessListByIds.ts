@@ -43,10 +43,12 @@ export const useGetFitnessListByIdsMock: MockedResponse<
   request: {
     query: getFitnessByIdGql
   },
-  result: (_v) => {
+  result: (v) => {
     return {
       data: {
-        getFitnessListByIds: Object.values(FitnessMockData)
+        getFitnessListByIds: v.ids.map(v => {
+          return FitnessMockData[v - 1]
+        })
       }
     }
   }

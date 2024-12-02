@@ -56,10 +56,17 @@ export const useGetFitnessByIdMock: MockedResponse<
   request: {
     query: getFitnessListByKeywordsGql
   },
-  result: (_v) => {
+  newData(v) {
     return {
       data: {
-        getFitnessListByKeywords: Object.values(FitnessMockData)
+        getFitnessListByKeywords: FitnessMockData.slice(v.offset, v.offset + v.limit)
+      }
+    }
+  },
+  result: (v) => {
+    return {
+      data: {
+        getFitnessListByKeywords: FitnessMockData.slice(v.offset, v.offset + v.limit)
       }
     }
   }
