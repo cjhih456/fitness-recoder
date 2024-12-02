@@ -12,7 +12,24 @@
       "persistent": true
     },
     "@fitness/graphql-worker#build": {
-      "cache": false
+      "cache": false,
+      "dependsOn": [
+        "^@types/sqlite-message-types#build",
+        "^@types/fitness-struct#build"
+      ]
+    },
+    "@fitness/sqlite-worker#build": {
+      "dependsOn": [
+        "^@types/sqlite-message-types#build",
+        "^@types/fitness-struct#build"
+      ]
+    },
+    "@fitness/web#build": {
+      "dependsOn": [
+        "^vite-plugin-i18next-language-pack-loader#build",
+        "^@fitness/graphql-worker#build",
+        "^@fitness/sqlite-worker#build"
+      ]
     },
     "build": {
       "dependsOn": ["^build"]
@@ -23,8 +40,6 @@
     },
     "dev_on": {
       "dependsOn": [
-        "^@types/sqlite-message-types#build",
-        "^@types/fitness-struct#build",
         "^vite-plugin-i18next-language-pack-loader#build",
         "^@fitness/graphql-worker#build",
         "^@fitness/sqlite-worker#build"
