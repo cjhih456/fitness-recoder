@@ -10,8 +10,8 @@ import { RootProvider } from './components/provider/RootProvider/RootProvider.ts
 import { BrowserRouter } from 'react-router-dom'
 import { baseURL } from './components/utils.ts'
 import { useApollo } from './hooks/apollo/useApollo.ts'
-Worker().then(() => {
-  const apolloClient = useApollo()
+Worker().then(async () => {
+  const apolloClient = await useApollo()
   Firebase()
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>

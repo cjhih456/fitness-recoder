@@ -2,8 +2,17 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink'
 import { offsetLimitPagination } from '@apollo/client/utilities'
 
-export const useApollo = () => {
+const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
+  import: 'default'
+})
+
+export const useApollo = async () => {
+  const PossibleTypesData = await Promise.all(Object.values((await PossibleTypes())).map(async (it) => {
+    return await it()
+  }))
+
   const cache = new InMemoryCache({
+    possibleTypes: PossibleTypesData[0],
     typePolicies: {
       Query: {
         fields: {

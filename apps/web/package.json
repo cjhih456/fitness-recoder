@@ -15,12 +15,13 @@
     "build": "tsc && vite build",
     "lint": "eslint . --report-unused-disable-directives",
     "preview": "vite preview",
-    "clean": "rm -rf dist .turbo src/i18n/i18next.d.ts src/i18n/en src/i18n/ko public/manifest.webmanifest node_modules/.vite "
+    "clean": "rm -rf dist .turbo src/i18n/i18next.d.ts src/i18n/en src/i18n/ko public/manifest.webmanifest node_modules/.vite src/hooks/apollo/possibleTypes.json"
   },
   "dependencies": {
     "@apollo/client": "^3.11.4",
     "@fitness/graphql-worker": "*",
     "@fitness/sqlite-worker": "*",
+    "@fitness/vite-plugin-graphql-server": "*",
     "@nextui-org/react": "^2.4.8",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "dayjs": "^1.11.10",
@@ -49,6 +50,7 @@
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
+    "jest": "^29.7.0",
     "postcss": "^8.4.49",
     "postcss-nesting": "^13.0.1",
     "tailwindcss": "^3.4.15",

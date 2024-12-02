@@ -4,12 +4,17 @@ import fs from 'fs'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
 import Inspect from 'vite-plugin-inspect'
 import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
+import GraphqlServer from '@fitness/vite-plugin-graphql-server'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
   return {
     server: mode === 'development' ? {
       headers: {
+        'Cross-Origin-Opener-Policy': 'same-origin',
+        'Cross-Origin-Resource-Policy': 'unsafe-none',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
+        // 'Access-Control-Allow-Origin': '*',
         'Service-Worker-Allowed': '/'
       },
       cors: true,
@@ -32,6 +37,16 @@ export default defineConfig(({ mode, isPreview }) => {
     },
     plugins: [
       Inspect(),
+      GraphqlServer({
+        modulePath: [
+          '../../packages/graphql-worker/src/graphql/Schedule',
+          '../../packages/graphql-worker/src/graphql/Sets',
+          '../../packages/graphql-worker/src/graphql/Exercise',
+          '../../packages/graphql-worker/src/graphql/ExercisePreset'
+        ],
+        path: '/__graphql',
+        autoGenTypePath: './src/hooks/apollo/possibleTypes.json'
+      }),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',
         outputPath: './src/i18n',
@@ -39,6 +54,7 @@ export default defineConfig(({ mode, isPreview }) => {
         useDts: true,
         langs: ['en', 'ko']
       }),
+
       makeManifest(),
       react()
     ],
