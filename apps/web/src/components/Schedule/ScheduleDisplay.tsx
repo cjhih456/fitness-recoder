@@ -1,32 +1,36 @@
 import SimpleFitnessList from '../Fitness/SimpleFitnessList'
 import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
 import { ReactNode, useEffect, useMemo } from 'react'
-import { Exercise, Schedule } from 'fitness-struct'
+import { Schedule } from 'fitness-struct'
 import MenuableAccordion from '../CustomComponent/MenuableAccordion'
+import useScheduleMenu from '../../hooks/useSchedule/useScheduleMenu'
 
 export interface ScheduleDisplayProps {
-  id: number,
   title: string,
-  schedule?: Schedule.Schedule
-  exerciseList?: Exercise.Data[]
+  schedule: Schedule.Schedule
   date?: string
   children?: (_id: number, _type?: Schedule.IType, _date?: string) => ReactNode
 }
 
-export default function ScheduleDisplay({ title, date, id, schedule, exerciseList, children }: ScheduleDisplayProps) {
+export default function ScheduleDisplay({ title, date, schedule, children }: ScheduleDisplayProps) {
   const [getExerciseList, { data }] = useLazyGetExerciseListByScheduleId()
+
+  const scheduleId = useMemo(() => {
+    return schedule.id
+  }, [schedule])
   useEffect(() => {
     if (schedule)
       getExerciseList({
         variables: {
-          scheduleId: schedule?.id || 0
+          scheduleId: scheduleId
         }
       })
-  }, [schedule, getExerciseList])
+  }, [schedule, getExerciseList, scheduleId])
   const lazyExerciseList = useMemo(() => {
-    return exerciseList ? exerciseList : data?.getExerciseListByScheduleId || []
-  }, [exerciseList, data])
-  return <MenuableAccordion>
+    return data?.getExerciseListByScheduleId || []
+  }, [data])
+  const scheduleMenu = useScheduleMenu('menu', scheduleId)
+  return <MenuableAccordion menu={scheduleMenu}>
     {() => {
       return {
         title: <>
@@ -37,7 +41,7 @@ export default function ScheduleDisplay({ title, date, id, schedule, exerciseLis
         </>,
         content: <div className="flex flex-col gap-y-2">
           <SimpleFitnessList exerciseDataList={lazyExerciseList} />
-          {children && children(id, schedule?.type, date)}
+          {children && children(scheduleId, schedule?.type, date)}
         </div>
       }
     }}

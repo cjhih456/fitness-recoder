@@ -1,11 +1,12 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { ScheduleMockData } from '.'
+import { ScheduleMockData, ScheduleStoreType } from '.'
 import { ExercisePresetMockData } from '../ExercisePreset'
-import { ExercisePreset, Schedule } from 'fitness-struct'
+import { ExercisePreset } from 'fitness-struct'
+import { GetScheduleByDateResponse } from './GetScheduleByDate'
 
 
-type CloneScheduleFromPresetResponse = { cloneScheduleFromPreset: Schedule.Schedule }
+type CloneScheduleFromPresetResponse = { cloneScheduleFromPreset: ScheduleStoreType }
 type CloneScheduleFromPresetVariable = { presetId: number, targetDate: { year: number, month: number, date: number } }
 const CloneScheduleFromPresetGql = gql`
 mutation CloneScheduleFromPreset($presetId: Int!, $targetDate: TargetDateInput) {
@@ -23,7 +24,21 @@ mutation CloneScheduleFromPreset($presetId: Int!, $targetDate: TargetDateInput) 
 }
 `
 export function useCloneScheduleFromPreset() {
-  return useMutation<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable>(CloneScheduleFromPresetGql)
+  return useMutation<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable>(CloneScheduleFromPresetGql, {
+    update: (cache, result) => {
+      cache.modify<{
+        getScheduleByDate: GetScheduleByDateResponse['getScheduleByDate']
+      }>({
+        fields: {
+          getScheduleByDate(prev, { toReference }) {
+            if (!prev || !result.data?.cloneScheduleFromPreset) return prev
+            const ref = toReference(result.data?.cloneScheduleFromPreset, true)
+            return [...prev, ref]
+          }
+        }
+      })
+    }
+  })
 }
 export const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable> = {
   request: {

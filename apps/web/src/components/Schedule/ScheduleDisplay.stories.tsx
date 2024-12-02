@@ -31,24 +31,6 @@ export default meta
 
 export const Display: Story = {
   args: {
-    exerciseList: [{
-      id: 1,
-      deps: 1,
-      exercise: 0
-    }, {
-      id: 2,
-      deps: 1,
-      exercise: 0
-    }],
-    date: '2024-01-01',
-    id: 1,
-    title: 'Title'
-  }
-}
-
-export const WithSchedule: Story = {
-  args: {
-    date: '2024-01-01',
     schedule: {
       id: 1,
       beforeTime: 0,
@@ -69,7 +51,7 @@ export const WithSchedule: Story = {
       start: 0,
       workoutTimes: 0
     },
-    id: 1,
+    date: '2024-01-01',
     title: 'Title'
   }
 }

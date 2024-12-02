@@ -9,6 +9,7 @@ export const useApollo = () => {
         fields: {
           getExercisePresetList: offsetLimitPagination(),
           getFitnessListByKeywords: offsetLimitPagination(['name', 'category', 'muscle']),
+          getScheduleByDate: offsetLimitPagination(['year', 'month', 'date'])
         }
       }
     }

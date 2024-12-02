@@ -58,7 +58,7 @@ type Query {
 type Mutation {
   createSchedule(schedule: CreateScheduleDataInput): ScheduleData
   updateSchedule(schedule: UpdateScheduleDataInput): ScheduleData
-  deleteSchedule(id: Int!): ScheduleData
+  deleteSchedule(id: Int!): String
   cloneSchedule(id: Int!, targetDate: TargetDateInput): ScheduleData
   cloneScheduleFromPreset(presetId: Int!, targetDate: TargetDateInput): ScheduleData
 }

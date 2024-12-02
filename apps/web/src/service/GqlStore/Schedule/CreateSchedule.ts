@@ -1,10 +1,11 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { ScheduleMockData } from '.'
+import { ScheduleMockData, ScheduleStoreType } from '.'
 import { Schedule } from 'fitness-struct'
+import { GetScheduleByDateResponse } from './GetScheduleByDate'
 
 
-type CreateScheduleResponse = { createSchedule: Schedule.Schedule }
+type CreateScheduleResponse = { createSchedule: ScheduleStoreType }
 type CreaetScheduleVariable = { createSchedule: Schedule.ICreate }
 const CreateScheduleGql = gql`
 mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
@@ -22,7 +23,21 @@ mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
 }
 `
 export function useCreateSchedule() {
-  return useMutation<CreateScheduleResponse, CreaetScheduleVariable>(CreateScheduleGql)
+  return useMutation<CreateScheduleResponse, CreaetScheduleVariable>(CreateScheduleGql, {
+    update: (cache, result) => {
+      cache.modify<{
+        getScheduleByDate: GetScheduleByDateResponse['getScheduleByDate']
+      }>({
+        fields: {
+          getScheduleByDate(prev, { toReference }) {
+            if (!prev || !result.data?.createSchedule) return prev
+            const ref = toReference(result.data?.createSchedule, true)
+            return [...prev, ref]
+          }
+        }
+      })
+    }
+  })
 }
 export const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreaetScheduleVariable> = {
   request: {

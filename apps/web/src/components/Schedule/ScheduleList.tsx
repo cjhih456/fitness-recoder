@@ -26,7 +26,7 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
           year, month, date
         }
       })
-  }, [year, month, date])
+  }, [year, month, date, loadScheduleList])
 
   function addBreakDaySchedule() {
     createSchedule({
@@ -81,7 +81,7 @@ export default function ScheduleList({ choosenDate, onChangeSchedule }: Schedule
     </div>)
     if (scheduleList?.getScheduleByDate) {
       displayList.push(scheduleList?.getScheduleByDate.map((schedule, idx) => {
-        return <ScheduleDisplay key={schedule.id} schedule={schedule} id={schedule.id} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
+        return <ScheduleDisplay key={schedule.id} schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
           {(id, type, date) => {
             const btnList = []
             if (type !== 'FINISH') {

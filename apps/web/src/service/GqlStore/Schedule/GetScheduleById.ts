@@ -1,10 +1,8 @@
-import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { ScheduleMockData } from '.'
-import { Schedule } from 'fitness-struct'
+import { ScheduleMockData, ScheduleStoreType } from '.'
 
-
-type GetScheduleByIdResponse = { getScheduleById: Schedule.Schedule }
+type GetScheduleByIdResponse = { getScheduleById: ScheduleStoreType }
 type GetScheduleByIdVAriable = { id: number }
 const getScheduleByIdGql = gql`
 query GetScheduleById($id: Int!) {
@@ -23,11 +21,9 @@ query GetScheduleById($id: Int!) {
 `
 export function useGetScheduleById(id: number) {
   return useQuery<GetScheduleByIdResponse, GetScheduleByIdVAriable>(getScheduleByIdGql, {
-    variables: { id: Number(id) }
+    variables: { id: Number(id) },
+    fetchPolicy: 'cache-first'
   })
-}
-export function useLazyGetScheduleById() {
-  return useLazyQuery<GetScheduleByIdResponse, GetScheduleByIdVAriable>(getScheduleByIdGql)
 }
 export const GetScheduleByIdMock: MockedResponse<GetScheduleByIdResponse, GetScheduleByIdVAriable> = {
   request: {
