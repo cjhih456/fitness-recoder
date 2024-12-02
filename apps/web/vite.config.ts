@@ -72,14 +72,10 @@ export default defineConfig(({ mode, isPreview }) => {
     base: process.env.VITE_URL_ROOT,
     worker: {
       rollupOptions: {
-        input: {
-          graphqlWorker: '@fitness/graphql-worker',
-          sqliteWorker: '@fitness/sqlite-worker'
-        },
         output: {
           entryFileNames(info) {
             if (info.facadeModuleId?.includes('packages/graphql-worker')) {
-              return '[name].js'
+              return 'gql-[name].js'
             }
             return 'assets/[name]-[hash].js'
           }

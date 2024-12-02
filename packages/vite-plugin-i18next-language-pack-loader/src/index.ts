@@ -104,7 +104,6 @@ export default function LanguagePackExporter(options: Partial<Options>): Plugin 
     langs: options.langs ?? ['en']
   }
   let fileName: string | undefined = undefined
-  let langObj: Resource = {}
   xlsx.set_fs(fs)
   const factor: Plugin = {
     name: 'LanguagePackExporter',
@@ -114,7 +113,6 @@ export default function LanguagePackExporter(options: Partial<Options>): Plugin 
         fileName = resolve(defaultOptions.fileName)
       }
       if (fileName) {
-        this.addWatchFile(fileName)
         const watchingFiles = this.getWatchFiles()
         if (!watchingFiles.includes(fileName)) {
           this.addWatchFile(fileName)
