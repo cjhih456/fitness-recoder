@@ -1,33 +1,30 @@
 import { Button } from '@nextui-org/react'
 import { useMemo } from 'react'
+import { useCalanderHook } from '../../hooks/useCalanderHook/useCalanderHook'
 
 interface MonthCalanderProps {
-  startMonth?: number
-  endMonth?: number
+  year: number
   month: number
+  startDate?: string
+  endDate?: string
   onChange: (_v: number) => void
 }
 
 export default function MonthCalander({
-  startMonth,
-  endMonth,
+  year,
   month,
-  onChange,
+  startDate = '1900-1-1',
+  endDate = '2100-12-31',
+  onChange
 }: MonthCalanderProps) {
-  const displayStartMonth = useMemo(() => startMonth || 0, [startMonth])
-  const displayEndMonth = useMemo(() => endMonth || 13, [endMonth])
+  const { validMonthWithValues } = useCalanderHook({ startDate, endDate })
   const monthList = useMemo(() => {
     const temp = []
     for (let i = 0; i < 12; i += 4) {
       const row = []
       for (let j = i; j < i + 4; j++) {
-        let disabled = false
         const displayMonth = j + 1
-        if (
-          (displayMonth < displayStartMonth) || (displayMonth > displayEndMonth)
-        ) {
-          disabled = true
-        }
+        let disabled = validMonthWithValues(year, displayMonth)
         row.push(<Button
           key={`month-${displayMonth}`}
           isDisabled={disabled}
@@ -35,10 +32,10 @@ export default function MonthCalander({
           onClick={() => onChange(displayMonth)}
         >{displayMonth}</Button>)
       }
-      temp.push(<div key={`month-row-${i}`} className="flex flex-nowrap gap-x-2">{row}</div>)
+      temp.push(<div key={`month-row-${i}`} className="grid grid-cols-4 gap-x-2">{row}</div>)
     }
     return temp
-  }, [displayStartMonth, displayEndMonth, month, onChange])
+  }, [validMonthWithValues, month, onChange, year])
   return <div className="flex gap-y-2 flex-col">
     {monthList}
   </div>
