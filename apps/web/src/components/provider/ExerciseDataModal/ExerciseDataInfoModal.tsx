@@ -67,7 +67,7 @@ export default function ExerciseDataInfoModal({
       })
     }
     setLazyOpen(Boolean(exerciseDataId))
-  }, [exerciseDataId])
+  }, [exerciseDataId, loadHistory, getFitnessById, fitnessId])
 
   return <ModalContext.Provider value={contextValue}>
     {children}

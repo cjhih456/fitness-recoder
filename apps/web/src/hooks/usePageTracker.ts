@@ -7,5 +7,5 @@ export default function usePageTracker(name: string) {
     return () => {
       LogEvent(`exit_${name}`)
     }
-  }, [])
+  }, [name])
 }

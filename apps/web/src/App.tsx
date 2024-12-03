@@ -28,7 +28,7 @@ function App() {
         </AlertProvider>
       </ExerciseDataInfoModal>
     </I18nextProvider>
-  </NextUIProvider>, [])
+  </NextUIProvider>, [navigate])
   return <div className={`app bg-background ${getThema()} h-screen max-h-full text-default-700`}>
     {main}
   </div>

@@ -17,6 +17,6 @@ export const useBottomNavi = () => {
     return () => {
       context.setBottomNavi(false)
     }
-  }, [])
+  }, [context])
 
 }

@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import ThemaProviderContext, { Thema } from './ThemaProviderContext';
 
 export interface ThemaProviderProps {
@@ -11,8 +11,7 @@ export const ThemaProvider = ({ children }: ThemaProviderProps) => {
     setThema: setThema,
     getThema: () => thema
   }
-  const memo = useMemo(() => children, [])
   return <ThemaProviderContext.Provider value={context}>
-    {memo}
+    {children}
   </ThemaProviderContext.Provider>
 }

@@ -29,15 +29,15 @@ export const HeaderHandler = (header: HeaderContentType) => {
     setLazyHeader(header)
   }, [header, lazyHeader])
   const headerTemp = useMemo(() => {
-    return header?.map((v, i) => {
+    return lazyHeader?.map((v, i) => {
       if (isValidElement(v)) return v
       return <span className="font-bold text-lg" key={`title-${i}`}>{v}</span>
     })
-  }, [header])
+  }, [lazyHeader])
   useEffect(() => {
     headerProvider.setHeaderContent(headerTemp)
     return () => {
       headerProvider.setHeaderContent([])
     }
-  }, [lazyHeader])
+  }, [headerProvider, headerTemp])
 }

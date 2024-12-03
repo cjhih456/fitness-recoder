@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import RootProviderContext from './RootProviderContext';
 
 export interface RootProviderProps {
@@ -12,12 +12,12 @@ export const RootProvider = ({ children, selector }: RootProviderProps) => {
   const [root, setRoot] = useState<Element>(document.body)
   useEffect(() => {
     setRoot(document.querySelector(selector || '#root > div.app > div.app-root') || document.body)
-  }, [])
+  }, [selector])
   const context = {
     getRoot: () => root
   }
-  const memo = useMemo(() => children, [])
+
   return <RootProviderContext.Provider value={context}>
-    {memo}
+    {children}
   </RootProviderContext.Provider>
 }
