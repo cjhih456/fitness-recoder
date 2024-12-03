@@ -11,6 +11,9 @@ function calcWeek(year: number, month: number, d: number = 1) {
   const h = (Math.floor(c / 4) - 2 * c + k + Math.floor(k / 4) + Math.floor(13 * (m + 1) / 5) + d - 1) % 7
   return (h + 7) % 7
 }
+function between(min: number, num: number, max: number) {
+  return Math.max(min, Math.min(num, max))
+}
 function isLeapYear(year: number) {
   if (year % 4 === 0) {
     return year % 100 === 0 && year % 400 !== 0 ? 0 : 1
@@ -25,30 +28,15 @@ function getDaysByMonth(year: number) {
   daysCount[1] += isLeapYear(year)
   return daysCount
 }
-function getDisplayYears(startYear?: number, endYear?: number) {
-  return {
-    displayStartYear: startYear || new Date().getFullYear() - 15,
-    displayEndYear: endYear || new Date().getFullYear() + 15
-  }
-}
-function getDisplayMonths(startMonth?: number, endMonth?: number) {
-  const todayMonth = new Date().getMonth() + 1
-  return {
-    displayStartMonth: startMonth || todayMonth,
-    displayEndMonth: endMonth || todayMonth
-  }
-}
-function getDisplayDates(startDate?: number, endDate?: number) {
-  const todayDate = new Date().getDate()
-  return {
-    displayStartDate: startDate || todayDate,
-    displayEndDate: endDate || todayDate
-  }
-}
+
+/**
+ * Calculate D{date} from 1999-12-31.
+ * @param dateString target date string
+ */
 function dateStringAsNumber(dateString: string) {
   const [year, month, date] = dateString.split('-').map(v => +v)
   let i = 2000
-  let totalDays = date
+  let totalDays = 0
   while (true) {
     const daysByYear = getDaysByYear(i)
     if (i === year) {
@@ -62,19 +50,26 @@ function dateStringAsNumber(dateString: string) {
     }
   }
   const daysByMonth = getDaysByMonth(year)
-  const monthN = month - 1
+  const monthN = between(0, month - 1, 11)
   for (let i = 0; i < monthN; i++) {
     totalDays += daysByMonth[i]
   }
+  totalDays += between(1, date, daysByMonth[month - 1])
   return totalDays
 }
+
+/**
+ * Make Date string from D{date}.
+ * @param daysNumber D{date}
+ */
 function numberAsDateString(daysNumber: number) {
   let nowDate = daysNumber
   let year = 2000, month = 0, day = 0
+  // TODO: calc Year
   if (daysNumber > 0) {
     while (true) {
       const yDate = getDaysByYear(year)
-      if (nowDate < yDate) {
+      if (nowDate <= yDate) {
         break
       }
       nowDate -= yDate
@@ -82,7 +77,7 @@ function numberAsDateString(daysNumber: number) {
     }
   } else {
     while (true) {
-      const yDate = getDaysByYear(year)
+      const yDate = getDaysByYear(year - 1)
       if (nowDate > 0) {
         break
       }
@@ -91,24 +86,26 @@ function numberAsDateString(daysNumber: number) {
     }
   }
 
+  // TODO: calc Month
   const daysByMonth = getDaysByMonth(year)
-  daysByMonth.forEach((m, i) => {
-    if (nowDate > m) {
-      nowDate -= m
-    } else if (!month) {
+  let i = 0;
+  while (!month) {
+    if (nowDate > daysByMonth[i]) {
+      nowDate -= daysByMonth[i++]
+    } else {
       month = i + 1
     }
-  })
+  }
+
+  // TODO: calc Day
   day = nowDate
   return `${year}-${month}-${day}`
 }
 export default {
+  between,
   calcWeek,
   isLeapYear,
   getDaysByMonth,
-  getDisplayYears,
-  getDisplayMonths,
-  getDisplayDates,
   dateStringAsNumber,
   numberAsDateString
 }
