@@ -1,4 +1,4 @@
-import utils, { ScheduleType } from '../../../components/utils'
+import { ScheduleType } from '../../../components/utils'
 import { useCreateSchedule } from './CreateSchedule'
 import { useDeleteSchedule } from './DeleteSchedule'
 import { useGetScheduleByDate, useLazyGetScheduleByDate } from './GetScheduleByDate'
@@ -9,6 +9,7 @@ import { useCloneSchedule } from './CloneSchedule'
 import { useCloneScheduleFromPreset } from './CloneScheduleFromPreset'
 import { Schedule } from 'fitness-struct'
 import { gql, StoreObject } from '@apollo/client'
+import DateUtil from '../../../components/utils/DateUtil'
 
 export const ScheduleSimpleFragment = gql`
 fragment ScheduleSimple on ScheduleData{
@@ -43,7 +44,7 @@ export {
 const today = new Date()
 const month = today.getMonth() + 1
 const year = today.getFullYear()
-const daysByMonth = utils.getDaysByMonth(year)
+const daysByMonth = DateUtil.getDaysByMonth(year)
 
 const typeTemp = [ScheduleType.BREAK, ScheduleType.FINISH, ScheduleType.PAUSED, ScheduleType.SCHEDULED, ScheduleType.STARTED]
 export const ScheduleMockData: { [key: number]: ScheduleStoreType } = Array(daysByMonth[month - 1]).fill(0).reduce((acc, _cur, i) => {
