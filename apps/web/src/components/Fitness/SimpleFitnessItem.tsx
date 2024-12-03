@@ -18,7 +18,7 @@ export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemPro
   const { loading, data, called } = useGetSetListByExerciseId(exerciseData.id)
   const setData = useMemo(() => {
     return called && !loading ? data?.getSetListByExerciseId || [] : []
-  }, [loading, data])
+  }, [loading, data, called])
   // prev Set Render
   const progress = useMemo(() => {
     if (!setData.length) return undefined

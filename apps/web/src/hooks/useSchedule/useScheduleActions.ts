@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
-import { useCloneSchedule, useDeleteSchedule } from '../../service/GqlStore/Schedule'
+import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '../../service/GqlStore/Schedule'
 import { useAlert } from '../../components/provider/Alert/useAlert'
 import { useNavigate } from 'react-router-dom'
+import { ScheduleType } from '../../components/utils'
 
 export default function useScheduleActions() {
   const navigate = useNavigate()
@@ -9,9 +10,37 @@ export default function useScheduleActions() {
   const [deleteSchedule] = useDeleteSchedule()
   const [cloneSchedule] = useCloneSchedule()
 
-  const deleteScheduleAction = useCallback((id: number) => {
-    deleteSchedule({ variables: { id } })
-  }, [deleteSchedule])
+
+  const gotoScheduleDetail = useCallback((id: number, date: string) => {
+    navigate(`/${date}/workout/${id}`)
+  }, [navigate])
+
+  const gotoCreateScheduleAction = useCallback((choosenDate: string, direct: boolean = false) => {
+    navigate(`/${choosenDate}/schedule/create${direct ? '?directStart=1' : ''}`)
+  }, [navigate])
+
+  const gotoModifyScheduleAction = useCallback((id: number, choosenDate: string) => {
+    if (!choosenDate) return
+    navigate(`/${choosenDate}/schedule/${id}`)
+  }, [navigate])
+
+  const [createSchedule] = useCreateSchedule()
+  const setBreakDayBySchedule = useCallback((year: number, month: number, date: number) => {
+    createSchedule({
+      variables: {
+        createSchedule: {
+          date,
+          month,
+          year,
+          beforeTime: 0,
+          breakTime: 0,
+          start: 0,
+          workoutTimes: 0,
+          type: ScheduleType.BREAK
+        }
+      }
+    })
+  }, [createSchedule])
 
   const shareScheduleAction = useCallback(() => {
     showAlert('ERROR', 'On Featured process', false)
@@ -35,14 +64,26 @@ export default function useScheduleActions() {
         { message: 'Goto Workout', colorClass: 'text-green-500' },
         { message: 'Cancel', colorClass: 'text-red-500' }
       ).then((value) => {
-        if (value) navigate(`/${year}-${month}-${date}/workout/${clonedScheduleId}`)
+        if (value) gotoScheduleDetail(clonedScheduleId, `${year}-${month}-${date}`)
       })
     }
-  }, [cloneSchedule, showAlert, navigate])
+  }, [cloneSchedule, showAlert, gotoScheduleDetail])
+
+
+  const deleteScheduleAction = useCallback((id: number) => {
+    deleteSchedule({ variables: { id } })
+  }, [deleteSchedule])
 
   return {
-    deleteScheduleAction,
+    gotoScheduleDetail,
+    gotoCreateScheduleAction,
+    gotoModifyScheduleAction,
+
+    setBreakDayBySchedule,
+
     shareScheduleAction,
-    cloneScheduleAction
+    cloneScheduleAction,
+
+    deleteScheduleAction,
   }
 }

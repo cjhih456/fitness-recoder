@@ -7,6 +7,7 @@ import { useCreateScheduleWithExercisePlans } from '../../../service/GqlStore/mi
 import { LogEvent } from '../../../service/firebase';
 import { useAlert } from '../../../components/provider/Alert/useAlert';
 import usePageTracker from '../../../hooks/usePageTracker';
+import useScheduleActions from '../../../hooks/useSchedule/useScheduleActions';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
@@ -16,6 +17,7 @@ export default function CreateSchedule() {
   HeaderHandler(['Create Schedule'])
   usePageTracker('create_schedule')
   const navigate = useNavigate()
+  const { gotoScheduleDetail } = useScheduleActions()
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = useMemo(() => selectDate && selectDate.split('-').map(v => +v) || [0, 0, 0], [selectDate])
@@ -29,7 +31,7 @@ export default function CreateSchedule() {
     const result = await createScheduleWithExercisePlans(year, month, date, exerciseIdxList)
     if (queryParams.get('directStart') === '1') {
       if (result?.id) {
-        navigate(`/${year}-${month}-${date}/workout/${result?.id}`)
+        gotoScheduleDetail(result?.id, `${year}-${month}-${date}`)
       } else {
         alert.showAlert('ERROR', 'Error... Something Wrong!', false)
       }

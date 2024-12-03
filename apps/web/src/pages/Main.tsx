@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
 import { useTranslation } from 'react-i18next'
 import usePageTracker from '../hooks/usePageTracker'
+import useScheduleActions from '../hooks/useSchedule/useScheduleActions'
 
 export default function Main() {
   useBottomNavi()
@@ -23,8 +24,13 @@ export default function Main() {
     }
   }, [])
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
-  const scheduleList = useMemo(() => scheduleListData?.getScheduleByDate || [], [scheduleListData])
   HeaderHandler([t('title:home')])
+
+  const {
+    gotoCreateScheduleAction,
+    gotoModifyScheduleAction,
+    gotoScheduleDetail
+  } = useScheduleActions()
 
   const addSchedule = useCallback(() => {
     const today = new Date()
@@ -33,28 +39,22 @@ export default function Main() {
       today.getMonth() + 1,
       today.getDate()
     ].join('-')
-    navigate(`/${choosenDate}/schedule/create?directStart=1`)
-  }, [navigate])
+    gotoCreateScheduleAction(choosenDate, true)
+  }, [gotoCreateScheduleAction])
+
   const gotoPresetPage = useCallback(() => {
     navigate('/preset')
   }, [navigate])
-  const gotoModify = useCallback((id: number, date?: string) => {
-    if (!date) return
-    navigate(`/${date}/schedule/${id}`)
-  }, [navigate])
-  const startSchedule = useCallback((id: number, date?: string) => {
-    if (!date) return
-    navigate(`/${date}/workout/${id}`)
-  }, [navigate])
   const displaySchedule = useMemo(() => {
+    const scheduleList = scheduleListData?.getScheduleByDate || []
     if (scheduleList.length) {
       return scheduleList.map((schedule, idx) => {
         const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
         return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
           {(id, type, date) => (
             <div className="grid grid-cols-2 gap-x-4">
-              <Button onClick={() => gotoModify(id, date)}>{t('common:modify')}</Button>
-              <Button onClick={() => startSchedule(id, date)}>
+              <Button onClick={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
+              <Button onClick={() => gotoScheduleDetail(id, date)}>
                 {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
               </Button>
             </div>
@@ -73,7 +73,7 @@ export default function Main() {
         </div>
       ]
     }
-  }, [scheduleList, t, gotoPresetPage, addSchedule, startSchedule, gotoModify])
+  }, [scheduleListData, t, gotoPresetPage, addSchedule, gotoModifyScheduleAction, gotoScheduleDetail])
 
   return <div className="flex flex-col items-stretch h-full pt-4">
     <h2 className="text-xl font-semibold px-4">

@@ -1,11 +1,10 @@
 import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDeleteExercisePreset } from '../../service/GqlStore/ExercisePreset'
 import { useCloneScheduleFromPreset } from '../../service/GqlStore/Schedule'
+import useScheduleActions from '../useSchedule/useScheduleActions'
 
 export default function usePresetActions() {
-  const navigate = useNavigate()
-
+  const { gotoScheduleDetail } = useScheduleActions()
   const [deletePreset] = useDeleteExercisePreset()
   const [cloneScheduleFromPreset] = useCloneScheduleFromPreset()
 
@@ -16,9 +15,9 @@ export default function usePresetActions() {
     const date = today.getDate()
 
     cloneScheduleFromPreset({ variables: { presetId: id, targetDate: { year, month, date } } }).then((result) => {
-      result.data && navigate(`/${year}-${month}-${date}/workout/${result.data.cloneScheduleFromPreset.id}`)
+      result.data && gotoScheduleDetail(result.data.cloneScheduleFromPreset.id, `${year}-${month}-${date}`)
     })
-  }, [navigate, cloneScheduleFromPreset])
+  }, [cloneScheduleFromPreset, gotoScheduleDetail])
 
   const deletePresetAction = useCallback((id: number) => {
     deletePreset({ variables: { id } })

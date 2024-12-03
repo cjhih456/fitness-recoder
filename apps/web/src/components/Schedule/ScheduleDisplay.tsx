@@ -8,8 +8,8 @@ import useScheduleMenu from '../../hooks/useSchedule/useScheduleMenu'
 export interface ScheduleDisplayProps {
   title: string,
   schedule: Schedule.Schedule
-  date?: string
-  children?: (_id: number, _type?: Schedule.IType, _date?: string) => ReactNode
+  date: string
+  children?: (_id: number, _type: Schedule.IType, _date: string) => ReactNode
 }
 
 export default function ScheduleDisplay({ title, date, schedule, children }: ScheduleDisplayProps) {
