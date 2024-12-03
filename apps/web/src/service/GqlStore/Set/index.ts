@@ -3,6 +3,9 @@ import { useCreateSet } from './CreateSet'
 import { useUpdateSet } from './UpdateSet'
 import { useDeleteSet } from './DeleteSet'
 import { Sets } from 'fitness-struct'
+import { StoreObject } from '@apollo/client'
+
+export type SetsStoreType = Sets.Sets & StoreObject
 
 export {
   useGetSetListByExerciseId,
@@ -12,7 +15,7 @@ export {
   useDeleteSet,
 }
 
-export const SetMockData: { [key: number]: Sets.Sets } = Array(20).fill(0).reduce<{ [k: number]: Sets.Sets }>((acc, _cur, idx) => {
+export const SetMockData: { [key: number]: SetsStoreType } = Array(20).fill(0).reduce<{ [k: number]: SetsStoreType }>((acc, _cur, idx) => {
   const id = idx + 1
   acc[id] = {
     id: id,

@@ -1,9 +1,9 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { SetMockData } from '.'
+import { SetMockData, SetsStoreType } from '.'
 import { Sets } from 'fitness-struct'
 
-type CreateSetResponse = { createSet: Sets.Sets }
+type CreateSetResponse = { createSet: SetsStoreType }
 type CreateSetVariable = { sets: Sets.CreateType }
 const createSetGql = gql`
 mutation createSetByExercise($sets: CreateSetsInput!) {

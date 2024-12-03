@@ -55,7 +55,6 @@ export default function ExerciseDataDisplay({
           set={set}
           hasSetChange={(setData) => {
             const data = { ...setData }
-            // @ts-ignore
             delete data.__typename
             updateSet({ variables: { sets: data } }).then(() => {
               getSetByExerciseId({ id: exerciseData.id })
