@@ -16,6 +16,7 @@ export const useApollo = async () => {
     typePolicies: {
       Query: {
         fields: {
+          getScheduleStatusByDate: offsetLimitPagination(['year', 'month']),
           getExercisePresetList: offsetLimitPagination(),
           getFitnessListByKeywords: offsetLimitPagination(['name', 'category', 'muscle']),
           getScheduleByDate: offsetLimitPagination(['year', 'month', 'date'])

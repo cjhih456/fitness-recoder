@@ -3,7 +3,7 @@ import { useCreateSchedule } from './CreateSchedule'
 import { useDeleteSchedule } from './DeleteSchedule'
 import { useGetScheduleByDate, useLazyGetScheduleByDate } from './GetScheduleByDate'
 import { useGetScheduleById } from './GetScheduleById'
-import { useLazyGetScheduleStateByDate } from './GetScheduleStatusByDate'
+import { useGetScheduleStatusByDate } from './GetScheduleStatusByDate'
 import { useUpdateSchedule } from './UpdateSchedule'
 import { useCloneSchedule } from './CloneSchedule'
 import { useCloneScheduleFromPreset } from './CloneScheduleFromPreset'
@@ -35,7 +35,7 @@ export {
   useGetScheduleByDate,
   useLazyGetScheduleByDate,
   useGetScheduleById,
-  useLazyGetScheduleStateByDate,
+  useGetScheduleStatusByDate,
   useUpdateSchedule,
   useCloneSchedule,
   useCloneScheduleFromPreset

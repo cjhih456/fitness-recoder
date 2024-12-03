@@ -3,6 +3,7 @@ import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData, ScheduleStoreType } from '.'
 import { Schedule } from 'fitness-struct'
 import { GetScheduleByDateResponse } from './GetScheduleByDate'
+import { GetScheduleStatusByDateResponse } from './GetScheduleStatusByDate'
 
 
 type CreateScheduleResponse = { createSchedule: ScheduleStoreType }
@@ -26,9 +27,17 @@ export function useCreateSchedule() {
   return useMutation<CreateScheduleResponse, CreaetScheduleVariable>(CreateScheduleGql, {
     update: (cache, result) => {
       cache.modify<{
+        getScheduleStatusByDate: GetScheduleStatusByDateResponse['getScheduleStatusByDate']
         getScheduleByDate: GetScheduleByDateResponse['getScheduleByDate']
       }>({
         fields: {
+          getScheduleStatusByDate(prev) {
+            if (!prev || !result.data?.createSchedule) return prev
+            if (!Array.isArray(prev)) return prev
+            const temp = [...prev]
+            temp[result.data.createSchedule.date] = result.data.createSchedule.type
+            return temp
+          },
           getScheduleByDate(prev, { toReference }) {
             if (!prev || !result.data?.createSchedule) return prev
             const ref = toReference(result.data?.createSchedule, true)

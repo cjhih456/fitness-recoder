@@ -1,21 +1,27 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
 
 
-type GetScheduleStatusByDateResponse = { getScheduleStatusByDate: string[] }
+export type GetScheduleStatusByDateResponse = { getScheduleStatusByDate: string[] }
 type GetScheduleStatusByDateVariable = { year: number, month: number }
 const getScheduleStatusByDateGql = gql`
 query GetScheduleStatusByDate($year: Int!, $month: Int!) {
   getScheduleStatusByDate(year: $year, month: $month)
 }
 `
-export function useLazyGetScheduleStateByDate() {
-  return useLazyQuery<
-    GetScheduleStatusByDateResponse,
-    GetScheduleStatusByDateVariable
-  >(getScheduleStatusByDateGql)
+
+export function useGetScheduleStatusByDate(year: number, month: number) {
+  return useQuery<GetScheduleStatusByDateResponse,
+    GetScheduleStatusByDateVariable>(getScheduleStatusByDateGql, {
+      variables: {
+        year,
+        month
+      },
+      fetchPolicy: 'cache-first'
+    })
 }
+
 export const GetScheduleStateByDateMock: MockedResponse<
   GetScheduleStatusByDateResponse,
   GetScheduleStatusByDateVariable
