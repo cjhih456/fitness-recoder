@@ -1,10 +1,10 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { Exercise } from 'fitness-struct'
-import { FitnessMockData } from '.'
+import { FitnessMockData, FitnessStoreType } from '.'
 
 
-type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: Exercise.IFitness[] }
+type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: FitnessStoreType[] }
 type GetFitnessListByKeywordsVariable = {
   name: string,
   category: Exercise.ICategory[],

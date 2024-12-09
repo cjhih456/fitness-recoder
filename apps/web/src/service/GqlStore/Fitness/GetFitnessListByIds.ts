@@ -1,10 +1,9 @@
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
-import { Exercise } from 'fitness-struct'
-import { FitnessMockData } from '.'
+import { FitnessMockData, FitnessStoreType } from '.'
 import { MockedResponse } from '@apollo/client/testing'
 
 
-type GetFitnessListByIdsResponse = { getFitnessListByIds: Exercise.IFitness[] }
+type GetFitnessListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }
 type GetFitnessListByIdsVariable = { ids: number[] }
 const getFitnessByIdGql = gql`
 query GetFitnessListByIds($ids: [Int!]) {
