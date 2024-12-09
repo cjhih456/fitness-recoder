@@ -21,7 +21,8 @@ fragment ScheduleSimple on ScheduleData{
 }
 `
 export const ScheduleTimeFragment = gql`
-fragment ScheduleTime on ScheduleData{
+fragment ScheduleWithTime on ScheduleData{
+  ...ScheduleSimple
   start
   beforeTime
   breakTime

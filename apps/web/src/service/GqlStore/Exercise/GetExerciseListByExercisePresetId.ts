@@ -12,9 +12,7 @@ type GetExerciseByExercisePresetIdVariable = {
 const GetExerciseListByExercisePresetIdGql = gql`
 query GetExerciseByExercisePresetId($exercisePresetId: Int) {
   getExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId) {
-    id
-    deps
-    exercise
+    ...ExerciseFragment
   }
 }`
 export function useGetExerciseListByExercisePresetId(exercisePresetId: number) {

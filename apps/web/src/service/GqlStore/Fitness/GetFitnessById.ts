@@ -9,19 +9,7 @@ type GetFitnessByIdVariable = { id: number }
 const getFitnessByIdGql = gql`
 query GetFitnessById($id: Int) {
   getFitnessById(id: $id) {
-    id
-    name
-    aliases
-    primaryMuscles
-    secondaryMuscles
-    force
-    level
-    mechanic
-    equipment
-    category
-    instructions
-    description
-    tips
+    ...FitnessFragment
   }
 }
 `

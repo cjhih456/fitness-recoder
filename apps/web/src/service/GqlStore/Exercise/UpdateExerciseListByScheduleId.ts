@@ -14,9 +14,7 @@ type UpdateExerciseListByScheduleIdVariable = {
 const UpdateExerciseListByScheduleIdGql = gql`
 mutation UpdateExerciseListByScheduleId($scheduleId: Int, $newExercise: [Int!], $deleteExerciseId: [Int!]) {
   updateExerciseListByScheduleId(scheduleId: $scheduleId, newExercise: $newExercise, deleteExerciseId: $deleteExerciseId){
-    id
-    deps
-    exercise
+    ...ExerciseFragment
   }
 }`
 export function useUpdateExerciseListByScheduleId() {

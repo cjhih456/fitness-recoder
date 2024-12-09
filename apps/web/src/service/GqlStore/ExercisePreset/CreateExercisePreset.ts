@@ -9,9 +9,7 @@ type CreateExercisePresetVariable = { exercisePreset: { name: string } }
 const createExercisePresetGql = gql`
 mutation CreateExercisePreset($exercisePreset: CreateExercisePresetInput) {
   createExercisePreset(exercisePreset: $exercisePreset) {
-    id
-    name
-    deps
+    ...ExercisePresetFragment
   }
 }
 `

@@ -8,12 +8,7 @@ type GetExercisePresetListVariable = { offset: number, size: number }
 const getExercisePresetListGql = gql`
 query GetExercisePresetList($offset: Int, $size: Int) {
   getExercisePresetList(offset: $offset, size: $size) {
-    id
-    name
-    exerciseList {
-      id
-      exercise
-    }
+    ...ExercisePresetWithExerciseFragment
   }
 }
 `

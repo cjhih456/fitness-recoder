@@ -9,8 +9,7 @@ export type GetExercisePresetVariable = { id: number }
 export const getExercisePresetByIdGql = gql`
 query GetExercisePresetById($id: Int!) {
   getExercisePresetById(id:$id) {
-    id
-    name
+    ...ExercisePresetFragment
   }
 }
 `

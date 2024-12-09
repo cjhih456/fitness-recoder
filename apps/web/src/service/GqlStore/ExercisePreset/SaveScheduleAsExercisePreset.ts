@@ -8,8 +8,7 @@ type SaveScheduleAsExercisePresetVariable = { scheduleId: number, name: string }
 const saveScheduleAsExercisePresetGql = gql`
 mutation SaveScheduleAsExercisePreset($scheduleId: Int!, $name: String!) {
   saveScheduleAsExercisePreset(scheduleId: $scheduleId, name: $name) {
-    id
-    name
+    ...ExercisePresetFragment
   }
 }
 `

@@ -11,15 +11,7 @@ type CreaetScheduleVariable = { createSchedule: Schedule.ICreate }
 const CreateScheduleGql = gql`
 mutation CreateSchedule($createSchedule: CreateScheduleDataInput) {
   createSchedule(schedule: $createSchedule) {
-    id
-    year
-    month
-    date
-    beforeTime
-    start
-    breakTime
-    workoutTimes
-    type
+    ...ScheduleSimple
   }
 }
 `

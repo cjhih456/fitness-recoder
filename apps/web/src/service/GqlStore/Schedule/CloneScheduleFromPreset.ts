@@ -11,15 +11,7 @@ type CloneScheduleFromPresetVariable = { presetId: number, targetDate: { year: n
 const CloneScheduleFromPresetGql = gql`
 mutation CloneScheduleFromPreset($presetId: Int!, $targetDate: TargetDateInput) {
   cloneScheduleFromPreset(presetId: $presetId, targetDate: $targetDate) {
-    id
-    year
-    month
-    date
-    beforeTime
-    start
-    breakTime
-    workoutTimes
-    type
+    ...ScheduleSimple
   }
 }
 `

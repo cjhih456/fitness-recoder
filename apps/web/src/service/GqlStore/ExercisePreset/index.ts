@@ -4,7 +4,20 @@ import { useDeleteExercisePreset } from './DeleteExercisePreset';
 import { useGetExercisePresetById } from './GetExercisePresetById';
 import { useGetExercisePresetList } from './GetExercisePresetList';
 import { useSaveScheduleAsExercisePreset } from './SaveScheduleAsExercisePreset';
-import { StoreObject } from '@apollo/client';
+import { gql, StoreObject } from '@apollo/client';
+
+export const ExercisePresetFragment = gql`
+fragment ExercisePresetFragment on ExercisePreset {
+  id
+  name
+}`
+export const ExercisePresetWithExerciseFragment = gql`
+fragment ExercisePresetWithExerciseFragment on ExercisePreset {
+  ...ExercisePresetFragment,
+  exerciseList {
+    ...ExerciseFragment
+  }
+}`
 
 export {
   useCreateExercisePreset,

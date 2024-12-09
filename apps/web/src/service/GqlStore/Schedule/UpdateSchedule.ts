@@ -8,15 +8,7 @@ type UpdateScheduleVariable = { updateSchedule: ScheduleStoreType }
 const UpdateScheduleGql = gql`
 mutation Mutation($updateSchedule: UpdateScheduleDataInput) {
   updateSchedule(schedule:$updateSchedule) {
-    id
-    year
-    month
-    date
-    beforeTime
-    start
-    breakTime
-    workoutTimes
-    type
+    ...ScheduleWithTime
   }
 }
 `

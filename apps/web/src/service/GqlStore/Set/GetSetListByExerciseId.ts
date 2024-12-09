@@ -7,13 +7,7 @@ type GetSetListByExerciseIdVariable = { id: number }
 const getSetListByExerciseIdGql = gql`
 query GetSetListByExerciseId($id: Int!) {
   getSetListByExerciseId(id: $id) {
-    duration
-    exerciseId
-    id
-    isDone
-    repeat
-    weight
-    weightUnit
+    ...SetsFragment
   }
 }
 `

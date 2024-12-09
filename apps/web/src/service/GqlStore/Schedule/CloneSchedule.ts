@@ -10,15 +10,7 @@ type CloneScheduleVariable = { id: number, targetDate: { year: number, month: nu
 const CloneScheduleGql = gql`
 mutation CloneSchedule($id: Int!, $targetDate: TargetDateInput) {
   cloneSchedule(id: $id, targetDate: $targetDate) {
-    id
-    year
-    month
-    date
-    beforeTime
-    start
-    breakTime
-    workoutTimes
-    type
+    ...ScheduleSimple
   }
 }
 `

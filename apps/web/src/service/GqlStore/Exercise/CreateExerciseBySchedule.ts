@@ -12,9 +12,7 @@ type CreateExerciseByScheduleVariable = {
 const CreateExerciseByScheduleGql = gql`
 mutation CreateExerciseBySchedule ($exercise: CreateExerciseByScheduleInput!) {
   createExerciseBySchedule(exercise: $exercise) {
-    id
-    deps
-    exercise
+    ...ExerciseFragment
   }
 }
 `

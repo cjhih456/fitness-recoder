@@ -15,19 +15,7 @@ type GetFitnessListByKeywordsVariable = {
 const getFitnessListByKeywordsGql = gql`
 query GetFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [IMuscle], $limit: Int, $offset: Int) {
   getFitnessListByKeywords(name: $name, category: $category, muscle: $muscle, limit: $limit, offset: $offset) {
-    id
-    name
-    aliases
-    primaryMuscles
-    secondaryMuscles
-    force
-    level
-    mechanic
-    equipment
-    category
-    instructions
-    description
-    tips
+    ...FitnessSimpleFragment
   }
 }
 `

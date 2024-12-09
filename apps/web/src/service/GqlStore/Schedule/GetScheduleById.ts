@@ -7,15 +7,7 @@ type GetScheduleByIdVAriable = { id: number }
 const getScheduleByIdGql = gql`
 query GetScheduleById($id: Int!) {
   getScheduleById(id: $id) {
-    id
-    year
-    month
-    date
-    beforeTime
-    start
-    breakTime
-    workoutTimes
-    type
+    ...ScheduleWithTime
   }
 }
 `

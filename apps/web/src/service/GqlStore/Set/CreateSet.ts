@@ -8,13 +8,7 @@ type CreateSetVariable = { sets: Sets.CreateType }
 const createSetGql = gql`
 mutation createSetByExercise($sets: CreateSetsInput!) {
   createSet(sets: $sets) {
-    id
-    exerciseId
-    repeat
-    isDone
-    weightUnit
-    weight
-    duration
+    ...SetsFragment
   }
 }
 `

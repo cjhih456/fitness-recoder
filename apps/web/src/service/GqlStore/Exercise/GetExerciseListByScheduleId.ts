@@ -12,9 +12,7 @@ type GetExerciseListByScheduleIdVariable = {
 const GetExerciseListByScheduleIdGql = gql`
 query GetExerciseListByScheduleId($scheduleId: Int) {
   getExerciseListByScheduleId(scheduleId: $scheduleId) {
-    id
-    deps
-    exercise
+    ...ExerciseFragment
   }
 }
 `

@@ -7,13 +7,7 @@ type updateSetVariable = { sets: SetsStoreType }
 const updateSetGql = gql`
 mutation updateSet($sets: UpdateSetsInput!) {
   updateSet(sets: $sets) {
-    id
-    exerciseId
-    repeat
-    isDone
-    weightUnit
-    weight
-    duration
+    ...SetsFragment
   }
 }`
 export function useUpdateSet() {

@@ -3,9 +3,20 @@ import { useCreateSet } from './CreateSet'
 import { useUpdateSet } from './UpdateSet'
 import { useDeleteSet } from './DeleteSet'
 import { Sets } from 'fitness-struct'
-import { StoreObject } from '@apollo/client'
+import { gql, StoreObject } from '@apollo/client'
 
 export type SetsStoreType = Sets.Sets & StoreObject
+
+export const SetsFragment = gql`
+fragment SetsFragment on Sets {
+  id
+  exerciseId
+  duration
+  isDone
+  repeat
+  weight
+  weightUnit
+}`
 
 export {
   useGetSetListByExerciseId,

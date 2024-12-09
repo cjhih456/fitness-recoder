@@ -1,6 +1,12 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { link } from './HttpLink'
 import { offsetLimitPagination } from '@apollo/client/utilities'
+import { createFragmentRegistry } from '@apollo/client/cache'
+import { SetsFragment } from '../../service/GqlStore/Set'
+import { ScheduleSimpleFragment, ScheduleTimeFragment } from '../../service/GqlStore/Schedule'
+import { FitnessFragment, FitnessSimpleFragment } from '../../service/GqlStore/Fitness'
+import { ExercisePresetFragment, ExercisePresetWithExerciseFragment } from '../../service/GqlStore/ExercisePreset'
+import { ExerciseFragment } from '../../service/GqlStore/Exercise'
 
 const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
   import: 'default'
@@ -13,6 +19,16 @@ export const useApollo = async () => {
 
   const cache = new InMemoryCache({
     possibleTypes: PossibleTypesData[0],
+    fragments: createFragmentRegistry(
+      SetsFragment,
+      ScheduleTimeFragment,
+      ScheduleSimpleFragment,
+      FitnessSimpleFragment,
+      FitnessFragment,
+      ExerciseFragment,
+      ExercisePresetFragment,
+      ExercisePresetWithExerciseFragment
+    ),
     typePolicies: {
       Query: {
         fields: {

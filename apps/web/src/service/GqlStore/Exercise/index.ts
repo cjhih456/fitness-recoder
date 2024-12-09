@@ -7,6 +7,14 @@ import { useGetExerciseListByScheduleId, useLazyGetExerciseListByScheduleId } fr
 import { useUpdateExerciseListByExercisePresetId } from './UpdateExerciseListByExercisePresetId'
 import { useUpdateExerciseListByScheduleId } from './UpdateExerciseListByScheduleId'
 import { Exercise } from 'fitness-struct'
+import { gql } from '@apollo/client'
+
+export const ExerciseFragment = gql`
+fragment ExerciseFragment on Exercise {
+  id
+  deps
+  exercise
+}`
 
 
 export {
