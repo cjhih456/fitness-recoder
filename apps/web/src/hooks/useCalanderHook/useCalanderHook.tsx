@@ -64,7 +64,6 @@ export const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) =>
     const chooseNum = DateUtil.dateStringAsNumber(date)
     const possibleDateNum = Math.max(startNum, Math.min(chooseNum, endNum))
 
-    console.log(date, DateUtil.numberAsDateString(chooseNum), DateUtil.numberAsDateString(possibleDateNum))
     return DateUtil.numberAsDateString(possibleDateNum)
 
   }, [startNum, endNum])
