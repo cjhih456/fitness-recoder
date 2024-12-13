@@ -17,9 +17,25 @@ fragment FitnessSimpleFragment on Fitness {
   secondaryMuscles
   category
 }`
+export const FitnessDetailFragment = gql`
+fragment FitnessDetailFragment on Fitness {
+  id
+  force
+  level
+  mechanic
+  equipment
+  instructions
+  description
+  tips
+}`
 export const FitnessFragment = gql`
 fragment FitnessFragment on Fitness {
-  ...FitnessSimpleFragment
+  id
+  name
+  aliases
+  primaryMuscles
+  secondaryMuscles
+  category
   force
   level
   mechanic

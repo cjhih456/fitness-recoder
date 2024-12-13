@@ -8,7 +8,8 @@ export type GetFitnessByIdVariable = { id: number }
 export const getFitnessByIdGql = gql`
 query GetFitnessById($id: Int) {
   getFitnessById(id: $id) {
-    ...FitnessFragment
+    ...FitnessSimpleFragment
+    ...FitnessDetailFragment
   }
 }
 `

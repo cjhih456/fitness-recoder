@@ -4,7 +4,7 @@ import { offsetLimitPagination } from '@apollo/client/utilities'
 import { createFragmentRegistry } from '@apollo/client/cache'
 import { SetsFragment } from '../../service/GqlStore/Set'
 import { ScheduleSimpleFragment, ScheduleTimeFragment } from '../../service/GqlStore/Schedule'
-import { FitnessFragment, FitnessSimpleFragment } from '../../service/GqlStore/Fitness'
+import { FitnessDetailFragment, FitnessFragment, FitnessSimpleFragment } from '../../service/GqlStore/Fitness'
 import { ExercisePresetFragment, ExercisePresetWithExerciseFragment } from '../../service/GqlStore/ExercisePreset'
 import { ExerciseFragment } from '../../service/GqlStore/Exercise'
 
@@ -24,6 +24,7 @@ export const useApollo = async () => {
       ScheduleTimeFragment,
       ScheduleSimpleFragment,
       FitnessSimpleFragment,
+      FitnessDetailFragment,
       FitnessFragment,
       ExerciseFragment,
       ExercisePresetFragment,

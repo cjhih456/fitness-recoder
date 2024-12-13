@@ -22,8 +22,8 @@ export default function FitnessDataInfoModal({
   const [lazyOpen, setLazyOpen] = useState(false)
   const [fitnessId, setFitnessId] = useState<number | undefined>()
   const contextValue = {
-    showModal(exerciseId) {
-      setFitnessId(exerciseId)
+    showModal(fitnessId) {
+      setFitnessId(fitnessId)
     }
   } as ModalContextType
 
@@ -40,23 +40,26 @@ export default function FitnessDataInfoModal({
   const { data: fitnessData, complete } = useFragment<FitnessStoreType>({
     fragment: FitnessFragment,
     from: {
-      id: fitnessId,
+      id: fitnessId || 0,
       __typename: 'Fitness'
     }
   })
-  const [lazyGetFitnessById] = useLazyGetFitnessById()
+  const [lazyGetFitnessById, { called, data }] = useLazyGetFitnessById()
   useEffect(() => {
     if (!complete && fitnessId) {
       lazyGetFitnessById({ variables: { id: fitnessId } })
     }
   }, [complete, fitnessId, lazyGetFitnessById])
+  const computedFitnessData = useMemo(() => {
+    return (called ? data?.getFitnessById : fitnessData) || {}
+  }, [called, data, fitnessData])
 
   const fitnessInstructions = useMemo(() => {
-    return fitnessData.instructions || []
-  }, [fitnessData])
+    return computedFitnessData.instructions || []
+  }, [computedFitnessData])
   const fitnessName = useMemo(() => {
-    return fitnessData.name || ''
-  }, [fitnessData])
+    return computedFitnessData.name || ''
+  }, [computedFitnessData])
 
   // Fitness Youtube Video
   const [fitnessVideoId, setFitnessVideoId] = useState<string | undefined>()
