@@ -5,7 +5,22 @@ import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    async getExercisePresetList(_source, { offset = 0, size = 10 }, context) {
+    async getExercisePresetWithListById(_source, { id }, context) {
+      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
+        context.client,
+        'select',
+        'select * from exercisePreset where id = ?',
+        [id]
+      )
+      if (!exercisePreset) return null
+      exercisePreset.exerciseList = await getExerciseListByExercisePresetIdTemp(
+        dbTransitionBus,
+        context.client,
+        exercisePreset.id
+      )
+      return exercisePreset
+    },
+    async getExercisePresetWithListList(_source, { offset = 0, size = 10 }, context) {
       const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
         context.client,
         'selects',

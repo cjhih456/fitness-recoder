@@ -1,5 +1,5 @@
 import { DocumentNode, OperationVariables, StoreObject, useFragment, useLazyQuery } from '@apollo/client'
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface BaseObj extends StoreObject {
   id: number
@@ -19,22 +19,15 @@ export default function useFixedFragment<
     from: options
   })
   const [load] = lazyQuery()
-  const loadCallback = useCallback((options: LV & StoreObject) => {
-    return load({
-      variables: options
-    })
-  }, [])
   const calledOptionStr = useRef<string>('')
   useEffect(() => {
     const tempStr = JSON.stringify(options)
     if (!complete && calledOptionStr.current !== tempStr) {
       calledOptionStr.current = tempStr
-      // console.trace('fragment called: ', fragment, options, data)
-      loadCallback(options)
+      load({
+        variables: options
+      })
     }
-  }, [complete, options, loadCallback])
-  // const computedFitnessData = useMemo<T>(() => {
-  //   return (called ?  : data)
-  // }, [called, data, loadedData])
+  }, [complete, options, load])
   return [data as T]
 }

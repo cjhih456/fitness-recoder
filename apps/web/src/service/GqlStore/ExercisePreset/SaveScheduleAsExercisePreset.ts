@@ -1,9 +1,8 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData } from '.'
-import { ExercisePreset } from 'fitness-struct'
+import { ExercisePresetMockData, ExercisePresetStoreType } from '.'
 
-type SaveScheduleAsExercisePresetResponse = { saveScheduleAsExercisePreset: ExercisePreset.Preset }
+type SaveScheduleAsExercisePresetResponse = { saveScheduleAsExercisePreset: ExercisePresetStoreType }
 type SaveScheduleAsExercisePresetVariable = { scheduleId: number, name: string }
 const saveScheduleAsExercisePresetGql = gql`
 mutation SaveScheduleAsExercisePreset($scheduleId: Int!, $name: String!) {

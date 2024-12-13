@@ -1,30 +1,30 @@
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ExercisePreset } from 'fitness-struct';
 import { Button } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import SimpleFitnessList from '../Fitness/SimpleFitnessList';
 import MenuableAccordion from '../CustomComponent/MenuableAccordion';
 import usePresetMenu from '../../hooks/usePreset/usePresetMenu';
+import { useExercisePresetWithListFragment } from '../../service/GqlStore/ExercisePreset';
 
 interface PresetDisplayProps {
-  preset: ExercisePreset.PresetWithExerciseList
+  presetId: number
 }
 
-export default memo(function PresetDisplay({
-  preset
-}: PresetDisplayProps) {
+export default function PresetDisplay({ presetId }: PresetDisplayProps) {
   const navigate = useNavigate()
   function gotoDetail() {
-    navigate(`/preset/${preset.id}`)
+    navigate(`/preset/${presetId}`)
   }
   const { t } = useTranslation(['common', 'preset'])
+
+  const [preset] = useExercisePresetWithListFragment(presetId)
 
   const presetName = useMemo(() => preset.name, [preset])
   const exerciseList = useMemo(() => preset.exerciseList || [], [preset])
   const exerciseListCount = useMemo(() => exerciseList.length || 0, [exerciseList])
 
-  const presetMenu = usePresetMenu(preset.id)
+  const presetMenu = usePresetMenu(presetId)
   const menuObj = useMemo(() => presetMenu, [presetMenu])
 
   return <MenuableAccordion menu={menuObj}>
@@ -43,4 +43,4 @@ export default memo(function PresetDisplay({
       }
     }}
   </MenuableAccordion>
-})
+}

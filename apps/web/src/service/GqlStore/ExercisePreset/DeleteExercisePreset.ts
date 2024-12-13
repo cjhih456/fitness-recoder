@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
-import { GetExercisePresetListResponse } from './GetExercisePresetList'
+import { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList'
 
 type DeleteExercisePresetResponse = { deleteExercisePreset: string }
 type DeleteExercisePresetVariable = { id: number }
@@ -14,10 +14,10 @@ export function useDeleteExercisePreset() {
   return useMutation<DeleteExercisePresetResponse, DeleteExercisePresetVariable>(deleteExercisePresetGql, {
     update: (cache, _r, { variables }) => {
       cache.modify<{
-        getExercisePresetList: GetExercisePresetListResponse['getExercisePresetList']
+        getExercisePresetWithListList: GetExercisePresetWithListListResponse['getExercisePresetWithListList']
       }>({
         fields: {
-          getExercisePresetList(prev, { readField }) {
+          getExercisePresetWithListList(prev, { readField }) {
             if (!prev) return prev
             return prev.filter((p) => {
               const list = readField<number>('id', p)

@@ -5,7 +5,7 @@ import { createFragmentRegistry } from '@apollo/client/cache'
 import { SetsFragment } from '../../service/GqlStore/Set'
 import { ScheduleSimpleFragment, ScheduleTimeFragment } from '../../service/GqlStore/Schedule'
 import { FitnessDetailFragment, FitnessFragment, FitnessSimpleFragment } from '../../service/GqlStore/Fitness'
-import { ExercisePresetFragment, ExercisePresetWithExerciseFragment } from '../../service/GqlStore/ExercisePreset'
+import { ExercisePresetFragment, ExercisePresetWithListFragment } from '../../service/GqlStore/ExercisePreset'
 import { ExerciseFragment } from '../../service/GqlStore/Exercise'
 
 const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
@@ -28,13 +28,13 @@ export const useApollo = async () => {
       FitnessFragment,
       ExerciseFragment,
       ExercisePresetFragment,
-      ExercisePresetWithExerciseFragment
+      ExercisePresetWithListFragment,
     ),
     typePolicies: {
       Query: {
         fields: {
           getScheduleStatusByDate: offsetLimitPagination(['year', 'month']),
-          getExercisePresetList: offsetLimitPagination(),
+          getExercisePresetWithListList: offsetLimitPagination(),
           getFitnessListByKeywords: offsetLimitPagination(['name', 'category', 'muscle']),
           getScheduleByDate: offsetLimitPagination(['year', 'month', 'date'])
         }

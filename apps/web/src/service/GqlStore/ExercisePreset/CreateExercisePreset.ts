@@ -1,10 +1,9 @@
-import { gql, StoreObject, useMutation } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData } from '.'
-import { ExercisePreset } from 'fitness-struct'
-import { GetExercisePresetListResponse } from './GetExercisePresetList'
+import { ExercisePresetMockData, ExercisePresetStoreType } from '.'
+import { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList'
 
-type CreateExercisePresetResponse = { createExercisePreset: ExercisePreset.Preset & StoreObject }
+type CreateExercisePresetResponse = { createExercisePreset: ExercisePresetStoreType }
 type CreateExercisePresetVariable = { exercisePreset: { name: string } }
 const createExercisePresetGql = gql`
 mutation CreateExercisePreset($exercisePreset: CreateExercisePresetInput) {
@@ -17,10 +16,10 @@ export function useCreateExercisePreset() {
   return useMutation<CreateExercisePresetResponse, CreateExercisePresetVariable>(createExercisePresetGql, {
     update: (cache, result) => {
       cache.modify<{
-        getExercisePresetList: GetExercisePresetListResponse['getExercisePresetList']
+        getExercisePresetWithListList: GetExercisePresetWithListListResponse['getExercisePresetWithListList']
       }>({
         fields: {
-          getExercisePresetList(prev, { toReference }) {
+          getExercisePresetWithListList(prev, { toReference }) {
             if (!prev || !result.data?.createExercisePreset) return prev
             const ref = toReference(result.data?.createExercisePreset, true)
             return [ref, ...prev]

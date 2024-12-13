@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { Button, ScrollShadow } from '@nextui-org/react';
 import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
-import { useCreateExercisePreset, useGetExercisePresetList } from '../../service/GqlStore/ExercisePreset';
+import { useCreateExercisePreset, useGetExercisePresetWithListList } from '../../service/GqlStore/ExercisePreset';
 import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
 import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
 import { useTranslation } from 'react-i18next';
@@ -26,8 +26,8 @@ export default function PresetListPage() {
     })
   }
 
-  const { data: presetListData, fetchMore, loading } = useGetExercisePresetList(0, 20)
-  const presetList = useMemo(() => presetListData?.getExercisePresetList || [], [presetListData])
+  const { data: presetListData, fetchMore, loading } = useGetExercisePresetWithListList(0, 20)
+  const presetList = useMemo(() => presetListData?.getExercisePresetWithListList || [], [presetListData])
   const loadMore = useCallback(() => {
     fetchMore({ variables: { offset: presetList.length } })
   }, [fetchMore, presetList])
@@ -45,7 +45,7 @@ export default function PresetListPage() {
     </div>
     <ScrollShadow>
       <div className='flex flex-col gap-y-3 flex-nowrap'>
-        {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} preset={preset} />)}
+        {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} presetId={preset.id} />)}
         {spinner}
       </div>
     </ScrollShadow>

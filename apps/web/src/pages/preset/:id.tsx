@@ -3,7 +3,7 @@ import { HeaderHandler, HeaderMenuHandler } from '../../components/provider/Head
 import { useMemo, useState } from 'react'
 import FitnessListEditor from '../../components/Fitness/FitnessListEditor'
 import { Button } from '@nextui-org/react'
-import { useGetExercisePresetById } from '../../service/GqlStore/ExercisePreset'
+import { useExercisePresetFragment } from '../../service/GqlStore/ExercisePreset'
 import { useGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
 import { useUpdateExerciseListByExercisePreset } from '../../service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
 import { useTranslation } from 'react-i18next'
@@ -15,8 +15,7 @@ export default function PresetDetailPage() {
   const navigate = useNavigate()
   const { t } = useTranslation(['preset', 'common'])
   const id = useMemo(() => Number(params.id), [params])
-  const { data: exercisePresetData } = useGetExercisePresetById(id)
-  const exercisePreset = useMemo(() => exercisePresetData?.getExercisePresetById, [exercisePresetData])
+  const [exercisePreset] = useExercisePresetFragment(id)
   const { data: exerciseIdxListData } = useGetExerciseListByExercisePresetId(id)
   const exerciseIdxList = useMemo(() => exerciseIdxListData?.getExerciseListByExercisePresetId || [], [exerciseIdxListData])
 
