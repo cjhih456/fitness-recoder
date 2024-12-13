@@ -2,7 +2,9 @@ import { Exercise } from 'fitness-struct';
 import FitnessData from '../../Fitness/FitnessData.json'
 import { useGetFitnessById, useLazyGetFitnessById } from './GetFitnessById'
 import { useGetFitnessListByIds, useLazyGetFitnessListByIds } from './GetFitnessListByIds'
-import { useGetFitnessListByKeywords, useLazyGetFitnessListByKeywords } from './GetFitnessListByKeywords'
+import { useGetFitnessListByKeywords } from './GetFitnessListByKeywords'
+import { useGetFitnessSimpleById, useLazyGetFitnessSimpleById } from './GetFitnessSimpleById'
+import { useGetFitnessSimpleListByIds, useBackgroundGetFitnessSimpleListByIds } from './GetFitnessSimpleListByIds'
 import { gql, StoreObject } from '@apollo/client';
 
 export type FitnessStoreType = Exercise.IFitness & StoreObject
@@ -33,7 +35,10 @@ export {
   useGetFitnessListByIds,
   useLazyGetFitnessListByIds,
   useGetFitnessListByKeywords,
-  useLazyGetFitnessListByKeywords,
+  useGetFitnessSimpleById,
+  useLazyGetFitnessSimpleById,
+  useGetFitnessSimpleListByIds,
+  useBackgroundGetFitnessSimpleListByIds,
 }
 
 export const FitnessMockData: FitnessStoreType[] = FitnessData.map((v, i) => {

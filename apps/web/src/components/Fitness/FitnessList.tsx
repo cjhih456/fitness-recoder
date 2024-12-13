@@ -1,6 +1,6 @@
 import FitnessItem from './FitnessItem';
 import { useMemo } from 'react';
-import { useExerciseDataModalProvider } from '../provider/ExerciseDataModal/useExerciseDataModalProvider';
+import { useFitnessDataModalProvider } from '../provider/FitnessDataModal/useFitnessDataModalProvider';
 import { Exercise } from 'fitness-struct';
 import useSpinner from '../../hooks/useSpinner';
 
@@ -21,7 +21,7 @@ export default function FitnessList({
   onChangeSelectedFitnessIds,
   onToggleFitnessIds,
   onLoadMore }: FitnessListProps) {
-  const { showModal } = useExerciseDataModalProvider()
+  const { showModal } = useFitnessDataModalProvider()
 
   const useSelect = useMemo(() => Boolean(selectedFitnessIds), [selectedFitnessIds])
 
@@ -46,7 +46,7 @@ export default function FitnessList({
     {list.map(fitness => (
       <FitnessItem
         key={fitness.id}
-        fitnessData={fitness}
+        fitnessId={fitness.id}
         useSelect={useSelect}
         isSelected={selectedFitnessIds?.includes(fitness.id)}
         onClick={clickFitness}

@@ -1,37 +1,53 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
 import { MdCheck } from 'react-icons/md';
-import { Exercise } from 'fitness-struct';
+import { useFragment } from '@apollo/client';
+import { FitnessSimpleFragment, FitnessStoreType, useLazyGetFitnessById } from '../../service/GqlStore/Fitness';
+import { useEffect } from 'react';
 
 export interface FitnessItemProps {
-  fitnessData: Exercise.IFitness
+  fitnessId: number
   isSelected?: boolean
   useSelect?: boolean
   onClick?: (_exercise: number, _isDetail: boolean) => void
 }
-export default function FitnessItem({ fitnessData, isSelected, onClick, useSelect }: FitnessItemProps) {
+export default function FitnessItem({ fitnessId, isSelected, onClick, useSelect }: FitnessItemProps) {
+  const { data, complete } = useFragment<FitnessStoreType>({
+    fragment: FitnessSimpleFragment,
+    from: {
+      id: fitnessId,
+      __typename: 'Fitness'
+    }
+  })
+  const [lazyGetFitnessById] = useLazyGetFitnessById()
+  useEffect(() => {
+    if (!complete) {
+      lazyGetFitnessById({ variables: { id: fitnessId } })
+    }
+  }, [complete, fitnessId, lazyGetFitnessById])
+
   return <Card className="fitness-item scroll-mb-4 snap-start">
     <CardBody className="flex flex-row">
       <div role="img" className="flex-[100px] flex-grow-0 flex-shrink-0" onClick={() => {
-        onClick && onClick(fitnessData.id, true)
+        onClick && onClick(fitnessId, true)
       }}>
         {/* TODO: add image files */}
       </div>
       <div role="contentinfo" className="flex flex-col flex-1 gap-y-2" onClick={() => {
-        onClick && onClick(fitnessData.id, false)
+        onClick && onClick(fitnessId, false)
       }}>
-        <h3 className="font-semibold"><span>{fitnessData.name}</span> {
+        <h3 className="font-semibold"><span>{data.name}</span> {
           useSelect && <span className="inline-block" >
             {isSelected && <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white"><MdCheck size="0.75rem"></MdCheck></div>}
           </span>
         }</h3>
         <div>
-          {fitnessData.category}
+          {data.category}
         </div>
         <div className="flex gap-1 flex-wrap">
-          {fitnessData.primaryMuscles.map((muscle) => {
+          {data.primaryMuscles?.map((muscle) => {
             return <Chip size='sm' key={muscle}>{muscle}</Chip>
           })}
-          {fitnessData.secondaryMuscles.map((muscle) => {
+          {data.secondaryMuscles?.map((muscle) => {
             return <Chip size='sm' key={muscle}>{muscle}</Chip>
           })}
         </div>

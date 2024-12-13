@@ -14,7 +14,7 @@ interface YoutubeResponse {
   items: YoutubeItemObject[]
 }
 
-export default async function ExercisePreviewVideo(exerciseName: string) {
+export default async function FitnessPreviewVideo(exerciseName: string) {
   // TODO: Add youtube api key
   const params = {
     part: 'id',

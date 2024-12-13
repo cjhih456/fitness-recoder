@@ -1,10 +1,10 @@
-import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { Exercise } from 'fitness-struct'
 import { FitnessMockData, FitnessStoreType } from '.'
 
 
-type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: FitnessStoreType[] }
+export type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: FitnessStoreType[] }
 type GetFitnessListByKeywordsVariable = {
   name: string,
   category: Exercise.ICategory[],
@@ -12,8 +12,8 @@ type GetFitnessListByKeywordsVariable = {
   limit: number,
   offset: number
 }
-const getFitnessListByKeywordsGql = gql`
-query GetFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [IMuscle], $limit: Int, $offset: Int) {
+const GetFitnessListByKeywordsGql = gql`
+query getFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [IMuscle], $limit: Int, $offset: Int) {
   getFitnessListByKeywords(name: $name, category: $category, muscle: $muscle, limit: $limit, offset: $offset) {
     ...FitnessSimpleFragment
   }
@@ -21,7 +21,7 @@ query GetFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [
 `
 
 export function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
-  return useQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(getFitnessListByKeywordsGql, {
+  return useQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywordsGql, {
     fetchPolicy: 'cache-first',
     variables: {
       name,
@@ -33,16 +33,12 @@ export function useGetFitnessListByKeywords(name: string, category: Exercise.ICa
   })
 }
 
-export function useLazyGetFitnessListByKeywords() {
-  return useLazyQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(getFitnessListByKeywordsGql)
-}
-
 export const useGetFitnessByIdMock: MockedResponse<
   GetFitnessListByKeywordsResponse,
   GetFitnessListByKeywordsVariable
 > = {
   request: {
-    query: getFitnessListByKeywordsGql
+    query: GetFitnessListByKeywordsGql
   },
   newData(v) {
     return {

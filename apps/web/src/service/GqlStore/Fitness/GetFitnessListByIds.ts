@@ -3,9 +3,9 @@ import { FitnessMockData, FitnessStoreType } from '.'
 import { MockedResponse } from '@apollo/client/testing'
 
 
-type GetFitnessListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }
-type GetFitnessListByIdsVariable = { ids: number[] }
-const getFitnessByIdGql = gql`
+export type GetFitnessListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }
+export type GetFitnessListByIdsVariable = { ids: number[] }
+export const getFitnessByIdsGql = gql`
 query GetFitnessListByIds($ids: [Int!]) {
   getFitnessListByIds(ids: $ids) {
     ...FitnessFragment
@@ -14,13 +14,16 @@ query GetFitnessListByIds($ids: [Int!]) {
 `
 
 export function useGetFitnessListByIds(ids: number[]) {
-  return useQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(getFitnessByIdGql, {
-    variables: { ids }
+  return useQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(getFitnessByIdsGql, {
+    variables: { ids },
+    fetchPolicy: 'cache-first',
   })
 }
 
 export function useLazyGetFitnessListByIds() {
-  return useLazyQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(getFitnessByIdGql)
+  return useLazyQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(getFitnessByIdsGql, {
+    fetchPolicy: 'cache-first',
+  })
 }
 
 export const useGetFitnessListByIdsMock: MockedResponse<
@@ -28,7 +31,7 @@ export const useGetFitnessListByIdsMock: MockedResponse<
   GetFitnessListByIdsVariable
 > = {
   request: {
-    query: getFitnessByIdGql
+    query: getFitnessByIdsGql
   },
   result: (v) => {
     return {

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useThema } from './components/provider/ThemaProvider/useThema'
 import { NextUIProvider, Spinner } from '@nextui-org/react'
-import ExerciseDataInfoModal from './components/provider/ExerciseDataModal/ExerciseDataInfoModal'
+import FitnessDataInfoModal from './components/provider/FitnessDataModal/FitnessDataInfoModal'
 import { AlertProvider } from './components/provider/Alert/AlertProvider'
 import DefaultLayout from './layout/DefaultLayout'
 import { BottomNaviProvider } from './components/provider/BottomNavi/BottomNaviProvider'
@@ -16,7 +16,7 @@ function App() {
   const navigate = useNavigate()
   const main = useMemo(() => <NextUIProvider navigate={navigate} className="app-root h-screen max-h-full flex flex-col">
     <I18nextProvider i18n={i18n}>
-      <ExerciseDataInfoModal>
+      <FitnessDataInfoModal>
         <AlertProvider>
           <DefaultLayout>
             <BottomNaviProvider>
@@ -26,7 +26,7 @@ function App() {
             </BottomNaviProvider>
           </DefaultLayout>
         </AlertProvider>
-      </ExerciseDataInfoModal>
+      </FitnessDataInfoModal>
     </I18nextProvider>
   </NextUIProvider>, [navigate])
   return <div className={`app bg-background ${getThema()} h-screen max-h-full text-default-700`}>

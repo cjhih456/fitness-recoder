@@ -2,11 +2,11 @@ import { Card, CardBody, CardHeader } from '@nextui-org/react'
 import { Exercise } from 'fitness-struct'
 import { useMemo } from 'react'
 
-interface DisplayExerciseFinishHistoryProps {
+interface DisplayFitnessFinishHistoryProps {
   history: Exercise.HistoryData
 }
 
-export default function DisplayExerciseFinishHistory({ history }: DisplayExerciseFinishHistoryProps) {
+export default function DisplayFitnessFinishHistory({ history }: DisplayFitnessFinishHistoryProps) {
   const date = useMemo(() => {
     return `${history.year}. ${history.month}. ${history.date}`
   }, [history])
