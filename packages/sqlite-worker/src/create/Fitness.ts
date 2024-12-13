@@ -24,7 +24,7 @@ export function migrate(bus: MigrationQueryBus, v: Versions) {
   switch (v) {
     case '0.1.0': {
       const loadData = async () => {
-        const data = () => import(new URL('./fitness-datas/fitness-flat-data.js', import.meta.url).href)
+        const data = () => import('./fitness-datas/fitness-flat-data.ts')
         const loaded = await data()
         const json_loaded = loaded.fitnessData
         const sql = Array(json_loaded.length / 13).fill('(?,?,?,?,?,?,?,?,?,?,?,?,?)').join(',')
