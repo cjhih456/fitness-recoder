@@ -6,8 +6,7 @@ import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exerc
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
 import { ModalContext, ModalContextType } from './FitnessDataModalContext';
-import { FitnessFragment, FitnessStoreType, useLazyGetFitnessById } from '../../../service/GqlStore/Fitness';
-import { useFragment } from '@apollo/client';
+import { useFitnessFragment } from '../../../service/GqlStore/Fitness';
 
 
 interface ExerciseDataInfoModalProps {
@@ -37,29 +36,14 @@ export default function FitnessDataInfoModal({
   }, [history])
 
   // Fitness Datas
-  const { data: fitnessData, complete } = useFragment<FitnessStoreType>({
-    fragment: FitnessFragment,
-    from: {
-      id: fitnessId || 0,
-      __typename: 'Fitness'
-    }
-  })
-  const [lazyGetFitnessById, { called, data }] = useLazyGetFitnessById()
-  useEffect(() => {
-    if (!complete && fitnessId) {
-      lazyGetFitnessById({ variables: { id: fitnessId } })
-    }
-  }, [complete, fitnessId, lazyGetFitnessById])
-  const computedFitnessData = useMemo(() => {
-    return (called ? data?.getFitnessById : fitnessData) || {}
-  }, [called, data, fitnessData])
+  const [fitnessData] = useFitnessFragment(fitnessId || 0)
 
   const fitnessInstructions = useMemo(() => {
-    return computedFitnessData.instructions || []
-  }, [computedFitnessData])
+    return fitnessData.instructions || []
+  }, [fitnessData])
   const fitnessName = useMemo(() => {
-    return computedFitnessData.name || ''
-  }, [computedFitnessData])
+    return fitnessData.name || ''
+  }, [fitnessData])
 
   // Fitness Youtube Video
   const [fitnessVideoId, setFitnessVideoId] = useState<string | undefined>()

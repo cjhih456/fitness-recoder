@@ -1,8 +1,6 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
 import { MdCheck } from 'react-icons/md';
-import { useFragment } from '@apollo/client';
-import { FitnessSimpleFragment, FitnessStoreType, useLazyGetFitnessById } from '../../service/GqlStore/Fitness';
-import { useEffect } from 'react';
+import { useFitnessSimpleFragment } from '../../service/GqlStore/Fitness';
 
 export interface FitnessItemProps {
   fitnessId: number
@@ -11,19 +9,7 @@ export interface FitnessItemProps {
   onClick?: (_exercise: number, _isDetail: boolean) => void
 }
 export default function FitnessItem({ fitnessId, isSelected, onClick, useSelect }: FitnessItemProps) {
-  const { data, complete } = useFragment<FitnessStoreType>({
-    fragment: FitnessSimpleFragment,
-    from: {
-      id: fitnessId,
-      __typename: 'Fitness'
-    }
-  })
-  const [lazyGetFitnessById] = useLazyGetFitnessById()
-  useEffect(() => {
-    if (!complete) {
-      lazyGetFitnessById({ variables: { id: fitnessId } })
-    }
-  }, [complete, fitnessId, lazyGetFitnessById])
+  const [data] = useFitnessSimpleFragment(fitnessId)
 
   return <Card className="fitness-item scroll-mb-4 snap-start">
     <CardBody className="flex flex-row">

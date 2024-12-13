@@ -1,31 +1,15 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
 import { useGetSetListByExerciseId } from '../../service/GqlStore/Set'
 import { Exercise } from 'fitness-struct'
-import { FitnessSimpleFragment, FitnessStoreType, useLazyGetFitnessById } from '../../service/GqlStore/Fitness'
-import { useFragment } from '@apollo/client'
+import { useFitnessSimpleFragment } from '../../service/GqlStore/Fitness'
 
 export interface SimpleFitnessItemProps {
   exerciseData: Exercise.Data
 }
 export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemProps) {
-  const { data: fitnessData, complete } = useFragment<FitnessStoreType>({
-    fragment: FitnessSimpleFragment,
-    from: {
-      id: exerciseData?.exercise,
-      __typename: 'Fitness'
-    }
-  })
-  const [lazyGetFitnessById] = useLazyGetFitnessById()
-  useEffect(() => {
-    if (!complete) {
-      lazyGetFitnessById({
-        variables: {
-          id: exerciseData.exercise
-        }
-      })
-    }
-  }, [complete, lazyGetFitnessById, exerciseData])
+  const [fitnessData] = useFitnessSimpleFragment(exerciseData?.exercise)
+
   const fitnessName = useMemo(() => {
     return fitnessData.name
   }, [fitnessData])
