@@ -71,6 +71,7 @@ export default defineConfig(({ mode, isPreview }) => {
     },
     base: process.env.VITE_URL_ROOT,
     worker: {
+      format: 'es',
       rollupOptions: {
         output: {
           entryFileNames(info) {
