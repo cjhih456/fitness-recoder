@@ -1,10 +1,11 @@
+import type { Exercise } from 'fitness-struct'
+import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
-import { ReactNode, useMemo, useState } from 'react'
-import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
-import FitnessList from './FitnessList'
-import { Exercise } from 'fitness-struct'
-import { useGetFitnessListByKeywords } from '@service/GqlStore/Fitness'
+import { useMemo, useState } from 'react'
 import { useDebounceValue } from 'usehooks-ts'
+import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
+import { useGetFitnessListByKeywords } from '@service/GqlStore/Fitness'
+import FitnessList from './FitnessList'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode
   selectedFitnessIds?: number[]
@@ -13,7 +14,6 @@ export interface FitnessListSearchProps {
   searchAreaBg?: boolean
   needSpace?: boolean
 }
-
 
 export default function FitnessListSearch({
   searchPrefix,

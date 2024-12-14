@@ -1,12 +1,12 @@
+import type { SqliteMessage } from 'sqlite-message-types'
+import sort from 'version-sort'
 import Sqlite3 from './Sqlite3'
-import createVersionTable, { getVersion, updateVersion } from './create/Version'
 import createExerciseTable, { migrate as migrateExercise } from './create/Exercise'
 import createExercisePresetTable, { migrate as migrateExercisePreset } from './create/ExercisePreset'
 import createFitnessTable, { migrate as migrateFitness } from './create/Fitness'
 import createScheduleTable, { migrate as migrateSchedule } from './create/Schedule'
 import createSetTable, { migrate as migrateSets } from './create/Sets'
-import { SqliteMessage } from 'sqlite-message-types'
-import sort from 'version-sort'
+import createVersionTable, { getVersion, updateVersion } from './create/Version'
 
 export interface QueryType {
   sql: string,

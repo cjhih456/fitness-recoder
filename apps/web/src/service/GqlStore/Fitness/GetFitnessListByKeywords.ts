@@ -1,8 +1,8 @@
+import type { FitnessStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { Exercise } from 'fitness-struct'
 import { gql, useQuery } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { Exercise } from 'fitness-struct'
-import { FitnessMockData, FitnessStoreType } from '.'
-
+import { FitnessMockData } from '.'
 
 export type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: FitnessStoreType[] }
 type GetFitnessListByKeywordsVariable = {

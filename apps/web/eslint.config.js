@@ -1,5 +1,5 @@
-import tsconfig from '@fitness/eslint-config/ts.js'
 import graphqlConfig from '@fitness/eslint-config/graphql.js'
+import tsconfig from '@fitness/eslint-config/ts.js'
 import ReactHook from 'eslint-plugin-react-hooks'
 import ReactRefresh from 'eslint-plugin-react-refresh'
 import globals from 'globals'

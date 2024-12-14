@@ -1,13 +1,13 @@
-import { useCallback, useMemo } from 'react'
-import { HeaderHandler } from '@provider/HeaderProvider'
-import { useGetScheduleByDate } from '@service/GqlStore/Schedule'
-import ScheduleDisplay from '@components/Schedule/ScheduleDisplay'
 import { Button, ScrollShadow } from '@nextui-org/react'
-import { useNavigate } from 'react-router-dom'
-import { useBottomNavi } from '@provider/BottomNaviProvider'
+import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import ScheduleDisplay from '@components/Schedule/ScheduleDisplay'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
+import { useBottomNavi } from '@provider/BottomNaviProvider'
+import { useHeaderHandler } from '@provider/HeaderProvider'
+import { useGetScheduleByDate } from '@service/GqlStore/Schedule'
 
 export default function Main() {
   useBottomNavi()
@@ -24,7 +24,7 @@ export default function Main() {
     }
   }, [])
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
-  HeaderHandler([t('title:home')])
+  useHeaderHandler([t('title:home')])
 
   const {
     gotoCreateScheduleAction,
@@ -51,14 +51,14 @@ export default function Main() {
       return scheduleList.map((schedule, idx) => {
         const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
         return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
-          {(id, type, date) => (
+          {(id, type, date) =>
             <div className="grid grid-cols-2 gap-x-4">
               <Button onClick={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
               <Button onClick={() => gotoScheduleDetail(id, date)}>
                 {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
               </Button>
             </div>
-          )}
+          }
         </ScheduleDisplay>
       })
     } else {

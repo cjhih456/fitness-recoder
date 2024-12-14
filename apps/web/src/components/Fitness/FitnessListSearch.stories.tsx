@@ -1,8 +1,9 @@
+import type { FitnessListSearchProps } from './FitnessListSearch';
 import type { Meta, StoryObj } from '@storybook/react';
-import FitnessListSearch, { FitnessListSearchProps } from './FitnessListSearch'
-import { MdHome } from 'react-icons/md';
 import { Button } from '@nextui-org/react';
 import { fn } from '@storybook/test';
+import { MdHome } from 'react-icons/md';
+import FitnessListSearch from './FitnessListSearch';
 
 const meta = {
   title: 'Fitness/FitnessListSearch',
@@ -40,6 +41,6 @@ export const NeedSpace: Story = {
 
 export const Prefix: Story = {
   args: {
-    searchPrefix: (<div><Button isIconOnly><MdHome /></Button></div>),
+    searchPrefix: <div><Button isIconOnly><MdHome /></Button></div>,
   }
 }

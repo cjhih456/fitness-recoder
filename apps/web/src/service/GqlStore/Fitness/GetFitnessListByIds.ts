@@ -1,7 +1,7 @@
+import type { FitnessStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
-import { FitnessMockData, FitnessStoreType } from '.'
-import { MockedResponse } from '@apollo/client/testing'
-
+import { FitnessMockData } from '.'
 
 export type GetFitnessListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }
 export type GetFitnessListByIdsVariable = { ids: number[] }

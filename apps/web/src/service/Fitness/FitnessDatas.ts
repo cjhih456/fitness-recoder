@@ -1,4 +1,4 @@
-import { Exercise } from 'fitness-struct';
+import type { Exercise } from 'fitness-struct';
 import { Category, Muscle } from './FitnessDataEnums'
 
 export const muscleList: { value: Exercise.IMuscle, text: string }[] = [

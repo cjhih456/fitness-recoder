@@ -1,8 +1,9 @@
+import type { AlertContextType, AlertData, AlertProviderProps } from './AlertContext';
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useEffect, useMemo, useState } from 'react'
-import CModal from '@components/CustomComponent/CModal'
 import { useTranslation } from 'react-i18next'
-import AlertContext, { AlertContextType, AlertData, AlertProviderProps } from './AlertContext'
+import CModal from '@components/CustomComponent/CModal'
+import AlertContext from './AlertContext'
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
   const { t } = useTranslation('alert')
@@ -58,7 +59,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
       {children}
       <CModal isOpen={displayAlert} onOpenChange={alertAisplayChanged}>
         <ModalContent>
-          {() => (<>
+          {() => <>
             <ModalHeader>{t('modal.title')}</ModalHeader>
             <ModalBody>
               <div>
@@ -79,7 +80,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
                 </Button>
               }
             </ModalFooter>
-          </>)}
+          </>}
         </ModalContent>
       </CModal>
     </AlertContext.Provider>

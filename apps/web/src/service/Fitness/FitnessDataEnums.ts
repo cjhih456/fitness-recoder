@@ -63,5 +63,3 @@ export const Equipment = enumify({
   e_z_curl_bar: 'e-z curl bar',
   foam_roll: 'foam roll',
 })
-
-

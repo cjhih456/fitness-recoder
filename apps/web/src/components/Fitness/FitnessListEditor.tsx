@@ -1,8 +1,9 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
-import FitnessSearchModal from './FitnessSearchModal'
-import FitnessList from './FitnessList'
-import { useLazyGetFitnessListByIds } from '@service/GqlStore/Fitness'
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Button } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
+import { useLazyGetFitnessListByIds } from '@service/GqlStore/Fitness'
+import FitnessList from './FitnessList'
+import FitnessSearchModal from './FitnessSearchModal'
 
 interface FitnessListEditorProps {
   savedIdxData?: number[]

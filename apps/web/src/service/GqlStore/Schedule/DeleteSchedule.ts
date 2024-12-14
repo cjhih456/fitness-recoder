@@ -1,8 +1,7 @@
+import type { GetScheduleByDateResponse } from './GetScheduleByDate';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
-import { GetScheduleByDateResponse } from './GetScheduleByDate'
-
 
 type DeleteScheduleResponse = { deleteSchedule: string }
 type DeleteScheduleVariable = { id: number }

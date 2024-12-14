@@ -1,8 +1,9 @@
+import type { FitnessSearchModalProps } from './FitnessSearchModal'
 import type { Meta, StoryObj } from '@storybook/react';
-import FitnessSearchModal, { FitnessSearchModalProps } from './FitnessSearchModal'
-import { useState } from 'react';
 import { Button } from '@nextui-org/react';
 import { fn } from '@storybook/test';
+import { useState } from 'react';
+import FitnessSearchModal from './FitnessSearchModal'
 
 const meta = {
   title: 'Fitness/FitnessSearchModal',

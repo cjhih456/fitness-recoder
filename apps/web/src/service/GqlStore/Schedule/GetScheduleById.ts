@@ -1,6 +1,7 @@
+import type { ScheduleStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useQuery } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ScheduleMockData, ScheduleStoreType } from '.'
+import { ScheduleMockData } from '.'
 
 type GetScheduleByIdResponse = { getScheduleById: ScheduleStoreType }
 type GetScheduleByIdVAriable = { id: number }

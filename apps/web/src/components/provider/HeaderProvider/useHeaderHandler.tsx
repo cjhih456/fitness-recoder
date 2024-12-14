@@ -1,25 +1,8 @@
+import type { HeaderContentType } from './HeaderContext'
 import { useEffect, useMemo, useState, isValidElement } from 'react'
 import { useHeaderContext } from './useHeaderContext'
-import { HeaderContentType, MenuType } from './HeaderContext'
 
-export const HeaderMenuHandler = (menu: MenuType[]) => {
-  const { setHeaderMenu } = useHeaderContext()
-  const [lazyHeaderMenu, setLazyHeaderMenu] = useState<MenuType[]>([])
-  useEffect(() => {
-    if (JSON.stringify(lazyHeaderMenu) === JSON.stringify(menu)) {
-      return
-    }
-    setLazyHeaderMenu(menu)
-  }, [menu, lazyHeaderMenu])
-  useEffect(() => {
-    setHeaderMenu(lazyHeaderMenu)
-    return () => {
-      setHeaderMenu([])
-    }
-  }, [lazyHeaderMenu, setHeaderMenu])
-}
-
-export const HeaderHandler = (header: HeaderContentType) => {
+const useHeaderHandler = (header: HeaderContentType) => {
   const headerProvider = useHeaderContext()
   const [lazyHeader, setLazyHeader] = useState<HeaderContentType>([])
   useEffect(() => {
@@ -41,3 +24,4 @@ export const HeaderHandler = (header: HeaderContentType) => {
     }
   }, [headerProvider, headerTemp])
 }
+export default useHeaderHandler

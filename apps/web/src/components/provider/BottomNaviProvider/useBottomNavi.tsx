@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react'
 import BottomNaviContext from './BottomNaviContext'
 
-
 export const useBottomNaviContext = () => {
   const context = useContext(BottomNaviContext)
   if (!context) {

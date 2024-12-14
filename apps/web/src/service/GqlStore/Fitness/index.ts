@@ -1,12 +1,15 @@
-import { Exercise } from 'fitness-struct';
+import type { GetFitnessByIdResponse, GetFitnessByIdVariable } from './GetFitnessById';
+import type { GetFitnessSimpleByIdResponse, GetFitnessSimpleByIdVariable } from './GetFitnessSimpleById';
+import type { StoreObject } from '@apollo/client';
+import type { Exercise } from 'fitness-struct';
+import { gql } from '@apollo/client';
+import useFixedFragment from '@hooks/apollo/useFixedFragment';
 import FitnessData from '@service/Fitness/FitnessData.json'
-import { GetFitnessByIdResponse, GetFitnessByIdVariable, useGetFitnessById, useLazyGetFitnessById } from './GetFitnessById'
+import { useGetFitnessById, useLazyGetFitnessById } from './GetFitnessById'
 import { useGetFitnessListByIds, useLazyGetFitnessListByIds } from './GetFitnessListByIds'
 import { useGetFitnessListByKeywords } from './GetFitnessListByKeywords'
-import { GetFitnessSimpleByIdResponse, GetFitnessSimpleByIdVariable, useGetFitnessSimpleById, useLazyGetFitnessSimpleById } from './GetFitnessSimpleById'
+import { useGetFitnessSimpleById, useLazyGetFitnessSimpleById } from './GetFitnessSimpleById'
 import { useGetFitnessSimpleListByIds, useBackgroundGetFitnessSimpleListByIds } from './GetFitnessSimpleListByIds'
-import { gql, StoreObject } from '@apollo/client';
-import useFixedFragment from '@hooks/apollo/useFixedFragment';
 
 export type FitnessStoreType = Exercise.IFitness & StoreObject
 export const FitnessSimpleFragment = gql`
@@ -45,7 +48,6 @@ fragment FitnessFragment on Fitness {
   description
   tips
 }`
-
 
 export function useFitnessSimpleFragment(id: number) {
   return useFixedFragment<FitnessStoreType, GetFitnessSimpleByIdResponse, GetFitnessSimpleByIdVariable>(

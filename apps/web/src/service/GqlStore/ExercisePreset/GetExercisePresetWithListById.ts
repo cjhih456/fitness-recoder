@@ -1,6 +1,8 @@
-import { gql, OperationVariables, useLazyQuery, useQuery } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData, ExercisePresetWithListStoreType } from '.'
+import type { ExercisePresetWithListStoreType } from '.';
+import type { OperationVariables } from '@apollo/client';
+import type { MockedResponse } from '@apollo/client/testing';
+import { gql, useLazyQuery, useQuery } from '@apollo/client'
+import { ExercisePresetMockData } from '.'
 
 export type GetExercisePresetWithListByIdResponse = { getExercisePresetWithListById: ExercisePresetWithListStoreType }
 export type GetExercisePresetWithListByIdVariable = { id: number } & OperationVariables

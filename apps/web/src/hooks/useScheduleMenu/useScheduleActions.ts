@@ -1,15 +1,14 @@
 import { useCallback } from 'react'
-import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@service/GqlStore/Schedule'
-import { useAlert } from '@provider/AlertProvider'
 import { useNavigate } from 'react-router-dom'
-import { ScheduleType } from '@components/utils'
+import { useAlert } from '@provider/AlertProvider'
+import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@service/GqlStore/Schedule'
+import { ScheduleType } from '@utils'
 
 export default function useScheduleActions() {
   const navigate = useNavigate()
   const { showAlert } = useAlert()
   const [deleteSchedule] = useDeleteSchedule()
   const [cloneSchedule] = useCloneSchedule()
-
 
   const gotoScheduleDetail = useCallback((id: number, date: string) => {
     navigate(`/${date}/workout/${id}`)
@@ -68,7 +67,6 @@ export default function useScheduleActions() {
       })
     }
   }, [cloneSchedule, showAlert, gotoScheduleDetail])
-
 
   const deleteScheduleAction = useCallback((id: number) => {
     deleteSchedule({ variables: { id } })

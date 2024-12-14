@@ -1,7 +1,8 @@
+import type { SetsStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { Sets } from 'fitness-struct'
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { SetMockData, SetsStoreType } from '.'
-import { Sets } from 'fitness-struct'
+import { SetMockData } from '.'
 
 type CreateSetResponse = { createSet: SetsStoreType }
 type CreateSetVariable = { sets: Sets.CreateType }

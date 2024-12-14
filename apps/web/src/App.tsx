@@ -1,15 +1,14 @@
 import { NextUIProvider, Spinner } from '@nextui-org/react'
+import { Suspense, useMemo } from 'react'
+import { I18nextProvider } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import AlertProvider from '@provider/AlertProvider'
 import BottomNaviProvider from '@provider/BottomNaviProvider'
 import FitnessDataModalProvider from '@provider/FitnessDataModalProvider'
 import { useThema } from '@provider/ThemaProvider'
-import { Suspense, useMemo } from 'react'
-import { I18nextProvider } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import CRouter from './CRoutes'
 import i18n from './i18n'
 import DefaultLayout from './layout/DefaultLayout'
-
 
 function App() {
   const { getThema } = useThema()

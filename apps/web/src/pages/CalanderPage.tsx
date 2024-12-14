@@ -1,17 +1,18 @@
-import { useMemo, useState } from 'react'
-import Calender, { Mode } from '@components/Calander/Calander'
-import ScheduleList from '@components/Schedule/ScheduleList'
-import { useGetScheduleStatusByDate } from '@service/GqlStore/Schedule'
-import { useBottomNavi } from '@provider/BottomNaviProvider'
-import { HeaderHandler } from '@provider/HeaderProvider'
+import type { Mode } from '@components/Calander/Calander';
 import { ScrollShadow } from '@nextui-org/react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Calender from '@components/Calander/Calander'
+import ScheduleList from '@components/Schedule/ScheduleList'
+import { useBottomNavi } from '@provider/BottomNaviProvider'
+import { useHeaderHandler } from '@provider/HeaderProvider'
+import { useGetScheduleStatusByDate } from '@service/GqlStore/Schedule'
 
 function CalanderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  HeaderHandler([t('calander')])
+  useHeaderHandler([t('calander')])
 
   const location = useLocation()
   const navigate = useNavigate()

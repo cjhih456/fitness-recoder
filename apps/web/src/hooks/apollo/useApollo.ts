@@ -1,19 +1,19 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { link } from './HttpLink'
-import { offsetLimitPagination } from '@apollo/client/utilities'
 import { createFragmentRegistry } from '@apollo/client/cache'
-import { SetsFragment } from '@service/GqlStore/Set'
-import { ScheduleSimpleFragment, ScheduleTimeFragment } from '@service/GqlStore/Schedule'
-import { FitnessDetailFragment, FitnessFragment, FitnessSimpleFragment } from '@service/GqlStore/Fitness'
-import { ExercisePresetFragment, ExercisePresetWithListFragment } from '@service/GqlStore/ExercisePreset'
+import { offsetLimitPagination } from '@apollo/client/utilities'
 import { ExerciseFragment } from '@service/GqlStore/Exercise'
+import { ExercisePresetFragment, ExercisePresetWithListFragment } from '@service/GqlStore/ExercisePreset'
+import { FitnessDetailFragment, FitnessFragment, FitnessSimpleFragment } from '@service/GqlStore/Fitness'
+import { ScheduleSimpleFragment, ScheduleTimeFragment } from '@service/GqlStore/Schedule'
+import { SetsFragment } from '@service/GqlStore/Set'
+import { link } from './HttpLink'
 
 const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
   import: 'default'
 })
 
 export const useApollo = async () => {
-  const PossibleTypesData = await Promise.all(Object.values((await PossibleTypes())).map(async (it) => {
+  const PossibleTypesData = await Promise.all(Object.values(await PossibleTypes()).map(async (it) => {
     return await it()
   }))
 

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import type { SetsStoreType } from '@service/GqlStore/Set'
 import { Button, Checkbox, Input } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'
 import { useDebounce } from '@hooks/useDebounce'
-import { SetsStoreType } from '@service/GqlStore/Set'
 export interface SetRowProps {
   set: SetsStoreType
   index: number

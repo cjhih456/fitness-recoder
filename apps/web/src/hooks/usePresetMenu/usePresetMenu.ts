@@ -1,7 +1,7 @@
+import type { MenuType } from '@provider/HeaderProvider';
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import usePresetActions from './usePresetActions'
-import { MenuType } from '@provider/HeaderProvider'
 
 export default function usePresetMenu(id: number): MenuType[] {
   const { t } = useTranslation(['preset'])

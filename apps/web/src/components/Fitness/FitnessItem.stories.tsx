@@ -1,6 +1,7 @@
+import type { FitnessItemProps } from './FitnessItem';
 import type { Meta, StoryObj } from '@storybook/react';
-import FitnessItem, { FitnessItemProps } from './FitnessItem'
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
+import FitnessItem from './FitnessItem';
 
 const meta = {
   title: 'Fitness/FitnessItem',

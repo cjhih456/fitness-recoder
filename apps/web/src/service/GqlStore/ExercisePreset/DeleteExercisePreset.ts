@@ -1,7 +1,7 @@
+import type { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
 import { ExercisePresetMockData } from '.'
-import { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList'
 
 type DeleteExercisePresetResponse = { deleteExercisePreset: string }
 type DeleteExercisePresetVariable = { id: number }

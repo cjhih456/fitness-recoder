@@ -1,6 +1,6 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import { IResolvers } from '@graphql-tools/utils';
-import { Exercise } from 'fitness-struct'
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { IResolvers } from '@graphql-tools/utils';
+import type { Exercise } from 'fitness-struct'
 
 interface getFitnessByIdArgs { id: number }
 interface getFitnessByIdsArgs { ids: number[] }

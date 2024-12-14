@@ -1,5 +1,6 @@
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
-import { ReactNode } from 'react';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { ReactNode } from 'react';
+import { MockedProvider } from '@apollo/client/testing';
 
 const list = import.meta.glob('./**/*.ts')
 const mocks: MockedResponse[] = []

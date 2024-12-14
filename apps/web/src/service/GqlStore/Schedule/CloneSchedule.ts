@@ -1,9 +1,9 @@
+import type { ScheduleStoreType } from '.';
+import type { GetScheduleByDateResponse } from './GetScheduleByDate';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { Schedule } from 'fitness-struct'
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ScheduleMockData, ScheduleStoreType } from '.'
-import { Schedule } from 'fitness-struct'
-import { GetScheduleByDateResponse } from './GetScheduleByDate'
-
+import { ScheduleMockData } from '.'
 
 type CloneScheduleResponse = { cloneSchedule: ScheduleStoreType }
 type CloneScheduleVariable = { id: number, targetDate: { year: number, month: number, date: number } }

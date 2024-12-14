@@ -17,7 +17,7 @@ export default function YearCalander({ year, startYear, endYear, onChange }: Yea
     const temp = []
     for (let i = 0; i < times; i += 4) {
       const row = []
-      for (let j = i; (j < i + 4 && j <= times); j++) {
+      for (let j = i; j < i + 4 && j <= times; j++) {
         const displayYear = j + displayStartYear
         row.push(<Button
           key={`year-${displayYear}`}

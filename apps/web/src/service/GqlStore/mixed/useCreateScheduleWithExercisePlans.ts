@@ -1,6 +1,6 @@
-import { ScheduleType } from '@utils'
 import { useCreateExerciseBySchedule } from '@service/GqlStore/Exercise'
 import { useCreateSchedule } from '@service/GqlStore/Schedule'
+import { ScheduleType } from '@utils'
 
 export function useCreateScheduleWithExercisePlans() {
   const [createSchedule] = useCreateSchedule()

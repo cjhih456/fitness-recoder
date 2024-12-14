@@ -1,6 +1,6 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import FitnessSchema from './query.gql'
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import FitnessSchema from './query.gql'
 import resolvers from './resolvers';
 
 export default function init(txBus: MessageTransactionBus) {

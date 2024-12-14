@@ -1,4 +1,5 @@
-import { Modal, ModalProps } from '@nextui-org/react';
+import type { ModalProps } from '@nextui-org/react';
+import { Modal } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { useRoot } from '@provider/RootDomProvider';
 

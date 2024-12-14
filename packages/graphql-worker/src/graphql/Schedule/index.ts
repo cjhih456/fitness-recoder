@@ -1,9 +1,8 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import ScheduleSchema from './query.gql'
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import resolvers from './resolvers';
 import TimestampType from '../ScalaType/Timestamp';
-
+import ScheduleSchema from './query.gql'
+import resolvers from './resolvers';
 
 export default function init(txBus: MessageTransactionBus) {
   return makeExecutableSchema({

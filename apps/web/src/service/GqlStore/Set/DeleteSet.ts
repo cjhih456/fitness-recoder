@@ -1,5 +1,5 @@
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client';
-import { MockedResponse } from '@apollo/client/testing';
 import { SetMockData } from '.';
 
 type DeleteSetResponse = { deleteSetById: string }

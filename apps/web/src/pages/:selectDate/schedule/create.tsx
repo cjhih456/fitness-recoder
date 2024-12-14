@@ -2,19 +2,19 @@ import { Button } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@components/Fitness/FitnessListEditor';
-import { HeaderHandler } from '@provider/HeaderProvider';
-import { useCreateScheduleWithExercisePlans } from '@service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
-import { LogEvent } from '@service/firebase';
-import { useAlert } from '@provider/AlertProvider';
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
+import { useAlert } from '@provider/AlertProvider';
+import { useHeaderHandler } from '@provider/HeaderProvider';
+import { useCreateScheduleWithExercisePlans } from '@service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
+import { LogEvent } from '@service/firebase';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
 })
 
 export default function CreateSchedule() {
-  HeaderHandler(['Create Schedule'])
+  useHeaderHandler(['Create Schedule'])
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()

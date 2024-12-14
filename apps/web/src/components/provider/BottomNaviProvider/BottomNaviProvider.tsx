@@ -1,16 +1,17 @@
-import { ReactNode, useCallback, useState } from 'react'
-import MenuButton from '@components/CustomComponent/MenuButton'
-import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
+import type { BottomNaviType } from './BottomNaviContext';
+import type { ReactNode } from 'react';
+import { useCallback, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useRoot } from '@provider/RootDomProvider'
 import { useTranslation } from 'react-i18next'
-import BottomNaviContext, { BottomNaviType } from './BottomNaviContext'
+import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import { useDebounceCallback } from 'usehooks-ts'
+import MenuButton from '@components/CustomComponent/MenuButton'
+import { useRoot } from '@provider/RootDomProvider'
+import BottomNaviContext from './BottomNaviContext'
 
 export interface BottomNaviProviderProps {
   children: ReactNode
 }
-
 
 export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const { t } = useTranslation('bottom')
@@ -38,4 +39,3 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
     </BottomNaviContext.Provider>
   )
 }
-

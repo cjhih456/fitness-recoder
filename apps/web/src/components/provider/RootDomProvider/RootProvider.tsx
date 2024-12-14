@@ -1,12 +1,11 @@
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import {  useEffect, useState } from 'react';
 import RootProviderContext from './RootProviderContext';
 
 export interface RootProviderProps {
   children: ReactNode
   selector?: string
 }
-
-
 
 export const RootProvider = ({ children, selector }: RootProviderProps) => {
   const [root, setRoot] = useState<Element>(document.body)

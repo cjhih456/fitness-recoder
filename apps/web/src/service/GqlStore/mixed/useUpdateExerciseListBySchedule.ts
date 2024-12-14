@@ -1,4 +1,4 @@
-import { Exercise } from 'fitness-struct'
+import type { Exercise } from 'fitness-struct'
 import { useUpdateExerciseListByScheduleId } from '@service/GqlStore/Exercise'
 
 export function useUpdateExerciseListBySchedule() {

@@ -1,12 +1,11 @@
-import { ReactNode, useState } from 'react'
-import HeaderContext, { HeaderContentType, HeaderContextType, MenuType } from './HeaderContext'
-
+import type { HeaderContentType, HeaderContextType, MenuType } from './HeaderContext'
+import type { ReactNode } from 'react'
+import { useState } from 'react'
+import HeaderContext from './HeaderContext'
 
 export interface HeaderProviderProps {
   children: ReactNode
 }
-
-
 
 export const HeaderProvider = ({ children }: HeaderProviderProps) => {
   const [headerContent, setHeaderContent] = useState<HeaderContentType>([])
@@ -29,4 +28,3 @@ export const HeaderProvider = ({ children }: HeaderProviderProps) => {
     </HeaderContext.Provider>
   )
 }
-

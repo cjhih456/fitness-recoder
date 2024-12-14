@@ -1,7 +1,6 @@
+import type { MockedResponse } from '@apollo/client/testing';
+import type { Exercise } from 'fitness-struct'
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { Exercise } from 'fitness-struct'
-
 
 type UpdateExerciseListByScheduleIdResponse = {
   updateExerciseListByScheduleId: Exercise.Data[]

@@ -1,9 +1,10 @@
-import { useGetSetListByExerciseId, useLazyGetSetListByExerciseId } from './GetSetListByExerciseId'
+import type { StoreObject } from '@apollo/client';
+import type { Sets } from 'fitness-struct'
+import { gql } from '@apollo/client'
 import { useCreateSet } from './CreateSet'
-import { useUpdateSet } from './UpdateSet'
 import { useDeleteSet } from './DeleteSet'
-import { Sets } from 'fitness-struct'
-import { gql, StoreObject } from '@apollo/client'
+import { useGetSetListByExerciseId, useLazyGetSetListByExerciseId } from './GetSetListByExerciseId'
+import { useUpdateSet } from './UpdateSet'
 
 export type SetsStoreType = Sets.Sets & StoreObject
 

@@ -1,6 +1,7 @@
+import type { SetsStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { SetMockData, SetsStoreType } from '.'
+import { SetMockData } from '.'
 
 type updateSetResponse = { updateSet: SetsStoreType }
 type updateSetVariable = { sets: SetsStoreType }

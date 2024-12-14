@@ -1,6 +1,7 @@
+import type { ExercisePresetWithListStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useQuery } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData, ExercisePresetWithListStoreType } from '.'
+import { ExercisePresetMockData } from '.'
 
 export type GetExercisePresetWithListListResponse = { getExercisePresetWithListList: ExercisePresetWithListStoreType[] }
 type GetExercisePresetWithListListVariable = { offset: number, size: number }

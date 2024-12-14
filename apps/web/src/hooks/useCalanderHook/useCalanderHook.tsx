@@ -43,7 +43,7 @@ const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
     const dateByMonths = DateUtil.getDaysByMonth(year)
     const targetSNum = DateUtil.dateStringAsNumber(`${year}-${month}-${dateByMonths[month]}`)
     const targetENum = DateUtil.dateStringAsNumber(`${year}-${month}-1`)
-    return (targetSNum < startNum || endNum < targetENum)
+    return targetSNum < startNum || endNum < targetENum
   }, [startDateObj, endDateObj])
 
   /**

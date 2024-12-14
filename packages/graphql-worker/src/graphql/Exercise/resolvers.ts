@@ -1,6 +1,6 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import { IResolvers } from '@graphql-tools/utils';
-import { Exercise } from 'fitness-struct'
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { IResolvers } from '@graphql-tools/utils';
+import type { Exercise } from 'fitness-struct'
 
 export async function getExerciseListByScheduleIdTemp(
   dbBus: MessageTransactionBus | undefined,
@@ -29,7 +29,6 @@ export async function getExerciseListByExercisePresetIdTemp(
   )
   return result || []
 }
-
 
 export async function cloneExerciseList(
   dbBus: MessageTransactionBus | undefined,

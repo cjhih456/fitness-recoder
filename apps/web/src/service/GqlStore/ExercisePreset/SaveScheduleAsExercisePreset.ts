@@ -1,6 +1,7 @@
+import type { ExercisePresetStoreType } from '.';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData, ExercisePresetStoreType } from '.'
+import { ExercisePresetMockData } from '.'
 
 type SaveScheduleAsExercisePresetResponse = { saveScheduleAsExercisePreset: ExercisePresetStoreType }
 type SaveScheduleAsExercisePresetVariable = { scheduleId: number, name: string }

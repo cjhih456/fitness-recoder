@@ -1,6 +1,6 @@
-import { Sets } from 'fitness-struct';
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import { IResolvers } from '@graphql-tools/utils';
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { IResolvers } from '@graphql-tools/utils';
+import type { Sets } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {

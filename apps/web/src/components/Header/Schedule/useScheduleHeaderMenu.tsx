@@ -1,11 +1,11 @@
+import type { Schedule } from 'fitness-struct'
 import { useMemo, useState } from 'react'
-import { HeaderMenuHandler } from '@provider/HeaderProvider'
-import { useAlert } from '@provider/AlertProvider'
-import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useSaveScheduleAsExercisePreset } from '@service/GqlStore/ExercisePreset'
-import { Schedule } from 'fitness-struct'
+import { useNavigate } from 'react-router-dom'
 import useScheduleMenu from '@hooks/useScheduleMenu'
+import { useAlert } from '@provider/AlertProvider'
+import { useHeaderMenuHandler } from '@provider/HeaderProvider'
+import { useSaveScheduleAsExercisePreset } from '@service/GqlStore/ExercisePreset'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
@@ -41,7 +41,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
     },
     ...headerMenus
   ] : [], [scheduleInfo, t, headerMenus])
-  HeaderMenuHandler(headerMenuList)
+  useHeaderMenuHandler(headerMenuList)
 
   return [isSaveScheduleAsPresetOpen, saveScheduleAsPreset]
 }

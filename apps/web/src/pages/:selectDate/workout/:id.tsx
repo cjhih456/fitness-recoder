@@ -1,18 +1,17 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { Schedule } from 'fitness-struct'
 import { Button } from '@nextui-org/react'
-import { dayjs } from '@utils'
-import ExerciseDataList from '@components/ExerciseData/ExerciseDataList'
-import { useAlert } from '@provider/AlertProvider'
-import { HeaderHandler } from '@provider/HeaderProvider'
-import { useGetScheduleById, useUpdateSchedule } from '@service/GqlStore/Schedule'
-import { ScheduleType } from '@utils'
-import { useTranslation } from 'react-i18next'
-import PresetNameInputDialog from '@components/Preset/PresetNameInputDialog'
-import { Schedule } from 'fitness-struct'
-import usePageTracker from '@hooks/usePageTracker'
 import { useAnimationFrame } from 'framer-motion'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
+import ExerciseDataList from '@components/ExerciseData/ExerciseDataList'
 import useScheduleHeaderMenu from '@components/Header/Schedule/useScheduleHeaderMenu'
+import PresetNameInputDialog from '@components/Preset/PresetNameInputDialog'
+import usePageTracker from '@hooks/usePageTracker'
+import { useAlert } from '@provider/AlertProvider'
+import { useHeaderHandler } from '@provider/HeaderProvider'
+import { useGetScheduleById, useUpdateSchedule } from '@service/GqlStore/Schedule'
+import { dayjs, ScheduleType } from '@utils'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
@@ -90,7 +89,7 @@ export default function DisplayWorkout() {
     setTimerText(calcTimeText(lazySchedule))
   })
 
-  HeaderHandler([timerText])
+  useHeaderHandler([timerText])
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {

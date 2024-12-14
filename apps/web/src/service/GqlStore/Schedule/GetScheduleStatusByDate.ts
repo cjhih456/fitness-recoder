@@ -1,7 +1,6 @@
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useQuery } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData } from '.'
-
 
 export type GetScheduleStatusByDateResponse = { getScheduleStatusByDate: string[] }
 type GetScheduleStatusByDateVariable = { year: number, month: number }

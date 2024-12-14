@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@nextui-org/react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
+import { useNavigate } from 'react-router-dom';
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
+import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
 import usePresetMenu from '@hooks/usePresetMenu';
 import { useExercisePresetWithListFragment } from '@service/GqlStore/ExercisePreset';
 

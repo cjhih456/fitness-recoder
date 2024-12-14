@@ -1,6 +1,6 @@
-import { Kind } from 'graphql/language';
-import { GraphQLScalarType } from 'graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { GraphQLScalarType } from 'graphql';
+import { Kind } from 'graphql/language';
 
 function serializeDate(value: any) {
   if (value instanceof Date) {

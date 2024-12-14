@@ -1,7 +1,8 @@
+import type { ExerciseDataDisplayProps } from './ExerciseDataDisplay';
 import type { Meta, StoryObj } from '@storybook/react';
-import ExerciseDataDisplay, { ExerciseDataDisplayProps } from './ExerciseDataDisplay';
+import type { Exercise } from 'fitness-struct';
 import { fn } from '@storybook/test';
-import { Exercise } from 'fitness-struct';
+import ExerciseDataDisplay from './ExerciseDataDisplay';
 const meta = {
   title: 'ExerciseData/ExerciseDataDisplay',
   tags: ['autodocs'],

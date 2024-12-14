@@ -1,4 +1,4 @@
-import { MigrationQueryBus } from '..'
+import type { MigrationQueryBus } from '..';
 import type Sqlite3 from '../Sqlite3'
 
 export default function createSetTable(db: Sqlite3) {

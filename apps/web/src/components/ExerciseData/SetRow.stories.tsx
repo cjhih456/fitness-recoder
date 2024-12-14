@@ -1,6 +1,7 @@
+import type { SetRowProps } from './SetRow'
 import type { Meta, StoryObj } from '@storybook/react';
-import SetRow, { SetRowProps } from './SetRow';
 import { fn } from '@storybook/test';
+import SetRow from './SetRow';
 const meta = {
   title: 'ExerciseData/SetRow',
   tags: ['autodocs'],

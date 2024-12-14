@@ -1,4 +1,5 @@
-import { DocumentNode, OperationVariables, StoreObject, useFragment, useLazyQuery } from '@apollo/client'
+import type { DocumentNode, OperationVariables, StoreObject, useLazyQuery } from '@apollo/client';
+import { useFragment } from '@apollo/client'
 import { useEffect, useRef } from 'react'
 
 interface BaseObj extends StoreObject {

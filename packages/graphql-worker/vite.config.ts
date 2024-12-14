@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import wasm from 'vite-plugin-wasm'
-import topLevelAwait from 'vite-plugin-top-level-await'
 import GraphqlLoader from 'vite-plugin-graphql-loader'
+import topLevelAwait from 'vite-plugin-top-level-await'
+import wasm from 'vite-plugin-wasm'
 
 export default defineConfig({
   plugins: [

@@ -1,9 +1,9 @@
-import ExerciseDataDisplay from './ExerciseDataDisplay';
+import type { Exercise, Schedule } from 'fitness-struct';
 import { useMemo, useState } from 'react';
-import { useGetExerciseListByScheduleId } from '@service/GqlStore/Exercise';
-import { Exercise, Schedule } from 'fitness-struct';
-import { useGetFitnessListByIds } from '@service/GqlStore/Fitness';
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
+import { useGetExerciseListByScheduleId } from '@service/GqlStore/Exercise';
+import { useGetFitnessListByIds } from '@service/GqlStore/Fitness';
+import ExerciseDataDisplay from './ExerciseDataDisplay';
 
 export interface ExerciseDataListProps {
   schedule: Schedule.Schedule

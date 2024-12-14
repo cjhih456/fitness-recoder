@@ -1,4 +1,4 @@
-import { Exercise } from 'fitness-struct';
+import type { Exercise } from 'fitness-struct';
 import { useUpdateExerciseListByExercisePresetId } from '@service/GqlStore/Exercise';
 
 export function useUpdateExerciseListByExercisePreset() {

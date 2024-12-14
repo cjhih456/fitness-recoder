@@ -1,7 +1,8 @@
+import type { ExercisePresetStoreType } from '.';
+import type { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList';
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-import { ExercisePresetMockData, ExercisePresetStoreType } from '.'
-import { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList'
+import { ExercisePresetMockData } from '.'
 
 type CreateExercisePresetResponse = { createExercisePreset: ExercisePresetStoreType }
 type CreateExercisePresetVariable = { exercisePreset: { name: string } }

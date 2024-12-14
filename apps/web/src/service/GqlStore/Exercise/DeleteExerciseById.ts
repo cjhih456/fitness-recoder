@@ -1,6 +1,5 @@
+import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
-import { MockedResponse } from '@apollo/client/testing'
-
 
 type DeleteExerciseByIdResponse = {
   deleteExerciseById: string

@@ -1,7 +1,7 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import { IResolvers } from '@graphql-tools/utils';
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { IResolvers } from '@graphql-tools/utils';
+import type { ExercisePreset, Schedule } from 'fitness-struct';
 import { cloneExerciseList, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
-import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {

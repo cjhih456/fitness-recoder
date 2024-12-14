@@ -1,5 +1,5 @@
+import type { Exercise } from 'fitness-struct'
 import { Card, CardBody, CardHeader } from '@nextui-org/react'
-import { Exercise } from 'fitness-struct'
 import { useMemo } from 'react'
 
 interface DisplayFitnessFinishHistoryProps {
@@ -20,10 +20,10 @@ export default function DisplayFitnessFinishHistory({ history }: DisplayFitnessF
         repeat: repeats[idx]
       }
     })
-    return temp.map(v => (<div className="flex justify-between" key={v.idx}>
+    return temp.map(v => <div className="flex justify-between" key={v.idx}>
       <span>{`${v.weight}${history.weightUnit}`}</span>
       <span>{`${v.repeat}`}rep</span>
-    </div>))
+    </div>)
   }, [history])
   return <Card className="w-36">
     <CardHeader className="justify-center">

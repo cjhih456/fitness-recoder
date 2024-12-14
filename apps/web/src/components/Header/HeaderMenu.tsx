@@ -1,9 +1,9 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
+import { useHeaderContext } from '@provider/HeaderProvider';
 import { useRoot } from '@provider/RootDomProvider';
 import { useThema } from '@provider/ThemaProvider';
-import { useHeaderContext } from '@provider/HeaderProvider';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {

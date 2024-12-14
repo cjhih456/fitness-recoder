@@ -1,5 +1,6 @@
+import type { SimpleFitnessItemProps } from './SimpleFitnessItem'
 import type { Meta, StoryObj } from '@storybook/react';
-import SimpleFitnessItem, { SimpleFitnessItemProps } from './SimpleFitnessItem'
+import SimpleFitnessItem from './SimpleFitnessItem'
 
 const meta = {
   title: 'Fitness/SimpleFitnessItem',

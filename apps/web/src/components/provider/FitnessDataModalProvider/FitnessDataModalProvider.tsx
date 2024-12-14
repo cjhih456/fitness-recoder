@@ -1,13 +1,14 @@
+import type { ModalContextType } from './FitnessDataModalContext';
+import type { ReactNode } from 'react';
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
-import CModal from '@components/CustomComponent/CModal';
-import FitnessPreviewVideo from './FitnessPreviewVideo';
-import { useLazyGetExerciseFinishHistory } from '@service/GqlStore/Exercise';
-import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ModalContext, ModalContextType } from './FitnessDataModalContext';
+import CModal from '@components/CustomComponent/CModal';
+import { useLazyGetExerciseFinishHistory } from '@service/GqlStore/Exercise';
 import { useFitnessFragment } from '@service/GqlStore/Fitness';
-
+import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
+import { ModalContext } from './FitnessDataModalContext';
+import FitnessPreviewVideo from './FitnessPreviewVideo';
 
 interface ExerciseDataInfoModalProps {
   children: ReactNode
@@ -32,7 +33,7 @@ export default function FitnessDataModalProvider({
     return historyData?.getExerciseFinishHistory || []
   }, [historyData])
   const historyList = useMemo(() => {
-    return history.map((h) => (<DisplayFitnessFinishHistory history={h} key={h.id} />))
+    return history.map((h) => <DisplayFitnessFinishHistory history={h} key={h.id} />)
   }, [history])
 
   // Fitness Datas
@@ -75,7 +76,7 @@ export default function FitnessDataModalProvider({
       scrollBehavior='inside'
     >
       <ModalContent>
-        {(onCloseAction) => (<>
+        {(onCloseAction) => <>
           <ModalHeader>
             {fitnessName || ''}
           </ModalHeader>
@@ -122,7 +123,7 @@ export default function FitnessDataModalProvider({
               {t('common:close')}
             </Button>
           </ModalFooter>
-        </>)}
+        </>}
       </ModalContent>
     </CModal>
   </ModalContext.Provider>

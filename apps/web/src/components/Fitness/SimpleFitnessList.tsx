@@ -1,6 +1,5 @@
-import { Exercise } from 'fitness-struct'
+import type { Exercise } from 'fitness-struct'
 import SimpleFitnessItem from './SimpleFitnessItem'
-
 
 export interface SimpleFitnessListProps {
   exerciseDataList: Exercise.Data[]
@@ -8,8 +7,8 @@ export interface SimpleFitnessListProps {
 
 export default function SimpleFitnessList({ exerciseDataList }: SimpleFitnessListProps) {
   return <div role="grid" className="flex flex-col gap-y-2">
-    {exerciseDataList.map(exerciseData => (
+    {exerciseDataList.map(exerciseData => <>
       <SimpleFitnessItem key={exerciseData.id} exerciseData={exerciseData} />
-    ))}
+    </>)}
   </div>
 }
