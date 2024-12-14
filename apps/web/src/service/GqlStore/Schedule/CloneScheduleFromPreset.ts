@@ -1,7 +1,7 @@
 import { gql, useMutation } from '@apollo/client'
 import { MockedResponse } from '@apollo/client/testing'
 import { ScheduleMockData, ScheduleStoreType } from '.'
-import { ExercisePresetMockData } from '../ExercisePreset'
+import { ExercisePresetMockData } from '@service/GqlStore/ExercisePreset'
 import { ExercisePreset } from 'fitness-struct'
 import { GetScheduleByDateResponse } from './GetScheduleByDate'
 

@@ -5,6 +5,7 @@ import makeManifest from './vitePlugin/Manifest/MakeManifest'
 import Inspect from 'vite-plugin-inspect'
 import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 import GraphqlServer from '@fitness/vite-plugin-graphql-server'
+import tsConfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
@@ -36,6 +37,7 @@ export default defineConfig(({ mode, isPreview }) => {
       exclude: ['@fitness/sqlite-worker']
     },
     plugins: [
+      tsConfigPaths(),
       Inspect(),
       GraphqlServer({
         modulePath: [

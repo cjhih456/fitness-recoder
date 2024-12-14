@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
-import FitnessSearchModal from '../Fitness/FitnessSearchModal'
-import FitnessList from '../Fitness/FitnessList'
-import { useLazyGetFitnessListByIds } from '../../service/GqlStore/Fitness'
+import FitnessSearchModal from './FitnessSearchModal'
+import FitnessList from './FitnessList'
+import { useLazyGetFitnessListByIds } from '@service/GqlStore/Fitness'
 import { Button } from '@nextui-org/react'
 
 interface FitnessListEditorProps {

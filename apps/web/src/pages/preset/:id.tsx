@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { HeaderHandler, HeaderMenuHandler } from '../../components/provider/Header/HeaderHandler'
+import { HeaderHandler, HeaderMenuHandler } from '@provider/HeaderProvider'
 import { useMemo, useState } from 'react'
-import FitnessListEditor from '../../components/Fitness/FitnessListEditor'
+import FitnessListEditor from '@components/Fitness/FitnessListEditor'
 import { Button } from '@nextui-org/react'
-import { useExercisePresetFragment } from '../../service/GqlStore/ExercisePreset'
-import { useGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
-import { useUpdateExerciseListByExercisePreset } from '../../service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
+import { useExercisePresetFragment } from '@service/GqlStore/ExercisePreset'
+import { useGetExerciseListByExercisePresetId } from '@service/GqlStore/Exercise'
+import { useUpdateExerciseListByExercisePreset } from '@service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
 import { useTranslation } from 'react-i18next'
-import usePresetMenu from '../../hooks/usePreset/usePresetMenu'
+import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
 
 
 export default function PresetDetailPage() {

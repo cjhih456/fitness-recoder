@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import DateCalander from './DateCalander';
 import MonthCalander from './MonthCalander';
 import YearCalander from './YearCalander';
-import { useCalanderHook } from '../../hooks/useCalanderHook/useCalanderHook';
+import useCalanderHook from '@hooks/useCalanderHook';
 
 export type Mode = 'date' | 'month' | 'year'
 export interface CalanderProps {

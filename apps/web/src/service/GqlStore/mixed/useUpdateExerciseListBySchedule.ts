@@ -1,5 +1,5 @@
 import { Exercise } from 'fitness-struct'
-import { useUpdateExerciseListByScheduleId } from '../Exercise'
+import { useUpdateExerciseListByScheduleId } from '@service/GqlStore/Exercise'
 
 export function useUpdateExerciseListBySchedule() {
   const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()

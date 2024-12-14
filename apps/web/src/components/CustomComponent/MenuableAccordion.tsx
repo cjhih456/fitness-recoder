@@ -2,7 +2,7 @@ import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, Dr
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
-import { MenuType } from '../provider/Header/HeaderContext';
+import { MenuType } from '@provider/HeaderProvider';
 
 interface MenuableAccordionProps {
   children: (_toggleAction?: () => void) => {

@@ -1,19 +1,19 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
-import CModal from '../../CustomComponent/CModal';
+import CModal from '@components/CustomComponent/CModal';
 import FitnessPreviewVideo from './FitnessPreviewVideo';
-import { useLazyGetExerciseFinishHistory } from '../../../service/GqlStore/Exercise';
+import { useLazyGetExerciseFinishHistory } from '@service/GqlStore/Exercise';
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
 import { useTranslation } from 'react-i18next';
 import { ModalContext, ModalContextType } from './FitnessDataModalContext';
-import { useFitnessFragment } from '../../../service/GqlStore/Fitness';
+import { useFitnessFragment } from '@service/GqlStore/Fitness';
 
 
 interface ExerciseDataInfoModalProps {
   children: ReactNode
 }
 
-export default function FitnessDataInfoModal({
+export default function FitnessDataModalProvider({
   children
 }: ExerciseDataInfoModalProps) {
   const { t } = useTranslation(['exerciseDataInfo', 'common'])

@@ -1,10 +1,10 @@
 import ScheduleDisplay from './ScheduleDisplay';
 import { useMemo } from 'react';
 import { Button } from '@nextui-org/react';
-import { ScheduleType } from '../utils';
-import { useGetScheduleByDate } from '../../service/GqlStore/Schedule';
+import { ScheduleType } from '@utils';
+import { useGetScheduleByDate } from '@service/GqlStore/Schedule';
 import { useTranslation } from 'react-i18next';
-import useScheduleActions from '../../hooks/useSchedule/useScheduleActions';
+import { useScheduleActions } from '@hooks/useScheduleMenu';
 
 export interface ScheduleListProps {
   choosenDate: string

@@ -1,8 +1,8 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import FitnessListSearch from './FitnessListSearch'
 import { useEffect } from 'react'
-import CModal from '../CustomComponent/CModal'
-import useIdToggle from '../../hooks/useIdToggle'
+import CModal from '@components/CustomComponent/CModal'
+import useIdToggle from '@hooks/useIdToggle'
 
 export interface FitnessSearchModalProps {
   selectedFitnessIds: number[]

@@ -1,3 +1,5 @@
+export { default as dayjs } from './dayjs'
+
 export const enumify = <T extends { [index: string]: U }, U extends string>(x: T): T => x;
 
 

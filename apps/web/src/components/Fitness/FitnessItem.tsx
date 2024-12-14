@@ -1,6 +1,6 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
 import { MdCheck } from 'react-icons/md';
-import { useFitnessSimpleFragment } from '../../service/GqlStore/Fitness';
+import { useFitnessSimpleFragment } from '@service/GqlStore/Fitness';
 
 export interface FitnessItemProps {
   fitnessId: number

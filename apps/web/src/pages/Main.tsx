@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react'
-import { HeaderHandler } from '../components/provider/Header/HeaderHandler'
-import { useGetScheduleByDate } from '../service/GqlStore/Schedule'
-import ScheduleDisplay from '../components/Schedule/ScheduleDisplay'
+import { HeaderHandler } from '@provider/HeaderProvider'
+import { useGetScheduleByDate } from '@service/GqlStore/Schedule'
+import ScheduleDisplay from '@components/Schedule/ScheduleDisplay'
 import { Button, ScrollShadow } from '@nextui-org/react'
 import { useNavigate } from 'react-router-dom'
-import { useBottomNavi } from '../components/provider/BottomNavi/useBottomNavi'
+import { useBottomNavi } from '@provider/BottomNaviProvider'
 import { useTranslation } from 'react-i18next'
-import usePageTracker from '../hooks/usePageTracker'
-import useScheduleActions from '../hooks/useSchedule/useScheduleActions'
+import usePageTracker from '@hooks/usePageTracker'
+import { useScheduleActions } from '@hooks/useScheduleMenu'
 
 export default function Main() {
   useBottomNavi()

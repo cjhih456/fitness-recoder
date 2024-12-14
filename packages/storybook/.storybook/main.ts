@@ -1,6 +1,10 @@
 import type { StorybookConfig } from '@storybook/react-vite'
-
+import tsConfigPaths from 'vite-tsconfig-paths'
 const config: StorybookConfig = {
+  viteFinal: async (config, option) => {
+    config.plugins = [...(config.plugins || []), tsConfigPaths()]
+    return config
+  },
   stories: ["../../../apps/web/src/**/*.mdx", "../../../apps/web/src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-onboarding",

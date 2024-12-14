@@ -3,6 +3,7 @@ import { createContext } from 'react'
 type RootContextType = {
   getRoot: () => Element
 }
-export default createContext<RootContextType>({
+const RootProviderContext = createContext<RootContextType>({
   getRoot: () => document.body
 })
+export default RootProviderContext

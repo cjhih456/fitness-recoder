@@ -1,9 +1,9 @@
 import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
 import { ReactNode, useMemo, useState } from 'react'
-import { categoryList, muscleList } from '../../service/Fitness/FitnessDatas'
+import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
 import { Exercise } from 'fitness-struct'
-import { useGetFitnessListByKeywords } from '../../service/GqlStore/Fitness'
+import { useGetFitnessListByKeywords } from '@service/GqlStore/Fitness'
 import { useDebounceValue } from 'usehooks-ts'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode

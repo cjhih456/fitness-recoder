@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ScheduleDisplay, { ScheduleDisplayProps } from './ScheduleDisplay'
-import { ScheduleType } from '../utils';
+import { ScheduleType } from '@utils';
 
 const meta = {
   title: 'Schedule/ScheduleDisplay',

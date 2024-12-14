@@ -1,4 +1,4 @@
-import { ScheduleType } from '../../../components/utils'
+import { ScheduleType } from '@utils'
 import { useCreateSchedule } from './CreateSchedule'
 import { useDeleteSchedule } from './DeleteSchedule'
 import { useGetScheduleByDate, useLazyGetScheduleByDate } from './GetScheduleByDate'
@@ -9,7 +9,7 @@ import { useCloneSchedule } from './CloneSchedule'
 import { useCloneScheduleFromPreset } from './CloneScheduleFromPreset'
 import { Schedule } from 'fitness-struct'
 import { gql, StoreObject } from '@apollo/client'
-import DateUtil from '../../../components/utils/DateUtil'
+import DateUtil from '@utils/DateUtil'
 
 export const ScheduleSimpleFragment = gql`
 fragment ScheduleSimple on ScheduleData{

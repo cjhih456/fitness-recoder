@@ -4,7 +4,7 @@ import React from 'react'
 import { NextUIProvider } from '@nextui-org/react'
 import { I18nextProvider } from 'react-i18next'
 import AllMockedProvider from '@fitness/web/src/service/GqlStore/AllMockedProvider'
-import { RootProvider } from '@fitness/web/src/components/provider/RootProvider/RootProvider'
+import RootProvider from '@fitness/web/src/components/provider/RootDomProvider'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import i18n from '@fitness/web/src/i18n'
 

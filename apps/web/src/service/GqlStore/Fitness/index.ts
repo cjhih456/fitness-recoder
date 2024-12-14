@@ -1,12 +1,12 @@
 import { Exercise } from 'fitness-struct';
-import FitnessData from '../../Fitness/FitnessData.json'
+import FitnessData from '@service/Fitness/FitnessData.json'
 import { GetFitnessByIdResponse, GetFitnessByIdVariable, useGetFitnessById, useLazyGetFitnessById } from './GetFitnessById'
 import { useGetFitnessListByIds, useLazyGetFitnessListByIds } from './GetFitnessListByIds'
 import { useGetFitnessListByKeywords } from './GetFitnessListByKeywords'
 import { GetFitnessSimpleByIdResponse, GetFitnessSimpleByIdVariable, useGetFitnessSimpleById, useLazyGetFitnessSimpleById } from './GetFitnessSimpleById'
 import { useGetFitnessSimpleListByIds, useBackgroundGetFitnessSimpleListByIds } from './GetFitnessSimpleListByIds'
 import { gql, StoreObject } from '@apollo/client';
-import useFixedFragment from '../useFixedFragment';
+import useFixedFragment from '@hooks/apollo/useFixedFragment';
 
 export type FitnessStoreType = Exercise.IFitness & StoreObject
 export const FitnessSimpleFragment = gql`

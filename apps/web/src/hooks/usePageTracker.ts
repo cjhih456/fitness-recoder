@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { LogEvent } from '../service/firebase';
+import { LogEvent } from '@service/firebase';
 
 export default function usePageTracker(name: string) {
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { enumify } from '../../components/utils'
+import { enumify } from '@utils'
 
 export const Muscle = enumify({
   abdominals: 'abdominals',

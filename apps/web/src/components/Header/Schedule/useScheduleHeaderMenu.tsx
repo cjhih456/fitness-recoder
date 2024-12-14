@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
-import { HeaderMenuHandler } from '../../provider/Header/HeaderHandler'
-import { useAlert } from '../../provider/Alert/useAlert'
+import { HeaderMenuHandler } from '@provider/HeaderProvider'
+import { useAlert } from '@provider/AlertProvider'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useSaveScheduleAsExercisePreset } from '../../../service/GqlStore/ExercisePreset'
+import { useSaveScheduleAsExercisePreset } from '@service/GqlStore/ExercisePreset'
 import { Schedule } from 'fitness-struct'
-import useScheduleMenu from '../../../hooks/useSchedule/useScheduleMenu'
-import { ScheduleType } from '../../utils'
+import useScheduleMenu from '@hooks/useScheduleMenu'
+import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
   boolean,

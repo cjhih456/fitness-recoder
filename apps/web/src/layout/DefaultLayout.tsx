@@ -1,10 +1,10 @@
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
-import { useRoot } from '../components/provider/RootProvider/useRoot'
+import { useRoot } from '@provider/RootDomProvider'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeaderMenu from '../components/Header/HeaderMenu'
-import HeaderContent from '../components/Header/HeaderContent'
+import HeaderMenu from '@components/Header/HeaderMenu'
+import HeaderContent from '@components/Header/HeaderContent'
 
 interface DefaultLayoutProps {
   children: ReactNode

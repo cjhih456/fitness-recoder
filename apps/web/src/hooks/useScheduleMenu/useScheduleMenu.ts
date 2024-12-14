@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next';
 import useScheduleActions from './useScheduleActions';
 import { Schedule } from 'fitness-struct';
-import { MenuType } from '../../components/provider/Header/HeaderContext';
+import { MenuType } from '@provider/HeaderProvider';
 
 
 

@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
-import { useGetSetListByExerciseId } from '../../service/GqlStore/Set'
+import { useGetSetListByExerciseId } from '@service/GqlStore/Set'
 import { Exercise } from 'fitness-struct'
-import { useFitnessSimpleFragment } from '../../service/GqlStore/Fitness'
+import { useFitnessSimpleFragment } from '@service/GqlStore/Fitness'
 
 export interface SimpleFitnessItemProps {
   exerciseData: Exercise.Data

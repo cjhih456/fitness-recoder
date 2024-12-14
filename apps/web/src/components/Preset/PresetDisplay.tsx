@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
-import SimpleFitnessList from '../Fitness/SimpleFitnessList';
-import MenuableAccordion from '../CustomComponent/MenuableAccordion';
-import usePresetMenu from '../../hooks/usePreset/usePresetMenu';
-import { useExercisePresetWithListFragment } from '../../service/GqlStore/ExercisePreset';
+import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
+import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
+import usePresetMenu from '@hooks/usePresetMenu';
+import { useExercisePresetWithListFragment } from '@service/GqlStore/ExercisePreset';
 
 interface PresetDisplayProps {
   presetId: number

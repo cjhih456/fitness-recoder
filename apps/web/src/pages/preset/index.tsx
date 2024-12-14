@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react';
 import { Button, ScrollShadow } from '@nextui-org/react';
-import PresetNameInputDialog from '../../components/Preset/PresetNameInputDialog';
+import PresetNameInputDialog from '@components/Preset/PresetNameInputDialog';
 import { useNavigate } from 'react-router-dom';
-import { useCreateExercisePreset, useGetExercisePresetWithListList } from '../../service/GqlStore/ExercisePreset';
-import { useBottomNavi } from '../../components/provider/BottomNavi/useBottomNavi';
-import { HeaderHandler } from '../../components/provider/Header/HeaderHandler';
+import { useCreateExercisePreset, useGetExercisePresetWithListList } from '@service/GqlStore/ExercisePreset';
+import { useBottomNavi } from '@provider/BottomNaviProvider';
+import { HeaderHandler } from '@provider/HeaderProvider';
 import { useTranslation } from 'react-i18next';
-import useSpinner from '../../hooks/useSpinner';
-import PresetDisplay from '../../components/Preset/PresetDisplay';
+import useSpinner from '@hooks/useSpinner';
+import PresetDisplay from '@components/Preset/PresetDisplay';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])

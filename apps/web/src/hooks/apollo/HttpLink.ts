@@ -1,5 +1,5 @@
 import { ApolloLink, createHttpLink } from '@apollo/client';
-import { baseURL } from '../../components/utils';
+import { baseURL } from '@utils';
 import { onError } from '@apollo/client/link/error';
 
 function fetchTimeout(uri: URL | RequestInfo, options: RequestInit | undefined, time = 5000) {

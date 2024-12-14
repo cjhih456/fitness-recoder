@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import FitnessListEditor from '../../../components/Fitness/FitnessListEditor';
+import FitnessListEditor from '@components/Fitness/FitnessListEditor';
 import { useMemo, useState } from 'react';
 import { Button } from '@nextui-org/react';
-import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
-import { useGetScheduleById } from '../../../service/GqlStore/Schedule';
-import { useGetExerciseListByScheduleId } from '../../../service/GqlStore/Exercise';
-import { useUpdateExerciseListBySchedule } from '../../../service/GqlStore/mixed/useUpdateExerciseListBySchedule';
-import usePageTracker from '../../../hooks/usePageTracker';
+import { HeaderHandler } from '@provider/HeaderProvider';
+import { useGetScheduleById } from '@service/GqlStore/Schedule';
+import { useGetExerciseListByScheduleId } from '@service/GqlStore/Exercise';
+import { useUpdateExerciseListBySchedule } from '@service/GqlStore/mixed/useUpdateExerciseListBySchedule';
+import usePageTracker from '@hooks/usePageTracker';
 
 export default function DisplaySchedule() {
   HeaderHandler(['Schedule'])

@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
-import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '../../service/GqlStore/Schedule'
-import { useAlert } from '../../components/provider/Alert/useAlert'
+import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@service/GqlStore/Schedule'
+import { useAlert } from '@provider/AlertProvider'
 import { useNavigate } from 'react-router-dom'
-import { ScheduleType } from '../../components/utils'
+import { ScheduleType } from '@components/utils'
 
 export default function useScheduleActions() {
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import { Button, Input, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { ReactNode, useEffect, useState } from 'react'
-import CModal from '../CustomComponent/CModal'
+import CModal from '@components/CustomComponent/CModal'
 
 interface IonChange {
   (_v: false): void | Promise<void>

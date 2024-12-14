@@ -1,6 +1,6 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useEffect, useMemo, useState } from 'react'
-import CModal from '../../CustomComponent/CModal'
+import CModal from '@components/CustomComponent/CModal'
 import { useTranslation } from 'react-i18next'
 import AlertContext, { AlertContextType, AlertData, AlertProviderProps } from './AlertContext'
 

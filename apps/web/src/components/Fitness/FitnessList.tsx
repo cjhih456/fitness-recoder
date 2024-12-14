@@ -1,8 +1,8 @@
 import FitnessItem from './FitnessItem';
 import { useMemo } from 'react';
-import { useFitnessDataModalProvider } from '../provider/FitnessDataModal/useFitnessDataModalProvider';
+import { useFitnessDataModalProvider } from '@provider/FitnessDataModalProvider';
 import { Exercise } from 'fitness-struct';
-import useSpinner from '../../hooks/useSpinner';
+import useSpinner from '@hooks/useSpinner';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {

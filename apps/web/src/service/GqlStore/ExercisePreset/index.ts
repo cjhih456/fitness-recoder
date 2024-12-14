@@ -5,7 +5,7 @@ import { GetExercisePresetResponse, GetExercisePresetVariable, useGetExercisePre
 import { useGetExercisePresetWithListList } from './GetExercisePresetWithListList';
 import { useSaveScheduleAsExercisePreset } from './SaveScheduleAsExercisePreset';
 import { gql, StoreObject } from '@apollo/client';
-import useFixedFragment from '../useFixedFragment';
+import useFixedFragment from '@hooks/apollo/useFixedFragment';
 import { GetExercisePresetWithListByIdResponse, GetExercisePresetWithListByIdVariable, useLazyGetExercisePresetWithListById } from './GetExercisePresetWithListById';
 
 export type ExercisePresetStoreType = ExercisePreset.Preset & StoreObject
