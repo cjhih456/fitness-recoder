@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf dist .turbo"
+    "clean": "rm -rf dist .turbo",
+    "lint": "eslint . --report-unused-disable-directives"
   },
   "dependencies": {},
   "tsup": {
@@ -29,6 +30,8 @@
     ]
   },
   "devDependencies": {
+    "@fitness/eslint-config": "*",
+    "eslint": "^9.17.0",
     "tsup": "^8.3.5"
   }
 }

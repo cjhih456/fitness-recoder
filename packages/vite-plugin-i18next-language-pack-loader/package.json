@@ -21,7 +21,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf dist .turbo"
+    "clean": "rm -rf dist .turbo",
+    "lint": "eslint . --report-unused-disable-directives"
   },
   "dependencies": {
     "i18next": "^23.16.6",
@@ -29,8 +30,10 @@
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
+    "@fitness/eslint-config": "*",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.9.0",
+    "eslint": "^9.17.0",
     "tsup": "^8.3.5",
     "typescript": "^5.2.2",
     "vite": "^5.4.11"
