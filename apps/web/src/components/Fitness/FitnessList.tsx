@@ -1,7 +1,7 @@
 import type { Exercise } from 'fitness-struct';
 import { useMemo } from 'react';
+import useFitnessDataModalProvider from '@hooks/provider/FitnessDataModal/useFitnessDataModalProvider';
 import useSpinner from '@hooks/useSpinner';
-import { useFitnessDataModalProvider } from '@provider/FitnessDataModalProvider';
 import FitnessItem from './FitnessItem';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
@@ -43,7 +43,7 @@ export default function FitnessList({
   const [spinner] = useSpinner(list.length, Boolean(isLoadingVisible), onLoadMore)
 
   return <div className="flex flex-col gap-y-4">
-    {list.map(fitness => 
+    {list.map(fitness =>
       <FitnessItem
         key={fitness.id}
         fitnessId={fitness.id}

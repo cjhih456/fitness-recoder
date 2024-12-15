@@ -1,8 +1,8 @@
-import type { HeaderContentType } from './HeaderContext'
+import type { HeaderContentType } from '@provider/HeaderProvider/HeaderContext'
 import { useEffect, useMemo, useState, isValidElement } from 'react'
-import { useHeaderContext } from './useHeaderContext'
+import useHeaderContext from './useHeaderContext'
 
-const useHeaderHandler = (header: HeaderContentType) => {
+export default function useHeaderHandler(header: HeaderContentType) {
   const headerProvider = useHeaderContext()
   const [lazyHeader, setLazyHeader] = useState<HeaderContentType>([])
   useEffect(() => {
@@ -14,7 +14,8 @@ const useHeaderHandler = (header: HeaderContentType) => {
   const headerTemp = useMemo(() => {
     return lazyHeader?.map((v, i) => {
       if (isValidElement(v)) return v
-      return <span className="font-bold text-lg" key={`title-${i}`}>{v}</span>
+      return <span className="font-bold text-lg" key={`title-${i}`
+      }> {v} </span>
     })
   }, [lazyHeader])
   useEffect(() => {
@@ -24,4 +25,3 @@ const useHeaderHandler = (header: HeaderContentType) => {
     }
   }, [headerProvider, headerTemp])
 }
-export default useHeaderHandler

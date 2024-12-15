@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Calender from '@components/Calander/Calander'
 import ScheduleList from '@components/Schedule/ScheduleList'
-import { useBottomNavi } from '@provider/BottomNaviProvider'
-import { useHeaderHandler } from '@provider/HeaderProvider'
+import useBottomNavi from '@hooks/provider/BottomNavi/useBottomNavi';
+import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
 import { useGetScheduleStatusByDate } from '@service/GqlStore/Schedule'
 
 function CalanderPage() {

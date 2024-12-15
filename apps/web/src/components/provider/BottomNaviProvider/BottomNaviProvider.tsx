@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import { useDebounceCallback } from 'usehooks-ts'
 import MenuButton from '@components/CustomComponent/MenuButton'
-import { useRoot } from '@provider/RootDomProvider'
+import useRootDom from '@hooks/provider/RootDom/useRootDom';
 import BottomNaviContext from './BottomNaviContext'
 
 export interface BottomNaviProviderProps {
@@ -16,7 +16,7 @@ export interface BottomNaviProviderProps {
 export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const { t } = useTranslation('bottom')
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
-  const { getRoot } = useRoot()
+  const { getRoot } = useRootDom()
 
   const changeBottomNaviVisibleFunc = useCallback((v: boolean) => setBottomNaviVisible(v), [])
   const changeBottomNaviVisible = useDebounceCallback(changeBottomNaviVisibleFunc, 100)

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useHeaderContext } from '@provider/HeaderProvider'
+import useHeaderContext from '@hooks/provider/Header/useHeaderContext'
 
 export default function HeaderContent() {
   const headerContext = useHeaderContext()

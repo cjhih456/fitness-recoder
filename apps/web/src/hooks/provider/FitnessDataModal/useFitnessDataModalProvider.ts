@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { ModalContext } from './FitnessDataModalContext'
+import { ModalContext } from '@provider/FitnessDataModalProvider/FitnessDataModalContext'
 
-export const useFitnessDataModalProvider = () => {
+export default function useFitnessDataModalProvider() {
   const context = useContext(ModalContext)
   if (!context) {
     throw new Error('Wrong position')

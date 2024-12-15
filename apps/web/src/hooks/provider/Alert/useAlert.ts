@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import AlertContext from './AlertContext'
+import AlertContext from '@provider/AlertProvider/AlertContext'
 
-export const useAlert = () => {
+export default function useAlert() {
   const context = useContext(AlertContext)
   if (!context) {
     throw new Error('Wrong position')

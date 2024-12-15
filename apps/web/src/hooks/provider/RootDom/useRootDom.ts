@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import RootProviderContext from './RootProviderContext'
+import RootProviderContext from '@provider/RootDomProvider/RootProviderContext'
 
-export const useRoot = () => {
+export default function useRootDom() {
   const context = useContext(RootProviderContext)
   if (!context) {
     throw new Error('Wrong position')

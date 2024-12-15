@@ -5,7 +5,7 @@ import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import HeaderContent from '@components/Header/HeaderContent'
 import HeaderMenu from '@components/Header/HeaderMenu'
-import { useRoot } from '@provider/RootDomProvider'
+import useRootDom from '@hooks/provider/RootDom/useRootDom';
 
 interface DefaultLayoutProps {
   children: ReactNode
@@ -34,7 +34,7 @@ export default function DefaultLayout({
     name: 'Preset',
     route: '/preset'
   }])
-  const { getRoot } = useRoot()
+  const { getRoot } = useRootDom()
   const location = useLocation()
   const fallback = useCallback(() => {
     navigate(-1)

@@ -1,8 +1,8 @@
-import type { MenuType } from './HeaderContext'
+import type { MenuType } from '@provider/HeaderProvider'
 import { useEffect, useState } from 'react'
-import { useHeaderContext } from './useHeaderContext'
+import useHeaderContext from './useHeaderContext'
 
-const useHeaderMenuHandler = (menu: MenuType[]) => {
+export default function useHeaderMenuHandler(menu: MenuType[]) {
   const { setHeaderMenu } = useHeaderContext()
   const [lazyHeaderMenu, setLazyHeaderMenu] = useState<MenuType[]>([])
   useEffect(() => {
@@ -18,4 +18,3 @@ const useHeaderMenuHandler = (menu: MenuType[]) => {
     }
   }, [lazyHeaderMenu, setHeaderMenu])
 }
-export default useHeaderMenuHandler

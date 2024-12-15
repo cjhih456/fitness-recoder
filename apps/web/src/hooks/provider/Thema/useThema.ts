@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import ThemaProviderContext from './ThemaProviderContext'
+import ThemaProviderContext from '@provider/ThemaProvider/ThemaProviderContext'
 
-export const useThema = () => {
+export default function useThema() {
   const context = useContext(ThemaProviderContext)
   if (!context) {
     throw new Error('Wrong position')

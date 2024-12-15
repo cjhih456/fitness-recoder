@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAlert } from '@provider/AlertProvider'
+import useAlert from '@hooks/provider/Alert/useAlert'
 import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@service/GqlStore/Schedule'
 import { ScheduleType } from '@utils'
 

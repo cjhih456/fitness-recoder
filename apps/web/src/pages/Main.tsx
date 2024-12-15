@@ -3,10 +3,10 @@ import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import ScheduleDisplay from '@components/Schedule/ScheduleDisplay'
+import useBottomNavi from '@hooks/provider/BottomNavi/useBottomNavi'
+import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
-import { useBottomNavi } from '@provider/BottomNaviProvider'
-import { useHeaderHandler } from '@provider/HeaderProvider'
 import { useGetScheduleByDate } from '@service/GqlStore/Schedule'
 
 export default function Main() {
