@@ -1,12 +1,12 @@
-import { Plugin, normalizePath } from 'vite';
-import { ApolloServer, ContextThunk, HeaderMap } from '@apollo/server';
-import express from 'express'
+import type { Plugin } from 'vite';
 import fs from 'fs'
 import { resolve } from 'path'
-import Http2 from 'http2-express-bridge'
-import { mergeSchemas, makeExecutableSchema } from '@graphql-tools/schema'
+import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import { GraphQLResponse, GraphQLResponseBody } from '@apollo/server/dist/esm/externalTypes/graphql';
+import { mergeSchemas, makeExecutableSchema } from '@graphql-tools/schema'
+import express from 'express'
+import Http2 from 'http2-express-bridge'
+import { normalizePath } from 'vite';
 
 export interface options {
   path: string,
@@ -37,16 +37,15 @@ const autogenType = `{
   }
 }`
 
-
 export default async function GraphqlServer(options: options): Promise<Plugin[]> {
 
-  const schemas = await (Promise.all(options.modulePath.map(async (path) => {
+  const schemas = await Promise.all(options.modulePath.map(async (path) => {
     const gqlFile = String(fs.readFileSync(resolve(path)))
     const schema = makeExecutableSchema({
       typeDefs: gqlFile,
     })
     return schema
-  })))
+  }))
 
   const apolloServer = new ApolloServer({
     schema: mergeSchemas({

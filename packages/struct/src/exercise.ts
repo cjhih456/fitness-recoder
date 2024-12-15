@@ -1,25 +1,25 @@
 export declare namespace Exercise {
-  type IMuscle = "abdominals" |
-    "hamstrings" |
-    "calves" |
-    "shoulders" |
-    "adductors" |
-    "glutes" |
-    "quadriceps" |
-    "biceps" |
-    "forearms" |
-    "abductors" |
-    "triceps" |
-    "chest" |
-    "lower_back" |
-    "traps" |
-    "middle_back" |
-    "lats" |
-    "neck"
+  type IMuscle = 'abdominals' |
+    'hamstrings' |
+    'calves' |
+    'shoulders' |
+    'adductors' |
+    'glutes' |
+    'quadriceps' |
+    'biceps' |
+    'forearms' |
+    'abductors' |
+    'triceps' |
+    'chest' |
+    'lower_back' |
+    'traps' |
+    'middle_back' |
+    'lats' |
+    'neck'
 
-  type IForce = "pull" |
-    "push" |
-    "static"
+  type IForce = 'pull' |
+    'push' |
+    'static'
 
   type ILevel = 'beginner' |
     'intermediate' |
@@ -96,4 +96,3 @@ export declare namespace Exercise {
     weightUnit: string
   }
 }
-

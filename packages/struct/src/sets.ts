@@ -1,4 +1,4 @@
-import { Measure } from "./measure"
+import type { Measure } from './measure';
 
 export declare namespace Sets {
   interface CreateType {

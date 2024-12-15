@@ -21,4 +21,3 @@ export declare namespace Measure {
     distanceUnit?: DistanceUnit;
   }
 }
-
