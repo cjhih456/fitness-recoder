@@ -60,9 +60,6 @@ export default defineConfig(({ mode, isPreview }) => {
       makeManifest(),
       react()
     ],
-    define: {
-      'process.env.NODE_ENV': '"production"'
-    },
     build: {
       sourcemap: 'hidden',
       rollupOptions: {

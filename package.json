@@ -9,7 +9,6 @@
     "preview": "dotenvx run --env-file=.env.production turbo preview",
     "build": "dotenvx run --env-file=.env.production turbo build",
     "dev": "dotenvx run --env-file=.env.development turbo dev",
-    "build-dev-graph": "dotenvx run --env-file=.env.development yarn workspace @fitness/graphql-worker build",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
