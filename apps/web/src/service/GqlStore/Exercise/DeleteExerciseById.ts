@@ -1,12 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
 
-type DeleteExerciseByIdResponse = {
-  deleteExerciseById: string
-}
-type DeleteExerciseByIdVariable = {
-  id: number
-}
 const DeleteExerciseByIdGql = gql`
 mutation DeleteExerciseById($id: Int) {
   deleteExerciseById(id: $id)

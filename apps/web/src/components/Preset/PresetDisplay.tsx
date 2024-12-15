@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
 import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
+import useExercisePresetWithListFragment from '@hooks/apollo/Fragments/useExercisePresetWithListFragment';
 import usePresetMenu from '@hooks/usePresetMenu';
-import { useExercisePresetWithListFragment } from '@service/GqlStore/ExercisePreset';
 
 interface PresetDisplayProps {
   presetId: number

@@ -1,4 +1,3 @@
-import type { SetsStoreType } from '@service/GqlStore/Set'
 import { Button, Checkbox, Input } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'

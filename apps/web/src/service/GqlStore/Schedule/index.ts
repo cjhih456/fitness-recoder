@@ -1,5 +1,3 @@
-import type { StoreObject } from '@apollo/client';
-import type { Schedule } from 'fitness-struct'
 import { gql } from '@apollo/client'
 import { ScheduleType } from '@utils'
 import DateUtil from '@utils/DateUtil'
@@ -31,7 +29,6 @@ fragment ScheduleWithTime on ScheduleData{
 }
 `
 
-export type ScheduleStoreType = Schedule.Schedule & StoreObject
 export {
   useCreateSchedule,
   useDeleteSchedule,

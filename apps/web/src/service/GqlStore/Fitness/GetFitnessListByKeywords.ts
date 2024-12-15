@@ -1,17 +1,8 @@
-import type { FitnessStoreType } from '.';
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Exercise } from 'fitness-struct'
 import { gql, useQuery } from '@apollo/client'
 import { FitnessMockData } from '.'
 
-export type GetFitnessListByKeywordsResponse = { getFitnessListByKeywords: FitnessStoreType[] }
-type GetFitnessListByKeywordsVariable = {
-  name: string,
-  category: Exercise.ICategory[],
-  muscle: Exercise.IMuscle[],
-  limit: number,
-  offset: number
-}
 const GetFitnessListByKeywordsGql = gql`
 query getFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [IMuscle], $limit: Int, $offset: Int) {
   getFitnessListByKeywords(name: $name, category: $category, muscle: $muscle, limit: $limit, offset: $offset) {

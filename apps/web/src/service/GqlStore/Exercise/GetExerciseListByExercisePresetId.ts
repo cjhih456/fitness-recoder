@@ -1,13 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import type { Exercise } from 'fitness-struct'
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 
-type GetExerciseByExercisePresetIdResponse = {
-  getExerciseListByExercisePresetId: Exercise.Data[]
-}
-type GetExerciseByExercisePresetIdVariable = {
-  exercisePresetId: number
-}
 const GetExerciseListByExercisePresetIdGql = gql`
 query GetExerciseByExercisePresetId($exercisePresetId: Int) {
   getExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId) {

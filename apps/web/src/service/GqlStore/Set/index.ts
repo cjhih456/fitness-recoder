@@ -1,12 +1,8 @@
-import type { StoreObject } from '@apollo/client';
-import type { Sets } from 'fitness-struct'
 import { gql } from '@apollo/client'
 import { useCreateSet } from './CreateSet'
 import { useDeleteSet } from './DeleteSet'
 import { useGetSetListByExerciseId, useLazyGetSetListByExerciseId } from './GetSetListByExerciseId'
 import { useUpdateSet } from './UpdateSet'
-
-export type SetsStoreType = Sets.Sets & StoreObject
 
 export const SetsFragment = gql`
 fragment SetsFragment on Sets {

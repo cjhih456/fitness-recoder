@@ -1,7 +1,7 @@
 import type { Exercise } from 'fitness-struct'
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
-import { useFitnessSimpleFragment } from '@service/GqlStore/Fitness'
+import useFitnessSimpleFragment from '@hooks/apollo/Fragments/useFitnessSimpleFragment'
 import { useGetSetListByExerciseId } from '@service/GqlStore/Set'
 
 export interface SimpleFitnessItemProps {

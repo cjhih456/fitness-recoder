@@ -1,10 +1,7 @@
-import type { FitnessStoreType } from '.';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useBackgroundQuery, useLazyQuery, useQuery } from '@apollo/client'
 import { FitnessMockData } from '.'
 
-type GetFitnessSimpleListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }
-type GetFitnessSimpleListByIdsVariable = { ids: number[] }
 const getFitnessSimpleByIdsGql = gql`
 query GetFitnessSimpleListByIds($ids: [Int!]) {
   getFitnessListByIds(ids: $ids) {

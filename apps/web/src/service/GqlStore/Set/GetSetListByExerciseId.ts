@@ -1,10 +1,7 @@
-import type { SetsStoreType } from '.';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { SetMockData } from '.'
 
-type GetSetListByExerciseIdResponse = { getSetListByExerciseId: SetsStoreType[] }
-type GetSetListByExerciseIdVariable = { id: number }
 const getSetListByExerciseIdGql = gql`
 query GetSetListByExerciseId($id: Int!) {
   getSetListByExerciseId(id: $id) {

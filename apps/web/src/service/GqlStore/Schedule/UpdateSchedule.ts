@@ -1,11 +1,7 @@
-import type { ScheduleStoreType } from '.';
-import type { GetScheduleByDateResponse } from './GetScheduleByDate';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
 import { ScheduleMockData } from '.'
 
-type UpdateScheduleResponse = { updateSchedule: ScheduleStoreType }
-type UpdateScheduleVariable = { updateSchedule: ScheduleStoreType }
 const UpdateScheduleGql = gql`
 mutation Mutation($updateSchedule: UpdateScheduleDataInput) {
   updateSchedule(schedule:$updateSchedule) {

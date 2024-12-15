@@ -1,10 +1,7 @@
-import type { GetExercisePresetWithListListResponse } from './GetExercisePresetWithListList';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
 import { ExercisePresetMockData } from '.'
 
-type DeleteExercisePresetResponse = { deleteExercisePreset: string }
-type DeleteExercisePresetVariable = { id: number }
 const deleteExercisePresetGql = gql`
 mutation DeleteExercisePreset($id: Int!) {
   deleteExercisePreset(id: $id)

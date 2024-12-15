@@ -8,6 +8,40 @@ export default [
     ignores: ["**/dist", "**/.eslintrc.cjs"],
   },
   js.configs.recommended,
+
+  // ESlint import list sort
+  importPlugin.flatConfigs.recommended,
+  {
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+    },
+    rules: {
+      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "type",
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "unknown",
+          ],
+          alphabetize: {
+            order: "asc",
+          },
+        },
+      ],
+    },
+  },
+
   {
     languageOptions: {
       parser: tseslint.parser,
@@ -21,6 +55,14 @@ export default [
     files: ["**/*.ts", "**/*.tsx"],
     ignores: ["**/*.d.ts"],
     rules: {
+      "no-undef": "off",
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": [
+        "error",
+        {
+          ignoreTypeReferences: true,
+        },
+      ],
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/consistent-type-imports": [
@@ -77,39 +119,7 @@ export default [
           SwitchCase: 1,
         },
       ],
-      // "no-undef": "off",
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-    },
-  },
-  importPlugin.flatConfigs.recommended,
-  {
-    settings: {
-      "import/resolver": {
-        typescript: {
-          alwaysTryTypes: true,
-        },
-      },
-    },
-    rules: {
-      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-      "import/order": [
-        "error",
-        {
-          groups: [
-            "type",
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-            "unknown",
-          ],
-          alphabetize: {
-            order: "asc",
-          },
-        },
-      ],
     },
   },
 ];

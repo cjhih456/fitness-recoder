@@ -3,12 +3,6 @@ import type { Exercise } from 'fitness-struct'
 import { gql, useMutation } from '@apollo/client'
 import { ExerciseMockData } from '.'
 
-type CreateExerciseByExercisePresetResponse = {
-  createExerciseByExercisePreset: Exercise.Data
-}
-type CreateExerciseByExercisePresetVariable = {
-  exercise: { exercisePreset: number, exerciseId: number[] }
-}
 const CreateExerciseByExercisePresetGql = gql`
 mutation CreateExerciseByExercisePreset($exercise: CreateExerciseByExercisePresetInput!) {
   createExerciseByExercisePreset(exercise: $exercise) {

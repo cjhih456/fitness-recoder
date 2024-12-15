@@ -1,10 +1,7 @@
-import type { ScheduleStoreType } from '.';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import { ScheduleMockData } from '.'
 
-export type GetScheduleByDateResponse = { getScheduleByDate: ScheduleStoreType[] }
-type GetScheduleByDateVariable = { year: number, month: number, date: number }
 const getScheduleByDateGql = gql`
 query GetScheduleByDate($year: Int!, $month: Int!, $date: Int!) {
   getScheduleByDate(year: $year, month: $month, date: $date) {

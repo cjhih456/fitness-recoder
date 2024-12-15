@@ -1,15 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import type { Exercise } from 'fitness-struct'
 import { gql, useMutation } from '@apollo/client'
 
-type UpdateExerciseListByExercisePresetIdResponse = {
-  updateExerciseListByExercisePresetId: Exercise.Data[]
-}
-type UpdateExerciseListByExercisePresetIdVariable = {
-  exercisePresetId: number,
-  newExercise: number[],
-  deleteExerciseId: number[]
-}
 const UpdateExerciseListByExercisePresetIdGql = gql`
 mutation UpdateExerciseListByExercisePresetId($exercisePresetId: Int, $newExercise: [Int!], $deleteExerciseId: [Int!]) {
   updateExerciseListByExercisePresetId(exercisePresetId: $exercisePresetId, newExercise: $newExercise, deleteExerciseId: $deleteExerciseId) {

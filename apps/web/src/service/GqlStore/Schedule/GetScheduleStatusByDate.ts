@@ -2,8 +2,6 @@ import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useQuery } from '@apollo/client'
 import { ScheduleMockData } from '.'
 
-export type GetScheduleStatusByDateResponse = { getScheduleStatusByDate: string[] }
-type GetScheduleStatusByDateVariable = { year: number, month: number }
 const getScheduleStatusByDateGql = gql`
 query GetScheduleStatusByDate($year: Int!, $month: Int!) {
   getScheduleStatusByDate(year: $year, month: $month)

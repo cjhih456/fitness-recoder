@@ -1,10 +1,7 @@
-import type { SetsStoreType } from '.';
 import type { MockedResponse } from '@apollo/client/testing';
 import { gql, useMutation } from '@apollo/client'
 import { SetMockData } from '.'
 
-type updateSetResponse = { updateSet: SetsStoreType }
-type updateSetVariable = { sets: SetsStoreType }
 const updateSetGql = gql`
 mutation updateSet($sets: UpdateSetsInput!) {
   updateSet(sets: $sets) {
@@ -12,9 +9,9 @@ mutation updateSet($sets: UpdateSetsInput!) {
   }
 }`
 export function useUpdateSet() {
-  return useMutation<updateSetResponse, updateSetVariable>(updateSetGql)
+  return useMutation<UpdateSetResponse, UpdateSetVariable>(updateSetGql)
 }
-export const UpdateSetMock: MockedResponse<updateSetResponse, updateSetVariable> = {
+export const UpdateSetMock: MockedResponse<UpdateSetResponse, UpdateSetVariable> = {
   request: {
     query: updateSetGql
   },
