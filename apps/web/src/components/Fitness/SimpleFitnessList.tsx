@@ -7,8 +7,8 @@ export interface SimpleFitnessListProps {
 
 export default function SimpleFitnessList({ exerciseDataList }: SimpleFitnessListProps) {
   return <div role="grid" className="flex flex-col gap-y-2">
-    {exerciseDataList.map(exerciseData => <>
-      <SimpleFitnessItem key={exerciseData.id} exerciseData={exerciseData} />
-    </>)}
+    {exerciseDataList.map(exerciseData =>
+      <SimpleFitnessItem key={`fitness-${exerciseData.id}`} exerciseData={exerciseData} />
+    )}
   </div>
 }
