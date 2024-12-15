@@ -8,8 +8,7 @@ query getFitnessListByKeywords($name: String, $category: [ICategory], $muscle: [
   getFitnessListByKeywords(name: $name, category: $category, muscle: $muscle, limit: $limit, offset: $offset) {
     ...FitnessSimpleFragment
   }
-}
-`
+}`
 
 export function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
   return useQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywordsGql, {

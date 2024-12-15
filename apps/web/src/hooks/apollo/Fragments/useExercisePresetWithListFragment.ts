@@ -1,16 +1,6 @@
-import { gql } from '@apollo/client';
 import useFixedFragment from '@hooks/apollo/useFixedFragment';
 import { useLazyGetExercisePresetWithListById } from '@service/GqlStore/ExercisePreset/GetExercisePresetWithListById';
-
-export const ExercisePresetWithListFragment = gql`
-fragment ExercisePresetWithListFragment on ExercisePresetWithList {
-  id
-  name
-  ...ExercisePresetFragment
-  exerciseList {
-    ...ExerciseFragment
-  }
-}`
+import ExercisePresetWithListFragment from '../../../graphQuery/Fragment/ExercisePresetWithListFragment';
 
 export default function useExercisePresetWithListFragment(id: number) {
   return useFixedFragment<

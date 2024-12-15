@@ -20,7 +20,7 @@ declare type GetFitnessListByKeywordsVariable = {
   offset: number
 }
 
-declare type GetFitnessSimpleByIdResponse = { getFitnessSimpleById: FitnessStoreType }
+declare type GetFitnessSimpleByIdResponse = { getFitnessById: FitnessStoreType }
 declare type GetFitnessSimpleByIdVariable = { id: number } & OperationVariables
 
 declare type GetFitnessSimpleListByIdsResponse = { getFitnessListByIds: FitnessStoreType[] }

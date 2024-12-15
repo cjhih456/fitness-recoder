@@ -5,8 +5,7 @@ import { FitnessMockData } from '.'
 export const getFitnessByIdsGql = gql`
 query GetFitnessListByIds($ids: [Int!]) {
   getFitnessListByIds(ids: $ids) {
-    ...FitnessSimpleFragment
-    ...FitnessDetailFragment
+    ...FitnessFragment
   }
 }`
 

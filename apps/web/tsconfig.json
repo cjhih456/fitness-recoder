@@ -24,6 +24,7 @@
     "verbatimModuleSyntax": true,
 
     "paths": {
+      "@graphQuery/*": ["./src/graphQuery/*"],
       "@utils": ["./src/components/utils"],
       "@utils/*": ["./src/components/utils/*"],
       "@provider/*": ["./src/components/provider/*"],

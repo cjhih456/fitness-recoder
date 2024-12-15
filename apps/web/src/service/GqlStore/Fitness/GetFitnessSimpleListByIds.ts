@@ -7,8 +7,7 @@ query GetFitnessSimpleListByIds($ids: [Int!]) {
   getFitnessListByIds(ids: $ids) {
     ...FitnessSimpleFragment
   }
-}
-`
+}`
 
 export function useBackgroundGetFitnessSimpleListByIds(ids: number[]) {
   return useBackgroundQuery<GetFitnessSimpleListByIdsResponse, GetFitnessSimpleListByIdsVariable>(getFitnessSimpleByIdsGql, {
