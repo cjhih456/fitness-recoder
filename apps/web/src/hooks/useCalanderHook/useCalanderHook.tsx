@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from 'react'
-import DateUtil from '../../components/utils/DateUtil'
+import DateUtil from '@components/utils/DateUtil'
 
 export interface useCalanderHookProps {
   startDate?: string
   endDate?: string
 }
 
-export const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
+const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
 
   const cleanDate = useCallback((date: string) => {
     return DateUtil.numberAsDateString(DateUtil.dateStringAsNumber(date))
@@ -43,7 +43,7 @@ export const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) =>
     const dateByMonths = DateUtil.getDaysByMonth(year)
     const targetSNum = DateUtil.dateStringAsNumber(`${year}-${month}-${dateByMonths[month]}`)
     const targetENum = DateUtil.dateStringAsNumber(`${year}-${month}-1`)
-    return (targetSNum < startNum || endNum < targetENum)
+    return targetSNum < startNum || endNum < targetENum
   }, [startDateObj, endDateObj])
 
   /**
@@ -83,3 +83,4 @@ export const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) =>
   }
 }
 
+export default useCalanderHook

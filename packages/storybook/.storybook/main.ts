@@ -1,7 +1,18 @@
 import type { StorybookConfig } from '@storybook/react-vite'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import { resolve } from 'path'
 
+const webRootPath = resolve(__dirname, '../../../apps/web')
+console.log('webRootPath: ', webRootPath)
 const config: StorybookConfig = {
-  stories: ["../../../apps/web/src/**/*.mdx", "../../../apps/web/src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  viteFinal: async (config) => {
+    config.plugins = [...(config.plugins || []), tsConfigPaths({
+      projects: [resolve(webRootPath, 'tsconfig.json')],
+    })]
+
+    return config
+  },
+  stories: [resolve(webRootPath, "src/**/*.mdx"), resolve(webRootPath, "src/**/*.stories.@(js|jsx|mjs|ts|tsx)")],
   addons: [
     "@storybook/addon-onboarding",
     "@storybook/addon-links",
@@ -13,6 +24,6 @@ const config: StorybookConfig = {
     "storybook-addon-remix-react-router",
   ],
   framework: '@storybook/react-vite',
-  staticDirs: ["../../../apps/web/public"],
+  staticDirs: [resolve(webRootPath, "public")],
 };
 export default config;

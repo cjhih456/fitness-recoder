@@ -18,11 +18,13 @@
   },
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf ./dist ./.turbo"
+    "clean": "rm -rf ./dist ./.turbo",
+    "lint": "eslint . --report-unused-disable-directives"
   },
   "devDependencies": {
     "@apollo/server": "^4.11.2",
     "@graphql-tools/schema": "^10.0.8",
+    "eslint": "^9.17.0",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
     "http2-express-bridge": "^1.0.7",

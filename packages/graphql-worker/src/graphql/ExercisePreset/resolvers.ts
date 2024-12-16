@@ -1,7 +1,7 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import { IResolvers } from '@graphql-tools/utils';
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { IResolvers } from '@graphql-tools/utils';
+import type { ExercisePreset, Schedule } from 'fitness-struct';
 import { cloneExerciseList, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
-import { ExercisePreset, Schedule } from 'fitness-struct';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
@@ -119,7 +119,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       return `delete - exercisePreset - ${id}`
     },
-    async saveScheduleAsExercisePreset(_source, { scheduleId, name }, context) {
+    async copyExercisePresetFromSchedule(_source, { scheduleId, name }, context) {
       const schedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'select',

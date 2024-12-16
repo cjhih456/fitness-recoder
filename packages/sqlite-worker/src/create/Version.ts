@@ -1,17 +1,5 @@
 import type Sqlite3 from '../Sqlite3'
 
-export default function create(db: Sqlite3) {
-  // TODO: add migration steps by Process Version
-
-  db.exec(`CREATE TABLE IF NOT EXISTS version (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      version string
-    )`)
-  if (!getVersion(db)) {
-    updateVersion(db, '0.1.0')
-  }
-}
-
 /**
  * Take version of database from Sqlite DB
  * @param db sqlite object
@@ -29,4 +17,16 @@ export function getVersion(db: Sqlite3): Versions | undefined {
 export function updateVersion(db: Sqlite3, v: string) {
   // TODO: add migration steps by Process Version
   db.exec('insert into version (version) values (?)', [v])
+}
+
+export default function create(db: Sqlite3) {
+  // TODO: add migration steps by Process Version
+
+  db.exec(`CREATE TABLE IF NOT EXISTS version (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      version string
+    )`)
+  if (!getVersion(db)) {
+    updateVersion(db, '0.1.0')
+  }
 }

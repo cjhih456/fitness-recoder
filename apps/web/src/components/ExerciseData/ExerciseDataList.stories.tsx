@@ -1,6 +1,8 @@
+import type { ExerciseDataListProps } from './ExerciseDataList';
 import type { Meta, StoryObj } from '@storybook/react';
-import ExerciseDataList, { ExerciseDataListProps } from './ExerciseDataList';
-import { Schedule } from 'fitness-struct';
+import type { Schedule } from 'fitness-struct';
+import ExerciseDataList from './ExerciseDataList';
+
 const meta = {
   title: 'ExerciseData/ExerciseDataList',
   tags: ['autodocs'],

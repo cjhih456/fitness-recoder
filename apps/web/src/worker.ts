@@ -1,7 +1,7 @@
-import { SqliteMessage } from 'sqlite-message-types'
-import { baseURL } from './components/utils'
+import type { SqliteMessage } from 'sqlite-message-types'
 import graphqlWorkerUrl from '@fitness/graphql-worker?worker&url'
 import sqliteWorkerUrl from '@fitness/sqlite-worker?worker&url'
+import { baseURL } from '@utils'
 export default () => {
   return new Promise<boolean>((resolve) => {
     if (window) {

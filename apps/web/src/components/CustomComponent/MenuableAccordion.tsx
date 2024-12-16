@@ -1,8 +1,9 @@
+import type { MenuType } from '@provider/HeaderProvider';
+import type { ReactNode } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
-import { MenuType } from '../provider/Header/HeaderContext';
 
 interface MenuableAccordionProps {
   children: (_toggleAction?: () => void) => {

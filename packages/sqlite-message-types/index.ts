@@ -22,4 +22,3 @@ export declare namespace SqliteMessage {
     bindArgs: any[]
   }
 }
-

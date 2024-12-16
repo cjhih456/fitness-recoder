@@ -1,5 +1,5 @@
-import Sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 import type { BindingSpec, Database, OpfsDatabase } from '@sqlite.org/sqlite-wasm';
+import Sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 
 // Singleton instance
 let sqlite: Sqlite3 | undefined = undefined
@@ -9,12 +9,14 @@ const error = console.error;
 
 class Sqlite3 {
   private db: undefined | Database | OpfsDatabase
+
   public ready: boolean = false
 
   constructor() {
     if (sqlite) return sqlite
     sqlite = this
   }
+
   async init() {
     if (this.db) return false
     try {
@@ -55,6 +57,7 @@ class Sqlite3 {
     if (!this.db) return
     return this.db.selectValue(query, bind)
   }
+
   selectValues(
     query: string,
     bind?: BindingSpec

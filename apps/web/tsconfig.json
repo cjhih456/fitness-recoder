@@ -20,7 +20,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+
+    "paths": {
+      "@graphQuery/*": ["./src/graphQuery/*"],
+      "@utils": ["./src/components/utils"],
+      "@utils/*": ["./src/components/utils/*"],
+      "@provider/*": ["./src/components/provider/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@service/*": ["./src/service/*"],
+    }
   },
   "include": ["vite.config.ts", "vitePlugin", "./types/**/*", "./src/**/*"],
 }

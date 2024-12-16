@@ -1,7 +1,4 @@
-
-
 import { assert, describe, it } from 'vitest'
-
 import DateUtil from './DateUtil'
 
 describe('DateUtil test', () => {

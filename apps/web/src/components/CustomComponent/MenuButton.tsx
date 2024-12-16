@@ -1,5 +1,5 @@
+import type { IconType } from 'react-icons';
 import { Button } from '@nextui-org/react';
-import { IconType } from 'react-icons';
 import { useNavigate } from 'react-router-dom';
 
 interface MenuButtonProps { name: string, Icon: IconType, path: string }

@@ -1,5 +1,6 @@
+import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
-import ScheduleList, { ScheduleListProps } from './ScheduleList'
+import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',
   tags: ['autodocs'],

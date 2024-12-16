@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react';
+import { useMemo, useState } from 'react'
 
 export default function useIdToggle(): [number[], Dispatch<SetStateAction<Set<number>>>, (_id: number) => void] {
   // Selected

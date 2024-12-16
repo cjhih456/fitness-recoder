@@ -1,12 +1,12 @@
-import { createHandler } from 'graphql-http/lib/use/fetch'
+import type { SqliteMessage } from 'sqlite-message-types'
 import { mergeSchemas } from '@graphql-tools/schema'
-import SetsInit from './graphql/Sets'
+import { createHandler } from 'graphql-http/lib/use/fetch'
 import ExerciseInit from './graphql/Exercise'
-import ScheduleInit from './graphql/Schedule'
 import ExercisePresetInit from './graphql/ExercisePreset'
 import FitnessInit from './graphql/Fitness'
+import ScheduleInit from './graphql/Schedule'
+import SetsInit from './graphql/Sets'
 import MessageTransactionBus from './transaction/MessageTransactionBus'
-import { SqliteMessage } from 'sqlite-message-types'
 
 declare const self: ServiceWorkerGlobalScope
 
@@ -23,7 +23,6 @@ let dbTransitionBus: MessageTransactionBus | undefined = undefined
 const parent: {
   handlers?: (_r: Request) => Promise<Response>
 } = { handlers: undefined }
-
 
 self.oninstall = () => {
   self.skipWaiting()

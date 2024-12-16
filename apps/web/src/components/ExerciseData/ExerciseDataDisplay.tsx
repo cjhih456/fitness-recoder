@@ -1,8 +1,8 @@
+import type { Exercise } from 'fitness-struct';
 import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
+import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import SetRow from './SetRow';
-import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '../../service/GqlStore/Set';
-import { Exercise } from 'fitness-struct';
 
 export interface ExerciseDataDisplayProps {
   exerciseData: Exercise.Data
@@ -41,7 +41,7 @@ export default function ExerciseDataDisplay({
   }
 
   function checkAllSetDone(id: number, isDone: boolean) {
-    if (isDone && (!setData.filter(v => !v.isDone).filter(v => v.id !== id).length)) {
+    if (isDone && !setData.filter(v => !v.isDone).filter(v => v.id !== id).length) {
       hasDoneLastSet && hasDoneLastSet()
     }
   }

@@ -1,9 +1,8 @@
-import { Plugin } from 'vite';
-import { resolve } from 'path';
+import type { Plugin } from 'vite';
 import * as fs from 'fs';
-import xlsx from 'xlsx'
+import { resolve } from 'path';
 import _ from 'lodash'
-import { Resource } from 'i18next'
+import { readFile, utils, set_fs } from 'xlsx'
 
 export interface Options {
   /**
@@ -45,10 +44,10 @@ type LangObj = Record<string, Record<string, string>>
  * @returns 
  */
 function loadLangObj(fileName: string, langs: string[]) {
-  const xlsxFile = xlsx.readFile(fileName, { type: 'file' })
+  const xlsxFile = readFile(fileName, { type: 'file' })
   const sheet = xlsxFile.Sheets[xlsxFile.SheetNames[0]]
   const langObj: LangObj = {}
-  for (const row of xlsx.utils.sheet_to_json<Row>(sheet)) {
+  for (const row of utils.sheet_to_json<Row>(sheet)) {
     langs.forEach(l => {
       _.set(langObj, [l, row.namespace, row.code.split('.')].flat(), row[l])
     })
@@ -82,14 +81,14 @@ function makeDtsString(langObj: LangObj, defaultNS: string, outputPath: string) 
 
   let outStr = ''
   outStr += nsList.map(ns => `import type ${ns} from './${lang}/${ns}.json'`).join('\n') + '\n'
-  outStr += `declare module 'i18next' {\n`
-  outStr += `  interface CustomTypeOptions {\n`
+  outStr += 'declare module \'i18next\' {\n'
+  outStr += '  interface CustomTypeOptions {\n'
   outStr += `    defaultNS: '${defaultNS}';\n`
-  outStr += `    resources: {\n`
+  outStr += '    resources: {\n'
   outStr += `      ${nsList.map(ns => `${ns}: typeof ${ns};`).join('\n      ')}\n`
-  outStr += `    };\n`
-  outStr += `  }\n`
-  outStr += `}\n`
+  outStr += '    };\n'
+  outStr += '  }\n'
+  outStr += '}\n'
   if (outputPath) {
     fs.writeFileSync(resolve(outputPath, 'i18next.d.ts'), outStr)
   }
@@ -104,7 +103,7 @@ export default function LanguagePackExporter(options: Partial<Options>): Plugin 
     langs: options.langs ?? ['en']
   }
   let fileName: string | undefined = undefined
-  xlsx.set_fs(fs)
+  set_fs(fs)
   const factor: Plugin = {
     name: 'LanguagePackExporter',
     enforce: 'pre',

@@ -1,8 +1,8 @@
+import type { PluginOption } from 'vite';
+import type { WebAppManifest } from 'web-app-manifest';
 import * as fs from 'fs';
 import { resolve } from 'path';
-import { PluginOption } from 'vite'
 import pkg from '../../package.json';
-import { WebAppManifest } from 'web-app-manifest';
 
 const outDir = resolve(__dirname, '..', '..', 'public');
 

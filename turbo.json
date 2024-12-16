@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["VITE_URL_ROOT"],
   "tasks": {
     "clean": {
       "dependsOn": ["^clean"]
@@ -11,8 +12,18 @@
       "cache": false,
       "persistent": true
     },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "@fitness/web#build": {
+      "dependsOn": [
+        "^vite-plugin-i18next-language-pack-loader#build",
+        "^@fitness/vite-plugin-graphql-server#build",
+        "^@fitness/graphql-worker#build",
+        "^@fitness/sqlite-worker#build"
+      ]
+    },
     "@fitness/graphql-worker#build": {
-      "cache": false,
       "dependsOn": [
         "^@types/sqlite-message-types#build",
         "^@types/fitness-struct#build"
@@ -24,23 +35,12 @@
         "^@types/fitness-struct#build"
       ]
     },
-    "@fitness/web#build": {
-      "dependsOn": [
-        "^vite-plugin-i18next-language-pack-loader#build",
-        "^@fitness/graphql-worker#build",
-        "^@fitness/sqlite-worker#build"
-      ]
-    },
-    "build": {
-      "dependsOn": ["^build"]
-    },
     "dev": {
       "cache": false,
-      "persistent": true
-    },
-    "dev_on": {
+      "persistent": true,
       "dependsOn": [
         "^vite-plugin-i18next-language-pack-loader#build",
+        "^@fitness/vite-plugin-graphql-server#build",
         "^@fitness/graphql-worker#build",
         "^@fitness/sqlite-worker#build"
       ]

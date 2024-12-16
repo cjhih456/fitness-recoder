@@ -1,5 +1,5 @@
+import type { Config } from 'tailwindcss';
 import { nextui } from '@nextui-org/react';
-import { Config } from 'tailwindcss';
 
 export default {
   content: [
@@ -16,4 +16,3 @@ export default {
       defaultTheme: 'light'
     })],
 } as Config
-

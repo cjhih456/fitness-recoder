@@ -88,3 +88,7 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
 
 ### Reference
 - exercise list : https://github.com/wrkout/exercises.json/
+
+
+### legercy data
+@service/Fitness/FitnessData.json

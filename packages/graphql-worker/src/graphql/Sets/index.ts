@@ -1,4 +1,4 @@
-import MessageTransactionBus from '../../transaction/MessageTransactionBus'
+import type MessageTransactionBus from '../../transaction/MessageTransactionBus'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import SetsSchema from './query.gql'
 import resolvers from './resolvers'

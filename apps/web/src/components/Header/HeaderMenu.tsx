@@ -1,9 +1,9 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
-import { useRoot } from '../provider/RootProvider/useRoot';
-import { useThema } from '../provider/ThemaProvider/useThema';
-import { useHeaderContext } from '../provider/Header/useHeaderContext';
+import useHeaderContext from '@hooks/provider/Header/useHeaderContext';
+import useRootDom from '@hooks/provider/RootDom/useRootDom';
+import useThema from '@hooks/provider/Thema/useThema';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {
@@ -16,7 +16,7 @@ export default function HeaderMenu() {
       setIsOpen(false)
     }}></HeaderMenuItem>
   }), [headerContext])
-  const { getRoot } = useRoot()
+  const { getRoot } = useRootDom()
   const singleVersion = useMemo(() => <Button isIconOnly radius='full' onClick={() => {
     setThema(getThema() === 'dark' ? 'light' : 'dark')
   }}>

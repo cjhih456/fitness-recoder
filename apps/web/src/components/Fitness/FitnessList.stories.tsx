@@ -1,8 +1,9 @@
+import type { FitnessListProps } from './FitnessList';
 import type { Meta, StoryObj } from '@storybook/react';
-import FitnessList, { FitnessListProps } from './FitnessList'
-import FitnessData from '../../service/Fitness/FitnessData.json'
+import type { Exercise } from 'fitness-struct';
 import { fn } from '@storybook/test';
-import { Exercise } from 'fitness-struct';
+import FitnessData from '@service/Fitness/FitnessData.json';
+import FitnessList from './FitnessList';
 
 const meta = {
   title: 'Fitness/FitnessList',

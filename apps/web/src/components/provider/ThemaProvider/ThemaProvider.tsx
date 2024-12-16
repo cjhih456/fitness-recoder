@@ -1,5 +1,7 @@
-import { ReactNode, useState } from 'react';
-import ThemaProviderContext, { Thema } from './ThemaProviderContext';
+import type { Thema } from './ThemaProviderContext';
+import type { ReactNode } from 'react';
+import {  useState } from 'react';
+import ThemaProviderContext from './ThemaProviderContext';
 
 export interface ThemaProviderProps {
   children: ReactNode

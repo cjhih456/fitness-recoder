@@ -1,8 +1,8 @@
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
-import FitnessListSearch from './FitnessListSearch'
 import { useEffect } from 'react'
-import CModal from '../CustomComponent/CModal'
-import useIdToggle from '../../hooks/useIdToggle'
+import CModal from '@components/CustomComponent/CModal'
+import useIdToggle from '@hooks/useIdToggle'
+import FitnessListSearch from './FitnessListSearch'
 
 export interface FitnessSearchModalProps {
   selectedFitnessIds: number[]
@@ -36,23 +36,22 @@ export default function FitnessSearchModal({
     onOpenChange={(v) => onOpenChange(v)}
   >
     <ModalContent>
-      {(onCloseAction) => (
-        <>
-          <ModalHeader>Select Exercises</ModalHeader>
-          <ModalBody className="overflow-y-hidden -mx-4">
-            <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => {
-              saveSelectedExercise()
-              onCloseAction()
-            }}>Save</Button>
-            <Button onClick={() => {
-              onCloseAction()
-            }}>Cancel</Button>
-          </ModalFooter>
-        </>
-      )}
+      {(onCloseAction) => <>
+        <ModalHeader>Select Exercises</ModalHeader>
+        <ModalBody className="overflow-y-hidden -mx-4">
+          <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => {
+            saveSelectedExercise()
+            onCloseAction()
+          }}>Save</Button>
+          <Button onClick={() => {
+            onCloseAction()
+          }}>Cancel</Button>
+        </ModalFooter>
+      </>
+      }
     </ModalContent>
   </CModal>
 }

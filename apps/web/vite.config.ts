@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
 import fs from 'fs'
-import makeManifest from './vitePlugin/Manifest/MakeManifest'
-import Inspect from 'vite-plugin-inspect'
-import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 import GraphqlServer from '@fitness/vite-plugin-graphql-server'
+import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
+import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
+import Inspect from 'vite-plugin-inspect'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import makeManifest from './vitePlugin/Manifest/MakeManifest'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, isPreview }) => {
@@ -36,6 +37,7 @@ export default defineConfig(({ mode, isPreview }) => {
       exclude: ['@fitness/sqlite-worker']
     },
     plugins: [
+      tsConfigPaths(),
       Inspect(),
       GraphqlServer({
         modulePath: [
@@ -58,9 +60,6 @@ export default defineConfig(({ mode, isPreview }) => {
       makeManifest(),
       react()
     ],
-    define: {
-      'process.env.NODE_ENV': '"production"'
-    },
     build: {
       sourcemap: 'hidden',
       rollupOptions: {

@@ -1,9 +1,10 @@
-import SimpleFitnessList from '../Fitness/SimpleFitnessList'
-import { useLazyGetExerciseListByScheduleId } from '../../service/GqlStore/Exercise'
-import { ReactNode, useEffect, useMemo } from 'react'
-import { Schedule } from 'fitness-struct'
-import MenuableAccordion from '../CustomComponent/MenuableAccordion'
-import useScheduleMenu from '../../hooks/useSchedule/useScheduleMenu'
+import type { Schedule } from 'fitness-struct'
+import type { ReactNode } from 'react';
+import { useEffect, useMemo } from 'react'
+import MenuableAccordion from '@components/CustomComponent/MenuableAccordion'
+import SimpleFitnessList from '@components/Fitness/SimpleFitnessList'
+import { useLazyGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
+import useScheduleMenu from '@hooks/useScheduleMenu'
 
 export interface ScheduleDisplayProps {
   title: string,

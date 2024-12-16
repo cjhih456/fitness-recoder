@@ -1,20 +1,20 @@
 import { Button } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import FitnessListEditor from '../../../components/Fitness/FitnessListEditor';
-import { HeaderHandler } from '../../../components/provider/Header/HeaderHandler';
-import { useCreateScheduleWithExercisePlans } from '../../../service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
-import { LogEvent } from '../../../service/firebase';
-import { useAlert } from '../../../components/provider/Alert/useAlert';
-import usePageTracker from '../../../hooks/usePageTracker';
-import useScheduleActions from '../../../hooks/useSchedule/useScheduleActions';
+import FitnessListEditor from '@components/Fitness/FitnessListEditor';
+import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
+import useAlert from '@hooks/provider/Alert/useAlert';
+import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
+import usePageTracker from '@hooks/usePageTracker';
+import { useScheduleActions } from '@hooks/useScheduleMenu';
+import { LogEvent } from '@service/firebase';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
 })
 
 export default function CreateSchedule() {
-  HeaderHandler(['Create Schedule'])
+  useHeaderHandler(['Create Schedule'])
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()

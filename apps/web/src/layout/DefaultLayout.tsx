@@ -1,10 +1,11 @@
-import { ReactNode, useCallback, useMemo, useState } from 'react'
+import type { ReactNode } from 'react';
 import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
+import { useCallback, useMemo, useState } from 'react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
-import { useRoot } from '../components/provider/RootProvider/useRoot'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeaderMenu from '../components/Header/HeaderMenu'
-import HeaderContent from '../components/Header/HeaderContent'
+import HeaderContent from '@components/Header/HeaderContent'
+import HeaderMenu from '@components/Header/HeaderMenu'
+import useRootDom from '@hooks/provider/RootDom/useRootDom';
 
 interface DefaultLayoutProps {
   children: ReactNode
@@ -33,7 +34,7 @@ export default function DefaultLayout({
     name: 'Preset',
     route: '/preset'
   }])
-  const { getRoot } = useRoot()
+  const { getRoot } = useRootDom()
   const location = useLocation()
   const fallback = useCallback(() => {
     navigate(-1)

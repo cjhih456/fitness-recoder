@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@nextui-org/react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import SimpleFitnessList from '../Fitness/SimpleFitnessList';
-import MenuableAccordion from '../CustomComponent/MenuableAccordion';
-import usePresetMenu from '../../hooks/usePreset/usePresetMenu';
-import { useExercisePresetWithListFragment } from '../../service/GqlStore/ExercisePreset';
+import { useNavigate } from 'react-router-dom';
+import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
+import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
+import useExercisePresetWithListFragment from '@hooks/apollo/Fragments/useExercisePresetWithListFragment';
+import usePresetMenu from '@hooks/usePresetMenu';
 
 interface PresetDisplayProps {
   presetId: number

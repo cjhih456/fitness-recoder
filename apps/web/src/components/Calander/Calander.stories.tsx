@@ -1,6 +1,7 @@
+import type { CalanderProps } from './Calander';
 import type { Meta, StoryObj } from '@storybook/react';
-import Calender, { CalanderProps } from './Calander'
 import { fn } from '@storybook/test';
+import Calender from './Calander';
 
 const date = new Date()
 

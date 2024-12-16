@@ -1,14 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { HeaderHandler, HeaderMenuHandler } from '../../components/provider/Header/HeaderHandler'
-import { useMemo, useState } from 'react'
-import FitnessListEditor from '../../components/Fitness/FitnessListEditor'
 import { Button } from '@nextui-org/react'
-import { useExercisePresetFragment } from '../../service/GqlStore/ExercisePreset'
-import { useGetExerciseListByExercisePresetId } from '../../service/GqlStore/Exercise'
-import { useUpdateExerciseListByExercisePreset } from '../../service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import usePresetMenu from '../../hooks/usePreset/usePresetMenu'
-
+import { useNavigate, useParams } from 'react-router-dom'
+import FitnessListEditor from '@components/Fitness/FitnessListEditor'
+import { useGetExerciseListByExercisePresetId } from '@hooks/apollo/Exercise'
+import useExercisePresetFragment from '@hooks/apollo/Fragments/useExercisePresetFragment'
+import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
+import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
+import useHeaderMenuHandler from '@hooks/provider/Header/useHeaderMenuHandler'
+import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
 
 export default function PresetDetailPage() {
   const params = useParams()
@@ -28,8 +28,8 @@ export default function PresetDetailPage() {
   }, [exercisePreset])
   const headerMenu = usePresetMenu(id)
 
-  HeaderHandler(header)
-  HeaderMenuHandler(headerMenu)
+  useHeaderHandler(header)
+  useHeaderMenuHandler(headerMenu)
   function savePreset() {
     if (!id) return
     updateExerciseList(id, exerciseIdxList, newExerciseList).finally(() => {

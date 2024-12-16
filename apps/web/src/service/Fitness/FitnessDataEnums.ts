@@ -1,4 +1,4 @@
-import { enumify } from '../../components/utils'
+import { enumify } from '@utils'
 
 export const Muscle = enumify({
   abdominals: 'abdominals',
@@ -63,5 +63,3 @@ export const Equipment = enumify({
   e_z_curl_bar: 'e-z curl bar',
   foam_roll: 'foam roll',
 })
-
-
