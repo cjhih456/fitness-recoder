@@ -1,4 +1,5 @@
 import type { FieldError, ValidationRule } from 'react-hook-form';
+import type { ReactNode } from 'react'
 import { useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -12,27 +13,32 @@ interface CInputProps {
   min?: number
   max?: number
   accept?: string
+  labelChildren?: ReactNode
+  children?: ReactNode
   onChange?: (_e: InputEvent) => void
 }
 
+type ValidateFun<T> = (_v: T) => string | boolean | undefined
+type ValidateType<T> = ValidateFun<T> | Record<string, ValidateFun<T>>
+
 type StrintTypeProps = {
   type?: string
-  validate?: (_v: string) => string | boolean | undefined
+  validate?: ValidateType<string>
 }
 type NumberTypeProps = {
   type: 'number'
-  validate: (_v: string) => string | boolean | undefined
+  validate: ValidateType<number>
 }
 type FileSingleTypeProps = {
   type: 'file'
   accept: string
-  validate?: (_v: File) => string | boolean | undefined
+  validate?: ValidateType<File | FileList>
 }
 type FileMultiTypeProps = {
   type: 'file'
   multiple: true
   accept: string
-  validate?: (_v: File[]) => string | boolean | undefined
+  validate?: ValidateType<File[] | FileList>
 }
 
 type PatternFilter = ({
@@ -60,7 +66,10 @@ export default function CInput({
   pattern,
   min,
   max,
-  accept
+  accept,
+  multiple,
+  children,
+  labelChildren
 }: CInputProps & (StrintTypeProps | NumberTypeProps | FileSingleTypeProps | FileMultiTypeProps)) {
   const { register, getFieldState } = useFormContext()
   const [errorState, setErrorState] = useState<FieldError | undefined>()
@@ -94,23 +103,30 @@ export default function CInput({
     <legend>
       {title}
     </legend>
-    <input
-      className={className}
-      type={type}
-      accept={accept}
-      {...register(name, {
-        ...patternFilter,
-        required: requredMessage,
-        validate: validate,
-        maxLength: max,
-        minLength: min,
-        onChange: (e) => {
-          setErrorState(getFieldState(name).error)
-          onChange && onChange(e)
-        }
-      })} />
-    <span className='text-red-300'>
+    <div>
+      {children}
+      <label className='inline-block'>
+        <input
+          className={className}
+          type={type}
+          multiple={multiple}
+          accept={accept}
+          {...register(name, {
+            ...patternFilter,
+            required: requredMessage,
+            validate: validate,
+            maxLength: max,
+            minLength: min,
+            onChange: (e) => {
+              setErrorState(getFieldState(name).error)
+              onChange && onChange(e)
+            }
+          })} />
+        {labelChildren}
+      </label>
+    </div>
+    <p className='text-red-300'>
       {errorState?.message}
-    </span>
+    </p>
   </fieldset>
 }

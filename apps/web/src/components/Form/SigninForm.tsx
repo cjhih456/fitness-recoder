@@ -5,6 +5,8 @@ import EmailInput from './EmailInput';
 import NameInput from './NameInput';
 import NickNameInput from './NickNameInput';
 import PhoneInput from './PhoneInput';
+import FileInput from './FileInput';
+import FileMultiInput from './FileMultiInput';
 
 interface SigninFormParams {
   // File input
@@ -33,6 +35,7 @@ export default function SigninForm() {
   return <div>
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <FileInput name="profile" title='Profile Image' />
         <div className="grid grid-cols-2">
           <NameInput name="firstName" title="First Name" required />
           <NameInput name="secondName" title="Second Name" required />
@@ -48,7 +51,10 @@ export default function SigninForm() {
           title="Email"
           required="Insert Email Address"
         />
-
+        <FileMultiInput
+          name="kyc"
+          title="KYC Images"
+        />
         <button type="submit">
           Submit
         </button>
