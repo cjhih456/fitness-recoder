@@ -1,5 +1,6 @@
+import type { FieldError, ValidationRule } from 'react-hook-form';
 import { useMemo, useState } from 'react'
-import { FieldError, useFormContext, ValidationRule } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 interface CInputProps {
   className?: string

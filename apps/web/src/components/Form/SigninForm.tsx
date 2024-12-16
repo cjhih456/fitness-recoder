@@ -1,9 +1,10 @@
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import PhoneInput from './PhoneInput';
+import type { SubmitHandler } from 'react-hook-form';
+import { useCallback } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import EmailInput from './EmailInput';
 import NameInput from './NameInput';
 import NickNameInput from './NickNameInput';
-import { useCallback } from 'react';
+import PhoneInput from './PhoneInput';
 
 interface SigninFormParams {
   // File input
