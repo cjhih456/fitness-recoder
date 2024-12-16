@@ -1,64 +1,97 @@
-import { MouseEvent, MouseEventHandler, TouchEvent, useCallback, useEffect, useRef, useState } from 'react'
-import CInput from './CInput'
+import type { MouseEvent, TouchEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdClose } from 'react-icons/md'
+import CInput from './CInput'
 
 interface FileInputProps {
   name: string
   title: string
+  max?: number
   required?: string | boolean
 }
 
-export default function FileInput(props: FileInputProps) {
+export default function FileMultiInput(props: FileInputProps) {
   const { watch, setValue } = useFormContext()
-
   const file = watch(props.name)
-  const lazyFile = useRef<File | undefined>()
-  const [imgPreview, setImgPreview] = useState<string>('')
+  const lazyFile = useRef<File[]>([])
+  const [imgPreview, setImgPreview] = useState<string[]>([])
 
+  const maxLength = useMemo(() => {
+    return props.max ?? 1
+  }, [props.max])
+  const multi = useMemo(() => {
+    return maxLength > 1
+  }, [maxLength])
 
-  const updateImagePreview = useCallback((file: File | undefined) => {
+  const deleteImageFile = useCallback((index: number) => {
+    const tempArray = [...lazyFile.current]
+    tempArray.splice(index, 1)
     setImgPreview((prev) => {
-      prev && URL.revokeObjectURL(prev)
-      return file ? URL.createObjectURL(file) : ''
+      const tempArray = [...prev]
+      tempArray.splice(index, 1).forEach(str => URL.revokeObjectURL(str))
+      return tempArray
     })
-  }, [setImgPreview])
+    lazyFile.current = tempArray
+    setValue(props.name, multi ? lazyFile.current : lazyFile.current[0])
+    return tempArray
+  }, [setValue, props.name, multi])
 
-  const updateImageFile = useCallback((file: File | undefined) => {
-    if (file === lazyFile.current) return
-    lazyFile.current = file
-    updateImagePreview(file)
-    setValue(props.name, file)
-  }, [updateImagePreview, setValue, props.name])
+  const appendImageFile = useCallback((file: (File | null)[]) => {
+    const tempList = [...lazyFile.current]
+    const newFileUrlList: string[] = [...imgPreview]
+    file.forEach(f => {
+      if (!f) return
+      newFileUrlList.push(URL.createObjectURL(f))
+      tempList.push(f)
+    })
+    if (tempList.length > maxLength) {
+      // TODO: 
+      const overCnt = tempList.length - maxLength
+      tempList.splice(0, overCnt)
+      newFileUrlList.splice(0, overCnt).forEach(str => URL.revokeObjectURL(str))
+    }
+    setImgPreview(newFileUrlList)
+    lazyFile.current = tempList
+    setValue(props.name, multi ? lazyFile.current : lazyFile.current[0])
+  }, [setValue, props.name, multi, maxLength, imgPreview])
 
-  const cancelImage = useCallback<MouseEventHandler<HTMLButtonElement>>((e: MouseEvent | TouchEvent) => {
+  const cancelImage = useCallback((e: MouseEvent | TouchEvent, idx: number) => {
     e.stopPropagation()
-    updateImageFile(undefined)
-    return
-  }, [updateImageFile])
+    deleteImageFile(idx)
+  }, [deleteImageFile])
 
   useEffect(() => {
     if (!(file instanceof FileList)) {
       return
     }
-    if (!file.length) return
-    const selectedFile = file.item(0)
-    selectedFile && updateImageFile(selectedFile)
-  }, [file, updateImageFile])
+    const fileList = Array(file.length).fill(0).map((_, i) => file.item(i))
+    appendImageFile(fileList)
+  }, [file, appendImageFile])
 
   return <CInput
     className="hidden"
     {...props}
     type="file"
+    multiple={multi}
     accept='image/*'
     labelChildren={
-      <div className="relative h-20 w-20 rounded-lg">
-        <img role="button" tabIndex={0} src={imgPreview} className='h-full w-full' />
-        <button className='absolute right-2 top-2 rounded-full bg-red-400/90' onClick={cancelImage}>
-          <MdClose size="1.5rem" preserveAspectRatio="xMidYMid slice" />
-        </button>
+      <div className='bg-purple-500 rounded-lg p-2'>
+        {multi ? 'Add Images' : 'Set Image'}
       </div>
     }
   >
+    <div className='flex flex-row gap-x-4'>
+      {
+        imgPreview.map((imgSrc, idx) => {
+          return <div className="relative h-40 w-40 rounded-lg overflow-hidden" key={`preview-img-${idx}`}>
+            <img role="button" tabIndex={0} src={imgSrc} className='h-full w-full' />
+            <button className='absolute right-2 top-2 rounded-full bg-red-400/90' onClick={(e) => cancelImage(e, idx)}>
+              <MdClose size="1.5rem" preserveAspectRatio="xMidYMid slice" />
+            </button>
+          </div>
+        })
+      }
+    </div>
   </CInput>
 }
