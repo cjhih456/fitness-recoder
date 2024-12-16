@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["VITE_URL_ROOT"],
   "tasks": {
     "clean": {
       "dependsOn": ["^clean"]
@@ -26,8 +27,7 @@
       "dependsOn": [
         "^@types/sqlite-message-types#build",
         "^@types/fitness-struct#build"
-      ],
-      "env": ["VITE_URL_ROOT"]
+      ]
     },
     "@fitness/sqlite-worker#build": {
       "dependsOn": [

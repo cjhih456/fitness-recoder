@@ -27,7 +27,6 @@ const cache = new InMemoryCache({
     ExercisePresetFragment,
     ExercisePresetWithListFragment,
   ),
-  addTypename: false,
   typePolicies: {
     Query: {
       fields: {
