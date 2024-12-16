@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { FieldError, useFormContext, useFormState } from 'react-hook-form'
+import { useMemo } from 'react'
+import { useFormContext, useFormState } from 'react-hook-form'
 
 type ValidateFun<T> = (_v: T) => string | boolean | undefined
 type ValidateType<T> = ValidateFun<T> | Record<string, ValidateFun<T>>

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
-import type { FieldError, ValidationRule } from 'react-hook-form';
-import { useMemo, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import type { ValidationRule } from 'react-hook-form';
+import { useMemo } from 'react'
+import { useFormContext, useFormState } from 'react-hook-form'
 
 interface CInputProps {
   className?: string
@@ -71,8 +71,12 @@ export default function CInput({
   children,
   labelChildren
 }: CInputProps & (StrintTypeProps | NumberTypeProps | FileSingleTypeProps | FileMultiTypeProps)) {
-  const { register, getFieldState } = useFormContext()
-  const [errorState, setErrorState] = useState<FieldError | undefined>()
+  const { register } = useFormContext()
+
+  const formState = useFormState({ name: name })
+  const errorMessage = useMemo(() => {
+    return String(formState.errors[name]?.message || '')
+  }, [formState, name])
 
   const requredMessage = useMemo(() => {
     const message = typeof required === 'string' ? required : `Insert ${title}`
@@ -118,15 +122,14 @@ export default function CInput({
             maxLength: max,
             minLength: min,
             onChange: (e) => {
-              setErrorState(getFieldState(name).error)
               onChange && onChange(e)
             }
           })} />
         {labelChildren}
       </label>
     </div>
-    <p className='text-red-300'>
-      {errorState?.message}
+    <p className='text-red-300 pt-1 h-5 leading-4'>
+      {errorMessage}
     </p>
   </fieldset>
 }

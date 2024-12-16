@@ -3,6 +3,8 @@ import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import EmailInput from './EmailInput';
 import FileInput from './FileInput';
+import GenderInput from './GenderInput';
+import HobbyInput from './HobbyInput';
 import NameInput from './NameInput';
 import NickNameInput from './NickNameInput';
 import PhoneInput from './PhoneInput';
@@ -27,8 +29,9 @@ export default function SigninForm() {
     console.log(data)
   }, [])
   const form = useForm<SigninFormParams>({
-    mode: 'onChange',
+    mode: 'all',
     reValidateMode: 'onChange',
+    shouldUseNativeValidation: false,
   })
   const { handleSubmit } = form;
   return <div>
@@ -43,6 +46,8 @@ export default function SigninForm() {
           <NameInput name="secondName" title="Second Name" required />
         </div>
         <NickNameInput name="nickName" title="Nick Name" required />
+        <GenderInput name="gender" title="Gender" />
+        <HobbyInput name="hobby" title="Hobby" />
         <PhoneInput
           name="phone"
           title="Phone"
