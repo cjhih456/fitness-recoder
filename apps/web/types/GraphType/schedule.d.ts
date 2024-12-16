@@ -25,3 +25,6 @@ declare type GetScheduleStatusByDateVariable = { year: number, month: number }
 
 declare type UpdateScheduleResponse = { updateSchedule: ScheduleStoreType }
 declare type UpdateScheduleVariable = { updateSchedule: ScheduleStoreType }
+
+declare type DeleteScheduleResponse = { deleteSchedule: string }
+declare type DeleteScheduleVariable = { id: number }

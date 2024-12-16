@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { useEffect, useMemo } from 'react'
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion'
 import SimpleFitnessList from '@components/Fitness/SimpleFitnessList'
+import { useLazyGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import { useLazyGetExerciseListByScheduleId } from '@service/GqlStore/Exercise'
 
 export interface ScheduleDisplayProps {
   title: string,

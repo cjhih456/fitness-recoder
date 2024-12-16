@@ -1,6 +1,6 @@
 import FitnessFragment from '@graphQuery/Fragment/FitnessFragment';
+import { useLazyGetFitnessById } from '@hooks/apollo/Fitness';
 import useFixedFragment from '@hooks/apollo/useFixedFragment';
-import { useLazyGetFitnessById } from '@service/GqlStore/Fitness';
 
 export default function useFitnessFragment(id: number) {
   return useFixedFragment<FitnessStoreType, GetFitnessByIdResponse, GetFitnessByIdVariable>(

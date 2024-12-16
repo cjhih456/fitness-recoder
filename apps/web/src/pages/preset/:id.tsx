@@ -3,12 +3,12 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import FitnessListEditor from '@components/Fitness/FitnessListEditor'
+import { useGetExerciseListByExercisePresetId } from '@hooks/apollo/Exercise'
 import useExercisePresetFragment from '@hooks/apollo/Fragments/useExercisePresetFragment'
+import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
 import useHeaderMenuHandler from '@hooks/provider/Header/useHeaderMenuHandler'
 import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
-import { useGetExerciseListByExercisePresetId } from '@service/GqlStore/Exercise'
-import { useUpdateExerciseListByExercisePreset } from '@service/GqlStore/mixed/useUpdateExerciseListByExercisePreset'
 
 export default function PresetDetailPage() {
   const params = useParams()

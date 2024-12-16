@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PresetDisplay from '@components/Preset/PresetDisplay';
 import PresetNameInputDialog from '@components/Preset/PresetNameInputDialog';
+import { useCreateExercisePreset, useGetExercisePresetWithListList } from '@hooks/apollo/ExercisePreset';
 import useBottomNavi from '@hooks/provider/BottomNavi/useBottomNavi';
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
 import useSpinner from '@hooks/useSpinner';
-import { useCreateExercisePreset, useGetExercisePresetWithListList } from '@service/GqlStore/ExercisePreset';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])

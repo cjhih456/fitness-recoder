@@ -1,8 +1,8 @@
 import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
-import { useGetScheduleByDate } from '@service/GqlStore/Schedule';
 import { ScheduleType } from '@utils';
 import ScheduleDisplay from './ScheduleDisplay';
 

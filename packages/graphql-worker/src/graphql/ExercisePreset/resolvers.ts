@@ -119,7 +119,7 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       return `delete - exercisePreset - ${id}`
     },
-    async saveScheduleAsExercisePreset(_source, { scheduleId, name }, context) {
+    async copyExercisePresetFromSchedule(_source, { scheduleId, name }, context) {
       const schedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
         context.client,
         'select',

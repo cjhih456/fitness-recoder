@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
 import { useDebounceValue } from 'usehooks-ts'
+import { useGetFitnessListByKeywords } from '@hooks/apollo/Fitness'
 import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
-import { useGetFitnessListByKeywords } from '@service/GqlStore/Fitness'
 import FitnessList from './FitnessList'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode

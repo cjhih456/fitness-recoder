@@ -4,21 +4,23 @@ import useApolloCache from './useApolloCache'
 
 export const useApollo = () => {
   const cache = useApolloCache()
-  return new ApolloClient({
-    cache: cache,
-    link: link,
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'ignore',
+  return cache.then((cache) => {
+    return new ApolloClient({
+      cache: cache,
+      link: link,
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'ignore',
+        },
+        query: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'all',
+        },
       },
-      query: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'all',
-      },
-    },
-    devtools: {
-      enabled: true
-    }
+      devtools: {
+        enabled: true
+      }
+    })
   })
 }

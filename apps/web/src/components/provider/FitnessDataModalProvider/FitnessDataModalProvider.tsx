@@ -4,8 +4,8 @@ import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CModal from '@components/CustomComponent/CModal';
+import { useLazyGetExerciseFinishHistory } from '@hooks/apollo/Exercise';
 import useFitnessFragment from '@hooks/apollo/Fragments/useFitnessFragment';
-import { useLazyGetExerciseFinishHistory } from '@service/GqlStore/Exercise';
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
 import { ModalContext } from './FitnessDataModalContext';
 import FitnessPreviewVideo from './FitnessPreviewVideo';

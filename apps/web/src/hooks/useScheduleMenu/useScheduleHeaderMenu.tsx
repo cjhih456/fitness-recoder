@@ -2,10 +2,10 @@ import type { Schedule } from 'fitness-struct'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
 import useAlert from '@hooks/provider/Alert/useAlert'
 import useHeaderMenuHandler from '@hooks/provider/Header/useHeaderMenuHandler'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import { useSaveScheduleAsExercisePreset } from '@service/GqlStore/ExercisePreset'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
@@ -17,7 +17,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
   const { t } = useTranslation(['workout'])
   const headerMenus = useScheduleMenu()
 
-  const [saveScheduleAsExercisePreset] = useSaveScheduleAsExercisePreset()
+  const [copyExercisePresetFromSchedule] = useCopyExercisePresetFromSchedule()
   const [isSaveScheduleAsPresetOpen, setSaveScheduleAsPresetOpen] = useState(false)
   function makeAsPreset() {
     setSaveScheduleAsPresetOpen(true)
@@ -25,9 +25,9 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
   async function saveScheduleAsPreset(v: boolean, presetName?: string) {
     if (!presetName || !v || !scheduleInfo) return
     setSaveScheduleAsPresetOpen(!v)
-    const result = await saveScheduleAsExercisePreset({ variables: { scheduleId: scheduleInfo.id, name: presetName } })
-    if (result.data?.saveScheduleAsExercisePreset) {
-      navigate(`/preset/${result.data.saveScheduleAsExercisePreset.id}`)
+    const result = await copyExercisePresetFromSchedule({ variables: { scheduleId: scheduleInfo.id, name: presetName } })
+    if (result.data?.copyExercisePresetFromSchedule) {
+      navigate(`/preset/${result.data.copyExercisePresetFromSchedule.id}`)
     } else {
       showAlert('ERROR', 'Save Schedule As Preset Failed', false)
     }

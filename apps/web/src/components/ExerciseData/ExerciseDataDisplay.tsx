@@ -1,7 +1,7 @@
 import type { Exercise } from 'fitness-struct';
 import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
-import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@service/GqlStore/Set';
+import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import SetRow from './SetRow';
 
 export interface ExerciseDataDisplayProps {

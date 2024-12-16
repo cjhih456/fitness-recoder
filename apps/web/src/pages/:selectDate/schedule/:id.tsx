@@ -2,11 +2,11 @@ import { Button } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FitnessListEditor from '@components/Fitness/FitnessListEditor';
+import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
+import { useGetScheduleById } from '@hooks/apollo/Schedule';
+import useUpdateExerciseListBySchedule from '@hooks/apollo/mixed/useUpdateExerciseListBySchedule';
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
 import usePageTracker from '@hooks/usePageTracker';
-import { useGetExerciseListByScheduleId } from '@service/GqlStore/Exercise';
-import { useGetScheduleById } from '@service/GqlStore/Schedule';
-import { useUpdateExerciseListBySchedule } from '@service/GqlStore/mixed/useUpdateExerciseListBySchedule';
 
 export default function DisplaySchedule() {
   useHeaderHandler(['Schedule'])

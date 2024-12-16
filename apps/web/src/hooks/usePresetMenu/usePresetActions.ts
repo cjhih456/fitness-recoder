@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
+import { useDeleteExercisePreset } from '@hooks/apollo/ExercisePreset'
+import { useCloneScheduleFromPreset } from '@hooks/apollo/Schedule'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
-import { useDeleteExercisePreset } from '@service/GqlStore/ExercisePreset'
-import { useCloneScheduleFromPreset } from '@service/GqlStore/Schedule'
 
 export default function usePresetActions() {
   const { gotoScheduleDetail } = useScheduleActions()

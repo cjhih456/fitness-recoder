@@ -6,11 +6,11 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ExerciseDataList from '@components/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@components/Preset/PresetNameInputDialog'
+import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import useAlert from '@hooks/provider/Alert/useAlert'
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
 import usePageTracker from '@hooks/usePageTracker'
 import useScheduleHeaderMenu from '@hooks/useScheduleMenu/useScheduleHeaderMenu'
-import { useGetScheduleById, useUpdateSchedule } from '@service/GqlStore/Schedule'
 import { dayjs, ScheduleType } from '@utils'
 
 export default function DisplayWorkout() {

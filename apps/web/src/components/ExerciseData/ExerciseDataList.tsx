@@ -1,8 +1,8 @@
 import type { Exercise, Schedule } from 'fitness-struct';
 import { useMemo, useState } from 'react';
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
-import { useGetExerciseListByScheduleId } from '@service/GqlStore/Exercise';
-import { useGetFitnessListByIds } from '@service/GqlStore/Fitness';
+import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
+import { useGetFitnessListByIds } from '@hooks/apollo/Fitness';
 import ExerciseDataDisplay from './ExerciseDataDisplay';
 
 export interface ExerciseDataListProps {

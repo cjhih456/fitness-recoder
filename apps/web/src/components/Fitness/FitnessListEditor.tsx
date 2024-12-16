@@ -1,7 +1,7 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Button } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { useLazyGetFitnessListByIds } from '@service/GqlStore/Fitness'
+import { useLazyGetFitnessListByIds } from '@hooks/apollo/Fitness'
 import FitnessList from './FitnessList'
 import FitnessSearchModal from './FitnessSearchModal'
 

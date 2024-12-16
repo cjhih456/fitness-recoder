@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@hooks/apollo/Schedule'
 import useAlert from '@hooks/provider/Alert/useAlert'
-import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@service/GqlStore/Schedule'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleActions() {

@@ -2,11 +2,11 @@ import { Button } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@components/Fitness/FitnessListEditor';
+import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
 import useAlert from '@hooks/provider/Alert/useAlert';
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
-import { useCreateScheduleWithExercisePlans } from '@service/GqlStore/mixed/useCreateScheduleWithExercisePlans';
 import { LogEvent } from '@service/firebase';
 
 const defaultSearchParams = createSearchParams({

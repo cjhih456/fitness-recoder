@@ -21,5 +21,5 @@ declare type GetExercisePresetWithListByIdVariable = { id: number } & OperationV
 declare type GetExercisePresetWithListListResponse = { getExercisePresetWithListList: ExercisePresetWithListStoreType[] }
 declare type GetExercisePresetWithListListVariable = { offset: number, size: number }
 
-declare type SaveScheduleAsExercisePresetResponse = { saveScheduleAsExercisePreset: ExercisePresetStoreType }
-declare type SaveScheduleAsExercisePresetVariable = { scheduleId: number, name: string }
+declare type CopyExercisePresetFromScheduleResponse = { copyExercisePresetFromSchedule: ExercisePresetStoreType }
+declare type CopyExercisePresetFromScheduleVariable = { scheduleId: number, name: string }
