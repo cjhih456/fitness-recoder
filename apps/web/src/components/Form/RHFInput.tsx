@@ -1,132 +1,94 @@
-import type { ReactNode } from 'react'
-import type { FieldError, ValidationRule } from 'react-hook-form';
-import { useMemo, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import type { ChangeEvent, ChangeEventHandler, ReactNode } from 'react'
+import type { UseControllerProps } from 'react-hook-form';
+import { useMemo } from 'react'
+import { useController } from 'react-hook-form';
+import RHFLayer from './RHFLayer';
 
 interface RHFInputProps {
   className?: string
   title: string
   name: string
   multiple?: boolean
-  required?: string | boolean
-  pattern?: ValidationRule<RegExp>
-  min?: number
-  max?: number
   accept?: string
   labelChildren?: ReactNode
   children?: ReactNode
-  onChange?: (_e: InputEvent) => void
+  onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
 type ValidateFun<T> = (_v: T) => string | boolean | undefined
 type ValidateType<T> = ValidateFun<T> | Record<string, ValidateFun<T>>
 
-type StrintTypeProps = {
-  type?: string
-  validate?: ValidateType<string>
+type FileTypeProps = {
+  type: 'file'
+  multiple?: boolean
+  onChange?: (_e: ChangeEvent<HTMLInputElement>, _callBack: (..._event: any[]) => void) => void
+  max?: number
+  rules?: {
+    validate?: ValidateType<File[] | FileList>
+  }
 }
 type NumberTypeProps = {
   type: 'number'
-  validate: ValidateType<number>
+  rules?: {
+    validate: ValidateType<number>
+  }
 }
-type FileSingleTypeProps = {
-  type: 'file'
-  accept: string
-  validate?: ValidateType<File | FileList>
-}
-type FileMultiTypeProps = {
-  type: 'file'
-  multiple: true
-  accept: string
-  validate?: ValidateType<File[] | FileList>
+type StrintTypeProps = {
+  type?: string
+  rules?: {
+    validate?: ValidateType<string>
+  }
 }
 
-type PatternFilter = ({
-  pattern?: ValidationRule<RegExp>;
-  valueAsNumber?: false;
-  valueAsDate?: false;
-} | {
-  pattern?: undefined;
-  valueAsNumber?: false;
-  valueAsDate?: true;
-} | {
-  pattern?: undefined;
-  valueAsNumber?: true;
-  valueAsDate?: false;
-})
-
-export default function RHFInput({
-  className,
-  title,
-  name,
-  type,
-  validate,
-  onChange,
-  required,
-  pattern,
-  min,
-  max,
-  accept,
-  multiple,
-  children,
-  labelChildren
-}: RHFInputProps & (StrintTypeProps | NumberTypeProps | FileSingleTypeProps | FileMultiTypeProps)) {
-  const { register, getFieldState } = useFormContext()
-  const [errorState, setErrorState] = useState<FieldError | undefined>()
-
+export default function RHFInput(props: UseControllerProps & RHFInputProps & (FileTypeProps | NumberTypeProps | StrintTypeProps)) {
+  const {
+    title,
+    children,
+    labelChildren,
+    rules,
+    onChange,
+    ...inputProps
+  } = props
   const requredMessage = useMemo(() => {
-    const message = typeof required === 'string' ? required : `Insert ${title}`
-    return required ? message : false
-  }, [title, required])
-  const patternFilter = useMemo<PatternFilter>(() => {
-    if (type === 'number') {
-      return {
-        valueAsDate: false,
-        valueAsNumber: true,
-        pattern: undefined
-      }
-    } else if (type === 'date') {
-      return {
-        valueAsDate: true,
-        valueAsNumber: false,
-        pattern: undefined
-      }
-    } else {
-      return {
-        valueAsDate: false,
-        valueAsNumber: false,
-        pattern: pattern
-      }
+    const message = typeof rules?.required === 'string' ? rules?.required : `Insert ${title}`
+    return rules?.required ? message : false
+  }, [title, rules?.required])
+
+  const defaultValue = useMemo(() => {
+    switch (props.type) {
+      case 'file': return []
+      case 'number': return 0
+      default:
+        return ''
     }
-  }, [type, pattern])
-  return <fieldset>
-    <legend>
-      {title}
-    </legend>
-    <div>
-      {children}
-      <label className='inline-block'>
-        <input
-          className={className}
-          type={type}
-          multiple={multiple}
-          accept={accept}
-          {...register(name, {
-            ...patternFilter,
-            required: requredMessage,
-            validate: validate,
-            maxLength: max,
-            minLength: min,
-            onChange: (e) => {
-              setErrorState(getFieldState(name).error)
-              onChange && onChange(e)
-            }
-          })} />
-        {labelChildren}
-      </label>
-    </div>
-    <p className='text-red-300'>
-      {errorState?.message}
-    </p>
-  </fieldset>
+  }, [props.type])
+
+  const { fieldState, field } = useController({
+    ...props,
+    defaultValue: defaultValue,
+    rules: {
+      ...rules,
+      onChange,
+      validate: rules?.validate,
+      required: requredMessage
+    }
+  })
+
+  return <RHFLayer title={title} rhfFieldstatus={fieldState}>
+    {children}
+    <label className='inline-block'>
+      <input
+        {...inputProps}
+        {...field}
+        onChange={(e) => {
+          if (props.type === 'file') {
+            props.onChange && props.onChange(e)
+          } else {
+            field.onChange(e)
+          }
+        }}
+      />
+      {labelChildren}
+    </label>
+  </RHFLayer>
 }
