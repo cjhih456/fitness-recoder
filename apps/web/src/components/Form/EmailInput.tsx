@@ -1,4 +1,4 @@
-import CInput from './CInput'
+import RHFInput from './RHFInput'
 
 interface EmailInputProps {
   name: string
@@ -7,7 +7,7 @@ interface EmailInputProps {
 }
 
 export default function EmailInput(props: EmailInputProps) {
-  return <CInput
+  return <RHFInput
     type="email"
     pattern={{
       value: /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,

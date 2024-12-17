@@ -1,6 +1,6 @@
 import { AsYouType } from 'libphonenumber-js/mobile'
 import { useCallback, useRef } from 'react'
-import CInput from './CInput'
+import RHFInput from './RHFInput'
 
 interface PhoneInputProps {
   name: string
@@ -18,7 +18,7 @@ export default function PhoneInput(props: PhoneInputProps) {
     return number?.getType() && number?.isPossible() ? true : 'Wrong Number Pattern'
   }, [])
 
-  return <CInput
+  return <RHFInput
     pattern={/[0-9+].+/}
     {...props}
     validate={validateRule}

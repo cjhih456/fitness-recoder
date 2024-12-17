@@ -3,7 +3,7 @@ import type { FieldError, ValidationRule } from 'react-hook-form';
 import { useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-interface CInputProps {
+interface RHFInputProps {
   className?: string
   title: string
   name: string
@@ -55,7 +55,7 @@ type PatternFilter = ({
   valueAsDate?: false;
 })
 
-export default function CInput({
+export default function RHFInput({
   className,
   title,
   name,
@@ -70,7 +70,7 @@ export default function CInput({
   multiple,
   children,
   labelChildren
-}: CInputProps & (StrintTypeProps | NumberTypeProps | FileSingleTypeProps | FileMultiTypeProps)) {
+}: RHFInputProps & (StrintTypeProps | NumberTypeProps | FileSingleTypeProps | FileMultiTypeProps)) {
   const { register, getFieldState } = useFormContext()
   const [errorState, setErrorState] = useState<FieldError | undefined>()
 

@@ -2,7 +2,7 @@ import type { MouseEvent, TouchEvent } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdClose } from 'react-icons/md'
-import CInput from './CInput'
+import RHFInput from './RHFInput'
 
 interface FileInputProps {
   name: string
@@ -69,7 +69,7 @@ export default function FileMultiInput(props: FileInputProps) {
     appendImageFile(fileList)
   }, [file, appendImageFile])
 
-  return <CInput
+  return <RHFInput
     className="hidden"
     {...props}
     type="file"
@@ -93,5 +93,5 @@ export default function FileMultiInput(props: FileInputProps) {
         })
       }
     </div>
-  </CInput>
+  </RHFInput>
 }
