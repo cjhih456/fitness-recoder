@@ -1,94 +1,79 @@
-import type { ChangeEvent, ChangeEventHandler, ReactNode } from 'react'
+import type { BaseSyntheticEvent, ReactElement, ReactNode } from 'react'
 import type { UseControllerProps } from 'react-hook-form';
 import { useMemo } from 'react'
-import { useController } from 'react-hook-form';
 import RHFLayer from './RHFLayer';
+import useFileControl from './hooks/useFileControl';
 
-interface RHFInputProps {
+interface RHFInputProps<T extends RHFValues> {
+  // Input Props
   className?: string
-  title: string
-  name: string
-  multiple?: boolean
   accept?: string
-  labelChildren?: ReactNode
-  children?: ReactNode
-  onChange?: ChangeEventHandler<HTMLInputElement>
-}
-
-type ValidateFun<T> = (_v: T) => string | boolean | undefined
-type ValidateType<T> = ValidateFun<T> | Record<string, ValidateFun<T>>
-
-type FileTypeProps = {
-  type: 'file'
-  multiple?: boolean
-  onChange?: (_e: ChangeEvent<HTMLInputElement>, _callBack: (..._event: any[]) => void) => void
-  max?: number
-  rules?: {
-    validate?: ValidateType<File[] | FileList>
-  }
-}
-type NumberTypeProps = {
-  type: 'number'
-  rules?: {
-    validate: ValidateType<number>
-  }
-}
-type StrintTypeProps = {
   type?: string
-  rules?: {
-    validate?: ValidateType<string>
-  }
+
+  // Label children
+  labelChildren?: ReactNode
+
+  // Layer Props
+  title: string
+  name: Path<T>
+
+  // Overwrite Controller Props
+  defaultValue: RHFDefaultValue<T>
+
+  // File Input Props
+  onSelectFile?: (_files: File[]) => void
+  children?: (_fileSrc?: string[], _imgDeleteAction?: ((_idx?: number, _e?: BaseSyntheticEvent) => void)) => (ReactElement | ReactElement[])
 }
 
-export default function RHFInput(props: UseControllerProps & RHFInputProps & (FileTypeProps | NumberTypeProps | StrintTypeProps)) {
+export default function RHFInput<T extends RHFValues>(
+  props: UseControllerProps<T> & RHFInputProps<T>
+) {
   const {
-    title,
-    children,
+    type,
+    className,
     labelChildren,
-    rules,
-    onChange,
-    ...inputProps
+    onSelectFile,
+    children,
+    ...controllerProps
   } = props
-  const requredMessage = useMemo(() => {
-    const message = typeof rules?.required === 'string' ? rules?.required : `Insert ${title}`
-    return rules?.required ? message : false
-  }, [title, rules?.required])
 
-  const defaultValue = useMemo(() => {
-    switch (props.type) {
-      case 'file': return []
-      case 'number': return 0
-      default:
-        return ''
-    }
-  }, [props.type])
+  // File type Controls
+  const maxLength = useMemo(() => {
+    return Number(props.rules?.max || 1)
+  }, [props.rules?.max])
+  const multiple = useMemo(() => type === 'file' && maxLength > 1, [type, maxLength])
+  const {
+    cancelImage,
+    onInputFileChange,
+    imgPreview
+  } = useFileControl<T>(maxLength, onSelectFile)
 
-  const { fieldState, field } = useController({
-    ...props,
-    defaultValue: defaultValue,
-    rules: {
-      ...rules,
-      onChange,
-      validate: rules?.validate,
-      required: requredMessage
-    }
-  })
-
-  return <RHFLayer title={title} rhfFieldstatus={fieldState}>
-    {children}
-    <label className='inline-block'>
-      <input
-        {...inputProps}
-        {...field}
-        onChange={(e) => {
-          if (props.type === 'file') {
-            props.onChange && props.onChange(e)
-          } else {
-            field.onChange(e)
-          }
-        }}
-      />
-      {labelChildren}
-    </label>
+  return <RHFLayer<T>
+    {...controllerProps}
+  >
+    {({ field }) => {
+      function deleteImage(idx?: number, e?: BaseSyntheticEvent) {
+        cancelImage(idx, e, field)
+      }
+      return <>
+        {children && children(imgPreview, deleteImage)}
+        <label className='inline-block'>
+          <input
+            type={type}
+            className={className}
+            multiple={multiple}
+            {...(props.type === 'file' ? {} : field)}
+            onChange={(e) => {
+              if (props.type === 'file') {
+                onInputFileChange(e, field)
+              } else {
+                field.onChange(e)
+              }
+            }}
+          />
+          {labelChildren}
+        </label>
+      </>
+    }}
   </RHFLayer>
 }
