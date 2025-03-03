@@ -1,6 +1,7 @@
 import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
 import useCalanderHook from '@hooks/useCalanderHook';
+import StateRender from '@utils/StateRender';
 import DateCalander from './DateCalander';
 import MonthCalander from './MonthCalander';
 import YearCalander from './YearCalander';
@@ -58,46 +59,51 @@ export default function Calender({
 
   return (
     <div className="h-min border-medium border-divider p-4 rounded-medium flex flex-col gap-4 transition-size">
-      {mode === 'year' && <YearCalander
-        startYear={startDateObj.year}
-        year={choosenDay.year}
-        endYear={endDateObj.year}
-        onChange={(v) => changeYear(v, true)}
-      />}
-      {mode === 'month' && [
-        <div key='month-top' className="flex gap-2 justify-center content-center">
-          <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year - 1)}> - </Button>
-          <Button className='font-bold' onClick={() => onChangeMode('year')}>{choosenDay.year}</Button>
-          <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year + 1)}> + </Button>
-        </div>,
-        <MonthCalander
-          key="month-picker"
-          year={choosenDay.year}
-          month={choosenDay.month}
-          startDate={startDate}
-          endDate={endDate}
-          onChange={changeMonth}
-        />
-      ]}
-      {mode === 'date' && [
-        <div key='date-top' className="flex gap-2 justify-center content-center">
-          <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month - 1)}> - </Button>
-          <Button className='font-bold' onClick={() => onChangeMode('month')}>
-            {`${choosenDay.year} - ${String(choosenDay.month).padStart(2, '0')}`}
-          </Button>
-          <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month + 1)}> + </Button>
-        </div>,
-        <DateCalander
-          key="date-picker"
-          year={choosenDay.year}
-          month={choosenDay.month}
-          startDate={startDate}
-          date={choosenDay.date}
-          endDate={endDate}
-          statesByDate={statesByDate}
-          onChange={changeDate}
-        />
-      ]}
+      <StateRender
+        condition={mode}
+        render={{
+          year: <YearCalander
+            startYear={startDateObj.year}
+            year={choosenDay.year}
+            endYear={endDateObj.year}
+            onChange={(v) => changeYear(v, true)}
+          />,
+          month: [
+            <div key='month-top' className="flex gap-2 justify-center content-center">
+              <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year - 1)}> - </Button>
+              <Button className='font-bold' onClick={() => onChangeMode('year')}>{choosenDay.year}</Button>
+              <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year + 1)}> + </Button>
+            </div>,
+            <MonthCalander
+              key="month-picker"
+              year={choosenDay.year}
+              month={choosenDay.month}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={changeMonth}
+            />
+          ],
+          date: [
+            <div key='date-top' className="flex gap-2 justify-center content-center">
+              <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month - 1)}> - </Button>
+              <Button className='font-bold' onClick={() => onChangeMode('month')}>
+                {`${choosenDay.year} - ${String(choosenDay.month).padStart(2, '0')}`}
+              </Button>
+              <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month + 1)}> + </Button>
+            </div>,
+            <DateCalander
+              key="date-picker"
+              year={choosenDay.year}
+              month={choosenDay.month}
+              startDate={startDate}
+              date={choosenDay.date}
+              endDate={endDate}
+              statesByDate={statesByDate}
+              onChange={changeDate}
+            />
+          ]
+        }}
+      />
     </div>
   );
 }
