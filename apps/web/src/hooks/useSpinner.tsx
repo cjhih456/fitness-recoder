@@ -1,6 +1,7 @@
 import { Spinner } from '@nextui-org/react'
 import { useMemo } from 'react'
 import { useIntersectionObserver } from 'usehooks-ts'
+import StateRender from '@utils/StateRender'
 
 export default function useSpinner(length: number, loadingVisible: boolean, onLoadMore?: () => void) {
   const { ref: spinnerRef } = useIntersectionObserver({
@@ -15,7 +16,12 @@ export default function useSpinner(length: number, loadingVisible: boolean, onLo
   // Spinner
   const spinner = useMemo(() => {
     return <div className="flex justify-center" ref={spinnerRef}>
-      {loadingVisible ? <Spinner color="primary" size="lg"></Spinner> : <></>}
+      <StateRender.Boolean
+        state={loadingVisible}
+        render={{
+          true: <Spinner color="primary" size="lg" />
+        }}
+      />
     </div>
   }, [loadingVisible, spinnerRef])
   return [spinner]

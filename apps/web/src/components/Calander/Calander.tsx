@@ -60,7 +60,7 @@ export default function Calender({
   return (
     <div className="h-min border-medium border-divider p-4 rounded-medium flex flex-col gap-4 transition-size">
       <StateRender
-        condition={mode}
+        state={mode}
         render={{
           year: <YearCalander
             startYear={startDateObj.year}

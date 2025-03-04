@@ -5,21 +5,21 @@ type StateRenderType = { [k: KeyType]: ReactNode }
 
 interface StateRenderProps<P> {
   render: P
-  condition: keyof P
+  state: keyof P
 }
 
 interface StateRenderBooleanProps {
   render: { false?: ReactNode, true?: ReactNode }
-  condition: boolean
+  state: boolean
 }
 
-const StateRender = <P extends StateRenderType = StateRenderType>({ render, condition }: StateRenderProps<P>) => {
-  if (render[condition]) return <>{render[condition]}</>
+const StateRender = <P extends StateRenderType = StateRenderType>({ render, state }: StateRenderProps<P>) => {
+  if (render[state]) return <>{render[state]}</>
   return null
 }
 
-const StateRenderBoolean = ({ render, condition }: StateRenderBooleanProps) => {
-  return <>{condition ? render.true : render.false}</>
+const StateRenderBoolean = ({ render, state }: StateRenderBooleanProps) => {
+  return <>{state ? render.true : render.false}</>
 }
 
 StateRender.Boolean = StateRenderBoolean
