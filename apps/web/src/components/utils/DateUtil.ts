@@ -33,7 +33,7 @@ function getDaysByMonth(year: number) {
  * Calculate D{date} from 1999-12-31.
  * @param dateString target date string
  */
-function dateStringAsNumber(dateString: string) {
+function dateStringAsDateNumber(dateString: string) {
   const [year, month, date] = dateString.split('-').map(v => +v)
   let i = 2000
   let totalDays = 0
@@ -62,7 +62,7 @@ function dateStringAsNumber(dateString: string) {
  * Make Date string from D{date}.
  * @param daysNumber D{date}
  */
-function numberAsDateString(daysNumber: number) {
+function dateNumberAsDateString(daysNumber: number) {
   let nowDate = daysNumber
   let year = 2000, month = 0, day = 0
   // TODO: calc Year
@@ -106,6 +106,6 @@ export default {
   calcWeek,
   isLeapYear,
   getDaysByMonth,
-  dateStringAsNumber,
-  numberAsDateString
+  dateStringAsDateNumber,
+  dateNumberAsDateString
 }
