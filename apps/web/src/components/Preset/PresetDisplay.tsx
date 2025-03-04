@@ -22,18 +22,16 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
 
   const presetName = useMemo(() => preset.name, [preset])
   const exerciseList = useMemo(() => preset.exerciseList || [], [preset])
-  const exerciseListCount = useMemo(() => exerciseList.length || 0, [exerciseList])
 
   const presetMenu = usePresetMenu(presetId)
-  const menuObj = useMemo(() => presetMenu, [presetMenu])
 
-  return <MenuableAccordion menu={menuObj}>
+  return <MenuableAccordion menu={presetMenu}>
     {() => {
       return {
         title: <>
           <h3 className="font-medium text-xl mb-2">{presetName}</h3>
           <p className="text-gray-600 text-sm">
-            {exerciseListCount} exercises
+            {exerciseList.length} exercises
           </p>
         </>,
         content: <div role="grid" className="flex flex-col gap-y-2">

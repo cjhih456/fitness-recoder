@@ -20,7 +20,7 @@ export default function CreateSchedule() {
   const { gotoScheduleDetail } = useScheduleActions()
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
-  const [year, month, date] = useMemo(() => selectDate && selectDate.split('-').map(v => +v) || [0, 0, 0], [selectDate])
+  const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
   const alert = useAlert()
   const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
 

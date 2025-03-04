@@ -1,6 +1,6 @@
 import type { Schedule } from 'fitness-struct'
 import type { ReactNode } from 'react';
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion'
 import SimpleFitnessList from '@components/Fitness/SimpleFitnessList'
 import { useLazyGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
@@ -16,20 +16,17 @@ export interface ScheduleDisplayProps {
 export default function ScheduleDisplay({ title, date, schedule, children }: ScheduleDisplayProps) {
   const [getExerciseList, { data }] = useLazyGetExerciseListByScheduleId()
 
-  const scheduleId = useMemo(() => {
-    return schedule.id
-  }, [schedule])
   useEffect(() => {
     if (schedule)
       getExerciseList({
         variables: {
-          scheduleId: scheduleId
+          scheduleId: schedule.id
         }
       })
-  }, [schedule, getExerciseList, scheduleId])
-  const lazyExerciseList = useMemo(() => {
-    return data?.getExerciseListByScheduleId || []
-  }, [data])
+  }, [schedule, getExerciseList])
+
+  const lazyExerciseList = data?.getExerciseListByScheduleId || []
+
   const scheduleMenu = useScheduleMenu(schedule)
   return <MenuableAccordion menu={scheduleMenu}>
     {() => {
@@ -42,7 +39,7 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
         </>,
         content: <div className="flex flex-col gap-y-2">
           <SimpleFitnessList exerciseDataList={lazyExerciseList} />
-          {children && children(scheduleId, schedule?.type, date)}
+          {children && children(schedule.id, schedule?.type, date)}
         </div>
       }
     }}
