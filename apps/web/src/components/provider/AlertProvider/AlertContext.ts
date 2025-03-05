@@ -16,8 +16,8 @@ export interface AlertData {
   type: AlertType
   message: string
   important: boolean
-  confirm: BtnType | false
-  cancel: BtnType | false
+  confirm: BtnType
+  cancel: BtnType
   resolver: ((_value: boolean | PromiseLike<boolean>) => void) | undefined
 }
 
@@ -26,8 +26,8 @@ export type AlertContextType = {
     _type: AlertType,
     _message: string,
     _important: boolean,
-    _confirm?: BtnType | false,
-    _cancel?: BtnType | false,
+    _confirm?: BtnType,
+    _cancel?: BtnType,
   ) => Promise<boolean>
 }
 

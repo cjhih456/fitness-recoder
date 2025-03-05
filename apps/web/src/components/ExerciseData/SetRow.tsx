@@ -38,25 +38,22 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
   }, [set, lazyValue])
 
   function changeRepeat(v: string) {
-    setLazyValue((before) => {
-      const temp = { ...before }
-      temp.repeat = Number(v)
-      return temp
-    })
+    setLazyValue((before) => ({
+      ...before,
+      repeat: Number(v)
+    }))
   }
   function changeWeight(v: string) {
-    setLazyValue((before) => {
-      const temp = { ...before }
-      temp.weight = Number(v)
-      return temp
-    })
+    setLazyValue((before) => ({
+      ...before,
+      weight: Number(v)
+    }))
   }
   function changeIsDone(v: boolean) {
-    setLazyValue((before) => {
-      const temp = { ...before }
-      temp.isDone = v
-      return temp
-    })
+    setLazyValue((before) => ({
+      ...before,
+      isDone: v
+    }))
   }
   function removeSet() {
     onRemoveSet && onRemoveSet(set.id)

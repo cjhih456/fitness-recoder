@@ -1,6 +1,6 @@
 import type { Thema } from './ThemaProviderContext';
 import type { ReactNode } from 'react';
-import {  useState } from 'react';
+import { useState } from 'react';
 import ThemaProviderContext from './ThemaProviderContext';
 
 export interface ThemaProviderProps {
@@ -11,7 +11,8 @@ export const ThemaProvider = ({ children }: ThemaProviderProps) => {
   const [thema, setThema] = useState<Thema>('dark')
   const context = {
     setThema: setThema,
-    getThema: () => thema
+    getThema: () => thema,
+    toggleTheme: () => setThema((before) => before === 'dark' ? 'light' : 'dark')
   }
   return <ThemaProviderContext.Provider value={context}>
     {children}

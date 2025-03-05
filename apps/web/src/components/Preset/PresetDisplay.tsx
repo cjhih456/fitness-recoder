@@ -26,19 +26,17 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
   const presetMenu = usePresetMenu(presetId)
 
   return <MenuableAccordion menu={presetMenu}>
-    {() => {
-      return {
-        title: <>
-          <h3 className="font-medium text-xl mb-2">{presetName}</h3>
-          <p className="text-gray-600 text-sm">
-            {exerciseList.length} exercises
-          </p>
-        </>,
-        content: <div role="grid" className="flex flex-col gap-y-2">
-          <SimpleFitnessList exerciseDataList={exerciseList} />
-          <Button role="button" onClick={() => gotoDetail()}>{t('detail')}</Button>
-        </div>
-      }
-    }}
+    {() => ({
+      title: <>
+        <h3 className="font-medium text-xl mb-2">{presetName}</h3>
+        <p className="text-gray-600 text-sm">
+          {exerciseList.length} exercises
+        </p>
+      </>,
+      content: <div role="grid" className="flex flex-col gap-y-2">
+        <SimpleFitnessList exerciseDataList={exerciseList} />
+        <Button role="button" onClick={() => gotoDetail()}>{t('detail')}</Button>
+      </div>
+    })}
   </MenuableAccordion>
 }

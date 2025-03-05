@@ -39,9 +39,7 @@ export default function PresetNameInputDialog({ isOpen, onChange, children }: Pr
 
   return (
     <>
-      {
-        children && children(handleOpen)
-      }
+      {children && children(handleOpen)}
       <CModal
         closeButton
         isOpen={lazyOpen}
