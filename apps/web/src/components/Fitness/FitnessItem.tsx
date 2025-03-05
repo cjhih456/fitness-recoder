@@ -1,6 +1,7 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
 import { MdCheck } from 'react-icons/md';
 import useFitnessSimpleFragment from '@hooks/apollo/Fragments/useFitnessSimpleFragment';
+import StateRender from '@utils/StateRender';
 
 export interface FitnessItemProps {
   fitnessId: number
@@ -8,7 +9,7 @@ export interface FitnessItemProps {
   useSelect?: boolean
   onClick?: (_exercise: number, _isDetail: boolean) => void
 }
-export default function FitnessItem({ fitnessId, isSelected, onClick, useSelect }: FitnessItemProps) {
+export default function FitnessItem({ fitnessId, isSelected, onClick }: FitnessItemProps) {
   const [data] = useFitnessSimpleFragment(fitnessId)
 
   return <Card className="fitness-item scroll-mb-4 snap-start">
@@ -21,11 +22,16 @@ export default function FitnessItem({ fitnessId, isSelected, onClick, useSelect 
       <div role="contentinfo" className="flex flex-col flex-1 gap-y-2" onClick={() => {
         onClick && onClick(fitnessId, false)
       }}>
-        <h3 className="font-semibold"><span>{data.name}</span> {
-          useSelect && <span className="inline-block" >
-            {isSelected && <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white"><MdCheck size="0.75rem"></MdCheck></div>}
-          </span>
-        }</h3>
+        <h3 className="font-semibold">
+          <span>{data.name}</span>
+          <StateRender.Boolean
+            state={isSelected || false}
+            render={{
+              true: <span className="inline-block" >
+                <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white"><MdCheck size="0.75rem"></MdCheck></div>
+              </span>
+            }}
+          /></h3>
         <div>
           {data.category}
         </div>
