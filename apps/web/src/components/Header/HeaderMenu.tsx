@@ -38,7 +38,7 @@ export default function HeaderMenu() {
               startContent={<MdLightMode />}
               endContent={<MdDarkMode />}
               onValueChange={toggleTheme}
-            ></Switch>
+            />
           </HeaderMenuItem>
         </PopoverContent>
       </Popover>,

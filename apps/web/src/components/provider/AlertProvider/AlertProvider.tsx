@@ -36,9 +36,11 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
     }
   }, [displayMessage, alertMessages])
 
-  function alertAisplayChanged() {
+  function alertDisplayChange() {
     if (displayMessage?.important) return
-    displayMessage?.resolver && displayMessage.resolver(false)
+    if (displayMessage?.resolver) {
+      displayMessage.resolver(false)
+    }
     setDisplayMessage(undefined)
   }
   function cancelAction() {
@@ -55,7 +57,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
   return (
     <AlertContext.Provider value={contextValue}>
       {children}
-      <CModal isOpen={Boolean(displayMessage)} onOpenChange={alertAisplayChanged}>
+      <CModal isOpen={Boolean(displayMessage)} onOpenChange={alertDisplayChange}>
         <ModalContent>
           {() => <>
             <ModalHeader>{t('modal.title')}</ModalHeader>

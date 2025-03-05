@@ -1,6 +1,6 @@
 import type { BottomNaviType } from './BottomNaviContext';
 import type { ReactNode } from 'react';
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
@@ -19,8 +19,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
   const { getRoot } = useRootDom()
 
-  const changeBottomNaviVisibleFunc = useCallback((v: boolean) => setBottomNaviVisible(v), [])
-  const changeBottomNaviVisible = useDebounceCallback(changeBottomNaviVisibleFunc, 100)
+  const changeBottomNaviVisible = useDebounceCallback(setBottomNaviVisible, 100)
 
   const contextValue = {
     setBottomNavi: changeBottomNaviVisible
