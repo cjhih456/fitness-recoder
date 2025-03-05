@@ -2,6 +2,7 @@ import { Button, Checkbox, Input } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'
 import { useDebounce } from '@hooks/useDebounce'
+import StateRender from '@utils/StateRender'
 export interface SetRowProps {
   set: SetsStoreType
   index: number
@@ -11,7 +12,7 @@ export interface SetRowProps {
   readonly?: boolean
 }
 
-export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly }: SetRowProps) {
+export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly = false }: SetRowProps) {
   const [lazyValue, setLazyValue] = useState<SetsStoreType>({
     weight: 0,
     isDone: false,
@@ -59,13 +60,18 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
     onRemoveSet && onRemoveSet(set.id)
   }
 
-  return set ? <div className="flex gap-x-2 items-center justify-center">
+  return <div className="flex gap-x-2 items-center justify-center">
     <span className='min-w-12'>Set {index}</span>
     <Input value={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} isReadOnly={readonly}></Input>
     <Input value={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} isReadOnly={readonly}></Input>
     <Checkbox classNames={{ wrapper: 'mr-0' }} isSelected={lazyValue?.isDone} size='lg' onValueChange={changeIsDone} isReadOnly={readonly} radius='full'></Checkbox>
-    {readonly ? undefined : <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onClick={removeSet}>
-      <MdClear size="1.5rem"></MdClear>
-    </Button>}
-  </div> : <></>
+    <StateRender.Boolean
+      state={readonly}
+      render={{
+        false: <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onClick={removeSet}>
+          <MdClear size="1.5rem"></MdClear>
+        </Button>
+      }}
+    />
+  </div>
 }

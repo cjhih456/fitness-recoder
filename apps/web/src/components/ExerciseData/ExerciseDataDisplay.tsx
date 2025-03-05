@@ -2,6 +2,7 @@ import type { Exercise } from 'fitness-struct';
 import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
+import StateRender from '@utils/StateRender';
 import SetRow from './SetRow';
 
 export interface ExerciseDataDisplayProps {
@@ -13,7 +14,7 @@ export interface ExerciseDataDisplayProps {
 export default function ExerciseDataDisplay({
   exerciseData,
   hasDoneLastSet,
-  readonly
+  readonly = false
 }: ExerciseDataDisplayProps) {
   const { data: setDatas, refetch: getSetByExerciseId } = useGetSetListByExerciseId(exerciseData.id)
   const [createSet] = useCreateSet()
@@ -70,8 +71,13 @@ export default function ExerciseDataDisplay({
         ></SetRow>
       })}
     </div>
-    {readonly ? undefined : <div className="flex flex-row gap-x-2">
-      <Button className="flex-1" onClick={appendSet}>+ Append Set</Button>
-    </div>}
+    <StateRender.Boolean
+      state={readonly}
+      render={{
+        false: <div className="flex flex-row gap-x-2">
+          <Button className="flex-1" onClick={appendSet}>+ Append Set</Button>
+        </div>
+      }}
+    />
   </div>
 }

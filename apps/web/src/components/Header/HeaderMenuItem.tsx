@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { useMemo } from 'react'
+import StateRender from '@utils/StateRender'
 
 interface HeaderMenuItemProps {
   children?: ReactNode | ReactNode[]
@@ -8,20 +8,17 @@ interface HeaderMenuItemProps {
 }
 
 export default function HeaderMenuItem({ children, text, onClick }: HeaderMenuItemProps) {
-  const displayMenu = useMemo(() => {
-    const menu = []
-    if (text) {
-      menu.push(<span key={text} className='font-bold text-md'>
-        {text}
-      </span>)
-    }
-    if (children) menu.push(children)
-
-    return menu.flat()
-  }, [children, text])
   return (
     <div className='flex justify-between items-center h-12 w-36' onClick={onClick}>
-      {displayMenu}
+      <StateRender.Boolean
+        state={Boolean(text)}
+        render={{
+          true: <span key={text} className='font-bold text-md'>
+            {text}
+          </span>
+        }}
+      />
+      {children}
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, Dr
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
+import StateRender from '@utils/StateRender';
 
 interface MenuableAccordionProps {
   children: (_toggleAction?: () => void) => {
@@ -15,7 +16,7 @@ interface MenuableAccordionProps {
   onFocusChange?: (_t: boolean) => void
 }
 
-export default function MenuableAccordion({ children, menu, isFocus, onFocusChange }: MenuableAccordionProps) {
+export default function MenuableAccordion({ children, menu = [], isFocus, onFocusChange }: MenuableAccordionProps) {
   const [isSingleOpen, setIsLazyOpen] = useState<boolean>(false);
   const onToggleIsOpen = useCallback(() => {
     setIsLazyOpen(prev => {
@@ -43,26 +44,6 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
     return children(onToggleIsOpen)
   }, [children, onToggleIsOpen])
 
-  const menuItem = useMemo(() => {
-    if (!menu) return []
-    return menu.map((item, idx) => {
-      return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={item.action}>{item.name}</DropdownItem>
-    })
-  }, [menu])
-
-  const menuCache = useMemo(() => {
-    return menuItem.length ? <Dropdown type="menu" portalContainer={cardRef.current || document.body}>
-      <DropdownTrigger>
-        <Button role="menu" isIconOnly variant="light" size="sm" className="absolute top-3 right-3" >
-          <MdMoreVert className="w-5 h-5 text-gray-400" />
-        </Button>
-      </DropdownTrigger>
-      <DropdownMenu>
-        {menuItem}
-      </DropdownMenu>
-    </Dropdown> : <></>
-  }, [menuItem])
-
   const contentRef = useRef<HTMLDivElement | null>(null)
   const { height } = useResizeObserver({ ref: contentRef })
   const contentHeight = useMemo(() => `calc(${height}px + 1.5rem)`, [height])
@@ -70,7 +51,23 @@ export default function MenuableAccordion({ children, menu, isFocus, onFocusChan
   return (
     <Card ref={(ref) => cardRef.current = ref}>
       <CardBody className="relative overflow-hidden">
-        {menuCache}
+        <StateRender.Boolean
+          state={Boolean(menu.length)}
+          render={{
+            true: <Dropdown type="menu" portalContainer={cardRef.current || document.body}>
+              <DropdownTrigger>
+                <Button role="menu" isIconOnly variant="light" size="sm" className="absolute top-3 right-3" >
+                  <MdMoreVert className="w-5 h-5 text-gray-400" />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu>
+                {menu.map((item, idx) => {
+                  return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={item.action}>{item.name}</DropdownItem>
+                })}
+              </DropdownMenu>
+            </Dropdown>
+          }}
+        />
         <figure className="">
           {titleNode}
         </figure>

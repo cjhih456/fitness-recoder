@@ -80,20 +80,25 @@ export default function FitnessDataModalProvider({
           </ModalHeader>
           <ModalBody>
             {/* Preview Video */}
-            {fitnessVideoId && <div >
-              <iframe
-                width="100%"
-                height="315"
-                sandbox="allow-scripts allow-same-origin allow-presentation"
-                src={`https://www.youtube.com/embed/${fitnessVideoId}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                credentialless="true"
-              ></iframe>
-            </div>}
+            <StateRender.Boolean
+              state={Boolean(fitnessVideoId)}
+              render={{
+                true: <div >
+                  <iframe
+                    width="100%"
+                    height="315"
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    src={`https://www.youtube.com/embed/${fitnessVideoId}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    credentialless="true"
+                  ></iframe>
+                </div>
+              }}
+            />
             {/* Training History - optional */}
             <StateRender.Boolean
               state={Boolean(historyList.length)}
