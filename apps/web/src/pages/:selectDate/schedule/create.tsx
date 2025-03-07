@@ -22,10 +22,9 @@ export default function CreateSchedule() {
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
   const alert = useAlert()
-  const [exerciseIdxList, changeExerciseIdxList] = useState<number[]>([])
 
   const createScheduleWithExercisePlans = useCreateScheduleWithExercisePlans()
-  async function startFitnessTime() {
+  async function startFitnessTime(exerciseIdxList: number[]) {
     if (!selectDate) return
     LogEvent('save_new_schedule')
     const result = await createScheduleWithExercisePlans(year, month, date, exerciseIdxList)
@@ -40,7 +39,8 @@ export default function CreateSchedule() {
     }
   }
 
-  return <FitnessListEditor exerciseIdxList={exerciseIdxList} onChangeExerciseIdxList={changeExerciseIdxList}>
-    <Button onClick={startFitnessTime}>Save Exercise</Button>
-  </FitnessListEditor>
+  return <FitnessListEditor
+    saveBtnText='Save Exercise'
+    onSaveAction={startFitnessTime}
+  />
 }

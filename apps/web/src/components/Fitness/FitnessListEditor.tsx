@@ -1,22 +1,19 @@
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Button } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useLazyGetFitnessListByIds } from '@hooks/apollo/Fitness'
 import FitnessList from './FitnessList'
 import FitnessSearchModal from './FitnessSearchModal'
 
 interface FitnessListEditorProps {
   savedIdxData?: number[]
-  exerciseIdxList: number[]
-  onChangeExerciseIdxList?: Dispatch<SetStateAction<number[]>>
-  children?: ReactNode
+  onSaveAction: (_exerciseIdxList: number[], _savedIdxData: number[]) => void
+  saveBtnText: string
 }
 
 export default function FitnessListEditor({
-  savedIdxData,
-  exerciseIdxList,
-  onChangeExerciseIdxList,
-  children
+  savedIdxData = [],
+  saveBtnText,
+  onSaveAction
 }: FitnessListEditorProps) {
   const [getFitnessListByIds, { data: fitnessList }] = useLazyGetFitnessListByIds()
   const [dialogState, changeDialogState] = useState(false)
@@ -27,12 +24,10 @@ export default function FitnessListEditor({
     changeDialogState(true)
   }
 
-  const [lazyFitnessIds, changeLazyFitnessIds] = useState<number[]>([])
+  const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>([])
   useEffect(() => {
-    changeLazyFitnessIds(() => {
-      return ([] as number[]).concat(exerciseIdxList, savedIdxData ?? [])
-    })
-  }, [savedIdxData, exerciseIdxList])
+    setLazyFitnessIds(savedIdxData)
+  }, [savedIdxData])
 
   useEffect(() => {
     getFitnessListByIds({
@@ -46,8 +41,8 @@ export default function FitnessListEditor({
    * update seleted list
    * @param fitnessIds new selected list of exercise index
    */
-  function changeSelectedFitnessIds(fitnessIds: number[]) {
-    changeLazyFitnessIds((current) => {
+  const changeSelectedFitnessIds = useCallback((fitnessIds: number[]) => {
+    setLazyFitnessIds((current) => {
       const tempList = [] as number[]
       current.forEach(data => {
         if (fitnessIds.includes(data)) {
@@ -59,10 +54,9 @@ export default function FitnessListEditor({
           tempList.push(v)
         }
       })
-      onChangeExerciseIdxList && onChangeExerciseIdxList(tempList)
       return tempList
     })
-  }
+  }, [])
 
   return <>
     <FitnessSearchModal
@@ -77,7 +71,7 @@ export default function FitnessListEditor({
       </div>
       <div className="grid grid-cols-2 gap-x-2">
         <Button onClick={openSearchDialog}>Add Exercise</Button>
-        {children}
+        <Button onClick={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
       </div>
     </div>
   </>
