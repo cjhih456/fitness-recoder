@@ -1,4 +1,4 @@
-import useLazyGetExercisePresetWithListById from '@hooks/apollo/ExercisePreset/useLazyGetExercisePresetWithListById';
+import { useLazyGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset';
 import useFixedFragment from '@hooks/apollo/useFixedFragment';
 import ExercisePresetWithListFragment from '../../../graphQuery/Fragment/ExercisePresetWithListFragment';
 
