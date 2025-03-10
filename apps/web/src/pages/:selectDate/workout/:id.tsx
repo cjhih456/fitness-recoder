@@ -10,7 +10,7 @@ import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import useAlert from '@hooks/provider/Alert/useAlert'
 import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
 import usePageTracker from '@hooks/usePageTracker'
-import useScheduleHeaderMenu from '@hooks/useScheduleMenu/useScheduleHeaderMenu'
+import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
 import { dayjs, ScheduleType } from '@utils'
 
 export default function DisplayWorkout() {

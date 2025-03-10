@@ -19,7 +19,7 @@ export default function MonthCalander({
   const { validMonthWithValues } = useCalanderHook({ startDate, endDate })
 
   return <div className="grid grid-cols-4 gap-2">
-    {Array(12).fill(0).map((v, i) => {
+    {Array(12).fill(0).map((_v, i) => {
       const idx = i + 1
       return <Button
         key={`month-${idx}`}

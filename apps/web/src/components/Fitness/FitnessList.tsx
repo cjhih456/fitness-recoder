@@ -1,5 +1,4 @@
 import type { Exercise } from 'fitness-struct';
-import { useMemo } from 'react';
 import useFitnessDataModalProvider from '@hooks/provider/FitnessDataModal/useFitnessDataModalProvider';
 import useSpinner from '@hooks/useSpinner';
 import FitnessItem from './FitnessItem';
