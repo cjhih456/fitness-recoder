@@ -1,5 +1,3 @@
-import { Button } from '@nextui-org/react';
-import { useMemo, useState } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@components/Fitness/FitnessListEditor';
 import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
