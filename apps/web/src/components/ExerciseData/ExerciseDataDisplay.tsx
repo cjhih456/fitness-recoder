@@ -3,7 +3,7 @@ import { Button } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import StateRender from '@utils/StateRender';
-import SetRow from './SetRow';
+import SetRow from '../Sets/SetRow';
 
 export interface ExerciseDataDisplayProps {
   exerciseData: Exercise.Data
