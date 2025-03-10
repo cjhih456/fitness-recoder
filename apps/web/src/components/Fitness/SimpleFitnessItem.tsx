@@ -1,7 +1,7 @@
 import type { Exercise } from 'fitness-struct'
 import { useMemo } from 'react'
 import { MdCheck } from 'react-icons/md'
-import useFitnessSimpleFragment from '@hooks/apollo/Fitness/useFitnessSimpleFragment'
+import { useFitnessSimpleFragment } from '@hooks/apollo/Fitness'
 import { useGetSetListByExerciseId } from '@hooks/apollo/Set'
 import StateRender from '@utils/StateRender'
 

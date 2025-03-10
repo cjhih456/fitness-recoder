@@ -1,6 +1,6 @@
 import { Card, CardBody, Chip } from '@nextui-org/react';
 import { MdCheck } from 'react-icons/md';
-import useFitnessSimpleFragment from '@hooks/apollo/Fitness/useFitnessSimpleFragment';
+import { useFitnessSimpleFragment } from '@hooks/apollo/Fitness';
 import StateRender from '@utils/StateRender';
 
 export interface FitnessItemProps {
