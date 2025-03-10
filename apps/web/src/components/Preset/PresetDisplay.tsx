@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import MenuableAccordion from '@components/CustomComponent/MenuableAccordion';
 import SimpleFitnessList from '@components/Fitness/SimpleFitnessList';
-import useExercisePresetWithListFragment from '@hooks/apollo/Fragments/useExercisePresetWithListFragment';
+import useExercisePresetWithListFragment from '@hooks/apollo/ExercisePreset/useExercisePresetWithListFragment';
 import usePresetMenu from '@hooks/usePresetMenu';
 
 interface PresetDisplayProps {
