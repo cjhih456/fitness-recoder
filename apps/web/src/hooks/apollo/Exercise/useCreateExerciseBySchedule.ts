@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import CreateExerciseBySchedule from '@graphQuery/Mutation/Exercise/CreateExerciseBySchedule';
+import CreateExerciseBySchedule from '@hooks/apollo/Exercise/graphql/mutation/CreateExerciseBySchedule';
 
 export default function useCreateExerciseBySchedule() {
   return useMutation<

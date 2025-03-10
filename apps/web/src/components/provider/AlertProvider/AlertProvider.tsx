@@ -1,13 +1,13 @@
 import type { AlertContextType, AlertData, AlertProviderProps } from './AlertContext';
 import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CModal from '@components/CustomComponent/CModal'
 import AlertContext from './AlertContext'
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
   const { t } = useTranslation('alert')
-  const [alertMessageBuffer, appendAlertMessage] = useState<AlertData[]>([])
+  const [alertMessages, setAlertMessages] = useState<AlertData[]>([])
   const [displayMessage, setDisplayMessage] = useState<AlertData | undefined>()
 
   const contextValue: AlertContextType = {
@@ -16,31 +16,31 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
         type,
         message,
         important,
-        confirm: confirm || false,
-        cancel: cancel || false,
+        confirm,
+        cancel,
         resolver: undefined
       } as AlertData
       const promiser = new Promise<boolean>((resolve) => {
         tempObj.resolver = resolve
       })
-      appendAlertMessage([...alertMessageBuffer, tempObj])
+      setAlertMessages([...alertMessages, tempObj])
       return promiser
     }
   }
 
   useEffect(() => {
-    if (!displayMessage && alertMessageBuffer.length) {
-      const [tempMessage, ...alertMessageOther] = alertMessageBuffer
-      appendAlertMessage(alertMessageOther)
+    if (!displayMessage && alertMessages.length) {
+      const [tempMessage, ...alertMessageOther] = alertMessages
+      setAlertMessages(alertMessageOther)
       setDisplayMessage(tempMessage)
     }
-  }, [displayMessage, alertMessageBuffer])
+  }, [displayMessage, alertMessages])
 
-  const displayAlert = useMemo(() => Boolean(displayMessage), [displayMessage])
-
-  function alertAisplayChanged() {
+  function alertDisplayChange() {
     if (displayMessage?.important) return
-    displayMessage?.resolver && displayMessage.resolver(false)
+    if (displayMessage?.resolver) {
+      displayMessage.resolver(false)
+    }
     setDisplayMessage(undefined)
   }
   function cancelAction() {
@@ -57,7 +57,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
   return (
     <AlertContext.Provider value={contextValue}>
       {children}
-      <CModal isOpen={displayAlert} onOpenChange={alertAisplayChanged}>
+      <CModal isOpen={Boolean(displayMessage)} onOpenChange={alertDisplayChange}>
         <ModalContent>
           {() => <>
             <ModalHeader>{t('modal.title')}</ModalHeader>

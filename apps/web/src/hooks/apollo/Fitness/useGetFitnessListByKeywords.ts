@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Exercise } from 'fitness-struct'
 import { useQuery } from '@apollo/client'
-import GetFitnessListByKeywords from '@graphQuery/Query/Fitness/GetFitnessListByKeywords';
+import GetFitnessListByKeywords from '@hooks/apollo/Fitness/graphql/query/GetFitnessListByKeywords';
 import { FitnessMockData } from '.'
 
 export default function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {

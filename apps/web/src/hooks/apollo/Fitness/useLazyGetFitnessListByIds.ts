@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import GetFitnessLisyByIds from '@graphQuery/Query/Fitness/GetFitnessLisyByIds';
+import GetFitnessLisyByIds from '@hooks/apollo/Fitness/graphql/query/GetFitnessLisyByIds';
 
 export default function useLazyGetFitnessListByIds() {
   return useLazyQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(GetFitnessLisyByIds, {

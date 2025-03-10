@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useQuery } from '@apollo/client'
-import GetExerciseListByScheduleId from '@graphQuery/Query/Exercise/GetExerciseListByScheduleId';
+import GetExerciseListByScheduleId from '@hooks/apollo/Exercise/graphql/query/GetExerciseListByScheduleId';
 
 export default function useGetExerciseListByScheduleId(scheduleId: number) {
   return useQuery<

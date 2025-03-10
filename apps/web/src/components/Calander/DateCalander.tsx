@@ -18,9 +18,9 @@ const dateStr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 export default function DateCalander({ year, month, date, startDate, endDate, statesByDate = [], onChange }: DateCalanderProps) {
 
-  const { validDateWithNumber } = useCalanderHook({ startDate, endDate })
+  const { checkIsPossibleDate } = useCalanderHook({ startDate, endDate })
 
-  const thisMonthNumber = useMemo(() => DateUtil.dateStringAsNumber(`${year}-${month}-1`) - 1, [year, month])
+  const thisMonthNumber = useMemo(() => DateUtil.dateStringAsDateNumber(`${year}-${month}-1`) - 1, [year, month])
   const daysCount = DateUtil.getDaysByMonth(year)
   const startTemp = useMemo(() => {
     return DateUtil.calcWeek(year, month)
@@ -34,7 +34,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, st
       temp[Math.floor(i / 7)].push(<div key={`date-empty-${i}`} className="flex-1 w-10 h-10"></div>)
     } else {
       const todayDate = i - startTemp + 1
-      const disable = !validDateWithNumber(thisMonthNumber + todayDate)
+      const disable = !checkIsPossibleDate(thisMonthNumber + todayDate)
 
       temp[Math.floor(i / 7)].push(<Button
         key={`date-${todayDate}`}

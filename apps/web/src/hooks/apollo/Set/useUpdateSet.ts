@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import UpdateSetGql from '@graphQuery/Mutation/Set/UpdateSetGql';
+import UpdateSetGql from '@hooks/apollo/Set/graphql/mutation/UpdateSetGql';
 import { SetMockData } from '.'
 
 export default function useUpdateSet() {

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import CreateSetGql from '@graphQuery/Mutation/Set/CreateSetGql';
+import CreateSetGql from '@hooks/apollo/Set/graphql/mutation/CreateSetGql';
 import { SetMockData } from '.'
 
 export default function useCreateSet() {

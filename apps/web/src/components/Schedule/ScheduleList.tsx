@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
 import { ScheduleType } from '@utils';
+import StateRender from '@utils/StateRender';
 import ScheduleDisplay from './ScheduleDisplay';
 
 export interface ScheduleListProps {
@@ -24,56 +25,47 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
     setBreakDayBySchedule
   } = useScheduleActions()
 
-  const displaySchedule = useMemo(() => {
-    const breakSchedule = scheduleList?.getScheduleByDate?.find(v => v.type === ScheduleType.BREAK)
-    const displayList = []
+  const isBreakday = useMemo(() => scheduleList?.getScheduleByDate?.some(v => v.type === ScheduleType.BREAK) ?? false, [scheduleList])
 
-    if (breakSchedule) {
-      displayList.push(<div key="breakday-list"></div>)
-      return displayList
-    }
-    displayList.push(<div key="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
-      <Button
-        className="bg-success-300"
-        onClick={() => gotoCreateScheduleAction(choosenDate)}
-      >
-        {t('schedule.bottomBtn.addSchedule')}
-      </Button>
-      <Button
-        className="bg-danger-400"
-        isDisabled={Boolean(scheduleList?.getScheduleByDate.length)}
-        onClick={() => setBreakDayBySchedule(year, month, date)}
-      >
-        {t('schedule.bottomBtn.setBreakDay')}
-      </Button>
-    </div>)
-    if (scheduleList?.getScheduleByDate) {
-      displayList.push(scheduleList?.getScheduleByDate.map((schedule, idx) => {
-        return <ScheduleDisplay key={schedule.id} schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
-          {(id, type) => {
-            const btnList = []
-            if (type !== 'FINISH') {
-              btnList.push(<Button key={`${id}-modify`} onClick={() => gotoModifyScheduleAction(id, choosenDate)}>
-                {t('common:modify')}
+  return <StateRender.Boolean
+    state={isBreakday}
+    render={{
+      true: <div key="breakday-list"></div>,
+      false: [
+        <div key="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
+          <Button
+            className="bg-success-300"
+            onClick={() => gotoCreateScheduleAction(choosenDate)}
+          >
+            {t('schedule.bottomBtn.addSchedule')}
+          </Button>
+          <Button
+            className="bg-danger-400"
+            isDisabled={Boolean(scheduleList?.getScheduleByDate.length)}
+            onClick={() => setBreakDayBySchedule(year, month, date)}
+          >
+            {t('schedule.bottomBtn.setBreakDay')}
+          </Button>
+        </div>,
+        scheduleList?.getScheduleByDate.map((schedule, idx) => {
+          return <ScheduleDisplay key={schedule.id} schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
+            {(id, type) => {
+              const btnList = []
+              if (type !== 'FINISH') {
+                btnList.push(<Button key={`${id}-modify`} onClick={() => gotoModifyScheduleAction(id, choosenDate)}>
+                  {t('common:modify')}
+                </Button>)
+              }
+              btnList.push(<Button key={`${id}-detail`} onClick={() => gotoScheduleDetail(id, choosenDate)}>
+                {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
               </Button>)
-            }
-            btnList.push(<Button key={`${id}-detail`} onClick={() => gotoScheduleDetail(id, choosenDate)}>
-              {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
-            </Button>)
-            return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>
-              {btnList}
-            </div>
-          }}
-        </ScheduleDisplay>
-      }))
-    }
-
-    return displayList
-  }, [scheduleList, gotoCreateScheduleAction, gotoModifyScheduleAction, setBreakDayBySchedule, gotoScheduleDetail, choosenDate, year, month, date, t])
-
-  return (
-    <>
-      {displaySchedule}
-    </>
-  );
+              return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>
+                {btnList}
+              </div>
+            }}
+          </ScheduleDisplay>
+        })
+      ]
+    }}
+  />;
 }

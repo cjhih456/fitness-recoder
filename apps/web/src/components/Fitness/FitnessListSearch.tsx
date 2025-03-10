@@ -45,7 +45,7 @@ export default function FitnessListSearch({
   return <div className="flex flex-col flex-nowrap relative overflow-y-hidden overflow-x-visible">
     <div className={`flex flex-col sticky top-0 left-0 right-0 gap-y-2 mt-1 ${xSpacing} ${bgString}`}>
       <div className="flex justify-center items-center gap-x-4">
-        {searchPrefix ?? undefined}
+        {searchPrefix}
         <Input
           variant='flat'
           placeholder='Search'

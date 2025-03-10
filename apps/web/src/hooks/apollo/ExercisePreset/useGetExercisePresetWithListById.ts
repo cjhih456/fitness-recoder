@@ -1,9 +1,9 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useQuery } from '@apollo/client'
-import GetExercisePresetWithListById from '@graphQuery/Query/ExercisePreset/GetExercisePresetWithListById';
+import GetExercisePresetWithListById from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListById';
 import { ExercisePresetMockData } from '.'
 
-export function useGetExercisePresetWithListById(id: number) {
+export default function useGetExercisePresetWithListById(id: number) {
   return useQuery<
     GetExercisePresetWithListByIdResponse,
     GetExercisePresetWithListByIdVariable

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import UpdateExerciseListByExercisePresetId from '@graphQuery/Mutation/Exercise/UpdateExerciseListByExercisePresetId';
+import UpdateExerciseListByExercisePresetId from '@hooks/apollo/Exercise/graphql/mutation/UpdateExerciseListByExercisePresetId';
 
 export default function useUpdateExerciseListByExercisePresetId() {
   return useMutation<

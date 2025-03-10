@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import CopyExercisePresetFromScheduleGql from '@graphQuery/Mutation/ExercisePreset/CopyExercisePresetFromScheduleGql';
+import CopyExercisePresetFromScheduleGql from '@hooks/apollo/ExercisePreset/graphql/mutation/CopyExercisePresetFromScheduleGql';
 import { ExercisePresetMockData } from '.'
 
 export default function useCopyExercisePresetFromSchedule() {

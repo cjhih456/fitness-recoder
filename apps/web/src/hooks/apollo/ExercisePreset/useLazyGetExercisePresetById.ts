@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import GetExercisePresetById from '@graphQuery/Query/ExercisePreset/GetExercisePresetById';
+import GetExercisePresetById from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetById';
 
 export default function useLazyGetExercisePresetById() {
   return useLazyQuery<

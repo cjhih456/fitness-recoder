@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useQuery } from '@apollo/client'
-import GetScheduleByIdGql from '@graphQuery/Query/Schedule/GetScheduleByIdGql';
+import GetScheduleByIdGql from '@hooks/apollo/Schedule/graphql/query/GetScheduleByIdGql';
 import { ScheduleMockData } from '.'
 
 export default function useGetScheduleById(id: number) {

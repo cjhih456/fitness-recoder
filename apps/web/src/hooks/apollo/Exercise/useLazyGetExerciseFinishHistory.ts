@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import GetExerciseFinishHistory from '@graphQuery/Query/Exercise/GetExerciseFinishHistory';
+import GetExerciseFinishHistory from '@hooks/apollo/Exercise/graphql/query/GetExerciseFinishHistory';
 
 export default function useLazyGetExerciseFinishHistory() {
   return useLazyQuery<

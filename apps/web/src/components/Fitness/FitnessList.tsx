@@ -23,8 +23,6 @@ export default function FitnessList({
   onLoadMore }: FitnessListProps) {
   const { showModal } = useFitnessDataModalProvider()
 
-  const useSelect = useMemo(() => Boolean(selectedFitnessIds), [selectedFitnessIds])
-
   /**
    * 
    * @param fitnessId Fitness Id
@@ -47,7 +45,6 @@ export default function FitnessList({
       <FitnessItem
         key={fitness.id}
         fitnessId={fitness.id}
-        useSelect={useSelect}
         isSelected={selectedFitnessIds?.includes(fitness.id)}
         onClick={clickFitness}
       ></FitnessItem>

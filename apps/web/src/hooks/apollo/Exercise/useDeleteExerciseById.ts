@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import DeleteExerciseById from '@graphQuery/Mutation/Exercise/DeleteExerciseById';
+import DeleteExerciseById from '@hooks/apollo/Exercise/graphql/mutation/DeleteExerciseById';
 
 export default function useDeleteExerciseById() {
   return useMutation<

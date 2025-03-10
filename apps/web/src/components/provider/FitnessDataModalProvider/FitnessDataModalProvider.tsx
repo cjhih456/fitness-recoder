@@ -5,7 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CModal from '@components/CustomComponent/CModal';
 import { useLazyGetExerciseFinishHistory } from '@hooks/apollo/Exercise';
-import useFitnessFragment from '@hooks/apollo/Fragments/useFitnessFragment';
+import { useFitnessFragment } from '@hooks/apollo/Fitness';
+import StateRender from '@utils/StateRender';
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
 import { ModalContext } from './FitnessDataModalContext';
 import FitnessPreviewVideo from './FitnessPreviewVideo';
@@ -29,12 +30,9 @@ export default function FitnessDataModalProvider({
 
   // History Datas
   const [loadHistory, { data: historyData }] = useLazyGetExerciseFinishHistory()
-  const history = useMemo(() => {
-    return historyData?.getExerciseFinishHistory || []
-  }, [historyData])
   const historyList = useMemo(() => {
-    return history.map((h) => <DisplayFitnessFinishHistory history={h} key={h.id} />)
-  }, [history])
+    return (historyData?.getExerciseFinishHistory || []).map((h) => <DisplayFitnessFinishHistory history={h} key={h.id} />)
+  }, [historyData])
 
   // Fitness Datas
   const [fitnessData] = useFitnessFragment(fitnessId || 0)
@@ -82,29 +80,39 @@ export default function FitnessDataModalProvider({
           </ModalHeader>
           <ModalBody>
             {/* Preview Video */}
-            {fitnessVideoId && <div >
-              <iframe
-                width="100%"
-                height="315"
-                sandbox="allow-scripts allow-same-origin allow-presentation"
-                src={`https://www.youtube.com/embed/${fitnessVideoId}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                credentialless="true"
-              ></iframe>
-            </div>}
+            <StateRender.Boolean
+              state={Boolean(fitnessVideoId)}
+              render={{
+                true: <div >
+                  <iframe
+                    width="100%"
+                    height="315"
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    src={`https://www.youtube.com/embed/${fitnessVideoId}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    credentialless="true"
+                  ></iframe>
+                </div>
+              }}
+            />
             {/* Training History - optional */}
-            {history.length ? <div className="max-w-full">
-              <p className="font-bold text-lg">
-                {t('history')}
-              </p>
-              <ScrollShadow orientation='horizontal'>
-                {historyList}
-              </ScrollShadow>
-            </div> : undefined}
+            <StateRender.Boolean
+              state={Boolean(historyList.length)}
+              render={{
+                true: <div className="max-w-full">
+                  <p className="font-bold text-lg">
+                    {t('history')}
+                  </p>
+                  <ScrollShadow orientation='horizontal'>
+                    {historyList}
+                  </ScrollShadow>
+                </div>
+              }}
+            />
             {/* Instructions */}
             <div>
               <p className="font-bold text-lg">{t('instructions')}</p>

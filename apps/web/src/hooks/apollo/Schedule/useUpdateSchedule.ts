@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import UpdateScheduleGql from '@graphQuery/Mutation/Schedule/UpdateScheduleGql';
+import UpdateScheduleGql from '@hooks/apollo/Schedule/graphql/mutation/UpdateScheduleGql';
 import { ScheduleMockData } from '.'
 
 export default function useUpdateSchedule() {

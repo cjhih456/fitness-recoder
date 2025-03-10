@@ -9,7 +9,7 @@ export interface useCalanderHookProps {
 const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
 
   const cleanDate = useCallback((date: string) => {
-    return DateUtil.numberAsDateString(DateUtil.dateStringAsNumber(date))
+    return DateUtil.dateNumberAsDateString(DateUtil.dateStringAsDateNumber(date))
   }, [])
 
   // StartDate
@@ -21,7 +21,7 @@ const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
     }
   }, [startDateDisplay])
   const startNum = useMemo(() => {
-    return DateUtil.dateStringAsNumber(startDateDisplay)
+    return DateUtil.dateStringAsDateNumber(startDateDisplay)
   }, [startDateDisplay])
 
   // EndDate
@@ -33,38 +33,32 @@ const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
     }
   }, [endDateDisplay])
   const endNum = useMemo(() => {
-    return DateUtil.dateStringAsNumber(endDateDisplay)
+    return DateUtil.dateStringAsDateNumber(endDateDisplay)
   }, [endDateDisplay])
 
   const validMonthWithValues = useCallback((year: number, month: number) => {
     const startDateByMonths = DateUtil.getDaysByMonth(startDateObj.year)
-    const startNum = DateUtil.dateStringAsNumber(`${startDateObj.year}-${startDateObj.month}-${startDateByMonths[startDateObj.month]}`)
-    const endNum = DateUtil.dateStringAsNumber(`${endDateObj.year}-${endDateObj.month}-1`)
+    const startNum = DateUtil.dateStringAsDateNumber(`${startDateObj.year}-${startDateObj.month}-${startDateByMonths[startDateObj.month - 1]}`)
+
+    const endNum = DateUtil.dateStringAsDateNumber(`${endDateObj.year}-${endDateObj.month}-1`)
     const dateByMonths = DateUtil.getDaysByMonth(year)
-    const targetSNum = DateUtil.dateStringAsNumber(`${year}-${month}-${dateByMonths[month]}`)
-    const targetENum = DateUtil.dateStringAsNumber(`${year}-${month}-1`)
+    const targetSNum = DateUtil.dateStringAsDateNumber(`${year}-${month}-${dateByMonths[month]}`)
+    const targetENum = DateUtil.dateStringAsDateNumber(`${year}-${month}-1`)
     return targetSNum < startNum || endNum < targetENum
   }, [startDateObj, endDateObj])
-
-  /**
-   * Validation Check between D{date} from 1999-12-31 is possible.
-   */
-  const validDateWithNumber = useCallback((date: number) => {
-    return startNum <= date && date <= endNum
-  }, [startNum, endNum])
   /**
      * Validation Check between D{date} from 1999-12-31 is possible.
      */
-  const validDateWithString = useCallback((date: string) => {
-    const num = DateUtil.dateStringAsNumber(date)
-    return validDateWithNumber(num)
-  }, [validDateWithNumber])
+  const checkIsPossibleDate = useCallback((date: number | string) => {
+    const dateNumber = typeof date === 'number' ? date : DateUtil.dateStringAsDateNumber(date)
+    return startNum <= dateNumber && dateNumber <= endNum
+  }, [startNum, endNum])
 
   const calcPossibleDate = useCallback((date: string) => {
-    const chooseNum = DateUtil.dateStringAsNumber(date)
+    const chooseNum = DateUtil.dateStringAsDateNumber(date)
     const possibleDateNum = Math.max(startNum, Math.min(chooseNum, endNum))
 
-    return DateUtil.numberAsDateString(possibleDateNum)
+    return DateUtil.dateNumberAsDateString(possibleDateNum)
 
   }, [startNum, endNum])
 
@@ -76,8 +70,7 @@ const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
     endDateObj,
 
     validMonthWithValues,
-    validDateWithString,
-    validDateWithNumber,
+    checkIsPossibleDate,
 
     calcPossibleDate,
   }

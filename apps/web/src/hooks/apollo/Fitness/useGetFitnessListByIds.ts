@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useQuery } from '@apollo/client'
-import GetFitnessLisyByIds from '@graphQuery/Query/Fitness/GetFitnessLisyByIds';
+import GetFitnessLisyByIds from '@hooks/apollo/Fitness/graphql/query/GetFitnessLisyByIds';
 import { FitnessMockData } from '.'
 
 export default function useGetFitnessListByIds(ids: number[]) {

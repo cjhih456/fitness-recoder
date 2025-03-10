@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import DeleteScheduleGql from '@graphQuery/Mutation/Schedule/DeleteScheduleGql';
+import DeleteScheduleGql from '@hooks/apollo/Schedule/graphql/mutation/DeleteScheduleGql';
 import { ScheduleMockData } from '.'
 
 export default function useDeleteSchedule() {
