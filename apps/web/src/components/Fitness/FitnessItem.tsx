@@ -6,10 +6,13 @@ import StateRender from '@utils/StateRender';
 export interface FitnessItemProps {
   fitnessId: number
   isSelected?: boolean
-  useSelect?: boolean
   onClick?: (_exercise: number, _isDetail: boolean) => void
 }
-export default function FitnessItem({ fitnessId, isSelected, onClick }: FitnessItemProps) {
+export default function FitnessItem({
+  fitnessId,
+  isSelected = false,
+  onClick
+}: FitnessItemProps) {
   const [data] = useFitnessSimpleFragment(fitnessId)
 
   return <Card className="fitness-item scroll-mb-4 snap-start">
@@ -25,10 +28,12 @@ export default function FitnessItem({ fitnessId, isSelected, onClick }: FitnessI
         <h3 className="font-semibold">
           <span>{data.name}</span>
           <StateRender.Boolean
-            state={isSelected || false}
+            state={isSelected}
             render={{
               true: <span className="inline-block" >
-                <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white"><MdCheck size="0.75rem"></MdCheck></div>
+                <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">
+                  <MdCheck size="0.75rem"></MdCheck>
+                </div>
               </span>
             }}
           /></h3>
