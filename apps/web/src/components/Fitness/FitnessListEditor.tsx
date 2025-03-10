@@ -26,7 +26,8 @@ export default function FitnessListEditor({
 
   const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>([])
   useEffect(() => {
-    setLazyFitnessIds(savedIdxData)
+    if (savedIdxData.length)
+      setLazyFitnessIds(savedIdxData)
   }, [savedIdxData])
 
   useEffect(() => {
