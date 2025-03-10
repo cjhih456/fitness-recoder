@@ -2,15 +2,15 @@ import type { DocumentNode } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client';
 import { createFragmentRegistry } from '@apollo/client/cache';
 import { offsetLimitPagination } from '@apollo/client/utilities';
-import ExerciseFragment from '@graphQuery/Fragment/ExerciseFragment';
-import ExercisePresetFragment from '@graphQuery/Fragment/ExercisePresetFragment';
-import ExercisePresetWithListFragment from '@graphQuery/Fragment/ExercisePresetWithListFragment';
-import FitnessFragment from '@graphQuery/Fragment/FitnessFragment';
-import FitnessSimpleFragment from '@graphQuery/Fragment/FitnessSimpleFragment';
-import ScheduleSimpleFragment from '@graphQuery/Fragment/ScheduleSimpleFragment';
-import ScheduleTimeFragment from '@graphQuery/Fragment/ScheduleTimeFragment';
-import SetsFragment from '@graphQuery/Fragment/SetsFragment';
-import GetFitnessLisyByIds from '@graphQuery/Query/Fitness/GetFitnessLisyByIds';
+import ExerciseFragment from '@hooks/apollo/Exercise/graphql/fragment/ExerciseFragment';
+import ExercisePresetFragment from '@hooks/apollo/ExercisePreset/graphql/fragments/ExercisePresetFragment';
+import ExercisePresetWithListFragment from '@hooks/apollo/ExercisePreset/graphql/fragments/ExercisePresetWithListFragment';
+import FitnessFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessFragment';
+import FitnessSimpleFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessSimpleFragment';
+import GetFitnessLisyByIds from '@hooks/apollo/Fitness/graphql/query/GetFitnessLisyByIds';
+import ScheduleSimpleFragment from '@hooks/apollo/Schedule/graphql/fragment/ScheduleSimpleFragment';
+import ScheduleTimeFragment from '@hooks/apollo/Schedule/graphql/fragment/ScheduleTimeFragment';
+import SetsFragment from '@hooks/apollo/Set/graphql/fragment/SetsFragment';
 
 const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
   import: 'default'

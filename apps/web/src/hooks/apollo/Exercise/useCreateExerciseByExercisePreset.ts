@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Exercise } from 'fitness-struct'
 import { useMutation } from '@apollo/client'
-import CreateExerciseByExercisePreset from '@graphQuery/Mutation/Exercise/CreateExerciseByExercisePreset';
+import CreateExerciseByExercisePreset from '@hooks/apollo/Exercise/graphql/mutation/CreateExerciseByExercisePreset';
 import { ExerciseMockData } from '.'
 
 export default function useCreateExerciseByExercisePreset() {

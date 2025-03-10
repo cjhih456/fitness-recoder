@@ -1,4 +1,4 @@
-import FitnessSimpleFragment from '@graphQuery/Fragment/FitnessSimpleFragment';
+import FitnessSimpleFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessSimpleFragment';
 import { useLazyGetFitnessSimpleById } from '@hooks/apollo/Fitness';
 import useFixedFragment from '@hooks/apollo/useFixedFragment';
 

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import CreateExercisePresetGql from '@graphQuery/Mutation/ExercisePreset/CreateExercisePresetGql';
+import CreateExercisePresetGql from '@hooks/apollo/ExercisePreset/graphql/mutation/CreateExercisePresetGql';
 import { ExercisePresetMockData } from '.'
 
 export default function useCreateExercisePreset() {

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import DeleteExercisePresetGql from '@graphQuery/Mutation/ExercisePreset/DeleteExercisePresetGql';
+import DeleteExercisePresetGql from '@hooks/apollo/ExercisePreset/graphql/mutation/DeleteExercisePresetGql';
 import { ExercisePresetMockData } from '.'
 
 export default function useDeleteExercisePreset() {

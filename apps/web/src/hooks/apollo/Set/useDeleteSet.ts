@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client';
-import DeleteSetGql from '@graphQuery/Mutation/Set/DeleteSetGql';
+import DeleteSetGql from '@hooks/apollo/Set/graphql/mutation/DeleteSetGql';
 import { SetMockData } from '.';
 
 export default function useDeleteSet() {
