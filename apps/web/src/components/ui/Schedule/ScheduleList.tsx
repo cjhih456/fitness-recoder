@@ -30,9 +30,9 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   return <StateRender.Boolean
     state={isBreakday}
     render={{
-      true: <div key="breakday-list"></div>,
+      true: <div role="breakday-list"></div>,
       false: [
-        <div key="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
+        <div role="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
           <Button
             className="bg-success-300"
             onPress={() => gotoCreateScheduleAction(choosenDate)}
@@ -49,20 +49,19 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
         </div>,
         scheduleList?.getScheduleByDate.map((schedule, idx) => {
           return <ScheduleDisplay key={schedule.id} schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
-            {(id, type) => {
-              const btnList = []
-              if (type !== 'FINISH') {
-                btnList.push(<Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
-                  {t('common:modify')}
-                </Button>)
-              }
-              btnList.push(<Button key={`${id}-detail`} onPress={() => gotoScheduleDetail(id, choosenDate)}>
+            {(id, type) => <div className="grid grid-flow-col auto-cols-auto gap-x-4">
+              <StateRender.Boolean
+                state={type !== 'FINISH'}
+                render={{
+                  true: <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
+                    {t('common:modify')}
+                  </Button>
+                }}
+              />
+              <Button key={`${id}-detail`} onPress={() => gotoScheduleDetail(id, choosenDate)}>
                 {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
-              </Button>)
-              return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>
-                {btnList}
-              </div>
-            }}
+              </Button>
+            </div>}
           </ScheduleDisplay>
         })
       ]
