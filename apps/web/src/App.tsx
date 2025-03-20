@@ -16,11 +16,11 @@ function App() {
         <BottomNaviProvider>
           <FitnessDataModalProvider>
             <AlertProvider>
-              <DefaultLayout>
-                <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
+              <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
+                <DefaultLayout>
                   <CRouter></CRouter>
-                </Suspense>
-              </DefaultLayout>
+                </DefaultLayout>
+              </Suspense>
             </AlertProvider>
           </FitnessDataModalProvider>
         </BottomNaviProvider>
