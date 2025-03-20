@@ -1,7 +1,6 @@
-import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useEffect } from 'react'
 import useIdToggle from '@hooks/useIdToggle'
-import CModal from '@ui/CustomComponent/CModal'
 import FitnessListSearch from './FitnessListSearch'
 
 export interface FitnessSearchModalProps {
@@ -29,7 +28,7 @@ export default function FitnessSearchModal({
     if (!selectedFitnessIds) return
     onChangeFitnessIds && onChangeFitnessIds(lazySelectedFitnessIds)
   }
-  return <CModal
+  return <Modal
     isOpen={isOpen}
     placement='top'
     scrollBehavior="inside"
@@ -53,5 +52,5 @@ export default function FitnessSearchModal({
       </>
       }
     </ModalContent>
-  </CModal>
+  </Modal>
 }

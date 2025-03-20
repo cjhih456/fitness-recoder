@@ -1,8 +1,7 @@
 import type { AlertContextType, AlertData, AlertProviderProps } from './AlertContext';
-import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import CModal from '@ui/CustomComponent/CModal'
 import AlertContext from './AlertContext'
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
@@ -57,7 +56,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
   return (
     <AlertContext.Provider value={contextValue}>
       {children}
-      <CModal isOpen={Boolean(displayMessage)} onOpenChange={alertDisplayChange}>
+      <Modal isOpen={Boolean(displayMessage)} onOpenChange={alertDisplayChange}>
         <ModalContent>
           {() => <>
             <ModalHeader>{t('modal.title')}</ModalHeader>
@@ -82,7 +81,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
             </ModalFooter>
           </>}
         </ModalContent>
-      </CModal>
+      </Modal>
     </AlertContext.Provider>
   )
 }

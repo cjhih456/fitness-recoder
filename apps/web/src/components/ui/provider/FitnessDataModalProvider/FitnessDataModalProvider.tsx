@@ -1,11 +1,10 @@
 import type { ModalContextType } from './FitnessDataModalContext';
 import type { ReactNode } from 'react';
-import { Button, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLazyGetExerciseFinishHistory } from '@hooks/apollo/Exercise';
 import { useFitnessFragment } from '@hooks/apollo/Fitness';
-import CModal from '@ui/CustomComponent/CModal';
 import StateRender from '@utils/StateRender';
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory';
 import { ModalContext } from './FitnessDataModalContext';
@@ -65,7 +64,7 @@ export default function FitnessDataModalProvider({
 
   return <ModalContext.Provider value={contextValue}>
     {children}
-    <CModal
+    <Modal
       isOpen={lazyOpen}
       onOpenChange={(v) => {
         setFitnessId(v ? fitnessId : undefined)
@@ -133,6 +132,6 @@ export default function FitnessDataModalProvider({
           </ModalFooter>
         </>}
       </ModalContent>
-    </CModal>
+    </Modal>
   </ModalContext.Provider>
 }

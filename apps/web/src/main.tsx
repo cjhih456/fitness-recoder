@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { useApollo } from '@hooks/apollo/useApollo'
 import HeaderProvider from '@provider/Header/HeaderProvider'
-import RootProvider from '@provider/RootDom/RootDomProvider'
 import ThemeProvider from '@provider/Theme/ThemeProvider'
 import Firebase from '@service/firebase'
 import { baseURL } from '@utils'
@@ -18,11 +17,9 @@ Worker().then(async () => {
       <BrowserRouter basename={baseURL('/')}>
         <ThemeProvider>
           <HeaderProvider>
-            <RootProvider>
-              <ApolloProvider client={apolloClient}>
-                <App />
-              </ApolloProvider>
-            </RootProvider>
+            <ApolloProvider client={apolloClient}>
+              <App />
+            </ApolloProvider>
           </HeaderProvider>
         </ThemeProvider>
       </BrowserRouter>

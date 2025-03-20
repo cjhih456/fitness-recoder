@@ -2,13 +2,11 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui
 import { useMemo, useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
 import useHeaderContext from '@provider/Header/hooks/useHeaderContext';
-import useRootDom from '@provider/RootDom/hooks/useRootDom';
 import useTheme from '@provider/Theme/hooks/useTheme';
 import StateRender from '@utils/StateRender';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {
-  const { getRoot } = useRootDom()
 
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
@@ -24,7 +22,7 @@ export default function HeaderMenu() {
   return <StateRender.Boolean
     state={Boolean(headerMenu.length)}
     render={{
-      true: <Popover isOpen={isOpen} portalContainer={getRoot()} onOpenChange={(open) => setIsOpen(open)}>
+      true: <Popover isOpen={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <PopoverTrigger>
           <Button isIconOnly variant='light' radius='full' >
             <MdMoreVert size="2rem" preserveAspectRatio="xMidYMid slice" />

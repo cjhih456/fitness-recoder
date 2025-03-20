@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
-import { Button, Input, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import CModal from '@ui/CustomComponent/CModal'
 
 interface IonChange {
   (_v: false): void | Promise<void>
@@ -40,7 +39,7 @@ export default function PresetNameInputDialog({ isOpen, onChange, children }: Pr
   return (
     <>
       {children && children(handleOpen)}
-      <CModal
+      <Modal
         closeButton
         isOpen={lazyOpen}
         onOpenChange={handleClose}
@@ -57,7 +56,7 @@ export default function PresetNameInputDialog({ isOpen, onChange, children }: Pr
             <Button onClick={handleSave}>Save</Button>
           </ModalFooter>
         </ModalContent>
-      </CModal>
+      </Modal>
     </>
   )
 }

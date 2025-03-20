@@ -1,11 +1,9 @@
 import type { BottomNaviType } from './BottomNaviContext';
 import type { ReactNode } from 'react';
 import { useState } from 'react'
-import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import { useDebounceCallback } from 'usehooks-ts'
-import useRootDom from '@provider/RootDom/hooks/useRootDom';
 import MenuButton from '@ui/CustomComponent/MenuButton'
 import StateRender from '@utils/StateRender';
 import BottomNaviContext from './BottomNaviContext'
@@ -17,7 +15,6 @@ export interface BottomNaviProviderProps {
 export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   const { t } = useTranslation('bottom')
   const [bottomNaviVisible, setBottomNaviVisible] = useState<boolean>(false)
-  const { getRoot } = useRootDom()
 
   const changeBottomNaviVisible = useDebounceCallback(setBottomNaviVisible, 100)
 
@@ -28,7 +25,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
   return (
     <BottomNaviContext.Provider value={contextValue}>
       {children}
-      {createPortal(<footer className="fixed bottom-0 left-0 right-0 flex justify-center bg-background">
+      <footer className="fixed bottom-0 left-0 right-0 flex justify-center bg-background">
         <StateRender.Boolean
           state={bottomNaviVisible}
           render={{
@@ -40,7 +37,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
             </div>
           }}
         />
-      </footer>, getRoot(), 'bottom-navi')}
+      </footer>
     </BottomNaviContext.Provider>
   )
 }
