@@ -21,7 +21,7 @@ const meta = {
       Object.assign(options.args, { isOpen: isOpen, onOpenChange: changeState })
 
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
-        <Button onClick={() => changeState(true)}>Open</Button>
+        <Button onPress={() => changeState(true)}>Open</Button>
         <Story {...options} />
       </div>
     }

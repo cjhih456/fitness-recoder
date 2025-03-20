@@ -35,14 +35,14 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
         <div key="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
           <Button
             className="bg-success-300"
-            onClick={() => gotoCreateScheduleAction(choosenDate)}
+            onPress={() => gotoCreateScheduleAction(choosenDate)}
           >
             {t('schedule.bottomBtn.addSchedule')}
           </Button>
           <Button
             className="bg-danger-400"
             isDisabled={Boolean(scheduleList?.getScheduleByDate.length)}
-            onClick={() => setBreakDayBySchedule(year, month, date)}
+            onPress={() => setBreakDayBySchedule(year, month, date)}
           >
             {t('schedule.bottomBtn.setBreakDay')}
           </Button>
@@ -52,11 +52,11 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
             {(id, type) => {
               const btnList = []
               if (type !== 'FINISH') {
-                btnList.push(<Button key={`${id}-modify`} onClick={() => gotoModifyScheduleAction(id, choosenDate)}>
+                btnList.push(<Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
                   {t('common:modify')}
                 </Button>)
               }
-              btnList.push(<Button key={`${id}-detail`} onClick={() => gotoScheduleDetail(id, choosenDate)}>
+              btnList.push(<Button key={`${id}-detail`} onPress={() => gotoScheduleDetail(id, choosenDate)}>
                 {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
               </Button>)
               return <div className={['grid', 'grid-cols-' + btnList.length, 'gap-x-4'].join(' ')}>

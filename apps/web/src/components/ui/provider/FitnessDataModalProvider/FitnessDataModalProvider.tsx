@@ -124,7 +124,7 @@ export default function FitnessDataModalProvider({
           </ModalBody>
           <ModalFooter>
             {/* CloseBtn */}
-            <Button onClick={() => {
+            <Button onPress={() => {
               onCloseAction()
             }}>
               {t('common:close')}

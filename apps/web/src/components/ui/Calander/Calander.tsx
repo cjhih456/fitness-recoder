@@ -70,9 +70,9 @@ export default function Calender({
           />,
           month: [
             <div key='month-top' className="flex gap-2 justify-center content-center">
-              <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year - 1)}> - </Button>
-              <Button className='font-bold' onClick={() => onChangeMode('year')}>{choosenDay.year}</Button>
-              <Button isIconOnly radius='full' onClick={() => changeYear(choosenDay.year + 1)}> + </Button>
+              <Button isIconOnly radius='full' onPress={() => changeYear(choosenDay.year - 1)}> - </Button>
+              <Button className='font-bold' onPress={() => onChangeMode('year')}>{choosenDay.year}</Button>
+              <Button isIconOnly radius='full' onPress={() => changeYear(choosenDay.year + 1)}> + </Button>
             </div>,
             <MonthCalander
               key="month-picker"
@@ -85,11 +85,11 @@ export default function Calender({
           ],
           date: [
             <div key='date-top' className="flex gap-2 justify-center content-center">
-              <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month - 1)}> - </Button>
-              <Button className='font-bold' onClick={() => onChangeMode('month')}>
+              <Button isIconOnly radius='full' onPress={() => changeMonth(choosenDay.month - 1)}> - </Button>
+              <Button className='font-bold' onPress={() => onChangeMode('month')}>
                 {`${choosenDay.year} - ${String(choosenDay.month).padStart(2, '0')}`}
               </Button>
-              <Button isIconOnly radius='full' onClick={() => changeMonth(choosenDay.month + 1)}> + </Button>
+              <Button isIconOnly radius='full' onPress={() => changeMonth(choosenDay.month + 1)}> + </Button>
             </div>,
             <DateCalander
               key="date-picker"

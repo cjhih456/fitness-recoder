@@ -35,7 +35,7 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
       </>,
       content: <div role="grid" className="flex flex-col gap-y-2">
         <SimpleFitnessList exerciseDataList={exerciseList} />
-        <Button role="button" onClick={() => gotoDetail()}>{t('detail')}</Button>
+        <Button role="button" onPress={() => gotoDetail()}>{t('detail')}</Button>
       </div>
     })}
   </MenuableAccordion>

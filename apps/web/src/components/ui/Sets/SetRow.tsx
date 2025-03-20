@@ -68,7 +68,7 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
     <StateRender.Boolean
       state={readonly}
       render={{
-        false: <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onClick={removeSet}>
+        false: <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onPress={removeSet}>
           <MdClear size="1.5rem"></MdClear>
         </Button>
       }}

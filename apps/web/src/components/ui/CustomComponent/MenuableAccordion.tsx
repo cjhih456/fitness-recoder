@@ -62,7 +62,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
               </DropdownTrigger>
               <DropdownMenu>
                 {menu.map((item, idx) => {
-                  return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={item.action}>{item.name}</DropdownItem>
+                  return <DropdownItem role="menuitem" key={`menu-${idx}`} onPress={item.action}>{item.name}</DropdownItem>
                 })}
               </DropdownMenu>
             </Dropdown>
@@ -87,7 +87,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
         <Button
           variant="light"
           fullWidth
-          onClick={onToggleIsOpen}>
+          onPress={onToggleIsOpen}>
           <MdExpandMore
             className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           />

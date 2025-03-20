@@ -75,7 +75,7 @@ export default function ExerciseDataDisplay({
       state={readonly}
       render={{
         false: <div className="flex flex-row gap-x-2">
-          <Button className="flex-1" onClick={appendSet}>+ Append Set</Button>
+          <Button className="flex-1" onPress={appendSet}>+ Append Set</Button>
         </div>
       }}
     />

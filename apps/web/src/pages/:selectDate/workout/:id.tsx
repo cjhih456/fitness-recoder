@@ -93,9 +93,9 @@ export default function DisplayWorkout() {
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {
-      return <Button onClick={pauseSchedule}>{t('actionBtn.pause')}</Button>
+      return <Button onPress={pauseSchedule}>{t('actionBtn.pause')}</Button>
     } else {
-      return <Button onClick={startSchedule}>{t('actionBtn.start')}</Button>
+      return <Button onPress={startSchedule}>{t('actionBtn.start')}</Button>
     }
   }, [lazySchedule, pauseSchedule, startSchedule, t])
 
@@ -111,7 +111,7 @@ export default function DisplayWorkout() {
       lazySchedule?.type !== ScheduleType.FINISH &&
       <div className='absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-x-4'>
         {scheduleProcessBtn}
-        <Button onClick={finishSchedule}>{t('actionBtn.finish')}</Button>
+        <Button onPress={finishSchedule}>{t('actionBtn.finish')}</Button>
       </div>
     }
     <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onChange={saveScheduleAsPreset} />

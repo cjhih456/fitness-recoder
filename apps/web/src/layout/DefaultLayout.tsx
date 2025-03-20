@@ -39,7 +39,7 @@ export default function DefaultLayout({
   }, [navigate])
   const menuBtn = useMemo(() => {
     if (location.pathname.split('/').length > 2) {
-      return <Button isIconOnly variant='light' size='sm' onClick={fallback} >
+      return <Button isIconOnly variant='light' size='sm' onPress={fallback} >
         <MdArrowBackIosNew size="1.5rem" preserveAspectRatio="xMidYMid slice" />
       </Button>
     } else {
@@ -67,7 +67,7 @@ export default function DefaultLayout({
       <NavbarMenu>
         {
           menuList.map(v => <NavbarMenuItem key={v.name}>
-            <Link href={v.route} onClick={() => { setMenuDisplay(false) }}>{v.name}</Link>
+            <Link href={v.route} onPress={() => { setMenuDisplay(false) }}>{v.name}</Link>
           </NavbarMenuItem>)
         }
       </NavbarMenu>

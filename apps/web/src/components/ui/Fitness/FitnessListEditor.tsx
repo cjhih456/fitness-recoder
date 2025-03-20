@@ -71,8 +71,8 @@ export default function FitnessListEditor({
         <FitnessList list={fitnessList?.getFitnessListByIds || []}></FitnessList>
       </div>
       <div className="grid grid-cols-2 gap-x-2">
-        <Button onClick={openSearchDialog}>Add Exercise</Button>
-        <Button onClick={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
+        <Button onPress={openSearchDialog}>Add Exercise</Button>
+        <Button onPress={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
       </div>
     </div>
   </>

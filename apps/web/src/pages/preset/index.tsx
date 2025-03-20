@@ -38,7 +38,7 @@ export default function PresetListPage() {
     <div>
       <PresetNameInputDialog onChange={hasInputNewName}>
         {(openFn) => <div className='grid'>
-          <Button onClick={openFn} size="lg">{t('actionBtn.create')}</Button>
+          <Button onPress={openFn} size="lg">{t('actionBtn.create')}</Button>
         </div>
         }
       </PresetNameInputDialog>

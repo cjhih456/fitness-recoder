@@ -41,11 +41,11 @@ export default function FitnessSearchModal({
           <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => {
+          <Button onPress={() => {
             saveSelectedExercise()
             onCloseAction()
           }}>Save</Button>
-          <Button onClick={() => {
+          <Button onPress={() => {
             onCloseAction()
           }}>Cancel</Button>
         </ModalFooter>

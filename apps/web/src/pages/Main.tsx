@@ -53,8 +53,8 @@ export default function Main() {
         return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
           {(id, type, date) =>
             <div className="grid grid-cols-2 gap-x-4">
-              <Button onClick={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
-              <Button onClick={() => gotoScheduleDetail(id, date)}>
+              <Button onPress={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
+              <Button onPress={() => gotoScheduleDetail(id, date)}>
                 {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
               </Button>
             </div>
@@ -68,8 +68,8 @@ export default function Main() {
           <p>{t('empty.schedule.l2')}</p>
         </div>,
         <div className="grid grid-cols-2 gap-x-4" key="empty-schedule-options">
-          <Button onClick={addSchedule}>{t('empty.schedule.actionBtn.createSchedule')}</Button>
-          <Button onClick={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
+          <Button onPress={addSchedule}>{t('empty.schedule.actionBtn.createSchedule')}</Button>
+          <Button onPress={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
         </div>
       ]
     }

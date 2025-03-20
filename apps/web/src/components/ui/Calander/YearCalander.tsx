@@ -17,7 +17,7 @@ export default function YearCalander({ year, startYear, endYear, onChange }: Yea
       return <Button
         key={`year-${displayYear}`}
         color={displayYear == year ? 'primary' : undefined}
-        onClick={() => onChange && onChange(displayYear)}
+        onPress={() => onChange && onChange(displayYear)}
       >{displayYear}</Button>
     })}
   </div>
