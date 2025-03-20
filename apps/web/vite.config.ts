@@ -47,7 +47,7 @@ export default defineConfig(({ mode, isPreview }) => {
           '../../packages/graphql-worker/src/graphql/ExercisePreset/query.gql'
         ],
         path: '/__graphql',
-        autoGenTypePath: './src/hooks/apollo/possibleTypes.json'
+        autoGenTypePath: './src/hooks/apollo/lib/possibleTypes.json'
       }),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',

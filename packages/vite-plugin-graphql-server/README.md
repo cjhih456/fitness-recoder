@@ -43,15 +43,11 @@ export default defineConfig(({ mode }) => {
 
 ### Set PossibleType to ApolloClient cache
 ```javascript
-const PossibleTypes = () => import.meta.glob<Record<string, string[]>>('./possibleTypes.json', {
-  import: 'default'
-})
+// @ts-ignore: Unreachable code error. will be auto generate
+import PossibleTypes from './possibleTypes.json'
 export const useApollo = async () => {
-  const PossibleTypesData = await Promise.all(Object.values((await PossibleTypes())).map(async (it) => {
-    return await it()
-  }))
   const cache = new InMemoryCache({
-    possibleTypes: PossibleTypesData[0],
+    possibleTypes: PossibleTypes,
   })
   return new ApolloClient({
     cache: cache,
