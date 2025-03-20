@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import DateUtil from '@components/utils/DateUtil'
+import DateUtil from '@utils/DateUtil'
 
 export interface useCalanderHookProps {
   startDate?: string
