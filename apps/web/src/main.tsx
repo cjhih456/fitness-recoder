@@ -2,10 +2,10 @@ import { ApolloProvider } from '@apollo/client'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import ThemeProvider from '@components/Theme/ThemeProvider/index.ts'
 import { useApollo } from '@hooks/apollo/useApollo'
 import HeaderProvider from '@provider/HeaderProvider'
 import RootProvider from '@provider/RootDomProvider'
-import ThemaProvider from '@provider/ThemaProvider'
 import Firebase from '@service/firebase'
 import { baseURL } from '@utils'
 import App from './App.tsx'
@@ -16,7 +16,7 @@ Worker().then(async () => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <BrowserRouter basename={baseURL('/')}>
-        <ThemaProvider>
+        <ThemeProvider>
           <HeaderProvider>
             <RootProvider>
               <ApolloProvider client={apolloClient}>
@@ -24,7 +24,7 @@ Worker().then(async () => {
               </ApolloProvider>
             </RootProvider>
           </HeaderProvider>
-        </ThemaProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </React.StrictMode>,
   )

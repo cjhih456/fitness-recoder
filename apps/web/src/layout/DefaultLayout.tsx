@@ -74,7 +74,7 @@ export default function DefaultLayout({
         }
       </NavbarMenu>
     </Navbar>
-    <main className="flex flex-1 justify-center max-h-[calc(100%-4rem)] overflow-hidden">
+    <main className="flex flex-1 justify-center">
       <div className="max-w-[640px] w-[640px] relative">
         {child}
       </div>

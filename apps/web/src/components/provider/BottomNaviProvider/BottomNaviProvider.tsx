@@ -31,7 +31,7 @@ export const BottomNaviProvider = ({ children }: BottomNaviProviderProps) => {
       {createPortal(<StateRender.Boolean
         state={bottomNaviVisible}
         render={{
-          true: <footer className="sticky flex justify-center">
+          true: <footer className="fixed bottom-0 left-0 right-0 flex justify-center bg-background">
             <div className="max-w-[640px] w-[640px] flex justify-center gap-x-1">
               <MenuButton name={t('home')} Icon={MdHome} path='/' />
               <MenuButton name={t('calander')} Icon={MdCalendarToday} path='/calander' />
