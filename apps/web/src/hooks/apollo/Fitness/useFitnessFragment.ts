@@ -1,5 +1,5 @@
-import FitnessFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessFragment';
 import { useLazyGetFitnessById } from '@hooks/apollo/Fitness';
+import FitnessFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessFragment';
 import useFixedFragment from '@hooks/apollo/useFixedFragment';
 
 export default function useFitnessFragment(id: number) {

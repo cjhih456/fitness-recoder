@@ -3,9 +3,9 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
-import useAlert from '@hooks/provider/Alert/useAlert'
-import useHeaderMenuHandler from '@hooks/provider/Header/useHeaderMenuHandler'
 import useScheduleMenu from '@hooks/useScheduleMenu'
+import useAlert from '@provider/Alert/hooks/useAlert'
+import useHeaderMenuHandler from '@provider/Header/hooks/useHeaderMenuHandler'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [

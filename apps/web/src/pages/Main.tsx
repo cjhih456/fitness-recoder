@@ -2,12 +2,12 @@ import { Button, ScrollShadow } from '@nextui-org/react'
 import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import ScheduleDisplay from '@components/Schedule/ScheduleDisplay'
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
-import useBottomNavi from '@hooks/provider/BottomNavi/useBottomNavi'
-import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
+import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi'
+import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
+import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
 
 export default function Main() {
   useBottomNavi()

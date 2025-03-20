@@ -1,13 +1,13 @@
-import type { Mode } from '@components/Calander/Calander';
+import type { Mode } from '@ui/Calander/Calander';
 import { ScrollShadow } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Calender from '@components/Calander/Calander'
-import ScheduleList from '@components/Schedule/ScheduleList'
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
-import useBottomNavi from '@hooks/provider/BottomNavi/useBottomNavi';
-import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
+import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
+import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
+import Calender from '@ui/Calander/Calander';
+import ScheduleList from '@ui/Schedule/ScheduleList';
 
 function CalanderPage() {
   const { t } = useTranslation('title')
