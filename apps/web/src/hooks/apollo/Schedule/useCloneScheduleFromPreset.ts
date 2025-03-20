@@ -1,8 +1,8 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { ExercisePreset } from 'fitness-struct'
 import { useMutation } from '@apollo/client'
-import CloneScheduleFromPreset from '@hooks/apollo/Schedule/graphql/mutation/CloneScheduleFromPresetGql';
 import { ExercisePresetMockData } from '@hooks/apollo/ExercisePreset'
+import CloneScheduleFromPreset from '@hooks/apollo/Schedule/graphql/mutation/CloneScheduleFromPresetGql';
 import { ScheduleMockData } from '.'
 
 export default function useCloneScheduleFromPreset() {

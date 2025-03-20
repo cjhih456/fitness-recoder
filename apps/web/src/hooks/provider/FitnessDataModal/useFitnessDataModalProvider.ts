@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ModalContext } from '@provider/FitnessDataModalProvider/FitnessDataModalContext'
+import { ModalContext } from '@ui/provider/FitnessDataModalProvider/FitnessDataModalContext'
 
 export default function useFitnessDataModalProvider() {
   const context = useContext(ModalContext)

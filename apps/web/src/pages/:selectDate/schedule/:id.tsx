@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import FitnessListEditor from '@components/Fitness/FitnessListEditor';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
 import useUpdateExerciseListBySchedule from '@hooks/apollo/mixed/useUpdateExerciseListBySchedule';
-import useHeaderHandler from '@hooks/provider/Header/useHeaderHandler';
 import usePageTracker from '@hooks/usePageTracker';
+import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
+import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
 
 export default function DisplaySchedule() {
   useHeaderHandler(['Schedule'])

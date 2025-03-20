@@ -3,9 +3,8 @@ import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, Navbar
 import { useCallback, useMemo, useState } from 'react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeaderContent from '@components/Header/HeaderContent'
-import HeaderMenu from '@components/Header/HeaderMenu'
-import useRootDom from '@hooks/provider/RootDom/useRootDom';
+import HeaderContent from '@ui/Header/HeaderContent'
+import HeaderMenu from '@ui/Header/HeaderMenu'
 
 interface DefaultLayoutProps {
   children: ReactNode
@@ -34,7 +33,6 @@ export default function DefaultLayout({
     name: 'Preset',
     route: '/preset'
   }])
-  const { getRoot } = useRootDom()
   const location = useLocation()
   const fallback = useCallback(() => {
     navigate(-1)
@@ -66,7 +64,7 @@ export default function DefaultLayout({
       <NavbarContent justify="end">
         <HeaderMenu />
       </NavbarContent>
-      <NavbarMenu portalContainer={getRoot()}>
+      <NavbarMenu>
         {
           menuList.map(v => <NavbarMenuItem key={v.name}>
             <Link href={v.route} onClick={() => { setMenuDisplay(false) }}>{v.name}</Link>
