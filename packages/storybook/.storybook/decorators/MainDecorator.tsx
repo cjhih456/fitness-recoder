@@ -3,7 +3,7 @@ import i18n from '@fitness/web/src/i18n'
 import { NextUIProvider } from '@nextui-org/react'
 import { I18nextProvider } from 'react-i18next'
 import AllMockedProvider from '@fitness/web/src/service/GqlStore/AllMockedProvider'
-import RootProvider from '@fitness/web/src/components/provider/RootDomProvider'
+import RootProvider from '@fitness/web/src/components/provider/RootDom/RootDomProvider'
 import useApolloCache from '@fitness/web/src/hooks/apollo/useApolloCache'
 import { StoryFn } from '@storybook/react'
 
