@@ -1,4 +1,4 @@
-import { Card, CardBody, Chip } from '@nextui-org/react';
+import { Card, CardBody, Chip } from '@heroui/react';
 import { MdCheck } from 'react-icons/md';
 import { useFitnessSimpleFragment } from '@hooks/apollo/Fitness';
 import StateRender from '@utils/StateRender';

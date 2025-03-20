@@ -1,5 +1,5 @@
 import type { Exercise } from 'fitness-struct';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { useMemo } from 'react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import StateRender from '@utils/StateRender';

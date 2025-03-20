@@ -1,6 +1,6 @@
 import type { ModalContextType } from './FitnessDataModalContext';
 import type { ReactNode } from 'react';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@nextui-org/react';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@heroui/react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLazyGetExerciseFinishHistory } from '@hooks/apollo/Exercise';

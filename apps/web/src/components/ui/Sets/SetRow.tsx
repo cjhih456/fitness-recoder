@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input } from '@nextui-org/react'
+import { Button, Checkbox, Input } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'
 import { useDebounce } from '@hooks/useDebounce'

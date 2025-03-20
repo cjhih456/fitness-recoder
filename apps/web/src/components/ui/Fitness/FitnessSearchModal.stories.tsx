@@ -1,6 +1,6 @@
 import type { FitnessSearchModalProps } from './FitnessSearchModal'
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { fn } from '@storybook/test';
 import { useState } from 'react';
 import FitnessSearchModal from './FitnessSearchModal'

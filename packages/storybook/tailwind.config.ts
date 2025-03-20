@@ -1,18 +1,18 @@
-import { nextui } from '@nextui-org/react';
+import { heroui } from '@heroui/react';
 import { Config } from 'tailwindcss';
 
 export default {
   content: [
     "../../apps/web/src/**/*.{tsx,ts,css,sass}",
     './.storybook/**/*.{tsx,ts,css,sass}',
-    '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {},
   },
   darkMode: 'class',
   plugins: [
-    nextui({
+    heroui({
       addCommonColors: true,
       defaultTheme: 'light'
     })],

@@ -1,4 +1,4 @@
-import { NextUIProvider, Spinner } from '@nextui-org/react'
+import { HeroUIProvider, Spinner } from '@heroui/react'
 import { Suspense, useMemo } from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +11,7 @@ import DefaultLayout from './layout/DefaultLayout'
 
 function App() {
   const navigate = useNavigate()
-  const main = useMemo(() => <NextUIProvider navigate={navigate} className="app-root pb-12">
+  const main = useMemo(() => <HeroUIProvider navigate={navigate} className="app-root pb-12">
     <I18nextProvider i18n={i18n}>
       <FitnessDataModalProvider>
         <AlertProvider>
@@ -25,7 +25,7 @@ function App() {
         </AlertProvider>
       </FitnessDataModalProvider>
     </I18nextProvider>
-  </NextUIProvider>, [navigate])
+  </HeroUIProvider>, [navigate])
   return <div className={'app h-screen max-h-full text-default-700'}>
     {main}
   </div>

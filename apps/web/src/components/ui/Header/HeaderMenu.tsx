@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
+import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
 import { useMemo, useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
 import useHeaderContext from '@provider/Header/hooks/useHeaderContext';

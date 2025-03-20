@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
