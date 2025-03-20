@@ -8,6 +8,7 @@ import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
 import useAlert from '@provider/Alert/hooks/useAlert'
+import BottomNaviArea from '@provider/BottomNavi/component/BottomNaviArea'
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
@@ -111,10 +112,10 @@ export default function DisplayWorkout() {
     </div>
     {
       lazySchedule?.type !== ScheduleType.FINISH &&
-      <div className='absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-x-4'>
+      <BottomNaviArea className="grid grid-cols-2 gap-x-4 p-4">
         {scheduleProcessBtn}
         <Button onPress={finishSchedule}>{t('actionBtn.finish')}</Button>
-      </div>
+      </BottomNaviArea>
     }
     <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onChange={saveScheduleAsPreset} />
   </>
