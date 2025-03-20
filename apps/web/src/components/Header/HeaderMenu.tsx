@@ -1,9 +1,9 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
+import useTheme from '@components/Theme/hooks/useTheme';
 import useHeaderContext from '@hooks/provider/Header/useHeaderContext';
 import useRootDom from '@hooks/provider/RootDom/useRootDom';
-import useThema from '@hooks/provider/Thema/useThema';
 import StateRender from '@utils/StateRender';
 import HeaderMenuItem from './HeaderMenuItem';
 
@@ -11,7 +11,7 @@ export default function HeaderMenu() {
   const { getRoot } = useRootDom()
 
   const [isOpen, setIsOpen] = useState(false)
-  const { getThema, toggleTheme } = useThema()
+  const { theme, toggleTheme } = useTheme()
 
   const { getHeaderMenu } = useHeaderContext()
   const headerMenu = useMemo(() => getHeaderMenu().map((menu, idx) => {
@@ -32,9 +32,9 @@ export default function HeaderMenu() {
         </PopoverTrigger>
         <PopoverContent>
           {headerMenu}
-          <HeaderMenuItem text="Thema">
+          <HeaderMenuItem text="Theme">
             <Switch
-              isSelected={getThema() === 'dark'}
+              isSelected={theme === 'dark'}
               startContent={<MdLightMode />}
               endContent={<MdDarkMode />}
               onValueChange={toggleTheme}
@@ -44,7 +44,7 @@ export default function HeaderMenu() {
       </Popover>,
       false: <Button isIconOnly radius='full' onClick={toggleTheme}>
         <StateRender
-          state={getThema()}
+          state={theme}
           render={{
             'dark': <MdDarkMode />,
             'light': <MdLightMode />
