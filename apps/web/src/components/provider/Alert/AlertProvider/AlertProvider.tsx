@@ -1,5 +1,5 @@
 import type { AlertContextType, AlertData, AlertProviderProps } from './AlertContext';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import AlertContext from './AlertContext'

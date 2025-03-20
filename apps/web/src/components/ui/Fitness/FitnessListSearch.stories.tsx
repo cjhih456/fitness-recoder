@@ -1,6 +1,6 @@
 import type { FitnessListSearchProps } from './FitnessListSearch';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/react';
 import { fn } from '@storybook/test';
 import { MdHome } from 'react-icons/md';
 import FitnessListSearch from './FitnessListSearch';

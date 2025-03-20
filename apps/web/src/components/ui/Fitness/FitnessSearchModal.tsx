@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useEffect } from 'react'
 import useIdToggle from '@hooks/useIdToggle'
 import FitnessListSearch from './FitnessListSearch'

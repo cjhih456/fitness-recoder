@@ -1,6 +1,6 @@
 import React from 'react'
 import i18n from '@fitness/web/src/i18n'
-import { NextUIProvider } from '@nextui-org/react'
+import { HeroUIProvider } from '@heroui/react'
 import { I18nextProvider } from 'react-i18next'
 import AllMockedProvider from '@fitness/web/src/service/GqlStore/AllMockedProvider'
 import useApolloCache from '@fitness/web/src/hooks/apollo/useApolloCache'
@@ -13,13 +13,13 @@ type MainDecoratorStory = {
 const MainDecorator: MainDecoratorStory = (Story, { loaded: { apolloCache } }) => {
   return <React.StrictMode>
     <I18nextProvider i18n={i18n}>
-      <NextUIProvider>
+      <HeroUIProvider>
         <AllMockedProvider cache={apolloCache}>
           <div className="dark bg-background text-default-700 storybook-root-path w-[640px]" style={{ padding: '2rem' }}>
             <Story />
           </div>
         </AllMockedProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
     </I18nextProvider>
   </React.StrictMode>
 }

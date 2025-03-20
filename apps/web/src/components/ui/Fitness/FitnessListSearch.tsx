@@ -1,6 +1,6 @@
 import type { Exercise } from 'fitness-struct'
 import type { ReactNode } from 'react';
-import { Input, ScrollShadow, Select, SelectItem } from '@nextui-org/react'
+import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
 import { useMemo, useState } from 'react'
 import { useDebounceValue } from 'usehooks-ts'
 import { useGetFitnessListByKeywords } from '@hooks/apollo/Fitness'

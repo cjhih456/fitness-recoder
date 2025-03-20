@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/react'
+import { Spinner } from '@heroui/react'
 import { useMemo } from 'react'
 import { useIntersectionObserver } from 'usehooks-ts'
 import StateRender from '@utils/StateRender'

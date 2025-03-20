@@ -1,5 +1,5 @@
 import type { Exercise } from 'fitness-struct'
-import { Card, CardBody, CardHeader } from '@nextui-org/react'
+import { Card, CardBody, CardHeader } from '@heroui/react'
 import { useMemo } from 'react'
 
 interface DisplayFitnessFinishHistoryProps {

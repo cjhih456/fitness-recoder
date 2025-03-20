@@ -1,4 +1,4 @@
-import { Button, ScrollShadow } from '@nextui-org/react'
+import { Button, ScrollShadow } from '@heroui/react'
 import { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useLazyGetFitnessListByIds } from '@hooks/apollo/Fitness'
 import FitnessList from './FitnessList'

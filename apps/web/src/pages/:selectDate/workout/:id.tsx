@@ -1,5 +1,5 @@
 import type { Schedule } from 'fitness-struct'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'

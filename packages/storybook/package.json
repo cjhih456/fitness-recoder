@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@fitness/web": "*",
-    "@nextui-org/react": "^2.4.8",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@heroui/react": "^2.7.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router": "^6.28.0",
     "react-router-dom": "^6.28.0"
   },

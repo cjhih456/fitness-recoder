@@ -1,6 +1,6 @@
 import type { MenuType } from '@provider/Header/HeaderProvider';
 import type { ReactNode } from 'react'
-import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
+import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
@@ -49,7 +49,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
   const contentHeight = useMemo(() => `calc(${height}px + 1.5rem)`, [height])
 
   return (
-    <Card ref={(ref) => cardRef.current = ref}>
+    <Card ref={cardRef}>
       <CardBody className="relative overflow-hidden">
         <StateRender.Boolean
           state={Boolean(menu.length)}
@@ -77,7 +77,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
           }}
         >
           <Divider className="my-3" />
-          <div ref={(ref) => contentRef.current = ref}>
+          <div ref={contentRef}>
             {childNode}
           </div>
         </figcaption>
