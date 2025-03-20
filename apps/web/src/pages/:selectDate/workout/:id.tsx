@@ -19,7 +19,7 @@ export default function DisplayWorkout() {
   usePageTracker('workout_detail')
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const alert = useAlert()
+  const { showAlert } = useAlert()
   const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
   const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
@@ -53,7 +53,7 @@ export default function DisplayWorkout() {
     [lazySchedule, updateState]
   )
   const finishSchedule = useCallback(
-    () => updateState(ScheduleType.FINISH, lazySchedule).then(() => navigate('/')),
+    () => updateState(ScheduleType.FINISH, lazySchedule).then(() => navigate(-1)),
     [lazySchedule, updateState, navigate]
   )
 
@@ -69,7 +69,9 @@ export default function DisplayWorkout() {
   // initations
   useEffect(() => {
     if (error) {
-      alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
+      showAlert({
+        message: t('error:wrong.schedule')
+      }).then(() => {
         navigate('/')
       })
     } else if (loadedScheduleData) {
@@ -81,7 +83,7 @@ export default function DisplayWorkout() {
         setTimerText(calcTimeText(temp))
       }
     }
-  }, [error, alert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
+  }, [error, showAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
 
   /** display formated duration time */
   useAnimationFrame(() => {

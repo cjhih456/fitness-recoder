@@ -2,6 +2,7 @@ import type { AlertContextType, AlertData, AlertProviderProps } from './AlertCon
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import StateRender from '@utils/StateRender';
 import AlertContext from './AlertContext'
 
 export const AlertProvider = ({ children }: AlertProviderProps) => {
@@ -10,13 +11,9 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
   const [displayMessage, setDisplayMessage] = useState<AlertData | undefined>()
 
   const contextValue: AlertContextType = {
-    showAlert: (type, message, important, confirm, cancel) => {
+    showAlert: (options) => {
       const tempObj = {
-        type,
-        message,
-        important,
-        confirm,
-        cancel,
+        ...options,
         resolver: undefined
       } as AlertData
       const promiser = new Promise<boolean>((resolve) => {
@@ -66,18 +63,22 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
               </div>
             </ModalBody>
             <ModalFooter>
-              {
-                displayMessage?.cancel &&
-                <Button className={displayMessage.cancel.colorClass} onPress={cancelAction}>
-                  {displayMessage.cancel.message}
-                </Button>
-              }
-              {
-                displayMessage?.confirm &&
-                <Button className={displayMessage.confirm.colorClass} onPress={confirmAction}>
-                  {displayMessage.confirm.message}
-                </Button>
-              }
+              <StateRender.Boolean
+                state={Boolean(displayMessage?.cancel)}
+                render={{
+                  true: <Button className={displayMessage?.cancel?.colorClass} onPress={cancelAction}>
+                    {displayMessage?.cancel?.message}
+                  </Button>
+                }}
+              />
+              <StateRender.Boolean
+                state={Boolean(displayMessage?.confirm)}
+                render={{
+                  true: <Button className={displayMessage?.confirm?.colorClass} onPress={confirmAction}>
+                    {displayMessage?.confirm?.message}
+                  </Button>
+                }}
+              />
             </ModalFooter>
           </>}
         </ModalContent>

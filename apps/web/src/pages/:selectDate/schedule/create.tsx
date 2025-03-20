@@ -19,7 +19,7 @@ export default function CreateSchedule() {
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
-  const alert = useAlert()
+  const { showAlert } = useAlert()
 
   const createScheduleWithExercisePlans = useCreateScheduleWithExercisePlans()
   async function startFitnessTime(exerciseIdxList: number[]) {
@@ -28,12 +28,14 @@ export default function CreateSchedule() {
     const result = await createScheduleWithExercisePlans(year, month, date, exerciseIdxList)
     if (queryParams.get('directStart') === '1') {
       if (result?.id) {
-        gotoScheduleDetail(result?.id, `${year}-${month}-${date}`)
+        gotoScheduleDetail(result?.id, `${year}-${month}-${date}`, { replace: true })
       } else {
-        alert.showAlert('ERROR', 'Error... Something Wrong!', false)
+        showAlert({
+          message: 'Error... Something Wrong!'
+        })
       }
     } else {
-      navigate('/')
+      navigate(-1)
     }
   }
 

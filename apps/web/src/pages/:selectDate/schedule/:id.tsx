@@ -20,7 +20,7 @@ export default function DisplaySchedule() {
   const savedExerciseIdxList = useMemo(() => exerciseList.map(v => v.exercise), [exerciseList]);
   function startFitnessTime(exerciseIdxList: number[]) {
     updateExerciseList(scheduleId, exerciseList || [], exerciseIdxList)
-    navigate('/')
+    navigate(-1)
   }
 
   return <FitnessListEditor
