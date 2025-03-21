@@ -11,17 +11,17 @@ export default function AllMockedProvider({ children, cache }: { children: React
   Object.entries(list).forEach(([key, value]) => {
     if (key.includes('index')) return
     const v = value as { [key: string]: any }
-    Object.keys(v).forEach(k => {
+    Object.keys(v).forEach((k) => {
       if (k.endsWith('Mock')) {
-        mocks.push(v[k] as MockedResponse)
+        const temp = v[k] as MockedResponse
+        temp.variableMatcher = temp.variableMatcher ?? (() => true)
+        temp.maxUsageCount = Number.POSITIVE_INFINITY
+        temp.request.query = cache.transformDocument(temp.request.query)
+        mocks.push(temp)
       }
     })
   })
-  const tempMocks = mocks.map(v => {
-    v.variableMatcher = v.variableMatcher ? v.variableMatcher : () => true
-    return v
-  })
-  return cache ? <MockedProvider mocks={tempMocks} cache={cache}>
+  return <MockedProvider showWarnings={false} mocks={mocks} cache={cache} connectToDevTools={true}>
     {children}
-  </MockedProvider> : <></>
+  </MockedProvider>
 }
