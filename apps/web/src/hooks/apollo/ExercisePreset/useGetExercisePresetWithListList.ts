@@ -22,7 +22,13 @@ export const GetExercisePresetWithListListMock: MockedResponse<
   result: (v) => {
     return {
       data: {
-        getExercisePresetWithListList: Object.values(ExercisePresetMockData).splice(v.offset, v.size)
+        getExercisePresetWithListList: Object
+          .values(ExercisePresetMockData)
+          .splice(v.offset, v.size)
+          .map(v => {
+            v.__typename = 'ExercisePresetWithList'
+            return v
+          })
       }
     }
   }

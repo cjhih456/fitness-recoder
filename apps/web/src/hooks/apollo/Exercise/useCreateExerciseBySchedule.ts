@@ -21,7 +21,8 @@ export const CreateExerciseByScheduleMock: MockedResponse<
         createExerciseBySchedule: {
           id: 1,
           deps: 0,
-          exercise: 1
+          exercise: 1,
+          __typename: 'Exercise'
         }
       }
     }

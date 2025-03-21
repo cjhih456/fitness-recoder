@@ -30,6 +30,7 @@ export const FitnessMockData: FitnessStoreType[] = FitnessData.map((v, i) => {
     aliases: fitness.aliases || [],
     description: fitness.description || '',
     tips: fitness.tips || [],
-    id: i + 1
+    id: i + 1,
+    __typename: 'Fitness'
   }
 })

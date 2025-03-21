@@ -25,12 +25,14 @@ export const GetExerciseListByExercisePresetIdMock: MockedResponse<
           {
             id: 1,
             exercise: 1,
-            deps: 0
+            deps: 0,
+            __typename: 'Exercise'
           },
           {
             id: 2,
             exercise: 2,
-            deps: 0
+            deps: 0,
+            __typename: 'Exercise'
           }
         ]
       }

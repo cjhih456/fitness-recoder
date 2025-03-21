@@ -27,7 +27,8 @@ export const ExercisePresetMockData: { [key: number]: ExercisePresetStoreType } 
   acc[id] = {
     id: id,
     name: `TestPreset - ${id}`,
-    deps: 0
+    deps: 0,
+    __typename: 'ExercisePreset'
   } as ExercisePresetStoreType
   return acc
 }, {})

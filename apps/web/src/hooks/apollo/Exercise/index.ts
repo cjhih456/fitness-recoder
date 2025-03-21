@@ -1,4 +1,3 @@
-import type { Exercise } from 'fitness-struct'
 import useCreateExerciseByExercisePreset from './useCreateExerciseByExercisePreset'
 import useCreateExerciseBySchedule from './useCreateExerciseBySchedule'
 import useDeleteExerciseById from './useDeleteExerciseById'
@@ -27,12 +26,13 @@ export {
   useUpdateExerciseListByExercisePresetId,
 }
 
-export const ExerciseMockData: { [key: number]: Exercise.Data } = Array(20).fill(0).reduce((acc, _cur, i) => {
+export const ExerciseMockData: { [key: number]: ExerciseDataStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
-  const temp: Exercise.Data = {
+  const temp: ExerciseDataStoreType = {
     deps: 0,
     exercise: i,
-    id
+    id,
+    __typename: 'Exercise'
   }
   acc[id] = temp
   return acc

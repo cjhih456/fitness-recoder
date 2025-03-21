@@ -21,9 +21,11 @@ export const GetExercisePresetWithListByIdMock: MockedResponse<
     query: GetExercisePresetWithListById
   },
   result: (v) => {
+    const temp = ExercisePresetMockData[v.id]
+    temp.__typename = 'ExercisePresetWithList'
     return {
       data: {
-        getExercisePresetWithListById: ExercisePresetMockData[v.id]
+        getExercisePresetWithListById: temp
       }
     }
   }

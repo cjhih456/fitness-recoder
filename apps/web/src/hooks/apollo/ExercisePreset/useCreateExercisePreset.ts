@@ -33,6 +33,7 @@ export const CreateExercisePresetMock: MockedResponse<
       name: v.exercisePreset.name,
       id: id,
       deps: 0,
+      __typename: 'ExercisePreset'
     }
     return {
       data: {

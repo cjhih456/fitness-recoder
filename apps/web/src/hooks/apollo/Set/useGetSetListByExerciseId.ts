@@ -11,9 +11,8 @@ export default function useGetSetListByExerciseId(id: number) {
 
 export const GetSetListByExerciseIdMock: MockedResponse<GetSetListByExerciseIdResponse, GetSetListByExerciseIdVariable> = {
   request: {
-    query: GetSetListByExerciseIdGql,
+    query: GetSetListByExerciseIdGql
   },
-  variableMatcher: () => true,
   result: () => {
     return {
       data: {

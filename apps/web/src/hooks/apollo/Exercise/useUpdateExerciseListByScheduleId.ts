@@ -23,7 +23,8 @@ export const UpdateExerciseListByScheduleIdMock: MockedResponse<
           {
             id: 1,
             deps: 0,
-            exercise: 1
+            exercise: 1,
+            __typename: 'Exercise'
           }
         ]
       }

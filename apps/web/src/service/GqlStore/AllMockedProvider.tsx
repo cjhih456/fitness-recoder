@@ -21,7 +21,7 @@ export default function AllMockedProvider({ children, cache }: { children: React
       }
     })
   })
-  return <MockedProvider showWarnings={false} mocks={mocks} cache={cache} connectToDevTools={true}>
+  return <MockedProvider showWarnings={false} mocks={mocks} cache={cache}>
     {children}
   </MockedProvider>
 }

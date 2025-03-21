@@ -33,5 +33,6 @@ export default new InMemoryCache({
       }
     }
   },
+  addTypename: true,
   possibleTypes: PossibleTypes
 })
