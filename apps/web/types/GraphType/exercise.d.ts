@@ -3,7 +3,7 @@ type OperationVariables = import('@apollo/client').OperationVariables
 type HistoryData = import('fitness-struct').Exercise.HistoryData
 type Data = import('fitness-struct').Exercise.Data
 
-type ExerciseDataStoreType = Data & Data
+type ExerciseDataStoreType = Data & StoreObject
 
 // GetExerciseFinishHistory
 declare interface GetExerciseFinishHistoryResponse {
