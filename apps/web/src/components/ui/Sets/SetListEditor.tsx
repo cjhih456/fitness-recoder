@@ -1,52 +1,52 @@
-import type { Exercise } from 'fitness-struct';
 import { Button } from '@heroui/react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import StateRender from '@utils/StateRender';
-import SetRow from '../Sets/SetRow';
+import SetRow from './SetRow';
 
-export interface ExerciseDataDisplayProps {
-  exerciseData: Exercise.Data
+export interface SetListEditorProps {
+  exerciseDataId: number
   hasDoneLastSet?: () => void
   readonly?: boolean
 }
 
-export default function ExerciseDataDisplay({
-  exerciseData,
+export default function SetListEditor({
+  exerciseDataId,
   hasDoneLastSet,
   readonly = false
-}: ExerciseDataDisplayProps) {
-  const { data: setDatas, refetch: getSetByExerciseId } = useGetSetListByExerciseId(exerciseData.id)
+}: SetListEditorProps) {
+  const { data, refetch } = useGetSetListByExerciseId(exerciseDataId)
+  const setsList = data.getSetListByExerciseId
   const [createSet] = useCreateSet()
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
 
-  const setData = setDatas.getSetListByExerciseId
+  function reloadSetList() {
+    refetch()
+  }
 
   function appendSet() {
     createSet({
       variables: {
         sets: {
-          exerciseId: exerciseData.id,
+          exerciseId: exerciseDataId,
           repeat: 10,
           isDone: false,
           weightUnit: 'kg',
           weight: 10
         }
       }
-    }).then(() => {
-      getSetByExerciseId({ id: exerciseData.id })
-    })
+    }).then(reloadSetList)
   }
 
   function checkAllSetDone(id: number, isDone: boolean) {
-    if (isDone && !setData.filter(v => !v.isDone).filter(v => v.id !== id).length) {
+    if (isDone && !setsList.filter(v => !v.isDone).filter(v => v.id !== id).length) {
       hasDoneLastSet && hasDoneLastSet()
     }
   }
 
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
-      {setData.map((set, index) => <SetRow
+      {setsList.map((set, index) => <SetRow
         key={set.id}
         index={index + 1}
         set={set}
@@ -58,9 +58,7 @@ export default function ExerciseDataDisplay({
         hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
         readonly={readonly}
         onRemoveSet={(id) => {
-          deleteSet({ variables: { id: id } }).then(() => {
-            getSetByExerciseId({ id: exerciseData.id })
-          })
+          deleteSet({ variables: { id: id } }).then(reloadSetList)
         }}
       ></SetRow>)}
     </div>
