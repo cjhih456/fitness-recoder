@@ -10,6 +10,7 @@ const meta = {
   },
   args: {
     hasDoneChange: fn(),
+    hasSetChange: fn(),
     onRemoveSet: fn()
   } as Partial<SetRowProps>,
   component: SetRow,
