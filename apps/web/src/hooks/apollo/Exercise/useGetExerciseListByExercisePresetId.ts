@@ -1,9 +1,9 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetExerciseListByExercisePresetId from '@hooks/apollo/Exercise/graphql/query/GetExerciseListByExercisePresetId';
 
 export default function useGetExerciseListByExercisePresetId(exercisePresetId: number) {
-  return useQuery<
+  return useSuspenseQuery<
     GetExerciseByExercisePresetIdResponse,
     GetExerciseByExercisePresetIdVariable
   >(GetExerciseListByExercisePresetId, {

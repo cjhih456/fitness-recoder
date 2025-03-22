@@ -1,10 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetExercisePresetWithListList from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListList';
 import { ExercisePresetMockData } from '.'
 
 export default function useGetExercisePresetWithListList(offset: number, size: number) {
-  return useQuery<
+  return useSuspenseQuery<
     GetExercisePresetWithListListResponse,
     GetExercisePresetWithListListVariable
   >(GetExercisePresetWithListList, {

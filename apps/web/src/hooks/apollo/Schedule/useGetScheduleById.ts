@@ -1,10 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetScheduleByIdGql from '@hooks/apollo/Schedule/graphql/query/GetScheduleByIdGql';
 import { ScheduleMockData } from '.'
 
 export default function useGetScheduleById(id: number) {
-  return useQuery<GetScheduleByIdResponse, GetScheduleByIdVAriable>(GetScheduleByIdGql, {
+  return useSuspenseQuery<GetScheduleByIdResponse, GetScheduleByIdVAriable>(GetScheduleByIdGql, {
     variables: { id: Number(id) },
     fetchPolicy: 'cache-first'
   })

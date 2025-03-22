@@ -1,10 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetSetListByExerciseIdGql from '@hooks/apollo/Set/graphql/query/GetSetListByExerciseIdGql';
 import { SetMockData } from '.'
 
 export default function useGetSetListByExerciseId(id: number) {
-  return useQuery<GetSetListByExerciseIdResponse, GetSetListByExerciseIdVariable>(GetSetListByExerciseIdGql, {
+  return useSuspenseQuery<GetSetListByExerciseIdResponse, GetSetListByExerciseIdVariable>(GetSetListByExerciseIdGql, {
     variables: { id }
   })
 }
