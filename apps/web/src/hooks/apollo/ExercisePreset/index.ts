@@ -6,8 +6,6 @@ import useExercisePresetWithListFragment from './useExercisePresetWithListFragme
 import useGetExercisePresetById from './useGetExercisePresetById';
 import useGetExercisePresetWithListById from './useGetExercisePresetWithListById';
 import useGetExercisePresetWithListList from './useGetExercisePresetWithListList';
-import useLazyGetExercisePresetById from './useLazyGetExercisePresetById';
-import useLazyGetExercisePresetWithListById from './useLazyGetExercisePresetWithListById';
 
 export {
   useCopyExercisePresetFromSchedule,
@@ -18,8 +16,6 @@ export {
   useGetExercisePresetById,
   useGetExercisePresetWithListList,
   useGetExercisePresetWithListById,
-  useLazyGetExercisePresetById,
-  useLazyGetExercisePresetWithListById
 }
 
 export const ExercisePresetMockData: { [key: number]: ExercisePresetStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {

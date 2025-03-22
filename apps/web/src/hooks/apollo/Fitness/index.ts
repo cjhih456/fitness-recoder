@@ -6,20 +6,14 @@ import useGetFitnessListByIds from './useGetFitnessListByIds'
 import useGetFitnessListByKeywords from './useGetFitnessListByKeywords'
 import useGetFitnessSimpleById from './useGetFitnessSimpleById'
 import useGetFitnessSimpleListByIds from './useGetFitnessSimpleListByIds'
-import useLazyGetFitnessById from './useLazyGetFitnessById'
-import useLazyGetFitnessListByIds from './useLazyGetFitnessListByIds'
-import useLazyGetFitnessSimpleById from './useLazyGetFitnessSimpleById'
 
 export {
   useFitnessFragment,
   useFitnessSimpleFragment,
   useGetFitnessById,
-  useLazyGetFitnessById,
   useGetFitnessListByIds,
-  useLazyGetFitnessListByIds,
   useGetFitnessListByKeywords,
   useGetFitnessSimpleById,
-  useLazyGetFitnessSimpleById,
   useGetFitnessSimpleListByIds
 }
 

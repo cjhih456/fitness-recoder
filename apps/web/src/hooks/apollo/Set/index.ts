@@ -1,12 +1,10 @@
 import useCreateSet from './useCreateSet'
 import useDeleteSet from './useDeleteSet'
 import useGetSetListByExerciseId from './useGetSetListByExerciseId'
-import useLazyGetSetListByExerciseId from './useLazyGetSetListByExerciseId'
 import useUpdateSet from './useUpdateSet'
 
 export {
   useGetSetListByExerciseId,
-  useLazyGetSetListByExerciseId,
   useCreateSet,
   useUpdateSet,
   useDeleteSet,
