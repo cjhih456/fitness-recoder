@@ -46,27 +46,23 @@ export default function ExerciseDataDisplay({
 
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
-      {setData.map((set, index) => {
-        return <SetRow
-          key={set.id}
-          index={index + 1}
-          set={set}
-          hasSetChange={(setData) => {
-            const data = { ...setData }
-            delete data.__typename
-            updateSet({ variables: { sets: data } }).then(() => {
-              getSetByExerciseId({ id: exerciseData.id })
-            })
-          }}
-          hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
-          readonly={readonly}
-          onRemoveSet={(id) => {
-            deleteSet({ variables: { id: id } }).then(() => {
-              getSetByExerciseId({ id: exerciseData.id })
-            })
-          }}
-        ></SetRow>
-      })}
+      {setData.map((set, index) => <SetRow
+        key={set.id}
+        index={index + 1}
+        set={set}
+        hasSetChange={(setData) => {
+          const data = { ...setData }
+          delete data.__typename
+          updateSet({ variables: { sets: data } })
+        }}
+        hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
+        readonly={readonly}
+        onRemoveSet={(id) => {
+          deleteSet({ variables: { id: id } }).then(() => {
+            getSetByExerciseId({ id: exerciseData.id })
+          })
+        }}
+      ></SetRow>)}
     </div>
     <StateRender.Boolean
       state={readonly}

@@ -1,5 +1,5 @@
 import type { Exercise, Schedule } from 'fitness-struct';
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
 import { useGetFitnessListByIds } from '@hooks/apollo/Fitness';
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
@@ -19,22 +19,14 @@ export default function ExerciseDataList({
   schedule,
   readonly
 }: ExerciseDataListProps) {
-  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id || 0)
+  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id)
+  const scheduleData = getExerciseListByScheduleIdData.getExerciseListByScheduleId
+  const fitnessIdList = scheduleData.map(v => v.exercise)
 
-  const scheduleData = useMemo(() => {
-    return getExerciseListByScheduleIdData?.getExerciseListByScheduleId || []
-  }, [getExerciseListByScheduleIdData])
-
-  const fitnessIdList = useMemo(() => {
-    return scheduleData.map(v => v.exercise) || []
-  }, [scheduleData])
   const { data: getFitnessListByIdsData } = useGetFitnessListByIds(fitnessIdList)
-  const fitnessList = useMemo(() => {
-    return getFitnessListByIdsData?.getFitnessListByIds || []
-  }, [getFitnessListByIdsData])
+  const fitnessList = getFitnessListByIdsData.getFitnessListByIds
 
   const exerciseDataList = useMemo(() => {
-    if (!scheduleData) return [] as TempExerciseData[]
     return scheduleData.map(exerciseData => {
       const exercise = fitnessList.find(v => v.id === exerciseData.exercise) || { name: '' }
       return {
@@ -47,25 +39,20 @@ export default function ExerciseDataList({
 
   const [focusExercise, changeFocus] = useState(0)
 
-  const exerciseListDisplay = useMemo(() => {
-    return exerciseDataList.map((exerciseData) => {
-      return <MenuableAccordion
-        key={`${exerciseData.id}`}
-        isFocus={focusExercise === exerciseData.id}
-        onFocusChange={(v) => {
-          changeFocus(v ? exerciseData.id : 0)
-        }}
-      >
-        {() => ({
-          title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
-          content: <ExerciseDataDisplay exerciseData={exerciseData} readonly={readonly}></ExerciseDataDisplay>
-        })}
-
-      </MenuableAccordion>
-    })
-  }, [exerciseDataList, readonly, focusExercise])
-
   return <div className="flex flex-col gap-y-3">
-    {exerciseListDisplay}
+    {exerciseDataList.map((exerciseData) => <MenuableAccordion
+      key={`${exerciseData.id}`}
+      isFocus={focusExercise === exerciseData.id}
+      onFocusChange={(v) => {
+        changeFocus(v ? exerciseData.id : 0)
+      }}
+    >
+      {() => ({
+        title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
+        content: <Suspense>
+          <ExerciseDataDisplay exerciseData={exerciseData} readonly={readonly}></ExerciseDataDisplay>
+        </Suspense>
+      })}
+    </MenuableAccordion>)}
   </div>
 }
