@@ -1,7 +1,6 @@
 import { Button, Checkbox, Input } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'
-import { useDebounce } from '@hooks/useDebounce'
 import StateRender from '@utils/StateRender'
 export interface SetRowProps {
   set: SetsStoreType
@@ -13,48 +12,41 @@ export interface SetRowProps {
 }
 
 export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly = false }: SetRowProps) {
-  const [lazyValue, setLazyValue] = useState<SetsStoreType>({
-    weight: 0,
-    isDone: false,
-    repeat: 0,
-    exerciseId: 0,
-    id: 0,
-    weightUnit: 'kg'
-  })
-  const debouncedLazyValue = useDebounce(lazyValue, 200)
-  useEffect(() => {
-    if (JSON.stringify(set) !== JSON.stringify(debouncedLazyValue)) {
-      if (debouncedLazyValue.id) {
-        hasSetChange && hasSetChange(debouncedLazyValue)
-        if (set.isDone !== debouncedLazyValue.isDone) {
-          hasDoneChange && hasDoneChange(debouncedLazyValue.isDone)
-        }
-      }
-    }
-  }, [debouncedLazyValue, set, hasDoneChange, hasSetChange])
+  const [lazyValue, setLazyValue] = useState<SetsStoreType>(set)
   useEffect(() => {
     if (JSON.stringify(set) !== JSON.stringify(lazyValue)) {
       setLazyValue(Object.assign({}, set))
     }
   }, [set, lazyValue])
 
+  function changeSetData(obj: Partial<SetsStoreType>) {
+    const tempObj = { ...lazyValue, ...obj }
+    setLazyValue(tempObj)
+  }
+
+  function saveChange() {
+    hasSetChange && hasSetChange(lazyValue)
+  }
+
   function changeRepeat(v: string) {
-    setLazyValue((before) => ({
-      ...before,
-      repeat: Number(v)
-    }))
+    const num = Number(v)
+    if (isNaN(num)) return
+    changeSetData({
+      repeat: num
+    })
   }
   function changeWeight(v: string) {
-    setLazyValue((before) => ({
-      ...before,
-      weight: Number(v)
-    }))
+    const num = Number(v)
+    if (isNaN(num)) return
+    changeSetData({
+      weight: num
+    })
   }
   function changeIsDone(v: boolean) {
-    setLazyValue((before) => ({
-      ...before,
+    changeSetData({
       isDone: v
-    }))
+    })
+    hasDoneChange && hasDoneChange(v)
   }
   function removeSet() {
     onRemoveSet && onRemoveSet(set.id)
@@ -62,9 +54,9 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
 
   return <div className="flex gap-x-2 items-center justify-center">
     <span className='min-w-12'>Set {index}</span>
-    <Input value={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} isReadOnly={readonly}></Input>
-    <Input value={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} isReadOnly={readonly}></Input>
-    <Checkbox classNames={{ wrapper: 'mr-0' }} isSelected={lazyValue?.isDone} size='lg' onValueChange={changeIsDone} isReadOnly={readonly} radius='full'></Checkbox>
+    <Input defaultValue={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} onBlur={saveChange} isReadOnly={readonly}></Input>
+    <Input defaultValue={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} onBlur={saveChange} isReadOnly={readonly}></Input>
+    <Checkbox defaultSelected={lazyValue?.isDone} classNames={{ wrapper: 'mr-0' }} size='lg' onValueChange={changeIsDone} onBlur={saveChange} isReadOnly={readonly} radius='full'></Checkbox>
     <StateRender.Boolean
       state={readonly}
       render={{

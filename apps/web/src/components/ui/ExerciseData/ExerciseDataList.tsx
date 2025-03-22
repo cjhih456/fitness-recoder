@@ -3,7 +3,7 @@ import { Suspense, useMemo, useState } from 'react';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
 import { useGetFitnessListByIds } from '@hooks/apollo/Fitness';
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
-import ExerciseDataDisplay from './ExerciseDataDisplay';
+import SetListEditor from '../Sets/SetListEditor';
 
 export interface ExerciseDataListProps {
   schedule: Schedule.Schedule
@@ -50,7 +50,10 @@ export default function ExerciseDataList({
       {() => ({
         title: <div><h3 className='font-bold'>{exerciseData.name}</h3></div>,
         content: <Suspense>
-          <ExerciseDataDisplay exerciseData={exerciseData} readonly={readonly}></ExerciseDataDisplay>
+          <SetListEditor
+            exerciseDataId={exerciseData.id}
+            readonly={readonly}
+          ></SetListEditor>
         </Suspense>
       })}
     </MenuableAccordion>)}
