@@ -1,22 +1,21 @@
-import type { Exercise } from 'fitness-struct';
 import useFitnessDataModalProvider from '@hooks/provider/FitnessDataModal/useFitnessDataModalProvider';
 import useSpinner from '@hooks/useSpinner';
 import FitnessItem from './FitnessItem';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
-  list: Exercise.IFitness[]
+  fitnessIds: number[]
   selectedFitnessIds?: number[]
-  isLoadingVisible?: boolean,
+  hasNext?: boolean
   onChangeSelectedFitnessIds?: (_selectedList: number[]) => void
   onToggleFitnessIds?: (_id: number) => void
   onLoadMore?: () => void
 }
 
 export default function FitnessList({
-  list,
+  fitnessIds,
   selectedFitnessIds,
-  isLoadingVisible,
+  hasNext = false,
   onChangeSelectedFitnessIds,
   onToggleFitnessIds,
   onLoadMore
@@ -38,14 +37,17 @@ export default function FitnessList({
     onChangeSelectedFitnessIds && onChangeSelectedFitnessIds(([] as number[]).concat(selectedFitnessIds || [], fitnessId))
   }
 
-  const [spinner] = useSpinner(list.length, Boolean(isLoadingVisible), onLoadMore)
+  const [spinner] = useSpinner({
+    visible: hasNext,
+    loadMore: onLoadMore
+  })
 
   return <div className="flex flex-col gap-y-4">
-    {list.map(fitness =>
+    {fitnessIds.map(fitness =>
       <FitnessItem
-        key={fitness.id}
-        fitnessId={fitness.id}
-        isSelected={selectedFitnessIds?.includes(fitness.id)}
+        key={fitness}
+        fitnessId={fitness}
+        isSelected={selectedFitnessIds?.includes(fitness)}
         onClick={clickFitness}
       ></FitnessItem>
     )}
