@@ -1,5 +1,4 @@
 import { Button } from '@heroui/react';
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useExercisePresetWithListFragment } from '@hooks/apollo/ExercisePreset';
@@ -18,17 +17,14 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
   }
   const { t } = useTranslation(['common', 'preset'])
 
-  const [preset] = useExercisePresetWithListFragment(presetId)
-
-  const presetName = useMemo(() => preset.name, [preset])
-  const exerciseList = useMemo(() => preset.exerciseList || [], [preset])
+  const preset = useExercisePresetWithListFragment(presetId)
+  const exerciseList = preset.exerciseList || []
 
   const presetMenu = usePresetMenu(presetId)
-
   return <MenuableAccordion menu={presetMenu}>
     {() => ({
       title: <>
-        <h3 className="font-medium text-xl mb-2">{presetName}</h3>
+        <h3 className="font-medium text-xl mb-2">{preset.name}</h3>
         <p className="text-gray-600 text-sm">
           {exerciseList.length} exercises
         </p>

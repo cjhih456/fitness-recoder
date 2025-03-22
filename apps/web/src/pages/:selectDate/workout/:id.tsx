@@ -1,7 +1,7 @@
 import type { Schedule } from 'fitness-struct'
 import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
@@ -107,7 +107,9 @@ export default function DisplayWorkout() {
   return <>
     <div className="flex flex-col pt-4">
       <div className="px-4">
-        {scheduleId && lazySchedule && <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
+        {scheduleId && lazySchedule && <Suspense>
+          <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH} />
+        </Suspense>}
       </div>
     </div>
     {

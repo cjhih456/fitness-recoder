@@ -14,19 +14,16 @@ export default function PresetDetailPage() {
   const navigate = useNavigate()
   const { t } = useTranslation(['preset', 'common'])
   const id = useMemo(() => Number(params.id), [params])
-  const [exercisePreset] = useExercisePresetFragment(id)
+  const exercisePreset = useExercisePresetFragment(id)
   const { data: exerciseIdxListData } = useGetExerciseListByExercisePresetId(id)
   const exerciseList = useMemo(() => exerciseIdxListData?.getExerciseListByExercisePresetId || [], [exerciseIdxListData])
 
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
   const oldExerciseList = useMemo(() => exerciseList.map(v => v.exercise), [exerciseList])
 
-  const header = useMemo(() => {
-    return [exercisePreset?.name]
-  }, [exercisePreset])
   const headerMenu = usePresetMenu(id)
 
-  useHeaderHandler(header)
+  useHeaderHandler([exercisePreset.name])
   useHeaderMenuHandler(headerMenu)
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return

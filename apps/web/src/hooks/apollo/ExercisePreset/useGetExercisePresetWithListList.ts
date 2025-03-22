@@ -1,16 +1,32 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useSuspenseQuery } from '@apollo/client'
+import { useState } from 'react';
 import GetExercisePresetWithListList from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListList';
 import { ExercisePresetMockData } from '.'
 
 export default function useGetExercisePresetWithListList(offset: number, size: number) {
-  return useSuspenseQuery<
+  const [hasNext, setHasNext] = useState(true)
+  const query = useSuspenseQuery<
     GetExercisePresetWithListListResponse,
     GetExercisePresetWithListListVariable
   >(GetExercisePresetWithListList, {
     fetchPolicy: 'cache-first',
     variables: { offset, size }
   })
+  const fetchMore = () => {
+    query.fetchMore({
+      variables: {
+        offset: query.data.getExercisePresetWithListList.length
+      }
+    }).then((result) => {
+      setHasNext(Boolean(result.data.getExercisePresetWithListList.length))
+    })
+  }
+  return {
+    ...query,
+    fetchMore,
+    hasNext
+  }
 }
 export const GetExercisePresetWithListListMock: MockedResponse<
   GetExercisePresetWithListListResponse,

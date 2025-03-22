@@ -34,14 +34,10 @@ export default function FitnessDataModalProvider({
   }, [historyData])
 
   // Fitness Datas
-  const [fitnessData] = useFitnessFragment(fitnessId || 0)
+  const fitnessData = useFitnessFragment(fitnessId ?? 0)
 
-  const fitnessInstructions = useMemo(() => {
-    return fitnessData.instructions || []
-  }, [fitnessData])
-  const fitnessName = useMemo(() => {
-    return fitnessData.name || ''
-  }, [fitnessData])
+  const fitnessInstructions = fitnessData.instructions
+  const fitnessName = fitnessData.name
 
   // Fitness Youtube Video
   const [fitnessVideoId, setFitnessVideoId] = useState<string | undefined>()

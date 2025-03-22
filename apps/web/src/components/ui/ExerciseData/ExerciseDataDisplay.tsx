@@ -1,6 +1,5 @@
 import type { Exercise } from 'fitness-struct';
 import { Button } from '@heroui/react';
-import { useMemo } from 'react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
 import StateRender from '@utils/StateRender';
 import SetRow from '../Sets/SetRow';
@@ -21,9 +20,7 @@ export default function ExerciseDataDisplay({
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
 
-  const setData = useMemo(() => {
-    return setDatas?.getSetListByExerciseId || []
-  }, [setDatas])
+  const setData = setDatas.getSetListByExerciseId
 
   function appendSet() {
     createSet({

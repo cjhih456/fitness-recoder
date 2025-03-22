@@ -14,18 +14,17 @@ export default function DisplaySchedule() {
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
   const { data: loadedData } = useGetExerciseListByScheduleId(scheduleId)
-  const exerciseList = useMemo(() => loadedData?.getExerciseListByScheduleId || [], [loadedData])
   const updateExerciseList = useUpdateExerciseListBySchedule()
 
-  const savedExerciseIdxList = useMemo(() => exerciseList.map(v => v.exercise), [exerciseList]);
-  function startFitnessTime(exerciseIdxList: number[]) {
-    updateExerciseList(scheduleId, exerciseList || [], exerciseIdxList)
+  const savedExerciseIdxList = loadedData.getExerciseListByScheduleId.map(v => v.exercise)
+  function saveSchedule(exerciseIdxList: number[]) {
+    updateExerciseList(scheduleId, savedExerciseIdxList || [], exerciseIdxList)
     navigate(-1)
   }
 
   return <FitnessListEditor
     saveBtnText='Save Exercise'
     savedIdxData={savedExerciseIdxList}
-    onSaveAction={startFitnessTime}
+    onSaveAction={saveSchedule}
   />
 }

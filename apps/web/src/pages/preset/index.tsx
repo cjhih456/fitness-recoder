@@ -1,5 +1,4 @@
 import { Button, ScrollShadow } from '@heroui/react';
-import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useGetExercisePresetWithListList } from '@hooks/apollo/ExercisePreset';
@@ -26,13 +25,13 @@ export default function PresetListPage() {
     })
   }
 
-  const { data: presetListData, fetchMore, loading } = useGetExercisePresetWithListList(0, 20)
-  const presetList = useMemo(() => presetListData?.getExercisePresetWithListList || [], [presetListData])
-  const loadMore = useCallback(() => {
-    fetchMore({ variables: { offset: presetList.length } })
-  }, [fetchMore, presetList])
+  const { data: presetListData, fetchMore, hasNext } = useGetExercisePresetWithListList(0, 20)
+  const presetList = presetListData.getExercisePresetWithListList
 
-  const [spinner] = useSpinner(presetList.length, loading, loadMore)
+  const [spinner] = useSpinner({
+    visible: hasNext,
+    loadMore: fetchMore
+  })
 
   return <div className="pt-4 px-4 flex flex-col gap-y-4">
     <div>

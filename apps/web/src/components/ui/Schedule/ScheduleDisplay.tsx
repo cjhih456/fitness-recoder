@@ -1,7 +1,6 @@
 import type { Schedule } from 'fitness-struct'
 import type { ReactNode } from 'react';
-import { useEffect } from 'react'
-import { useLazyGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
+import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
 import useScheduleMenu from '@hooks/useScheduleMenu'
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
 import SimpleFitnessList from '@ui/Fitness/SimpleFitnessList'
@@ -14,18 +13,9 @@ export interface ScheduleDisplayProps {
 }
 
 export default function ScheduleDisplay({ title, date, schedule, children }: ScheduleDisplayProps) {
-  const [getExerciseList, { data }] = useLazyGetExerciseListByScheduleId()
+  const { data } = useGetExerciseListByScheduleId(schedule.id)
 
-  useEffect(() => {
-    if (schedule)
-      getExerciseList({
-        variables: {
-          scheduleId: schedule.id
-        }
-      })
-  }, [schedule, getExerciseList])
-
-  const lazyExerciseList = data?.getExerciseListByScheduleId || []
+  const lazyExerciseList = data.getExerciseListByScheduleId
 
   const scheduleMenu = useScheduleMenu(schedule)
   return <MenuableAccordion menu={scheduleMenu}>

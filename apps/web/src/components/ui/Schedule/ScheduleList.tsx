@@ -32,7 +32,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
     render={{
       true: <div role="breakday-list"></div>,
       false: [
-        <div role="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
+        <div key="btn-menu" role="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
           <Button
             className="bg-success-300"
             onPress={() => gotoCreateScheduleAction(choosenDate)}

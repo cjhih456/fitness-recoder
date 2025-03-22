@@ -13,7 +13,7 @@ export default function FitnessItem({
   isSelected = false,
   onClick
 }: FitnessItemProps) {
-  const [data] = useFitnessSimpleFragment(fitnessId)
+  const fitness = useFitnessSimpleFragment(fitnessId)
 
   return <Card className="fitness-item scroll-mb-4 snap-start">
     <CardBody className="flex flex-row">
@@ -26,7 +26,7 @@ export default function FitnessItem({
         onClick && onClick(fitnessId, false)
       }}>
         <h3 className="font-semibold">
-          <span>{data.name}</span>
+          <span>{fitness.name}</span>
           <StateRender.Boolean
             state={isSelected}
             render={{
@@ -38,13 +38,13 @@ export default function FitnessItem({
             }}
           /></h3>
         <div>
-          {data.category}
+          {fitness.category}
         </div>
         <div className="flex gap-1 flex-wrap">
-          {data.primaryMuscles?.map((muscle) => {
+          {fitness.primaryMuscles.map((muscle) => {
             return <Chip size='sm' key={muscle}>{muscle}</Chip>
           })}
-          {data.secondaryMuscles?.map((muscle) => {
+          {fitness.secondaryMuscles.map((muscle) => {
             return <Chip size='sm' key={muscle}>{muscle}</Chip>
           })}
         </div>
