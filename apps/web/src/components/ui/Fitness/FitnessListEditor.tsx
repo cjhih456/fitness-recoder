@@ -1,5 +1,5 @@
 import { Button } from '@heroui/react'
-import { useCallback, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 import FitnessList from './FitnessList'
 import FitnessSearchModal from './FitnessSearchModal'
 
@@ -47,11 +47,13 @@ export default function FitnessListEditor({
       <Button onPress={() => setDialogState(true)}>Add Exercise</Button>
       <Button onPress={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
     </div>
-    <FitnessSearchModal
-      isOpen={dialogState}
-      onOpenChange={setDialogState}
-      selectedFitnessIds={lazyFitnessIds}
-      onChangeFitnessIds={changeSelectedFitnessIds}
-    />
+    <Suspense>
+      <FitnessSearchModal
+        isOpen={dialogState}
+        onOpenChange={setDialogState}
+        selectedFitnessIds={lazyFitnessIds}
+        onChangeFitnessIds={changeSelectedFitnessIds}
+      />
+    </Suspense>
   </div >
 }

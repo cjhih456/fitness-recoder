@@ -1,5 +1,5 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import useIdToggle from '@hooks/useIdToggle'
 import FitnessListSearch from './FitnessListSearch'
 
@@ -38,7 +38,9 @@ export default function FitnessSearchModal({
       {(onCloseAction) => <>
         <ModalHeader>Select Exercises</ModalHeader>
         <ModalBody className="overflow-y-hidden -mx-4">
-          <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
+          <Suspense>
+            <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace></FitnessListSearch>
+          </Suspense>
         </ModalBody>
         <ModalFooter>
           <Button onPress={() => {

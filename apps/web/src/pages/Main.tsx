@@ -1,5 +1,5 @@
 import { Button, ScrollShadow } from '@heroui/react'
-import { useCallback, useMemo } from 'react'
+import { Suspense, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
@@ -50,16 +50,18 @@ export default function Main() {
     if (scheduleList.length) {
       return scheduleList.map((schedule, idx) => {
         const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
-        return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
-          {(id, type, date) =>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Button onPress={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
-              <Button onPress={() => gotoScheduleDetail(id, date)}>
-                {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
-              </Button>
-            </div>
-          }
-        </ScheduleDisplay>
+        return <Suspense>
+          <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
+            {(id, type, date) =>
+              <div className="grid grid-cols-2 gap-x-4">
+                <Button onPress={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
+                <Button onPress={() => gotoScheduleDetail(id, date)}>
+                  {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
+                </Button>
+              </div>
+            }
+          </ScheduleDisplay>
+        </Suspense>
       })
     } else {
       return [

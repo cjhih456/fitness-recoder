@@ -2,7 +2,7 @@ import type { ModalContextType } from './FitnessDataModalContext';
 import type { ReactNode } from 'react';
 import { Modal, ModalContent } from '@heroui/react';
 import { Suspense, useState } from 'react';
-import FitnessDataModalContent from './FitnessDataModal';
+import FitnessDataModalContent from './FitnessDataModalContent';
 import { ModalContext } from './FitnessDataModalContext';
 
 interface ExerciseDataInfoModalProps {
