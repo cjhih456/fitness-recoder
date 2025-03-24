@@ -17,20 +17,18 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
   const lazyExerciseList = data.getExerciseListByScheduleId
 
   const scheduleMenu = useScheduleMenu(schedule)
-  return <MenuableAccordion menu={scheduleMenu}>
-    {() => {
-      return {
-        title: <>
-          <h3 className="font-medium text-xl mb-2">{title}</h3>
-          <p className="text-gray-600 text-sm">
-            {lazyExerciseList.length} exercises
-          </p>
-        </>,
-        content: <div className="flex flex-col gap-y-2">
-          <SimpleFitnessList exerciseDataList={lazyExerciseList} />
-          {children && children(schedule.id, schedule?.type, date)}
-        </div>
-      }
+  return <MenuableAccordion.Self menu={scheduleMenu}>
+    {{
+      title: <>
+        <h3 className="font-medium text-xl mb-2">{title}</h3>
+        <p className="text-gray-600 text-sm">
+          {lazyExerciseList.length} exercises
+        </p>
+      </>,
+      content: <div className="flex flex-col gap-y-2">
+        <SimpleFitnessList exerciseDataList={lazyExerciseList} />
+        {children && children(schedule.id, schedule?.type, date)}
+      </div>
     }}
-  </MenuableAccordion>
+  </MenuableAccordion.Self>
 }

@@ -15,18 +15,18 @@ export default function ExerciseDataList({
 }: ExerciseDataListProps) {
   const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id)
   const exerciseList = getExerciseListByScheduleIdData.getExerciseListByScheduleId
-
-  const [focusExercise, changeFocus] = useState(0)
-
+  const [displayId, setDisplayId] = useState(0)
+  const onAccordionChanged = (v: boolean, id: number) => {
+    if (!v) return setDisplayId(0)
+    return setDisplayId(id)
+  }
   return <div className="flex flex-col gap-y-3">
     {exerciseList.map((exercise) => <MenuableAccordion
       key={`${exercise.id}`}
-      isFocus={focusExercise === exercise.id}
-      onFocusChange={(v) => {
-        changeFocus(v ? exercise.id : 0)
-      }}
+      isOpen={displayId === exercise.id}
+      onOpenChange={(v) => onAccordionChanged(v, exercise.id)}
     >
-      {() => ({
+      {{
         title: <div><h3 className='font-bold'>{exercise.fitness.name}</h3></div>,
         content: <Suspense>
           <SetListEditor
@@ -34,7 +34,7 @@ export default function ExerciseDataList({
             readonly={readonly}
           ></SetListEditor>
         </Suspense>
-      })}
+      }}
     </MenuableAccordion>)}
   </div>
 }

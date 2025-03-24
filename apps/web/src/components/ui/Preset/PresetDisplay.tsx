@@ -21,8 +21,8 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
   const exerciseList = preset.exerciseList || []
 
   const presetMenu = usePresetMenu(presetId)
-  return <MenuableAccordion menu={presetMenu}>
-    {() => ({
+  return <MenuableAccordion.Self menu={presetMenu}>
+    {{
       title: <>
         <h3 className="font-medium text-xl mb-2">{preset.name}</h3>
         <p className="text-gray-600 text-sm">
@@ -33,6 +33,6 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
         <SimpleFitnessList exerciseDataList={exerciseList} />
         <Button role="button" onPress={() => gotoDetail()}>{t('detail')}</Button>
       </div>
-    })}
-  </MenuableAccordion>
+    }}
+  </MenuableAccordion.Self>
 }
