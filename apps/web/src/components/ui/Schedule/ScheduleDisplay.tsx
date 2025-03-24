@@ -17,7 +17,7 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
   const lazyExerciseList = data.getExerciseListByScheduleId
 
   const scheduleMenu = useScheduleMenu(schedule)
-  return <MenuableAccordion.Self menu={scheduleMenu}>
+  return <MenuableAccordion.GroupContent menu={scheduleMenu} openId={schedule.id}>
     {{
       title: <>
         <h3 className="font-medium text-xl mb-2">{title}</h3>
@@ -30,5 +30,5 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
         {children && children(schedule.id, schedule?.type, date)}
       </div>
     }}
-  </MenuableAccordion.Self>
+  </MenuableAccordion.GroupContent>
 }

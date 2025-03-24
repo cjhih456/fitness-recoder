@@ -30,11 +30,11 @@ export default function PresetDetailPage() {
       navigate('/preset')
     })
   }
-  return <div>
+  return <main>
     <FitnessListEditor
       savedIdxData={oldExerciseList}
       saveBtnText={t('actionBtn.save')}
       onSaveAction={savePreset}
     />
-  </div>
+  </main>
 }

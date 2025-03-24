@@ -3,6 +3,7 @@ import { Suspense, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
+import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
 import { ScheduleType } from '@utils';
 import StateRender from '@utils/StateRender';
 import ScheduleDisplay from './ScheduleDisplay';
@@ -47,25 +48,27 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
             {t('schedule.bottomBtn.setBreakDay')}
           </Button>
         </div>,
-        scheduleList.getScheduleByDate.map((schedule, idx) => {
-          return <Suspense key={schedule.id}>
-            <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
-              {(id, type) => <div className="grid grid-flow-col auto-cols-auto gap-x-4">
-                <StateRender.Boolean
-                  state={type !== 'FINISH'}
-                  render={{
-                    true: <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
-                      {t('common:modify')}
-                    </Button>
-                  }}
-                />
-                <Button key={`${id}-detail`} onPress={() => gotoScheduleDetail(id, choosenDate)}>
-                  {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
-                </Button>
-              </div>}
-            </ScheduleDisplay>
-          </Suspense>
-        })
+        <MenuableAccordion.GroupProvider key="schedule-list">
+          {scheduleList.getScheduleByDate.map((schedule, idx) => {
+            return <Suspense key={schedule.id}>
+              <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
+                {(id, type) => <div className="grid grid-flow-col auto-cols-auto gap-x-4">
+                  <StateRender.Boolean
+                    state={type !== 'FINISH'}
+                    render={{
+                      true: <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
+                        {t('common:modify')}
+                      </Button>
+                    }}
+                  />
+                  <Button key={`${id}-detail`} onPress={() => gotoScheduleDetail(id, choosenDate)}>
+                    {type === 'FINISH' ? t('common:detail') : t('schedule.actionBtn.start')}
+                  </Button>
+                </div>}
+              </ScheduleDisplay>
+            </Suspense>
+          })}
+        </MenuableAccordion.GroupProvider>
       ]
     }}
   />;

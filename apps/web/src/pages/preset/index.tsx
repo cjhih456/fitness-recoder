@@ -5,6 +5,7 @@ import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@
 import useSpinner from '@hooks/useSpinner';
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
+import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
 import PresetDisplay from '@ui/Preset/PresetDisplay';
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog';
 
@@ -33,21 +34,23 @@ export default function PresetListPage() {
     loadMore: fetchMore
   })
 
-  return <div className="pt-4 px-4 flex flex-col gap-y-4">
-    <div>
+  return <main className="pt-4 px-4 flex flex-col gap-y-4">
+    <figure role="create area">
       <PresetNameInputDialog onChange={hasInputNewName}>
         {(openFn) => <div className='grid'>
           <Button onPress={openFn} size="lg">{t('actionBtn.create')}</Button>
         </div>
         }
       </PresetNameInputDialog>
-    </div>
+    </figure>
     <ScrollShadow>
-      <div className='flex flex-col gap-y-3 flex-nowrap'>
-        {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} presetId={preset.id} />)}
+      <figcaption role="" className='flex flex-col gap-y-3 flex-nowrap'>
+        <MenuableAccordion.GroupProvider>
+          {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} presetId={preset.id} />)}
+        </MenuableAccordion.GroupProvider>
         {spinner}
-      </div>
+      </figcaption>
     </ScrollShadow>
 
-  </div>
+  </main>
 }

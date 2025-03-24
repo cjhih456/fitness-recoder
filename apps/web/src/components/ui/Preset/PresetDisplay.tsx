@@ -21,7 +21,7 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
   const exerciseList = preset.exerciseList || []
 
   const presetMenu = usePresetMenu(presetId)
-  return <MenuableAccordion.Self menu={presetMenu}>
+  return <MenuableAccordion.GroupContent menu={presetMenu} openId={presetId}>
     {{
       title: <>
         <h3 className="font-medium text-xl mb-2">{preset.name}</h3>
@@ -34,5 +34,5 @@ export default function PresetDisplay({ presetId }: PresetDisplayProps) {
         <Button role="button" onPress={() => gotoDetail()}>{t('detail')}</Button>
       </div>
     }}
-  </MenuableAccordion.Self>
+  </MenuableAccordion.GroupContent>
 }
