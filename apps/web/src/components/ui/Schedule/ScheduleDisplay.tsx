@@ -1,8 +1,6 @@
-import type { MenuType } from '@provider/Header/HeaderProvider';
 import type { Schedule } from 'fitness-struct'
 import type { ReactNode } from 'react';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
-import { useGetFitnessListByIds } from '@hooks/apollo/Fitness';
 import useScheduleMenu from '@hooks/useScheduleMenu'
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
 import SimpleFitnessList from '@ui/Fitness/SimpleFitnessList'
@@ -17,8 +15,6 @@ export interface ScheduleDisplayProps {
 export default function ScheduleDisplay({ title, date, schedule, children }: ScheduleDisplayProps) {
   const { data } = useGetExerciseListByScheduleId(schedule.id)
   const lazyExerciseList = data.getExerciseListByScheduleId
-
-  useGetFitnessListByIds(lazyExerciseList.map(v => v.exercise))
 
   const scheduleMenu = useScheduleMenu(schedule)
   return <MenuableAccordion menu={scheduleMenu}>

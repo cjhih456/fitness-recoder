@@ -82,6 +82,10 @@ export declare namespace Exercise {
     deps: number
   }
 
+  interface DataWithFitness extends Data {
+    fitness: IFitness
+  }
+
   interface HistoryData {
     id: number,
     year: number,

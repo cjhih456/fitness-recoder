@@ -1,7 +1,7 @@
 import { InMemoryCache } from '@apollo/client';
 import { createFragmentRegistry } from '@apollo/client/cache';
 import { offsetLimitPagination } from '@apollo/client/utilities';
-import ExerciseFragment from '@hooks/apollo/Exercise/graphql/fragment/ExerciseFragment';
+import { ExerciseFragment, ExerciseWithFitnessFragment } from '@hooks/apollo/Exercise/graphql/fragment/ExerciseFragment';
 import ExercisePresetFragment from '@hooks/apollo/ExercisePreset/graphql/fragments/ExercisePresetFragment';
 import ExercisePresetWithListFragment from '@hooks/apollo/ExercisePreset/graphql/fragments/ExercisePresetWithListFragment';
 import FitnessFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessFragment';
@@ -20,6 +20,7 @@ export default new InMemoryCache({
     FitnessSimpleFragment,
     FitnessFragment,
     ExerciseFragment,
+    ExerciseWithFitnessFragment,
     ExercisePresetFragment,
     ExercisePresetWithListFragment,
   ),

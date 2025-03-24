@@ -8,7 +8,6 @@ import { FitnessMockData } from '.'
 export default function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
 
   const query = useSuspenseQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywords, {
-    fetchPolicy: 'cache-first',
     variables: {
       name,
       category,
@@ -18,7 +17,7 @@ export default function useGetFitnessListByKeywords(name: string, category: Exer
     }
   })
 
-  const [hasNext, setHasNext] = useState(true)
+  const [hasNext, setHasNext] = useState(Boolean(query.data.getFitnessListByKeywords.length))
   const refetch = useCallback((...args: Parameters<typeof query.refetch>) => {
     setHasNext(true)
     return query.refetch(...args)

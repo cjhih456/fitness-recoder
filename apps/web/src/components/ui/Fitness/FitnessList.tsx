@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import useFitnessDataModalProvider from '@hooks/provider/FitnessDataModal/useFitnessDataModalProvider';
 import useSpinner from '@hooks/useSpinner';
 import FitnessItem from './FitnessItem';
@@ -44,12 +45,13 @@ export default function FitnessList({
 
   return <div className="flex flex-col gap-y-4">
     {fitnessIds.map(fitness =>
-      <FitnessItem
-        key={fitness}
-        fitnessId={fitness}
-        isSelected={selectedFitnessIds?.includes(fitness)}
-        onClick={clickFitness}
-      ></FitnessItem>
+      <Suspense key={fitness}>
+        <FitnessItem
+          fitnessId={fitness}
+          isSelected={selectedFitnessIds?.includes(fitness)}
+          onClick={clickFitness}
+        ></FitnessItem>
+      </Suspense>
     )}
     {spinner}
   </div>

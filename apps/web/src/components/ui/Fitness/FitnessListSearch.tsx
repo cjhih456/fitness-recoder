@@ -1,7 +1,7 @@
 import type { Exercise } from 'fitness-struct'
 import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
-import { useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 import { useGetFitnessListByKeywords } from '@hooks/apollo/Fitness'
 import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
@@ -63,14 +63,16 @@ export default function FitnessListSearch({
       </div>
     </div>
     <ScrollShadow className={`${xSpacing} scroll-smooth pt-4`}>
-      <FitnessList
-        fitnessIds={fitnessIds}
-        hasNext={hasNext}
-        selectedFitnessIds={selectedFitnessIds}
-        onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
-        onToggleFitnessIds={onToggleFitnessIds}
-        onLoadMore={fetchMore}
-      ></FitnessList>
+      <Suspense>
+        <FitnessList
+          fitnessIds={fitnessIds}
+          hasNext={hasNext}
+          selectedFitnessIds={selectedFitnessIds}
+          onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
+          onToggleFitnessIds={onToggleFitnessIds}
+          onLoadMore={fetchMore}
+        ></FitnessList>
+      </Suspense>
     </ScrollShadow>
   </div>
 }

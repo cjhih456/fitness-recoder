@@ -6,12 +6,8 @@ export default new ApolloClient({
   cache: apolloCache,
   link: link,
   defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'ignore',
-    },
     query: {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-first',
       errorPolicy: 'all',
     },
   },

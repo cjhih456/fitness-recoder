@@ -1,3 +1,4 @@
+import { FitnessMockData } from '../Fitness'
 import useCreateExerciseByExercisePreset from './useCreateExerciseByExercisePreset'
 import useCreateExerciseBySchedule from './useCreateExerciseBySchedule'
 import useDeleteExerciseById from './useDeleteExerciseById'
@@ -26,8 +27,9 @@ export const ExerciseMockData: { [key: number]: ExerciseDataStoreType } = Array(
   const id = i + 1
   const temp: ExerciseDataStoreType = {
     deps: 0,
-    exercise: i,
+    exercise: id,
     id,
+    fitness: FitnessMockData[i],
     __typename: 'Exercise'
   }
   acc[id] = temp

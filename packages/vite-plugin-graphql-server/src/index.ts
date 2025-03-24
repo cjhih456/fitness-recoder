@@ -10,7 +10,7 @@ import { normalizePath } from 'vite';
 
 export interface options {
   path: string,
-  modulePath: string[]
+  modulePath: (string | string[])[]
   autoGenTypePath?: string
 }
 
@@ -38,9 +38,12 @@ const autogenType = `{
 }`
 
 export default async function GraphqlServer(options: options): Promise<Plugin[]> {
-
   const schemas = await Promise.all(options.modulePath.map(async (path) => {
-    const gqlFile = String(fs.readFileSync(resolve(path)))
+
+    let pathes = Array.isArray(path) ? path : [path]
+    let gqlFile = pathes.reduce((acc, cur) => {
+      return acc + fs.readFileSync(resolve(cur)).toString()
+    }, '')
     const schema = makeExecutableSchema({
       typeDefs: gqlFile,
     })

@@ -48,8 +48,8 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
           </Button>
         </div>,
         scheduleList.getScheduleByDate.map((schedule, idx) => {
-          return <Suspense>
-            <ScheduleDisplay key={schedule.id} schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
+          return <Suspense key={schedule.id}>
+            <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
               {(id, type) => <div className="grid grid-flow-col auto-cols-auto gap-x-4">
                 <StateRender.Boolean
                   state={type !== 'FINISH'}

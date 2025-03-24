@@ -1,33 +1,57 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import type { IResolvers } from '@graphql-tools/utils';
 import type { Exercise } from 'fitness-struct'
+import { getFitnessByIds } from '../Fitness/resolvers';
+
+export const loadFitnessByExerciseList = async (
+  dbBus: MessageTransactionBus | undefined,
+  client: string,
+  exerciseList: Exercise.Data[]
+): Promise<Exercise.DataWithFitness[]> => {
+  const fitnessList = await getFitnessByIds(dbBus, client, exerciseList.map(v => v.exercise))
+  return exerciseList.map(v => ({
+    ...v,
+    fitness: fitnessList?.find(f => f.id === v.exercise) as Exercise.IFitness
+  }))
+}
+
+export const loadFitnessByExercise = async (
+  dbBus: MessageTransactionBus | undefined,
+  client: string,
+  exercise: Exercise.Data
+) => {
+  const result = await loadFitnessByExerciseList(dbBus, client, [exercise])
+  return result[0]
+}
 
 export async function getExerciseListByScheduleIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   scheduleId: number
-): Promise<Exercise.Data[]> {
+): Promise<Exercise.DataWithFitness[]> {
   if (!dbBus) return []
   const result = await dbBus?.sendTransaction<Exercise.Data>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from schedule_exercise where scheduleId = ?)',
     [scheduleId]
   )
-  return result || []
+  if (!result) return []
+  return await loadFitnessByExerciseList(dbBus, client, result)
 }
 
 export async function getExerciseListByExercisePresetIdTemp(
   dbBus: MessageTransactionBus | undefined,
   client: string,
   exercisePresetId: number
-): Promise<Exercise.Data[]> {
+): Promise<Exercise.DataWithFitness[]> {
   if (!dbBus) return []
   const result = await dbBus?.sendTransaction<Exercise.Data>(client,
     'selects',
     'select * from exercise where id in (select exerciseId from exercisePreset_exercise where exercisePresetId = ?)',
     [exercisePresetId]
   )
-  return result || []
+  if (!result) return []
+  return await loadFitnessByExerciseList(dbBus, client, result)
 }
 
 export async function cloneExerciseList(
@@ -137,24 +161,26 @@ export async function deleteExerciseByIdsTemp(
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
   Query: {
-    async getExerciseById(_source, { id }, context) {
+    async getExerciseById(_source, { id }, { client }) {
       const result = await dbTransitionBus?.sendTransaction<Exercise.Data>(
-        context.client,
+        client,
         'select',
         'select * from exercise where id=?',
         [id],
       )
-      return result || null
+      if (!result) return null
+      return loadFitnessByExercise(dbTransitionBus, client, result)
     },
-    async getExerciseListByIds(_source, { ids }, context) {
+    async getExerciseListByIds(_source, { ids }, { client }) {
       const temp = new Array(ids.length).fill('?').join(', ')
       const result = await dbTransitionBus?.sendTransaction<Exercise.Data>(
-        context.client,
+        client,
         'selects',
         `select * from exercise where id in (${temp})`,
         ids,
       )
-      return result || []
+      if (!result) return []
+      return loadFitnessByExerciseList(dbTransitionBus, client, result)
     },
     async getExerciseListByScheduleId(_source, { scheduleId }, context) {
       return await getExerciseListByScheduleIdTemp(
