@@ -1,10 +1,22 @@
-import { useContext } from 'react'
-import AlertContext from '@provider/Alert/AlertProvider/AlertContext'
+import type { AlertData } from '../atom';
+import { useAtom } from 'jotai'
+import { alertAtom } from '../atom'
 
 export default function useAlert() {
-  const context = useContext(AlertContext)
-  if (!context) {
-    throw new Error('Wrong position')
+  const [alertList, setAlertList] = useAtom(alertAtom)
+  return {
+    alertList,
+    setAlertList,
+    pushAlert: (alert: Omit<AlertData, 'resolver'>) => {
+      const tempObj = {
+        ...alert,
+        resolver: undefined
+      } as AlertData
+      const promiser = new Promise<boolean>((resolve) => {
+        tempObj.resolver = resolve
+      })
+      setAlertList((prev) => [...prev, tempObj])
+      return promiser
+    }
   }
-  return context
 }

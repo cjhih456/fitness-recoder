@@ -20,7 +20,7 @@ export default function DisplayWorkout() {
   usePageTracker('workout_detail')
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
   const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
   const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
@@ -71,7 +71,7 @@ export default function DisplayWorkout() {
   // initations
   useEffect(() => {
     if (error) {
-      showAlert({
+      pushAlert({
         message: t('error:wrong.schedule')
       }).then(() => {
         navigate('/')
@@ -85,7 +85,7 @@ export default function DisplayWorkout() {
         setTimerText(calcTimeText(temp))
       }
     }
-  }, [error, showAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
+  }, [error, pushAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
 
   /** display formated duration time */
   useAnimationFrame(() => {

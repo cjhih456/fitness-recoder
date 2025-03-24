@@ -12,7 +12,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
   boolean,
   (_v: boolean, _presetName?: string) => Promise<void>
 ] {
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
   const navigate = useNavigate()
   const { t } = useTranslation(['workout'])
   const headerMenus = useScheduleMenu()
@@ -29,7 +29,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
     if (result.data?.copyExercisePresetFromSchedule) {
       navigate(`/preset/${result.data.copyExercisePresetFromSchedule.id}`)
     } else {
-      showAlert({
+      pushAlert({
         message: 'Save Schedule As Preset Failed'
       })
     }
