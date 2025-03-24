@@ -3,12 +3,14 @@ import { Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AlertModal from '@globalUi/Alert'
 import BottomNavi from '@globalUi/BottomNavi'
+import useTheme from '@hooks/useTheme'
 import FitnessDataModalProvider from '@ui/provider/FitnessDataModalProvider'
 import CRouter from './CRoutes'
 import DefaultLayout from './layout/DefaultLayout'
 
 function App() {
   const navigate = useNavigate()
+  useTheme(true)
   return <main className={'app h-screen max-h-full text-default-700'}>
     <HeroUIProvider navigate={navigate} className="app-root pb-12">
       <FitnessDataModalProvider>

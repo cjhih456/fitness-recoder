@@ -5,7 +5,6 @@ import { createRoot } from 'react-dom/client'
 import { I18nextProvider } from 'react-i18next'
 import { BrowserRouter } from 'react-router-dom'
 import apolloClient from '@hooks/apollo/lib/apolloClient.ts'
-import ThemeProvider from '@provider/Theme/ThemeProvider'
 import firebase from '@service/firebase'
 import { baseURL } from '@utils'
 import App from './App.tsx'
@@ -18,13 +17,11 @@ Worker().then(() => {
     <React.StrictMode>
       <I18nextProvider i18n={i18n}>
         <ApolloProvider client={apolloClient}>
-          <ThemeProvider>
-            <BrowserRouter basename={baseURL('/')}>
-              <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
-                <App />
-              </Suspense>
-            </BrowserRouter>
-          </ThemeProvider>
+          <BrowserRouter basename={baseURL('/')}>
+            <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
+              <App />
+            </Suspense>
+          </BrowserRouter>
         </ApolloProvider>
       </I18nextProvider>
     </React.StrictMode>,

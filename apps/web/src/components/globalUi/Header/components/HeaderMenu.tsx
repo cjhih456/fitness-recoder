@@ -2,7 +2,7 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
-import useTheme from '@provider/Theme/hooks/useTheme';
+import useTheme from '@hooks/useTheme';
 import StateRender from '@utils/StateRender';
 import { headerMenuAtom } from '../atom';
 import HeaderMenuItem from './HeaderMenuItem';
