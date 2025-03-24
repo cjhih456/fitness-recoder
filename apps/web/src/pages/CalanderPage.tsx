@@ -3,10 +3,10 @@ import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useBottomNavi } from '@globalUi/BottomNavi';
+import { useHeaderHandler } from '@globalUi/Header';
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
-import useBottomNavi from '@ui/BottomNavi/hooks/useBottomNavi';
 import Calender from '@ui/Calander/Calander';
-import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 import ScheduleList from '@ui/Schedule/ScheduleList';
 
 function CalanderPage() {

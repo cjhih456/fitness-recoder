@@ -1,11 +1,11 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useAlert } from '@globalUi/Alert';
+import { useHeaderHandler } from '@globalUi/Header';
 import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
-import useAlert from '@provider/Alert/hooks/useAlert';
 import { LogEvent } from '@service/firebase';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
-import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'

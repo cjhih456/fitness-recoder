@@ -1,4 +1,4 @@
-import type { MenuType } from '@ui/Header/atom';
+import type { MenuType } from '@globalUi/Header';
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';

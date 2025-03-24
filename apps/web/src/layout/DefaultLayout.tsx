@@ -3,8 +3,7 @@ import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, Navbar
 import { useCallback, useMemo, useState } from 'react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import HeaderContent from '@ui/Header/components/HeaderContent'
-import HeaderMenu from '@ui/Header/components/HeaderMenu'
+import HeaderContent, { HeaderMenu } from '@globalUi/Header';
 
 interface DefaultLayoutProps {
   children: ReactNode

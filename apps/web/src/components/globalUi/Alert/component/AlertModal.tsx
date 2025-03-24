@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import StateRender from '@utils/StateRender';
 import useAlert from '../hooks/useAlert';
 
-export const AlertModal = () => {
+const AlertModal = () => {
   const { t } = useTranslation('alert')
   const { alertList, setAlertList } = useAlert()
   const [displayMessage, setDisplayMessage] = useState<AlertData>()
@@ -67,3 +67,4 @@ export const AlertModal = () => {
     </ModalContent>
   </Modal>
 }
+export default AlertModal

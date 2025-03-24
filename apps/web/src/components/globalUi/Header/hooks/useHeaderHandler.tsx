@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import { useEffect } from 'react'
-import { headerContentAtom } from '@ui/Header/atom';
+import { headerContentAtom } from '../atom';
 
 export default function useHeaderHandler(header: string | undefined) {
   const [, setHeader] = useAtom(headerContentAtom)

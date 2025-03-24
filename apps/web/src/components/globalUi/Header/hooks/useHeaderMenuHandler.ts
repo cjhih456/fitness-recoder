@@ -1,7 +1,7 @@
-import type { MenuType } from '@ui/Header/atom';
+import type { MenuType } from '../atom';
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
-import { headerMenuAtom } from '@ui/Header/atom'
+import { headerMenuAtom } from '../atom'
 
 export default function useHeaderMenuHandler(menu: MenuType[]) {
   const [, setHeaderMenu] = useAtom(headerMenuAtom)
