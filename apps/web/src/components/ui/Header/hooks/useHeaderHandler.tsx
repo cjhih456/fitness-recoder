@@ -7,8 +7,6 @@ export default function useHeaderHandler(header: string | undefined) {
 
   useEffect(() => {
     setHeader(header)
-    return () => {
-      setHeader('')
-    }
   }, [header, setHeader])
+  useEffect(() => () => setHeader(''), [])
 }

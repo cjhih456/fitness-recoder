@@ -1,7 +1,7 @@
 import type { Schedule } from 'fitness-struct'
 import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { startTransition, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
@@ -25,6 +25,7 @@ export default function DisplayWorkout() {
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
   const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
   const [timerText, setTimerText] = useState('00:00:00.000')
+  useHeaderHandler(timerText)
 
   const [updateSchedule] = useUpdateSchedule()
   const updateState = useCallback((type: Schedule.IType, lazySchedule?: Schedule.Schedule) => {
@@ -89,10 +90,10 @@ export default function DisplayWorkout() {
   /** display formated duration time */
   useAnimationFrame(() => {
     if (!lazySchedule || lazySchedule.type !== 'STARTED') return
-    setTimerText(calcTimeText(lazySchedule))
+    startTransition(() => {
+      setTimerText(calcTimeText(lazySchedule))
+    })
   })
-
-  useHeaderHandler(timerText)
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {
