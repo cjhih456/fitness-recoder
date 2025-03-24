@@ -8,7 +8,6 @@ export default function useGetExercisePresetWithListById(id: number) {
     GetExercisePresetWithListByIdResponse,
     GetExercisePresetWithListByIdVariable
   >(GetExercisePresetWithListById, {
-    fetchPolicy: 'cache-first',
     variables: { id }
   })
 }

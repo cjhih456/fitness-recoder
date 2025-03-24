@@ -5,8 +5,7 @@ import { ScheduleMockData } from '.'
 
 export default function useGetScheduleById(id: number) {
   return useSuspenseQuery<GetScheduleByIdResponse, GetScheduleByIdVAriable>(GetScheduleByIdGql, {
-    variables: { id: Number(id) },
-    fetchPolicy: 'cache-first'
+    variables: { id: Number(id) }
   })
 }
 export const GetScheduleByIdMock: MockedResponse<GetScheduleByIdResponse, GetScheduleByIdVAriable> = {

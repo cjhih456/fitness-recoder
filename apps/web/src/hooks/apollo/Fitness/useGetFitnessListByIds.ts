@@ -5,8 +5,7 @@ import { FitnessMockData } from '.'
 
 export default function useGetFitnessListByIds(ids: number[]) {
   return useSuspenseQuery<GetFitnessListByIdsResponse, GetFitnessListByIdsVariable>(GetFitnessLisyByIds, {
-    variables: { ids },
-    fetchPolicy: 'cache-first',
+    variables: { ids }
   })
 }
 

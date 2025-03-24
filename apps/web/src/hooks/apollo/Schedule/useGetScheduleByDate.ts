@@ -8,7 +8,6 @@ export default function useGetScheduleByDate(year: number, month: number, date: 
     GetScheduleByDateResponse,
     GetScheduleByDateVariable
   >(GetScheduleByDateGql, {
-    fetchPolicy: 'cache-first',
     variables: {
       year, month, date
     }

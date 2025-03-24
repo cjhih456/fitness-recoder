@@ -9,7 +9,6 @@ export default function useGetExercisePresetWithListByOffset(offset: number, siz
     GetExercisePresetWithListByOffsetResponse,
     GetExercisePresetWithListByOffsetVariable
   >(GetExercisePresetWithListByOffset, {
-    fetchPolicy: 'cache-first',
     variables: { offset, size }
   })
 

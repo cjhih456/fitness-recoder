@@ -9,8 +9,7 @@ export default function useGetScheduleStatusByDate(year: number, month: number) 
       variables: {
         year,
         month
-      },
-      fetchPolicy: 'cache-first'
+      }
     })
 }
 
