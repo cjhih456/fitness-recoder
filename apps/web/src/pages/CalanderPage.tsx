@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import Calender from '@ui/Calander/Calander';
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 import ScheduleList from '@ui/Schedule/ScheduleList';
 
 function CalanderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler([t('calander')])
+  useHeaderHandler(t('calander'))
 
   const location = useLocation()
   const navigate = useNavigate()

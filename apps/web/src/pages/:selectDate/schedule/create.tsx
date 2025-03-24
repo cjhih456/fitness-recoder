@@ -3,16 +3,16 @@ import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateSch
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
 import useAlert from '@provider/Alert/hooks/useAlert';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import { LogEvent } from '@service/firebase';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
 })
 
 export default function CreateSchedule() {
-  useHeaderHandler(['Create Schedule'])
+  useHeaderHandler('Create Schedule')
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()

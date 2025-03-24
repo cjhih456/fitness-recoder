@@ -1,9 +1,10 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
-import { useMemo, useState } from 'react';
+import { useAtom } from 'jotai';
+import { useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
-import useHeaderContext from '@provider/Header/hooks/useHeaderContext';
 import useTheme from '@provider/Theme/hooks/useTheme';
 import StateRender from '@utils/StateRender';
+import { headerMenuAtom } from '../atom';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {
@@ -11,13 +12,7 @@ export default function HeaderMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
-  const { getHeaderMenu } = useHeaderContext()
-  const headerMenu = useMemo(() => getHeaderMenu().map((menu, idx) => {
-    return <HeaderMenuItem key={`menu-${idx}`} text={menu.name} onClick={() => {
-      menu.action()
-      setIsOpen(false)
-    }}></HeaderMenuItem>
-  }), [getHeaderMenu])
+  const [headerMenu] = useAtom(headerMenuAtom)
 
   return <StateRender.Boolean
     state={Boolean(headerMenu.length)}
@@ -29,7 +24,14 @@ export default function HeaderMenu() {
           </Button>
         </PopoverTrigger>
         <PopoverContent>
-          {headerMenu}
+          {
+            headerMenu.map((menu, idx) => {
+              return <HeaderMenuItem key={`menu-${idx}`} text={menu.name} onClick={() => {
+                menu.action()
+                setIsOpen(false)
+              }}></HeaderMenuItem>
+            })
+          }
           <HeaderMenuItem text="Theme">
             <Switch
               isSelected={theme === 'dark'}

@@ -4,9 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset'
 import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
 import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
-import useHeaderMenuHandler from '@provider/Header/hooks/useHeaderMenuHandler'
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor'
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler'
+import useHeaderMenuHandler from '@ui/Header/hooks/useHeaderMenuHandler'
 
 export default function PresetDetailPage() {
   const params = useParams()
@@ -22,7 +22,7 @@ export default function PresetDetailPage() {
 
   const headerMenu = usePresetMenu(id)
 
-  useHeaderHandler([exercisePreset.name])
+  useHeaderHandler(exercisePreset.name)
   useHeaderMenuHandler(headerMenu)
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return

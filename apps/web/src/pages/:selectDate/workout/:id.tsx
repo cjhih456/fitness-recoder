@@ -9,8 +9,8 @@ import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
 import useAlert from '@provider/Alert/hooks/useAlert'
 import BottomNaviArea from '@provider/BottomNavi/component/BottomNaviArea'
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
 import { dayjs, ScheduleType } from '@utils'
 
@@ -92,7 +92,7 @@ export default function DisplayWorkout() {
     setTimerText(calcTimeText(lazySchedule))
   })
 
-  useHeaderHandler([timerText])
+  useHeaderHandler(timerText)
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {

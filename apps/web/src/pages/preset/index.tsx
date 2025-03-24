@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@hooks/apollo/ExercisePreset';
 import useSpinner from '@hooks/useSpinner';
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 import PresetDisplay from '@ui/Preset/PresetDisplay';
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
   useBottomNavi()
-  useHeaderHandler([t('title:preset')])
+  useHeaderHandler(t('title:preset'))
 
   const navigator = useNavigate()
 

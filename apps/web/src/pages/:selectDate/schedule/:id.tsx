@@ -3,20 +3,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
 import useUpdateExerciseListBySchedule from '@hooks/apollo/mixed/useUpdateExerciseListBySchedule';
 import usePageTracker from '@hooks/usePageTracker';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 
 export default function DisplaySchedule() {
-  useHeaderHandler(['Schedule'])
+  useHeaderHandler('Schedule')
   usePageTracker('modify_schedule')
 
   const { id: idParam } = useParams()
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const { data: loadedData } = useGetExerciseListByScheduleId(scheduleId)
+  const { data } = useGetExerciseListByScheduleId(scheduleId)
   const updateExerciseList = useUpdateExerciseListBySchedule()
 
-  const savedExerciseIdxList = loadedData.getExerciseListByScheduleId.map(v => v.exercise)
+  const savedExerciseIdxList = data.getExerciseListByScheduleId.map(v => v.exercise)
   function saveSchedule(exerciseIdxList: number[]) {
     updateExerciseList(scheduleId, savedExerciseIdxList || [], exerciseIdxList)
     navigate(-1)

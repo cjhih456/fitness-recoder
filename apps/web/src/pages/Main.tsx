@@ -6,8 +6,8 @@ import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi'
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
+import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler'
 import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
 import StateRender from '@utils/StateRender'
 
@@ -26,7 +26,7 @@ export default function Main() {
     }
   }, [])
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
-  useHeaderHandler([t('title:home')])
+  useHeaderHandler(t('title:home'))
 
   const {
     gotoCreateScheduleAction,

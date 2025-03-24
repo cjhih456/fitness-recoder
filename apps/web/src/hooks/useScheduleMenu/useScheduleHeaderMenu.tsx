@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
 import useScheduleMenu from '@hooks/useScheduleMenu'
 import useAlert from '@provider/Alert/hooks/useAlert'
-import useHeaderMenuHandler from '@provider/Header/hooks/useHeaderMenuHandler'
+import useHeaderMenuHandler from '@ui/Header/hooks/useHeaderMenuHandler'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
