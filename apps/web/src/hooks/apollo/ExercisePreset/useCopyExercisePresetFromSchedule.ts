@@ -18,7 +18,8 @@ export const CopyExercisePresetFromScheduleMock: MockedResponse<
     ExercisePresetMockData[id] = {
       name: v.name,
       id: id,
-      deps: 0
+      deps: 0,
+      __typename: 'ExercisePreset'
     }
     return {
       data: {

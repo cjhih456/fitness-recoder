@@ -1,6 +1,5 @@
 import { Button } from '@heroui/react'
-import { useCallback, useEffect, useState } from 'react'
-import { useLazyGetFitnessListByIds } from '@hooks/apollo/Fitness'
+import { Suspense, useCallback, useState } from 'react'
 import FitnessList from './FitnessList'
 import FitnessSearchModal from './FitnessSearchModal'
 
@@ -15,28 +14,9 @@ export default function FitnessListEditor({
   saveBtnText,
   onSaveAction
 }: FitnessListEditorProps) {
-  const [getFitnessListByIds, { data: fitnessList }] = useLazyGetFitnessListByIds()
-  const [dialogState, changeDialogState] = useState(false)
-  /**
-   * Open Search Dialog
-   */
-  function openSearchDialog() {
-    changeDialogState(true)
-  }
+  const [dialogState, setDialogState] = useState(false)
 
-  const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>([])
-  useEffect(() => {
-    if (savedIdxData.length)
-      setLazyFitnessIds(savedIdxData)
-  }, [savedIdxData])
-
-  useEffect(() => {
-    getFitnessListByIds({
-      variables: {
-        ids: lazyFitnessIds
-      }
-    })
-  }, [lazyFitnessIds, getFitnessListByIds])
+  const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>(savedIdxData)
 
   /**
    * update seleted list
@@ -59,21 +39,21 @@ export default function FitnessListEditor({
     })
   }, [])
 
-  return <>
-    <FitnessSearchModal
-      isOpen={dialogState}
-      onOpenChange={changeDialogState}
-      selectedFitnessIds={lazyFitnessIds}
-      onChangeFitnessIds={changeSelectedFitnessIds}
-    ></FitnessSearchModal>
-    <div className="flex flex-col gap-y-4 px-4 pt-4">
-      <div className="flex flex-col gap-y-2">
-        <FitnessList list={fitnessList?.getFitnessListByIds || []}></FitnessList>
-      </div>
-      <div className="grid grid-cols-2 gap-x-2">
-        <Button onClick={openSearchDialog}>Add Exercise</Button>
-        <Button onClick={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
-      </div>
+  return <div className="flex flex-col gap-y-4 px-4 pt-4">
+    <div className="flex flex-col gap-y-2">
+      <FitnessList fitnessIds={lazyFitnessIds} />
     </div>
-  </>
+    <div className="grid grid-cols-2 gap-x-2">
+      <Button onPress={() => setDialogState(true)}>Add Exercise</Button>
+      <Button onPress={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
+    </div>
+    <Suspense>
+      <FitnessSearchModal
+        isOpen={dialogState}
+        onOpenChange={setDialogState}
+        selectedFitnessIds={lazyFitnessIds}
+        onChangeFitnessIds={changeSelectedFitnessIds}
+      />
+    </Suspense>
+  </div >
 }

@@ -12,7 +12,7 @@ declare const self: ServiceWorkerGlobalScope
 
 export type Version = number
 
-export const version: Version = 1
+export const version: Version = 2
 
 function baseURL(url?: string) {
   return (import.meta.env.VITE_URL_ROOT + (url ?? '')).replace(/\/\//g, '/')

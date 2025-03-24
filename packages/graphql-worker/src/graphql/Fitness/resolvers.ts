@@ -12,42 +12,43 @@ interface getFitnessListByKeywordsArgs {
   offset: number
 }
 
-export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, { client: string }> => ({
-  Query: {
-    async getFitnessById(_source, { id }: getFitnessByIdArgs, { client }) {
-      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
-        client,
-        'select',
-        'select * from fitness where id=?',
-        [id]
-      )
-      if (!result) return null
-      const filteredData: Exercise.IFitness = Object.assign(result, {
-        primaryMuscles: JSON.parse(result?.primaryMuscles as string),
-        secondaryMuscles: JSON.parse(result?.secondaryMuscles as string),
-        instructions: JSON.parse(result?.instructions as string),
-        tips: JSON.parse(result?.tips as string)
-      })
+const parseFitness = (fitness: Exercise.IFitnessDB): Exercise.IFitness => Object.assign(fitness, {
+  primaryMuscles: JSON.parse(fitness?.primaryMuscles as string),
+  secondaryMuscles: JSON.parse(fitness?.secondaryMuscles as string),
+  instructions: JSON.parse(fitness?.instructions as string),
+  tips: JSON.parse(fitness?.tips as string)
+})
 
-      return filteredData
+export const getFitnessById = async (dbTransitionBus: MessageTransactionBus | undefined, client: string, fitnessId: number) => {
+  const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
+    client,
+    'select',
+    'select * from fitness where id=?',
+    [fitnessId]
+  )
+  if (!result) return null
+  return parseFitness(result)
+}
+
+export const getFitnessByIds = async (dbTransitionBus: MessageTransactionBus | undefined, client: string, fitnessIds: number[]) => {
+  const temp = new Array(fitnessIds.length).fill('?').join(', ')
+  const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
+    client,
+    'selects',
+    `select * from fitness where id in (${temp})`,
+    fitnessIds
+  )
+  if (!result) return null
+  return result.map(res => parseFitness(res))
+}
+
+const fitnessResolver = (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, { client: string }> => ({
+  Query: {
+    getFitnessById(_source, { id }: getFitnessByIdArgs, { client }) {
+      return getFitnessById(dbTransitionBus, client, id)
     },
-    async getFitnessListByIds(_source, { ids }: getFitnessByIdsArgs, { client }) {
-      const temp = new Array(ids.length).fill('?').join(', ')
-      const result = await dbTransitionBus?.sendTransaction<Exercise.IFitnessDB>(
-        client,
-        'selects',
-        `select * from fitness where id in (${temp})`,
-        ids
-      )
-      if (!result) return null
-      return result.map(res => {
-        return Object.assign(res, {
-          primaryMuscles: JSON.parse(res?.primaryMuscles as string),
-          secondaryMuscles: JSON.parse(res?.secondaryMuscles as string),
-          instructions: JSON.parse(res?.instructions as string),
-          tips: JSON.parse(res?.tips as string)
-        })
-      })
+    getFitnessListByIds(_source, { ids }: getFitnessByIdsArgs, { client }) {
+      return getFitnessByIds(dbTransitionBus, client, ids)
     },
     async getFitnessListByKeywords(_source, { name, category = [], muscle = [], limit, offset }: getFitnessListByKeywordsArgs, { client }) {
       const whereQuery = []
@@ -75,14 +76,8 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
         [...argsQuery, offset, limit]
       )
       if (!result) return []
-      return result.map(res => {
-        return Object.assign(res, {
-          primaryMuscles: JSON.parse(res?.primaryMuscles as string),
-          secondaryMuscles: JSON.parse(res?.secondaryMuscles as string),
-          instructions: JSON.parse(res?.instructions as string),
-          tips: JSON.parse(res?.tips as string)
-        })
-      })
+      return result.map(res => parseFitness(res))
     }
   }
 })
+export default fitnessResolver

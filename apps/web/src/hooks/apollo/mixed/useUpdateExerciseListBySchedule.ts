@@ -1,30 +1,30 @@
-import type { Exercise } from 'fitness-struct'
 import { useUpdateExerciseListByScheduleId } from '@hooks/apollo/Exercise'
 
 export default function useUpdateExerciseListBySchedule() {
   const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()
-  return async (scheduleId: number, oldExerciseList: Exercise.Data[], exerciseList: number[]) => {
-    const removeNeedExerciseData = [] as Exercise.Data[]
-    const keepExerciseData = [] as Exercise.Data[]
+  return async (scheduleId: number, oldExerciseIds: number[], newExerciseIds: number[]) => {
+    const removeNeedExerciseData = [] as number[]
+    const keepExerciseData = [] as number[]
     const createNeedExerciseId = [] as number[]
 
-    oldExerciseList.forEach((e) => {
-      if (exerciseList.includes(e.exercise)) {
+    oldExerciseIds.forEach((e) => {
+      if (newExerciseIds.includes(e)) {
         keepExerciseData.push(e)
       } else {
         removeNeedExerciseData.push(e)
       }
     })
-    const keepExerciseDataExercises = keepExerciseData.map(v => v.exercise)
-    exerciseList.forEach((newExerciseId) => {
-      if (!keepExerciseDataExercises.includes(newExerciseId)) {
+
+    newExerciseIds.forEach((newExerciseId) => {
+      if (!keepExerciseData.includes(newExerciseId)) {
         createNeedExerciseId.push(newExerciseId)
       }
     })
+
     updateListByScheduleId({
       variables: {
         scheduleId: scheduleId,
-        deleteExerciseId: removeNeedExerciseData.map(v => Number(v.id)),
+        deleteExerciseId: removeNeedExerciseData,
         newExercise: createNeedExerciseId
       }
     })

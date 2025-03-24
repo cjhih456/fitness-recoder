@@ -1,6 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
 import CreateExerciseBySchedule from '@hooks/apollo/Exercise/graphql/mutation/CreateExerciseBySchedule';
+import { FitnessMockData } from '../Fitness';
 
 export default function useCreateExerciseBySchedule() {
   return useMutation<
@@ -21,7 +22,9 @@ export const CreateExerciseByScheduleMock: MockedResponse<
         createExerciseBySchedule: {
           id: 1,
           deps: 0,
-          exercise: 1
+          exercise: 1,
+          __typename: 'ExerciseWithFitness',
+          fitness: FitnessMockData[0]
         }
       }
     }

@@ -7,10 +7,10 @@ export default function useCreateExercisePreset() {
   return useMutation<CreateExercisePresetResponse, CreateExercisePresetVariable>(CreateExercisePresetGql, {
     update: (cache, result) => {
       cache.modify<{
-        getExercisePresetWithListList: GetExercisePresetWithListListResponse['getExercisePresetWithListList']
+        getExercisePresetWithListByOffset: GetExercisePresetWithListByOffsetResponse['getExercisePresetWithListByOffset']
       }>({
         fields: {
-          getExercisePresetWithListList(prev, { toReference }) {
+          getExercisePresetWithListByOffset(prev, { toReference }) {
             if (!prev || !result.data?.createExercisePreset) return prev
             const ref = toReference(result.data?.createExercisePreset, true)
             return [ref, ...prev]
@@ -33,6 +33,7 @@ export const CreateExercisePresetMock: MockedResponse<
       name: v.exercisePreset.name,
       id: id,
       deps: 0,
+      __typename: 'ExercisePreset'
     }
     return {
       data: {

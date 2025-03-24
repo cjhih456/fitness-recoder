@@ -1,28 +1,32 @@
 import { ApolloProvider } from '@apollo/client'
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { Spinner } from '@heroui/react'
+import React, { Suspense } from 'react'
+import { createRoot } from 'react-dom/client'
+import { I18nextProvider } from 'react-i18next'
 import { BrowserRouter } from 'react-router-dom'
-import { useApollo } from '@hooks/apollo/useApollo'
-import HeaderProvider from '@provider/Header/HeaderProvider'
+import apolloClient from '@hooks/apollo/lib/apolloClient.ts'
 import ThemeProvider from '@provider/Theme/ThemeProvider'
-import Firebase from '@service/firebase'
+import firebase from '@service/firebase'
 import { baseURL } from '@utils'
 import App from './App.tsx'
+import i18n from './i18n'
 import Worker from './worker.ts'
-Worker().then(async () => {
-  const apolloClient = await useApollo()
-  Firebase()
-  ReactDOM.createRoot(document.getElementById('root')!).render(
+
+firebase()
+Worker().then(() => {
+  createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <BrowserRouter basename={baseURL('/')}>
-        <ThemeProvider>
-          <HeaderProvider>
-            <ApolloProvider client={apolloClient}>
-              <App />
-            </ApolloProvider>
-          </HeaderProvider>
-        </ThemeProvider>
-      </BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider>
+            <BrowserRouter basename={baseURL('/')}>
+              <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
+                <App />
+              </Suspense>
+            </BrowserRouter>
+          </ThemeProvider>
+        </ApolloProvider>
+      </I18nextProvider>
     </React.StrictMode>,
   )
 })

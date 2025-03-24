@@ -1,5 +1,6 @@
 import type { ScheduleDisplayProps } from './ScheduleDisplay';
 import type { Meta, StoryObj } from '@storybook/react';
+import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
 import { ScheduleType } from '@utils';
 import ScheduleDisplay from './ScheduleDisplay'
 
@@ -20,7 +21,9 @@ const meta = {
     (Story) => {
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
         <div>
-          <Story />
+          <MenuableAccordion.GroupProvider>
+            <Story />
+          </MenuableAccordion.GroupProvider>
         </div>
       </div>
     }
@@ -40,15 +43,6 @@ export const Display: Story = {
       month: 1,
       year: 2024,
       type: ScheduleType.SCHEDULED,
-      exerciseList: [{
-        id: 1,
-        deps: 1,
-        exercise: 0
-      }, {
-        id: 2,
-        deps: 1,
-        exercise: 0
-      }],
       start: 0,
       workoutTimes: 0
     },

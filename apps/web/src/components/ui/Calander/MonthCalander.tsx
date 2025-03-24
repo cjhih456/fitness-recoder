@@ -25,7 +25,7 @@ export default function MonthCalander({
         key={`month-${idx}`}
         isDisabled={validMonthWithValues(year, idx)}
         color={month === idx ? 'primary' : undefined}
-        onClick={() => onChange(idx)}
+        onPress={() => onChange(idx)}
       >{idx}</Button>
     })}
   </div>

@@ -3,11 +3,8 @@ import useCreateExercisePreset from './useCreateExercisePreset';
 import useDeleteExercisePreset from './useDeleteExercisePreset';
 import useExercisePresetFragment from './useExercisePresetFragment';
 import useExercisePresetWithListFragment from './useExercisePresetWithListFragment';
-import useGetExercisePresetById from './useGetExercisePresetById';
 import useGetExercisePresetWithListById from './useGetExercisePresetWithListById';
-import useGetExercisePresetWithListList from './useGetExercisePresetWithListList';
-import useLazyGetExercisePresetById from './useLazyGetExercisePresetById';
-import useLazyGetExercisePresetWithListById from './useLazyGetExercisePresetWithListById';
+import useGetExercisePresetWithListByOffset from './useGetExercisePresetWithListByOffset';
 
 export {
   useCopyExercisePresetFromSchedule,
@@ -15,11 +12,8 @@ export {
   useDeleteExercisePreset,
   useExercisePresetFragment,
   useExercisePresetWithListFragment,
-  useGetExercisePresetById,
-  useGetExercisePresetWithListList,
+  useGetExercisePresetWithListByOffset,
   useGetExercisePresetWithListById,
-  useLazyGetExercisePresetById,
-  useLazyGetExercisePresetWithListById
 }
 
 export const ExercisePresetMockData: { [key: number]: ExercisePresetStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {
@@ -27,7 +21,8 @@ export const ExercisePresetMockData: { [key: number]: ExercisePresetStoreType } 
   acc[id] = {
     id: id,
     name: `TestPreset - ${id}`,
-    deps: 0
+    deps: 0,
+    __typename: 'ExercisePreset'
   } as ExercisePresetStoreType
   return acc
 }, {})

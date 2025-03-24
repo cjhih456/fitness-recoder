@@ -1,14 +1,13 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetExercisePresetWithListById from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListById';
 import { ExercisePresetMockData } from '.'
 
 export default function useGetExercisePresetWithListById(id: number) {
-  return useQuery<
+  return useSuspenseQuery<
     GetExercisePresetWithListByIdResponse,
     GetExercisePresetWithListByIdVariable
   >(GetExercisePresetWithListById, {
-    fetchPolicy: 'cache-first',
     variables: { id }
   })
 }
@@ -21,9 +20,11 @@ export const GetExercisePresetWithListByIdMock: MockedResponse<
     query: GetExercisePresetWithListById
   },
   result: (v) => {
+    const temp = ExercisePresetMockData[v.id]
+    temp.__typename = 'ExercisePresetWithList'
     return {
       data: {
-        getExercisePresetWithListById: ExercisePresetMockData[v.id]
+        getExercisePresetWithListById: temp
       }
     }
   }

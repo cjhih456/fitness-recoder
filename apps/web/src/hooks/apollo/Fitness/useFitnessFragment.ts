@@ -1,13 +1,13 @@
-import { useLazyGetFitnessById } from '@hooks/apollo/Fitness';
+import { useSuspenseFragment } from '@apollo/client';
 import FitnessFragment from '@hooks/apollo/Fitness/graphql/fragment/FitnessFragment';
-import useFixedFragment from '@hooks/apollo/useFixedFragment';
 
 export default function useFitnessFragment(id: number) {
-  return useFixedFragment<FitnessStoreType, GetFitnessByIdResponse, GetFitnessByIdVariable>(
-    FitnessFragment,
-    useLazyGetFitnessById,
-    {
+  const { data } = useSuspenseFragment<FitnessStoreType>({
+    fragment: FitnessFragment,
+    from: {
       id,
       __typename: 'Fitness'
-    })
+    }
+  })
+  return data
 }

@@ -7,10 +7,10 @@ export default function useDeleteExercisePreset() {
   return useMutation<DeleteExercisePresetResponse, DeleteExercisePresetVariable>(DeleteExercisePresetGql, {
     update: (cache, _r, { variables }) => {
       cache.modify<{
-        getExercisePresetWithListList: GetExercisePresetWithListListResponse['getExercisePresetWithListList']
+        getExercisePresetWithListByOffset: GetExercisePresetWithListByOffsetResponse['getExercisePresetWithListByOffset']
       }>({
         fields: {
-          getExercisePresetWithListList(prev, { readField }) {
+          getExercisePresetWithListByOffset(prev, { readField }) {
             if (!prev) return prev
             return prev.filter((p) => {
               const list = readField<number>('id', p)

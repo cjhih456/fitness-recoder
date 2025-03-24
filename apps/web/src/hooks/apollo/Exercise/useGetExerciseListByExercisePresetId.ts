@@ -1,9 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetExerciseListByExercisePresetId from '@hooks/apollo/Exercise/graphql/query/GetExerciseListByExercisePresetId';
+import { FitnessMockData } from '../Fitness';
 
 export default function useGetExerciseListByExercisePresetId(exercisePresetId: number) {
-  return useQuery<
+  return useSuspenseQuery<
     GetExerciseByExercisePresetIdResponse,
     GetExerciseByExercisePresetIdVariable
   >(GetExerciseListByExercisePresetId, {
@@ -25,12 +26,16 @@ export const GetExerciseListByExercisePresetIdMock: MockedResponse<
           {
             id: 1,
             exercise: 1,
-            deps: 0
+            deps: 0,
+            __typename: 'ExerciseWithFitness',
+            fitness: FitnessMockData[0]
           },
           {
             id: 2,
             exercise: 2,
-            deps: 0
+            deps: 0,
+            __typename: 'ExerciseWithFitness',
+            fitness: FitnessMockData[1]
           }
         ]
       }

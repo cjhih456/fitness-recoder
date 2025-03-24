@@ -31,7 +31,7 @@ dist-ssr
 apps/web/public/manifest.webmanifest
 
 #graphql PossibleType
-apps/web/src/hooks/apollo/possibleTypes.json
+apps/web/src/hooks/apollo/lib/possibleTypes.json
 
 
 # ssl files

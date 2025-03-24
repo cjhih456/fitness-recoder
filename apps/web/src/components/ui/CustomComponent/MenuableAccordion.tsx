@@ -1,52 +1,32 @@
 import type { MenuType } from '@provider/Header/HeaderProvider';
-import type { ReactNode } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
 import StateRender from '@utils/StateRender';
 
 interface MenuableAccordionProps {
-  children: (_toggleAction?: () => void) => {
+  children: {
     title: ReactNode
     content: ReactNode
   },
   menu?: MenuType[]
-  isFocus?: boolean | undefined
-  onFocusChange?: (_t: boolean) => void
+  isOpen: boolean | undefined
+  onOpenChange: (_t: boolean) => void
 }
 
-export default function MenuableAccordion({ children, menu = [], isFocus, onFocusChange }: MenuableAccordionProps) {
-  const [isSingleOpen, setIsLazyOpen] = useState<boolean>(false);
-  const onToggleIsOpen = useCallback(() => {
-    setIsLazyOpen(prev => {
-      onFocusChange && onFocusChange(!prev)
-      return !prev
-    })
-  }, [onFocusChange]);
+const MenuableAccordion = ({ children, menu = [], isOpen, onOpenChange }: MenuableAccordionProps) => {
   const cardRef = useRef<HTMLDivElement | null>(null)
   useOnClickOutside([cardRef], () => {
-    typeof isFocus === 'undefined' && setIsLazyOpen(false)
+    isOpen && onOpenChange && onOpenChange(false)
   })
-  useEffect(() => {
-    setIsLazyOpen(typeof isFocus === 'undefined' ? false : isFocus)
-  }, [isFocus])
-
-  const isOpen = useMemo(() => {
-    if (typeof isFocus === 'undefined') {
-      return isSingleOpen
-    } else {
-      return isFocus
-    }
-  }, [isFocus, isSingleOpen])
-
-  const { content: childNode, title: titleNode } = useMemo(() => {
-    return children(onToggleIsOpen)
-  }, [children, onToggleIsOpen])
 
   const contentRef = useRef<HTMLDivElement | null>(null)
   const { height } = useResizeObserver({ ref: contentRef })
   const contentHeight = useMemo(() => `calc(${height}px + 1.5rem)`, [height])
+
+  const { content: childNode, title: titleNode } = children
 
   return (
     <Card ref={cardRef}>
@@ -62,7 +42,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
               </DropdownTrigger>
               <DropdownMenu>
                 {menu.map((item, idx) => {
-                  return <DropdownItem role="menuitem" key={`menu-${idx}`} onClick={item.action}>{item.name}</DropdownItem>
+                  return <DropdownItem role="menuitem" key={`menu-${idx}`} onPress={item.action}>{item.name}</DropdownItem>
                 })}
               </DropdownMenu>
             </Dropdown>
@@ -87,7 +67,7 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
         <Button
           variant="light"
           fullWidth
-          onClick={onToggleIsOpen}>
+          onPress={() => onOpenChange(!isOpen)}>
           <MdExpandMore
             className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           />
@@ -96,3 +76,31 @@ export default function MenuableAccordion({ children, menu = [], isFocus, onFocu
     </Card>
   );
 };
+
+const MenuableAccordionSelf = (props: Omit<MenuableAccordionProps, 'isOpen' | 'onOpenChange'>) => {
+  const [isOpen, setIsOpen] = useState(false)
+  return <MenuableAccordion {...props} onOpenChange={setIsOpen} isOpen={isOpen} />
+}
+MenuableAccordion.Self = MenuableAccordionSelf
+
+const Context = createContext<[any, Dispatch<SetStateAction<any>>]>([0, () => { }])
+interface MenuableAccordionGroupProviderProps {
+  defaultValue?: number
+  children: ReactNode
+}
+const MenuableAccordionGroupProvider = ({ defaultValue = 0, children }: MenuableAccordionGroupProviderProps) => {
+  const providerState = useState(defaultValue)
+  return <Context.Provider value={providerState}>{children}</Context.Provider>
+}
+const MenuableAccordionGroupContent = ({ openId, ...props }: Omit<MenuableAccordionProps, 'isOpen' | 'onOpenChange'> & { openId: any }) => {
+  const [state, setState] = useContext(Context)
+  const isOpen = useMemo(() => state === openId, [state, openId])
+  const setIsOpen = useCallback((v: boolean) => {
+    setState(v ? openId : null)
+  }, [setState, openId])
+  return <MenuableAccordion {...props} onOpenChange={setIsOpen} isOpen={isOpen} />
+}
+MenuableAccordion.GroupProvider = MenuableAccordionGroupProvider
+MenuableAccordion.GroupContent = MenuableAccordionGroupContent
+
+export default MenuableAccordion

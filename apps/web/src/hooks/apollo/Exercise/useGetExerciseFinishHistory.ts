@@ -1,9 +1,9 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetExerciseFinishHistory from '@hooks/apollo/Exercise/graphql/query/GetExerciseFinishHistory';
 
 export default function useGetExerciseFinishHistory(exerciseId: number) {
-  return useQuery<
+  return useSuspenseQuery<
     GetExerciseFinishHistoryResponse,
     GetExerciseFinishHistoryVariable
   >(GetExerciseFinishHistory, {

@@ -26,7 +26,7 @@ export const Display: Story = {
   args: {
     exerciseData: {
       id: 1,
-      exercise: 0,
+      exercise: 1,
       deps: 0
     }
   }

@@ -1,11 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetFitnessSimpleByIds from '@hooks/apollo/Fitness/graphql/query/GetFitnessSimpleByIds';
 import { FitnessMockData } from '.'
 
 export default function useGetFitnessSimpleListByIds(ids: number[]) {
-  return useQuery<GetFitnessSimpleListByIdsResponse, GetFitnessSimpleListByIdsVariable>(GetFitnessSimpleByIds, {
-    fetchPolicy: 'cache-first',
+  return useSuspenseQuery<GetFitnessSimpleListByIdsResponse, GetFitnessSimpleListByIdsVariable>(GetFitnessSimpleByIds, {
     variables: { ids }
   })
 }

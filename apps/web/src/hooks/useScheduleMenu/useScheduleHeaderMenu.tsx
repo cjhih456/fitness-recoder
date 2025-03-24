@@ -29,7 +29,9 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
     if (result.data?.copyExercisePresetFromSchedule) {
       navigate(`/preset/${result.data.copyExercisePresetFromSchedule.id}`)
     } else {
-      showAlert('ERROR', 'Save Schedule As Preset Failed', false)
+      showAlert({
+        message: 'Save Schedule As Preset Failed'
+      })
     }
   }
 

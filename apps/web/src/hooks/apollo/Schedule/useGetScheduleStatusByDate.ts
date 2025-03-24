@@ -1,16 +1,15 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import GetScheduleStatusByDateGql from '@hooks/apollo/Schedule/graphql/query/GetScheduleStatusByDateGql';
 import { ScheduleMockData } from '.'
 
 export default function useGetScheduleStatusByDate(year: number, month: number) {
-  return useQuery<GetScheduleStatusByDateResponse,
+  return useSuspenseQuery<GetScheduleStatusByDateResponse,
     GetScheduleStatusByDateVariable>(GetScheduleStatusByDateGql, {
       variables: {
         year,
         month
-      },
-      fetchPolicy: 'cache-first'
+      }
     })
 }
 

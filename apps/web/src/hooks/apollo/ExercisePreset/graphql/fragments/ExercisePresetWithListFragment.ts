@@ -6,7 +6,7 @@ fragment ExercisePresetWithListFragment on ExercisePresetWithList {
   name
   ...ExercisePresetFragment
   exerciseList {
-    ...ExerciseFragment
+    ...ExerciseWithFitnessFragment
   }
 }`
 export default ExercisePresetWithListFragment

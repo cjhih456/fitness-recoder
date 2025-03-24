@@ -52,8 +52,8 @@ export default function PresetNameInputDialog({ isOpen, onChange, children }: Pr
             <Input label="Name" value={presetName} onValueChange={setPresetName} />
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleSave}>Save</Button>
+            <Button onPress={handleClose}>Cancel</Button>
+            <Button onPress={handleSave}>Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

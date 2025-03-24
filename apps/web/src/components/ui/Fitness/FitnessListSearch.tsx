@@ -1,8 +1,7 @@
 import type { Exercise } from 'fitness-struct'
 import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
-import { useMemo, useState } from 'react'
-import { useDebounceValue } from 'usehooks-ts'
+import { Suspense, useMemo } from 'react'
 import { useGetFitnessListByKeywords } from '@hooks/apollo/Fitness'
 import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
 import FitnessList from './FitnessList'
@@ -23,22 +22,8 @@ export default function FitnessListSearch({
   needSpace = false,
   searchAreaBg = false
 }: FitnessListSearchProps) {
-  const [searchValue, changeSearchValue] = useState('')
-  const [selectedCategoryList, changeCategory] = useState<Exercise.ICategory[]>([])
-  const [selectedMuscleList, changeMuscle] = useState<Exercise.IMuscle[]>([])
-  const [debouncedOptions] = useDebounceValue<Parameters<typeof useGetFitnessListByKeywords>>([
-    searchValue,
-    selectedCategoryList,
-    selectedMuscleList,
-    20,
-    0
-  ], 1000, {
-    equalityFn: (l, r) => {
-      return JSON.stringify(l) === JSON.stringify(r)
-    }
-  })
-  const { data: fitnessListData, fetchMore, called } = useGetFitnessListByKeywords(...debouncedOptions)
-  const fitnessList = useMemo(() => fitnessListData?.getFitnessListByKeywords || [], [fitnessListData])
+  const { data: fitnessListData, refetch, fetchMore, hasNext } = useGetFitnessListByKeywords('', [], [], 20, 0)
+  const fitnessIds = useMemo(() => fitnessListData.getFitnessListByKeywords.map(v => v.id), [fitnessListData])
 
   const bgString = searchAreaBg ? 'bg-background/70 backdrop-blur-xl backdrop-saturate-200' : ''
   const xSpacing = needSpace ? 'px-4' : ''
@@ -50,17 +35,15 @@ export default function FitnessListSearch({
           variant='flat'
           placeholder='Search'
           size="lg"
-          value={searchValue}
-          onValueChange={(v: string) => { changeSearchValue(v) }}
-          onClear={() => changeSearchValue('')}
+          onValueChange={(v: string) => { refetch({ name: v }) }}
+          onClear={() => refetch({ name: '' })}
         ></Input>
       </div>
       <div className="grid grid-cols-2 gap-x-2">
         <Select
-          value={selectedCategoryList}
           items={categoryList}
           onSelectionChange={(v) => {
-            changeCategory(v === 'all' ? [] : Array.from(v) as Exercise.ICategory[])
+            refetch({ category: v === 'all' ? [] : Array.from(v) as Exercise.ICategory[] })
           }}
           selectionMode='multiple'
           label="Workout Category"
@@ -68,10 +51,9 @@ export default function FitnessListSearch({
           {(category) => <SelectItem key={category.value}>{category.text}</SelectItem>}
         </Select>
         <Select
-          value={selectedMuscleList}
           items={muscleList}
           onSelectionChange={(v) => {
-            changeMuscle(v === 'all' ? [] : Array.from(v) as Exercise.IMuscle[])
+            refetch({ muscle: v === 'all' ? [] : Array.from(v) as Exercise.IMuscle[] })
           }}
           selectionMode='multiple'
           label="Target Muscle"
@@ -81,20 +63,16 @@ export default function FitnessListSearch({
       </div>
     </div>
     <ScrollShadow className={`${xSpacing} scroll-smooth pt-4`}>
-      <FitnessList
-        list={fitnessList}
-        isLoadingVisible={called}
-        selectedFitnessIds={selectedFitnessIds}
-        onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
-        onToggleFitnessIds={onToggleFitnessIds}
-        onLoadMore={() => {
-          fetchMore({
-            variables: {
-              offset: fitnessList.length
-            }
-          })
-        }}
-      ></FitnessList>
+      <Suspense>
+        <FitnessList
+          fitnessIds={fitnessIds}
+          hasNext={hasNext}
+          selectedFitnessIds={selectedFitnessIds}
+          onChangeSelectedFitnessIds={onChangeSelectedFitnessIds}
+          onToggleFitnessIds={onToggleFitnessIds}
+          onLoadMore={fetchMore}
+        ></FitnessList>
+      </Suspense>
     </ScrollShadow>
   </div>
 }

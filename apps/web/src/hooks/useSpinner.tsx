@@ -1,13 +1,22 @@
+import type { ReactNode } from 'react';
 import { Spinner } from '@heroui/react'
 import { useMemo } from 'react'
 import { useIntersectionObserver } from 'usehooks-ts'
 import StateRender from '@utils/StateRender'
 
-export default function useSpinner(length: number, loadingVisible: boolean, onLoadMore?: () => void) {
+interface useSpinnerProps {
+  visible: boolean
+  loadMore?: () => void
+}
+
+export default function useSpinner({
+  visible = true,
+  loadMore: onLoadMore
+}: useSpinnerProps): [ReactNode] {
   const { ref: spinnerRef } = useIntersectionObserver({
     threshold: 1,
     onChange(isIntersecting) {
-      if (isIntersecting && loadingVisible && length) {
+      if (isIntersecting) {
         onLoadMore && onLoadMore()
       }
     },
@@ -15,14 +24,14 @@ export default function useSpinner(length: number, loadingVisible: boolean, onLo
 
   // Spinner
   const spinner = useMemo(() => {
-    return <div className="flex justify-center" ref={spinnerRef}>
+    return <div className="flex justify-center">
       <StateRender.Boolean
-        state={loadingVisible}
+        state={visible}
         render={{
-          true: <Spinner color="primary" size="lg" />
+          true: <Spinner color="primary" size="lg" ref={spinnerRef} />
         }}
       />
     </div>
-  }, [loadingVisible, spinnerRef])
+  }, [visible, spinnerRef])
   return [spinner]
 }

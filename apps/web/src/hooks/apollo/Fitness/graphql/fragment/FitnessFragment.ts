@@ -3,7 +3,11 @@ import { gql } from '@apollo/client'
 const FitnessFragment = gql`
 fragment FitnessFragment on Fitness {
   id
-  ...FitnessSimpleFragment
+  name
+  aliases
+  primaryMuscles
+  secondaryMuscles
+  category
   force
   level
   mechanic

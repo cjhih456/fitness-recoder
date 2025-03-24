@@ -1,6 +1,6 @@
 import type { Mode } from '@ui/Calander/Calander';
 import { ScrollShadow } from '@heroui/react'
-import { useMemo, useState } from 'react'
+import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
@@ -58,9 +58,11 @@ function CalanderPage() {
           endDate='2035-1-1'
         />
       </div>
-      <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
-        <ScheduleList choosenDate={choosenDate}></ScheduleList>
-      </ScrollShadow>
+      <Suspense>
+        <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
+          <ScheduleList choosenDate={choosenDate}></ScheduleList>
+        </ScrollShadow>
+      </Suspense>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { Button, ScrollShadow } from '@heroui/react'
-import { useCallback, useMemo } from 'react'
+import { Suspense, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
@@ -7,7 +7,9 @@ import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi'
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
+import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
 import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
+import StateRender from '@utils/StateRender'
 
 export default function Main() {
   useBottomNavi()
@@ -33,54 +35,56 @@ export default function Main() {
   } = useScheduleActions()
 
   const addSchedule = useCallback(() => {
-    const today = new Date()
     const choosenDate = [
-      today.getFullYear(),
-      today.getMonth() + 1,
-      today.getDate()
+      todayInfo.year,
+      todayInfo.month,
+      todayInfo.month
     ].join('-')
     gotoCreateScheduleAction(choosenDate, true)
-  }, [gotoCreateScheduleAction])
+  }, [gotoCreateScheduleAction, todayInfo])
 
   const gotoPresetPage = useCallback(() => {
     navigate('/preset')
   }, [navigate])
-  const displaySchedule = useMemo(() => {
-    const scheduleList = scheduleListData?.getScheduleByDate || []
-    if (scheduleList.length) {
-      return scheduleList.map((schedule, idx) => {
-        const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
-        return <ScheduleDisplay key={`schedule-${schedule.id}`} schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
-          {(id, type, date) =>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Button onClick={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
-              <Button onClick={() => gotoScheduleDetail(id, date)}>
-                {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
-              </Button>
-            </div>
-          }
-        </ScheduleDisplay>
-      })
-    } else {
-      return [
-        <div className="text-center" key="empty-schedule-desc">
-          <p>{t('empty.schedule.l1')}</p>
-          <p>{t('empty.schedule.l2')}</p>
-        </div>,
-        <div className="grid grid-cols-2 gap-x-4" key="empty-schedule-options">
-          <Button onClick={addSchedule}>{t('empty.schedule.actionBtn.createSchedule')}</Button>
-          <Button onClick={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
-        </div>
-      ]
-    }
-  }, [scheduleListData, t, gotoPresetPage, addSchedule, gotoModifyScheduleAction, gotoScheduleDetail])
+  const scheduleList = scheduleListData.getScheduleByDate || []
 
   return <div className="flex flex-col items-stretch h-full pt-4">
     <h2 className="text-xl font-semibold px-4">
       {t('todaySchedule')}
     </h2>
-    <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
-      {displaySchedule}
-    </ScrollShadow>
+    <StateRender.Boolean
+      state={Boolean(scheduleList.length)}
+      render={{
+        false: [
+          <div className="text-center" key="empty-schedule-desc">
+            <p>{t('empty.schedule.l1')}</p>
+            <p>{t('empty.schedule.l2')}</p>
+          </div>,
+          <div className="grid grid-cols-2 gap-x-4" key="empty-schedule-options">
+            <Button onPress={addSchedule}>{t('empty.schedule.actionBtn.createSchedule')}</Button>
+            <Button onPress={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
+          </div>
+        ],
+        true: <MenuableAccordion.GroupProvider>
+          <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
+            {scheduleList.map((schedule, idx) => {
+              const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
+              return <Suspense key={schedule.id}>
+                <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
+                  {(id, type, date) =>
+                    <div className="grid grid-cols-2 gap-x-4">
+                      <Button onPress={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
+                      <Button onPress={() => gotoScheduleDetail(id, date)}>
+                        {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
+                      </Button>
+                    </div>
+                  }
+                </ScheduleDisplay>
+              </Suspense>
+            })}
+          </ScrollShadow>
+        </MenuableAccordion.GroupProvider>
+      }}
+    />
   </div >
 }

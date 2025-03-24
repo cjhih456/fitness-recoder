@@ -1,12 +1,10 @@
 import useCreateSet from './useCreateSet'
 import useDeleteSet from './useDeleteSet'
 import useGetSetListByExerciseId from './useGetSetListByExerciseId'
-import useLazyGetSetListByExerciseId from './useLazyGetSetListByExerciseId'
 import useUpdateSet from './useUpdateSet'
 
 export {
   useGetSetListByExerciseId,
-  useLazyGetSetListByExerciseId,
   useCreateSet,
   useUpdateSet,
   useDeleteSet,
@@ -21,7 +19,8 @@ export const SetMockData: { [key: number]: SetsStoreType } = Array(20).fill(0).r
     duration: 0,
     repeat: 10,
     weightUnit: 'kg',
-    weight: 20
+    weight: 20,
+    __typename: 'Sets'
   }
   return acc
 }, {})

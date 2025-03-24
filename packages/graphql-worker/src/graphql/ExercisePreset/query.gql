@@ -3,23 +3,18 @@ interface ExercisePreset {
   name: String!
   deps: Int!
 }
-type Exercise {
-  id: Int!
-  exercise: Int!
-}
 
 type ExercisePresetWithList implements ExercisePreset {
   id: Int!
   name: String!
   deps: Int!
-  exerciseList: [Exercise!]
+  exerciseList: [ExerciseWithFitness!]
 }
 
 type Query {
-  getExercisePresetWithListList(offset: Int, size: Int): [ExercisePresetWithList!]
+  getExercisePresetWithListByIds(ids: Int): [ExercisePresetWithList!]
   getExercisePresetWithListById(id: Int): ExercisePresetWithList
-  getExercisePresetByIds(ids: [Int!]): [ExercisePreset!]
-  getExercisePresetById(id: Int): ExercisePreset
+  getExercisePresetWithListByOffset(offset: Int, size: Int): [ExercisePresetWithList!]
 }
 
 input CreateExercisePresetInput {
@@ -33,8 +28,8 @@ input UpdateExercisePresetInput {
 }
 
 type Mutation {
-  createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePreset
-  updateExercisePreset(exercisePreset: UpdateExercisePresetInput): ExercisePreset
+  createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePresetWithList
+  updateExercisePreset(exercisePreset: UpdateExercisePresetInput): ExercisePresetWithList
   deleteExercisePreset(id: Int!): String
   copyExercisePresetFromSchedule(scheduleId: Int!, name: String!): ExercisePreset
 }

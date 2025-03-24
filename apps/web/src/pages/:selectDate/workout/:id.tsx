@@ -1,13 +1,14 @@
 import type { Schedule } from 'fitness-struct'
 import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
 import useAlert from '@provider/Alert/hooks/useAlert'
+import BottomNaviArea from '@provider/BottomNavi/component/BottomNaviArea'
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
@@ -19,7 +20,7 @@ export default function DisplayWorkout() {
   usePageTracker('workout_detail')
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const alert = useAlert()
+  const { showAlert } = useAlert()
   const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
   const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
@@ -53,7 +54,7 @@ export default function DisplayWorkout() {
     [lazySchedule, updateState]
   )
   const finishSchedule = useCallback(
-    () => updateState(ScheduleType.FINISH, lazySchedule).then(() => navigate('/')),
+    () => updateState(ScheduleType.FINISH, lazySchedule).then(() => navigate(-1)),
     [lazySchedule, updateState, navigate]
   )
 
@@ -69,7 +70,9 @@ export default function DisplayWorkout() {
   // initations
   useEffect(() => {
     if (error) {
-      alert.showAlert('WARNING', t('error:wrong.schedule'), false).then(() => {
+      showAlert({
+        message: t('error:wrong.schedule')
+      }).then(() => {
         navigate('/')
       })
     } else if (loadedScheduleData) {
@@ -81,7 +84,7 @@ export default function DisplayWorkout() {
         setTimerText(calcTimeText(temp))
       }
     }
-  }, [error, alert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
+  }, [error, showAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
 
   /** display formated duration time */
   useAnimationFrame(() => {
@@ -93,9 +96,9 @@ export default function DisplayWorkout() {
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {
-      return <Button onClick={pauseSchedule}>{t('actionBtn.pause')}</Button>
+      return <Button onPress={pauseSchedule}>{t('actionBtn.pause')}</Button>
     } else {
-      return <Button onClick={startSchedule}>{t('actionBtn.start')}</Button>
+      return <Button onPress={startSchedule}>{t('actionBtn.start')}</Button>
     }
   }, [lazySchedule, pauseSchedule, startSchedule, t])
 
@@ -104,15 +107,17 @@ export default function DisplayWorkout() {
   return <>
     <div className="flex flex-col pt-4">
       <div className="px-4">
-        {scheduleId && lazySchedule && <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH}></ExerciseDataList>}
+        {scheduleId && lazySchedule && <Suspense>
+          <ExerciseDataList key={scheduleId} schedule={lazySchedule} readonly={lazySchedule?.type === ScheduleType.FINISH} />
+        </Suspense>}
       </div>
     </div>
     {
       lazySchedule?.type !== ScheduleType.FINISH &&
-      <div className='absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-x-4'>
+      <BottomNaviArea className="grid grid-cols-2 gap-x-4 p-4">
         {scheduleProcessBtn}
-        <Button onClick={finishSchedule}>{t('actionBtn.finish')}</Button>
-      </div>
+        <Button onPress={finishSchedule}>{t('actionBtn.finish')}</Button>
+      </BottomNaviArea>
     }
     <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onChange={saveScheduleAsPreset} />
   </>

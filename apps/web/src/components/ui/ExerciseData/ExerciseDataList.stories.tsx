@@ -20,12 +20,12 @@ const meta = {
         exerciseList: [
           {
             id: 1,
-            exercise: 0,
+            exercise: 1,
             deps: 1
           },
           {
             id: 2,
-            exercise: 1,
+            exercise: 2,
             deps: 2
           }
         ],

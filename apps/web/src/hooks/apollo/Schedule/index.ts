@@ -7,14 +7,12 @@ import useDeleteSchedule from './useDeleteSchedule'
 import useGetScheduleByDate from './useGetScheduleByDate'
 import useGetScheduleById from './useGetScheduleById'
 import useGetScheduleStatusByDate from './useGetScheduleStatusByDate'
-import useLazyGetScheduleByDate from './useLazyGetScheduleByDate'
 import useUpdateSchedule from './useUpdateSchedule'
 
 export {
   useCreateSchedule,
   useDeleteSchedule,
   useGetScheduleByDate,
-  useLazyGetScheduleByDate,
   useGetScheduleById,
   useGetScheduleStatusByDate,
   useUpdateSchedule,

@@ -40,7 +40,7 @@ export default function HeaderMenu() {
           </HeaderMenuItem>
         </PopoverContent>
       </Popover>,
-      false: <Button isIconOnly radius='full' onClick={toggleTheme}>
+      false: <Button isIconOnly radius='full' onPress={toggleTheme}>
         <StateRender
           state={theme}
           render={{

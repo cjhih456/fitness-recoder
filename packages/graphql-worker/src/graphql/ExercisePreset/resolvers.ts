@@ -20,7 +20,25 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       return exercisePreset
     },
-    async getExercisePresetWithListList(_source, { offset = 0, size = 10 }, context) {
+    async getExercisePresetWithListByIds(_source, { ids }, { client }) {
+      const temp = new Array(ids.length).fill('?').join(', ')
+      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
+        client,
+        'selects',
+        `select * from exercisePreset where id in (${temp})`,
+        ids
+      )
+      if (!exercisePresetList) return []
+      await Promise.all(exercisePresetList.map(async (obj) => {
+        return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
+          dbTransitionBus,
+          client,
+          obj.id
+        )
+      }))
+      return exercisePresetList
+    },
+    async getExercisePresetWithListByOffset(_source, { offset = 0, size = 10 }, context) {
       const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
         context.client,
         'selects',
@@ -37,25 +55,6 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       }))
       return exercisePresetList
     },
-    async getExercisePresetByIds(_source, { ids }, context) {
-      const temp = new Array(ids.length).fill('?').join(', ')
-      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
-        context.client,
-        'selects',
-        `select * from exercisePreset where id in (${temp})`,
-        ids
-      )
-      return exercisePresetList || []
-    },
-    async getExercisePresetById(_source, { id }, context) {
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
-        context.client,
-        'select',
-        'select * from exercisePreset where id=?',
-        [id]
-      )
-      return exercisePreset || null
-    }
   },
   Mutation: {
     async createExercisePreset(_source, { exercisePreset }, context) {

@@ -1,17 +1,13 @@
-import { useLazyGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset';
-import useFixedFragment from '@hooks/apollo/useFixedFragment';
+import { useSuspenseFragment } from '@apollo/client';
 import ExercisePresetWithListFragment from './graphql/fragments/ExercisePresetWithListFragment';
 
 export default function useExercisePresetWithListFragment(id: number) {
-  return useFixedFragment<
-    ExercisePresetWithListStoreType,
-    GetExercisePresetWithListByIdResponse,
-    GetExercisePresetWithListByIdVariable
-  >(
-    ExercisePresetWithListFragment,
-    useLazyGetExercisePresetWithListById,
-    {
+  const { data } = useSuspenseFragment<ExercisePresetWithListStoreType>({
+    fragment: ExercisePresetWithListFragment,
+    from: {
       id,
       __typename: 'ExercisePresetWithList'
-    })
+    }
+  })
+  return data
 }

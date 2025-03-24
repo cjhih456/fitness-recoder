@@ -40,7 +40,7 @@ export default function DateCalander({ year, month, date, startDate, endDate, st
         key={`date-${todayDate}`}
         isDisabled={disable}
         variant='bordered'
-        onClick={() => onChange(todayDate)}
+        onPress={() => onChange(todayDate)}
         className={['flex-1 px-0 min-w-[40px]', calanderColor(year, month, todayDate, year, month, date, statesByDate[todayDate])].join(' ')}
         radius='full'
       >{todayDate}</Button>)
