@@ -63,25 +63,7 @@ enum ICategory {
   assisted_bodyweight
 }
 
-interface BaseFitness {
-  id: Int!
-  name: String!
-  aliases: [String]
-  primaryMuscles: [IMuscle]
-  secondaryMuscles: [IMuscle]
-  category: ICategory
-}
-
-type SimpleFitness implements BaseFitness {
-  id: Int!
-  name: String!
-  aliases: [String]
-  primaryMuscles: [IMuscle]
-  secondaryMuscles: [IMuscle]
-  category: ICategory
-}
-
-type Fitness implements BaseFitness {
+type Fitness {
   id: Int!
   name: String!
   aliases: [String]
