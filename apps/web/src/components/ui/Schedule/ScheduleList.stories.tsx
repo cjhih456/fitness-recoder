@@ -28,8 +28,10 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta
 
+const today = new Date()
+
 export const Display: Story = {
   args: {
-    choosenDate: '2024-01-01',
+    choosenDate: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
   }
 }

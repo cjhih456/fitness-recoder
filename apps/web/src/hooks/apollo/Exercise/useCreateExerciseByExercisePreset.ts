@@ -25,7 +25,7 @@ export const CreateExerciseByExercisePresetMock: MockedResponse<
       deps: 0,
       exercise: args.exercise.exerciseId[0],
       fitness: FitnessMockData[args.exercise.exerciseId[0] - 1],
-      __typename: 'Exercise'
+      __typename: 'ExerciseWithFitness'
     }
     return {
       data: {

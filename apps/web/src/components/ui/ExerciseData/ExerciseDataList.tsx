@@ -14,6 +14,7 @@ export default function ExerciseDataList({
   readonly
 }: ExerciseDataListProps) {
   const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id)
+  console.log(getExerciseListByScheduleIdData)
   const exerciseList = getExerciseListByScheduleIdData.getExerciseListByScheduleId
 
   return <div className="flex flex-col gap-y-3">

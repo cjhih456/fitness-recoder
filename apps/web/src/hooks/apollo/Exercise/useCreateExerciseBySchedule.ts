@@ -23,7 +23,7 @@ export const CreateExerciseByScheduleMock: MockedResponse<
           id: 1,
           deps: 0,
           exercise: 1,
-          __typename: 'Exercise',
+          __typename: 'ExerciseWithFitness',
           fitness: FitnessMockData[0]
         }
       }

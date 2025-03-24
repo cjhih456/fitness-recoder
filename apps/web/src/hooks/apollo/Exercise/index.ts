@@ -30,7 +30,7 @@ export const ExerciseMockData: { [key: number]: ExerciseDataStoreType } = Array(
     exercise: id,
     id,
     fitness: FitnessMockData[i],
-    __typename: 'Exercise'
+    __typename: 'ExerciseWithFitness'
   }
   acc[id] = temp
   return acc

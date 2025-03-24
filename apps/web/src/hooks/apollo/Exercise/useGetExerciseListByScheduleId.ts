@@ -27,14 +27,14 @@ export const GetExerciseListByScheduleIdMock: MockedResponse<
             id: 1,
             exercise: 1,
             deps: 0,
-            __typename: 'Exercise',
+            __typename: 'ExerciseWithFitness',
             fitness: FitnessMockData[0]
           },
           {
             id: 2,
             exercise: 2,
             deps: 0,
-            __typename: 'Exercise',
+            __typename: 'ExerciseWithFitness',
             fitness: FitnessMockData[1]
           }
         ]
