@@ -1,7 +1,7 @@
 import { Button, ScrollShadow } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useCreateExercisePreset, useGetExercisePresetWithListList } from '@hooks/apollo/ExercisePreset';
+import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@hooks/apollo/ExercisePreset';
 import useSpinner from '@hooks/useSpinner';
 import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
@@ -25,8 +25,8 @@ export default function PresetListPage() {
     })
   }
 
-  const { data: presetListData, fetchMore, hasNext } = useGetExercisePresetWithListList(0, 20)
-  const presetList = presetListData.getExercisePresetWithListList
+  const { data: presetListData, fetchMore, hasNext } = useGetExercisePresetWithListByOffset(0, 20)
+  const presetList = presetListData.getExercisePresetWithListByOffset
 
   const [spinner] = useSpinner({
     visible: hasNext,

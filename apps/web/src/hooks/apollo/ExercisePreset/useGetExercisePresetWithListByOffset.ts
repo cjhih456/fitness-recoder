@@ -1,14 +1,14 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
-import GetExercisePresetWithListList from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListList';
+import GetExercisePresetWithListByOffset from '@hooks/apollo/ExercisePreset/graphql/query/GetExercisePresetWithListByOffset';
 import { ExercisePresetMockData } from '.'
 
-export default function useGetExercisePresetWithListList(offset: number, size: number) {
+export default function useGetExercisePresetWithListByOffset(offset: number, size: number) {
   const query = useSuspenseQuery<
-    GetExercisePresetWithListListResponse,
-    GetExercisePresetWithListListVariable
-  >(GetExercisePresetWithListList, {
+    GetExercisePresetWithListByOffsetResponse,
+    GetExercisePresetWithListByOffsetVariable
+  >(GetExercisePresetWithListByOffset, {
     fetchPolicy: 'cache-first',
     variables: { offset, size }
   })
@@ -23,14 +23,14 @@ export default function useGetExercisePresetWithListList(offset: number, size: n
       query.fetchMore({
         updateQuery: (beforeResult, { fetchMoreResult }) => {
           return {
-            getExercisePresetWithListList: [...beforeResult.getExercisePresetWithListList, ...fetchMoreResult.getExercisePresetWithListList]
+            getExercisePresetWithListByOffset: [...beforeResult.getExercisePresetWithListByOffset, ...fetchMoreResult.getExercisePresetWithListByOffset]
           }
         },
         variables: {
-          offset: query.data.getExercisePresetWithListList.length
+          offset: query.data.getExercisePresetWithListByOffset.length
         }
       }).then((result) => {
-        setHasNext(Boolean(result.data.getExercisePresetWithListList.length))
+        setHasNext(Boolean(result.data.getExercisePresetWithListByOffset.length))
       })
     })
   }, [query])
@@ -42,16 +42,16 @@ export default function useGetExercisePresetWithListList(offset: number, size: n
   }
 }
 export const GetExercisePresetWithListListMock: MockedResponse<
-  GetExercisePresetWithListListResponse,
-  GetExercisePresetWithListListVariable
+  GetExercisePresetWithListByOffsetResponse,
+  GetExercisePresetWithListByOffsetVariable
 > = {
   request: {
-    query: GetExercisePresetWithListList
+    query: GetExercisePresetWithListByOffset
   },
   result: (v) => {
     return {
       data: {
-        getExercisePresetWithListList: Object
+        getExercisePresetWithListByOffset: Object
           .values(ExercisePresetMockData)
           .splice(v.offset, v.size)
           .map(v => {

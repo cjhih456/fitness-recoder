@@ -12,14 +12,11 @@ declare interface CreateExercisePresetVariable { exercisePreset: { name: string 
 declare interface DeleteExercisePresetResponse { deleteExercisePreset: string }
 declare interface DeleteExercisePresetVariable { id: number }
 
-declare interface GetExercisePresetResponse { getExercisePresetById: ExercisePresetStoreType }
-declare type GetExercisePresetVariable = { id: number } & OperationVariables
-
 declare type GetExercisePresetWithListByIdResponse = { getExercisePresetWithListById: ExercisePresetWithListStoreType }
 declare type GetExercisePresetWithListByIdVariable = { id: number } & OperationVariables
 
-declare type GetExercisePresetWithListListResponse = { getExercisePresetWithListList: ExercisePresetWithListStoreType[] }
-declare type GetExercisePresetWithListListVariable = { offset: number, size: number }
+declare type GetExercisePresetWithListByOffsetResponse = { getExercisePresetWithListByOffset: ExercisePresetWithListStoreType[] }
+declare type GetExercisePresetWithListByOffsetVariable = { offset: number, size: number }
 
 declare type CopyExercisePresetFromScheduleResponse = { copyExercisePresetFromSchedule: ExercisePresetStoreType }
 declare type CopyExercisePresetFromScheduleVariable = { scheduleId: number, name: string }

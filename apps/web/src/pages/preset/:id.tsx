@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGetExerciseListByExercisePresetId } from '@hooks/apollo/Exercise'
-import { useExercisePresetFragment } from '@hooks/apollo/ExercisePreset'
+import { useGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset'
 import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
 import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
 import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
@@ -14,12 +13,12 @@ export default function PresetDetailPage() {
   const navigate = useNavigate()
   const { t } = useTranslation(['preset', 'common'])
   const id = useMemo(() => Number(params.id), [params])
-  const exercisePreset = useExercisePresetFragment(id)
-  const { data: exerciseIdxListData } = useGetExerciseListByExercisePresetId(id)
-  const exerciseList = useMemo(() => exerciseIdxListData?.getExerciseListByExercisePresetId || [], [exerciseIdxListData])
+  const { data } = useGetExercisePresetWithListById(id)
+  const exercisePreset = data.getExercisePresetWithListById
+  const exerciseList = exercisePreset.exerciseList ?? []
+  const oldExerciseList = exerciseList.map(v => v.exercise)
 
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
-  const oldExerciseList = useMemo(() => exerciseList.map(v => v.exercise), [exerciseList])
 
   const headerMenu = usePresetMenu(id)
 

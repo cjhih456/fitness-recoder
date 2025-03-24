@@ -3,9 +3,8 @@ import useCreateExercisePreset from './useCreateExercisePreset';
 import useDeleteExercisePreset from './useDeleteExercisePreset';
 import useExercisePresetFragment from './useExercisePresetFragment';
 import useExercisePresetWithListFragment from './useExercisePresetWithListFragment';
-import useGetExercisePresetById from './useGetExercisePresetById';
 import useGetExercisePresetWithListById from './useGetExercisePresetWithListById';
-import useGetExercisePresetWithListList from './useGetExercisePresetWithListList';
+import useGetExercisePresetWithListByOffset from './useGetExercisePresetWithListByOffset';
 
 export {
   useCopyExercisePresetFromSchedule,
@@ -13,8 +12,7 @@ export {
   useDeleteExercisePreset,
   useExercisePresetFragment,
   useExercisePresetWithListFragment,
-  useGetExercisePresetById,
-  useGetExercisePresetWithListList,
+  useGetExercisePresetWithListByOffset,
   useGetExercisePresetWithListById,
 }
 

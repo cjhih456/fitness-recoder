@@ -3,7 +3,7 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 import { resolve } from 'path'
 
 const webRootPath = resolve(__dirname, '../../../apps/web')
-console.log('webRootPath: ', webRootPath)
+
 const config: StorybookConfig = {
   viteFinal: async (config) => {
     config.plugins = [...(config.plugins || []), tsConfigPaths({
