@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi'
+import useBottomNavi from '@ui/BottomNavi/hooks/useBottomNavi'
 import FitnessListSearch from '@ui/Fitness/FitnessListSearch'
 import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler'
 function FitnessList() {

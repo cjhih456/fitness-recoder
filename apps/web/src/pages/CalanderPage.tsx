@@ -4,7 +4,7 @@ import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
-import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
+import useBottomNavi from '@ui/BottomNavi/hooks/useBottomNavi';
 import Calender from '@ui/Calander/Calander';
 import useHeaderHandler from '@ui/Header/hooks/useHeaderHandler';
 import ScheduleList from '@ui/Schedule/ScheduleList';
