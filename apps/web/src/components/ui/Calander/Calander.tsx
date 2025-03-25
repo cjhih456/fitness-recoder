@@ -47,7 +47,7 @@ export default function Calender({
           year: undefined,
           month: <MonthCalanderHead
             {...props}
-            onChange={changeMonth}
+            onChange={changeTrigger}
           />,
           date: <DateCalanderHead
             {...props}
