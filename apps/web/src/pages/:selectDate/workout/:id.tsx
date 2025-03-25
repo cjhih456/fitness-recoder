@@ -1,15 +1,15 @@
 import type { Schedule } from 'fitness-struct'
 import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { startTransition, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAlert } from '@globalUi/Alert';
+import { BottomNaviArea } from '@globalUi/BottomNavi'
+import { useHeaderHandler } from '@globalUi/Header'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
-import useAlert from '@provider/Alert/hooks/useAlert'
-import BottomNaviArea from '@provider/BottomNavi/component/BottomNaviArea'
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
 import { dayjs, ScheduleType } from '@utils'
@@ -20,11 +20,12 @@ export default function DisplayWorkout() {
   usePageTracker('workout_detail')
   const scheduleId = useMemo(() => Number(idParam) || 0, [idParam])
   const navigate = useNavigate()
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
   const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
   const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
   const [timerText, setTimerText] = useState('00:00:00.000')
+  useHeaderHandler(timerText)
 
   const [updateSchedule] = useUpdateSchedule()
   const updateState = useCallback((type: Schedule.IType, lazySchedule?: Schedule.Schedule) => {
@@ -70,7 +71,7 @@ export default function DisplayWorkout() {
   // initations
   useEffect(() => {
     if (error) {
-      showAlert({
+      pushAlert({
         message: t('error:wrong.schedule')
       }).then(() => {
         navigate('/')
@@ -84,15 +85,15 @@ export default function DisplayWorkout() {
         setTimerText(calcTimeText(temp))
       }
     }
-  }, [error, showAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
+  }, [error, pushAlert, t, navigate, updateLazySchedule, loadedScheduleData, lazySchedule])
 
   /** display formated duration time */
   useAnimationFrame(() => {
     if (!lazySchedule || lazySchedule.type !== 'STARTED') return
-    setTimerText(calcTimeText(lazySchedule))
+    startTransition(() => {
+      setTimerText(calcTimeText(lazySchedule))
+    })
   })
-
-  useHeaderHandler([timerText])
 
   const scheduleProcessBtn = useMemo(() => {
     if (lazySchedule?.type === ScheduleType.STARTED) {

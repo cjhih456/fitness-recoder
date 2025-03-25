@@ -1,13 +1,13 @@
 import type { NavigateOptions } from 'react-router-dom';
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAlert } from '@globalUi/Alert';
 import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@hooks/apollo/Schedule'
-import useAlert from '@provider/Alert/hooks/useAlert'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleActions() {
   const navigate = useNavigate()
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
   const [deleteSchedule] = useDeleteSchedule()
   const [cloneSchedule] = useCloneSchedule()
 
@@ -43,13 +43,13 @@ export default function useScheduleActions() {
   }, [createSchedule])
 
   const shareScheduleAction = useCallback(() => {
-    showAlert({
+    pushAlert({
       message: 'On Featured process',
     })
     // TODO: schedule data as json
     // TODO: encode json as base64
     // TODO: make QR code
-  }, [showAlert])
+  }, [pushAlert])
 
   const cloneScheduleAction = useCallback(async (scheduleId: number) => {
     const today = new Date()
@@ -59,7 +59,7 @@ export default function useScheduleActions() {
     const result = await cloneSchedule({ variables: { id: scheduleId, targetDate: { year, month, date } } })
     if (result.data?.cloneSchedule) {
       const clonedScheduleId = result.data.cloneSchedule.id
-      showAlert({
+      pushAlert({
         message: 'Clone Schedule Success',
         confirm: { message: 'Goto Workout', colorClass: 'text-green-500' },
         cancel: { message: 'Cancel', colorClass: 'text-red-500' }
@@ -67,7 +67,7 @@ export default function useScheduleActions() {
         if (value) gotoScheduleDetail(clonedScheduleId, `${year}-${month}-${date}`)
       })
     }
-  }, [cloneSchedule, showAlert, gotoScheduleDetail])
+  }, [cloneSchedule, pushAlert, gotoScheduleDetail])
 
   const deleteScheduleAction = useCallback((id: number) => {
     deleteSchedule({ variables: { id } })

@@ -1,4 +1,4 @@
-import type { MenuType } from '@provider/Header/HeaderProvider';
+import type { MenuType } from '@globalUi/Header';
 import type { Schedule } from 'fitness-struct';
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next';

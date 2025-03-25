@@ -1,11 +1,10 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useHeaderHandler, useHeaderMenuHandler } from '@globalUi/Header'
 import { useGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset'
 import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
 import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler'
-import useHeaderMenuHandler from '@provider/Header/hooks/useHeaderMenuHandler'
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor'
 
 export default function PresetDetailPage() {
@@ -22,7 +21,7 @@ export default function PresetDetailPage() {
 
   const headerMenu = usePresetMenu(id)
 
-  useHeaderHandler([exercisePreset.name])
+  useHeaderHandler(exercisePreset.name)
   useHeaderMenuHandler(headerMenu)
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return

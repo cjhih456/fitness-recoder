@@ -5,7 +5,6 @@ import useDeleteExerciseById from './useDeleteExerciseById'
 import useGetExerciseFinishHistory from './useGetExerciseFinishHistory'
 import useGetExerciseListByExercisePresetId from './useGetExerciseListByExercisePresetId'
 import useGetExerciseListByScheduleId from './useGetExerciseListByScheduleId'
-import useLazyGetExerciseFinishHistory from './useLazyGetExerciseFinishHistory'
 import useUpdateExerciseListByExercisePresetId from './useUpdateExerciseListByExercisePresetId'
 import useUpdateExerciseListByScheduleId from './useUpdateExerciseListByScheduleId'
 
@@ -14,7 +13,6 @@ export {
   useCreateExerciseByExercisePreset,
 
   useGetExerciseFinishHistory,
-  useLazyGetExerciseFinishHistory,
   useGetExerciseListByScheduleId,
   useGetExerciseListByExercisePresetId,
 

@@ -2,17 +2,17 @@ import type { Schedule } from 'fitness-struct'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useAlert } from '@globalUi/Alert';
+import { useHeaderMenuHandler } from '@globalUi/Header';
 import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import useAlert from '@provider/Alert/hooks/useAlert'
-import useHeaderMenuHandler from '@provider/Header/hooks/useHeaderMenuHandler'
 import { ScheduleType } from '@utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
   boolean,
   (_v: boolean, _presetName?: string) => Promise<void>
 ] {
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
   const navigate = useNavigate()
   const { t } = useTranslation(['workout'])
   const headerMenus = useScheduleMenu()
@@ -29,7 +29,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule):
     if (result.data?.copyExercisePresetFromSchedule) {
       navigate(`/preset/${result.data.copyExercisePresetFromSchedule.id}`)
     } else {
-      showAlert({
+      pushAlert({
         message: 'Save Schedule As Preset Failed'
       })
     }

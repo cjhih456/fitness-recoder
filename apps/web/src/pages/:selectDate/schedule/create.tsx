@@ -1,9 +1,9 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useAlert } from '@globalUi/Alert';
+import { useHeaderHandler } from '@globalUi/Header';
 import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
-import useAlert from '@provider/Alert/hooks/useAlert';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import { LogEvent } from '@service/firebase';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
 
@@ -12,14 +12,14 @@ const defaultSearchParams = createSearchParams({
 })
 
 export default function CreateSchedule() {
-  useHeaderHandler(['Create Schedule'])
+  useHeaderHandler('Create Schedule')
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
-  const { showAlert } = useAlert()
+  const { pushAlert } = useAlert()
 
   const createScheduleWithExercisePlans = useCreateScheduleWithExercisePlans()
   async function startFitnessTime(exerciseIdxList: number[]) {
@@ -30,7 +30,7 @@ export default function CreateSchedule() {
       if (result?.id) {
         gotoScheduleDetail(result?.id, `${year}-${month}-${date}`, { replace: true })
       } else {
-        showAlert({
+        pushAlert({
           message: 'Error... Something Wrong!'
         })
       }

@@ -3,22 +3,22 @@ import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useBottomNavi } from '@globalUi/BottomNavi';
+import { useHeaderHandler } from '@globalUi/Header';
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
-import useBottomNavi from '@provider/BottomNavi/hooks/useBottomNavi';
-import useHeaderHandler from '@provider/Header/hooks/useHeaderHandler';
 import Calender from '@ui/Calander/Calander';
 import ScheduleList from '@ui/Schedule/ScheduleList';
+import DateUtil from '@utils/DateUtil';
 
 function CalanderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler([t('calander')])
+  useHeaderHandler(t('calander'))
 
   const location = useLocation()
   const navigate = useNavigate()
-  const todayYear = new Date().getFullYear()
-  const todayMonth = new Date().getMonth() + 1
-  const todayDate = new Date().getDate()
+
+  const { year: todayYear, month: todayMonth, date: todayDate } = DateUtil.takeYearMonthDate()
 
   const [calanderMode, changeCalanderMode] = useState<Mode>('date')
   const [choosenDate, changeDate] = useState(location.hash.replace('#', '') || `${todayYear}-${todayMonth}-${todayDate}`)

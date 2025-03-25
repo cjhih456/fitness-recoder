@@ -19,9 +19,7 @@ export {
   useCloneSchedule,
   useCloneScheduleFromPreset
 }
-const today = new Date()
-const month = today.getMonth() + 1
-const year = today.getFullYear()
+const { month, year } = DateUtil.takeYearMonthDate()
 const daysByMonth = DateUtil.getDaysByMonth(year)
 
 const typeTemp = [ScheduleType.BREAK, ScheduleType.FINISH, ScheduleType.PAUSED, ScheduleType.SCHEDULED, ScheduleType.STARTED]

@@ -21,8 +21,12 @@ export default function useCreateScheduleWithExercisePlans() {
       }
     })
 
-    if (!schedule.errors && exerciseList.length) {
-      const scheduleId = Number(schedule.data?.createSchedule.id)
+    if (schedule.errors || !schedule.data) {
+      throw Error('Schedule Create Failed')
+    }
+
+    const scheduleId = Number(schedule.data.createSchedule.id)
+    if (exerciseList.length) {
       await createExerciseBySchedule({
         variables: {
           exercise: {
@@ -31,8 +35,7 @@ export default function useCreateScheduleWithExercisePlans() {
           }
         }
       })
-      return schedule.data?.createSchedule
     }
-    return undefined
+    return schedule.data.createSchedule
   }
 }

@@ -8848,6 +8848,11 @@ joi@^17.11.0:
     "@sideway/formula" "^3.0.1"
     "@sideway/pinpoint" "^2.0.0"
 
+jotai@^2.12.2:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.12.2.tgz#21626f5f019fc971b4da6bc528790a02d1448e3c"
+  integrity sha512-oN8715y7MkjXlSrpyjlR887TOuc/NLZMs9gvgtfWH/JP47ChwO0lR2ijSwBvPMYyXRAPT+liIAhuBavluKGgtA==
+
 joycon@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/joycon/-/joycon-3.1.1.tgz#bce8596d6ae808f8b68168f5fc69280996894f03"
