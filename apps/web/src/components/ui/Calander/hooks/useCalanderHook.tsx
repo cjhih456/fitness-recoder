@@ -63,12 +63,6 @@ const useCalanderHook = ({ startDate, endDate }: useCalanderHookProps) => {
   }, [startNum, endNum])
 
   return {
-    startNum,
-    endNum,
-
-    startDateObj,
-    endDateObj,
-
     validMonthWithValues,
     checkIsPossibleDate,
 

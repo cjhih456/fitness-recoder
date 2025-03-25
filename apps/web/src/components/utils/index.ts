@@ -14,12 +14,8 @@ export const ScheduleType = enumify({
   FINISH: 'FINISH',
 })
 
-export const calanderColor = (year: number, month: number, date: number, selectedYear: number, selectedMonth: number, selectedDate: number, type: string) => {
-  if (
-    year === selectedYear &&
-    month === selectedMonth &&
-    date === selectedDate
-  ) return 'bg-primary'
+export const calanderColor = (isSelected: boolean, type: string) => {
+  if (isSelected) return 'bg-primary'
   const tempType = (type || '').split(',')
   if (tempType.length) {
     switch (tempType[0]) {

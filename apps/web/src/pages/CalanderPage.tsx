@@ -47,7 +47,7 @@ function CalanderPage() {
 
   return (
     <div className="flex flex-col items-stretch h-full pt-4">
-      <div className='px-4'>
+      <figure className='px-4'>
         <Calender
           value={choosenDate}
           mode={calanderMode}
@@ -57,12 +57,14 @@ function CalanderPage() {
           startDate='2020-1-1'
           endDate='2035-1-1'
         />
-      </div>
-      <Suspense>
-        <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
-          <ScheduleList choosenDate={choosenDate}></ScheduleList>
-        </ScrollShadow>
-      </Suspense>
+      </figure>
+      <figcaption>
+        <Suspense>
+          <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
+            <ScheduleList choosenDate={choosenDate}></ScheduleList>
+          </ScrollShadow>
+        </Suspense>
+      </figcaption>
     </div>
   )
 }

@@ -1,13 +1,20 @@
-import { Button } from '@heroui/react';
-import { useMemo } from 'react';
 import StateRender from '@utils/StateRender';
 import DateCalander from './DateCalander';
+import DateCalanderHead from './DateCalanderHead';
 import MonthCalander from './MonthCalander';
+import MonthCalanderHead from './MonthCalanderHead';
 import YearCalander from './YearCalander';
 import useCalanderHook from './hooks/useCalanderHook';
 
 export type Mode = 'date' | 'month' | 'year'
-export interface CalanderProps {
+
+export interface BaseCalanderProps {
+  value: string
+  startDate?: string,
+  endDate?: string
+  onChange: (_v: string) => void
+}
+interface CalanderProps extends BaseCalanderProps {
   value: string
   onChange: (_v: string) => void
   mode: Mode
@@ -17,44 +24,23 @@ export interface CalanderProps {
   endDate?: string
 }
 export default function Calender({
-  startDate = '1900-1-1',
-  endDate = '2100-12-31',
   mode,
-  value,
-  statesByDate = [],
   onChange,
-  onChangeMode
+  ...props
 }: CalanderProps) {
+  const { startDate, endDate, onChangeMode } = props
 
-  const { calcPossibleDate, startDateObj, endDateObj } = useCalanderHook({ startDate, endDate })
+  const { calcPossibleDate } = useCalanderHook({ startDate, endDate })
+  const changeTrigger = (v: string) => onChange(calcPossibleDate(v))
 
-  const choosenDay = useMemo(() => {
-    const [year, month, date] = value.split('-').map(v => +v)
-    return {
-      year,
-      month,
-      date
-    }
-  }, [value])
-
-  function changeYear(v: number, mode?: boolean) {
-    onChange(calcPossibleDate(`${v}-${choosenDay.month}-${choosenDay.date}`))
+  const changeYear = (v: string, mode: boolean = true) => {
+    changeTrigger(v)
     if (mode) onChangeMode('month')
   }
 
-  function changeMonth(v: number) {
-    if (v === 0) {
-      onChange(calcPossibleDate(`${choosenDay.year - 1}-${12}-${choosenDay.date}`))
-      return
-    } else if (v === 13) {
-      onChange(calcPossibleDate(`${choosenDay.year + 1}-${1}-${choosenDay.date}`))
-    } else {
-      onChange(calcPossibleDate(`${choosenDay.year}-${v}-${choosenDay.date}`))
-    }
+  const changeMonth = (v: string) => {
+    changeTrigger(v)
     onChangeMode('date')
-  }
-  function changeDate(v: number) {
-    onChange(calcPossibleDate(`${choosenDay.year}-${choosenDay.month}-${v}`))
   }
 
   return (
@@ -62,46 +48,32 @@ export default function Calender({
       <StateRender
         state={mode}
         render={{
-          year: <YearCalander
-            startYear={startDateObj.year}
-            year={choosenDay.year}
-            endYear={endDateObj.year}
-            onChange={(v) => changeYear(v, true)}
+          year: undefined,
+          month: <MonthCalanderHead
+            {...props}
+            onChange={changeMonth}
           />,
-          month: [
-            <div key='month-top' className="flex gap-2 justify-center content-center">
-              <Button isIconOnly radius='full' onPress={() => changeYear(choosenDay.year - 1)}> - </Button>
-              <Button className='font-bold' onPress={() => onChangeMode('year')}>{choosenDay.year}</Button>
-              <Button isIconOnly radius='full' onPress={() => changeYear(choosenDay.year + 1)}> + </Button>
-            </div>,
-            <MonthCalander
-              key="month-picker"
-              year={choosenDay.year}
-              month={choosenDay.month}
-              startDate={startDate}
-              endDate={endDate}
-              onChange={changeMonth}
-            />
-          ],
-          date: [
-            <div key='date-top' className="flex gap-2 justify-center content-center">
-              <Button isIconOnly radius='full' onPress={() => changeMonth(choosenDay.month - 1)}> - </Button>
-              <Button className='font-bold' onPress={() => onChangeMode('month')}>
-                {`${choosenDay.year} - ${String(choosenDay.month).padStart(2, '0')}`}
-              </Button>
-              <Button isIconOnly radius='full' onPress={() => changeMonth(choosenDay.month + 1)}> + </Button>
-            </div>,
-            <DateCalander
-              key="date-picker"
-              year={choosenDay.year}
-              month={choosenDay.month}
-              startDate={startDate}
-              date={choosenDay.date}
-              endDate={endDate}
-              statesByDate={statesByDate}
-              onChange={changeDate}
-            />
-          ]
+          date: <DateCalanderHead
+            {...props}
+            onChange={changeTrigger}
+          />
+        }}
+      />
+      <StateRender
+        state={mode}
+        render={{
+          year: <YearCalander
+            {...props}
+            onChange={changeYear}
+          />,
+          month: <MonthCalander
+            {...props}
+            onChange={changeMonth}
+          />,
+          date: <DateCalander
+            {...props}
+            onChange={changeTrigger}
+          />
         }}
       />
     </div>
