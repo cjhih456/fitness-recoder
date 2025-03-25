@@ -4,8 +4,8 @@ import { Button } from '@heroui/react'
 type YearCalanderProps = BaseCalanderProps
 export default function YearCalander({
   value,
-  startDate = '1900-1-1',
-  endDate = '2100-12-31',
+  startDate,
+  endDate,
   onChange
 }: YearCalanderProps) {
   const [year, month, date] = value.split('-').map(v => +v)

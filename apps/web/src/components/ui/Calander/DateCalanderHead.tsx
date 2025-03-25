@@ -9,13 +9,12 @@ interface DateCalanderHeadProps extends BaseCalanderProps {
 
 export default function DateCalanderHead({
   value,
-  startDate = '1900-1-1',
-  endDate = '2100-12-31',
   onChange,
-  onChangeMode
+  onChangeMode,
+  ...props
 }: DateCalanderHeadProps) {
   const [year, month, date] = value.split('-').map(v => +v)
-  const { checkIsPossibleDate } = useCalanderHook({ startDate, endDate })
+  const { checkIsPossibleDate } = useCalanderHook(props)
 
   const beforeMonth = useMemo(() => {
     if (month - 1 === 0) return [year - 1, 12, date].join('-')

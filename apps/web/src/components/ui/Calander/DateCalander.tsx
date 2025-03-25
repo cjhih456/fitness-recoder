@@ -12,8 +12,8 @@ interface DateCalanderProps extends BaseCalanderProps {
 
 const dateStr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
-export default function DateCalander({ value, startDate, endDate, statesByDate = [], onChange }: DateCalanderProps) {
-  const { checkIsPossibleDate } = useCalanderHook({ startDate, endDate })
+export default function DateCalander({ value, statesByDate = [], onChange, ...props }: DateCalanderProps) {
+  const { checkIsPossibleDate } = useCalanderHook(props)
   const [year, month, date] = value.split('-').map(v => +v)
 
   const thisMonthNumber = useMemo(() => DateUtil.dateStringAsDateNumber(`${year}-${month}-1`) - 1, [year, month])

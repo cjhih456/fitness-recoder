@@ -6,11 +6,10 @@ type MonthCalanderProps = BaseCalanderProps
 
 export default function MonthCalander({
   value,
-  startDate = '1900-1-1',
-  endDate = '2100-12-31',
-  onChange
+  onChange,
+  ...props
 }: MonthCalanderProps) {
-  const { validMonthWithValues } = useCalanderHook({ startDate, endDate })
+  const { validMonthWithValues } = useCalanderHook(props)
   const [year, month, date] = value.split('-').map(v => +v)
 
   return <div className="grid grid-cols-4 gap-2">

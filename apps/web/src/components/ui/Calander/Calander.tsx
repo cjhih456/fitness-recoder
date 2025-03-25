@@ -10,18 +10,14 @@ export type Mode = 'date' | 'month' | 'year'
 
 export interface BaseCalanderProps {
   value: string
-  startDate?: string,
-  endDate?: string
+  startDate: string,
+  endDate: string
   onChange: (_v: string) => void
 }
-interface CalanderProps extends BaseCalanderProps {
-  value: string
-  onChange: (_v: string) => void
+export interface CalanderProps extends BaseCalanderProps {
   mode: Mode
   onChangeMode: (_v: Mode) => void
   statesByDate?: string[],
-  startDate?: string,
-  endDate?: string
 }
 export default function Calender({
   mode,
