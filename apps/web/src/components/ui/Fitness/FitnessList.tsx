@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import useFitnessDataModalProvider from '@hooks/provider/FitnessDataModal/useFitnessDataModalProvider';
+import useFitnessDataModal from '@globalUi/FitnessDataModal/hooks/useFitnessDataModal';
 import useSpinner from '@hooks/useSpinner';
 import FitnessItem from './FitnessItem';
 
@@ -21,7 +21,7 @@ export default function FitnessList({
   onToggleFitnessIds,
   onLoadMore
 }: FitnessListProps) {
-  const { showModal } = useFitnessDataModalProvider()
+  const { setFitnessId } = useFitnessDataModal()
 
   /**
    * 
@@ -31,7 +31,7 @@ export default function FitnessList({
    */
   function clickFitness(fitnessId: number, isDetail: boolean) {
     if (isDetail || !onChangeSelectedFitnessIds && !onToggleFitnessIds) {
-      showModal(fitnessId)
+      setFitnessId(fitnessId)
       return
     }
     onToggleFitnessIds && onToggleFitnessIds(fitnessId)
