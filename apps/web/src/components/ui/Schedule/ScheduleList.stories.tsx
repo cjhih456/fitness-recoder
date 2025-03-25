@@ -1,5 +1,6 @@
 import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
+import DateUtil from '@utils/DateUtil';
 import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',
@@ -28,10 +29,11 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta
 
-const today = new Date()
+const { year, month, date } = DateUtil.takeYearMonthDate()
+const nowDate = `${year}-${month}-${date}`
 
 export const Display: Story = {
   args: {
-    choosenDate: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
+    choosenDate: nowDate
   }
 }

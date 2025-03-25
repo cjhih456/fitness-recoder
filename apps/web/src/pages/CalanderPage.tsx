@@ -8,6 +8,7 @@ import { useHeaderHandler } from '@globalUi/Header';
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
 import Calender from '@ui/Calander/Calander';
 import ScheduleList from '@ui/Schedule/ScheduleList';
+import DateUtil from '@utils/DateUtil';
 
 function CalanderPage() {
   const { t } = useTranslation('title')
@@ -16,9 +17,8 @@ function CalanderPage() {
 
   const location = useLocation()
   const navigate = useNavigate()
-  const todayYear = new Date().getFullYear()
-  const todayMonth = new Date().getMonth() + 1
-  const todayDate = new Date().getDate()
+
+  const { year: todayYear, month: todayMonth, date: todayDate } = DateUtil.takeYearMonthDate()
 
   const [calanderMode, changeCalanderMode] = useState<Mode>('date')
   const [choosenDate, changeDate] = useState(location.hash.replace('#', '') || `${todayYear}-${todayMonth}-${todayDate}`)

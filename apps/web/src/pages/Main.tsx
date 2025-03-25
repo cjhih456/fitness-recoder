@@ -1,5 +1,5 @@
 import { Button, ScrollShadow } from '@heroui/react'
-import { Suspense, useCallback, useMemo } from 'react'
+import { Suspense, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '@globalUi/BottomNavi'
@@ -9,6 +9,7 @@ import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
 import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
+import DateUtil from '@utils/DateUtil'
 import StateRender from '@utils/StateRender'
 
 export default function Main() {
@@ -17,14 +18,7 @@ export default function Main() {
   const { t } = useTranslation(['main', 'common', 'scheduleList', 'title'])
   const navigate = useNavigate()
 
-  const todayInfo = useMemo(() => {
-    const today = new Date()
-    return {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      date: today.getDate()
-    }
-  }, [])
+  const todayInfo = DateUtil.takeYearMonthDate()
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
   useHeaderHandler(t('title:home'))
 

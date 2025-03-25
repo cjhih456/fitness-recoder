@@ -101,11 +101,17 @@ function dateNumberAsDateString(daysNumber: number) {
   day = nowDate
   return `${year}-${month}-${day}`
 }
+
 export default {
   between,
   calcWeek,
   isLeapYear,
   getDaysByMonth,
   dateStringAsDateNumber,
-  dateNumberAsDateString
+  dateNumberAsDateString,
+  takeYearMonthDate: (time: Date = new Date()) => ({
+    year: time.getFullYear(),
+    month: time.getMonth() + 1,
+    date: time.getDate(),
+  })
 }

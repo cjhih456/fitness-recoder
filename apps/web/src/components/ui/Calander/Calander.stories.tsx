@@ -1,11 +1,10 @@
 import type { CalanderProps } from './Calander';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import DateUtil from '@utils/DateUtil';
 import Calender from './Calander';
 
-const date = new Date()
-
-const nowDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+const { year, month, date } = DateUtil.takeYearMonthDate()
 
 const meta = {
   title: 'Calander',
@@ -25,7 +24,7 @@ const meta = {
     }
   },
   args: {
-    value: nowDate,
+    value: `${year}-${month}-${date}`,
     onChange: fn()
   } as Partial<CalanderProps>,
   component: Calender
