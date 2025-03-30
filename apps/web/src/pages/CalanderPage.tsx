@@ -1,4 +1,4 @@
-import type { Mode } from '@ui/Calander/Calander';
+import type { DateValue } from '@ui/Calender/types';
 import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,9 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '@globalUi/BottomNavi';
 import { useHeaderHandler } from '@globalUi/Header';
 import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
-import Calender from '@ui/Calander/Calander';
+import DateService from '@ui/Calender/model/DateService';
+import Calender from '@ui/Calender/ui/templates/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
-import DateUtil from '@utils/DateUtil';
 
 function CalanderPage() {
   const { t } = useTranslation('title')
@@ -18,20 +18,20 @@ function CalanderPage() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const { year: todayYear, month: todayMonth, date: todayDate } = DateUtil.takeYearMonthDate()
+  const today = DateService.takeTodayDateValue()
+  const selectedDateOnHash = DateService.parseDateString(location.hash.replace('#', '') || today)
+  const [choosenDate, changeDate] = useState<DateValue>(selectedDateOnHash)
+  const { year, month } = choosenDate
 
-  const [calanderMode, changeCalanderMode] = useState<Mode>('date')
-  const [choosenDate, changeDate] = useState(location.hash.replace('#', '') || `${todayYear}-${todayMonth}-${todayDate}`)
+  const choosenDateStr = DateService.formatDateValue(choosenDate)
 
-  function changeChooseDate(chooseDate: string) {
+  function changeChooseDate(chooseDate: DateValue) {
     const nowPath = location.pathname + (location.search.startsWith('?') ? '' : '?') + location.search
-    navigate(nowPath + '#' + chooseDate, {
+    navigate(nowPath + '#' + DateService.formatDateValue(chooseDate), {
       replace: true
     })
     changeDate(chooseDate)
   }
-
-  const [year, month] = useMemo(() => choosenDate.split('-').map(v => +v), [choosenDate])
 
   const { data: monthlyStatusLoaded } = useGetScheduleStatusByDate(year, month)
   const monthlyStatus = useMemo(() => monthlyStatusLoaded?.getScheduleStatusByDate, [monthlyStatusLoaded])
@@ -61,7 +61,7 @@ function CalanderPage() {
       <figcaption>
         <Suspense>
           <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
-            <ScheduleList choosenDate={choosenDate}></ScheduleList>
+            <ScheduleList choosenDate={choosenDateStr}></ScheduleList>
           </ScrollShadow>
         </Suspense>
       </figcaption>
