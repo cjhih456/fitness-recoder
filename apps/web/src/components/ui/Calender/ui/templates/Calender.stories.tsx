@@ -1,10 +1,10 @@
-import type { CalanderProps } from './Calander';
+import type { CalenderProps } from '../types';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import DateUtil from '@utils/DateUtil';
-import Calender from './Calander';
+import DateService from '@ui/Calender/model/DateService';
+import Calender from './Calender';
 
-const { year, month, date } = DateUtil.takeYearMonthDate()
+const todayDateValue = DateService.takeTodayDateValue()
 
 const meta = {
   title: 'Calander',
@@ -13,20 +13,17 @@ const meta = {
     layout: 'centered'
   },
   argTypes: {
-    endDate: {
-      control: 'number',
-    },
-    startDate: {
-      control: 'number',
+    dateRange: {
+      control: 'range'
     },
     value: {
       control: 'text'
     }
   },
   args: {
-    value: `${year}-${month}-${date}`,
+    value: todayDateValue,
     onChange: fn()
-  } as Partial<CalanderProps>,
+  } as Partial<CalenderProps>,
   component: Calender
 } satisfies Meta<typeof Calender>;
 
@@ -35,18 +32,18 @@ export default meta
 
 export const DateCalanderType: Story = {
   args: {
-    mode: 'date'
+    defaultMode: 'date'
   }
 }
 
 export const MonthCalanderType: Story = {
   args: {
-    mode: 'month'
+    defaultMode: 'month'
   }
 }
 
 export const YearCalanderType: Story = {
   args: {
-    mode: 'year'
+    defaultMode: 'year'
   }
 }

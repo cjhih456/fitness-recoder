@@ -50,12 +50,12 @@ function CalanderPage() {
       <figure className='px-4'>
         <Calender
           value={choosenDate}
-          mode={calanderMode}
-          onChangeMode={changeCalanderMode}
           onChange={changeChooseDate}
           statesByDate={monthlyStatus}
-          startDate='2020-1-1'
-          endDate='2035-1-1'
+          dateRange={{
+            startDate: { year: 2020, month: 1, date: 1 },
+            endDate: { year: 2035, month: 1, date: 1 }
+          }}
         />
       </figure>
       <figcaption>
