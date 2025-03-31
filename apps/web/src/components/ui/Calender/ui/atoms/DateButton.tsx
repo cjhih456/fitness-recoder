@@ -1,7 +1,7 @@
 import type { DateButtonProps } from '../types';
 import { Button } from '@heroui/react';
+import { calenderColor } from '@ui/Calender/lib/color';
 import DateService from '@ui/Calender/model/DateService';
-import { calanderColor } from '@utils';
 
 export default function DateButton({
   value,
@@ -10,7 +10,7 @@ export default function DateButton({
   onChange,
   statesByDate = []
 }: DateButtonProps) {
-  const colorClass = calanderColor(DateService.isEqual(display, value), statesByDate[display.date])
+  const colorClass = calenderColor(DateService.isEqual(display, value), statesByDate)
   const inRange = DateService.isDateInRange(display, dateRange)
   return <Button
     isDisabled={!inRange}

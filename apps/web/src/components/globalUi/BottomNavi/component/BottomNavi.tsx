@@ -15,7 +15,7 @@ const BottomNavi = () => {
     render={{
       true: <BottomNaviArea className="flex justify-center gap-x-1">
         <MenuButton name={t('home')} Icon={MdHome} path='/' />
-        <MenuButton name={t('calander')} Icon={MdCalendarToday} path='/calander' />
+        <MenuButton name={t('calender')} Icon={MdCalendarToday} path='/calender' />
         <MenuButton name={t('exercise')} Icon={MdList} path='/fitnessList' />
         <MenuButton name={t('preset')} Icon={MdOutlineDataset} path='/preset' />
       </BottomNaviArea>

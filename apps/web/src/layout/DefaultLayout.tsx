@@ -23,8 +23,8 @@ export default function DefaultLayout({
     name: 'Home',
     route: '/',
   }, {
-    name: 'Calander',
-    route: '/calander',
+    name: 'Calender',
+    route: '/calender',
   }, {
     name: 'Fitness',
     route: '/fitnessList'

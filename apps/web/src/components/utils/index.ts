@@ -14,29 +14,8 @@ export const ScheduleType = enumify({
   FINISH: 'FINISH',
 })
 
-export const calanderColor = (isSelected: boolean, type: string) => {
-  if (isSelected) return 'bg-primary'
-  const tempType = (type || '').split(',')
-  if (tempType.length) {
-    switch (tempType[0]) {
-      case ScheduleType.BREAK:
-        return 'bg-warning-500 text-default'
-      case ScheduleType.FINISH:
-        return 'bg-success-300'
-      case ScheduleType.SCHEDULED:
-        return 'bg-default'
-      case ScheduleType.STARTED:
-        return 'bg-success-700 text-success-100'
-      case ScheduleType.PAUSED:
-        return 'bg-blue-100 text-default'
-    }
-  }
-  return 'text-default-500'
-}
-
 export default {
   enumify,
   ScheduleType,
-  baseURL,
-  calanderColor
+  baseURL
 }

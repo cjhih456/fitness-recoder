@@ -7,7 +7,7 @@ import Calender from './Calender';
 const todayDateValue = DateService.takeTodayDateValue()
 
 const meta = {
-  title: 'Calander',
+  title: 'Calender',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered'
@@ -30,19 +30,19 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta
 
-export const DateCalanderType: Story = {
+export const DateCalenderType: Story = {
   args: {
     defaultMode: 'date'
   }
 }
 
-export const MonthCalanderType: Story = {
+export const MonthCalenderType: Story = {
   args: {
     defaultMode: 'month'
   }
 }
 
-export const YearCalanderType: Story = {
+export const YearCalenderType: Story = {
   args: {
     defaultMode: 'year'
   }

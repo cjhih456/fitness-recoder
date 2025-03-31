@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 const Main = lazy(() => import('./pages/Main'))
-const CalanderPage = lazy(() => import('./pages/CalanderPage'))
+const CalenderPage = lazy(() => import('./pages/CalenderPage'))
 const FitnessList = lazy(() => import('./pages/FitnessList'))
 const CreateSchedule = lazy(() => import('./pages/:selectDate/schedule/create'))
 const DisplaySchedule = lazy(() => import('./pages/:selectDate/schedule/:id'))
@@ -13,7 +13,7 @@ const PresetDetailPage = lazy(() => import('./pages/preset/:id'))
 export default function CRouter() {
   return <Routes>
     <Route index Component={Main} />
-    <Route path="calander" Component={CalanderPage} />
+    <Route path="calender" Component={CalenderPage} />
     <Route path="fitnessList" Component={FitnessList} />
     <Route path=":selectDate/schedule/create" Component={CreateSchedule} />
     <Route path=":selectDate/schedule/:id" Component={DisplaySchedule} />

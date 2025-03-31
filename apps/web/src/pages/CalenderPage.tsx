@@ -10,10 +10,10 @@ import DateService from '@ui/Calender/model/DateService';
 import Calender from '@ui/Calender/ui/templates/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
 
-function CalanderPage() {
+function CalenderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler(t('calander'))
+  useHeaderHandler(t('calender'))
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -51,7 +51,7 @@ function CalanderPage() {
         <Calender
           value={choosenDate}
           onChange={changeChooseDate}
-          statesByDate={monthlyStatus}
+          statesByMonth={monthlyStatus}
           dateRange={{
             startDate: { year: 2020, month: 1, date: 1 },
             endDate: { year: 2035, month: 1, date: 1 }
@@ -69,4 +69,4 @@ function CalanderPage() {
   )
 }
 
-export default CalanderPage
+export default CalenderPage
