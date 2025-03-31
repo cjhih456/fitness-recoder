@@ -1,4 +1,5 @@
 import type { DateValue, DateRange } from '../types';
+import type { Schedule } from 'fitness-struct';
 import type { ReactNode } from 'react';
 
 export type CalendarMode = 'date' | 'month' | 'year';
@@ -10,11 +11,12 @@ export interface CalenderBaseProps {
 }
 
 export interface DateCalenderStates {
-  statesByDate?: string[]
+  statesByMonth?: Schedule.IType[][]
 }
 
-export interface DateButtonProps extends CalenderBaseProps, DateCalenderStates {
+export interface DateButtonProps extends CalenderBaseProps {
   display: DateValue
+  statesByDate?: Schedule.IType[]
 }
 
 export interface DateGridProps extends CalenderBaseProps, DateCalenderStates {

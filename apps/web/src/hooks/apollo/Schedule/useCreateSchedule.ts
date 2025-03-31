@@ -7,15 +7,17 @@ export default function useCreateSchedule() {
   return useMutation<CreateScheduleResponse, CreaetScheduleVariable>(CreateSchedule, {
     update: (cache, result) => {
       cache.modify<{
-        getScheduleStatusByDate: GetScheduleStatusByDateResponse['getScheduleStatusByDate']
+        getScheduleStatusByMonth: GetScheduleStatusByMonthResponse['getScheduleStatusByMonth']
         getScheduleByDate: GetScheduleByDateResponse['getScheduleByDate']
       }>({
         fields: {
-          getScheduleStatusByDate(prev) {
+          getScheduleStatusByMonth(prev) {
             if (!prev || !result.data?.createSchedule) return prev
             if (!Array.isArray(prev)) return prev
             const temp = [...prev]
-            temp[result.data.createSchedule.date] = result.data.createSchedule.type
+            const dateTemp = temp[result.data.createSchedule.date] ? [...temp[result.data.createSchedule.date]] : []
+            dateTemp.push(result.data.createSchedule.type)
+            temp[result.data.createSchedule.date] = dateTemp
             return temp
           },
           getScheduleByDate(prev, { toReference }) {

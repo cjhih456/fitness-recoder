@@ -6,7 +6,7 @@ import useCreateSchedule from './useCreateSchedule'
 import useDeleteSchedule from './useDeleteSchedule'
 import useGetScheduleByDate from './useGetScheduleByDate'
 import useGetScheduleById from './useGetScheduleById'
-import useGetScheduleStatusByDate from './useGetScheduleStatusByDate'
+import useGetScheduleStatusByMonth from './useGetScheduleStatusByMonth'
 import useUpdateSchedule from './useUpdateSchedule'
 
 export {
@@ -14,7 +14,7 @@ export {
   useDeleteSchedule,
   useGetScheduleByDate,
   useGetScheduleById,
-  useGetScheduleStatusByDate,
+  useGetScheduleStatusByMonth,
   useUpdateSchedule,
   useCloneSchedule,
   useCloneScheduleFromPreset

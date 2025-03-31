@@ -52,7 +52,7 @@ input TargetDateInput {
 type Query {
   getScheduleById(id: Int!): ScheduleData
   getScheduleByDate(year: Int!, month: Int!, date: Int!): [ScheduleData!]
-  getScheduleStatusByDate(year: Int!, month: Int!): [String]
+  getScheduleStatusByMonth(year: Int!, month: Int!): [[String]]
 }
 
 type Mutation {

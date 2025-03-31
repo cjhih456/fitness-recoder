@@ -1,6 +1,7 @@
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
 type Schedule = import('fitness-struct').Schedule.Schedule
+type ScheduleIType = import('fitness-struct').Schedule.IType
 type ScheduleCreate = import('fitness-struct').Schedule.ICreate
 
 declare type ScheduleStoreType = Schedule & StoreObject
@@ -20,8 +21,8 @@ declare type GetScheduleByDateVariable = { year: number, month: number, date: nu
 declare type GetScheduleByIdResponse = { getScheduleById: ScheduleStoreType }
 declare type GetScheduleByIdVAriable = { id: number }
 
-declare type GetScheduleStatusByDateResponse = { getScheduleStatusByDate: string[] }
-declare type GetScheduleStatusByDateVariable = { year: number, month: number }
+declare type GetScheduleStatusByMonthResponse = { getScheduleStatusByMonth: ScheduleIType[][] }
+declare type GetScheduleStatusByMonthVariable = { year: number, month: number }
 
 declare type UpdateScheduleResponse = { updateSchedule: ScheduleStoreType }
 declare type UpdateScheduleVariable = { updateSchedule: ScheduleStoreType }

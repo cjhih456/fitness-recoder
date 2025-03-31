@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useBottomNavi } from '@globalUi/BottomNavi';
 import { useHeaderHandler } from '@globalUi/Header';
-import { useGetScheduleStatusByDate } from '@hooks/apollo/Schedule'
+import { useGetScheduleStatusByMonth } from '@hooks/apollo/Schedule'
 import DateService from '@ui/Calender/model/DateService';
 import Calender from '@ui/Calender/ui/templates/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
@@ -33,8 +33,8 @@ function CalenderPage() {
     changeDate(chooseDate)
   }
 
-  const { data: monthlyStatusLoaded } = useGetScheduleStatusByDate(year, month)
-  const monthlyStatus = useMemo(() => monthlyStatusLoaded?.getScheduleStatusByDate, [monthlyStatusLoaded])
+  const { data: monthlyStatusLoaded } = useGetScheduleStatusByMonth(year, month)
+  const monthlyStatus = useMemo(() => monthlyStatusLoaded?.getScheduleStatusByMonth, [monthlyStatusLoaded])
 
   const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
   function scrollShadowChange(visibility: string) {

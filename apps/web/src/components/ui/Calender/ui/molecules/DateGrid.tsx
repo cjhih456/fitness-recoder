@@ -26,6 +26,7 @@ export default function DateGrid({
         return <DateButton
           key={`date-btn-${i}`}
           {...props}
+          statesByDate={props.statesByMonth ? props.statesByMonth[buttonDate.date] : []}
           display={buttonDate}
         />
       }
