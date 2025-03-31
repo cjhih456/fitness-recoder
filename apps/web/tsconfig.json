@@ -28,6 +28,7 @@
       "@utils": ["./src/components/utils"],
       "@utils/*": ["./src/components/utils/*"],
       "@provider/*": ["./src/components/provider/*"],
+      "@entities/*": ["./src/entities/*"],
       "@globalUi/*": ["./src/components/globalUi/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@components/*": ["./src/components/*"],

@@ -1,4 +1,4 @@
-import DateService from '@ui/Calender/model/DateService'
+import DateService from '@entities/Calender/model/DateService'
 import { ScheduleType } from '@utils'
 import useCloneSchedule from './useCloneSchedule'
 import useCloneScheduleFromPreset from './useCloneScheduleFromPreset'

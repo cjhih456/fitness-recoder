@@ -1,13 +1,13 @@
-import type { DateValue } from '@ui/Calender/types';
+import type { DateValue } from '@entities/Calender/types';
 import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
+import DateService from '@entities/Calender/model/DateService';
+import Calender from '@entities/Calender/ui/templates/Calender';
 import { useBottomNavi } from '@globalUi/BottomNavi';
 import { useHeaderHandler } from '@globalUi/Header';
 import { useGetScheduleStatusByMonth } from '@hooks/apollo/Schedule'
-import DateService from '@ui/Calender/model/DateService';
-import Calender from '@ui/Calender/ui/templates/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
 
 function CalenderPage() {

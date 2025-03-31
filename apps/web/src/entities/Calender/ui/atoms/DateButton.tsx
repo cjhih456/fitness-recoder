@@ -1,7 +1,7 @@
 import type { DateButtonProps } from '../types';
 import { Button } from '@heroui/react';
-import { calenderColor } from '@ui/Calender/lib/color';
-import DateService from '@ui/Calender/model/DateService';
+import { calenderColor } from '@entities/Calender/lib/color';
+import DateService from '@entities/Calender/model/DateService';
 
 export default function DateButton({
   value,
