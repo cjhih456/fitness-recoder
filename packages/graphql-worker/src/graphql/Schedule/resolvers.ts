@@ -21,16 +21,16 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       )
       return scheduleList || []
     },
-    async getScheduleStatusByDate(_source, { year, month }, context) {
+    async getScheduleStatusByMonth(_source, { year, month }, context) {
       const result = await dbTransitionBus?.sendTransaction<{ year: number, month: number, date: number, type: string }>(
         context.client,
         'selects', 'select year, month, date, group_concat(type) as type from schedule where year=? and month=? group by year, month, date',
         [year, month]
       )
       return result?.reduce((acc, cur) => {
-        acc[cur.date] = cur.type
+        acc[cur.date] = cur.type.split(',')
         return acc
-      }, [] as string[])
+      }, [] as string[][])
     }
   },
   Mutation: {

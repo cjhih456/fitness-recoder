@@ -27,7 +27,7 @@ export default new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        getScheduleStatusByDate: offsetLimitPagination(['year', 'month']),
+        getScheduleStatusByMonth: offsetLimitPagination(['year', 'month']),
         getExercisePresetWithListList: offsetLimitPagination(),
         getFitnessListByKeywords: offsetLimitPagination(['name', 'category', 'muscle']),
         getScheduleByDate: offsetLimitPagination(['year', 'month', 'date'])

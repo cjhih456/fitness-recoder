@@ -6,6 +6,9 @@ export default {
     './src/**/*.{tsx,ts,css,sass}',
     '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
+  safelist: [
+    { pattern: /col-span-(\d+)/ }, // col-span-1 ~ col-span-N 사용 가능
+  ],
   theme: {
     extend: {},
   },

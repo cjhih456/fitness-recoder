@@ -1,12 +1,12 @@
+import DateService from '@entities/Calender/model/DateService'
 import { ScheduleType } from '@utils'
-import DateUtil from '@utils/DateUtil'
 import useCloneSchedule from './useCloneSchedule'
 import useCloneScheduleFromPreset from './useCloneScheduleFromPreset'
 import useCreateSchedule from './useCreateSchedule'
 import useDeleteSchedule from './useDeleteSchedule'
 import useGetScheduleByDate from './useGetScheduleByDate'
 import useGetScheduleById from './useGetScheduleById'
-import useGetScheduleStatusByDate from './useGetScheduleStatusByDate'
+import useGetScheduleStatusByMonth from './useGetScheduleStatusByMonth'
 import useUpdateSchedule from './useUpdateSchedule'
 
 export {
@@ -14,16 +14,16 @@ export {
   useDeleteSchedule,
   useGetScheduleByDate,
   useGetScheduleById,
-  useGetScheduleStatusByDate,
+  useGetScheduleStatusByMonth,
   useUpdateSchedule,
   useCloneSchedule,
   useCloneScheduleFromPreset
 }
-const { month, year } = DateUtil.takeYearMonthDate()
-const daysByMonth = DateUtil.getDaysByMonth(year)
+const { month, year } = DateService.takeTodayDateValue()
+const daysByMonth = DateService.getDaysInMonth(year, month)
 
 const typeTemp = [ScheduleType.BREAK, ScheduleType.FINISH, ScheduleType.PAUSED, ScheduleType.SCHEDULED, ScheduleType.STARTED]
-export const ScheduleMockData: { [key: number]: ScheduleStoreType } = Array(daysByMonth[month - 1]).fill(0).reduce((acc, _cur, i) => {
+export const ScheduleMockData: { [key: number]: ScheduleStoreType } = Array(daysByMonth).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
   acc[id] = {
     date: id,

@@ -1,6 +1,6 @@
 import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
-import DateUtil from '@utils/DateUtil';
+import DateService from '@entities/Calender/model/DateService';
 import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',
@@ -29,7 +29,7 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta
 
-const { year, month, date } = DateUtil.takeYearMonthDate()
+const { year, month, date } = DateService.takeTodayDateValue()
 const nowDate = `${year}-${month}-${date}`
 
 export const Display: Story = {

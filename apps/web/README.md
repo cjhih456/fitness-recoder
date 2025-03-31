@@ -40,10 +40,10 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
         - Display neally schedule of weeks
           - Start with Schedule
 
-2. Calander & Daily schedule list
+2. Calender & Daily schedule list
     - Schedule List page
       - content
-        - calander - date
+        - calender - date
         - display schedule list - done
           - menu
             - Detail of Schedule - done
