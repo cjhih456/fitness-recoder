@@ -27,7 +27,7 @@ export default function DateGrid({
           key={`date-btn-${i}`}
           {...props}
           isSelected={DateService.isEqual(value, buttonDate)}
-          color={colorByDate ? colorByDate[i] : undefined}
+          color={colorByDate ? colorByDate[buttonDate.date] : undefined}
           display={buttonDate}
         />
       }
