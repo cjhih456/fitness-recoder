@@ -6,17 +6,17 @@ import AllMockedProvider from '@fitness/web/src/shared/test/AllMockedProvider'
 import getApolloCache from '@fitness/web/src/shared/lib/apollo/apolloCache'
 import { StoryFn } from '@storybook/react'
 import { getFragmentFiles } from '@fitness/web/src/app/lib/getFragmentFiles'
-
+import { getMockQueryFiles } from '@fitness/web/src/app/lib/getMockQueryFiles'
 type MainDecoratorStory = StoryFn<any>;
 
 const fragmentList = getFragmentFiles()
 const cache = getApolloCache({ fragmentList })
-
+const mockFiles = getMockQueryFiles(cache)
 const MainDecorator: MainDecoratorStory = (Story) => {
   return <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <HeroUIProvider>
-        <AllMockedProvider cache={cache}>
+        <AllMockedProvider cache={cache} mocks={mockFiles}>
           <div className="dark bg-background text-default-700 storybook-root-path w-[640px]" style={{ padding: '2rem' }}>
             <Suspense>
               <Story />
