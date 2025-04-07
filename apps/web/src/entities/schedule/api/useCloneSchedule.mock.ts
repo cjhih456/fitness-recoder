@@ -3,7 +3,7 @@ import type { Schedule } from 'fitness-struct'
 import CloneSchedule from './graphql/mutation/CloneScheduleGql';
 import { ScheduleMockData } from '.'
 
-export const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVariable> = {
+const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVariable> = {
   request: {
     query: CloneSchedule
   },
@@ -23,3 +23,4 @@ export const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneSched
     }
   }
 }
+export default CloneScheduleMock

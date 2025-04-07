@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import { ScheduleMockData } from '@entities/schedule/api';
 import CreateSchedule from '@entities/schedule/api/graphql/mutation/CreateScheduleGql';
 
-export const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreaetScheduleVariable> = {
+const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreateScheduleVariable> = {
   request: {
     query: CreateSchedule
   },
@@ -18,4 +18,5 @@ export const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreaetSc
       }
     }
   }
-} 
+}
+export default CreateScheduleMock

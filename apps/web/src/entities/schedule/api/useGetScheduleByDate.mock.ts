@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import GetScheduleByDateGql from './graphql/query/GetScheduleByDateGql';
 import { ScheduleMockData } from '.'
 
-export const GetScheduleByDateMock: MockedResponse<GetScheduleByDateResponse, GetScheduleByDateVariable> = {
+const GetScheduleByDateMock: MockedResponse<GetScheduleByDateResponse, GetScheduleByDateVariable> = {
   request: {
     query: GetScheduleByDateGql
   },
@@ -14,3 +14,4 @@ export const GetScheduleByDateMock: MockedResponse<GetScheduleByDateResponse, Ge
     }
   }
 }
+export default GetScheduleByDateMock

@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import UpdateSetGql from './graphql/mutation/UpdateSetGql';
 import { SetMockData } from '.';
 
-export const UpdateSetMock: MockedResponse<UpdateSetResponse, UpdateSetVariable> = {
+const UpdateSetMock: MockedResponse<UpdateSetResponse, UpdateSetVariable> = {
   request: {
     query: UpdateSetGql
   },
@@ -14,4 +14,5 @@ export const UpdateSetMock: MockedResponse<UpdateSetResponse, UpdateSetVariable>
       }
     }
   }
-} 
+}
+export default UpdateSetMock

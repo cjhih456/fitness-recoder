@@ -3,7 +3,7 @@ import type { Schedule } from 'fitness-struct';
 import { ScheduleMockData } from '@entities/schedule/api';
 import GetScheduleStatusByMonthGql from '@entities/schedule/api/graphql/query/GetScheduleStatusByMonthGql';
 
-export const GetScheduleStateByDateMock: MockedResponse<
+const GetScheduleStateByDateMock: MockedResponse<
   GetScheduleStatusByMonthResponse,
   GetScheduleStatusByMonthVariable
 > = {
@@ -24,3 +24,4 @@ export const GetScheduleStateByDateMock: MockedResponse<
     }
   }
 }
+export default GetScheduleStateByDateMock

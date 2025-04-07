@@ -3,7 +3,7 @@ import { ExerciseMockData } from '@entities/exercise/api';
 import CreateExerciseByExercisePreset from '@entities/exercise/api/graphql/mutation/CreateExerciseByExercisePreset';
 import { FitnessMockData } from '@entities/fitness/api';
 
-export const CreateExerciseByExercisePresetMock: MockedResponse<
+const CreateExerciseByExercisePresetMock: MockedResponse<
   CreateExerciseByExercisePresetResponse,
   CreateExerciseByExercisePresetVariable
 > = {
@@ -25,4 +25,5 @@ export const CreateExerciseByExercisePresetMock: MockedResponse<
       }
     }
   }
-} 
+}
+export default CreateExerciseByExercisePresetMock

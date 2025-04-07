@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import { SetMockData } from '@entities/set/api';
 import DeleteSetGql from '@entities/set/api/graphql/mutation/DeleteSetGql';
 
-export const DeleteSetMock: MockedResponse<DeleteSetResponse, DeleteSetVariable> = {
+const DeleteSetMock: MockedResponse<DeleteSetResponse, DeleteSetVariable> = {
   request: {
     query: DeleteSetGql,
   },
@@ -14,4 +14,5 @@ export const DeleteSetMock: MockedResponse<DeleteSetResponse, DeleteSetVariable>
       }
     }
   }
-} 
+}
+export default DeleteSetMock

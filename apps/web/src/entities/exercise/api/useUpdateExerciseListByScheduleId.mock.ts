@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import { FitnessMockData } from '@entities/fitness/api';
 import UpdateExerciseListByScheduleId from './graphql/mutation/UpdateExerciseListByScheduleId';
 
-export const UpdateExerciseListByScheduleIdMock: MockedResponse<
+const UpdateExerciseListByScheduleIdMock: MockedResponse<
   UpdateExerciseListByScheduleIdResponse,
   UpdateExerciseListByScheduleIdVariable
 > = {
@@ -24,4 +24,5 @@ export const UpdateExerciseListByScheduleIdMock: MockedResponse<
       }
     }
   }
-} 
+}
+export default UpdateExerciseListByScheduleIdMock

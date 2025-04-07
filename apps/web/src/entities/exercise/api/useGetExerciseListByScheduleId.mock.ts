@@ -2,7 +2,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import { FitnessMockData } from '@entities/fitness/api';
 import GetExerciseListByScheduleId from '../api/graphql/query/GetExerciseListByScheduleId';
 
-export const GetExerciseListByScheduleIdMock: MockedResponse<
+const GetExerciseListByScheduleIdMock: MockedResponse<
   GetExerciseListByScheduleIdResponse,
   GetExerciseListByScheduleIdVariable
 > = {
@@ -31,4 +31,5 @@ export const GetExerciseListByScheduleIdMock: MockedResponse<
       }
     }
   }
-} 
+}
+export default GetExerciseListByScheduleIdMock

@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import DeleteExerciseById from '@entities/exercise/api/graphql/mutation/DeleteExerciseById';
 
-export const DeleteExerciseByIdMock: MockedResponse<
+const DeleteExerciseByIdMock: MockedResponse<
   DeleteExerciseByIdResponse,
   DeleteExerciseByIdVariable
 > = {
@@ -15,4 +15,5 @@ export const DeleteExerciseByIdMock: MockedResponse<
       }
     }
   }
-} 
+}
+export default DeleteExerciseByIdMock

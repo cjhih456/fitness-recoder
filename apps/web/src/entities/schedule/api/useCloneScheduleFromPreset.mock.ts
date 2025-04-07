@@ -4,7 +4,7 @@ import { ExercisePresetMockData } from '@entities/exercisePreset/api';
 import { ScheduleMockData } from '@entities/schedule/api';
 import CloneScheduleFromPreset from '@entities/schedule/api/graphql/mutation/CloneScheduleFromPresetGql';
 
-export const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable> = {
+const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable> = {
   request: {
     query: CloneScheduleFromPreset
   },
@@ -29,3 +29,4 @@ export const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPreset
     }
   }
 }
+export default CloneScheduleFromPresetMock
