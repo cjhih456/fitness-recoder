@@ -2,8 +2,8 @@ import { createSearchParams, useNavigate, useParams, useSearchParams } from 'rea
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useScheduleActions } from '@entities/schedule/hooks';
 import { useCreateScheduleWithExercisePlans } from '@features/exerciseManagement/api';
-import { LogEvent } from '@service/firebase';
 import usePageTracker from '@shared/hooks/usePageTracker';
+import { LogEvent } from '@shared/lib/firebase/firebase';
 import { useAlert } from '@widgets/alert';
 import { useHeaderHandler } from '@widgets/header';
 

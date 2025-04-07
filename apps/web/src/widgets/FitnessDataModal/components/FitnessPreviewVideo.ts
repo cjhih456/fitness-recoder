@@ -1,4 +1,4 @@
-import { firebaseConfig } from '@service/firebase'
+import { firebaseConfig } from '@shared/lib/firebase/firebase'
 
 interface YoutubeItemObject {
   kind: string
