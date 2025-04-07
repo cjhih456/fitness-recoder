@@ -2,8 +2,8 @@ import type { NavigateOptions } from 'react-router-dom';
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
-import { useAlert } from '@globalUi/Alert';
 import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@hooks/apollo/Schedule'
+import { useAlert } from '@shared/ui/Alert';
 
 export default function useScheduleActions() {
   const navigate = useNavigate()

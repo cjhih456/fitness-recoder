@@ -1,10 +1,10 @@
 import { HeroUIProvider, Spinner } from '@heroui/react'
 import { Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
-import AlertModal from '@globalUi/Alert'
 import FitnessDataModal from '@globalUi/FitnessDataModal'
 import BottomNavi from '@shared/hooks/bottomNavi'
 import useTheme from '@shared/hooks/useTheme'
+import AlertModal from '@shared/ui/Alert'
 import CRouter from './CRoutes'
 import DefaultLayout from './layout/DefaultLayout'
 

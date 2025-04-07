@@ -5,13 +5,13 @@ import { startTransition, Suspense, useCallback, useEffect, useMemo, useState } 
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
-import { useAlert } from '@globalUi/Alert';
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
 import { BottomNaviArea } from '@shared/hooks/bottomNavi'
 import { useHeaderHandler } from '@shared/hooks/header'
 import { dayjs } from '@shared/lib/utils'
+import { useAlert } from '@shared/ui/Alert';
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
 
