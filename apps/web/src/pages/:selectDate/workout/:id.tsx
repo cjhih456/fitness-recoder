@@ -8,12 +8,12 @@ import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
-import { BottomNaviArea } from '@shared/hooks/bottomNavi'
-import { useHeaderHandler } from '@shared/hooks/header'
 import { dayjs } from '@shared/lib/utils'
-import { useAlert } from '@shared/ui/Alert';
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
+import { useAlert } from '@widgets/alert';
+import { BottomNaviArea } from '@widgets/bottomNavi'
+import { useHeaderHandler } from '@widgets/header'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])

@@ -1,14 +1,14 @@
-import type { DateValue } from '@shared/ui/Calender';
+import type { DateValue } from '@widgets/calender';
 import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
 import { useGetScheduleStatusByMonth } from '@hooks/apollo/Schedule'
-import { useBottomNavi } from '@shared/hooks/bottomNavi';
-import { useHeaderHandler } from '@shared/hooks/header';
-import { DateService, default as Calender } from '@shared/ui/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
+import { useBottomNavi } from '@widgets/bottomNavi';
+import { DateService, default as Calender } from '@widgets/calender';
+import { useHeaderHandler } from '@widgets/header';
 
 function CalenderPage() {
   const { t } = useTranslation('title')

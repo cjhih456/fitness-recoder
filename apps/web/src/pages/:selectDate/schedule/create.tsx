@@ -3,9 +3,9 @@ import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateSch
 import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
 import { LogEvent } from '@service/firebase';
-import { useHeaderHandler } from '@shared/hooks/header';
-import { useAlert } from '@shared/ui/Alert';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
+import { useAlert } from '@widgets/alert';
+import { useHeaderHandler } from '@widgets/header';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'

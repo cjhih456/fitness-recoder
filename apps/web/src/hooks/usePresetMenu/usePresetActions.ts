@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDeleteExercisePreset } from '@hooks/apollo/ExercisePreset'
 import { useCloneScheduleFromPreset } from '@hooks/apollo/Schedule'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
-import { DateService } from '@shared/ui/Calender'
+import { DateService } from '@widgets/calender'
 
 export default function usePresetActions() {
   const { gotoScheduleDetail } = useScheduleActions()

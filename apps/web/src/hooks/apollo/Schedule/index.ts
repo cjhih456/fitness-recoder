@@ -1,5 +1,5 @@
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
-import { DateService } from '@shared/ui/Calender'
+import { DateService } from '@widgets/calender'
 import useCloneSchedule from './useCloneSchedule'
 import useCloneScheduleFromPreset from './useCloneScheduleFromPreset'
 import useCreateSchedule from './useCreateSchedule'

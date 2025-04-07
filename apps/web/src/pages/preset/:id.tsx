@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset'
 import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
 import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
-import { useHeaderHandler, useHeaderMenuHandler } from '@shared/hooks/header'
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor'
+import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
 
 export default function PresetDetailPage() {
   const params = useParams()

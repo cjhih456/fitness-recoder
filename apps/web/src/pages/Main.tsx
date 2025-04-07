@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
-import { useBottomNavi } from '@shared/hooks/bottomNavi'
-import { useHeaderHandler } from '@shared/hooks/header'
-import { DateService } from '@shared/ui/Calender'
 import StateRender from '@shared/ui/StateRender'
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
 import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
+import { useBottomNavi } from '@widgets/bottomNavi'
+import { DateService } from '@widgets/calender'
+import { useHeaderHandler } from '@widgets/header'
 
 export default function Main() {
   useBottomNavi()

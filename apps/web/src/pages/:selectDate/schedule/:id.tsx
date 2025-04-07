@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise';
 import useUpdateExerciseListBySchedule from '@hooks/apollo/mixed/useUpdateExerciseListBySchedule';
 import usePageTracker from '@hooks/usePageTracker';
-import { useHeaderHandler } from '@shared/hooks/header';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
+import { useHeaderHandler } from '@widgets/header';
 
 export default function DisplaySchedule() {
   useHeaderHandler('Schedule')

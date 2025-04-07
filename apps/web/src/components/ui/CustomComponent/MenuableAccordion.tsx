@@ -1,4 +1,4 @@
-import type { MenuType } from '@shared/hooks/header';
+import type { MenuType } from '@widgets/header';
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';

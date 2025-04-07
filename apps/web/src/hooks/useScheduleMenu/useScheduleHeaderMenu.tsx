@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import { useHeaderMenuHandler } from '@shared/hooks/header';
-import { useAlert } from '@shared/ui/Alert';
+import { useAlert } from '@widgets/alert';
+import { useHeaderMenuHandler } from '@widgets/header';
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
   boolean,

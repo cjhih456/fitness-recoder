@@ -1,6 +1,6 @@
 import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
-import { DateService } from '@shared/ui/Calender';
+import { DateService } from '@widgets/calender';
 import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',

@@ -32,6 +32,7 @@
       "@globalUi/*": ["./src/components/globalUi/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@components/*": ["./src/components/*"],
+      "@widgets/*": ["./src/widgets/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@service/*": ["./src/service/*"],
