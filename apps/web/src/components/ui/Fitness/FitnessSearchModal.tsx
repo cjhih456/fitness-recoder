@@ -1,6 +1,6 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { Suspense, useEffect } from 'react'
-import useIdToggle from '@hooks/useIdToggle'
+import useIdToggle from '@shared/hooks/useIdToggle'
 import FitnessListSearch from './FitnessListSearch'
 
 export interface FitnessSearchModalProps {

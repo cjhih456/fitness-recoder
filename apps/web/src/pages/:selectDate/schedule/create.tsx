@@ -1,8 +1,8 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import useCreateScheduleWithExercisePlans from '@hooks/apollo/mixed/useCreateScheduleWithExercisePlans';
-import usePageTracker from '@hooks/usePageTracker';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
 import { LogEvent } from '@service/firebase';
+import usePageTracker from '@shared/hooks/usePageTracker';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
 import { useAlert } from '@widgets/alert';
 import { useHeaderHandler } from '@widgets/header';

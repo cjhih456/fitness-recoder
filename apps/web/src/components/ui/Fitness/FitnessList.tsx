@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import useFitnessDataModal from '@globalUi/FitnessDataModal/hooks/useFitnessDataModal';
-import useSpinner from '@hooks/useSpinner';
+import useSpinner from '@shared/hooks/useSpinner';
 import FitnessItem from './FitnessItem';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
