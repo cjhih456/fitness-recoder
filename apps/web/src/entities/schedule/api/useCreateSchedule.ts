@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import CreateSchedule from '@entities/schedule/api/graphql/mutation/CreateScheduleGql';
 
 export default function useCreateSchedule() {
-  return useMutation<CreateScheduleResponse, CreaetScheduleVariable>(CreateSchedule, {
+  return useMutation<CreateScheduleResponse, CreateScheduleVariable>(CreateSchedule, {
     update: (cache, result) => {
       cache.modify<{
         getScheduleStatusByMonth: GetScheduleStatusByMonthResponse['getScheduleStatusByMonth']
