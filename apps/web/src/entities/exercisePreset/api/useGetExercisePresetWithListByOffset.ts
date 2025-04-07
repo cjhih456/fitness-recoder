@@ -1,8 +1,6 @@
-import type { MockedResponse } from '@apollo/client/testing';
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
 import GetExercisePresetWithListByOffset from './graphql/query/GetExercisePresetWithListByOffset';
-import { ExercisePresetMockData } from '.'
 
 export default function useGetExercisePresetWithListByOffset(offset: number, size: number) {
   const query = useSuspenseQuery<
@@ -38,26 +36,5 @@ export default function useGetExercisePresetWithListByOffset(offset: number, siz
     fetchMore,
     refetch,
     hasNext
-  }
-}
-export const GetExercisePresetWithListListMock: MockedResponse<
-  GetExercisePresetWithListByOffsetResponse,
-  GetExercisePresetWithListByOffsetVariable
-> = {
-  request: {
-    query: GetExercisePresetWithListByOffset
-  },
-  result: (v) => {
-    return {
-      data: {
-        getExercisePresetWithListByOffset: Object
-          .values(ExercisePresetMockData)
-          .splice(v.offset, v.size)
-          .map(v => {
-            v.__typename = 'ExercisePresetWithList'
-            return v
-          })
-      }
-    }
   }
 }

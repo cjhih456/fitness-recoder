@@ -1,7 +1,5 @@
-import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
 import DeleteExercisePresetGql from './graphql/mutation/DeleteExercisePresetGql';
-import { ExercisePresetMockData } from '.'
 
 export default function useDeleteExercisePreset() {
   return useMutation<DeleteExercisePresetResponse, DeleteExercisePresetVariable>(DeleteExercisePresetGql, {
@@ -21,20 +19,4 @@ export default function useDeleteExercisePreset() {
       })
     }
   })
-}
-export const DeleteExercisePresetMock: MockedResponse<
-  DeleteExercisePresetResponse,
-  DeleteExercisePresetVariable
-> = {
-  request: {
-    query: DeleteExercisePresetGql,
-  },
-  result: (v) => {
-    delete ExercisePresetMockData[v.id]
-    return {
-      data: {
-        deleteExercisePreset: `delete - ExercisePreset - ${v.id}`
-      }
-    }
-  }
 }
