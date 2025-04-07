@@ -1,2 +1,2 @@
 export { default as usePresetActions } from './usePresetActions'
-export { default } from './usePresetMenu';
+export { default as usePresetMenu } from './usePresetMenu'

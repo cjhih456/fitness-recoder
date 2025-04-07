@@ -2,7 +2,7 @@ import { Button } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useExercisePresetWithListFragment } from '@entities/exercisePreset/api';
-import usePresetMenu from '@hooks/usePresetMenu';
+import { usePresetMenu } from '@entities/exercisePreset/hooks';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import SimpleFitnessList from '@ui/Fitness/SimpleFitnessList';
 

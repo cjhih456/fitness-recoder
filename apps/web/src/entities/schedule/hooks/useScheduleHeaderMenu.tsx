@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useCopyExercisePresetFromSchedule } from '@entities/exercisePreset/api'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
-import useScheduleMenu from '@hooks/useScheduleMenu'
 import { useAlert } from '@widgets/alert';
 import { useHeaderMenuHandler } from '@widgets/header';
+import useScheduleMenu from './useScheduleMenu';
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
   boolean,

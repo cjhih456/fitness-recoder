@@ -1,6 +1,6 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useScheduleActions } from '@entities/schedule/hooks';
 import { useCreateScheduleWithExercisePlans } from '@features/exerciseManagement/api';
-import { useScheduleActions } from '@hooks/useScheduleMenu';
 import { LogEvent } from '@service/firebase';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
