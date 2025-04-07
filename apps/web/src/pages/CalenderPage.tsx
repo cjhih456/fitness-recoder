@@ -18,16 +18,20 @@ function CalenderPage() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const today = DateService.takeTodayDateValue()
-  const selectedDateOnHash = DateService.parseDateString(location.hash.replace('#', '') || today)
+  const selectedDateOnHash = DateService.parseDateString(
+    location.hash.replace('#', '') ||
+    DateService.takeTodayDateValue()
+  )
   const [choosenDate, changeDate] = useState<DateValue>(selectedDateOnHash)
   const { year, month } = choosenDate
 
   const choosenDateStr = DateService.formatDateValue(choosenDate)
 
   function changeChooseDate(chooseDate: DateValue) {
-    const nowPath = location.pathname + (location.search.startsWith('?') ? '' : '?') + location.search
-    navigate(nowPath + '#' + DateService.formatDateValue(chooseDate), {
+    navigate({
+      ...location,
+      hash: DateService.formatDateValue(chooseDate)
+    }, {
       replace: true
     })
     changeDate(chooseDate)
@@ -39,15 +43,6 @@ function CalenderPage() {
       monthlyStatusLoaded?.getScheduleStatusByMonth?.map(colorByScheduleType),
     [monthlyStatusLoaded]
   )
-
-  const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
-  function scrollShadowChange(visibility: string) {
-    if (visibility === 'bottom') {
-      setScrollShadow('bottom')
-    } else {
-      setScrollShadow('none')
-    }
-  }
 
   return (
     <div className="flex flex-col items-stretch h-full pt-4">
@@ -64,7 +59,7 @@ function CalenderPage() {
       </figure>
       <figcaption>
         <Suspense>
-          <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3" visibility={scrollShadow} onVisibilityChange={scrollShadowChange}>
+          <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
             <ScheduleList choosenDate={choosenDateStr}></ScheduleList>
           </ScrollShadow>
         </Suspense>
