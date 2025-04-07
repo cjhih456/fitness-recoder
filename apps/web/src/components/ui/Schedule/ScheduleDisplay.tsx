@@ -2,7 +2,7 @@ import type { Schedule } from 'fitness-struct'
 import type { ReactNode } from 'react';
 import { useGetExerciseListByScheduleId } from '@hooks/apollo/Exercise'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
+import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import SimpleFitnessList from '@ui/Fitness/SimpleFitnessList'
 
 export interface ScheduleDisplayProps {

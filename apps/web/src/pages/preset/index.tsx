@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@hooks/apollo/ExercisePreset';
 import useSpinner from '@shared/hooks/useSpinner';
-import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
+import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import PresetDisplay from '@ui/Preset/PresetDisplay';
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog';
 import { useBottomNavi } from '@widgets/bottomNavi';

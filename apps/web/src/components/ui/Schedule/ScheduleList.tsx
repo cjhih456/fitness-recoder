@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
+import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import StateRender from '@shared/ui/StateRender';
-import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
 import ScheduleDisplay from './ScheduleDisplay';
 
 export interface ScheduleListProps {

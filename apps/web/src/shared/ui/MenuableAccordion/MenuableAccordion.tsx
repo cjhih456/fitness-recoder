@@ -1,12 +1,12 @@
 import type { MenuType } from '@widgets/header';
-import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import type { ReactNode } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
 import StateRender from '@shared/ui/StateRender';
 
-interface MenuableAccordionProps {
+export interface MenuableAccordionProps {
   children: {
     title: ReactNode
     content: ReactNode
@@ -82,25 +82,5 @@ const MenuableAccordionSelf = (props: Omit<MenuableAccordionProps, 'isOpen' | 'o
   return <MenuableAccordion {...props} onOpenChange={setIsOpen} isOpen={isOpen} />
 }
 MenuableAccordion.Self = MenuableAccordionSelf
-
-const Context = createContext<[any, Dispatch<SetStateAction<any>>]>([0, () => { }])
-interface MenuableAccordionGroupProviderProps {
-  defaultValue?: number
-  children: ReactNode
-}
-const MenuableAccordionGroupProvider = ({ defaultValue = 0, children }: MenuableAccordionGroupProviderProps) => {
-  const providerState = useState(defaultValue)
-  return <Context.Provider value={providerState}>{children}</Context.Provider>
-}
-const MenuableAccordionGroupContent = ({ openId, ...props }: Omit<MenuableAccordionProps, 'isOpen' | 'onOpenChange'> & { openId: any }) => {
-  const [state, setState] = useContext(Context)
-  const isOpen = useMemo(() => state === openId, [state, openId])
-  const setIsOpen = useCallback((v: boolean) => {
-    setState(v ? openId : null)
-  }, [setState, openId])
-  return <MenuableAccordion {...props} onOpenChange={setIsOpen} isOpen={isOpen} />
-}
-MenuableAccordion.GroupProvider = MenuableAccordionGroupProvider
-MenuableAccordion.GroupContent = MenuableAccordionGroupContent
 
 export default MenuableAccordion

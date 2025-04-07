@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
+import MenuButton from '@shared/ui/MenuButton'
 import StateRender from '@shared/ui/StateRender';
-import MenuButton from '@ui/CustomComponent/MenuButton'
 import { bottomNaviAtom } from '../lib/atom';
 import BottomNaviArea from './BottomNaviArea';
 
