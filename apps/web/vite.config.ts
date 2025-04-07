@@ -44,11 +44,11 @@ export default defineConfig(({ mode, isPreview }) => {
           '../../packages/graphql-worker/src/graphql/Fitness/query.gql',
           '../../packages/graphql-worker/src/graphql/Schedule/query.gql',
           '../../packages/graphql-worker/src/graphql/Sets/query.gql',
-          ['../../packages/graphql-worker/src/graphql/Fitness/query.gql', '../../packages/graphql-worker/src/graphql/Exercise/query.gql'],
-          ['../../packages/graphql-worker/src/graphql/Fitness/query.gql', '../../packages/graphql-worker/src/graphql/Exercise/query.gql', '../../packages/graphql-worker/src/graphql/ExercisePreset/query.gql']
+          '../../packages/graphql-worker/src/graphql/Exercise/query.gql',
+          '../../packages/graphql-worker/src/graphql/ExercisePreset/query.gql'
         ],
         path: '/__graphql',
-        autoGenTypePath: './src/hooks/apollo/lib/possibleTypes.json'
+        autoGenTypePath: './src/shared/lib/apollo/possibleTypes.json'
       }),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',

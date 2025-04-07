@@ -38,22 +38,16 @@ const autogenType = `{
 }`
 
 export default async function GraphqlServer(options: options): Promise<Plugin[]> {
-  const schemas = await Promise.all(options.modulePath.map(async (path) => {
-
-    let pathes = Array.isArray(path) ? path : [path]
-    let gqlFile = pathes.reduce((acc, cur) => {
-      return acc + fs.readFileSync(resolve(cur)).toString()
-    }, '')
-    const schema = makeExecutableSchema({
-      typeDefs: gqlFile,
-    })
-    return schema
+  const filteredPathList = new Set(options.modulePath.flat())
+  const schemas = await Promise.all(Array.from(filteredPathList).map(async (path) => {
+    return fs.readFileSync(resolve(path)).toString()
   }))
+  const schema = makeExecutableSchema({
+    typeDefs: schemas.join('\n'),
+  })
 
   const apolloServer = new ApolloServer({
-    schema: mergeSchemas({
-      schemas: schemas
-    })
+    schema: schema
   })
   await apolloServer.start()
   return [{
