@@ -35,7 +35,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@layout/*": ["./src/layout/*"],
       "@pages/*": ["./src/pages/*"],
-      "@service/*": ["./src/service/*"]
+      "@service/*": ["./src/service/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": ["vite.config.ts", "vitePlugin", "./types/**/*", "./src/**/*"],
