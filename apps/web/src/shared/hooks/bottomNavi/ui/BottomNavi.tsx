@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
+import StateRender from '@shared/ui/StateRender';
 import MenuButton from '@ui/CustomComponent/MenuButton'
-import StateRender from '@utils/StateRender';
-import { bottomNaviAtom } from '../atom';
+import { bottomNaviAtom } from '../lib/atom';
 import BottomNaviArea from './BottomNaviArea';
 
 const BottomNavi = () => {
@@ -13,7 +13,7 @@ const BottomNavi = () => {
   return <StateRender.Boolean
     state={bottomNaviVisible}
     render={{
-      true: <BottomNaviArea className="flex justify-center gap-x-1">
+      true: () => <BottomNaviArea className="flex justify-center gap-x-1">
         <MenuButton name={t('home')} Icon={MdHome} path='/' />
         <MenuButton name={t('calender')} Icon={MdCalendarToday} path='/calender' />
         <MenuButton name={t('exercise')} Icon={MdList} path='/fitnessList' />

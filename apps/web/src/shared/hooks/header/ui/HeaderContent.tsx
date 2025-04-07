@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { headerContentAtom } from '../atom'
+import { headerContentAtom } from '../lib/atom'
 
 export default function HeaderContent() {
   const [header] = useAtom(headerContentAtom)

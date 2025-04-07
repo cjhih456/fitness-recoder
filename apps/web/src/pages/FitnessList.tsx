@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { useBottomNavi } from '@globalUi/BottomNavi'
-import { useHeaderHandler } from '@globalUi/Header'
+import { useBottomNavi } from '@shared/hooks/bottomNavi'
+import { useHeaderHandler } from '@shared/hooks/header'
 import FitnessListSearch from '@ui/Fitness/FitnessListSearch'
 function FitnessList() {
   const { t } = useTranslation('title')

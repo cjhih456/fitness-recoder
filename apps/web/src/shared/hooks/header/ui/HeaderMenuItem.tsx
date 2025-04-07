@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import StateRender from '@utils/StateRender'
+import StateRender from '@shared/ui/StateRender'
 
 interface HeaderMenuItemProps {
   children?: ReactNode | ReactNode[]
@@ -13,7 +13,7 @@ export default function HeaderMenuItem({ children, text, onClick }: HeaderMenuIt
       <StateRender.Boolean
         state={Boolean(text)}
         render={{
-          true: <span key={text} className='font-bold text-md'>
+          true: () => <span key={text} className='font-bold text-md'>
             {text}
           </span>
         }}

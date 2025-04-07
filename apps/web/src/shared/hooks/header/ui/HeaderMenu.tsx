@@ -2,9 +2,9 @@ import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
-import useTheme from '@hooks/useTheme';
-import StateRender from '@utils/StateRender';
-import { headerMenuAtom } from '../atom';
+import useTheme from '@shared/hooks/useTheme'
+import StateRender from '@shared/ui/StateRender';
+import { headerMenuAtom } from '../lib/atom';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {
@@ -17,7 +17,7 @@ export default function HeaderMenu() {
   return <StateRender.Boolean
     state={Boolean(headerMenu.length)}
     render={{
-      true: <Popover isOpen={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+      true: () => <Popover isOpen={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <PopoverTrigger>
           <Button isIconOnly variant='light' radius='full' >
             <MdMoreVert size="2rem" preserveAspectRatio="xMidYMid slice" />
@@ -42,12 +42,12 @@ export default function HeaderMenu() {
           </HeaderMenuItem>
         </PopoverContent>
       </Popover>,
-      false: <Button isIconOnly radius='full' onPress={toggleTheme}>
+      false: () => <Button isIconOnly radius='full' onPress={toggleTheme}>
         <StateRender
           state={theme}
           render={{
-            'dark': <MdDarkMode />,
-            'light': <MdLightMode />
+            'dark': () => <MdDarkMode />,
+            'light': () => <MdLightMode />
           }}
         />
       </Button>
