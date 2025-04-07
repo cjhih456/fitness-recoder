@@ -1,6 +1,6 @@
 import { Button } from '@heroui/react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 import SetRow from './SetRow';
 
 export interface SetListEditorProps {
@@ -65,7 +65,7 @@ export default function SetListEditor({
     <StateRender.Boolean
       state={readonly}
       render={{
-        false: <div className="flex flex-row gap-x-2">
+        false: () => <div className="flex flex-row gap-x-2">
           <Button className="flex-1" onPress={appendSet}>+ Append Set</Button>
         </div>
       }}

@@ -10,9 +10,9 @@ import { useHeaderHandler } from '@globalUi/Header'
 import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
 import usePageTracker from '@hooks/usePageTracker'
 import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
+import { dayjs, ScheduleType } from '@shared/lib/utils'
 import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
 import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
-import { dayjs, ScheduleType } from '@utils'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])

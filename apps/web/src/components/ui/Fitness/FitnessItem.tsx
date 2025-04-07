@@ -1,7 +1,7 @@
 import { Card, CardBody, Chip } from '@heroui/react';
 import { MdCheck } from 'react-icons/md';
 import { useFitnessSimpleFragment } from '@hooks/apollo/Fitness';
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 
 export interface FitnessItemProps {
   fitnessId: number
@@ -30,7 +30,7 @@ export default function FitnessItem({
           <StateRender.Boolean
             state={isSelected}
             render={{
-              true: <span className="inline-block" >
+              true: () => <span className="inline-block" >
                 <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">
                   <MdCheck size="0.75rem"></MdCheck>
                 </div>

@@ -1,7 +1,7 @@
 import type { DateValue } from '../../types';
 import type { CalenderProps, CalendarMode } from '../types';
 import { useState } from 'react';
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 import DateService from '../../model/DateService';
 import DateView from '../organisms/DateView';
 import MonthView from '../organisms/MonthView';
@@ -17,19 +17,19 @@ export default function Calender(props: CalenderProps) {
       <StateRender
         state={mode}
         render={{
-          year: <YearView
+          year: () => <YearView
             {...props}
             onChange={changeTrigger}
             targetMode='month'
           />,
-          month: <MonthView
+          month: () => <MonthView
             {...props}
             prevMode='year'
             targetMode='date'
             onModeChange={setMode}
             onChange={changeTrigger}
           />,
-          date: <DateView
+          date: () => <DateView
             {...props}
             prevMode='month'
             onModeChange={setMode}

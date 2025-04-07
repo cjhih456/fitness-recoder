@@ -4,7 +4,7 @@ import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, Dr
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 
 interface MenuableAccordionProps {
   children: {
@@ -34,7 +34,7 @@ const MenuableAccordion = ({ children, menu = [], isOpen, onOpenChange }: Menuab
         <StateRender.Boolean
           state={Boolean(menu.length)}
           render={{
-            true: <Dropdown type="menu" portalContainer={cardRef.current || document.body}>
+            true: () => <Dropdown type="menu" portalContainer={cardRef.current || document.body}>
               <DropdownTrigger>
                 <Button role="menu" isIconOnly variant="light" size="sm" className="absolute top-3 right-3" >
                   <MdMoreVert className="w-5 h-5 text-gray-400" />

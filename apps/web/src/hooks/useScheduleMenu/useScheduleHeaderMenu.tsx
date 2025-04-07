@@ -6,7 +6,7 @@ import { useAlert } from '@globalUi/Alert';
 import { useHeaderMenuHandler } from '@globalUi/Header';
 import { useCopyExercisePresetFromSchedule } from '@hooks/apollo/ExercisePreset'
 import useScheduleMenu from '@hooks/useScheduleMenu'
-import { ScheduleType } from '@utils'
+import { ScheduleType } from '@shared/lib/utils'
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
   boolean,

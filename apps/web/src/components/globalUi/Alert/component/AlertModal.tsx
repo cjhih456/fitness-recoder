@@ -2,7 +2,7 @@ import type { AlertData } from '../atom';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 import useAlert from '../hooks/useAlert';
 
 const AlertModal = () => {
@@ -49,7 +49,7 @@ const AlertModal = () => {
           <StateRender.Boolean
             state={Boolean(displayMessage?.cancel)}
             render={{
-              true: <Button className={displayMessage?.cancel?.colorClass} onPress={cancelAction}>
+              true: () => <Button className={displayMessage?.cancel?.colorClass} onPress={cancelAction}>
                 {displayMessage?.cancel?.message}
               </Button>
             }}
@@ -57,7 +57,7 @@ const AlertModal = () => {
           <StateRender.Boolean
             state={Boolean(displayMessage?.confirm)}
             render={{
-              true: <Button className={displayMessage?.confirm?.colorClass} onPress={confirmAction}>
+              true: () => <Button className={displayMessage?.confirm?.colorClass} onPress={confirmAction}>
                 {displayMessage?.confirm?.message}
               </Button>
             }}

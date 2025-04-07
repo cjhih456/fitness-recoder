@@ -1,6 +1,6 @@
 import { useCreateExerciseBySchedule } from '@hooks/apollo/Exercise'
 import { useCreateSchedule } from '@hooks/apollo/Schedule'
-import { ScheduleType } from '@utils'
+import { ScheduleType } from '@shared/lib/utils'
 
 export default function useCreateScheduleWithExercisePlans() {
   const [createSchedule] = useCreateSchedule()

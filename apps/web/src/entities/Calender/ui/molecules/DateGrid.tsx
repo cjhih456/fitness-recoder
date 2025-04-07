@@ -1,5 +1,5 @@
 import type { DateGridProps } from '../types';
-import StateRender from '@utils/StateRender';
+import StateRender from '@shared/ui/StateRender';
 import DateService from '../../model/DateService';
 import DateButton from '../atoms/DateButton';
 
@@ -17,7 +17,7 @@ export default function DateGrid({
     <StateRender.Boolean
       state={Boolean(startTemp)}
       render={{
-        true: <div className={`col-span-${startTemp}`}></div>
+        true: () => <div className={`col-span-${startTemp}`}></div>
       }}
     />
     {Array(daysInMonth).fill(0).map(

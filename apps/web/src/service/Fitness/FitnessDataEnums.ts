@@ -1,4 +1,4 @@
-import { enumify } from '@utils'
+import { enumify } from '@shared/lib/utils'
 
 export const Muscle = enumify({
   abdominals: 'abdominals',

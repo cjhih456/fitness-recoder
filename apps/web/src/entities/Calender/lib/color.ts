@@ -1,5 +1,5 @@
 import type { Schedule } from 'fitness-struct'
-import { ScheduleType } from '@utils'
+import { ScheduleType } from '@shared/lib/utils'
 
 export const calenderColor = (isSelected: boolean, type: Schedule.IType[]) => {
   if (isSelected) return 'bg-primary'

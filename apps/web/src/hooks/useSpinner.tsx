@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Spinner } from '@heroui/react'
 import { useMemo } from 'react'
 import { useIntersectionObserver } from 'usehooks-ts'
-import StateRender from '@utils/StateRender'
+import StateRender from '@shared/ui/StateRender'
 
 interface useSpinnerProps {
   visible: boolean
@@ -28,7 +28,7 @@ export default function useSpinner({
       <StateRender.Boolean
         state={visible}
         render={{
-          true: <Spinner color="primary" size="lg" ref={spinnerRef} />
+          true: () => <Spinner color="primary" size="lg" ref={spinnerRef} />
         }}
       />
     </div>

@@ -3,9 +3,9 @@ import { Suspense, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
+import { ScheduleType } from '@shared/lib/utils';
+import StateRender from '@shared/ui/StateRender';
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
-import { ScheduleType } from '@utils';
-import StateRender from '@utils/StateRender';
 import ScheduleDisplay from './ScheduleDisplay';
 
 export interface ScheduleListProps {
@@ -31,8 +31,8 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
   return <StateRender.Boolean
     state={isBreakday}
     render={{
-      true: <div role="breakday-list"></div>,
-      false: [
+      true: () => <div role="breakday-list"></div>,
+      false: () => [
         <div key="btn-menu" role="btn-menu" className="grid grid-cols-2 gap-x-4 sticky top-0 bg-background z-10">
           <Button
             className="bg-success-300"
@@ -56,7 +56,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
                   <StateRender.Boolean
                     state={type !== 'FINISH'}
                     render={{
-                      true: <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
+                      true: () => <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>
                         {t('common:modify')}
                       </Button>
                     }}

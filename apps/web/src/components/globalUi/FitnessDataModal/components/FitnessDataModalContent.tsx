@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGetExerciseFinishHistory } from '@hooks/apollo/Exercise'
 import { useFitnessFragment } from '@hooks/apollo/Fitness'
-import StateRender from '@utils/StateRender'
+import StateRender from '@shared/ui/StateRender'
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory'
 import FitnessPreviewVideo from './FitnessPreviewVideo'
 
@@ -43,7 +43,7 @@ export default function FitnessDataModalContent({
       <StateRender.Boolean
         state={Boolean(fitnessVideoId)}
         render={{
-          true: <div >
+          true: () => <div >
             <iframe
               width="100%"
               height="315"
@@ -63,7 +63,7 @@ export default function FitnessDataModalContent({
       <StateRender.Boolean
         state={Boolean(historyData.getExerciseFinishHistory.length)}
         render={{
-          true: <div className="max-w-full">
+          true: () => <div className="max-w-full">
             <p className="font-bold text-lg">
               {t('history')}
             </p>
