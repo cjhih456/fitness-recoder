@@ -1,7 +1,5 @@
-import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
 import UpdateScheduleGql from '../api/graphql/mutation/UpdateScheduleGql';
-import { ScheduleMockData } from '.'
 
 export default function useUpdateSchedule() {
   return useMutation<UpdateScheduleResponse, UpdateScheduleVariable>(UpdateScheduleGql, {
@@ -18,18 +16,4 @@ export default function useUpdateSchedule() {
       })
     }
   })
-}
-
-export const UpdateScheduleMock: MockedResponse<UpdateScheduleResponse, UpdateScheduleVariable> = {
-  request: {
-    query: UpdateScheduleGql
-  },
-  result: (v) => {
-    ScheduleMockData[v.updateSchedule.id] = v.updateSchedule
-    return {
-      data: {
-        updateSchedule: ScheduleMockData[v.updateSchedule.id]
-      }
-    }
-  }
 }

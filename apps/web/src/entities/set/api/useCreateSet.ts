@@ -1,25 +1,6 @@
-import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
-import { SetMockData } from '@entities/set/api';
 import CreateSetGql from '@entities/set/api/graphql/mutation/CreateSetGql';
 
 export default function useCreateSet() {
   return useMutation<CreateSetResponse, CreateSetVariable>(CreateSetGql)
-}
-export const CreateSetMock: MockedResponse<CreateSetResponse, CreateSetVariable> = {
-  request: {
-    query: CreateSetGql
-  },
-  result: (v) => {
-    const id = Math.max(...Object.keys(SetMockData).map(Number)) + 1
-    SetMockData[id] = {
-      ...v.sets,
-      id: id
-    }
-    return {
-      data: {
-        createSet: SetMockData[id]
-      }
-    }
-  }
 }

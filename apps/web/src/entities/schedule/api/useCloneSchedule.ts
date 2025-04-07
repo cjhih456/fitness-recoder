@@ -1,8 +1,5 @@
-import type { MockedResponse } from '@apollo/client/testing';
-import type { Schedule } from 'fitness-struct'
 import { useMutation } from '@apollo/client'
 import CloneSchedule from './graphql/mutation/CloneScheduleGql';
-import { ScheduleMockData } from '.'
 
 export default function useCloneSchedule() {
   return useMutation<CloneScheduleResponse, CloneScheduleVariable>(CloneSchedule, {
@@ -20,24 +17,4 @@ export default function useCloneSchedule() {
       })
     }
   })
-}
-export const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVariable> = {
-  request: {
-    query: CloneSchedule
-  },
-  result: (v) => {
-    const id = Math.max(...Object.keys(ScheduleMockData).map(Number)) + 1
-    ScheduleMockData[id] = {
-      ...(ScheduleMockData[v.id] as Schedule.Schedule),
-      id,
-      year: v.targetDate.year,
-      month: v.targetDate.month,
-      date: v.targetDate.date
-    }
-    return {
-      data: {
-        cloneSchedule: ScheduleMockData[id]
-      }
-    }
-  }
 }

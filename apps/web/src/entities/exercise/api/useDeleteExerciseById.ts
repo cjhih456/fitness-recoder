@@ -1,4 +1,3 @@
-import type { MockedResponse } from '@apollo/client/testing';
 import { useMutation } from '@apollo/client'
 import DeleteExerciseById from '@entities/exercise/api/graphql/mutation/DeleteExerciseById';
 
@@ -7,19 +6,4 @@ export default function useDeleteExerciseById() {
     DeleteExerciseByIdResponse,
     DeleteExerciseByIdVariable
   >(DeleteExerciseById)
-}
-export const DeleteExerciseByIdMock: MockedResponse<
-  DeleteExerciseByIdResponse,
-  DeleteExerciseByIdVariable
-> = {
-  request: {
-    query: DeleteExerciseById,
-  },
-  result: (v) => {
-    return {
-      data: {
-        deleteExerciseById: `delete - exercise - ${v.id}`
-      }
-    }
-  }
 }
