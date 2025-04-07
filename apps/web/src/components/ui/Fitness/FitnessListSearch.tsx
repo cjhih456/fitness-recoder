@@ -2,8 +2,8 @@ import type { Exercise } from 'fitness-struct'
 import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
 import { Suspense, useMemo } from 'react'
-import { useGetFitnessListByKeywords } from '@hooks/apollo/Fitness'
-import { categoryList, muscleList } from '@service/Fitness/FitnessDatas'
+import { useGetFitnessListByKeywords } from '@entities/fitness/api';
+import { categoryList, muscleList } from '@entities/fitness/model/FitnessDatas';
 import FitnessList from './FitnessList'
 export interface FitnessListSearchProps {
   searchPrefix?: ReactNode

@@ -3,8 +3,8 @@ import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
-import { useGetScheduleStatusByMonth } from '@hooks/apollo/Schedule'
 import ScheduleList from '@ui/Schedule/ScheduleList';
 import { useBottomNavi } from '@widgets/bottomNavi';
 import { DateService, default as Calender } from '@widgets/calender';

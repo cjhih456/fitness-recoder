@@ -1,5 +1,5 @@
 import { MdCheck } from 'react-icons/md';
-import { useGetSetListByExerciseId } from '@hooks/apollo/Set';
+import { useGetSetListByExerciseId } from '@entities/set/api';
 import StateRender from '@shared/ui/StateRender';
 
 interface SetStateProps {

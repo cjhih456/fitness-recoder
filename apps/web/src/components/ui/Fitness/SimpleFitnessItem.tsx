@@ -1,6 +1,6 @@
 import type { Exercise } from 'fitness-struct'
 import { Suspense } from 'react'
-import { useFitnessFragment } from '@hooks/apollo/Fitness'
+import { useFitnessFragment } from '@entities/fitness/api';
 import SetState from '@ui/Sets/SetState'
 
 export interface SimpleFitnessItemProps {

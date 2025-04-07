@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { useDeleteExercisePreset } from '@hooks/apollo/ExercisePreset'
-import { useCloneScheduleFromPreset } from '@hooks/apollo/Schedule'
+import { useDeleteExercisePreset } from '@entities/exercisePreset/api'
+import { useCloneScheduleFromPreset } from '@entities/schedule/api'
 import { useScheduleActions } from '@hooks/useScheduleMenu'
 import { DateService } from '@widgets/calender'
 

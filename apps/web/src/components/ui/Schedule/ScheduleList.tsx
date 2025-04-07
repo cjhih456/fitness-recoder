@@ -1,8 +1,8 @@
 import { Button } from '@heroui/react';
 import { Suspense, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useGetScheduleByDate } from '@entities/schedule/api';
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
-import { useGetScheduleByDate } from '@hooks/apollo/Schedule';
 import { useScheduleActions } from '@hooks/useScheduleMenu';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import StateRender from '@shared/ui/StateRender';

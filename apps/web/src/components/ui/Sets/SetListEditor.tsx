@@ -1,5 +1,5 @@
 import { Button } from '@heroui/react';
-import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@hooks/apollo/Set';
+import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@entities/set/api';
 import StateRender from '@shared/ui/StateRender';
 import SetRow from './SetRow';
 

@@ -1,7 +1,7 @@
 import { Button, ScrollShadow } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@hooks/apollo/ExercisePreset';
+import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/api';
 import useSpinner from '@shared/hooks/useSpinner';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import PresetDisplay from '@ui/Preset/PresetDisplay';

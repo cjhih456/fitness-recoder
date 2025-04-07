@@ -1,6 +1,6 @@
 import { Card, CardBody, Chip } from '@heroui/react';
 import { MdCheck } from 'react-icons/md';
-import { useFitnessSimpleFragment } from '@hooks/apollo/Fitness';
+import { useFitnessSimpleFragment } from '@entities/fitness/api';
 import StateRender from '@shared/ui/StateRender';
 
 export interface FitnessItemProps {
