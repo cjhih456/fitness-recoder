@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import AlertModal from '@globalUi/Alert'
 import BottomNavi from '@globalUi/BottomNavi'
 import FitnessDataModal from '@globalUi/FitnessDataModal'
-import useTheme from '@hooks/useTheme'
+import useTheme from '@shared/hooks/useTheme'
 import CRouter from './CRoutes'
 import DefaultLayout from './layout/DefaultLayout'
 
