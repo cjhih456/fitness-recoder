@@ -24,17 +24,9 @@
     "verbatimModuleSyntax": true,
 
     "paths": {
-      "@graphQuery/*": ["./src/graphQuery/*"],
-      "@utils": ["./src/components/utils"],
-      "@utils/*": ["./src/components/utils/*"],
-      "@provider/*": ["./src/components/provider/*"],
       "@entities/*": ["./src/entities/*"],
       "@features/*": ["./src/features/*"],
-      "@globalUi/*": ["./src/components/globalUi/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@components/*": ["./src/components/*"],
       "@widgets/*": ["./src/widgets/*"],
-      "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@service/*": ["./src/service/*"],
       "@shared/*": ["./src/shared/*"]

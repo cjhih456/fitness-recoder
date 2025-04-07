@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
-import ScheduleList from '@ui/Schedule/ScheduleList';
+import ScheduleList from '@entities/schedule/ui/ScheduleList';
 import { useBottomNavi } from '@widgets/bottomNavi';
 import { DateService, default as Calender } from '@widgets/calender';
 import { useHeaderHandler } from '@widgets/header';

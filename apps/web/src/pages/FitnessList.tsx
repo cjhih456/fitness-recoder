@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import FitnessListSearch from '@ui/Fitness/FitnessListSearch'
+import FitnessListSearch from '@entities/fitness/ui/FitnessListSearch'
 import { useBottomNavi } from '@widgets/bottomNavi'
 import { useHeaderHandler } from '@widgets/header'
 function FitnessList() {

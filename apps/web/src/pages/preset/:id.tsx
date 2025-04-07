@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
 import { usePresetMenu } from '@entities/exercisePreset/hooks'
 import { useUpdateExerciseListByExercisePreset } from '@features/presetManagement/api'
-import FitnessListEditor from '@ui/Fitness/FitnessListEditor'
+import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
 import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
 
 export default function PresetDetailPage() {

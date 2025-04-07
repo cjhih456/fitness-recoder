@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/api';
 import useSpinner from '@shared/hooks/useSpinner';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
-import PresetDisplay from '@ui/Preset/PresetDisplay';
-import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog';
+import PresetDisplay from '@entities/exercisePreset/ui/PresetDisplay';
+import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog';
 import { useBottomNavi } from '@widgets/bottomNavi';
 import { useHeaderHandler } from '@widgets/header';
 

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import usePageTracker from '@shared/hooks/usePageTracker';
-import FitnessListEditor from '@ui/Fitness/FitnessListEditor';
+import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useHeaderHandler } from '@widgets/header';
 
 export default function DisplaySchedule() {
