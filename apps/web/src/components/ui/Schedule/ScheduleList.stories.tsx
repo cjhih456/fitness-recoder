@@ -1,6 +1,6 @@
 import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
-import DateService from '@entities/Calender/model/DateService';
+import { DateService } from '@shared/ui/Calender';
 import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',

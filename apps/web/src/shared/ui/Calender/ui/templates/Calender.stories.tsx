@@ -1,7 +1,7 @@
 import type { CalenderProps } from '../types';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import DateService from '@entities/Calender/model/DateService';
+import { DateService } from '@shared/ui/Calender';
 import Calender from './Calender';
 
 const todayDateValue = DateService.takeTodayDateValue()

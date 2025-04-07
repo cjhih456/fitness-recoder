@@ -6,16 +6,7 @@ export function baseURL(url?: string) {
   return (import.meta.env.VITE_URL_ROOT + (url ?? '')).replace(/\/\//g, '/')
 }
 
-export const ScheduleType = enumify({
-  BREAK: 'BREAK',
-  SCHEDULED: 'SCHEDULED',
-  STARTED: 'STARTED',
-  PAUSED: 'PAUSED',
-  FINISH: 'FINISH',
-})
-
 export default {
   enumify,
-  ScheduleType,
   baseURL
 }

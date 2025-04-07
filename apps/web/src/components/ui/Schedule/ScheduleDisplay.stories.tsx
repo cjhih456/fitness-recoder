@@ -1,6 +1,6 @@
 import type { ScheduleDisplayProps } from './ScheduleDisplay';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ScheduleType } from '@shared/lib/utils';
+import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
 import ScheduleDisplay from './ScheduleDisplay'
 

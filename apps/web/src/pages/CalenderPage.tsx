@@ -1,13 +1,13 @@
-import type { DateValue } from '@entities/Calender/types';
+import type { DateValue } from '@shared/ui/Calender';
 import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
-import DateService from '@entities/Calender/model/DateService';
-import Calender from '@entities/Calender/ui/templates/Calender';
+import { colorByScheduleType } from '@entities/schedule/lib/color';
 import { useGetScheduleStatusByMonth } from '@hooks/apollo/Schedule'
 import { useBottomNavi } from '@shared/hooks/bottomNavi';
 import { useHeaderHandler } from '@shared/hooks/header';
+import { DateService, default as Calender } from '@shared/ui/Calender';
 import ScheduleList from '@ui/Schedule/ScheduleList';
 
 function CalenderPage() {
@@ -34,7 +34,13 @@ function CalenderPage() {
   }
 
   const { data: monthlyStatusLoaded } = useGetScheduleStatusByMonth(year, month)
-  const monthlyStatus = useMemo(() => monthlyStatusLoaded?.getScheduleStatusByMonth, [monthlyStatusLoaded])
+  const colorByDate = useMemo(() =>
+    monthlyStatusLoaded?.getScheduleStatusByMonth?.map((v, i) =>
+      colorByScheduleType(DateService.isEqual(choosenDate, {
+        ...choosenDate,
+        date: i + 1
+      }), v)
+    ), [monthlyStatusLoaded, choosenDate])
 
   const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
   function scrollShadowChange(visibility: string) {
@@ -51,7 +57,7 @@ function CalenderPage() {
         <Calender
           value={choosenDate}
           onChange={changeChooseDate}
-          statesByMonth={monthlyStatus}
+          colorByDate={colorByDate}
           dateRange={{
             startDate: { year: 2020, month: 1, date: 1 },
             endDate: { year: 2035, month: 1, date: 1 }

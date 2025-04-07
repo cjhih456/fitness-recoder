@@ -7,7 +7,7 @@ export default function DateGrid({
   titleRow,
   ...props
 }: DateGridProps) {
-  const { value } = props
+  const { value, colorByDate } = props
   const { year, month } = value
   const daysInMonth = DateService.getDaysInMonth(year, month)
   const startTemp = DateService.getFirstDayOfMonth(year, month)
@@ -26,7 +26,7 @@ export default function DateGrid({
         return <DateButton
           key={`date-btn-${i}`}
           {...props}
-          statesByDate={props.statesByMonth ? props.statesByMonth[buttonDate.date] : []}
+          color={colorByDate ? colorByDate[i] : undefined}
           display={buttonDate}
         />
       }
