@@ -10,7 +10,7 @@ import HeaderMenuItem from './HeaderMenuItem';
 export default function HeaderMenu() {
 
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme(true)
 
   const [headerMenu] = useAtom(headerMenuAtom)
 

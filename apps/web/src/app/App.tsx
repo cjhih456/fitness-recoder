@@ -1,7 +1,6 @@
 import { HeroUIProvider, Spinner } from '@heroui/react'
 import { Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useTheme from '@shared/hooks/useTheme'
 import FitnessDataModal from '@widgets/FitnessDataModal'
 import AlertModal from '@widgets/alert'
 import BottomNavi from '@widgets/bottomNavi'
@@ -10,7 +9,6 @@ import CRouter from './routes/CRoutes'
 
 function App() {
   const navigate = useNavigate()
-  useTheme(true)
   return <main className={'app h-screen max-h-full text-default-700'}>
     <HeroUIProvider navigate={navigate} className="app-root pb-12">
       <Suspense fallback={<div className="w-screen h-screen flex items-center justify-center"><Spinner /></div>}>
