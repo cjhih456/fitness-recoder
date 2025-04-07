@@ -14,7 +14,9 @@ const meta = {
   },
   argTypes: {
     dateRange: {
-      control: 'range'
+      control: {
+        type: 'object',
+      }
     },
     value: {
       control: 'text'
@@ -22,6 +24,10 @@ const meta = {
   },
   args: {
     value: todayDateValue,
+    dateRange: {
+      startDate: { ...todayDateValue, date: todayDateValue.date - 1 },
+      endDate: { ...todayDateValue, date: todayDateValue.date + 1 }
+    },
     onChange: fn()
   } as Partial<CalenderProps>,
   component: Calender

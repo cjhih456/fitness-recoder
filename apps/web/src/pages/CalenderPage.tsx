@@ -34,13 +34,11 @@ function CalenderPage() {
   }
 
   const { data: monthlyStatusLoaded } = useGetScheduleStatusByMonth(year, month)
-  const colorByDate = useMemo(() =>
-    monthlyStatusLoaded?.getScheduleStatusByMonth?.map((v, i) =>
-      colorByScheduleType(DateService.isEqual(choosenDate, {
-        ...choosenDate,
-        date: i + 1
-      }), v)
-    ), [monthlyStatusLoaded, choosenDate])
+  const colorByDate = useMemo(
+    () =>
+      monthlyStatusLoaded?.getScheduleStatusByMonth?.map(colorByScheduleType),
+    [monthlyStatusLoaded]
+  )
 
   const [scrollShadow, setScrollShadow] = useState<'bottom' | 'none'>('bottom')
   function scrollShadowChange(visibility: string) {

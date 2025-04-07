@@ -16,6 +16,7 @@ export interface DateCalenderStates {
 export interface DateButtonProps extends CalenderBaseProps {
   display: DateValue
   color?: string
+  isSelected?: boolean
 }
 
 export interface DateGridProps extends CalenderBaseProps, DateCalenderStates {

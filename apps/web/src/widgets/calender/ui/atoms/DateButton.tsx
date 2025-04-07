@@ -6,6 +6,7 @@ export default function DateButton({
   display,
   dateRange,
   onChange,
+  isSelected,
   color
 }: DateButtonProps) {
   const inRange = DateService.isDateInRange(display, dateRange)
@@ -13,7 +14,7 @@ export default function DateButton({
     isDisabled={!inRange}
     variant='bordered'
     onPress={() => onChange(display)}
-    className={['flex-1 px-0 min-w-[40px]', color].join(' ')}
+    className={['flex-1 px-0 min-w-[40px]', isSelected ? 'bg-primary' : color].join(' ')}
     radius='full'
   >
     {display.date}

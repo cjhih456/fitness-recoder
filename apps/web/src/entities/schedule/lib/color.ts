@@ -1,8 +1,7 @@
 import type { Schedule } from 'fitness-struct'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 
-export const colorByScheduleType = (isSelected: boolean, type: Schedule.IType[]) => {
-  if (isSelected) return 'bg-primary'
+export const colorByScheduleType = (type: Schedule.IType[]) => {
   if (type && type.length) {
     switch (type[0]) {
       case ScheduleType.BREAK:
