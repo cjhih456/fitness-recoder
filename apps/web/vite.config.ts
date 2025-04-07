@@ -52,7 +52,7 @@ export default defineConfig(({ mode, isPreview }) => {
       }),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',
-        outputPath: './src/i18n',
+        outputPath: './src/shared/config/i18n',
         defaultNS: 'common',
         useDts: true,
         langs: ['en', 'ko']

@@ -6,9 +6,9 @@ import { I18nextProvider } from 'react-i18next'
 import { BrowserRouter } from 'react-router-dom'
 import apolloClient from '@hooks/apollo/lib/apolloClient.ts'
 import firebase from '@service/firebase'
+import i18n from '@shared/config/i18n/index.ts'
 import { baseURL } from '@shared/lib/utils/index.ts'
 import App from './App.tsx'
-import i18n from './i18n'
 import Worker from './worker.ts'
 
 firebase()

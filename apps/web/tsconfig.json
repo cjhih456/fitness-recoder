@@ -33,7 +33,6 @@
       "@ui/*": ["./src/components/ui/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@layout/*": ["./src/layout/*"],
       "@pages/*": ["./src/pages/*"],
       "@service/*": ["./src/service/*"],
       "@shared/*": ["./src/shared/*"]

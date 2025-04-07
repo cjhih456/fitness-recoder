@@ -5,8 +5,8 @@ import FitnessDataModal from '@globalUi/FitnessDataModal'
 import BottomNavi from '@shared/hooks/bottomNavi'
 import useTheme from '@shared/hooks/useTheme'
 import AlertModal from '@shared/ui/Alert'
-import CRouter from './CRoutes'
 import DefaultLayout from './layout/DefaultLayout'
+import CRouter from './routes/CRoutes'
 
 function App() {
   const navigate = useNavigate()
