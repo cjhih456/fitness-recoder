@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
-import i18n from '@fitness/web/src/i18n'
+import i18n from '@fitness/web/src/shared/config/i18n'
 import { HeroUIProvider } from '@heroui/react'
 import { I18nextProvider } from 'react-i18next'
-import AllMockedProvider from '@fitness/web/src/service/GqlStore/AllMockedProvider'
-import apolloCache from '@fitness/web/src/hooks/apollo/lib/apolloCache'
+import AllMockedProvider from '@fitness/web/src/shared/test/AllMockedProvider'
+import apolloCache from '@fitness/web/src/shared/lib/apollo/apolloCache'
 import { StoryFn } from '@storybook/react'
 
 type MainDecoratorStory = StoryFn<any>;

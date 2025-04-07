@@ -3,7 +3,7 @@ import type { MockedResponse } from '@apollo/client/testing';
 import type { ReactNode } from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 
-const list = import.meta.glob(['../../hooks/apollo/**/*.ts'], { eager: true })
+const list = import.meta.glob(['../../entities/**/*.ts'], { eager: true })
 
 export default function AllMockedProvider({ children, cache }: { children: ReactNode, cache: InMemoryCache }) {
   const mocks: MockedResponse[] = []
