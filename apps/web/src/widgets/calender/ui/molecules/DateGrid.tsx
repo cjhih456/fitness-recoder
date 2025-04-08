@@ -1,6 +1,6 @@
 import type { DateGridProps } from '../types';
+import { DateService } from '@shared/lib/dateService';
 import StateRender from '@shared/ui/StateRender';
-import DateService from '../../model/DateService';
 import DateButton from '../atoms/DateButton';
 
 export default function DateGrid({

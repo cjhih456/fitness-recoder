@@ -1,11 +1,11 @@
-import type { DateValue } from '../../types';
-import type { CalenderProps, CalendarMode } from '../types';
-import { useState } from 'react';
-import StateRender from '@shared/ui/StateRender';
-import DateService from '../../model/DateService';
-import DateView from '../organisms/DateView';
-import MonthView from '../organisms/MonthView';
-import YearView from '../organisms/YearView';
+import type { CalenderProps, CalendarMode } from '../types'
+import type { DateValue } from '@shared/lib/dateService'
+import { useState } from 'react'
+import { DateService } from '@shared/lib/dateService'
+import StateRender from '@shared/ui/StateRender'
+import DateView from '../organisms/DateView'
+import MonthView from '../organisms/MonthView'
+import YearView from '../organisms/YearView'
 
 export default function Calender(props: CalenderProps) {
   const { onChange, dateRange, defaultMode } = props

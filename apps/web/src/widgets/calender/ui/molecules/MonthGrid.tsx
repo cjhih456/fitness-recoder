@@ -1,5 +1,5 @@
-import type { DateValue } from '../../types'
 import type { MonthGridProps } from '../types'
+import type { DateValue } from '@shared/lib/dateService'
 import MonthButton from '../atoms/MonthButton'
 
 export default function MonthGrid({

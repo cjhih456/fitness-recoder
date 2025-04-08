@@ -1,4 +1,4 @@
-import type { DateValue, DateRange } from '../types';
+import type { DateValue, DateRange } from '@shared/lib/dateService'
 import type { ReactNode } from 'react';
 
 export type CalendarMode = 'date' | 'month' | 'year';

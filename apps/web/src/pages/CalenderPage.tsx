@@ -1,4 +1,4 @@
-import type { DateValue } from '@widgets/calender';
+import type { DateValue } from '@shared/lib/dateService';
 import { ScrollShadow } from '@heroui/react'
 import { Suspense, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,8 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
 import ScheduleList from '@entities/schedule/ui/ScheduleList';
+import { DateService } from '@shared/lib/dateService';
 import { useBottomNavi } from '@widgets/bottomNavi';
-import { DateService, default as Calender } from '@widgets/calender';
+import { default as Calender } from '@widgets/calender';
 import { useHeaderHandler } from '@widgets/header';
 
 function CalenderPage() {

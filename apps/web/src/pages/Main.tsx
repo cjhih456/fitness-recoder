@@ -6,10 +6,10 @@ import { useGetScheduleByDate } from '@entities/schedule/api'
 import { useScheduleActions } from '@entities/schedule/hooks'
 import ScheduleDisplay from '@entities/schedule/ui/ScheduleDisplay'
 import usePageTracker from '@shared/hooks/usePageTracker'
+import { DateService } from '@shared/lib/dateService'
 import MenuableAccordion from '@shared/ui/MenuableAccordion'
 import StateRender from '@shared/ui/StateRender'
 import { useBottomNavi } from '@widgets/bottomNavi'
-import { DateService } from '@widgets/calender'
 import { useHeaderHandler } from '@widgets/header'
 
 export default function Main() {

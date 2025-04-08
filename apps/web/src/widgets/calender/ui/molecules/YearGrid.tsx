@@ -1,5 +1,5 @@
-import type { DateValue } from '../../types'
 import type { YearCalenderProps } from '../types'
+import type { DateValue } from '@shared/lib/dateService'
 import YearButton from '../atoms/YearButton'
 
 export default function YeerGrid(props: YearCalenderProps) {

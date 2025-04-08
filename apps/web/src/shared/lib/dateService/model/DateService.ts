@@ -1,5 +1,4 @@
-import type { DateRange, DateValue } from '../types'
-import type { CalendarMode } from '../ui/types'
+import type { DateRange, DateValue, DateCheckRange } from '@shared/lib/dateService'
 
 export default class DateService {
   static takeTodayDateValue(time: Date = new Date()): DateValue {
@@ -129,7 +128,7 @@ export default class DateService {
     return startNum <= targetNum && targetNum <= endNum;
   }
 
-  static isEqual(a: DateValue, b: DateValue, mode: CalendarMode = 'date') {
+  static isEqual(a: DateValue, b: DateValue, mode: DateCheckRange = 'date') {
     switch (mode) {
       case 'year':
         return a.year === b.year

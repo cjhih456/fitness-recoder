@@ -1,6 +1,6 @@
 import type { DateButtonProps } from '../types';
 import { Button } from '@heroui/react';
-import { DateService } from '@widgets/calender';
+import { DateService } from '@shared/lib/dateService';
 
 export default function DateButton({
   display,

@@ -8,3 +8,5 @@ export interface DateRange {
   startDate: DateValue
   endDate: DateValue
 }
+
+export type DateCheckRange = 'date' | 'month' | 'year';

@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useDeleteExercisePreset } from '@entities/exercisePreset/api'
 import { useCloneScheduleFromPreset } from '@entities/schedule/api'
 import { useScheduleActions } from '@entities/schedule/hooks'
-import { DateService } from '@widgets/calender'
+import { DateService } from '@shared/lib/dateService'
 
 export default function usePresetActions() {
   const { gotoScheduleDetail } = useScheduleActions()
