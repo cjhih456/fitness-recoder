@@ -1,3 +1,4 @@
+import type { UserConfig } from 'vite';
 import fs from 'fs'
 import GraphqlServer from '@fitness/vite-plugin-graphql-server'
 import react from '@vitejs/plugin-react-swc'
@@ -6,9 +7,8 @@ import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 import Inspect from 'vite-plugin-inspect'
 import tsConfigPaths from 'vite-tsconfig-paths'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
-
 // https://vitejs.dev/config/
-export default defineConfig(({ mode, isPreview }) => {
+export default defineConfig(({ mode, isPreview }): UserConfig => {
   return {
     server: mode === 'development' ? {
       headers: {
