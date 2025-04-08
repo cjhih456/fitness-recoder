@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import UpdateSetGql from './graphql/mutation/UpdateSetGql';
-import { SetMockData } from '.';
+import { SetMockData } from './set.mockData';
 
 const UpdateSetMock: MockedResponse<UpdateSetResponse, UpdateSetVariable> = {
   request: {

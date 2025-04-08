@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
+import { ExercisePresetMockData } from './exercisePreset.mockData'
 import CopyExercisePresetFromScheduleGql from './graphql/mutation/CopyExercisePresetFromScheduleGql';
-import { ExercisePresetMockData } from '.'
 
 const CopyExercisePresetFromScheduleMock: MockedResponse<
   CopyExercisePresetFromScheduleResponse,

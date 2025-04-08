@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { SetMockData } from '@entities/set/api';
 import GetSetListByExerciseIdGql from '@entities/set/api/graphql/query/GetSetListByExerciseIdGql';
+import { SetMockData } from '@entities/set/api/set.mockData';
 
 const GetSetListByExerciseIdMock: MockedResponse<GetSetListByExerciseIdResponse, GetSetListByExerciseIdVariable> = {
   request: {

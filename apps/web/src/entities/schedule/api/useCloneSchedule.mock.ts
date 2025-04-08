@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Schedule } from 'fitness-struct'
 import CloneSchedule from './graphql/mutation/CloneScheduleGql';
-import { ScheduleMockData } from '.'
+import { ScheduleMockData } from './schedule.mockData';
 
 const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVariable> = {
   request: {

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { ScheduleMockData } from '@entities/schedule/api';
 import DeleteScheduleGql from '@entities/schedule/api/graphql/mutation/DeleteScheduleGql';
+import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';
 
 const DeleteScheduleMock: MockedResponse<DeleteScheduleResponse, DeleteScheduleVariable> = {
   request: {
