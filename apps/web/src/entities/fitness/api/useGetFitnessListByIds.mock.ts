@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
+import { FitnessMockData } from './fitness.mockData'
 import GetFitnessLisyByIds from './graphql/query/GetFitnessLisyByIds';
-import { FitnessMockData } from '.'
 
 const useGetFitnessListByIdsMock: MockedResponse<
   GetFitnessListByIdsResponse,
