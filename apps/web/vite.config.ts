@@ -1,3 +1,4 @@
+import type { UserConfig } from 'vite';
 import fs from 'fs'
 import GraphqlServer from '@fitness/vite-plugin-graphql-server'
 import react from '@vitejs/plugin-react-swc'
@@ -6,9 +7,8 @@ import LanguagePackExporter from 'vite-plugin-i18next-language-pack-loader'
 import Inspect from 'vite-plugin-inspect'
 import tsConfigPaths from 'vite-tsconfig-paths'
 import makeManifest from './vitePlugin/Manifest/MakeManifest'
-
 // https://vitejs.dev/config/
-export default defineConfig(({ mode, isPreview }) => {
+export default defineConfig(({ mode, isPreview }): UserConfig => {
   return {
     server: mode === 'development' ? {
       headers: {
@@ -44,15 +44,15 @@ export default defineConfig(({ mode, isPreview }) => {
           '../../packages/graphql-worker/src/graphql/Fitness/query.gql',
           '../../packages/graphql-worker/src/graphql/Schedule/query.gql',
           '../../packages/graphql-worker/src/graphql/Sets/query.gql',
-          ['../../packages/graphql-worker/src/graphql/Fitness/query.gql', '../../packages/graphql-worker/src/graphql/Exercise/query.gql'],
-          ['../../packages/graphql-worker/src/graphql/Fitness/query.gql', '../../packages/graphql-worker/src/graphql/Exercise/query.gql', '../../packages/graphql-worker/src/graphql/ExercisePreset/query.gql']
+          '../../packages/graphql-worker/src/graphql/Exercise/query.gql',
+          '../../packages/graphql-worker/src/graphql/ExercisePreset/query.gql'
         ],
         path: '/__graphql',
-        autoGenTypePath: './src/hooks/apollo/lib/possibleTypes.json'
+        autoGenTypePath: './src/shared/lib/apollo/possibleTypes.json'
       }),
       LanguagePackExporter({
         fileName: './LanguagePack.xlsx',
-        outputPath: './src/i18n',
+        outputPath: './src/shared/config/i18n',
         defaultNS: 'common',
         useDts: true,
         langs: ['en', 'ko']

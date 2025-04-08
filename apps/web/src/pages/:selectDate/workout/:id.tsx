@@ -4,15 +4,16 @@ import { useAnimationFrame } from 'framer-motion'
 import { startTransition, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useAlert } from '@globalUi/Alert';
-import { BottomNaviArea } from '@globalUi/BottomNavi'
-import { useHeaderHandler } from '@globalUi/Header'
-import { useGetScheduleById, useUpdateSchedule } from '@hooks/apollo/Schedule'
-import usePageTracker from '@hooks/usePageTracker'
-import { useScheduleHeaderMenu } from '@hooks/useScheduleMenu'
-import ExerciseDataList from '@ui/ExerciseData/ExerciseDataList'
-import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog'
-import { dayjs, ScheduleType } from '@utils'
+import ExerciseDataList from '@entities/exercise/ui/ExerciseDataList'
+import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog'
+import { useGetScheduleById, useUpdateSchedule } from '@entities/schedule/api'
+import { useScheduleHeaderMenu } from '@entities/schedule/hooks'
+import { ScheduleType } from '@entities/schedule/model/ScheduleType'
+import usePageTracker from '@shared/hooks/usePageTracker'
+import { dayjs } from '@shared/lib/utils'
+import { useAlert } from '@widgets/alert';
+import { BottomNaviArea } from '@widgets/bottomNavi'
+import { useHeaderHandler } from '@widgets/header'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])

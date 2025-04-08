@@ -1,13 +1,13 @@
 import { Button, ScrollShadow } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useBottomNavi } from '@globalUi/BottomNavi';
-import { useHeaderHandler } from '@globalUi/Header';
-import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@hooks/apollo/ExercisePreset';
-import useSpinner from '@hooks/useSpinner';
-import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion';
-import PresetDisplay from '@ui/Preset/PresetDisplay';
-import PresetNameInputDialog from '@ui/Preset/PresetNameInputDialog';
+import { useCreateExercisePreset, useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/api';
+import PresetDisplay from '@entities/exercisePreset/ui/PresetDisplay';
+import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog';
+import useSpinner from '@shared/hooks/useSpinner';
+import MenuableAccordion from '@shared/ui/MenuableAccordion';
+import { useBottomNavi } from '@widgets/bottomNavi';
+import { useHeaderHandler } from '@widgets/header';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { useBottomNavi } from '@globalUi/BottomNavi'
-import { useHeaderHandler } from '@globalUi/Header'
-import FitnessListSearch from '@ui/Fitness/FitnessListSearch'
+import FitnessListSearch from '@entities/fitness/ui/FitnessListSearch'
+import { useBottomNavi } from '@widgets/bottomNavi'
+import { useHeaderHandler } from '@widgets/header'
 function FitnessList() {
   const { t } = useTranslation('title')
   useBottomNavi()

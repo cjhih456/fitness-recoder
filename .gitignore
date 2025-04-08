@@ -31,13 +31,12 @@ dist-ssr
 apps/web/public/manifest.webmanifest
 
 #graphql PossibleType
-apps/web/src/hooks/apollo/lib/possibleTypes.json
-
+apps/web/src/shared/lib/apollo/possibleTypes.json
 
 # ssl files
 apps/web/ssl/server.crt
 apps/web/ssl/server.key
 
 # i18n generated files
-apps/web/src/i18n/**/*.json
-apps/web/src/i18n/i18next.d.ts
+apps/web/src/shared/config/i18n/**/*.json
+apps/web/src/shared/config/i18n/i18next.d.ts

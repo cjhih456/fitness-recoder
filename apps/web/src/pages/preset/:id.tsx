@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useHeaderHandler, useHeaderMenuHandler } from '@globalUi/Header'
-import { useGetExercisePresetWithListById } from '@hooks/apollo/ExercisePreset'
-import useUpdateExerciseListByExercisePreset from '@hooks/apollo/mixed/useUpdateExerciseListByExercisePreset'
-import usePresetMenu from '@hooks/usePresetMenu/usePresetMenu'
-import FitnessListEditor from '@ui/Fitness/FitnessListEditor'
+import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
+import { usePresetMenu } from '@entities/exercisePreset/hooks'
+import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
+import { useUpdateExerciseListByExercisePreset } from '@features/presetManagement/api'
+import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
 
 export default function PresetDetailPage() {
   const params = useParams()

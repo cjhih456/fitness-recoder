@@ -2,15 +2,15 @@ import { Button, ScrollShadow } from '@heroui/react'
 import { Suspense, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import DateService from '@entities/Calender/model/DateService'
-import { useBottomNavi } from '@globalUi/BottomNavi'
-import { useHeaderHandler } from '@globalUi/Header'
-import { useGetScheduleByDate } from '@hooks/apollo/Schedule'
-import usePageTracker from '@hooks/usePageTracker'
-import { useScheduleActions } from '@hooks/useScheduleMenu'
-import MenuableAccordion from '@ui/CustomComponent/MenuableAccordion'
-import ScheduleDisplay from '@ui/Schedule/ScheduleDisplay'
-import StateRender from '@utils/StateRender'
+import { useGetScheduleByDate } from '@entities/schedule/api'
+import { useScheduleActions } from '@entities/schedule/hooks'
+import ScheduleDisplay from '@entities/schedule/ui/ScheduleDisplay'
+import usePageTracker from '@shared/hooks/usePageTracker'
+import { DateService } from '@shared/lib/dateService'
+import MenuableAccordion from '@shared/ui/MenuableAccordion'
+import StateRender from '@shared/ui/StateRender'
+import { useBottomNavi } from '@widgets/bottomNavi'
+import { useHeaderHandler } from '@widgets/header'
 
 export default function Main() {
   useBottomNavi()
@@ -49,7 +49,7 @@ export default function Main() {
     <StateRender.Boolean
       state={Boolean(scheduleList.length)}
       render={{
-        false: [
+        false: () => [
           <div className="text-center" key="empty-schedule-desc">
             <p>{t('empty.schedule.l1')}</p>
             <p>{t('empty.schedule.l2')}</p>
@@ -59,7 +59,7 @@ export default function Main() {
             <Button onPress={gotoPresetPage}>{t('empty.schedule.actionBtn.checkPreset')}</Button>
           </div>
         ],
-        true: <MenuableAccordion.GroupProvider>
+        true: () => <MenuableAccordion.GroupProvider>
           <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
             {scheduleList.map((schedule, idx) => {
               const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')

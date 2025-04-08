@@ -24,18 +24,12 @@
     "verbatimModuleSyntax": true,
 
     "paths": {
-      "@graphQuery/*": ["./src/graphQuery/*"],
-      "@utils": ["./src/components/utils"],
-      "@utils/*": ["./src/components/utils/*"],
-      "@provider/*": ["./src/components/provider/*"],
       "@entities/*": ["./src/entities/*"],
-      "@globalUi/*": ["./src/components/globalUi/*"],
-      "@ui/*": ["./src/components/ui/*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@layout/*": ["./src/layout/*"],
+      "@features/*": ["./src/features/*"],
+      "@widgets/*": ["./src/widgets/*"],
       "@pages/*": ["./src/pages/*"],
-      "@service/*": ["./src/service/*"]
+      "@service/*": ["./src/service/*"],
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": ["vite.config.ts", "vitePlugin", "./types/**/*", "./src/**/*"],

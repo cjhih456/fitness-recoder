@@ -1,18 +1,22 @@
 import React, { Suspense } from 'react'
-import i18n from '@fitness/web/src/i18n'
+import i18n from '@fitness/web/src/shared/config/i18n'
 import { HeroUIProvider } from '@heroui/react'
 import { I18nextProvider } from 'react-i18next'
-import AllMockedProvider from '@fitness/web/src/service/GqlStore/AllMockedProvider'
-import apolloCache from '@fitness/web/src/hooks/apollo/lib/apolloCache'
+import AllMockedProvider from '@fitness/web/src/shared/test/AllMockedProvider'
+import getApolloCache from '@fitness/web/src/shared/lib/apollo/apolloCache'
 import { StoryFn } from '@storybook/react'
-
+import { getFragmentFiles } from '@fitness/web/src/app/lib/getFragmentFiles'
+import { getMockQueryFiles } from '@fitness/web/src/app/lib/getMockQueryFiles'
 type MainDecoratorStory = StoryFn<any>;
 
+const fragmentList = getFragmentFiles()
+const cache = getApolloCache({ fragmentList })
+const mockFiles = getMockQueryFiles(cache)
 const MainDecorator: MainDecoratorStory = (Story) => {
   return <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <HeroUIProvider>
-        <AllMockedProvider cache={apolloCache}>
+        <AllMockedProvider cache={cache} mocks={mockFiles}>
           <div className="dark bg-background text-default-700 storybook-root-path w-[640px]" style={{ padding: '2rem' }}>
             <Suspense>
               <Story />
