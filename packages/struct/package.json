@@ -1,6 +1,6 @@
 {
   "name": "@types/fitness-struct",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.cjs.js",
@@ -12,7 +12,9 @@
     "clean": "rm -rf dist .turbo",
     "lint": "eslint . --report-unused-disable-directives"
   },
-  "dependencies": {},
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
   "tsup": {
     "entry": [
       "index.ts",

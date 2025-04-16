@@ -1,29 +1,30 @@
-import type { Exercise } from './exercise';
+import { z } from 'zod';
+import { IExerciesSchema } from './exercise';
 
+export const IScheduleTypeSchema = z.enum(['BREAK', 'SCHEDULED', 'STARTED', 'PAUSED', 'FINISH'])
+
+export const IScheduleSchema = z.object({
+  id: z.number(),
+  year: z.number(),
+  month: z.number(),
+  date: z.number(),
+  type: IScheduleTypeSchema,
+  beforeTime: z.number(),
+  breakTime: z.number(),
+  workoutTimes: z.number(),
+})
+
+export const IScheduleCreateSchema = IScheduleSchema.omit({ id: true })
+
+export const IScheduleWithExerciseListSchema = IScheduleSchema.extend({
+  exerciseList: z.array(IExerciesSchema),
+})
 export declare namespace Schedule {
-  type IType = 'BREAK' |
-    'SCHEDULED' |
-    'STARTED' |
-    'PAUSED' |
-    'FINISH'
+  type IType = z.infer<typeof IScheduleTypeSchema>
 
-  interface Data {
-    start: number
-    breakTime: number
-    workoutTimes: number
-    type: IType
-    /** ExerciseData key */
-    exerciseList?: Exercise.Data[]
-  }
+  type CreateType = z.infer<typeof IScheduleCreateSchema>
 
-  interface ICreate extends Data {
-    year: number
-    month: number
-    date: number
-    beforeTime: number
-  }
+  type Data = z.infer<typeof IScheduleSchema>
 
-  interface Schedule extends ICreate {
-    id: number
-  }
+  type WithExerciseList = z.infer<typeof IScheduleWithExerciseListSchema>
 }
