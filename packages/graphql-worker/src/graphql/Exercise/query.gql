@@ -1,18 +1,18 @@
 interface BaseExercise{
   id: Int!
-  exercise: Int!
+  fitnessId: Int!
   deps: Int
 }
 
 type Exercise implements BaseExercise {
   id: Int!
-  exercise: Int!
+  fitnessId: Int!
   deps: Int
 }
 
 type ExerciseWithFitness implements BaseExercise {
   id: Int!
-  exercise: Int!
+  fitnessId: Int!
   deps: Int
   fitness: Fitness
 }
@@ -43,16 +43,16 @@ type Query {
 
 input CreateExerciseByScheduleInput {
   scheduleId: Int!
-  exerciseId: [Int!]
+  fitnessIds: [Int!]
 }
 input CreateExerciseByExercisePresetInput {
   exercisePresetId: Int!
-  exerciseId: [Int!]
+  fitnessIds: [Int!]
 }
 
 input UpdateExerciseInput {
-  id: String!
-  exerciseId: Int!
+  id: Int!
+  fitnessId: Int!
 }
 
 type Mutation {

@@ -1,156 +1,83 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import type { IResolvers } from '@graphql-tools/utils';
-import type { ExercisePreset, Schedule } from 'fitness-struct';
-import { cloneExerciseList, getExerciseListByExercisePresetIdTemp, getExerciseListByScheduleIdTemp } from '../Exercise/resolvers';
+import type { ExercisePreset } from 'fitness-struct';
+import {
+  getExerciseByExercisePresetId
+} from '../Exercise/repository';
+import {
+  getExercisePresetWithListById,
+  getExercisePresetWithListByIds,
+  getExercisePresetWithListByOffset,
+  createExercisePreset,
+  updateExercisePreset,
+  deleteExercisePreset,
+} from './repository';
+import {
+  copyExercisePresetFromSchedule
+} from './service';
 
-export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
-  Query: {
-    async getExercisePresetWithListById(_source, { id }, context) {
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
-        context.client,
-        'select',
-        'select * from exercisePreset where id = ?',
-        [id]
-      )
-      if (!exercisePreset) return null
-      exercisePreset.exerciseList = await getExerciseListByExercisePresetIdTemp(
-        dbTransitionBus,
-        context.client,
-        exercisePreset.id
-      )
-      return exercisePreset
-    },
-    async getExercisePresetWithListByIds(_source, { ids }, { client }) {
-      const temp = new Array(ids.length).fill('?').join(', ')
-      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
-        client,
-        'selects',
-        `select * from exercisePreset where id in (${temp})`,
-        ids
-      )
-      if (!exercisePresetList) return []
-      await Promise.all(exercisePresetList.map(async (obj) => {
-        return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
-          dbTransitionBus,
-          client,
-          obj.id
-        )
-      }))
-      return exercisePresetList
-    },
-    async getExercisePresetWithListByOffset(_source, { offset = 0, size = 10 }, context) {
-      const exercisePresetList = await dbTransitionBus?.sendTransaction<ExercisePreset.PresetWithExerciseList>(
-        context.client,
-        'selects',
-        'select * from exercisePreset order by id desc limit ?,?',
-        [offset, size]
-      )
-      if (!exercisePresetList) return []
-      await Promise.all(exercisePresetList.map(async (obj) => {
-        return obj.exerciseList = await getExerciseListByExercisePresetIdTemp(
-          dbTransitionBus,
-          context.client,
-          obj.id
-        )
-      }))
-      return exercisePresetList
-    },
-  },
-  Mutation: {
-    async createExercisePreset(_source, { exercisePreset }, context) {
-      const createdResult = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
-        context.client,
-        'insert',
-        'insert into exercisePreset (name, deps) values (?, 0)',
-        [
-          exercisePreset.name
-        ],
-      )
-      return createdResult ? createdResult[0] : null
-    },
-    async updateExercisePreset(_source, { exercisePreset }, context) {
-      const updatedResult = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
-        context.client,
-        'update',
-        'update exercisePreset set name=?, deps=? where id=?',
-        [
-          exercisePreset.name,
-          exercisePreset.deps,
-          exercisePreset.id
-        ]
-      )
-      return updatedResult ? updatedResult[0] : null
-    },
-    async deleteExercisePreset(_source, { id }, context) {
-      const relations = await dbTransitionBus?.sendTransaction<{ exerciseId: number }>(
-        context.client,
-        'selects',
-        'select exerciseId from exercisePreset_exercise where exercisePresetId=?',
-        [id]
-      ) || []
-      const keyList = relations.map(v => v.exerciseId).join(',')
-      // delete Sets
-      await dbTransitionBus?.sendTransaction(
-        context.client,
-        'delete',
-        `delete from sets where exerciseId in (${keyList})`,
-        relations.map(v => v.exerciseId)
-      )
-      // delete exercisePreset_exercise
-      await dbTransitionBus?.sendTransaction(
-        context.client,
-        'delete',
-        'delete from exercisePreset_exercise where exercisePresetId=?',
-        [id]
-      )
-      // delete exercises
-      await dbTransitionBus?.sendTransaction(
-        context.client,
-        'delete',
-        `delete from exercise where id in (${keyList})`,
-        relations.map(v => v.exerciseId)
-      )
-      await dbTransitionBus?.sendTransaction(
-        context.client,
-        'delete',
-        'delete from exercisePreset where id=?',
-        [id]
-      )
-      return `delete - exercisePreset - ${id}`
-    },
-    async copyExercisePresetFromSchedule(_source, { scheduleId, name }, context) {
-      const schedule = await dbTransitionBus?.sendTransaction<Schedule.Schedule>(
-        context.client,
-        'select',
-        'select * from schedule where id=?',
-        [scheduleId]
-      )
-      if (!schedule) return null;
+export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => {
+  const getExercisePresetWithListByIdShell: ResponseResolver<{ id: number }, ExercisePreset.WithExerciseList | null> = async (_, { id }, { client }) => {
+    const result = await getExercisePresetWithListById(dbTransitionBus, { client }, { id })
+    if (!result) return null
+    return Object.assign(result, {
+      exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
+    })
+  }
+  const getExercisePresetWithListByIdsShell: ResponseResolver<{ ids: number[] }, ExercisePreset.WithExerciseList[] | null> = async (_, { ids }, { client }) => {
+    const result = await getExercisePresetWithListByIds(dbTransitionBus, { client }, { ids })
+    if (!result) return null
 
-      const exercisePreset = await dbTransitionBus?.sendTransaction<ExercisePreset.Preset>(
-        context.client,
-        'insert',
-        'insert into exercisePreset (name) values (?)',
-        [name]
-      )
-      const exercises = await getExerciseListByScheduleIdTemp(
-        dbTransitionBus,
-        context.client,
-        scheduleId
-      );
-
-      if (exercises && exercises.length > 0 && exercisePreset && exercisePreset[0]) {
-        const newExerciseList = await cloneExerciseList(dbTransitionBus, context.client, exercises)
-        const values = newExerciseList.map(v => [exercisePreset[0].id, v.id])
-        const sqlPattern = Array(values.length).fill('(?,?)').join(',')
-        await dbTransitionBus?.sendTransaction(
-          context.client,
-          'insert',
-          `insert into exercisePreset_exercise (exercisePresetId, exerciseId) values ${sqlPattern}`,
-          values.flat()
-        );
-      }
-      return exercisePreset ? exercisePreset[0] : null
+    return await Promise.all(result.map(async (obj) => {
+      return Object.assign(obj, {
+        exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
+      })
+    }))
+  }
+  const getExercisePresetWithListByOffsetShell: ResponseResolver<{ offset: number, size: number }, ExercisePreset.WithExerciseList[] | null> = async (_, { offset, size }, { client }) => {
+    const result = await getExercisePresetWithListByOffset(dbTransitionBus, { client }, { offset, size })
+    if (!result) return null
+    return await Promise.all(result.map(async (obj) => {
+      return Object.assign(obj, {
+        exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
+      })
+    }))
+  }
+  const createExercisePresetShell: ResponseResolver<{ exercisePreset: ExercisePreset.CreateType }, ExercisePreset.WithExerciseList | null> = async (_, { exercisePreset }, { client }) => {
+    const result = await createExercisePreset(dbTransitionBus, { client }, { exercisePreset })
+    if (!result) return null
+    return Object.assign(result, {
+      exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
+    })
+  }
+  const updateExercisePresetShell: ResponseResolver<{ exercisePreset: ExercisePreset.Data }, ExercisePreset.WithExerciseList | null> = async (_, { exercisePreset }, { client }) => {
+    const result = await updateExercisePreset(dbTransitionBus, { client }, { exercisePreset })
+    if (!result) return null
+    return Object.assign(result, {
+      exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
+    })
+  }
+  const deleteExercisePresetShell: ResponseResolver<{ id: number }, string | null> = async (_, { id }, { client }) => {
+    return deleteExercisePreset(dbTransitionBus, { client }, { id })
+  }
+  const copyExercisePresetFromScheduleShell: ResponseResolver<{ scheduleId: number, name: string }, ExercisePreset.WithExerciseList | null> = async (_, { scheduleId, name }, { client }) => {
+    const result = await copyExercisePresetFromSchedule(dbTransitionBus, { client }, { scheduleId, name })
+    if (!result) return null
+    return Object.assign(result, {
+      exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
+    })
+  }
+  return {
+    Query: {
+      getExercisePresetWithListById: getExercisePresetWithListByIdShell,
+      getExercisePresetWithListByIds: getExercisePresetWithListByIdsShell,
+      getExercisePresetWithListByOffset: getExercisePresetWithListByOffsetShell,
+    },
+    Mutation: {
+      createExercisePreset: createExercisePresetShell,
+      updateExercisePreset: updateExercisePresetShell,
+      deleteExercisePreset: deleteExercisePresetShell,
+      copyExercisePresetFromSchedule: copyExercisePresetFromScheduleShell,
     }
   }
-})
+}
