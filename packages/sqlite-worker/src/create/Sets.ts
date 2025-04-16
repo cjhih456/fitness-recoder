@@ -6,7 +6,7 @@ export default function createSetTable(db: Sqlite3) {
 
   db.exec(`CREATE TABLE IF NOT EXISTS sets (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      exerciseId INTEGER REFERENCES exercise(id),
+      exerciseId INTEGER REFERENCES exercise(id) ON DELETE CASCADE,
       repeat INTEGER,
       isDone INTEGER,
       weightUnit TEXT,
@@ -15,4 +15,15 @@ export default function createSetTable(db: Sqlite3) {
     )`)
 }
 
-export function migrate(_db: MigrationQueryBus, _v: Versions) { }
+export function migrate(db: MigrationQueryBus, v: Versions) {
+  switch (v) {
+    case '1.1.0': {
+      const queryList = db.get('1.1.0') || []
+      queryList.push({
+        sql: 'ALTER TABLE sets ADD COLUMN exerciseId INTEGER REFERENCES exercise(id) ON DELETE CASCADE',
+        args: []
+      })
+      db.set('1.1.0', queryList)
+    } break
+  }
+}

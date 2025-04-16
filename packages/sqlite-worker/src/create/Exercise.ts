@@ -6,7 +6,7 @@ export default function create(db: Sqlite3) {
 
   db.exec(`CREATE TABLE IF NOT EXISTS exercise (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      exercise INTEGER,
+      fitnessId INTEGER REFERENCES fitness(id),
       deps INTEGER
     )`)
 }
@@ -20,6 +20,15 @@ export function migrate(bus: MigrationQueryBus, v: Versions) {
         args: []
       })
       bus.set('0.1.0', queryList)
+    } break
+    case '1.1.0': {
+      const queryList = bus.get('1.1.0') || []
+      // TODO: rename exercise to fitnessId
+      queryList.push({
+        sql: 'ALTER TABLE exercise RENAME COLUMN exercise TO fitnessId',
+        args: []
+      })
+      bus.set('1.1.0', queryList)
     } break
   }
 }
