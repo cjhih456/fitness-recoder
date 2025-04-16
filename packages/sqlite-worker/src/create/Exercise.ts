@@ -23,7 +23,6 @@ export function migrate(bus: MigrationQueryBus, v: Versions) {
     } break
     case '1.1.0': {
       const queryList = bus.get('1.1.0') || []
-      // TODO: rename exercise to fitnessId
       queryList.push({
         sql: 'ALTER TABLE exercise RENAME COLUMN exercise TO fitnessId',
         args: []
