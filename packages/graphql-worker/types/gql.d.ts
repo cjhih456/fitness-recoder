@@ -19,3 +19,15 @@ declare module '*.graphql' {
     import('graphql').FragmentDefinitionNode
   >;
 }
+
+declare type ResponseResolver<Args, Return> = import('@graphql-tools/utils').IFieldResolver<any, {
+  client: string
+}, Args, Return | Promise<Return>>
+
+declare type ResponseBuilder<Args, Return> = (
+  dbTransitionBus: import('../src/transaction/MessageTransactionBus').default | undefined,
+  context: {
+    client: string
+  },
+  args: Args
+) => Promise<Return>
