@@ -14,15 +14,11 @@ export default function SetListEditor({
   hasDoneLastSet,
   readonly = false
 }: SetListEditorProps) {
-  const { data, refetch } = useGetSetListByExerciseId(exerciseDataId)
+  const { data } = useGetSetListByExerciseId(exerciseDataId)
   const setsList = data.getSetListByExerciseId
   const [createSet] = useCreateSet()
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
-
-  function reloadSetList() {
-    refetch()
-  }
 
   function appendSet() {
     createSet({
@@ -35,7 +31,7 @@ export default function SetListEditor({
           weight: 10
         }
       }
-    }).then(reloadSetList)
+    })
   }
 
   function checkAllSetDone(id: number, isDone: boolean) {
@@ -58,7 +54,7 @@ export default function SetListEditor({
         hasDoneChange={(v) => { checkAllSetDone(set.id, v) }}
         readonly={readonly}
         onRemoveSet={(id) => {
-          deleteSet({ variables: { id: id } }).then(reloadSetList)
+          deleteSet({ variables: { id: id } })
         }}
       ></SetRow>)}
     </div>

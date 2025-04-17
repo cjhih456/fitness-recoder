@@ -1,6 +1,6 @@
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
-type Sets = import('@fitness/struct').Sets.Sets
+type Sets = import('@fitness/struct').Sets.Set
 type SetsCreateType = import('@fitness/struct').Sets.CreateType
 
 declare type SetsStoreType = Sets & StoreObject
