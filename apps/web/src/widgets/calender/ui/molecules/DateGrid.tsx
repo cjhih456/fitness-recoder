@@ -1,6 +1,6 @@
 import type { DateGridProps } from '../types';
 import { DateService } from '@shared/lib/dateService';
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 import DateButton from '../atoms/DateButton';
 
 export default function DateGrid({
@@ -14,7 +14,7 @@ export default function DateGrid({
 
   return <div className="grid grid-rows-7 grid-cols-7 gap-1 justify-items-stretch min-w-[320px]">
     {titleRow}
-    <StateRender.Boolean
+    <BooleanRender
       state={Boolean(startTemp)}
       render={{
         true: () => <div className={`col-span-${startTemp}`}></div>

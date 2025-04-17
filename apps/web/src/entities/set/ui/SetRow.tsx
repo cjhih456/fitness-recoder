@@ -1,7 +1,7 @@
 import { Button, Checkbox, Input } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { MdClear } from 'react-icons/md'
-import StateRender from '@shared/ui/StateRender'
+import { BooleanRender } from '@shared/ui/StateRender'
 export interface SetRowProps {
   set: SetsStoreType
   index: number
@@ -57,7 +57,7 @@ export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemo
     <Input defaultValue={String(lazyValue?.repeat)} className="w-28" onValueChange={changeRepeat} onBlur={saveChange} isReadOnly={readonly}></Input>
     <Input defaultValue={String(lazyValue?.weight)} className="w-28" onValueChange={changeWeight} onBlur={saveChange} isReadOnly={readonly}></Input>
     <Checkbox defaultSelected={lazyValue?.isDone} classNames={{ wrapper: 'mr-0' }} size='lg' onValueChange={changeIsDone} onBlur={saveChange} isReadOnly={readonly} radius='full'></Checkbox>
-    <StateRender.Boolean
+    <BooleanRender
       state={readonly}
       render={{
         false: () => <Button isIconOnly variant='bordered' radius='full' className="text-default w-6 h-6 min-w-6" onPress={removeSet}>

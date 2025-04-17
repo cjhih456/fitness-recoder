@@ -8,7 +8,7 @@ import ScheduleDisplay from '@entities/schedule/ui/ScheduleDisplay'
 import usePageTracker from '@shared/hooks/usePageTracker'
 import { DateService } from '@shared/lib/dateService'
 import MenuableAccordion from '@shared/ui/MenuableAccordion'
-import StateRender from '@shared/ui/StateRender'
+import { BooleanRender } from '@shared/ui/StateRender'
 import { useBottomNavi } from '@widgets/bottomNavi'
 import { useHeaderHandler } from '@widgets/header'
 
@@ -46,7 +46,7 @@ export default function Main() {
     <h2 className="text-xl font-semibold px-4">
       {t('todaySchedule')}
     </h2>
-    <StateRender.Boolean
+    <BooleanRender
       state={Boolean(scheduleList.length)}
       render={{
         false: () => [

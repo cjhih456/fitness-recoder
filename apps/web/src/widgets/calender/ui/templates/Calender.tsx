@@ -2,7 +2,7 @@ import type { CalenderProps, CalendarMode } from '../types'
 import type { DateValue } from '@shared/lib/dateService'
 import { useState } from 'react'
 import { DateService } from '@shared/lib/dateService'
-import StateRender from '@shared/ui/StateRender'
+import { EnumRender } from '@shared/ui/StateRender'
 import DateView from '../organisms/DateView'
 import MonthView from '../organisms/MonthView'
 import YearView from '../organisms/YearView'
@@ -14,7 +14,7 @@ export default function Calender(props: CalenderProps) {
 
   return (
     <div className="h-min border-medium border-divider p-4 rounded-medium flex flex-col gap-4 transition-size">
-      <StateRender
+      <EnumRender
         state={mode}
         render={{
           year: () => <YearView

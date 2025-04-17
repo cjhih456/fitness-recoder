@@ -1,7 +1,7 @@
 import { Card, CardBody, Chip } from '@heroui/react';
 import { MdCheck } from 'react-icons/md';
 import { useFitnessSimpleFragment } from '@entities/fitness/api';
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 
 export interface FitnessItemProps {
   fitnessId: number
@@ -27,7 +27,7 @@ export default function FitnessItem({
       }}>
         <h3 className="font-semibold">
           <span>{fitness.name}</span>
-          <StateRender.Boolean
+          <BooleanRender
             state={isSelected}
             render={{
               true: () => <span className="inline-block" >

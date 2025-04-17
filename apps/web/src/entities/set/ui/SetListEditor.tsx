@@ -1,6 +1,6 @@
 import { Button } from '@heroui/react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@entities/set/api';
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 import SetRow from './SetRow';
 
 export interface SetListEditorProps {
@@ -62,7 +62,7 @@ export default function SetListEditor({
         }}
       ></SetRow>)}
     </div>
-    <StateRender.Boolean
+    <BooleanRender
       state={readonly}
       render={{
         false: () => <div className="flex flex-row gap-x-2">

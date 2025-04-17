@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next'
 import { MdCalendarToday, MdHome, MdList, MdOutlineDataset } from 'react-icons/md'
 import MenuButton from '@shared/ui/MenuButton'
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 import { bottomNaviAtom } from '../lib/atom';
 import BottomNaviArea from './BottomNaviArea';
 
@@ -10,7 +10,7 @@ const BottomNavi = () => {
   const { t } = useTranslation('bottom')
   const [bottomNaviVisible] = useAtom<boolean>(bottomNaviAtom)
 
-  return <StateRender.Boolean
+  return <BooleanRender
     state={bottomNaviVisible}
     render={{
       true: () => <BottomNaviArea className="flex justify-center gap-x-1">

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGetExerciseFinishHistory } from '@entities/exercise/api'
 import { useFitnessFragment } from '@entities/fitness/api'
-import StateRender from '@shared/ui/StateRender'
+import { BooleanRender } from '@shared/ui/StateRender'
 import DisplayFitnessFinishHistory from './DisplayExerciseFinishHistory'
 import FitnessPreviewVideo from './FitnessPreviewVideo'
 
@@ -40,7 +40,7 @@ export default function FitnessDataModalContent({
     </ModalHeader>
     <ModalBody>
       {/* Preview Video */}
-      <StateRender.Boolean
+      <BooleanRender
         state={Boolean(fitnessVideoId)}
         render={{
           true: () => <div >
@@ -60,7 +60,7 @@ export default function FitnessDataModalContent({
         }}
       />
       {/* Training History - optional */}
-      <StateRender.Boolean
+      <BooleanRender
         state={Boolean(historyData.getExerciseFinishHistory.length)}
         render={{
           true: () => <div className="max-w-full">

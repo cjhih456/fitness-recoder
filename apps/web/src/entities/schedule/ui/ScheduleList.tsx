@@ -5,7 +5,7 @@ import { useGetScheduleByDate } from '@entities/schedule/api';
 import { useScheduleActions } from '@entities/schedule/hooks';
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 import ScheduleDisplay from './ScheduleDisplay';
 
 export interface ScheduleListProps {
@@ -28,7 +28,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
 
   const isBreakday = useMemo(() => scheduleList.getScheduleByDate.some(v => v.type === ScheduleType.BREAK) ?? false, [scheduleList])
 
-  return <StateRender.Boolean
+  return <BooleanRender
     state={isBreakday}
     render={{
       true: () => <div role="breakday-list"></div>,
@@ -53,7 +53,7 @@ export default function ScheduleList({ choosenDate }: ScheduleListProps) {
             return <Suspense key={schedule.id}>
               <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('schedule.row.title', { n: idx + 1 })} >
                 {(id, type) => <div className="grid grid-flow-col auto-cols-auto gap-x-4">
-                  <StateRender.Boolean
+                  <BooleanRender
                     state={type !== 'FINISH'}
                     render={{
                       true: () => <Button key={`${id}-modify`} onPress={() => gotoModifyScheduleAction(id, choosenDate)}>

@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
 import useTheme from '@shared/hooks/useTheme'
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender, EnumRender } from '@shared/ui/StateRender';
 import { headerMenuAtom } from '../lib/atom';
 import HeaderMenuItem from './HeaderMenuItem';
 
@@ -14,7 +14,7 @@ export default function HeaderMenu() {
 
   const [headerMenu] = useAtom(headerMenuAtom)
 
-  return <StateRender.Boolean
+  return <BooleanRender
     state={Boolean(headerMenu.length)}
     render={{
       true: () => <Popover isOpen={isOpen} onOpenChange={(open) => setIsOpen(open)}>
@@ -43,7 +43,7 @@ export default function HeaderMenu() {
         </PopoverContent>
       </Popover>,
       false: () => <Button isIconOnly radius='full' onPress={toggleTheme}>
-        <StateRender
+        <EnumRender
           state={theme}
           render={{
             'dark': () => <MdDarkMode />,
