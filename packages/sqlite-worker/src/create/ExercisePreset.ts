@@ -1,5 +1,6 @@
 import type { MigrationQueryBus } from '..';
 import type Sqlite3 from '../Sqlite3'
+import { isNewVersion } from './Version';
 
 const createExercisePresetExerciseTableSql = `CREATE TABLE IF NOT EXISTS exercisePreset_exercise (
   exercisePresetId INTEGER REFERENCES exercisePreset(id) ON DELETE CASCADE,
@@ -31,30 +32,28 @@ export default function create(db: Sqlite3) {
 }
 
 export function migrate(db: MigrationQueryBus, v: Versions) {
-  switch (v) {
-    case '1.1.0': {
-      const queryList = db.get('1.1.0') || []
-      queryList.push({
-        sql: 'alter table exercisePreset_exercise rename to exercisePreset_exercise_old',
-        args: []
-      })
-      queryList.push({
-        sql: createExercisePresetExerciseTableSql,
-        args: []
-      })
-      queryList.push({
-        sql: 'insert into exercisePreset_exercise (exercisePresetId, exerciseId) select exercisePresetId, exerciseId from exercisePreset_exercise_old',
-        args: []
-      })
-      queryList.push({
-        sql: 'drop table exercisePreset_exercise_old',
-        args: []
-      })
-      queryList.push({
-        sql: deleteTriggerOnExercisePresetExercise,
-        args: []
-      })
-      db.set('1.1.0', queryList)
-    } break
+  if (isNewVersion(v, '1.3.0')) {
+    const queryList = db.get('1.3.0') || []
+    queryList.push({
+      sql: 'alter table exercisePreset_exercise rename to exercisePreset_exercise_old',
+      args: []
+    })
+    queryList.push({
+      sql: createExercisePresetExerciseTableSql,
+      args: []
+    })
+    queryList.push({
+      sql: 'insert into exercisePreset_exercise (exercisePresetId, exerciseId) select exercisePresetId, exerciseId from exercisePreset_exercise_old',
+      args: []
+    })
+    queryList.push({
+      sql: 'drop table exercisePreset_exercise_old',
+      args: []
+    })
+    queryList.push({
+      sql: deleteTriggerOnExercisePresetExercise,
+      args: []
+    })
+    db.set('1.3.0', queryList)
   }
 }
