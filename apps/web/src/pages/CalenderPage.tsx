@@ -7,8 +7,8 @@ import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
 import ScheduleList from '@entities/schedule/ui/ScheduleList';
 import { DateService } from '@shared/lib/dateService';
+import { default as Calender } from '@shared/ui/calender';
 import { useBottomNavi } from '@widgets/bottomNavi';
-import { default as Calender } from '@widgets/calender';
 import { useHeaderHandler } from '@widgets/header';
 
 function CalenderPage() {
