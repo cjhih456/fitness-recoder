@@ -15,7 +15,7 @@ export default function PresetDetailPage() {
   const { data } = useGetExercisePresetWithListById(id)
   const exercisePreset = data.getExercisePresetWithListById
   const exerciseList = exercisePreset.exerciseList ?? []
-  const oldExerciseList = exerciseList.map(v => v.exercise)
+  const oldExerciseList = exerciseList.map(v => v.fitnessId)
 
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
 

@@ -9,13 +9,13 @@ export default function useUpdateExerciseListByExercisePreset() {
     const createNeedExerciseId = [] as number[]
 
     oldExerciseList.forEach((e) => {
-      if (exerciseList.includes(e.exercise)) {
+      if (exerciseList.includes(e.fitnessId)) {
         keepExerciseData.push(e)
       } else {
         removeNeedExerciseData.push(e)
       }
     })
-    const keepExerciseDataExercises = keepExerciseData.map(v => v.exercise)
+    const keepExerciseDataExercises = keepExerciseData.map(v => v.fitnessId)
     exerciseList.forEach((newExerciseId) => {
       if (!keepExerciseDataExercises.includes(newExerciseId)) {
         createNeedExerciseId.push(newExerciseId)

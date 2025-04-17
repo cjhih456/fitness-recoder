@@ -15,17 +15,17 @@ const GetExerciseListByScheduleIdMock: MockedResponse<
         getExerciseListByScheduleId: [
           {
             id: 1,
-            exercise: 1,
             deps: 0,
+            fitness: FitnessMockData[0],
+            fitnessId: FitnessMockData[0].id,
             __typename: 'ExerciseWithFitness',
-            fitness: FitnessMockData[0]
           },
           {
             id: 2,
-            exercise: 2,
             deps: 0,
+            fitness: FitnessMockData[1],
+            fitnessId: FitnessMockData[1].id,
             __typename: 'ExerciseWithFitness',
-            fitness: FitnessMockData[1]
           }
         ]
       }

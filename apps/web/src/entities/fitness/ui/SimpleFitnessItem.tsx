@@ -7,7 +7,7 @@ export interface SimpleFitnessItemProps {
   exerciseData: Exercise.Data
 }
 export default function SimpleFitnessItem({ exerciseData }: SimpleFitnessItemProps) {
-  const fitnessData = useFitnessFragment(exerciseData.exercise)
+  const fitnessData = useFitnessFragment(exerciseData.fitnessId)
   return <div className="flex justify-between items-center">
     <div>{fitnessData.name}</div>
     <div>

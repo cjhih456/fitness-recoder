@@ -16,9 +16,9 @@ const UpdateExerciseListByScheduleIdMock: MockedResponse<
           {
             id: 1,
             deps: 0,
-            exercise: 1,
+            fitness: FitnessMockData[0],
+            fitnessId: FitnessMockData[0].id,
             __typename: 'ExerciseWithFitness',
-            fitness: FitnessMockData[0]
           }
         ]
       }

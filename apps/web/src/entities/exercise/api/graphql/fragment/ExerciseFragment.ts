@@ -4,7 +4,7 @@ const ExerciseFragment = gql`
 fragment ExerciseFragment on BaseExercise {
   id
   deps
-  exercise
+  fitnessId
 }`
 
 export default ExerciseFragment

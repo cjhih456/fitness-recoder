@@ -16,7 +16,7 @@ export default function DisplaySchedule() {
   const { data } = useGetExerciseListByScheduleId(scheduleId)
   const updateExerciseList = useUpdateExerciseListBySchedule()
 
-  const savedExerciseIdxList = data.getExerciseListByScheduleId.map(v => v.exercise)
+  const savedExerciseIdxList = data.getExerciseListByScheduleId.map(v => v.fitnessId)
   function saveSchedule(exerciseIdxList: number[]) {
     updateExerciseList(scheduleId, savedExerciseIdxList || [], exerciseIdxList)
     navigate(-1)

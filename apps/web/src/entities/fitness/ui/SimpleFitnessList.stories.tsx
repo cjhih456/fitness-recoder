@@ -26,11 +26,11 @@ export const Display: Story = {
   args: {
     exerciseDataList: [{
       id: 1,
-      exercise: 1,
+      fitnessId: 1,
       deps: 0
     }, {
       id: 2,
-      exercise: 2,
+      fitnessId: 2,
       deps: 1
     }]
   }
