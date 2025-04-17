@@ -24,8 +24,7 @@ export default function create(db: Sqlite3) {
   db.exec(`CREATE TABLE IF NOT EXISTS exercisePreset (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
-      deps INTEGER,
-      createdAt INTEGER
+      deps INTEGER
     )`)
   db.exec(createExercisePresetExerciseTableSql)
   db.exec(deleteTriggerOnExercisePresetExercise)
