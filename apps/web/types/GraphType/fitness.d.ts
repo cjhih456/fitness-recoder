@@ -1,6 +1,6 @@
-type IFitness = import('fitness-struct').Exercise.IFitness
-type ICategory = import('fitness-struct').Exercise.ICategory
-type IMuscle = import('fitness-struct').Exercise.IMuscle
+type IFitness = import('@fitness/struct').Exercise.IFitness
+type ICategory = import('@fitness/struct').Exercise.ICategory
+type IMuscle = import('@fitness/struct').Exercise.IMuscle
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
 

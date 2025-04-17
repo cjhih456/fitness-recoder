@@ -1,5 +1,5 @@
 {
-  "name": "@types/fitness-struct",
+  "name": "@fitness/struct",
   "version": "0.2.0",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -7,6 +7,9 @@
   "module": "dist/index.js",
   "license": "GPL-3.0-only",
   "private": true,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf dist .turbo",

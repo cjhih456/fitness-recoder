@@ -1,10 +1,10 @@
+import type { Schedule } from '@fitness/struct';
 import type { MenuType } from '@widgets/header';
-import type { Schedule } from 'fitness-struct';
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next';
 import useScheduleActions from './useScheduleActions';
 
-export default function useScheduleMenu(schedule?: Schedule.Schedule): MenuType[] {
+export default function useScheduleMenu(schedule?: Schedule.Data): MenuType[] {
   const { t } = useTranslation(['workout', 'common'])
 
   const {

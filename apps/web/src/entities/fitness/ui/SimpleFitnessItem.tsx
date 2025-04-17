@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import { Suspense } from 'react'
 import { useFitnessFragment } from '@entities/fitness/api';
 import SetState from '@entities/set/ui/SetState'

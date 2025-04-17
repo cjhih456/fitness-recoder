@@ -1,8 +1,8 @@
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
-type Schedule = import('fitness-struct').Schedule.Schedule
-type ScheduleIType = import('fitness-struct').Schedule.IType
-type ScheduleCreate = import('fitness-struct').Schedule.ICreate
+type Schedule = import('@fitness/struct').Schedule.Data
+type ScheduleIType = import('@fitness/struct').Schedule.IType
+type ScheduleCreate = import('@fitness/struct').Schedule.ICreate
 
 declare type ScheduleStoreType = Schedule & StoreObject
 

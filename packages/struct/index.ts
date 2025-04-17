@@ -1,5 +1,6 @@
 export * from './src/exercise'
 export * from './src/exercise-preset'
+export * from './src/fitness'
 export * from './src/measure'
 export * from './src/schedule'
 export * from './src/sets'

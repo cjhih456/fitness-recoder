@@ -1,11 +1,11 @@
-import type { Schedule } from 'fitness-struct';
+import type { Schedule } from '@fitness/struct';
 import { Suspense } from 'react';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import SetListEditor from '@entities/set/ui/SetListEditor';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 export interface ExerciseDataListProps {
-  schedule: Schedule.Schedule
+  schedule: Schedule.Data
   readonly?: boolean
 }
 

@@ -1,4 +1,4 @@
-import type { Schedule } from 'fitness-struct'
+import type { Schedule } from '@fitness/struct'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ import { useAlert } from '@widgets/alert';
 import { useHeaderMenuHandler } from '@widgets/header';
 import useScheduleMenu from './useScheduleMenu';
 
-export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Schedule): [
+export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
   boolean,
   (_v: boolean, _presetName?: string) => Promise<void>
 ] {

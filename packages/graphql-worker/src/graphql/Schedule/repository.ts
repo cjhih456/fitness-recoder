@@ -1,4 +1,4 @@
-import type { Schedule } from 'fitness-struct'
+import type { Schedule } from '@fitness/struct'
 
 export const getScheduleById: ResponseBuilder<{ id: number }, Schedule.Data | null> = async (dbTransitionBus, { client }, { id }) => {
   const schedule = await dbTransitionBus?.sendTransaction<Schedule.Data>(

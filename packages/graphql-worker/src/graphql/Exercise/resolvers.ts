@@ -1,6 +1,6 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
 import type { IResolvers } from '@graphql-tools/utils';
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import {
   getExerciseByIds,
   getExerciseByScheduleId,

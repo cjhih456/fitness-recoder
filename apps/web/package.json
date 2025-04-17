@@ -22,6 +22,7 @@
     "@apollo/client": "^3.11.4",
     "@fitness/graphql-worker": "*",
     "@fitness/sqlite-worker": "*",
+    "@fitness/struct": "*",
     "@fitness/vite-plugin-graphql-server": "*",
     "@heroui/react": "^2.7.5",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
@@ -41,7 +42,6 @@
   },
   "devDependencies": {
     "@fitness/eslint-config": "*",
-    "@types/fitness-struct": "*",
     "@types/node": "^22.9.0",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",

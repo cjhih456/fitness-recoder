@@ -1,4 +1,4 @@
-import type { ExercisePreset } from 'fitness-struct';
+import type { ExercisePreset } from '@fitness/struct';
 
 export const getExercisePresetWithListById: ResponseBuilder<{ id: number }, ExercisePreset.Data | null> = async (dbBus, { client }, { id }) => {
   if (!dbBus) return null

@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
 import { Suspense, useMemo } from 'react'

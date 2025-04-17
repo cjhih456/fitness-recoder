@@ -5,7 +5,7 @@
 1. [@fitness/web](#web)
 
 ### Sub repo
-1. [@types/fitness-struct](#struct)
+1. [@fitness/struct](#struct)
 1. [@types/sqlite-message-types](#sqlite-message-types)
 1. [@fitness/eslint-config](#eslint-config)
 1. [@fitness/sqlite-worker](#sqlite-worker)
@@ -58,7 +58,7 @@ Please config env on `./.env.development` and `./.env.production`.
 Fitness recording service. This project will use Sqlite, GraphqlServer on Web Worker and Service Worker.
 
 
-### <a id="struct"></a> @types/fitness-struct
+### <a id="struct"></a> @fitness/struct
 Typescript global object structures. 
 This package will be give effect on [@fitness/web](#web), [@fitness/graphql-worker](#graphql-worker).
 

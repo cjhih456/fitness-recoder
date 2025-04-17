@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
 import GetFitnessListByKeywords from './graphql/query/GetFitnessListByKeywords';

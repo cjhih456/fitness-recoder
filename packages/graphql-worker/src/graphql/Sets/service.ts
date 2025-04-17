@@ -1,4 +1,4 @@
-import type { Sets } from 'fitness-struct'
+import type { Sets } from '@fitness/struct'
 
 export const getSetByIds: ResponseBuilder<{ ids: number[] }, Sets.Set[]> = async (
   dbTransitionBus,

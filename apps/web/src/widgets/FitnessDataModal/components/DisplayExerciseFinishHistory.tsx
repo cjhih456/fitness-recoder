@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import { Card, CardBody, CardHeader } from '@heroui/react'
 import { useMemo } from 'react'
 

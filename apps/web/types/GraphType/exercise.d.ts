@@ -1,7 +1,7 @@
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
-type HistoryData = import('fitness-struct').Exercise.HistoryData
-type Data = import('fitness-struct').Exercise.Data
+type HistoryData = import('@fitness/struct').Exercise.HistoryData
+type Data = import('@fitness/struct').Exercise.Data
 
 type ExerciseDataStoreType = Data & StoreObject & {
   fitness: FitnessStoreType

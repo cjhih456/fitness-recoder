@@ -1,5 +1,5 @@
-import type { Exercise } from 'fitness-struct'
-import { IHistorySchema } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct';
+import { IHistorySchema } from '@fitness/struct'
 
 export const createExerciseByIds: ResponseBuilder<{ fitnessIds: number[] | number }, Exercise.Data[]> = async (
   dbBus,

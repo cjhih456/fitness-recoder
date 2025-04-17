@@ -1,4 +1,4 @@
-import type { Schedule } from 'fitness-struct'
+import type { Schedule } from '@fitness/struct'
 import { Button } from '@heroui/react'
 import { useAnimationFrame } from 'framer-motion'
 import { startTransition, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
@@ -24,12 +24,12 @@ export default function DisplayWorkout() {
   const { pushAlert } = useAlert()
   const { data: getScheduleData, error } = useGetScheduleById(scheduleId)
   const loadedScheduleData = useMemo(() => getScheduleData?.getScheduleById, [getScheduleData])
-  const [lazySchedule, updateLazySchedule] = useState<Schedule.Schedule>()
+  const [lazySchedule, updateLazySchedule] = useState<Schedule.Data>()
   const [timerText, setTimerText] = useState('00:00:00.000')
   useHeaderHandler(timerText)
 
   const [updateSchedule] = useUpdateSchedule()
-  const updateState = useCallback((type: Schedule.IType, lazySchedule?: Schedule.Schedule) => {
+  const updateState = useCallback((type: Schedule.IType, lazySchedule?: Schedule.Data) => {
     if (!lazySchedule) return Promise.resolve()
     const now = new Date().getTime()
     let workoutTimes = lazySchedule.workoutTimes
@@ -60,7 +60,7 @@ export default function DisplayWorkout() {
     [lazySchedule, updateState, navigate]
   )
 
-  function calcTimeText(schedule: Schedule.Schedule) {
+  function calcTimeText(schedule: Schedule.Data) {
     let time = schedule.workoutTimes
     if (schedule.type === ScheduleType.STARTED) {
       const nowTime = new Date().getTime()

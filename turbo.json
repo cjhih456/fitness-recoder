@@ -26,13 +26,13 @@
     "@fitness/graphql-worker#build": {
       "dependsOn": [
         "^@types/sqlite-message-types#build",
-        "^@types/fitness-struct#build"
+        "^@fitness/struct#build"
       ]
     },
     "@fitness/sqlite-worker#build": {
       "dependsOn": [
         "^@types/sqlite-message-types#build",
-        "^@types/fitness-struct#build"
+        "^@fitness/struct#build"
       ]
     },
     "dev": {

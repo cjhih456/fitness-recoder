@@ -1,6 +1,6 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { Fitness } from '@fitness/struct';
 import type { IResolvers } from '@graphql-tools/utils';
-import type { Fitness } from 'fitness-struct/dist/src/fitness';
 import { getFitnessById, getFitnessByIds, getFitnessListByKeywords } from './service';
 interface GetFitnessByIdArgs { id: number }
 interface GetFitnessByIdsArgs { ids: number[] }

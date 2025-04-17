@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct';
+import type { Exercise } from '@fitness/struct';
 import { useUpdateExerciseListByExercisePresetId } from '@entities/exercise/api';
 
 export default function useUpdateExerciseListByExercisePreset() {

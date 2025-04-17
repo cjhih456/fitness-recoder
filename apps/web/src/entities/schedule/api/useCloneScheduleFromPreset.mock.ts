@@ -1,5 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import type { ExercisePreset } from 'fitness-struct'
+import type { ExercisePreset } from '@fitness/struct'
 import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData';
 import CloneScheduleFromPreset from '@entities/schedule/api/graphql/mutation/CloneScheduleFromPresetGql';
 import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';

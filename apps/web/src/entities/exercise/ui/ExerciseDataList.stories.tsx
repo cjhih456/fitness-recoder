@@ -1,6 +1,6 @@
 import type { ExerciseDataListProps } from './ExerciseDataList';
+import type { Schedule } from '@fitness/struct';
 import type { Meta, StoryObj } from '@storybook/react';
-import type { Schedule } from 'fitness-struct';
 import ExerciseDataList from './ExerciseDataList';
 
 const meta = {
@@ -17,6 +17,11 @@ const meta = {
         id: 1,
         beforeTime: 0,
         breakTime: 0,
+        workoutTimes: 0,
+        date: 0,
+        year: 0,
+        month: 0,
+        start: 0,
         exerciseList: [
           {
             id: 1,
@@ -30,7 +35,7 @@ const meta = {
           }
         ],
         type: 'SCHEDULED'
-      } as Schedule.Schedule
+      } as Schedule.Data
       Object.assign(options.args, { schedule: id })
       return <div>
         < Story {...options} />

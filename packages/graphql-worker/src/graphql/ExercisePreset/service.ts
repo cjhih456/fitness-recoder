@@ -1,4 +1,4 @@
-import type { ExercisePreset } from 'fitness-struct';
+import type { ExercisePreset } from '@fitness/struct';
 import {
   createExerciseByIds,
   createExerciseWithExercisePresetRelation,

@@ -1,4 +1,4 @@
-import type { Exercise } from 'fitness-struct'
+import type { Exercise } from '@fitness/struct'
 import { getFitnessById, getFitnessByIds } from '../Fitness/service'
 import { cloneListByExerciseId } from '../Sets/service'
 import { createExerciseByIds } from './repository'

@@ -1,4 +1,4 @@
-import type { Schedule } from 'fitness-struct'
+import type { Schedule } from '@fitness/struct'
 import type { ReactNode } from 'react';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api'
 import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList'
@@ -7,7 +7,7 @@ import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 export interface ScheduleDisplayProps {
   title: string,
-  schedule: Schedule.Schedule
+  schedule: Schedule.Data
   date: string
   children?: (_id: number, _type: Schedule.IType, _date: string) => ReactNode
 }

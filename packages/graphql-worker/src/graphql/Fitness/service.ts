@@ -1,5 +1,5 @@
-import type { Fitness } from 'fitness-struct/dist/src/fitness'
-import { IFitnessSchema } from 'fitness-struct/dist/src/fitness'
+import type { Fitness } from '@fitness/struct'
+import { IFitnessSchema } from '@fitness/struct'
 
 interface GetFitnessByIdArgs { id: number }
 interface GetFitnessByIdsArgs { ids: number[] }

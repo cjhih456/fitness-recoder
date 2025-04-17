@@ -1,5 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import type { Schedule } from 'fitness-struct';
+import type { Schedule } from '@fitness/struct';
 import GetScheduleStatusByMonthGql from '@entities/schedule/api/graphql/query/GetScheduleStatusByMonthGql';
 import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';
 
