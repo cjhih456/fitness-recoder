@@ -15,8 +15,8 @@ const CreateExerciseByExercisePresetMock: MockedResponse<
     const obj: ExerciseDataStoreType = {
       id: idx,
       deps: 0,
-      fitness: FitnessMockData[args.exercise.exerciseId[0] - 1],
-      fitnessId: FitnessMockData[args.exercise.exerciseId[0] - 1].id,
+      fitness: FitnessMockData[args.exercise.fitnessIds[0] - 1],
+      fitnessId: FitnessMockData[args.exercise.fitnessIds[0] - 1].id,
       __typename: 'ExerciseWithFitness'
     }
     return {

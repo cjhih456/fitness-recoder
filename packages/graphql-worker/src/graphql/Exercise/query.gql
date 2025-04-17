@@ -56,22 +56,25 @@ input UpdateExerciseInput {
 }
 
 type Mutation {
-  createExerciseBySchedule(exercise: CreateExerciseByScheduleInput): Exercise
+  createExerciseBySchedule(exercise: CreateExerciseByScheduleInput): [Exercise!]
+  
   createExerciseByExercisePreset(
     exercise: CreateExerciseByExercisePresetInput
-  ): Exercise
+  ): [Exercise!]
 
   updateExercise(exercise: UpdateExerciseInput): Exercise
+  
   updateExerciseListByScheduleId(
     scheduleId: Int
     newExercise: [Int!]
     deleteExerciseId: [Int!]
-  ): [Exercise]
+  ): [Exercise!]
+
   updateExerciseListByExercisePresetId(
     exercisePresetId: Int
     newExercise: [Int!]
     deleteExerciseId: [Int!]
-  ): [Exercise]
+  ): [Exercise!]
 
   deleteExerciseById(id: Int): String
 }

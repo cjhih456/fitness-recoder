@@ -33,8 +33,8 @@ export const getScheduleStatusByMonth: ResponseBuilder<{ year: number, month: nu
 export const createSchedule: ResponseBuilder<{ schedule: Schedule.CreateType }, Schedule.Data | null> = async (dbTransitionBus, { client }, { schedule }) => {
   const result = await dbTransitionBus?.sendTransaction<Schedule.Data>(
     client,
-    'insert', 'insert into schedule (year, month, date, type) values (?,?,?,?)',
-    [schedule.year, schedule.month, schedule.date, schedule.type]
+    'insert', 'insert into schedule (year, month, date, type, start, beforeTime, breakTime, workoutTimes) values (?,?,?,?,?,?,?,?)',
+    [schedule.year, schedule.month, schedule.date, schedule.type, 0, 0, 0, 0]
   )
   return result && result[0] ? result[0] : null
 }

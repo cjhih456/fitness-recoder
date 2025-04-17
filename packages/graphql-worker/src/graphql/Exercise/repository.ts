@@ -8,7 +8,8 @@ export const createExerciseByIds: ResponseBuilder<{ fitnessIds: number[] | numbe
 ) => {
   const temp = Array.isArray(fitnessIds) ? fitnessIds : [fitnessIds]
   const tempQuestion = new Array(temp.length).fill('(?)').join(',')
-  const result = await dbBus?.sendTransaction<Exercise.Data>(client,
+  const result = await dbBus?.sendTransaction<Exercise.Data>(
+    client,
     'insert',
     `insert into exercise (fitnessId) values ${tempQuestion}`,
     temp

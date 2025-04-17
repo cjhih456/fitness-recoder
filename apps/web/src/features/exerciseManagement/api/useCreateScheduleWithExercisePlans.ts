@@ -31,7 +31,7 @@ export default function useCreateScheduleWithExercisePlans() {
         variables: {
           exercise: {
             scheduleId,
-            exerciseId: exerciseList
+            fitnessIds: exerciseList
           }
         }
       })

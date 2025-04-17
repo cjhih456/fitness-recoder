@@ -29,7 +29,7 @@ declare interface CreateExerciseByScheduleResponse {
   createExerciseBySchedule: ExerciseDataStoreType
 }
 declare interface CreateExerciseByScheduleVariable {
-  exercise: { scheduleId: number, exerciseId: number[] }
+  exercise: { scheduleId: number, fitnessIds: number[] }
 }
 
 // CreateExerciseByExercisePreset
@@ -37,7 +37,7 @@ declare interface CreateExerciseByExercisePresetResponse {
   createExerciseByExercisePreset: ExerciseDataStoreType
 }
 declare interface CreateExerciseByExercisePresetVariable {
-  exercise: { exercisePreset: number, exerciseId: number[] }
+  exercise: { exercisePresetId: number, fitnessIds: number[] }
 }
 
 // GetExerciseByExercisePresetId
