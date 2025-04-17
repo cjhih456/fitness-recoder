@@ -10,18 +10,16 @@ export default function DisplayFitnessFinishHistory({ history }: DisplayFitnessF
   const date = useMemo(() => {
     return `${history.year}. ${history.month}. ${history.date}`
   }, [history])
-  const repeats = history.repeats.split(',')
-  const weights = history.weights.split(',')
 
   return <Card className="w-36">
     <CardHeader className="justify-center">
       {date}
     </CardHeader>
     <CardBody>
-      {Array(history.cnt).fill(0).map((_v, idx) => {
+      {history.historyList.map((v, idx) => {
         return <div className="flex justify-between" key={`${history.id}-${idx}`}>
-          <span>{`${weights[idx]}${history.weightUnit}`}</span>
-          <span>{`${repeats[idx]}`}rep</span>
+          <span>{`${v.weight}${history.weightUnit}`}</span>
+          <span>{`${v.repeat}`}rep</span>
         </div>
       })}
     </CardBody>
