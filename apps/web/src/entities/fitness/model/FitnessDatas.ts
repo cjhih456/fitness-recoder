@@ -1,7 +1,7 @@
-import type { Exercise } from '@fitness/struct';
+import type { Fitness } from '@fitness/struct';
 import { Category, Muscle } from './FitnessDataEnums'
 
-export const muscleList: { value: Exercise.IMuscle, text: string }[] = [
+export const muscleList: { value: Fitness.IMuscle, text: string }[] = [
   { value: Muscle.abdominals, text: 'Abdominals' },
   { value: Muscle.hamstrings, text: 'Hamstrings' },
   { value: Muscle.calves, text: 'Calves' },
@@ -20,7 +20,7 @@ export const muscleList: { value: Exercise.IMuscle, text: string }[] = [
   { value: Muscle.lats, text: 'Lats' },
   { value: Muscle.neck, text: 'Neck' },
 ]
-export const categoryList: { value: Exercise.ICategory, text: string }[] = [
+export const categoryList: { value: Fitness.ICategory, text: string }[] = [
   { value: Category.strength, text: 'Strength' },
   { value: Category.stretching, text: 'Stretching' },
   { value: Category.plyometrics, text: 'Plyometrics' },

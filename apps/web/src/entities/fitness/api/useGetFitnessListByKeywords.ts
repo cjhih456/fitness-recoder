@@ -1,9 +1,9 @@
-import type { Exercise } from '@fitness/struct'
+import type { Fitness } from '@fitness/struct'
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
 import GetFitnessListByKeywords from './graphql/query/GetFitnessListByKeywords';
 
-export default function useGetFitnessListByKeywords(name: string, category: Exercise.ICategory[], muscle: Exercise.IMuscle[], limit: number, offset: number) {
+export default function useGetFitnessListByKeywords(name: string, category: Fitness.ICategory[], muscle: Fitness.IMuscle[], limit: number, offset: number) {
 
   const query = useSuspenseQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywords, {
     variables: {

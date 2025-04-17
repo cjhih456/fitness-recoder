@@ -1,4 +1,4 @@
-import type { Exercise } from '@fitness/struct'
+import type { Fitness } from '@fitness/struct'
 import type { ReactNode } from 'react';
 import { Input, ScrollShadow, Select, SelectItem } from '@heroui/react'
 import { Suspense, useMemo } from 'react'
@@ -43,7 +43,7 @@ export default function FitnessListSearch({
         <Select
           items={categoryList}
           onSelectionChange={(v) => {
-            refetch({ category: v === 'all' ? [] : Array.from(v) as Exercise.ICategory[] })
+            refetch({ category: v === 'all' ? [] : Array.from(v) as Fitness.ICategory[] })
           }}
           selectionMode='multiple'
           label="Workout Category"
@@ -53,7 +53,7 @@ export default function FitnessListSearch({
         <Select
           items={muscleList}
           onSelectionChange={(v) => {
-            refetch({ muscle: v === 'all' ? [] : Array.from(v) as Exercise.IMuscle[] })
+            refetch({ muscle: v === 'all' ? [] : Array.from(v) as Fitness.IMuscle[] })
           }}
           selectionMode='multiple'
           label="Target Muscle"

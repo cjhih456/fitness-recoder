@@ -9,6 +9,7 @@ export const IExerciesSchema = z.object({
 })
 
 export const IHistoryDBSchema = z.object({
+  id: z.number(),
   year: z.number(),
   month: z.number(),
   date: z.number(),

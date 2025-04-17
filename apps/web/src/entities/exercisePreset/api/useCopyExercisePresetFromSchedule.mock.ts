@@ -15,6 +15,7 @@ const CopyExercisePresetFromScheduleMock: MockedResponse<
       name: v.name,
       id: id,
       deps: 0,
+      exerciseList: [],
       __typename: 'ExercisePreset'
     }
     return {

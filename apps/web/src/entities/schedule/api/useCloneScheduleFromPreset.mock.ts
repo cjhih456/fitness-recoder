@@ -11,7 +11,7 @@ const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPresetRespons
   result: (v) => {
     const id = Math.max(...Object.keys(ScheduleMockData).map(Number)) + 1
     ScheduleMockData[id] = {
-      ...(ExercisePresetMockData[v.presetId] as ExercisePreset.Preset),
+      ...(ExercisePresetMockData[v.presetId] as ExercisePreset.WithExerciseList),
       beforeTime: 0,
       start: 0,
       breakTime: 0,

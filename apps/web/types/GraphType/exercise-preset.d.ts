@@ -1,7 +1,7 @@
 type StoreObject = import('@apollo/client').StoreObject
 type OperationVariables = import('@apollo/client').OperationVariables
-type Preset = import('@fitness/struct').ExercisePreset.Preset
-type PresetWithExerciseList = import('@fitness/struct').ExercisePreset.PresetWithExerciseList
+type Preset = import('@fitness/struct').ExercisePreset.Data
+type PresetWithExerciseList = import('@fitness/struct').ExercisePreset.WithExerciseList
 
 declare type ExercisePresetStoreType = Preset & StoreObject
 declare type ExercisePresetWithListStoreType = PresetWithExerciseList & StoreObject

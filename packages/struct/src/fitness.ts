@@ -68,21 +68,23 @@ export const IFitnessCategory = z.enum([
 export const IFitnessDBSchema = z.object({
   id: z.number(),
   name: z.string(),
-  aliases: z.string().optional(),
+  aliases: z.string().optional().or(z.null()),
   primaryMuscles: z.string(),
   secondaryMuscles: z.string(),
   force: IFitnessForce.optional(),
   level: IFitnessLevel,
-  mechanic: IFitnessMechanic.optional(),
-  equipment: IFitnessEquipment.optional(),
+  mechanic: IFitnessMechanic.optional().or(z.null()),
+  equipment: IFitnessEquipment.optional().or(z.null()),
   category: IFitnessCategory,
   instructions: z.string(),
-  description: z.string().optional(),
-  tips: z.string().optional(),
+  description: z.string().optional().or(z.null()),
+  tips: z.string().optional().or(z.null()),
 })
 
 export const IFitnessSchema = IFitnessDBSchema.transform((fitness) => ({
   ...fitness,
+  description: fitness.description ?? '',
+  equipment: fitness.equipment ?? 'other',
   aliases: JSON.parse(fitness.aliases ?? '[]') as string[],
   primaryMuscles: JSON.parse(fitness.primaryMuscles) as Fitness.IMuscle[],
   secondaryMuscles: JSON.parse(fitness.secondaryMuscles) as Fitness.IMuscle[],

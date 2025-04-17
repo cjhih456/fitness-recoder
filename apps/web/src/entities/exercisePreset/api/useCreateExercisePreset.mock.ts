@@ -15,6 +15,7 @@ const CreateExercisePresetMock: MockedResponse<
       name: v.exercisePreset.name,
       id: id,
       deps: 0,
+      exerciseList: [],
       __typename: 'ExercisePreset'
     }
     return {
