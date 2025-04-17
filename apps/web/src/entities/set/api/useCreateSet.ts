@@ -9,7 +9,7 @@ export default function useCreateSet() {
       cache.modify({
         fields: {
           getSetListByExerciseId: (existingData, { storeFieldName }) => {
-            if (!storeFieldName.endsWith(`:${JSON.stringify({ id: exerciseId })}`)) return existingData
+            if (!storeFieldName.includes(JSON.stringify({ id: exerciseId }))) return existingData
             const newData = [...existingData, data.createSet]
             return newData
           }
