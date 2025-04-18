@@ -1,6 +1,8 @@
 import type { ExerciseDataListProps } from './ExerciseDataList';
-import type { Schedule } from '@fitness/struct';
+import type { Exercise } from '@fitness/struct';
 import type { Meta, StoryObj } from '@storybook/react';
+import SetListEditor from '@entities/set/ui/SetListEditor';
+import ExerciseDataItem from './ExerciseDataItem';
 import ExerciseDataList from './ExerciseDataList';
 
 const meta = {
@@ -9,52 +11,29 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<ExerciseDataListProps>,
+  args: {
+    scheduleId: 1,
+  } as Partial<ExerciseDataListProps>,
   component: ExerciseDataList,
   decorators: [
     (Story, options) => {
-      const id = {
-        id: 1,
-        beforeTime: 0,
-        breakTime: 0,
-        workoutTimes: 0,
-        date: 0,
-        year: 0,
-        month: 0,
-        start: 0,
-        exerciseList: [
-          {
-            id: 1,
-            exercise: 1,
-            deps: 1
-          },
-          {
-            id: 2,
-            exercise: 2,
-            deps: 2
-          }
-        ],
-        type: 'SCHEDULED'
-      } as Schedule.Data
-      Object.assign(options.args, { schedule: id })
+      Object.assign(options.args, {
+        children: ({ exercise }: { exercise: Exercise.Data }) => <ExerciseDataItem exerciseId={exercise.id} fitnessName={exercise.fitness?.name}>
+          <SetListEditor exerciseDataId={exercise.id} readonly={false} />
+        </ExerciseDataItem>
+      })
       return <div>
-        < Story {...options} />
+        <Story {...options} />
       </div >
     }
   ]
 } satisfies Meta<typeof ExerciseDataList>
 
-type Story = StoryObj<typeof meta>;
 export default meta
 
-export const CustomAble: Story = {
-  args: {
-    readonly: false
-  }
-}
+type Story = StoryObj<typeof meta>;
 
-export const ReadOnly: Story = {
+export const Default: Story = {
   args: {
-    readonly: true
   }
 }
