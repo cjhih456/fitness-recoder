@@ -1,5 +1,6 @@
+import type { CreateSetVariable, CreateSetResponse } from '@entities/set/model'
 import { useMutation } from '@apollo/client'
-import CreateSetGql from '@entities/set/api/graphql/mutation/CreateSetGql';
+import CreateSetGql from '@entities/set/api/mutation/CreateSetGql'
 
 export default function useCreateSet() {
   return useMutation<CreateSetResponse, CreateSetVariable>(CreateSetGql, {

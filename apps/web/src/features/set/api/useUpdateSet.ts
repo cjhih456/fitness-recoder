@@ -1,5 +1,6 @@
+import type { UpdateSetVariable, UpdateSetResponse } from '@entities/set/model';
 import { useMutation } from '@apollo/client'
-import UpdateSetGql from './graphql/mutation/UpdateSetGql';
+import UpdateSetGql from '@entities/set/api/mutation/UpdateSetGql';
 
 export default function useUpdateSet() {
   return useMutation<UpdateSetResponse, UpdateSetVariable>(UpdateSetGql, {

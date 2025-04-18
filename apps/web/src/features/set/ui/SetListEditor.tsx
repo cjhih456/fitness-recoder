@@ -1,7 +1,7 @@
 import { Button } from '@heroui/react';
-import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@entities/set/api';
+import { useCreateSet, useUpdateSet, useDeleteSet, useGetSetListByExerciseId } from '@features/set/api';
 import { BooleanRender } from '@shared/ui/StateRender';
-import SetRow from './SetRow';
+import SetRow from '../../../entities/set/ui/SetRow';
 export interface SetListEditorProps {
   exerciseDataId: number
   hasDoneLastSet?: () => void

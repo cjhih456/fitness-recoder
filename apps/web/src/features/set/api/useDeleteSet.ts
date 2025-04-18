@@ -1,8 +1,10 @@
-import type { Reference } from '@apollo/client';
-import type { Sets } from '@fitness/struct';
-import { useMutation } from '@apollo/client';
-import DeleteSetGql from '@entities/set/api/graphql/mutation/DeleteSetGql';
-import SetsFragment from './graphql/fragment/SetsFragment';
+import type { Reference } from '@apollo/client'
+import type { DeleteSetResponse, DeleteSetVariable } from '@entities/set/model'
+import type { Sets } from '@fitness/struct'
+import { useMutation } from '@apollo/client'
+import SetsFragment from '@entities/set/api/fragment/SetsFragment'
+import DeleteSetGql from '@entities/set/api/mutation/DeleteSetGql'
+
 export default function useDeleteSet() {
   return useMutation<DeleteSetResponse, DeleteSetVariable>(DeleteSetGql, {
     update: (cache, { data }, { variables }) => {

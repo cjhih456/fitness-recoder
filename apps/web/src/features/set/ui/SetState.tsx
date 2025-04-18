@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { MdCheck } from 'react-icons/md';
+import { useGetSetListByExerciseId } from '@features/set/api';
 import { EnumRender } from '@shared/ui/StateRender';
-import { useGetSetListByExerciseId } from '../api';
 
 interface SetStateProps {
   exerciseDataId: number

@@ -1,3 +1,4 @@
+import type { SetsStoreType } from '../model'
 import { Button, Checkbox, Input } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 import { MdClear } from 'react-icons/md'
