@@ -1,37 +1,24 @@
-import type { Schedule } from '@fitness/struct';
-import { Suspense } from 'react';
+import type { Exercise } from '@fitness/struct';
+import type { ReactElement } from 'react';
+import { cloneElement } from 'react';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
-import SetListEditor from '@entities/set/ui/SetListEditor';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 export interface ExerciseDataListProps {
-  schedule: Schedule.Data
-  readonly?: boolean
+  scheduleId: number
+  children: (_props: { exercise: Exercise.Data }) => ReactElement
 }
 
 export default function ExerciseDataList({
-  schedule,
-  readonly
+  scheduleId,
+  children
 }: ExerciseDataListProps) {
-  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(schedule.id)
+  const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(scheduleId)
   const exerciseList = getExerciseListByScheduleIdData.getExerciseListByScheduleId
 
   return <div className="flex flex-col gap-y-3">
     <MenuableAccordion.GroupProvider>
-      {exerciseList.map((exercise) => <MenuableAccordion.GroupContent
-        key={`${exercise.id}`}
-        openId={exercise.id}
-      >
-        {{
-          title: <div><h3 className='font-bold'>{exercise.fitness.name}</h3></div>,
-          content: <Suspense>
-            <SetListEditor
-              exerciseDataId={exercise.id}
-              readonly={readonly}
-            ></SetListEditor>
-          </Suspense>
-        }}
-      </MenuableAccordion.GroupContent>)}
+      {exerciseList.map((exercise) => cloneElement(children({ exercise }), { key: `${exercise.id}` }))}
     </MenuableAccordion.GroupProvider>
   </div>
 }

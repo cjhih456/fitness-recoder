@@ -2,7 +2,6 @@ import { Button } from '@heroui/react';
 import { useCreateSet, useDeleteSet, useGetSetListByExerciseId, useUpdateSet } from '@entities/set/api';
 import { BooleanRender } from '@shared/ui/StateRender';
 import SetRow from './SetRow';
-
 export interface SetListEditorProps {
   exerciseDataId: number
   hasDoneLastSet?: () => void
@@ -15,7 +14,7 @@ export default function SetListEditor({
   readonly = false
 }: SetListEditorProps) {
   const { data } = useGetSetListByExerciseId(exerciseDataId)
-  const setsList = data.getSetListByExerciseId
+  const sets = data.getSetListByExerciseId
   const [createSet] = useCreateSet()
   const [updateSet] = useUpdateSet()
   const [deleteSet] = useDeleteSet()
@@ -35,14 +34,14 @@ export default function SetListEditor({
   }
 
   function checkAllSetDone(id: number, isDone: boolean) {
-    if (isDone && !setsList.filter(v => !v.isDone).filter(v => v.id !== id).length) {
+    if (isDone && !sets.filter(v => !v.isDone).filter(v => v.id !== id).length) {
       hasDoneLastSet && hasDoneLastSet()
     }
   }
 
   return <div className="flex flex-col gap-y-4 pb-2">
     <div className="flex flex-col gap-y-2">
-      {setsList.map((set, index) => <SetRow
+      {sets.map((set, index) => <SetRow
         key={set.id}
         index={index + 1}
         set={set}

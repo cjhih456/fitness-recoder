@@ -1,22 +1,22 @@
+import type { FC } from 'react';
 import { MdCheck } from 'react-icons/md';
-import { useGetSetListByExerciseId } from '@entities/set/api';
 import { EnumRender } from '@shared/ui/StateRender';
+import { useGetSetListByExerciseId } from '../api';
 
 interface SetStateProps {
   exerciseDataId: number
 }
 
 type SetStateType = 'done' | 'notDone' | 'notStarted'
-
-export default function SetState({
+const SetState: FC<SetStateProps> = ({
   exerciseDataId
-}: SetStateProps) {
+}) => {
   const { data } = useGetSetListByExerciseId(exerciseDataId)
-
+  const sets = data.getSetListByExerciseId
   let state: SetStateType = 'notDone'
-  const doneCount = data.getSetListByExerciseId.filter(v => v.isDone).length
-  if (data.getSetListByExerciseId.length === 0) state = 'notStarted'
-  else if (doneCount === data.getSetListByExerciseId.length) state = 'done'
+  const doneCount = sets.filter(v => v.isDone).length
+  if (sets.length === 0) state = 'notStarted'
+  else if (doneCount === sets.length) state = 'done'
 
   return <EnumRender
     state={state}
@@ -24,8 +24,9 @@ export default function SetState({
       done: () => <div className="flex justify-center items-center w-[16px] h-[16px] rounded-full bg-primary text-white">
         <MdCheck size="0.75rem"></MdCheck>
       </div>,
-      notDone: () => <div> {doneCount}/{data.getSetListByExerciseId.length} </div>,
+      notDone: () => <div> {doneCount}/{sets.length} </div>,
       notStarted: () => <></>
     }}
   />
 }
+export default SetState
