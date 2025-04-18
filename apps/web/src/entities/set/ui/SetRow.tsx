@@ -3,8 +3,10 @@ import { Button, Checkbox, Input } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 import { MdClear } from 'react-icons/md'
 import { BooleanRender } from '@shared/ui/StateRender'
+import useSetFragment from '../api/useSetFragment'
+
 export interface SetRowProps {
-  set: SetsStoreType
+  setId: number
   index: number
   hasSetChange?: (_set: SetsStoreType) => void
   hasDoneChange?: (_isDone: boolean) => void
@@ -12,7 +14,8 @@ export interface SetRowProps {
   readonly?: boolean
 }
 
-export default function SetRow({ set, index, hasDoneChange, hasSetChange, onRemoveSet, readonly = false }: SetRowProps) {
+export default function SetRow({ setId, index, hasDoneChange, hasSetChange, onRemoveSet, readonly = false }: SetRowProps) {
+  const set = useSetFragment(setId)
   const { register, handleSubmit } = useForm({
     values: set,
     mode: 'onBlur'

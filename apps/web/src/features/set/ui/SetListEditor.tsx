@@ -44,7 +44,7 @@ export default function SetListEditor({
       {sets.map((set, index) => <SetRow
         key={set.id}
         index={index + 1}
-        set={set}
+        setId={set.id}
         hasSetChange={(setData) => {
           const data = { ...setData }
           delete data.__typename

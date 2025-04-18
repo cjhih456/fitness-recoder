@@ -30,14 +30,7 @@ export const CustomAble: Story = {
   args: {
     index: 1,
     readonly: false,
-    set: {
-      exerciseId: 1,
-      id: 1,
-      isDone: false,
-      weightUnit: 'kg',
-      repeat: 10,
-      weight: 20
-    }
+    setId: 1,
   }
 }
 
@@ -45,13 +38,6 @@ export const ReadOnly: Story = {
   args: {
     index: 1,
     readonly: true,
-    set: {
-      exerciseId: 1,
-      id: 1,
-      isDone: false,
-      weightUnit: 'kg',
-      repeat: 10,
-      weight: 20
-    },
+    setId: 1,
   }
 }
