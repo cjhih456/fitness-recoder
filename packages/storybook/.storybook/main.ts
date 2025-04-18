@@ -1,14 +1,18 @@
 import type { StorybookConfig } from '@storybook/react-vite'
 import tsConfigPaths from 'vite-tsconfig-paths'
 import { resolve } from 'path'
+import { PluginOption } from 'vite';
 
 const webRootPath = resolve(__dirname, '../../../apps/web')
 
 const config: StorybookConfig = {
   viteFinal: async (config) => {
-    config.plugins = [...(config.plugins || []), tsConfigPaths({
-      projects: [resolve(webRootPath, 'tsconfig.json')],
-    })]
+    config.plugins = [
+      ...(config.plugins || []),
+      tsConfigPaths({
+        projects: [resolve(webRootPath, 'tsconfig.json')],
+      }) as PluginOption
+    ]
 
     return config
   },
