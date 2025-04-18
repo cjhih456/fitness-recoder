@@ -4,14 +4,17 @@ import UpdateScheduleGql from '../api/graphql/mutation/UpdateScheduleGql';
 export default function useUpdateSchedule() {
   return useMutation<UpdateScheduleResponse, UpdateScheduleVariable>(UpdateScheduleGql, {
     update: (cache, result) => {
-      cache.modify<{
-        getScheduleByDate: GetScheduleByDateResponse['getScheduleByDate']
-      }>({
+      if (!result.data) return
+      const { updateSchedule } = result.data
+      if (!updateSchedule) return
+      cache.modify({
+        id: cache.identify(updateSchedule),
         fields: {
-          getScheduleByDate(prev, { toReference }) {
-            if (!prev || !result.data?.updateSchedule) return prev
-            toReference(result.data?.updateSchedule, true)
-          }
+          type: () => updateSchedule.type,
+          beforeTime: () => updateSchedule.beforeTime,
+          workoutTimes: () => updateSchedule.workoutTimes,
+          breakTime: () => updateSchedule.breakTime,
+          start: () => updateSchedule.start,
         }
       })
     }

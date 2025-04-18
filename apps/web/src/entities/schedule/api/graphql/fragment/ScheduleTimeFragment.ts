@@ -3,7 +3,10 @@ import { gql } from '@apollo/client';
 const ScheduleTimeFragment = gql`
 fragment ScheduleWithTime on ScheduleData{
   id
-  ...ScheduleSimple
+  type
+  year
+  month
+  date
   start
   beforeTime
   breakTime
