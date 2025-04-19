@@ -1,11 +1,11 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useScheduleActions } from '@entities/schedule/hooks';
-import { useCreateScheduleWithExercisePlans } from '@features/exercise/api';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import { LogEvent } from '@shared/lib/firebase/firebase';
 import { useAlert } from '@widgets/alert';
 import { useHeaderHandler } from '@widgets/header';
+import { useCreateScheduleWithExercisePlans } from '@widgets/schedule-with-exercise/api';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'

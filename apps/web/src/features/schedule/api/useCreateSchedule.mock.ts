@@ -1,5 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import CreateSchedule from '@entities/schedule/api/graphql/mutation/CreateScheduleGql';
+import CreateSchedule from '@features/schedule/api/mutation/CreateScheduleGql';
 import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';
 
 const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreateScheduleVariable> = {

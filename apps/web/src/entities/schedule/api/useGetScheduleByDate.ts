@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@apollo/client'
-import GetScheduleByDateGql from '../api/graphql/query/GetScheduleByDateGql';
+import GetScheduleByDateGql from './query/GetScheduleByDateGql';
 
 export default function useGetScheduleByDate(year: number, month: number, date: number) {
   return useSuspenseQuery<

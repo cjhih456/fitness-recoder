@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import CloneScheduleFromPreset from '@entities/schedule/api/graphql/mutation/CloneScheduleFromPresetGql';
+import CloneScheduleFromPreset from '@features/schedule/api/mutation/CloneScheduleFromPresetGql';
 
 export default function useCloneScheduleFromPreset() {
   return useMutation<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable>(CloneScheduleFromPreset, {

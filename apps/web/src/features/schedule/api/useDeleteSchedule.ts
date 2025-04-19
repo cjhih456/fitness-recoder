@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import DeleteScheduleGql from '@entities/schedule/api/graphql/mutation/DeleteScheduleGql';
+import DeleteScheduleGql from '@features/schedule/api/mutation/DeleteScheduleGql';
 
 export default function useDeleteSchedule() {
   return useMutation<DeleteScheduleResponse, DeleteScheduleVariable>(DeleteScheduleGql, {

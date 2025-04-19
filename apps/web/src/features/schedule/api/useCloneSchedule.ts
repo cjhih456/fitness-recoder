@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import CloneSchedule from './graphql/mutation/CloneScheduleGql';
+import CloneSchedule from './mutation/CloneScheduleGql';
 
 export default function useCloneSchedule() {
   return useMutation<CloneScheduleResponse, CloneScheduleVariable>(CloneSchedule, {

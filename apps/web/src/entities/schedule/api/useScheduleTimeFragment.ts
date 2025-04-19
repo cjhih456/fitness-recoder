@@ -1,5 +1,5 @@
 import { useSuspenseFragment } from '@apollo/client';
-import ScheduleTimeFragment from './graphql/fragment/ScheduleTimeFragment';
+import ScheduleTimeFragment from './fragment/ScheduleTimeFragment';
 
 export default function useScheduleTimeFragment(scheduleId: number) {
   const { data } = useSuspenseFragment<ScheduleStoreType>({

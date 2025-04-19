@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@apollo/client'
-import GetScheduleByIdGql from '../api/graphql/query/GetScheduleByIdGql';
+import GetScheduleByIdGql from './query/GetScheduleByIdGql';
 
 export default function useGetScheduleById(id: number) {
   return useSuspenseQuery<GetScheduleByIdResponse, GetScheduleByIdVariable>(GetScheduleByIdGql, {

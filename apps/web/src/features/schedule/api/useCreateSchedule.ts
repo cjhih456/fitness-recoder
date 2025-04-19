@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import CreateSchedule from '@entities/schedule/api/graphql/mutation/CreateScheduleGql';
+import CreateSchedule from '@features/schedule/api/mutation/CreateScheduleGql';
 
 export default function useCreateSchedule() {
   return useMutation<CreateScheduleResponse, CreateScheduleVariable>(CreateSchedule, {
