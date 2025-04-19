@@ -1,3 +1,5 @@
+import type { ExercisePresetWithListStoreType } from '../model'
+
 export const ExercisePresetMockData: { [key: number]: ExercisePresetWithListStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {
   const id = i + 1
   acc[id] = {

@@ -1,3 +1,5 @@
+import type { CreateExercisePresetResponse, CreateExercisePresetVariable } from '../model';
+import type { GetExercisePresetWithListByOffsetResponse } from '@entities/exercisePreset/model';
 import { useMutation } from '@apollo/client'
 import CreateExercisePresetGql from '@features/exercisePreset/api/mutation/CreateExercisePresetGql';
 

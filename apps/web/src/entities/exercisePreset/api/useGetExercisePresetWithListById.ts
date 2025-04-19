@@ -1,3 +1,4 @@
+import type { GetExercisePresetWithListByIdVariable, GetExercisePresetWithListByIdResponse } from '../model';
 import { useSuspenseQuery } from '@apollo/client'
 import GetExercisePresetWithListById from './query/GetExercisePresetWithListById';
 

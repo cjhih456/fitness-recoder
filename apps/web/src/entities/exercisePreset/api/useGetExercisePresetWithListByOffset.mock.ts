@@ -1,4 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
+import type { GetExercisePresetWithListByOffsetResponse, GetExercisePresetWithListByOffsetVariable } from '@entities/exercisePreset/model';
 import { ExercisePresetMockData } from './exercisePreset.mockData'
 import GetExercisePresetWithListByOffset from './query/GetExercisePresetWithListByOffset';
 

@@ -1,7 +1,7 @@
+import type { CreateExercisePresetResponse, CreateExercisePresetVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData'
 import CreateExercisePresetGql from '@features/exercisePreset/api/mutation/CreateExercisePresetGql';
-
 const CreateExercisePresetMock: MockedResponse<
   CreateExercisePresetResponse,
   CreateExercisePresetVariable

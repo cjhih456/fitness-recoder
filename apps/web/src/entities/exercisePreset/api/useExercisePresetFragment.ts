@@ -1,3 +1,4 @@
+import type { ExercisePresetStoreType } from '@entities/exercisePreset/model';
 import { useSuspenseFragment } from '@apollo/client';
 import ExercisePresetFragment from './fragments/ExercisePresetFragment';
 

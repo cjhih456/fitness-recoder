@@ -1,3 +1,4 @@
+import type { GetExercisePresetWithListByOffsetResponse, GetExercisePresetWithListByOffsetVariable } from '@entities/exercisePreset/model';
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
 import GetExercisePresetWithListByOffset from './query/GetExercisePresetWithListByOffset';

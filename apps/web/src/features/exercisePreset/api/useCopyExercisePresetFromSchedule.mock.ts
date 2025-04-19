@@ -1,3 +1,4 @@
+import type { CopyExercisePresetFromScheduleResponse, CopyExercisePresetFromScheduleVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData'
 import CopyExercisePresetFromScheduleGql from '@features/exercisePreset/api/mutation/CopyExercisePresetFromScheduleGql';
