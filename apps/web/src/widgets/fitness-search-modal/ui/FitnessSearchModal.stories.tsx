@@ -1,8 +1,7 @@
-import type { FitnessSearchModalProps } from './FitnessSearchModal'
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@heroui/react';
 import { fn } from '@storybook/test';
-import { useState } from 'react';
+import { useFitnessSearchModalAction } from '@shared/hooks/fitness-search-modal';
 import FitnessSearchModal from './FitnessSearchModal'
 
 const meta = {
@@ -11,17 +10,12 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {
-    onChangeFitnessIds: fn(),
-  } as Partial<FitnessSearchModalProps>,
   component: FitnessSearchModal,
   decorators: [
     (Story, options) => {
-      const [isOpen, changeState] = useState(options.args.isOpen)
-      Object.assign(options.args, { isOpen: isOpen, onOpenChange: changeState })
-
+      const openAction = useFitnessSearchModalAction()
       return <div className="grid min-w-[320px] h-[500px] overflow-hiden">
-        <Button onPress={() => changeState(true)}>Open</Button>
+        <Button onPress={() => openAction({ type: true })?.then(fn)}>Open</Button>
         <Story {...options} />
       </div>
     }
