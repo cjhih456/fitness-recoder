@@ -1,4 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
+import type { UpdateExerciseListByExercisePresetIdResponse, UpdateExerciseListByExercisePresetIdVariable } from '@features/exercise/model';
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';
 import UpdateExerciseListByExercisePresetId from '@features/exercise/api/mutation/UpdateExerciseListByExercisePresetId';
 

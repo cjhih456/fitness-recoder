@@ -1,3 +1,4 @@
+import type { GetExerciseListByScheduleIdResponse, GetExerciseListByScheduleIdVariable } from '../model';
 import { useSuspenseQuery } from '@apollo/client'
 import GetExerciseListByScheduleId from './query/GetExerciseListByScheduleId';
 

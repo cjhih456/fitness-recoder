@@ -1,3 +1,4 @@
+import type { CreateExerciseByScheduleResponse, CreateExerciseByScheduleVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import { ExerciseMockData } from '@entities/exercise/api/exercise.mockData';
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';

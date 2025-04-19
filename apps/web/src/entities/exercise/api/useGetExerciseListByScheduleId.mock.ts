@@ -1,3 +1,4 @@
+import type { GetExerciseListByScheduleIdResponse, GetExerciseListByScheduleIdVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';
 import GetExerciseListByScheduleId from './query/GetExerciseListByScheduleId';

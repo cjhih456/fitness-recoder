@@ -1,6 +1,6 @@
+import type { UpdateExerciseListByExercisePresetIdResponse, UpdateExerciseListByExercisePresetIdVariable } from '@features/exercise/model';
 import { useMutation } from '@apollo/client'
 import UpdateExerciseListByExercisePresetId from '@features/exercise/api/mutation/UpdateExerciseListByExercisePresetId';
-
 export default function useUpdateExerciseListByExercisePresetId() {
   return useMutation<
     UpdateExerciseListByExercisePresetIdResponse,

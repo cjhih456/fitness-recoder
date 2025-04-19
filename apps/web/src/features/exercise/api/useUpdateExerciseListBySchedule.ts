@@ -1,5 +1,4 @@
 import { useUpdateExerciseListByScheduleId } from '@features/exercise/api'
-
 export default function useUpdateExerciseListBySchedule() {
   const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()
   return async (scheduleId: number, oldExerciseIds: number[], newExerciseIds: number[]) => {

@@ -1,3 +1,4 @@
+import type { UpdateExerciseListByScheduleIdResponse, UpdateExerciseListByScheduleIdVariable } from '@features/exercise/model';
 import { useMutation } from '@apollo/client'
 import UpdateExerciseListByScheduleId from './mutation/UpdateExerciseListByScheduleId';
 

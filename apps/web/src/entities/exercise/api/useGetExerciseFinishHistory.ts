@@ -1,3 +1,4 @@
+import type { GetExerciseFinishHistoryVariable, GetExerciseFinishHistoryResponse } from '../model';
 import { useSuspenseQuery } from '@apollo/client'
 import GetExerciseFinishHistory from '@entities/exercise/api/query/GetExerciseFinishHistory';
 

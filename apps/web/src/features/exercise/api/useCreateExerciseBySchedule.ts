@@ -1,3 +1,4 @@
+import type { CreateExerciseByScheduleResponse, CreateExerciseByScheduleVariable } from '@features/exercise/model';
 import { useMutation } from '@apollo/client'
 import GetExerciseListByScheduleId from '@entities/exercise/api/query/GetExerciseListByScheduleId';
 import CreateExerciseBySchedule from '@features/exercise/api/mutation/CreateExerciseBySchedule';
