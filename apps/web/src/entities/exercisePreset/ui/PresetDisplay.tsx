@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useExercisePresetWithListFragment } from '@entities/exercisePreset/api';
 import { usePresetMenu } from '@entities/exercisePreset/hooks';
-import SetState from '@features/set/ui/SetState';
 import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList';
+import SetState from '@features/set/ui/SetState';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 interface PresetDisplayProps {

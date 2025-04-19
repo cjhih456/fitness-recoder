@@ -12,7 +12,7 @@ import useScheduleTimeFragment from '@entities/schedule/api/useScheduleTimeFragm
 import { useScheduleHeaderMenu } from '@entities/schedule/hooks'
 import useScheduleTypeActions from '@entities/schedule/hooks/useScheduleTypeActions'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
-import SetListEditor from '@entities/set/ui/SetListEditor'
+import SetListEditor from '@features/set/ui/SetListEditor'
 import usePageTracker from '@shared/hooks/usePageTracker'
 import { formatTime } from '@shared/lib/formatter'
 import { BooleanRender } from '@shared/ui/StateRender'
