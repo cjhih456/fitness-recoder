@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
-import { useGetExerciseListByScheduleId, useUpdateExerciseListBySchedule } from '@features/exercise/api';
+import { useUpdateExerciseListBySchedule } from '@features/exercise/api';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import { useHeaderHandler } from '@widgets/header';
 

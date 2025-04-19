@@ -1,7 +1,7 @@
 import type { Exercise } from '@fitness/struct';
 import type { ReactElement } from 'react';
 import { cloneElement } from 'react';
-import { useGetExerciseListByScheduleId } from '@features/exercise/api';
+import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 export interface ExerciseDataListProps {

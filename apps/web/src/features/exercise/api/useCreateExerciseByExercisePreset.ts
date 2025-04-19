@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
-import CreateExerciseByExercisePreset from '@entities/exercise/api/mutation/CreateExerciseByExercisePreset';
 import GetExercisePresetWithListById from '@entities/exercisePreset/api/graphql/query/GetExercisePresetWithListById';
+import CreateExerciseByExercisePreset from '@features/exercise/api/mutation/CreateExerciseByExercisePreset';
 
 export default function useCreateExerciseByExercisePreset() {
   return useMutation<

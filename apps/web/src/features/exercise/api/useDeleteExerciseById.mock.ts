@@ -1,5 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import DeleteExerciseById from '@entities/exercise/api/mutation/DeleteExerciseById';
+import DeleteExerciseById from '@features/exercise/api/mutation/DeleteExerciseById';
 
 const DeleteExerciseByIdMock: MockedResponse<
   DeleteExerciseByIdResponse,

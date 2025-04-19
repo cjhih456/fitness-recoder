@@ -1,7 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import CreateExerciseBySchedule from '@entities/exercise/api/mutation/CreateExerciseBySchedule';
+import { ExerciseMockData } from '@entities/exercise/api/exercise.mockData';
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';
-import { ExerciseMockData } from '../../../entities/exercise/api/exercise.mockData';
+import CreateExerciseBySchedule from '@features/exercise/api/mutation/CreateExerciseBySchedule';
 
 const CreateExerciseByScheduleMock: MockedResponse<
   CreateExerciseByScheduleResponse,
@@ -10,17 +10,20 @@ const CreateExerciseByScheduleMock: MockedResponse<
   request: {
     query: CreateExerciseBySchedule,
   },
-  result: () => {
+  result: (args) => {
     const idx = Math.max(...Object.keys(ExerciseMockData).map(Number)) + 1
+    const createdObjs = args.exercise.fitnessIds.map((v, i) => {
+      return {
+        id: idx + i,
+        deps: 0,
+        fitness: FitnessMockData[v - 1],
+        fitnessId: FitnessMockData[v - 1].id,
+        __typename: 'ExerciseWithFitness'
+      }
+    })
     return {
       data: {
-        createExerciseBySchedule: {
-          id: idx,
-          deps: 0,
-          fitness: FitnessMockData[0],
-          fitnessId: FitnessMockData[0].id,
-          __typename: 'ExerciseWithFitness',
-        }
+        createExerciseBySchedule: createdObjs
       }
     }
   }

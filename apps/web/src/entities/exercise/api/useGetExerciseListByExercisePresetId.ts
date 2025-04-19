@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@apollo/client'
-import GetExerciseListByExercisePresetId from '../../../entities/exercise/api/query/GetExerciseListByExercisePresetId';
+import GetExerciseListByExercisePresetId from './query/GetExerciseListByExercisePresetId';
 
 export default function useGetExerciseListByExercisePresetId(exercisePresetId: number) {
   return useSuspenseQuery<
