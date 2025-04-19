@@ -1,4 +1,4 @@
-import { useUpdateExerciseListByScheduleId } from '@entities/exercise/api'
+import { useUpdateExerciseListByScheduleId } from '@features/exercise/api'
 
 export default function useUpdateExerciseListBySchedule() {
   const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()

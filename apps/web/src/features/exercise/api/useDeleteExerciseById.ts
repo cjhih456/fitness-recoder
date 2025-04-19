@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import DeleteExerciseById from '@entities/exercise/api/graphql/mutation/DeleteExerciseById';
+import DeleteExerciseById from '@entities/exercise/api/mutation/DeleteExerciseById';
 
 export default function useDeleteExerciseById() {
   return useMutation<

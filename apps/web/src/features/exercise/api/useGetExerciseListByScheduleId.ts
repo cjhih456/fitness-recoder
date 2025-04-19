@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@apollo/client'
-import GetExerciseListByScheduleId from '../api/graphql/query/GetExerciseListByScheduleId';
+import GetExerciseListByScheduleId from '../../../entities/exercise/api/query/GetExerciseListByScheduleId';
 
 export default function useGetExerciseListByScheduleId(scheduleId: number) {
   return useSuspenseQuery<

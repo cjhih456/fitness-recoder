@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import UpdateExerciseListByScheduleId from './graphql/mutation/UpdateExerciseListByScheduleId';
+import UpdateExerciseListByScheduleId from '../../../entities/exercise/api/mutation/UpdateExerciseListByScheduleId';
 
 export default function useUpdateExerciseListByScheduleId() {
   return useMutation<

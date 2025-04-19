@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@apollo/client'
-import GetExerciseFinishHistory from '@entities/exercise/api/graphql/query/GetExerciseFinishHistory';
+import GetExerciseFinishHistory from '@entities/exercise/api/query/GetExerciseFinishHistory';
 
 export default function useGetExerciseFinishHistory(exerciseId: number) {
   return useSuspenseQuery<

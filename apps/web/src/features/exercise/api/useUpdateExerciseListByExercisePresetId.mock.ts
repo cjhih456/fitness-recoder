@@ -1,5 +1,5 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import UpdateExerciseListByExercisePresetId from '@entities/exercise/api/graphql/mutation/UpdateExerciseListByExercisePresetId';
+import UpdateExerciseListByExercisePresetId from '@entities/exercise/api/mutation/UpdateExerciseListByExercisePresetId';
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';
 
 const UpdateExerciseListByExercisePresetIdMock: MockedResponse<

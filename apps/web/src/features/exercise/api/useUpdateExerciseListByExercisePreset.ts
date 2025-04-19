@@ -1,5 +1,5 @@
 import type { Exercise } from '@fitness/struct';
-import { useUpdateExerciseListByExercisePresetId } from '@entities/exercise/api';
+import { useUpdateExerciseListByExercisePresetId } from '@features/exercise/api';
 
 export default function useUpdateExerciseListByExercisePreset() {
   const [updateList] = useUpdateExerciseListByExercisePresetId()

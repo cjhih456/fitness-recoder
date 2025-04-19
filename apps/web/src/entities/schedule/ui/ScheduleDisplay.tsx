@@ -1,8 +1,8 @@
 import type { Schedule } from '@fitness/struct'
 import type { ReactNode } from 'react';
-import { useGetExerciseListByScheduleId } from '@entities/exercise/api'
 import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList'
 import { useScheduleMenu } from '@entities/schedule/hooks';
+import { useGetExerciseListByScheduleId } from '@features/exercise/api'
 import SetState from '@features/set/ui/SetState';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 

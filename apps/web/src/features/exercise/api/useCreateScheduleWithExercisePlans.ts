@@ -1,6 +1,6 @@
-import { useCreateExerciseBySchedule } from '@entities/exercise/api'
 import { useCreateSchedule } from '@entities/schedule/api'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
+import { useCreateExerciseBySchedule } from '@features/exercise/api'
 
 export default function useCreateScheduleWithExercisePlans() {
   const [createSchedule] = useCreateSchedule()
