@@ -91,4 +91,4 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
 
 
 ### legercy data
-@service/Fitness/FitnessData.json
+@entites/fitness/model/FitnessData.json - fitness data set
