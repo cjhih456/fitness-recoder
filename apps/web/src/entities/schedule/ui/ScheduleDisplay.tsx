@@ -1,8 +1,9 @@
 import type { Schedule } from '@fitness/struct'
 import type { ReactNode } from 'react';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api'
-import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList'
 import { useScheduleMenu } from '@entities/schedule/hooks';
+import SetState from '@features/set/ui/SetState';
+import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList'
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
 export interface ScheduleDisplayProps {
@@ -26,7 +27,9 @@ export default function ScheduleDisplay({ title, date, schedule, children }: Sch
         </p>
       </>,
       content: <div className="flex flex-col gap-y-2">
-        <SimpleFitnessList exerciseDataList={lazyExerciseList} />
+        <SimpleFitnessList exerciseDataList={lazyExerciseList}>
+          {exerciseData => <SetState exerciseDataId={exerciseData.id} />}
+        </SimpleFitnessList>
         {children && children(schedule.id, schedule?.type, date)}
       </div>
     }}

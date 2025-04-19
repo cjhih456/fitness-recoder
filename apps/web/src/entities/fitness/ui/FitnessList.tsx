@@ -1,27 +1,26 @@
-import { Suspense } from 'react';
 import useSpinner from '@shared/hooks/useSpinner';
-import useFitnessDataModal from '@widgets/FitnessDataModal/hooks/useFitnessDataModal';
 import FitnessItem from './FitnessItem';
 
 export type FitnessListSelectedProps = { selected: boolean, idx: number }
 export interface FitnessListProps {
   fitnessIds: number[]
+  className?: string
   selectedFitnessIds?: number[]
   hasNext?: boolean
-  onChangeSelectedFitnessIds?: (_selectedList: number[]) => void
   onToggleFitnessIds?: (_id: number) => void
+  onModalOpen?: (_id: number) => void
   onLoadMore?: () => void
 }
 
 export default function FitnessList({
+  className,
   fitnessIds,
   selectedFitnessIds,
   hasNext = false,
-  onChangeSelectedFitnessIds,
   onToggleFitnessIds,
+  onModalOpen,
   onLoadMore
 }: FitnessListProps) {
-  const { setFitnessId } = useFitnessDataModal()
 
   /**
    * 
@@ -30,12 +29,15 @@ export default function FitnessList({
    * @returns 
    */
   function clickFitness(fitnessId: number, isDetail: boolean) {
-    if (isDetail || !onChangeSelectedFitnessIds && !onToggleFitnessIds) {
-      setFitnessId(fitnessId)
+    if (isDetail) {
+      onModalOpen?.(fitnessId)
       return
     }
-    onToggleFitnessIds && onToggleFitnessIds(fitnessId)
-    onChangeSelectedFitnessIds && onChangeSelectedFitnessIds(([] as number[]).concat(selectedFitnessIds || [], fitnessId))
+    if (onToggleFitnessIds) {
+      onToggleFitnessIds(fitnessId)
+    } else {
+      onModalOpen?.(fitnessId)
+    }
   }
 
   const [spinner] = useSpinner({
@@ -43,15 +45,14 @@ export default function FitnessList({
     loadMore: onLoadMore
   })
 
-  return <div className="flex flex-col gap-y-4">
+  return <div className={`flex flex-col gap-y-4 ${className}`}>
     {fitnessIds.map(fitness =>
-      <Suspense key={fitness}>
-        <FitnessItem
-          fitnessId={fitness}
-          isSelected={selectedFitnessIds?.includes(fitness)}
-          onClick={clickFitness}
-        ></FitnessItem>
-      </Suspense>
+      <FitnessItem
+        key={`fitness-${fitness}`}
+        fitnessId={fitness}
+        isSelected={selectedFitnessIds?.includes(fitness)}
+        onClick={clickFitness}
+      ></FitnessItem>
     )}
     {spinner}
   </div>

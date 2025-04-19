@@ -1,21 +1,25 @@
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
-import { Suspense, useOptimistic } from 'react'
-import FitnessListSearch from '@entities/fitness/ui/FitnessListSearch'
+import type { FitnessSearchFormData } from '@entities/fitness/model/FitnessSearchFormData'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow } from '@heroui/react'
+import { Suspense, useEffect, useState } from 'react'
+import FitnessSearchForm from '@entities/fitness/ui/FitnessSearchForm'
+import FitnessListByFilter from '@features/fitness/ui/FitnessListByKeywords'
 import useFitnessSearchModal from '@shared/hooks/fitness-search-modal'
+import useIdToggle from '@shared/hooks/useIdToggle'
 import { BooleanRender } from '@shared/ui/StateRender'
 
 export default function FitnessSearchModal() {
   const { isOpen, setIsOpen, selectedFitnessIds } = useFitnessSearchModal()
-  const [lazySelectedFitnessIds, toggleSelectedFitnessIds] = useOptimistic<number[], number>(
-    selectedFitnessIds || [],
-    (prev, action) => {
-      if (prev.includes(action)) {
-        return prev.filter(v => v !== action)
-      } else {
-        return [...prev, action]
-      }
+  const [searchFormData, setSearchFormData] = useState<FitnessSearchFormData>({
+    name: '',
+    category: [],
+    muscle: []
+  })
+  const [lazySelectedFitnessIds, setLazySelectedFitnessIds, toggleSelectedFitnessId] = useIdToggle()
+  useEffect(() => {
+    if (selectedFitnessIds) {
+      setLazySelectedFitnessIds(new Set(selectedFitnessIds))
     }
-  )
+  }, [selectedFitnessIds, setLazySelectedFitnessIds])
 
   return <Modal
     isOpen={isOpen}
@@ -31,9 +35,20 @@ export default function FitnessSearchModal() {
             state={isOpen}
             render={{
               true: () => <>
-                <Suspense>
-                  <FitnessListSearch selectedFitnessIds={lazySelectedFitnessIds} onToggleFitnessIds={toggleSelectedFitnessIds} needSpace />
-                </Suspense>
+                <FitnessSearchForm
+                  className='px-4'
+                  value={searchFormData}
+                  onValueChange={setSearchFormData}
+                />
+                <ScrollShadow className='px-4'>
+                  <Suspense>
+                    <FitnessListByFilter
+                      selectedFitnessIds={lazySelectedFitnessIds}
+                      onToggleFitnessIds={toggleSelectedFitnessId}
+                      searchFilter={searchFormData}
+                    />
+                  </Suspense>
+                </ScrollShadow>
               </>
             }}
           />

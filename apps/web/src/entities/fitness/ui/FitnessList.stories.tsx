@@ -10,7 +10,7 @@ const meta = {
     layout: 'centered'
   },
   args: {
-    onChangeSelectedFitnessIds: fn()
+    onToggleFitnessIds: fn()
   } as Partial<FitnessListProps>,
   component: FitnessList,
   decorators: [

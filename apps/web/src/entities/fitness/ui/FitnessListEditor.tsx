@@ -1,7 +1,7 @@
 import { Button } from '@heroui/react'
-import { Suspense, useCallback, useState } from 'react'
+import { useState } from 'react'
+import { useFitnessSearchModalAction } from '@shared/hooks/fitness-search-modal'
 import FitnessList from './FitnessList'
-import FitnessSearchModal from './FitnessSearchModal'
 
 interface FitnessListEditorProps {
   savedIdxData?: number[]
@@ -14,46 +14,23 @@ export default function FitnessListEditor({
   saveBtnText,
   onSaveAction
 }: FitnessListEditorProps) {
-  const [dialogState, setDialogState] = useState(false)
+  const openAction = useFitnessSearchModalAction()
 
   const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>(savedIdxData)
-
-  /**
-   * update seleted list
-   * @param fitnessIds new selected list of exercise index
-   */
-  const changeSelectedFitnessIds = useCallback((fitnessIds: number[]) => {
-    setLazyFitnessIds((current) => {
-      const tempList = [] as number[]
-      current.forEach(data => {
-        if (fitnessIds.includes(data)) {
-          tempList.push(data)
-        }
-      })
-      fitnessIds.forEach(v => {
-        if (!tempList.includes(v)) {
-          tempList.push(v)
-        }
-      })
-      return tempList
+  const setDialogState = () => {
+    openAction({ type: true, resolveList: lazyFitnessIds })?.then((list) => {
+      if (!list) return
+      setLazyFitnessIds(list)
     })
-  }, [])
+  }
 
   return <div className="flex flex-col gap-y-4 px-4 pt-4">
     <div className="flex flex-col gap-y-2">
       <FitnessList fitnessIds={lazyFitnessIds} />
     </div>
     <div className="grid grid-cols-2 gap-x-2">
-      <Button onPress={() => setDialogState(true)}>Add Exercise</Button>
+      <Button onPress={() => setDialogState()}>Add Exercise</Button>
       <Button onPress={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
     </div>
-    <Suspense>
-      <FitnessSearchModal
-        isOpen={dialogState}
-        onOpenChange={setDialogState}
-        selectedFitnessIds={lazyFitnessIds}
-        onChangeFitnessIds={changeSelectedFitnessIds}
-      />
-    </Suspense>
   </div >
 }

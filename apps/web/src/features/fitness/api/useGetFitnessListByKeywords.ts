@@ -4,8 +4,21 @@ import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
 import GetFitnessListByKeywords from '@entities/fitness/api/query/GetFitnessListByKeywords';
 
-export default function useGetFitnessListByKeywords(name: string, category: Fitness.ICategory[], muscle: Fitness.IMuscle[], limit: number, offset: number) {
+export interface UseGetFitnessListByKeywordsProps {
+  name?: string,
+  category?: Fitness.ICategory[],
+  muscle?: Fitness.IMuscle[],
+  limit?: number,
+  offset?: number
+}
 
+export default function useGetFitnessListByKeywords({
+  name = '',
+  category = [],
+  muscle = [],
+  limit = 20,
+  offset = 0
+}: UseGetFitnessListByKeywordsProps) {
   const query = useSuspenseQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywords, {
     variables: {
       name,

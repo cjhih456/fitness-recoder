@@ -1,5 +1,6 @@
 import type { SimpleFitnessListProps } from './SimpleFitnessList'
 import type { Meta, StoryObj } from '@storybook/react';
+import SetState from '@features/set/ui/SetState';
 import SimpleFitnessList from './SimpleFitnessList'
 
 const meta = {
@@ -8,7 +9,9 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<SimpleFitnessListProps>,
+  args: {
+    children: (exerciseData) => <SetState exerciseDataId={exerciseData.id} />
+  } as Partial<SimpleFitnessListProps>,
   component: SimpleFitnessList,
   decorators: [
     (Story) => {
