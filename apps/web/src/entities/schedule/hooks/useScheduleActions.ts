@@ -1,13 +1,13 @@
 import type { NavigateOptions } from 'react-router-dom';
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@entities/schedule/api'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
-import { useAlert } from '@widgets/alert';
+import { useCloneSchedule, useCreateSchedule, useDeleteSchedule } from '@features/schedule/api'
+import { useSetAlert } from '@shared/hooks/alert';
 
 export default function useScheduleActions() {
   const navigate = useNavigate()
-  const { pushAlert } = useAlert()
+  const { pushAlert } = useSetAlert()
   const [deleteSchedule] = useDeleteSchedule()
   const [cloneSchedule] = useCloneSchedule()
 

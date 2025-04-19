@@ -1,9 +1,9 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useScheduleActions } from '@entities/schedule/hooks';
+import { useSetAlert } from '@shared/hooks/alert';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import { LogEvent } from '@shared/lib/firebase/firebase';
-import { useAlert } from '@widgets/alert';
 import { useHeaderHandler } from '@widgets/header';
 import { useCreateScheduleWithExercisePlans } from '@widgets/schedule-with-exercise/api';
 
@@ -19,7 +19,7 @@ export default function CreateSchedule() {
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
-  const { pushAlert } = useAlert()
+  const { pushAlert } = useSetAlert()
 
   const createScheduleWithExercisePlans = useCreateScheduleWithExercisePlans()
   async function startFitnessTime(exerciseIdxList: number[]) {

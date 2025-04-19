@@ -1,9 +1,9 @@
-import type { AlertData } from '../atom';
+import type { AlertData } from '@shared/lib/store/alert';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import useAlert from '@shared/hooks/alert';
 import { BooleanRender } from '@shared/ui/StateRender';
-import useAlert from '../hooks/useAlert';
 
 const AlertModal = () => {
   const { t } = useTranslation('alert')

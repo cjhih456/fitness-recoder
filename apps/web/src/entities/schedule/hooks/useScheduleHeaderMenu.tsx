@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import { useCopyExercisePresetFromSchedule } from '@features/exercisePreset/api'
-import { useAlert } from '@widgets/alert';
+import { useSetAlert } from '@shared/hooks/alert';
 import { useHeaderMenuHandler } from '@widgets/header';
 import useScheduleMenu from './useScheduleMenu';
 
@@ -12,7 +12,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
   boolean,
   (_v: boolean, _presetName?: string) => Promise<void>
 ] {
-  const { pushAlert } = useAlert()
+  const { pushAlert } = useSetAlert()
   const navigate = useNavigate()
   const { t } = useTranslation(['workout'])
   const headerMenus = useScheduleMenu()
