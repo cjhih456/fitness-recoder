@@ -1,7 +1,8 @@
+import type { GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable } from '@entities/fitness/model/types';
 import type { Fitness } from '@fitness/struct'
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
-import GetFitnessListByKeywords from './graphql/query/GetFitnessListByKeywords';
+import GetFitnessListByKeywords from '@entities/fitness/api/query/GetFitnessListByKeywords';
 
 export default function useGetFitnessListByKeywords(name: string, category: Fitness.ICategory[], muscle: Fitness.IMuscle[], limit: number, offset: number) {
 
