@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
 import { useUpdateExerciseListByExercisePreset } from '@features/exercise/api'
-import { usePresetMenu } from '@features/exercisePreset/hooks'
 import { useHeaderMenuSetValue, useHeaderSetValue } from '@shared/hooks/header'
+import { usePresetMenu } from '@widgets/exercise-preset-menu/hooks'
 
 export default function PresetDetailPage() {
   const params = useParams()
@@ -19,11 +19,11 @@ export default function PresetDetailPage() {
 
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
 
-  const headerMenu = usePresetMenu(id)
+  const presetMenu = usePresetMenu()
   const setHeader = useHeaderSetValue()
   const setHeaderMenu = useHeaderMenuSetValue()
   setHeader(exercisePreset.name)
-  setHeaderMenu(headerMenu)
+  setHeaderMenu(presetMenu(id))
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return
     updateExerciseList(id, exerciseList, exerciseIdxList).finally(() => {

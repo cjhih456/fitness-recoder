@@ -2,13 +2,16 @@ import { Button, ScrollShadow } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/api';
+import PresetDisplay from '@entities/exercisePreset/ui/PresetDisplay';
 import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog';
+import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList';
 import { useCreateExercisePreset } from '@features/exercisePreset/api';
-import PresetDisplay from '@features/exercisePreset/ui/PresetDisplay';
+import SetState from '@features/set/ui/SetState';
 import { useHeaderSetValue } from '@shared/hooks/header';
 import useSpinner from '@shared/hooks/useSpinner';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import { useBottomNavi } from '@widgets/bottomNavi';
+import usePresetMenu from '@widgets/exercise-preset-menu/hooks/usePresetMenu';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
@@ -35,6 +38,7 @@ export default function PresetListPage() {
     visible: hasNext,
     loadMore: fetchMore
   })
+  const presetMenu = usePresetMenu()
 
   return <main className="pt-4 px-4 flex flex-col gap-y-4">
     <figure role="create area">
@@ -48,7 +52,12 @@ export default function PresetListPage() {
     <ScrollShadow>
       <figcaption role="" className='flex flex-col gap-y-3 flex-nowrap'>
         <MenuableAccordion.GroupProvider>
-          {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} presetId={preset.id} />)}
+          {presetList.map(preset => <PresetDisplay key={`preset-${preset.id}`} presetId={preset.id} menu={presetMenu(preset.id)}>
+            {({ exerciseDatas }) =>
+              <SimpleFitnessList exerciseDataList={exerciseDatas}>
+                {exerciseData => <SetState exerciseDataId={exerciseData.id} />}
+              </SimpleFitnessList>}
+          </PresetDisplay>)}
         </MenuableAccordion.GroupProvider>
         {spinner}
       </figcaption>

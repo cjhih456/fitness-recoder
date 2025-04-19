@@ -1,14 +1,16 @@
 import type { MenuType } from '@shared/model/menuType'
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import usePresetActions from './usePresetActions'
 
-export default function usePresetMenu(id: number): MenuType[] {
+type PresetMenuType = (_id: number) => MenuType[]
+
+export default function usePresetMenu(): PresetMenuType {
   const { t } = useTranslation(['preset'])
 
   const { startWorkoutWithPresetAction, deletePresetAction } = usePresetActions()
 
-  return useMemo(() => [
+  return useCallback((id) => [
     {
       name: t('menu.startWorkoutWithPreset'),
       action: () => startWorkoutWithPresetAction(id)
@@ -17,5 +19,5 @@ export default function usePresetMenu(id: number): MenuType[] {
       name: t('menu.deletePreset'),
       action: () => deletePresetAction(id)
     }
-  ], [t, id, startWorkoutWithPresetAction, deletePresetAction])
+  ], [t, startWorkoutWithPresetAction, deletePresetAction])
 }
