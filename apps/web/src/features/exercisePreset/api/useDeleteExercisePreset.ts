@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import DeleteExercisePresetGql from './graphql/mutation/DeleteExercisePresetGql';
+import DeleteExercisePresetGql from '@features/exercisePreset/api/mutation/DeleteExercisePresetGql';
 
 export default function useDeleteExercisePreset() {
   return useMutation<DeleteExercisePresetResponse, DeleteExercisePresetVariable>(DeleteExercisePresetGql, {

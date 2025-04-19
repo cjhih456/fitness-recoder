@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import CreateExercisePresetGql from './graphql/mutation/CreateExercisePresetGql';
+import CreateExercisePresetGql from '@features/exercisePreset/api/mutation/CreateExercisePresetGql';
 
 export default function useCreateExercisePreset() {
   return useMutation<CreateExercisePresetResponse, CreateExercisePresetVariable>(CreateExercisePresetGql, {

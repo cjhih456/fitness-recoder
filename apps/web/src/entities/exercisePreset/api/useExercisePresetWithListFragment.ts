@@ -1,5 +1,5 @@
 import { useSuspenseFragment } from '@apollo/client';
-import ExercisePresetWithListFragment from './graphql/fragments/ExercisePresetWithListFragment';
+import ExercisePresetWithListFragment from './fragments/ExercisePresetWithListFragment';
 
 export default function useExercisePresetWithListFragment(id: number) {
   const { data } = useSuspenseFragment<ExercisePresetWithListStoreType>({

@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { ExercisePresetMockData } from './exercisePreset.mockData'
-import CreateExercisePresetGql from './graphql/mutation/CreateExercisePresetGql';
+import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData'
+import CreateExercisePresetGql from '@features/exercisePreset/api/mutation/CreateExercisePresetGql';
 
 const CreateExercisePresetMock: MockedResponse<
   CreateExercisePresetResponse,

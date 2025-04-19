@@ -2,8 +2,8 @@ import type { Schedule } from '@fitness/struct'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useCopyExercisePresetFromSchedule } from '@entities/exercisePreset/api'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
+import { useCopyExercisePresetFromSchedule } from '@features/exercisePreset/api'
 import { useAlert } from '@widgets/alert';
 import { useHeaderMenuHandler } from '@widgets/header';
 import useScheduleMenu from './useScheduleMenu';
