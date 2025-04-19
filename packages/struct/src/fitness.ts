@@ -71,7 +71,7 @@ export const IFitnessDBSchema = z.object({
   aliases: z.string().optional().or(z.null()),
   primaryMuscles: z.string(),
   secondaryMuscles: z.string(),
-  force: IFitnessForce.optional(),
+  force: IFitnessForce.optional().or(z.null()),
   level: IFitnessLevel,
   mechanic: IFitnessMechanic.optional().or(z.null()),
   equipment: IFitnessEquipment.optional().or(z.null()),
