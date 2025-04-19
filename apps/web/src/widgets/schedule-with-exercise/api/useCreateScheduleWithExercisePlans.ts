@@ -9,14 +9,10 @@ export default function useCreateScheduleWithExercisePlans() {
     const schedule = await createSchedule({
       variables: {
         createSchedule: {
-          beforeTime: 0,
-          breakTime: 0,
           year,
           date,
           month,
-          start: 0,
-          type: ScheduleType.SCHEDULED,
-          workoutTimes: 0
+          type: ScheduleType.SCHEDULED
         }
       }
     })

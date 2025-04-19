@@ -1,3 +1,5 @@
+import type { CreateScheduleResponse, CreateScheduleVariable } from '../model';
+import type { GetScheduleStatusByMonthResponse, GetScheduleByDateResponse } from '@entities/schedule/model';
 import { useMutation } from '@apollo/client'
 import CreateSchedule from '@features/schedule/api/mutation/CreateScheduleGql';
 

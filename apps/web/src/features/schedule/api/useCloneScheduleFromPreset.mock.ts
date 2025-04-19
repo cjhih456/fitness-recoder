@@ -1,9 +1,9 @@
+import type { CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import type { ExercisePreset } from '@fitness/struct'
 import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData';
-import CloneScheduleFromPreset from '@features/schedule/api/mutation/CloneScheduleFromPresetGql';
 import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';
-
+import CloneScheduleFromPreset from '@features/schedule/api/mutation/CloneScheduleFromPresetGql';
 const CloneScheduleFromPresetMock: MockedResponse<CloneScheduleFromPresetResponse, CloneScheduleFromPresetVariable> = {
   request: {
     query: CloneScheduleFromPreset

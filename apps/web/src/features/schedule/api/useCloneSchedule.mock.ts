@@ -1,6 +1,7 @@
+import type { CloneScheduleResponse, CloneScheduleVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Schedule } from '@fitness/struct'
-import { ScheduleMockData } from '../../../entities/schedule/api/schedule.mockData';
+import { ScheduleMockData } from '@entities/schedule/api/schedule.mockData';
 import CloneSchedule from './mutation/CloneScheduleGql';
 
 const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVariable> = {

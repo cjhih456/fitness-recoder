@@ -1,3 +1,4 @@
+import type { UpdateScheduleResponse, UpdateScheduleVariable } from '../model';
 import { useMutation } from '@apollo/client'
 import UpdateScheduleGql from './mutation/UpdateScheduleGql';
 

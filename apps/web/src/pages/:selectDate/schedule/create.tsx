@@ -1,6 +1,6 @@
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
-import { useScheduleActions } from '@entities/schedule/hooks';
+import { useScheduleActions } from '@features/schedule/hooks';
 import { useSetAlert } from '@shared/hooks/alert';
 import { useHeaderSetValue } from '@shared/hooks/header';
 import usePageTracker from '@shared/hooks/usePageTracker';

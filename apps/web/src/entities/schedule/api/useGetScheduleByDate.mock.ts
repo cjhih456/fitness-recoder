@@ -1,3 +1,4 @@
+import type { GetScheduleByDateResponse, GetScheduleByDateVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import GetScheduleByDateGql from './query/GetScheduleByDateGql';
 import { ScheduleMockData } from './schedule.mockData'

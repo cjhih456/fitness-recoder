@@ -1,3 +1,4 @@
+import type { ScheduleStoreType } from '../model'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 import { DateService } from '@shared/lib/dateService'
 

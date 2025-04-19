@@ -1,3 +1,4 @@
+import type { GetScheduleByIdResponse, GetScheduleByIdVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import GetScheduleByIdGql from './query/GetScheduleByIdGql';
 import { ScheduleMockData } from './schedule.mockData';

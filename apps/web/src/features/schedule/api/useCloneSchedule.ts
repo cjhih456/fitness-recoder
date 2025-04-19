@@ -1,3 +1,5 @@
+import type { CloneScheduleResponse, CloneScheduleVariable } from '../model';
+import type { GetScheduleByDateResponse } from '@entities/schedule/model';
 import { useMutation } from '@apollo/client'
 import CloneSchedule from './mutation/CloneScheduleGql';
 

@@ -1,3 +1,4 @@
+import type { ExerciseDataStoreType } from '../model'
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData'
 
 export const ExerciseMockData: { [key: number]: ExerciseDataStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {

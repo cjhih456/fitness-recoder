@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { useScheduleActions } from '@entities/schedule/hooks'
 import { useDeleteExercisePreset } from '@features/exercisePreset/api'
 import { useCloneScheduleFromPreset } from '@features/schedule/api'
+import { useScheduleActions } from '@features/schedule/hooks'
 import { DateService } from '@shared/lib/dateService'
 
 export default function usePresetActions() {

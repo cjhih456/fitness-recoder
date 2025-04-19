@@ -1,3 +1,4 @@
+import type { GetScheduleByDateResponse, GetScheduleByDateVariable } from '../model';
 import { useSuspenseQuery } from '@apollo/client'
 import GetScheduleByDateGql from './query/GetScheduleByDateGql';
 

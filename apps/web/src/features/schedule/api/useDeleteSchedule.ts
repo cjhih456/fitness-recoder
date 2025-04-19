@@ -1,3 +1,5 @@
+import type { DeleteScheduleResponse, DeleteScheduleVariable } from '../model';
+import type { GetScheduleByDateResponse } from '@entities/schedule/model';
 import { useMutation } from '@apollo/client'
 import DeleteScheduleGql from '@features/schedule/api/mutation/DeleteScheduleGql';
 

@@ -1,8 +1,9 @@
+import type { ScheduleStoreType } from '@entities/schedule/model'
 import type { Schedule } from '@fitness/struct'
 import { startTransition, useCallback } from 'react'
+import { useUpdateSchedule } from '@features/schedule/api'
 import { calcTimeDiff } from '@shared/lib/formatter'
-import { useUpdateSchedule } from '../api'
-import { ScheduleType } from '../model/ScheduleType'
+import { ScheduleType } from '../../../entities/schedule/model/ScheduleType'
 
 type ScheduleTypeActionsProps = {
   schedule: ScheduleStoreType

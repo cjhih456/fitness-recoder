@@ -1,3 +1,4 @@
+import type { GetScheduleStatusByMonthResponse, GetScheduleStatusByMonthVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Schedule } from '@fitness/struct';
 import GetScheduleStatusByMonthGql from '@entities/schedule/api/query/GetScheduleStatusByMonthGql';

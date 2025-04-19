@@ -1,3 +1,4 @@
+import type { ScheduleStoreType } from '@entities/schedule/model';
 import { useSuspenseFragment } from '@apollo/client';
 import ScheduleTimeFragment from './fragment/ScheduleTimeFragment';
 

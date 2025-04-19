@@ -32,10 +32,6 @@ export default function useScheduleActions() {
           date,
           month,
           year,
-          beforeTime: 0,
-          breakTime: 0,
-          start: 0,
-          workoutTimes: 0,
           type: ScheduleType.BREAK
         }
       }
