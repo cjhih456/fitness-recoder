@@ -15,7 +15,8 @@ const CloneScheduleMock: MockedResponse<CloneScheduleResponse, CloneScheduleVari
       id,
       year: v.targetDate.year,
       month: v.targetDate.month,
-      date: v.targetDate.date
+      date: v.targetDate.date,
+      __typename: 'ScheduleData'
     }
     return {
       data: {

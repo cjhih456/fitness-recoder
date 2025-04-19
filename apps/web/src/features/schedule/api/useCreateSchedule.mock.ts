@@ -11,7 +11,13 @@ const CreateScheduleMock: MockedResponse<CreateScheduleResponse, CreateScheduleV
     const id = Math.max(...Object.keys(ScheduleMockData).map(Number)) + 1
     ScheduleMockData[id] = {
       ...v.createSchedule,
-      id: id
+      id: id,
+      start: 0,
+      beforeTime: 0,
+      breakTime: 0,
+      workoutTimes: 0,
+      type: 'SCHEDULED',
+      __typename: 'ScheduleData'
     }
     return {
       data: {
