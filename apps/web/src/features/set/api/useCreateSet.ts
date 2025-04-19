@@ -1,4 +1,4 @@
-import type { CreateSetVariable, CreateSetResponse } from '@entities/set/model'
+import type { CreateSetVariable, CreateSetResponse } from '@features/set/model'
 import { useMutation } from '@apollo/client'
 import SetsFragment from '@entities/set/api/fragment/SetsFragment'
 import CreateSetGql from '@features/set/api/mutation/CreateSetGql'

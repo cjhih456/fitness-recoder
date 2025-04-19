@@ -1,5 +1,5 @@
 import type { Reference } from '@apollo/client'
-import type { DeleteSetResponse, DeleteSetVariable } from '@entities/set/model'
+import type { DeleteSetResponse, DeleteSetVariable } from '@features/set/model'
 import type { Sets } from '@fitness/struct'
 import { useMutation } from '@apollo/client'
 import SetsFragment from '@entities/set/api/fragment/SetsFragment'
