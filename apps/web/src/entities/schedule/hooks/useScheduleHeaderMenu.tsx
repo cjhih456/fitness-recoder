@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
 import { useCopyExercisePresetFromSchedule } from '@features/exercisePreset/api'
 import { useSetAlert } from '@shared/hooks/alert';
-import { useHeaderMenuHandler } from '@widgets/header';
+import { useHeaderMenuSetValue } from '@shared/hooks/header';
 import useScheduleMenu from './useScheduleMenu';
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
@@ -43,7 +43,8 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
     },
     ...headerMenus
   ] : [], [scheduleInfo, t, headerMenus])
-  useHeaderMenuHandler(headerMenuList)
+  const setHeaderMenu = useHeaderMenuSetValue()
+  setHeaderMenu(headerMenuList)
 
   return [isSaveScheduleAsPresetOpen, saveScheduleAsPreset]
 }

@@ -5,15 +5,16 @@ import { useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/a
 import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog';
 import { useCreateExercisePreset } from '@features/exercisePreset/api';
 import PresetDisplay from '@features/exercisePreset/ui/PresetDisplay';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import useSpinner from '@shared/hooks/useSpinner';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 import { useBottomNavi } from '@widgets/bottomNavi';
-import { useHeaderHandler } from '@widgets/header';
 
 export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
   useBottomNavi()
-  useHeaderHandler(t('title:preset'))
+  const setHeader = useHeaderSetValue()
+  setHeader(t('title:preset'))
 
   const navigator = useNavigate()
 

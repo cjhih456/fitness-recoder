@@ -2,9 +2,9 @@ import { createSearchParams, useNavigate, useParams, useSearchParams } from 'rea
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useScheduleActions } from '@entities/schedule/hooks';
 import { useSetAlert } from '@shared/hooks/alert';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import { LogEvent } from '@shared/lib/firebase/firebase';
-import { useHeaderHandler } from '@widgets/header';
 import { useCreateScheduleWithExercisePlans } from '@widgets/schedule-with-exercise/api';
 
 const defaultSearchParams = createSearchParams({
@@ -12,7 +12,8 @@ const defaultSearchParams = createSearchParams({
 })
 
 export default function CreateSchedule() {
-  useHeaderHandler('Create Schedule')
+  const setHeader = useHeaderSetValue()
+  setHeader('Create Schedule')
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()

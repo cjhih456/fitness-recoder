@@ -1,4 +1,4 @@
-import type { MenuType } from '@widgets/header';
+import type { MenuType } from '@shared/model/menuType';
 import type { ReactNode } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { useMemo, useRef, useState } from 'react';

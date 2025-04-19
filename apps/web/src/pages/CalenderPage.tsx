@@ -6,15 +6,16 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
 import ScheduleList from '@entities/schedule/ui/ScheduleList';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import { DateService } from '@shared/lib/dateService';
 import { default as Calender } from '@shared/ui/calender';
 import { useBottomNavi } from '@widgets/bottomNavi';
-import { useHeaderHandler } from '@widgets/header';
 
 function CalenderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler(t('calender'))
+  const setHeader = useHeaderSetValue()
+  setHeader(t('calender'))
 
   const location = useLocation()
   const navigate = useNavigate()

@@ -13,11 +13,11 @@ import useScheduleTypeActions from '@entities/schedule/hooks/useScheduleTypeActi
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 import ExerciseDataList from '@features/exercise/ui/ExerciseDataList'
 import SetListEditor from '@features/set/ui/SetListEditor'
+import { useHeaderSetValue } from '@shared/hooks/header'
 import usePageTracker from '@shared/hooks/usePageTracker'
 import { formatTime } from '@shared/lib/formatter'
 import { BooleanRender } from '@shared/ui/StateRender'
 import { BottomNaviArea } from '@widgets/bottomNavi'
-import { useHeaderHandler } from '@widgets/header'
 
 export default function DisplayWorkout() {
   const { t } = useTranslation(['workout', 'error'])
@@ -37,7 +37,7 @@ export default function DisplayWorkout() {
       }
     }
   )
-  const { setHeader } = useHeaderHandler()
+  const setHeader = useHeaderSetValue()
 
   const { startSchedule, pauseSchedule, finishSchedule, calcTime } = useScheduleTypeActions({
     schedule: schedule,

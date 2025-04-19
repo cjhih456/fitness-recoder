@@ -5,7 +5,7 @@ import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
 import { useUpdateExerciseListByExercisePreset } from '@features/exercise/api'
 import { usePresetMenu } from '@features/exercisePreset/hooks'
-import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
+import { useHeaderMenuSetValue, useHeaderSetValue } from '@shared/hooks/header'
 
 export default function PresetDetailPage() {
   const params = useParams()
@@ -20,9 +20,10 @@ export default function PresetDetailPage() {
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
 
   const headerMenu = usePresetMenu(id)
-
-  useHeaderHandler(exercisePreset.name)
-  useHeaderMenuHandler(headerMenu)
+  const setHeader = useHeaderSetValue()
+  const setHeaderMenu = useHeaderMenuSetValue()
+  setHeader(exercisePreset.name)
+  setHeaderMenu(headerMenu)
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return
     updateExerciseList(id, exerciseList, exerciseIdxList).finally(() => {

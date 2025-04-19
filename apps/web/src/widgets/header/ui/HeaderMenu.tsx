@@ -1,10 +1,9 @@
 import { Button, Popover, PopoverContent, PopoverTrigger, Switch } from '@heroui/react';
-import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { MdDarkMode, MdLightMode, MdMoreVert } from 'react-icons/md';
+import { useHeaderMenuValue } from '@shared/hooks/header';
 import useTheme from '@shared/hooks/useTheme'
 import { BooleanRender, EnumRender } from '@shared/ui/StateRender';
-import { headerMenuAtom } from '../lib/atom';
 import HeaderMenuItem from './HeaderMenuItem';
 
 export default function HeaderMenu() {
@@ -12,7 +11,7 @@ export default function HeaderMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme(true)
 
-  const [headerMenu] = useAtom(headerMenuAtom)
+  const headerMenu = useHeaderMenuValue()
 
   return <BooleanRender
     state={Boolean(headerMenu.length)}

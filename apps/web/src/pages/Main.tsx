@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@entities/schedule/api'
 import { useScheduleActions } from '@entities/schedule/hooks'
 import ScheduleDisplay from '@entities/schedule/ui/ScheduleDisplay'
+import { useHeaderSetValue } from '@shared/hooks/header'
 import usePageTracker from '@shared/hooks/usePageTracker'
 import { DateService } from '@shared/lib/dateService'
 import MenuableAccordion from '@shared/ui/MenuableAccordion'
 import { BooleanRender } from '@shared/ui/StateRender'
 import { useBottomNavi } from '@widgets/bottomNavi'
-import { useHeaderHandler } from '@widgets/header'
 
 export default function Main() {
   useBottomNavi()
@@ -20,7 +20,8 @@ export default function Main() {
 
   const todayInfo = DateService.takeTodayDateValue()
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
-  useHeaderHandler(t('title:home'))
+  const setHeader = useHeaderSetValue()
+  setHeader(t('title:home'))
 
   const {
     gotoCreateScheduleAction,

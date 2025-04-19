@@ -1,4 +1,4 @@
-import type { MenuType } from '@widgets/header'
+import type { MenuType } from '@shared/model/menuType'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import usePresetActions from './usePresetActions'

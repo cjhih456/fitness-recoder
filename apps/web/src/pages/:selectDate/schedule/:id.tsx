@@ -3,11 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useUpdateExerciseListBySchedule } from '@features/exercise/api';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import usePageTracker from '@shared/hooks/usePageTracker';
-import { useHeaderHandler } from '@widgets/header';
 
 export default function DisplaySchedule() {
-  useHeaderHandler('Schedule')
+  const setHeader = useHeaderSetValue()
+  setHeader('Schedule')
   usePageTracker('modify_schedule')
 
   const { id: idParam } = useParams()

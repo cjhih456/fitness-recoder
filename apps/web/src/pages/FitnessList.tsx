@@ -4,13 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { defaultFitnessSearchFormData } from '@entities/fitness/model/FitnessSearchFormData'
 import FitnessSearchForm from '@entities/fitness/ui/FitnessSearchForm'
 import FitnessListByFilter from '@features/fitness/ui/FitnessListByKeywords'
+import { useHeaderSetValue } from '@shared/hooks/header'
 import { useBottomNavi } from '@widgets/bottomNavi'
-import { useHeaderHandler } from '@widgets/header'
 
 function FitnessList() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler(t('exercise'))
+  const setHeader = useHeaderSetValue()
+  setHeader(t('exercise'))
   const [searchFormData, setSearchFormData] = useState<FitnessSearchFormData>(defaultFitnessSearchFormData)
 
   return <div className="grid h-full max-h-full overflow-hidden pt-4">
