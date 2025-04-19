@@ -2,8 +2,8 @@ import { Button } from '@heroui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useExercisePresetWithListFragment } from '@entities/exercisePreset/api';
-import { usePresetMenu } from '@entities/exercisePreset/hooks';
 import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList';
+import { usePresetMenu } from '@features/exercisePreset/hooks';
 import SetState from '@features/set/ui/SetState';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 

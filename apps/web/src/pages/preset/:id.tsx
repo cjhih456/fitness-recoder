@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
-import { usePresetMenu } from '@entities/exercisePreset/hooks'
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
 import { useUpdateExerciseListByExercisePreset } from '@features/exercise/api'
+import { usePresetMenu } from '@features/exercisePreset/hooks'
 import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
 
 export default function PresetDetailPage() {
