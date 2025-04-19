@@ -3,7 +3,6 @@ import { Button, Link, Navbar, NavbarContent, NavbarMenu, NavbarMenuItem, Navbar
 import { useCallback, useMemo, useState } from 'react'
 import { MdArrowBackIosNew, MdClose, MdMenu } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import FitnessSearchModal from '@widgets/fitness-search-modal/ui/FitnessSearchModal';
 import HeaderContent, { HeaderMenu } from '@widgets/header';
 
 interface DefaultLayoutProps {
@@ -76,7 +75,6 @@ export default function DefaultLayout({
       <div className="max-w-[640px] w-[640px] relative">
         {child}
       </div>
-      <FitnessSearchModal />
     </main>
   </>
 }

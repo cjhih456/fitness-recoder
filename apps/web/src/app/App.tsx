@@ -1,9 +1,10 @@
 import { HeroUIProvider, Spinner } from '@heroui/react'
 import { Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
-import FitnessDataModal from '@widgets/FitnessDataModal'
 import AlertModal from '@widgets/alert'
 import BottomNavi from '@widgets/bottomNavi'
+import FitnessDataModal from '@widgets/fitness-data-modal'
+import FitnessSearchModal from '@widgets/fitness-search-modal'
 import DefaultLayout from './layout/DefaultLayout'
 import CRouter from './routes/CRoutes'
 
@@ -19,6 +20,7 @@ function App() {
       <BottomNavi />
       <AlertModal />
       <FitnessDataModal />
+      <FitnessSearchModal />
     </HeroUIProvider>
   </main>
 }
