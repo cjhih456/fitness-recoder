@@ -1,8 +1,8 @@
 import type { ExerciseDataListProps } from './ExerciseDataList';
 import type { Exercise } from '@fitness/struct';
 import type { Meta, StoryObj } from '@storybook/react';
+import ExerciseDataItem from '@entities/exercise/ui/ExerciseDataItem';
 import SetListEditor from '@features/set/ui/SetListEditor';
-import ExerciseDataItem from './ExerciseDataItem';
 import ExerciseDataList from './ExerciseDataList';
 
 const meta = {
