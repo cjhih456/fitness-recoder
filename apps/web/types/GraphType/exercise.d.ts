@@ -26,7 +26,7 @@ declare interface DeleteExerciseByIdVariable {
 
 // CreateExerciseBySchedule
 declare interface CreateExerciseByScheduleResponse {
-  createExerciseBySchedule: ExerciseDataStoreType
+  createExerciseBySchedule: ExerciseDataStoreType[]
 }
 declare interface CreateExerciseByScheduleVariable {
   exercise: { scheduleId: number, fitnessIds: number[] }
@@ -34,7 +34,7 @@ declare interface CreateExerciseByScheduleVariable {
 
 // CreateExerciseByExercisePreset
 declare interface CreateExerciseByExercisePresetResponse {
-  createExerciseByExercisePreset: ExerciseDataStoreType
+  createExerciseByExercisePreset: ExerciseDataStoreType[]
 }
 declare interface CreateExerciseByExercisePresetVariable {
   exercise: { exercisePresetId: number, fitnessIds: number[] }
