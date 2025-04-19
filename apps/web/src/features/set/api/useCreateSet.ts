@@ -1,7 +1,7 @@
 import type { CreateSetVariable, CreateSetResponse } from '@entities/set/model'
 import { useMutation } from '@apollo/client'
 import SetsFragment from '@entities/set/api/fragment/SetsFragment'
-import CreateSetGql from '@entities/set/api/mutation/CreateSetGql'
+import CreateSetGql from '@features/set/api/mutation/CreateSetGql'
 export default function useCreateSet() {
   return useMutation<CreateSetResponse, CreateSetVariable>(CreateSetGql, {
     update: (cache, { data }, { variables }) => {

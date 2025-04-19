@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { CreateSetResponse, CreateSetVariable } from '@entities/set/model';
-import CreateSetGql from '@entities/set/api/mutation/CreateSetGql';
+import CreateSetGql from '@features/set/api/mutation/CreateSetGql';
 import { SetMockData } from '@entities/set/api/set.mockData';
 
 const CreateSetMock: MockedResponse<CreateSetResponse, CreateSetVariable> = {

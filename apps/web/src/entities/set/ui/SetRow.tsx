@@ -2,8 +2,8 @@ import type { SetsStoreType } from '../model'
 import { Button, Checkbox, Input } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 import { MdClear } from 'react-icons/md'
+import useSetFragment from '@entities/set/api/useSetFragment'
 import { BooleanRender } from '@shared/ui/StateRender'
-import useSetFragment from '../api/useSetFragment'
 
 export interface SetRowProps {
   setId: number

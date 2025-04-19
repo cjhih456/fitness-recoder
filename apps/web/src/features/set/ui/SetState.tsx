@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { MdCheck } from 'react-icons/md';
-import { useGetSetListByExerciseId } from '@features/set/api';
+import { useGetSetListByExerciseId } from '@entities/set/api';
 import { EnumRender } from '@shared/ui/StateRender';
 
 interface SetStateProps {

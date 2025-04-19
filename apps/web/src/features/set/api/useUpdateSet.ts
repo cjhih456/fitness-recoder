@@ -1,7 +1,7 @@
 import type { UpdateSetVariable, UpdateSetResponse } from '@entities/set/model';
 import { useMutation } from '@apollo/client'
 import SetsFragment from '@entities/set/api/fragment/SetsFragment';
-import UpdateSetGql from '@entities/set/api/mutation/UpdateSetGql';
+import UpdateSetGql from '@features/set/api/mutation/UpdateSetGql';
 export default function useUpdateSet() {
   return useMutation<UpdateSetResponse, UpdateSetVariable>(UpdateSetGql, {
     update: (cache, { data }) => {

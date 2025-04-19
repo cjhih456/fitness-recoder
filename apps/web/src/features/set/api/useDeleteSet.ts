@@ -3,7 +3,7 @@ import type { DeleteSetResponse, DeleteSetVariable } from '@entities/set/model'
 import type { Sets } from '@fitness/struct'
 import { useMutation } from '@apollo/client'
 import SetsFragment from '@entities/set/api/fragment/SetsFragment'
-import DeleteSetGql from '@entities/set/api/mutation/DeleteSetGql'
+import DeleteSetGql from '@features/set/api/mutation/DeleteSetGql'
 
 export default function useDeleteSet() {
   return useMutation<DeleteSetResponse, DeleteSetVariable>(DeleteSetGql, {
