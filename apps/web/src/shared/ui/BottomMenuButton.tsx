@@ -2,9 +2,9 @@ import type { IconType } from 'react-icons';
 import { Button } from '@heroui/react';
 import { useNavigate } from 'react-router-dom';
 
-interface MenuButtonProps { name: string, Icon: IconType, path: string }
+interface BottomMenuButtonProps { name: string, Icon: IconType, path: string }
 
-export default function MenuButton({ name, Icon, path }: MenuButtonProps) {
+export default function BottomMenuButton({ name, Icon, path }: BottomMenuButtonProps) {
   const navigate = useNavigate()
   function onClickAction() {
     navigate(path)
