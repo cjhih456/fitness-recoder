@@ -1,6 +1,6 @@
 import type { DateValue } from '@shared/lib/dateService';
 import { ScrollShadow } from '@heroui/react'
-import { Suspense, useMemo, useState } from 'react'
+import { Suspense, useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
@@ -15,7 +15,9 @@ function CalenderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
   const setHeader = useHeaderSetValue()
-  setHeader(t('calender'))
+  useLayoutEffect(() => {
+    setHeader(t('calender'))
+  }, [t, setHeader])
 
   const location = useLocation()
   const navigate = useNavigate()

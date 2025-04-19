@@ -1,5 +1,5 @@
 import type { Schedule } from '@fitness/struct'
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
@@ -44,7 +44,9 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
     ...headerMenus
   ] : [], [scheduleInfo, t, headerMenus])
   const setHeaderMenu = useHeaderMenuSetValue()
-  setHeaderMenu(headerMenuList)
+  useLayoutEffect(() => {
+    setHeaderMenu(headerMenuList)
+  }, [headerMenuList, setHeaderMenu])
 
   return [isSaveScheduleAsPresetOpen, saveScheduleAsPreset]
 }

@@ -1,4 +1,5 @@
 import { Button, ScrollShadow } from '@heroui/react';
+import { useLayoutEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/api';
@@ -17,7 +18,9 @@ export default function PresetListPage() {
   const { t } = useTranslation(['preset', 'title', 'common'])
   useBottomNavi()
   const setHeader = useHeaderSetValue()
-  setHeader(t('title:preset'))
+  useLayoutEffect(() => {
+    setHeader(t('title:preset'))
+  }, [t, setHeader])
 
   const navigator = useNavigate()
 

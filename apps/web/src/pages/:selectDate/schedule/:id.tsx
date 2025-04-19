@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useLayoutEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
@@ -8,7 +8,9 @@ import usePageTracker from '@shared/hooks/usePageTracker';
 
 export default function DisplaySchedule() {
   const setHeader = useHeaderSetValue()
-  setHeader('Schedule')
+  useLayoutEffect(() => {
+    setHeader('Schedule')
+  }, [setHeader])
   usePageTracker('modify_schedule')
 
   const { id: idParam } = useParams()

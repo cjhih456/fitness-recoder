@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
@@ -22,8 +22,10 @@ export default function PresetDetailPage() {
   const presetMenu = usePresetMenu()
   const setHeader = useHeaderSetValue()
   const setHeaderMenu = useHeaderMenuSetValue()
-  setHeader(exercisePreset.name)
-  setHeaderMenu(presetMenu(id))
+  useLayoutEffect(() => {
+    setHeader(exercisePreset.name)
+    setHeaderMenu(presetMenu(id))
+  }, [exercisePreset.name, id, presetMenu, setHeader, setHeaderMenu])
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return
     updateExerciseList(id, exerciseList, exerciseIdxList).finally(() => {

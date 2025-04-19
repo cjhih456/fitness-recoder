@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
 import { useScheduleActions } from '@features/schedule/hooks';
@@ -13,7 +14,9 @@ const defaultSearchParams = createSearchParams({
 
 export default function CreateSchedule() {
   const setHeader = useHeaderSetValue()
-  setHeader('Create Schedule')
+  useLayoutEffect(() => {
+    setHeader('Create Schedule')
+  }, [setHeader])
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()

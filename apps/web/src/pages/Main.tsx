@@ -1,5 +1,5 @@
 import { Button, ScrollShadow } from '@heroui/react'
-import { Suspense, useCallback } from 'react'
+import { Suspense, useCallback, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@entities/schedule/api'
@@ -21,7 +21,9 @@ export default function Main() {
   const todayInfo = DateService.takeTodayDateValue()
   const { data: scheduleListData } = useGetScheduleByDate(todayInfo.year, todayInfo.month, todayInfo.date)
   const setHeader = useHeaderSetValue()
-  setHeader(t('title:home'))
+  useLayoutEffect(() => {
+    setHeader(t('title:home'))
+  }, [t, setHeader])
 
   const {
     gotoCreateScheduleAction,
