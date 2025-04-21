@@ -31,5 +31,5 @@ type Mutation {
   createExercisePreset(exercisePreset: CreateExercisePresetInput): ExercisePresetWithList
   updateExercisePreset(exercisePreset: UpdateExercisePresetInput): ExercisePresetWithList
   deleteExercisePreset(id: Int!): String
-  copyExercisePresetFromSchedule(scheduleId: Int!, name: String!): ExercisePreset
+  copyExercisePresetFromSchedule(scheduleId: Int!, name: String!): ExercisePresetWithList
 }
