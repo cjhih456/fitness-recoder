@@ -1,13 +1,13 @@
 import type { CalenderProps, CalendarMode } from '../types'
 import type { DateValue } from '@shared/lib/dateService'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { DateService } from '@shared/lib/dateService'
 import { EnumRender } from '@shared/ui/StateRender'
 import DateView from '../organisms/DateView'
 import MonthView from '../organisms/MonthView'
 import YearView from '../organisms/YearView'
 
-export default function Calender(props: CalenderProps) {
+const Calender = memo((props: CalenderProps) => {
   const { onChange, dateRange, defaultMode } = props
   const [mode, setMode] = useState<CalendarMode>(defaultMode ?? 'date')
   const changeTrigger = (v: DateValue) => onChange(DateService.adjustDateToRange(v, dateRange))
@@ -39,4 +39,9 @@ export default function Calender(props: CalenderProps) {
       />
     </div>
   );
-}
+}, (prevProps, nextProps) => {
+  return prevProps.dateRange === nextProps.dateRange &&
+    prevProps.defaultMode === nextProps.defaultMode &&
+    prevProps.value === nextProps.value
+})
+export default Calender
