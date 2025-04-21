@@ -10,7 +10,8 @@ import useScheduleMenu from './useScheduleMenu';
 
 export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
   boolean,
-  (_v: boolean, _presetName?: string) => Promise<void>
+  (_v: boolean) => void,
+  (_presetName?: string) => Promise<void>
 ] {
   const { pushAlert } = useSetAlert()
   const navigate = useNavigate()
@@ -22,9 +23,8 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
   function makeAsPreset() {
     setSaveScheduleAsPresetOpen(true)
   }
-  async function saveScheduleAsPreset(v: boolean, presetName?: string) {
-    if (!presetName || !v || !scheduleInfo) return
-    setSaveScheduleAsPresetOpen(!v)
+  async function saveScheduleAsPreset(presetName?: string) {
+    if (!presetName || !scheduleInfo) return
     const result = await copyExercisePresetFromSchedule({ variables: { scheduleId: scheduleInfo.id, name: presetName } })
     if (result.data?.copyExercisePresetFromSchedule) {
       navigate(`/preset/${result.data.copyExercisePresetFromSchedule.id}`)
@@ -48,5 +48,5 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
     setHeaderMenu(headerMenuList)
   }, [headerMenuList, setHeaderMenu])
 
-  return [isSaveScheduleAsPresetOpen, saveScheduleAsPreset]
+  return [isSaveScheduleAsPresetOpen, setSaveScheduleAsPresetOpen, saveScheduleAsPreset]
 }

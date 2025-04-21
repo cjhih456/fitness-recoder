@@ -25,8 +25,7 @@ export default function PresetListPage() {
   const navigator = useNavigate()
 
   const [createExercisePreset] = useCreateExercisePreset()
-  function hasInputNewName(open: boolean, presetName?: string) {
-    if (!open || !presetName) return
+  function hasInputNewName(presetName: string) {
     createExercisePreset({ variables: { exercisePreset: { name: presetName } } }).then((result) => {
       if (result.data) {
         navigator(`/preset/${result.data?.createExercisePreset.id}`)
@@ -45,12 +44,12 @@ export default function PresetListPage() {
 
   return <main className="pt-4 px-4 flex flex-col gap-y-4">
     <figure role="create area">
-      <PresetNameInputDialog onChange={hasInputNewName}>
+      <PresetNameInputDialog.WithChild onSubmit={hasInputNewName}>
         {(openFn) => <div className='grid'>
           <Button onPress={openFn} size="lg">{t('actionBtn.create')}</Button>
         </div>
         }
-      </PresetNameInputDialog>
+      </PresetNameInputDialog.WithChild>
     </figure>
     <ScrollShadow>
       <figcaption role="" className='flex flex-col gap-y-3 flex-nowrap'>

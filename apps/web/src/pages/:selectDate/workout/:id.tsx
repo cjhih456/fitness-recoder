@@ -57,7 +57,7 @@ export default function DisplayWorkout() {
     setHeader(formatTime(calcTime(lazySchedule)))
   })
 
-  const [isSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(lazySchedule)
+  const [isSaveScheduleAsPresetOpen, setSaveScheduleAsPresetOpen, saveScheduleAsPreset] = useScheduleHeaderMenu(lazySchedule)
 
   return <>
     <div className="flex flex-col pt-4">
@@ -86,6 +86,6 @@ export default function DisplayWorkout() {
         </BottomNaviArea>
       }}
     />
-    <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onChange={saveScheduleAsPreset} />
+    <PresetNameInputDialog isOpen={isSaveScheduleAsPresetOpen} onSubmit={saveScheduleAsPreset} onOpenChange={setSaveScheduleAsPresetOpen} />
   </>
 }
