@@ -1,18 +1,16 @@
 import useCreateExerciseByExercisePreset from './useCreateExerciseByExercisePreset'
 import useCreateExerciseBySchedule from './useCreateExerciseBySchedule'
 import useDeleteExerciseById from './useDeleteExerciseById'
+import useDeleteExerciseByIds from './useDeleteExerciseByIds'
 import useUpdateExerciseListByExercisePreset from './useUpdateExerciseListByExercisePreset'
-import useUpdateExerciseListByExercisePresetId from './useUpdateExerciseListByExercisePresetId'
 import useUpdateExerciseListBySchedule from './useUpdateExerciseListBySchedule'
-import useUpdateExerciseListByScheduleId from './useUpdateExerciseListByScheduleId'
 
 export {
   useCreateExerciseBySchedule,
   useCreateExerciseByExercisePreset,
 
   useDeleteExerciseById,
-  useUpdateExerciseListByScheduleId,
-  useUpdateExerciseListByExercisePresetId,
+  useDeleteExerciseByIds,
 
   useUpdateExerciseListBySchedule,
   useUpdateExerciseListByExercisePreset,

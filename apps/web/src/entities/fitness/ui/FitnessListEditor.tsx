@@ -4,19 +4,19 @@ import { useFitnessSearchModalAction } from '@shared/hooks/fitness-search-modal'
 import FitnessList from './FitnessList'
 
 interface FitnessListEditorProps {
-  savedIdxData?: number[]
-  onSaveAction: (_exerciseIdxList: number[], _savedIdxData: number[]) => void
+  fitnessIds?: number[]
+  onSaveAction: (_newIds: number[], _beforeIds: number[]) => void
   saveBtnText: string
 }
 
 export default function FitnessListEditor({
-  savedIdxData = [],
+  fitnessIds = [],
   saveBtnText,
   onSaveAction
 }: FitnessListEditorProps) {
   const openAction = useFitnessSearchModalAction()
 
-  const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>(savedIdxData)
+  const [lazyFitnessIds, setLazyFitnessIds] = useState<number[]>(fitnessIds)
   const setDialogState = () => {
     openAction({ type: true, resolveList: lazyFitnessIds })?.then((list) => {
       if (!list) return
@@ -30,7 +30,7 @@ export default function FitnessListEditor({
     </div>
     <div className="grid grid-cols-2 gap-x-2">
       <Button onPress={() => setDialogState()}>Add Exercise</Button>
-      <Button onPress={() => onSaveAction(lazyFitnessIds, savedIdxData)}>{saveBtnText}</Button>
+      <Button onPress={() => onSaveAction(lazyFitnessIds, fitnessIds)}>{saveBtnText}</Button>
     </div>
   </div >
 }

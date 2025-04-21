@@ -1,7 +1,7 @@
 import type { DeleteExerciseByIdVariable, DeleteExerciseByIdResponse } from '../model';
 import type { ExerciseDataStoreType } from '@entities/exercise/model';
 import { useMutation } from '@apollo/client'
-import DeleteExerciseById from '@features/exercise/api/mutation/DeleteExerciseById';
+import DeleteExerciseById from './mutation/DeleteExerciseById';
 export default function useDeleteExerciseById() {
   return useMutation<
     DeleteExerciseByIdResponse,

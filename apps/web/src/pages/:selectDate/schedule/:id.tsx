@@ -19,15 +19,15 @@ export default function DisplaySchedule() {
   const { data } = useGetExerciseListByScheduleId(scheduleId)
   const updateExerciseList = useUpdateExerciseListBySchedule()
 
-  const savedExerciseIdxList = data.getExerciseListByScheduleId.map(v => v.fitnessId)
-  function saveSchedule(exerciseIdxList: number[]) {
-    updateExerciseList(scheduleId, savedExerciseIdxList || [], exerciseIdxList)
+  const fitnessIds = data.getExerciseListByScheduleId.map(v => v.fitnessId)
+  function saveSchedule(fitnessIdxList: number[]) {
+    updateExerciseList(scheduleId, data.getExerciseListByScheduleId, fitnessIdxList)
     navigate(-1)
   }
 
   return <FitnessListEditor
     saveBtnText='Save Exercise'
-    savedIdxData={savedExerciseIdxList}
+    fitnessIds={fitnessIds}
     onSaveAction={saveSchedule}
   />
 }

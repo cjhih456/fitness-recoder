@@ -17,30 +17,18 @@ export interface CreateExerciseByExercisePresetVariable {
   exercise: { exercisePresetId: number, fitnessIds: number[] }
 }
 
-// UpdateExerciseListByExercisePresetId
-export interface UpdateExerciseListByExercisePresetIdResponse {
-  updateExerciseListByExercisePresetId: ExerciseDataStoreType[]
-}
-export interface UpdateExerciseListByExercisePresetIdVariable {
-  exercisePresetId: number,
-  newExercise: number[],
-  deleteExerciseId: number[]
-}
-
-// UpdateExerciseListByScheduleId
-export interface UpdateExerciseListByScheduleIdResponse {
-  updateExerciseListByScheduleId: ExerciseDataStoreType[]
-}
-export interface UpdateExerciseListByScheduleIdVariable {
-  scheduleId: number,
-  newExercise: number[],
-  deleteExerciseId: number[]
-}
-
 // DeleteExerciseById
 export interface DeleteExerciseByIdResponse {
   deleteExerciseById: string
 }
 export interface DeleteExerciseByIdVariable {
   id: number
+}
+
+// DeleteExerciseByIds
+export interface DeleteExerciseByIdsResponse {
+  deleteExerciseByIds: string
+}
+export interface DeleteExerciseByIdsVariable {
+  ids: number[]
 }

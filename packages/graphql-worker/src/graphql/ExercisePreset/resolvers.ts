@@ -1,9 +1,10 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import type { IResolvers } from '@graphql-tools/utils';
 import type { ExercisePreset } from '@fitness/struct';
+import type { IResolvers } from '@graphql-tools/utils';
 import {
   getExerciseByExercisePresetId
 } from '../Exercise/repository';
+import { loadFitnessByExerciseList } from '../Exercise/service';
 import {
   getExercisePresetWithListById,
   getExercisePresetWithListByIds,
@@ -20,8 +21,9 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
   const getExercisePresetWithListByIdShell: ResponseResolver<{ id: number }, ExercisePreset.WithExerciseList | null> = async (_, { id }, { client }) => {
     const result = await getExercisePresetWithListById(dbTransitionBus, { client }, { id })
     if (!result) return null
+    const exerciseList = await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
     return Object.assign(result, {
-      exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: result.id })
+      exerciseList: await loadFitnessByExerciseList(dbTransitionBus, { client }, { exerciseList })
     })
   }
   const getExercisePresetWithListByIdsShell: ResponseResolver<{ ids: number[] }, ExercisePreset.WithExerciseList[] | null> = async (_, { ids }, { client }) => {
@@ -29,8 +31,9 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     if (!result) return null
 
     return await Promise.all(result.map(async (obj) => {
+      const exerciseList = await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
       return Object.assign(obj, {
-        exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
+        exerciseList: await loadFitnessByExerciseList(dbTransitionBus, { client }, { exerciseList })
       })
     }))
   }
@@ -38,8 +41,9 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     const result = await getExercisePresetWithListByOffset(dbTransitionBus, { client }, { offset, size })
     if (!result) return null
     return await Promise.all(result.map(async (obj) => {
+      const exerciseList = await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
       return Object.assign(obj, {
-        exerciseList: await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId: obj.id })
+        exerciseList: await loadFitnessByExerciseList(dbTransitionBus, { client }, { exerciseList })
       })
     }))
   }

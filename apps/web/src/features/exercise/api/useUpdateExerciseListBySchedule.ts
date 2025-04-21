@@ -1,31 +1,42 @@
-import { useUpdateExerciseListByScheduleId } from '@features/exercise/api'
-export default function useUpdateExerciseListBySchedule() {
-  const [updateListByScheduleId] = useUpdateExerciseListByScheduleId()
-  return async (scheduleId: number, oldExerciseIds: number[], newExerciseIds: number[]) => {
-    const removeNeedExerciseData = [] as number[]
-    const keepExerciseData = [] as number[]
-    const createNeedExerciseId = [] as number[]
+import type { Exercise } from '@fitness/struct'
+import { useCreateExerciseBySchedule, useDeleteExerciseByIds } from '@features/exercise/api'
 
-    oldExerciseIds.forEach((e) => {
-      if (newExerciseIds.includes(e)) {
+export default function useUpdateExerciseListBySchedule() {
+  const [createExercise] = useCreateExerciseBySchedule()
+  const [deleteExercise] = useDeleteExerciseByIds()
+  return async (scheduleId: number, oldExerciseList: Exercise.Data[], fitnessIds: number[]) => {
+    const removeNeedExerciseData = [] as Exercise.Data[]
+    const keepExerciseData = [] as Exercise.Data[]
+    const createNeedFitnessId = [] as number[]
+    oldExerciseList.forEach((e) => {
+      if (fitnessIds.includes(e.fitnessId)) {
         keepExerciseData.push(e)
       } else {
         removeNeedExerciseData.push(e)
       }
     })
-
-    newExerciseIds.forEach((newExerciseId) => {
-      if (!keepExerciseData.includes(newExerciseId)) {
-        createNeedExerciseId.push(newExerciseId)
+    const keepExerciseDataExercises = keepExerciseData.map(v => v.fitnessId)
+    fitnessIds.forEach((newExerciseId) => {
+      if (!keepExerciseDataExercises.includes(newExerciseId)) {
+        createNeedFitnessId.push(newExerciseId)
       }
     })
-
-    updateListByScheduleId({
-      variables: {
-        scheduleId: scheduleId,
-        deleteExerciseId: removeNeedExerciseData,
-        newExercise: createNeedExerciseId
-      }
-    })
+    if (createNeedFitnessId.length) {
+      await createExercise({
+        variables: {
+          exercise: {
+            scheduleId,
+            fitnessIds: createNeedFitnessId
+          }
+        }
+      })
+    }
+    if (removeNeedExerciseData.length) {
+      await deleteExercise({
+        variables: {
+          ids: removeNeedExerciseData.map(v => Number(v.id))
+        }
+      })
+    }
   }
 }

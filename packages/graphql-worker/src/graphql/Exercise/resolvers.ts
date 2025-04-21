@@ -56,19 +56,9 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       { client },
       { scheduleId, exerciseList: newExerciseList }
     )
-    return newExerciseList || null
+    return await loadFitnessByExerciseList(dbTransitionBus, { client }, { exerciseList: newExerciseList })
   }
 
-  const updateExerciseListByScheduleIdShell: ResponseResolver<{
-    scheduleId: number,
-    newExercise: number[],
-    deleteExerciseId: number[]
-  }, Exercise.Data[]> = async (_, { scheduleId, newExercise, deleteExerciseId }, { client }) => {
-    await deleteExerciseByIds(dbTransitionBus, { client }, { ids: deleteExerciseId })
-    const createdExercise = await createExerciseByIds(dbTransitionBus, { client }, { fitnessIds: newExercise })
-    await createExerciseWithScheduleRelation(dbTransitionBus, { client }, { scheduleId, exerciseList: createdExercise })
-    return await getExerciseByScheduleId(dbTransitionBus, { client }, { scheduleId })
-  }
   const createExerciseByExercisePresetShell: ResponseResolver<{
     exercise: {
       exercisePresetId: number,
@@ -87,27 +77,17 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
       { client },
       { exercisePresetId, exerciseList: newExerciseList }
     )
-    return newExerciseList || null
+    return await loadFitnessByExerciseList(dbTransitionBus, { client }, { exerciseList: newExerciseList })
   }
-  const updateExerciseListByExercisePresetIdShell: ResponseResolver<{
-    exercisePresetId: number,
-    newExercise: number[],
-    deleteExerciseId: number[]
-  }, Exercise.Data[]> = async (_, { exercisePresetId, newExercise, deleteExerciseId }, { client }) => {
-    if (deleteExerciseId.length) {
-      await deleteExerciseByIds(dbTransitionBus, { client }, { ids: deleteExerciseId })
-    }
-    if (newExercise.length) {
-      const createdExercise = await createExerciseByIds(dbTransitionBus, { client }, { fitnessIds: newExercise })
-      await createExerciseWithExercisePresetRelation(dbTransitionBus, { client }, { exercisePresetId, exerciseList: createdExercise })
-    }
-    return await getExerciseByExercisePresetId(dbTransitionBus, { client }, { exercisePresetId })
-  }
+
   const updateExerciseShell: ResponseResolver<{ exercise: { id: number, fitnessId: number } }, Exercise.Data | null> = async (_, { exercise }, { client }) => {
     return await updateExercise(dbTransitionBus, { client }, exercise)
   }
   const deleteExerciseByIdShell: ResponseResolver<{ id: number }, string> = async (_, { id }, { client }) => {
-    return await deleteExerciseByIds(dbTransitionBus, { client }, { ids: id })
+    return await deleteExerciseByIds(dbTransitionBus, { client }, { ids: [id] })
+  }
+  const deleteExerciseByIdsShell: ResponseResolver<{ ids: number[] }, string> = async (_, { ids }, { client }) => {
+    return await deleteExerciseByIds(dbTransitionBus, { client }, { ids })
   }
   return {
     Query: {
@@ -119,11 +99,10 @@ export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<
     },
     Mutation: {
       createExerciseBySchedule: createExerciseByScheduleShell,
-      updateExerciseListByScheduleId: updateExerciseListByScheduleIdShell,
       createExerciseByExercisePreset: createExerciseByExercisePresetShell,
-      updateExerciseListByExercisePresetId: updateExerciseListByExercisePresetIdShell,
       updateExercise: updateExerciseShell,
-      deleteExerciseById: deleteExerciseByIdShell
+      deleteExerciseById: deleteExerciseByIdShell,
+      deleteExerciseByIds: deleteExerciseByIdsShell
     }
   }
 }
