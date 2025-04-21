@@ -1,6 +1,6 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
-import type { IResolvers } from '@graphql-tools/utils';
 import type { Sets } from '@fitness/struct';
+import type { IResolvers } from '@graphql-tools/utils';
 import { getSetByIds, getSetById, getSetListByExerciseId, createSet, updateSet, deleteSetById } from './service';
 
 export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => {
