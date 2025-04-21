@@ -64,7 +64,7 @@ export default function DisplayWorkout() {
       <div className="px-4">
         <Suspense>
           <ExerciseDataList scheduleId={scheduleId}>
-            {({ exercise }) => <ExerciseDataItem exerciseId={exercise.id} fitnessName={exercise.fitness?.name}>
+            {({ exercise }) => <ExerciseDataItem exerciseId={exercise.id}>
               <SetListEditor exerciseDataId={exercise.id} readonly={lazySchedule?.type === ScheduleType.FINISH} />
             </ExerciseDataItem>}
           </ExerciseDataList>

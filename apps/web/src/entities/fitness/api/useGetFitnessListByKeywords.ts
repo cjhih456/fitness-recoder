@@ -30,10 +30,6 @@ export default function useGetFitnessListByKeywords({
   })
 
   const [hasNext, setHasNext] = useState(Boolean(query.data.getFitnessListByKeywords.length))
-  const refetch = useCallback((...args: Parameters<typeof query.refetch>) => {
-    setHasNext(true)
-    return query.refetch(...args)
-  }, [query])
   const fetchMore = useCallback(() => {
     startTransition(() => {
       query.fetchMore({
@@ -52,7 +48,6 @@ export default function useGetFitnessListByKeywords({
   }, [query])
   return {
     ...query,
-    refetch,
     fetchMore,
     hasNext
   }
