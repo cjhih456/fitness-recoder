@@ -2,7 +2,9 @@ import type { GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable
 import type { Fitness } from '@fitness/struct'
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
+import { useDebounceValue } from 'usehooks-ts';
 import GetFitnessListByKeywords from '@entities/fitness/api/query/GetFitnessListByKeywords';
+import { useDebounce } from '@shared/hooks/useDebounce';
 
 export interface UseGetFitnessListByKeywordsProps {
   name?: string,
@@ -19,14 +21,15 @@ export default function useGetFitnessListByKeywords({
   limit = 20,
   offset = 0
 }: UseGetFitnessListByKeywordsProps) {
+  const debouncedValue = useDebounce({
+    name,
+    category,
+    muscle,
+    limit,
+    offset
+  }, 500)
   const query = useSuspenseQuery<GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable>(GetFitnessListByKeywords, {
-    variables: {
-      name,
-      category,
-      muscle,
-      limit,
-      offset
-    }
+    variables: debouncedValue
   })
 
   const [hasNext, setHasNext] = useState(Boolean(query.data.getFitnessListByKeywords.length))
