@@ -2,6 +2,7 @@ import type { ExerciseDataListProps } from './ExerciseDataList';
 import type { Exercise } from '@fitness/struct';
 import type { Meta, StoryObj } from '@storybook/react';
 import ExerciseDataItem from '@entities/exercise/ui/ExerciseDataItem';
+// eslint-disable-next-line boundaries/element-types
 import SetListEditor from '@features/set/ui/SetListEditor';
 import ExerciseDataList from './ExerciseDataList';
 

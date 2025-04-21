@@ -1,4 +1,5 @@
 import type { ExerciseDataStoreType } from '../model'
+// eslint-disable-next-line boundaries/element-types
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData'
 
 export const ExerciseMockData: { [key: number]: ExerciseDataStoreType } = Array(20).fill(0).reduce((acc, _cur, i) => {

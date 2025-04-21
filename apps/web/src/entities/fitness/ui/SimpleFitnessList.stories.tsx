@@ -1,6 +1,7 @@
 import type { SimpleFitnessListProps } from './SimpleFitnessList'
 import type { Meta, StoryObj } from '@storybook/react';
-import SetState from '@features/set/ui/SetState';
+// eslint-disable-next-line boundaries/element-types
+import SetState from '@entities/set/ui/SetState';
 import SimpleFitnessList from './SimpleFitnessList'
 
 const meta = {

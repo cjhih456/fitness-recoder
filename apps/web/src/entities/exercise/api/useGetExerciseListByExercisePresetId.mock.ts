@@ -1,5 +1,6 @@
 import type { GetExerciseByExercisePresetIdResponse, GetExerciseByExercisePresetIdVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
+// eslint-disable-next-line boundaries/element-types
 import { FitnessMockData } from '../../fitness/api/fitness.mockData';
 import GetExerciseListByExercisePresetId from './query/GetExerciseListByExercisePresetId';
 
