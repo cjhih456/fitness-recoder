@@ -13,14 +13,14 @@ export default function useCreateExerciseBySchedule() {
       if (!variables) return
       const { scheduleId } = variables.exercise
       const newExercise = data.createExerciseBySchedule
-
       let hasUpdate = false
       cache.modify({
         fields: {
-          getExerciseListByScheduleId: (existingData, { storeFieldName }) => {
+          getExerciseListByScheduleId: (existingData, { storeFieldName, toReference }) => {
+            const refList = newExercise.map(v => toReference(v))
             if (!storeFieldName.includes(JSON.stringify({ scheduleId }))) return existingData
             hasUpdate = true
-            return [...existingData, ...newExercise]
+            return [...existingData, ...refList]
           }
         }
       })

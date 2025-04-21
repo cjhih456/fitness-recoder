@@ -1,15 +1,12 @@
 import type { UpdateSetVariable, UpdateSetResponse } from '@features/set/model';
 import { useMutation } from '@apollo/client'
-import SetsFragment from '@entities/set/api/fragment/SetsFragment';
+import updateSetCache from '@entities/set/lib/updateSetCache'
 import UpdateSetGql from '@features/set/api/mutation/UpdateSetGql';
 export default function useUpdateSet() {
   return useMutation<UpdateSetResponse, UpdateSetVariable>(UpdateSetGql, {
     update: (cache, { data }) => {
       if (!data) return
-      cache.updateFragment({
-        id: cache.identify(data.updateSet),
-        fragment: SetsFragment
-      }, (data) => {
+      updateSetCache(data.updateSet.id, cache, () => {
         return data.updateSet
       })
     },

@@ -1,8 +1,8 @@
 import type { Reference } from '@apollo/client'
 import type { DeleteSetResponse, DeleteSetVariable } from '@features/set/model'
-import type { Sets } from '@fitness/struct'
 import { useMutation } from '@apollo/client'
-import SetsFragment from '@entities/set/api/fragment/SetsFragment'
+import deleteSetCache from '@entities/set/lib/deleteSetCache'
+import getSetCache from '@entities/set/lib/getSetCache'
 import DeleteSetGql from '@features/set/api/mutation/DeleteSetGql'
 
 export default function useDeleteSet() {
@@ -14,10 +14,7 @@ export default function useDeleteSet() {
         fields: {
           getSetListByExerciseId: (existingData) => {
             const newData = existingData.filter((set: Reference) => {
-              const setObj = cache.readFragment<Sets.Set>({
-                id: cache.identify(set),
-                fragment: SetsFragment
-              })
+              const setObj = getSetCache(set, cache)
               return setObj?.id !== variables.id
             })
             return newData
@@ -25,9 +22,7 @@ export default function useDeleteSet() {
         }
       })
 
-      cache.evict({
-        id: cache.identify({ id: variables.id, __typename: 'Sets' })
-      })
+      deleteSetCache(variables.id, cache)
     }
   })
 }

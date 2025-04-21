@@ -1,8 +1,7 @@
 import type { CreateExerciseByExercisePresetResponse, CreateExerciseByExercisePresetVariable } from '@features/exercise/model';
 import { useMutation } from '@apollo/client'
-import GetExercisePresetWithListById from '@entities/exercisePreset/api/query/GetExercisePresetWithListById';
+import updateExercisePresetWithListCache from '@entities/exercisePreset/lib/updateExercisePresetWithListCache';
 import CreateExerciseByExercisePreset from '@features/exercise/api/mutation/CreateExerciseByExercisePreset';
-
 export default function useCreateExerciseByExercisePreset() {
   return useMutation<
     CreateExerciseByExercisePresetResponse,
@@ -13,23 +12,10 @@ export default function useCreateExerciseByExercisePreset() {
       if (!variables) return
       const { exercisePresetId } = variables.exercise
       const newExercise = data.createExerciseByExercisePreset
-      let hasUpdate = false
-      cache.modify({
-        fields: {
-          getExercisePresetWithListById: (existingData, { storeFieldName }) => {
-            if (!storeFieldName.includes(JSON.stringify({ id: exercisePresetId }))) return existingData
-            hasUpdate = true
-            return [...existingData, ...newExercise]
-          }
-        }
+      updateExercisePresetWithListCache(exercisePresetId, cache, (exercisePresetData) => {
+        if (!exercisePresetData) return exercisePresetData
+        return { ...exercisePresetData, exerciseList: [...exercisePresetData.exerciseList, ...newExercise] }
       })
-      if (!hasUpdate) {
-        cache.writeQuery({
-          query: GetExercisePresetWithListById,
-          variables: { id: exercisePresetId },
-          data: { getExercisePresetWithListById: newExercise }
-        })
-      }
     }
   })
 }

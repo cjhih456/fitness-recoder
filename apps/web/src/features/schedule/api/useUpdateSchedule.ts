@@ -1,5 +1,6 @@
 import type { UpdateScheduleResponse, UpdateScheduleVariable } from '../model';
 import { useMutation } from '@apollo/client'
+import updateScheduleCache from '@entities/schedule/lib/updateScheduleCache';
 import UpdateScheduleGql from './mutation/UpdateScheduleGql';
 
 export default function useUpdateSchedule() {
@@ -8,14 +9,16 @@ export default function useUpdateSchedule() {
       if (!result.data) return
       const { updateSchedule } = result.data
       if (!updateSchedule) return
-      cache.modify({
-        id: cache.identify(updateSchedule),
-        fields: {
-          type: () => updateSchedule.type,
-          beforeTime: () => updateSchedule.beforeTime,
-          workoutTimes: () => updateSchedule.workoutTimes,
-          breakTime: () => updateSchedule.breakTime,
-          start: () => updateSchedule.start,
+      const { id } = updateSchedule
+      updateScheduleCache(id, cache, (schedule) => {
+        if (!schedule) return schedule
+        return {
+          ...schedule,
+          type: updateSchedule.type,
+          beforeTime: updateSchedule.beforeTime,
+          workoutTimes: updateSchedule.workoutTimes,
+          breakTime: updateSchedule.breakTime,
+          start: updateSchedule.start,
         }
       })
     }
