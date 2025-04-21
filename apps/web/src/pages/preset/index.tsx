@@ -6,8 +6,8 @@ import { useGetExercisePresetWithListByOffset } from '@entities/exercisePreset/a
 import PresetDisplay from '@entities/exercisePreset/ui/PresetDisplay';
 import PresetNameInputDialog from '@entities/exercisePreset/ui/PresetNameInputDialog';
 import SimpleFitnessList from '@entities/fitness/ui/SimpleFitnessList';
+import SetState from '@entities/set/ui/SetState';
 import { useCreateExercisePreset } from '@features/exercisePreset/api';
-import SetState from '@features/set/ui/SetState';
 import { useHeaderSetValue } from '@shared/hooks/header';
 import useSpinner from '@shared/hooks/useSpinner';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';

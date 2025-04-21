@@ -1,6 +1,5 @@
 import type { ScheduleListProps } from './ScheduleList';
 import type { Meta, StoryObj } from '@storybook/react';
-import { DateService } from '@shared/lib/dateService';
 import ScheduleList from './ScheduleList'
 const meta = {
   title: 'Schedule/ScheduleList',
@@ -8,11 +7,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  argTypes: {
-    choosenDate: {
-      control: 'text'
-    }
-  },
+  argTypes: {},
   args: {} as Partial<ScheduleListProps>,
   component: ScheduleList,
   decorators: [
@@ -29,11 +24,8 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta
 
-const { year, month, date } = DateService.takeTodayDateValue()
-const nowDate = `${year}-${month}-${date}`
-
 export const Display: Story = {
   args: {
-    choosenDate: nowDate
+    scheduleList: []
   }
 }

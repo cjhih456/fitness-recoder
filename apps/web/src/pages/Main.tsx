@@ -3,8 +3,9 @@ import { Suspense, useCallback, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useGetScheduleByDate } from '@entities/schedule/api'
-import ScheduleDisplay from '@entities/schedule/ui/ScheduleDisplay'
+import ScheduleList from '@entities/schedule/ui/ScheduleList'
 import { useScheduleActions } from '@features/schedule/hooks'
+import ScheduleDisplayWithExerciseList from '@features/schedule/ui/ScheduleWithExerciseList'
 import { useHeaderSetValue } from '@shared/hooks/header'
 import usePageTracker from '@shared/hooks/usePageTracker'
 import { DateService } from '@shared/lib/dateService'
@@ -27,8 +28,6 @@ export default function Main() {
 
   const {
     gotoCreateScheduleAction,
-    gotoModifyScheduleAction,
-    gotoScheduleDetail
   } = useScheduleActions()
 
   const addSchedule = useCallback(() => {
@@ -64,21 +63,11 @@ export default function Main() {
         ],
         true: () => <MenuableAccordion.GroupProvider>
           <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
-            {scheduleList.map((schedule, idx) => {
-              const choosenDate = [schedule.year, schedule.month, schedule.date].join('-')
-              return <Suspense key={schedule.id}>
-                <ScheduleDisplay schedule={schedule} date={choosenDate} title={t('scheduleList:schedule.row.title', { n: idx + 1 })} >
-                  {(id, type, date) =>
-                    <div className="grid grid-cols-2 gap-x-4">
-                      <Button onPress={() => gotoModifyScheduleAction(id, date)}>{t('common:modify')}</Button>
-                      <Button onPress={() => gotoScheduleDetail(id, date)}>
-                        {type === 'FINISH' ? t('common:detail') : t('scheduleList:schedule.actionBtn.start')}
-                      </Button>
-                    </div>
-                  }
-                </ScheduleDisplay>
-              </Suspense>
-            })}
+            <Suspense>
+              <ScheduleList scheduleList={scheduleList}>
+                {(schedule, idx) => <ScheduleDisplayWithExerciseList schedule={schedule} idx={idx + 1} />}
+              </ScheduleList>
+            </Suspense>
           </ScrollShadow>
         </MenuableAccordion.GroupProvider>
       }}

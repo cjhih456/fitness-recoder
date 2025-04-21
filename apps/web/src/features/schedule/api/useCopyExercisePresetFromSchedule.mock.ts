@@ -1,7 +1,7 @@
-import type { CopyExercisePresetFromScheduleResponse, CopyExercisePresetFromScheduleVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
+import type { CopyExercisePresetFromScheduleResponse, CopyExercisePresetFromScheduleVariable } from '@features/schedule/model';
 import { ExercisePresetMockData } from '@entities/exercisePreset/api/exercisePreset.mockData'
-import CopyExercisePresetFromScheduleGql from '@features/exercisePreset/api/mutation/CopyExercisePresetFromScheduleGql';
+import CopyExercisePresetFromScheduleGql from '@features/schedule/api/mutation/CopyExercisePresetFromScheduleGql';
 
 const CopyExercisePresetFromScheduleMock: MockedResponse<
   CopyExercisePresetFromScheduleResponse,

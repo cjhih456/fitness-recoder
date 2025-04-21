@@ -1,10 +1,15 @@
 import type { Schedule } from '@fitness/struct';
 import type { MenuType } from '@shared/model/menuType';
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next';
 import useScheduleActions from './useScheduleActions';
 
-export default function useScheduleMenu(schedule?: Schedule.Data): MenuType[] {
+interface ScheduleMenuProps {
+  scheduleId: number,
+  scheduleType: Schedule.IType
+}
+
+export default function useScheduleMenu(): (_props: ScheduleMenuProps) => MenuType[] {
   const { t } = useTranslation(['workout', 'common'])
 
   const {
@@ -13,13 +18,12 @@ export default function useScheduleMenu(schedule?: Schedule.Data): MenuType[] {
     shareScheduleAction
   } = useScheduleActions()
 
-  return useMemo(() => {
+  return useCallback(({ scheduleId, scheduleType }: ScheduleMenuProps) => {
     const tempList: MenuType[] = []
-    if (!schedule) return tempList
-    if (schedule.type === 'FINISH') {
+    if (scheduleType === 'FINISH') {
       tempList.push({
         name: t('actionBtn.clone'),
-        action: () => cloneScheduleAction(schedule.id)
+        action: () => cloneScheduleAction(scheduleId)
       }, {
         name: t('actionBtn.share'),
         action: () => shareScheduleAction()
@@ -27,8 +31,8 @@ export default function useScheduleMenu(schedule?: Schedule.Data): MenuType[] {
     }
     tempList.push({
       name: t('common:delete'),
-      action: () => deleteScheduleAction(schedule.id)
+      action: () => deleteScheduleAction(scheduleId)
     })
     return tempList
-  }, [t, schedule, deleteScheduleAction, cloneScheduleAction, shareScheduleAction])
+  }, [t, deleteScheduleAction, cloneScheduleAction, shareScheduleAction])
 }

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
-import ScheduleList from '@entities/schedule/ui/ScheduleList';
+import ScheduleListWithActions from '@features/schedule/ui/ScheduleListWithActions';
 import { useHeaderSetValue } from '@shared/hooks/header';
 import { DateService } from '@shared/lib/dateService';
 import { default as Calender } from '@shared/ui/calender';
@@ -64,7 +64,7 @@ function CalenderPage() {
       <figcaption>
         <Suspense>
           <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
-            <ScheduleList choosenDate={choosenDateStr}></ScheduleList>
+            <ScheduleListWithActions choosenDate={choosenDateStr} />
           </ScrollShadow>
         </Suspense>
       </figcaption>

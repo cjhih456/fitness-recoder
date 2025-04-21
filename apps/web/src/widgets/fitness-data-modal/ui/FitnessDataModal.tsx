@@ -1,6 +1,6 @@
 import { Modal, ModalContent } from '@heroui/react';
 import { Suspense } from 'react';
-import useFitnessDataModal from '../../../shared/hooks/fitness-data-modal';
+import useFitnessDataModal from '@shared/hooks/fitness-data-modal';
 import FitnessDataModalContent from './FitnessDataModalContent';
 
 export default function FitnessDataModal() {

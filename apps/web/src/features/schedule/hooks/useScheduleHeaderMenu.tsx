@@ -3,7 +3,7 @@ import { useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType';
-import { useCopyExercisePresetFromSchedule } from '@features/exercisePreset/api'
+import { useCopyExercisePresetFromSchedule } from '@features/schedule/api'
 import { useSetAlert } from '@shared/hooks/alert';
 import { useHeaderMenuSetValue } from '@shared/hooks/header';
 import useScheduleMenu from './useScheduleMenu';
@@ -41,7 +41,7 @@ export default function useScheduleHeaderMenu(scheduleInfo?: Schedule.Data): [
       name: t('actionBtn.make'),
       action: makeAsPreset
     },
-    ...headerMenus
+    ...headerMenus({ scheduleId: scheduleInfo.id, scheduleType: scheduleInfo.type })
   ] : [], [scheduleInfo, t, headerMenus])
   const setHeaderMenu = useHeaderMenuSetValue()
   useLayoutEffect(() => {

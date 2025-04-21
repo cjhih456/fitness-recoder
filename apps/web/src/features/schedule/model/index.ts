@@ -1,3 +1,4 @@
+import type { ExercisePresetStoreType } from '@entities/exercisePreset/model'
 import type { ScheduleStoreType } from '@entities/schedule/model'
 import type { Schedule } from '@fitness/struct'
 
@@ -17,3 +18,6 @@ export type UpdateScheduleVariable = { updateSchedule: ScheduleStoreType }
 
 export type DeleteScheduleResponse = { deleteSchedule: string }
 export type DeleteScheduleVariable = { id: number }
+
+export type CopyExercisePresetFromScheduleResponse = { copyExercisePresetFromSchedule: ExercisePresetStoreType }
+export type CopyExercisePresetFromScheduleVariable = { scheduleId: number, name: string }

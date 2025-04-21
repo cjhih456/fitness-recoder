@@ -2,7 +2,6 @@ import type { GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable
 import type { Fitness } from '@fitness/struct'
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
-import { useDebounceValue } from 'usehooks-ts';
 import GetFitnessListByKeywords from '@entities/fitness/api/query/GetFitnessListByKeywords';
 import { useDebounce } from '@shared/hooks/useDebounce';
 
