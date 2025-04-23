@@ -1,73 +1,37 @@
 import type MessageTransactionBus from '../../transaction/MessageTransactionBus';
+import type { Sets } from '@fitness/struct';
 import type { IResolvers } from '@graphql-tools/utils';
-import type { Sets } from 'fitness-struct';
+import { getSetByIds, getSetById, getSetListByExerciseId, createSet, updateSet, deleteSetById } from './service';
 
-export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => ({
-  Query: {
-    async getSetByIds(_source, { ids }, context) {
-      const temp = new Array(ids.length).fill('?').join(', ')
-      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'selects', `select * from sets where id in (${temp})`,
-        ids
-      )
-      return setList || []
+export default (dbTransitionBus: MessageTransactionBus | undefined): IResolvers<any, any> => {
+  const getSetByIdsShell: ResponseResolver<{ ids: number[] }, Sets.Set[]> = async (_, { ids }, { client }) => {
+    return getSetByIds(dbTransitionBus, { client }, { ids })
+  }
+  const getSetByIdShell: ResponseResolver<{ id: number }, Sets.Set | null> = async (_, { id }, { client }) => {
+    return getSetById(dbTransitionBus, { client }, { id })
+  }
+  const getSetListByExerciseIdShell: ResponseResolver<{ id: number }, Sets.Set[]> = async (_, { id }, { client }) => {
+    return getSetListByExerciseId(dbTransitionBus, { client }, { id })
+  }
+  const createSetShell: ResponseResolver<{ sets: Sets.CreateType }, Sets.Set | null> = async (_, { sets }, { client }) => {
+    return createSet(dbTransitionBus, { client }, { sets })
+  }
+  const updateSetShell: ResponseResolver<{ sets: Sets.Set }, Sets.Set | null> = async (_, { sets }, { client }) => {
+    return updateSet(dbTransitionBus, { client }, { sets })
+  }
+  const deleteSetByIdShell: ResponseResolver<{ id: number }, string | null> = async (_, { id }, { client }) => {
+    return deleteSetById(dbTransitionBus, { client }, { id })
+  }
+  return {
+    Query: {
+      getSetByIds: getSetByIdsShell,
+      getSetById: getSetByIdShell,
+      getSetListByExerciseId: getSetListByExerciseIdShell
     },
-    async getSetById(_source, { id }, context) {
-      const set = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'select', 'select * from sets where id=?',
-        [id]
-      )
-      return set || null
-    },
-    async getSetListByExerciseId(_source, { id }, context) {
-      const setList = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'selects', 'select * from sets where exerciseId=?',
-        [id]
-      )
-      return setList || []
-    }
-  },
-  Mutation: {
-    async createSet(_source, { sets }, context) {
-      const createdResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'insert', 'INSERT INTO sets (repeat, isDone, weightUnit, weight, duration, exerciseId) values (?,?,?,?,?,?)',
-        [
-          sets.repeat,
-          sets.isDone ? 1 : 0,
-          sets.weightUnit,
-          sets.weight,
-          sets.duration,
-          sets.exerciseId
-        ],
-      )
-      return createdResult && createdResult[0] ? createdResult[0] : null
-    },
-    async updateSet(_source, { sets }, context) {
-      const updateResult = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'update', 'UPDATE sets set repeat=?, isDone=?, weightUnit=?, weight=?, duration=? where id=?',
-        [
-          sets.repeat,
-          sets.isDone ? 1 : 0,
-          sets.weightUnit,
-          sets.weight,
-          sets.duration,
-          sets.id
-        ]
-      )
-      return updateResult ? updateResult[0] : null
-    },
-    async deleteSetById(_source, { id }, context) {
-      const result = await dbTransitionBus?.sendTransaction<Sets.Sets>(
-        context.client,
-        'update', 'DELETE FROM sets where id=?',
-        [id]
-      )
-      return result ? `delete - sets - ${id}` : null
+    Mutation: {
+      createSet: createSetShell,
+      updateSet: updateSetShell,
+      deleteSetById: deleteSetByIdShell
     }
   }
-})
+}

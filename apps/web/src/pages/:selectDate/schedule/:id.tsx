@@ -1,13 +1,16 @@
-import { useMemo } from 'react';
+import { useMemo, useLayoutEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
-import useUpdateExerciseListBySchedule from '@features/scheduleManagement/api/useUpdateExerciseListBySchedule';
+import { useUpdateExerciseListBySchedule } from '@features/exercise/api';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import usePageTracker from '@shared/hooks/usePageTracker';
-import { useHeaderHandler } from '@widgets/header';
 
 export default function DisplaySchedule() {
-  useHeaderHandler('Schedule')
+  const setHeader = useHeaderSetValue()
+  useLayoutEffect(() => {
+    setHeader('Schedule')
+  }, [setHeader])
   usePageTracker('modify_schedule')
 
   const { id: idParam } = useParams()
@@ -16,15 +19,15 @@ export default function DisplaySchedule() {
   const { data } = useGetExerciseListByScheduleId(scheduleId)
   const updateExerciseList = useUpdateExerciseListBySchedule()
 
-  const savedExerciseIdxList = data.getExerciseListByScheduleId.map(v => v.exercise)
-  function saveSchedule(exerciseIdxList: number[]) {
-    updateExerciseList(scheduleId, savedExerciseIdxList || [], exerciseIdxList)
+  const fitnessIds = data.getExerciseListByScheduleId.map(v => v.fitnessId)
+  function saveSchedule(fitnessIdxList: number[]) {
+    updateExerciseList(scheduleId, data.getExerciseListByScheduleId, fitnessIdxList)
     navigate(-1)
   }
 
   return <FitnessListEditor
     saveBtnText='Save Exercise'
-    savedIdxData={savedExerciseIdxList}
+    fitnessIds={fitnessIds}
     onSaveAction={saveSchedule}
   />
 }

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import StateRender from '@shared/ui/StateRender'
+import { BooleanRender } from '@shared/ui/StateRender'
 
 interface HeaderMenuItemProps {
   children?: ReactNode | ReactNode[]
@@ -10,7 +10,7 @@ interface HeaderMenuItemProps {
 export default function HeaderMenuItem({ children, text, onClick }: HeaderMenuItemProps) {
   return (
     <div className='flex justify-between items-center h-12 w-36' onClick={onClick}>
-      <StateRender.Boolean
+      <BooleanRender
         state={Boolean(text)}
         render={{
           true: () => <span key={text} className='font-bold text-md'>

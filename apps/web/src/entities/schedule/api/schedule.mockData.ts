@@ -1,3 +1,4 @@
+import type { ScheduleStoreType } from '../model'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 import { DateService } from '@shared/lib/dateService'
 
@@ -16,7 +17,8 @@ export const ScheduleMockData: { [key: number]: ScheduleStoreType } = Array(days
     beforeTime: 0,
     breakTime: 0,
     start: 0,
-    workoutTimes: 0
+    workoutTimes: 0,
+    __typename: 'Schedule'
   } as ScheduleStoreType
   return acc
 }, {})

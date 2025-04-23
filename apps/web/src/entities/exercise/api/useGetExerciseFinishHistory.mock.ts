@@ -1,5 +1,6 @@
+import type { GetExerciseFinishHistoryResponse, GetExerciseFinishHistoryVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
-import GetExerciseFinishHistory from '@entities/exercise/api/graphql/query/GetExerciseFinishHistory';
+import GetExerciseFinishHistory from '@entities/exercise/api/query/GetExerciseFinishHistory';
 
 const GetExerciseFinishHistoryMock: MockedResponse<
   GetExerciseFinishHistoryResponse,

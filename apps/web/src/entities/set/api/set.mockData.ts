@@ -1,3 +1,5 @@
+import type { SetsStoreType } from '../model'
+
 export const SetMockData: { [key: number]: SetsStoreType } = Array(20).fill(0).reduce<{ [k: number]: SetsStoreType }>((acc, _cur, idx) => {
   const id = idx + 1
   acc[id] = {

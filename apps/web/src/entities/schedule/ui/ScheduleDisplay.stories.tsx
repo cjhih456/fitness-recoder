@@ -10,11 +10,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  argTypes: {
-    date: {
-      control: 'text'
-    }
-  },
+  argTypes: {},
   args: {} as Partial<ScheduleDisplayProps>,
   component: ScheduleDisplay,
   decorators: [
@@ -46,7 +42,7 @@ export const Display: Story = {
       start: 0,
       workoutTimes: 0
     },
-    date: '2024-01-01',
+    exerciseListCount: 1,
     title: 'Title'
   }
 }

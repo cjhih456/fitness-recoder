@@ -1,10 +1,10 @@
-import type { MenuType } from '@widgets/header';
+import type { MenuType } from '@shared/model/menuType';
 import type { ReactNode } from 'react'
 import { Button, Card, CardBody, CardFooter, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import { useMemo, useRef, useState } from 'react';
 import { MdExpandMore, MdMoreVert } from 'react-icons/md';
 import { useOnClickOutside, useResizeObserver } from 'usehooks-ts';
-import StateRender from '@shared/ui/StateRender';
+import { BooleanRender } from '@shared/ui/StateRender';
 
 export interface MenuableAccordionProps {
   children: {
@@ -31,7 +31,7 @@ const MenuableAccordion = ({ children, menu = [], isOpen, onOpenChange }: Menuab
   return (
     <Card ref={cardRef}>
       <CardBody className="relative overflow-hidden">
-        <StateRender.Boolean
+        <BooleanRender
           state={Boolean(menu.length)}
           render={{
             true: () => <Dropdown type="menu" portalContainer={cardRef.current || document.body}>

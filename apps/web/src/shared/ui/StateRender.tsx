@@ -13,20 +13,10 @@ interface StateRenderBooleanProps {
   state: boolean
 }
 
-const StateRender = <P extends StateRenderType = StateRenderType>({ render, state }: StateRenderProps<P>) => {
-  if (render[state]) return <>{render[state]()}</>
-  return null
+export const EnumRender = <P extends StateRenderType = StateRenderType>({ render, state }: StateRenderProps<P>) => {
+  return <>{render[state]?.()}</>
 }
 
-const StateRenderBoolean = ({ render, state }: StateRenderBooleanProps) => {
-  if (state) {
-    if (render.true) return <>{render.true()}</>
-    return null
-  }
-  if (render.false) return <>{render.false()}</>
-  return null
+export const BooleanRender = ({ render, state }: StateRenderBooleanProps) => {
+  return <>{state ? render.true?.() : render.false?.()}</>
 }
-
-StateRender.Boolean = StateRenderBoolean
-
-export default StateRender

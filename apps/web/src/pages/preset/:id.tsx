@@ -1,11 +1,11 @@
-import { useMemo } from 'react'
+import { useMemo, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetExercisePresetWithListById } from '@entities/exercisePreset/api'
-import { usePresetMenu } from '@entities/exercisePreset/hooks'
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor'
-import { useUpdateExerciseListByExercisePreset } from '@features/presetManagement/api'
-import { useHeaderHandler, useHeaderMenuHandler } from '@widgets/header'
+import { useUpdateExerciseListByExercisePreset } from '@features/exercise/api'
+import { useHeaderMenuSetValue, useHeaderSetValue } from '@shared/hooks/header'
+import { usePresetMenu } from '@widgets/exercise-preset-menu/hooks'
 
 export default function PresetDetailPage() {
   const params = useParams()
@@ -15,14 +15,17 @@ export default function PresetDetailPage() {
   const { data } = useGetExercisePresetWithListById(id)
   const exercisePreset = data.getExercisePresetWithListById
   const exerciseList = exercisePreset.exerciseList ?? []
-  const oldExerciseList = exerciseList.map(v => v.exercise)
+  const oldExerciseList = exerciseList.map(v => v.fitnessId)
 
   const updateExerciseList = useUpdateExerciseListByExercisePreset()
 
-  const headerMenu = usePresetMenu(id)
-
-  useHeaderHandler(exercisePreset.name)
-  useHeaderMenuHandler(headerMenu)
+  const presetMenu = usePresetMenu()
+  const setHeader = useHeaderSetValue()
+  const setHeaderMenu = useHeaderMenuSetValue()
+  useLayoutEffect(() => {
+    setHeader(exercisePreset.name)
+    setHeaderMenu(presetMenu(id))
+  }, [exercisePreset.name, id, presetMenu, setHeader, setHeaderMenu])
   function savePreset(exerciseIdxList: number[]) {
     if (!id) return
     updateExerciseList(id, exerciseList, exerciseIdxList).finally(() => {
@@ -31,7 +34,7 @@ export default function PresetDetailPage() {
   }
   return <main>
     <FitnessListEditor
-      savedIdxData={oldExerciseList}
+      fitnessIds={oldExerciseList}
       saveBtnText={t('actionBtn.save')}
       onSaveAction={savePreset}
     />

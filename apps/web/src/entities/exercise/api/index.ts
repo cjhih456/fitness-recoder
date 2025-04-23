@@ -1,21 +1,4 @@
-import useCreateExerciseByExercisePreset from './useCreateExerciseByExercisePreset'
-import useCreateExerciseBySchedule from './useCreateExerciseBySchedule'
-import useDeleteExerciseById from './useDeleteExerciseById'
-import useGetExerciseFinishHistory from './useGetExerciseFinishHistory'
-import useGetExerciseListByExercisePresetId from './useGetExerciseListByExercisePresetId'
-import useGetExerciseListByScheduleId from './useGetExerciseListByScheduleId'
-import useUpdateExerciseListByExercisePresetId from './useUpdateExerciseListByExercisePresetId'
-import useUpdateExerciseListByScheduleId from './useUpdateExerciseListByScheduleId'
-
-export {
-  useCreateExerciseBySchedule,
-  useCreateExerciseByExercisePreset,
-
-  useGetExerciseFinishHistory,
-  useGetExerciseListByScheduleId,
-  useGetExerciseListByExercisePresetId,
-
-  useDeleteExerciseById,
-  useUpdateExerciseListByScheduleId,
-  useUpdateExerciseListByExercisePresetId,
-}
+export { default as useGetExerciseFinishHistory } from './useGetExerciseFinishHistory'
+export { default as useGetExerciseListByExercisePresetId } from './useGetExerciseListByExercisePresetId'
+export { default as useGetExerciseListByScheduleId } from './useGetExerciseListByScheduleId'
+export { default as useExerciseWithFitnessFragment } from './useExerciseWithFitnessFragment'

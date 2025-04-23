@@ -1,6 +1,7 @@
+import type { GetExercisePresetWithListByOffsetResponse, GetExercisePresetWithListByOffsetVariable } from '@entities/exercisePreset/model';
 import { useSuspenseQuery } from '@apollo/client'
 import { startTransition, useCallback, useState } from 'react';
-import GetExercisePresetWithListByOffset from './graphql/query/GetExercisePresetWithListByOffset';
+import GetExercisePresetWithListByOffset from './query/GetExercisePresetWithListByOffset';
 
 export default function useGetExercisePresetWithListByOffset(offset: number, size: number) {
   const query = useSuspenseQuery<

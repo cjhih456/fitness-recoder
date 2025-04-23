@@ -1,25 +1,29 @@
+import { useLayoutEffect } from 'react';
 import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import FitnessListEditor from '@entities/fitness/ui/FitnessListEditor';
-import { useScheduleActions } from '@entities/schedule/hooks';
-import { useCreateScheduleWithExercisePlans } from '@features/exerciseManagement/api';
+import { useScheduleActions } from '@features/schedule/hooks';
+import { useSetAlert } from '@shared/hooks/alert';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import usePageTracker from '@shared/hooks/usePageTracker';
 import { LogEvent } from '@shared/lib/firebase/firebase';
-import { useAlert } from '@widgets/alert';
-import { useHeaderHandler } from '@widgets/header';
+import { useCreateScheduleWithExercisePlans } from '@widgets/schedule-with-exercise/api';
 
 const defaultSearchParams = createSearchParams({
   directStart: '0'
 })
 
 export default function CreateSchedule() {
-  useHeaderHandler('Create Schedule')
+  const setHeader = useHeaderSetValue()
+  useLayoutEffect(() => {
+    setHeader('Create Schedule')
+  }, [setHeader])
   usePageTracker('create_schedule')
   const navigate = useNavigate()
   const { gotoScheduleDetail } = useScheduleActions()
   const { selectDate } = useParams()
   const [queryParams] = useSearchParams(defaultSearchParams)
   const [year, month, date] = selectDate ? selectDate.split('-').map(v => +v) : [0, 0, 0]
-  const { pushAlert } = useAlert()
+  const { pushAlert } = useSetAlert()
 
   const createScheduleWithExercisePlans = useCreateScheduleWithExercisePlans()
   async function startFitnessTime(exerciseIdxList: number[]) {

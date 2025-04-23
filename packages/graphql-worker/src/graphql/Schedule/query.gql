@@ -24,10 +24,6 @@ input CreateScheduleDataInput {
   year: Int!
   month: Int!
   date: Int!
-  beforeTime: Timestamp!
-  start: Timestamp!
-  breakTime: Int!
-  workoutTimes: Timestamp!
   type: ScheduleType!
 }
 

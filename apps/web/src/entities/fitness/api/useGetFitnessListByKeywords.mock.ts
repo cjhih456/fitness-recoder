@@ -1,6 +1,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
-import { FitnessMockData } from './fitness.mockData'
-import GetFitnessListByKeywords from './graphql/query/GetFitnessListByKeywords';
+import type { GetFitnessListByKeywordsResponse, GetFitnessListByKeywordsVariable } from '@entities/fitness/model/types';
+import { FitnessMockData } from '@entities/fitness/api/fitness.mockData'
+import GetFitnessListByKeywords from '@entities/fitness/api/query/GetFitnessListByKeywords';
 
 const useGetFitnessListByKeywords: MockedResponse<
   GetFitnessListByKeywordsResponse,

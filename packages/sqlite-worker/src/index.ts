@@ -3,7 +3,7 @@ import sort from 'version-sort'
 import Sqlite3 from './Sqlite3'
 import createExerciseTable, { migrate as migrateExercise } from './create/Exercise'
 import createExercisePresetTable, { migrate as migrateExercisePreset } from './create/ExercisePreset'
-import createFitnessTable, { migrate as migrateFitness } from './create/Fitness'
+import createFitnessTable, { checkFitnessDataLength, insertFitnessData, migrate as migrateFitness } from './create/Fitness'
 import createScheduleTable, { migrate as migrateSchedule } from './create/Schedule'
 import createSetTable, { migrate as migrateSets } from './create/Sets'
 import createVersionTable, { getVersion, updateVersion } from './create/Version'
@@ -29,6 +29,7 @@ self.addEventListener('message', async (e: MessageEvent) => {
       }
       const currentVersion = getVersion(db)
       if (__APP_VERSION__ !== currentVersion) {
+
         const queryStacksByVersion: MigrationQueryBus = new Map()
         migrateFitness(queryStacksByVersion, currentVersion)
         migrateExercise(queryStacksByVersion, currentVersion)
@@ -36,17 +37,28 @@ self.addEventListener('message', async (e: MessageEvent) => {
         migrateSets(queryStacksByVersion, currentVersion)
         migrateSchedule(queryStacksByVersion, currentVersion)
         const result = sort<Versions>(Array.from(queryStacksByVersion.keys()))
-        for (let v of result) {
-          const list = queryStacksByVersion.get(v)
-          if (list) {
-            await Promise.all(list).then((quryObjList) => {
-              for (let i = 0; i < quryObjList.length; i++) {
-                db.exec(quryObjList[i].sql, quryObjList[i].args)
-              }
-            })
+        try {
+          await db.exec('BEGIN TRANSACTION;')
+          for (let v of result) {
+            const list = queryStacksByVersion.get(v)
+            if (list) {
+              await Promise.all(list).then(async (quryObjList) => {
+                for (let i = 0; i < quryObjList.length; i++) {
+                  await db.exec(quryObjList[i].sql, quryObjList[i].args)
+                }
+              })
+            }
           }
+          updateVersion(db, __APP_VERSION__)
+          await db.exec('COMMIT TRANSACTION;')
+        } catch (e) {
+          await db.exec('ROLLBACK TRANSACTION;')
+          console.error(e)
         }
-        updateVersion(db, __APP_VERSION__)
+      }
+      if (checkFitnessDataLength(db) === 0) {
+        const { sql, value } = await insertFitnessData()
+        db.exec(sql, value)
       }
     })
     return

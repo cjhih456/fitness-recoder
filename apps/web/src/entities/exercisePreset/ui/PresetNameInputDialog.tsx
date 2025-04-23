@@ -1,62 +1,62 @@
-import type { ReactNode } from 'react';
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
-import { useEffect, useState } from 'react'
-
-interface IonChange {
-  (_v: false): void | Promise<void>
-  (_v: true, _inputValue: string): void | Promise<void>
-}
+import { useState } from 'react'
 
 interface PresetNameInputDialogProp {
   isOpen?: boolean
-  onChange: IonChange
-  children?: (_openFn: () => void) => ReactNode
+  onSubmit: (_v: string) => void,
+  onOpenChange: (_v: boolean) => void
 }
 
-export default function PresetNameInputDialog({ isOpen, onChange, children }: PresetNameInputDialogProp) {
-
-  const [lazyOpen, setLazyOpen] = useState(false)
+const PresetNameInputDialog = ({ isOpen, onSubmit, onOpenChange }: PresetNameInputDialogProp) => {
   const [presetName, setPresetName] = useState('')
+  const handleClose = () => {
+    onOpenChange(false)
+    setPresetName('')
+  }
+  const handleSave = () => {
+    onSubmit(presetName)
+    handleClose()
+  }
+
+  return (
+    <Modal
+      closeButton
+      isOpen={isOpen}
+      onOpenChange={handleClose}
+    >
+      <ModalContent>
+        <ModalHeader>
+          <p>Set Preset Name</p>
+        </ModalHeader>
+        <ModalBody>
+          <Input label="Name" value={presetName} onValueChange={setPresetName} />
+        </ModalBody>
+        <ModalFooter>
+          <Button onPress={handleClose}>Cancel</Button>
+          <Button onPress={handleSave}>Save</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
+
+interface WithChildProp {
+  children: (_openFn: () => void) => React.ReactNode
+  onSubmit: (_v: string) => void
+}
+const WithChild = ({ children, onSubmit }: WithChildProp) => {
+  const [lazyOpen, setLazyOpen] = useState(false)
+
   const handleOpen = () => {
     setLazyOpen(true)
   }
-  const handleClose = () => {
-    setLazyOpen(false)
-    onChange(false)
-  }
-  const handleSave = () => {
-    setLazyOpen(false)
-    onChange(true, presetName)
-    setPresetName('')
-  }
 
-  useEffect(() => {
-    if (typeof isOpen !== 'boolean') return
-    if (isOpen === lazyOpen) return
-    setLazyOpen(isOpen)
-  }, [isOpen, lazyOpen])
-
-  return (
-    <>
-      {children && children(handleOpen)}
-      <Modal
-        closeButton
-        isOpen={lazyOpen}
-        onOpenChange={handleClose}
-      >
-        <ModalContent>
-          <ModalHeader>
-            <p>Set Preset Name</p>
-          </ModalHeader>
-          <ModalBody>
-            <Input label="Name" value={presetName} onValueChange={setPresetName} />
-          </ModalBody>
-          <ModalFooter>
-            <Button onPress={handleClose}>Cancel</Button>
-            <Button onPress={handleSave}>Save</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  )
+  return <>
+    {children && children(handleOpen)}
+    <PresetNameInputDialog isOpen={lazyOpen} onSubmit={onSubmit} onOpenChange={setLazyOpen} />
+  </>
 }
+
+PresetNameInputDialog.WithChild = WithChild
+
+export default PresetNameInputDialog

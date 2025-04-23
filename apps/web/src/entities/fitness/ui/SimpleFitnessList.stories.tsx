@@ -1,5 +1,7 @@
 import type { SimpleFitnessListProps } from './SimpleFitnessList'
 import type { Meta, StoryObj } from '@storybook/react';
+// eslint-disable-next-line boundaries/element-types
+import SetState from '@entities/set/ui/SetState';
 import SimpleFitnessList from './SimpleFitnessList'
 
 const meta = {
@@ -8,7 +10,9 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  args: {} as Partial<SimpleFitnessListProps>,
+  args: {
+    children: (exerciseData) => <SetState exerciseDataId={exerciseData.id} />
+  } as Partial<SimpleFitnessListProps>,
   component: SimpleFitnessList,
   decorators: [
     (Story) => {
@@ -26,11 +30,11 @@ export const Display: Story = {
   args: {
     exerciseDataList: [{
       id: 1,
-      exercise: 1,
+      fitnessId: 1,
       deps: 0
     }, {
       id: 2,
-      exercise: 2,
+      fitnessId: 2,
       deps: 1
     }]
   }

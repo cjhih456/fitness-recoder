@@ -1,6 +1,8 @@
+import type { GetExerciseListByScheduleIdResponse, GetExerciseListByScheduleIdVariable } from '../model';
 import type { MockedResponse } from '@apollo/client/testing';
+// eslint-disable-next-line boundaries/element-types
 import { FitnessMockData } from '@entities/fitness/api/fitness.mockData';
-import GetExerciseListByScheduleId from '../api/graphql/query/GetExerciseListByScheduleId';
+import GetExerciseListByScheduleId from './query/GetExerciseListByScheduleId';
 
 const GetExerciseListByScheduleIdMock: MockedResponse<
   GetExerciseListByScheduleIdResponse,
@@ -15,17 +17,17 @@ const GetExerciseListByScheduleIdMock: MockedResponse<
         getExerciseListByScheduleId: [
           {
             id: 1,
-            exercise: 1,
             deps: 0,
+            fitness: FitnessMockData[0],
+            fitnessId: FitnessMockData[0].id,
             __typename: 'ExerciseWithFitness',
-            fitness: FitnessMockData[0]
           },
           {
             id: 2,
-            exercise: 2,
             deps: 0,
+            fitness: FitnessMockData[1],
+            fitnessId: FitnessMockData[1].id,
             __typename: 'ExerciseWithFitness',
-            fitness: FitnessMockData[1]
           }
         ]
       }

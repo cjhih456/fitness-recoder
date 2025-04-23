@@ -1,23 +1,34 @@
 import type { MenuableAccordionProps } from './MenuableAccordion'
-import type { ReactNode, Dispatch, SetStateAction } from 'react'
-import { useCallback, useMemo, useContext, createContext, useState } from 'react'
+import type { FC, ReactNode } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import MenuableAccordion from './MenuableAccordion'
+import { MenuableAccordionGroupContext, useMenuableAccordionGroup } from './group/context'
 
-const Context = createContext<[any, Dispatch<SetStateAction<any>>]>([0, () => { }])
 interface MenuableAccordionGroupProviderProps {
+  valueList: number[]
   defaultValue?: number
-  children: ReactNode
+  children: ReactNode | ((_gotoNext: () => void) => ReactNode)
 }
-const MenuableAccordionGroupProvider = ({ defaultValue = 0, children }: MenuableAccordionGroupProviderProps) => {
-  const providerState = useState(defaultValue)
-  return <Context.Provider value={providerState}>{children}</Context.Provider>
+const MenuableAccordionGroupProvider: FC<MenuableAccordionGroupProviderProps> = ({ defaultValue = 0, valueList = [], children }) => {
+  const [openId, setOpenId] = useState(defaultValue)
+  const [menuList, setMenuList] = useState<number[]>(valueList)
+  const gotoNext = useCallback(() => {
+    const idx = menuList.indexOf(openId)
+    if (idx === -1) {
+      setOpenId(menuList[0])
+    } else if (menuList[idx + 1]) {
+      setOpenId(menuList[idx + 1])
+    }
+  }, [setOpenId, menuList, openId])
+  return <MenuableAccordionGroupContext.Provider value={{ openId, setOpenId, menuList, setMenuList, gotoNext }}>{typeof children === 'function' ? children(gotoNext) : children}</MenuableAccordionGroupContext.Provider>
 }
+
 const MenuableAccordionGroupContent = ({ openId, ...props }: Omit<MenuableAccordionProps, 'isOpen' | 'onOpenChange'> & { openId: any }) => {
-  const [state, setState] = useContext(Context)
-  const isOpen = useMemo(() => state === openId, [state, openId])
+  const { setOpenId, openId: openIdContext } = useMenuableAccordionGroup()
+  const isOpen = useMemo(() => openId === openIdContext, [openId, openIdContext])
   const setIsOpen = useCallback((v: boolean) => {
-    setState(v ? openId : null)
-  }, [setState, openId])
+    setOpenId(v ? openId : null)
+  }, [setOpenId, openId])
   return <MenuableAccordion {...props} onOpenChange={setIsOpen} isOpen={isOpen} />
 }
 

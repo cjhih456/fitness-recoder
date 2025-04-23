@@ -1,4 +1,4 @@
-import type { Schedule } from 'fitness-struct'
+import type { Schedule } from '@fitness/struct'
 import { ScheduleType } from '@entities/schedule/model/ScheduleType'
 
 export const colorByScheduleType = (type: Schedule.IType[]) => {

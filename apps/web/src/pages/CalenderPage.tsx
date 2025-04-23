@@ -1,20 +1,23 @@
 import type { DateValue } from '@shared/lib/dateService';
 import { ScrollShadow } from '@heroui/react'
-import { Suspense, useMemo, useState } from 'react'
+import { Suspense, useLayoutEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetScheduleStatusByMonth } from '@entities/schedule/api'
 import { colorByScheduleType } from '@entities/schedule/lib/color';
-import ScheduleList from '@entities/schedule/ui/ScheduleList';
+import ScheduleListWithActions from '@features/schedule/ui/ScheduleListWithActions';
+import { useHeaderSetValue } from '@shared/hooks/header';
 import { DateService } from '@shared/lib/dateService';
+import { default as Calender } from '@shared/ui/calender';
 import { useBottomNavi } from '@widgets/bottomNavi';
-import { default as Calender } from '@widgets/calender';
-import { useHeaderHandler } from '@widgets/header';
 
 function CalenderPage() {
   const { t } = useTranslation('title')
   useBottomNavi()
-  useHeaderHandler(t('calender'))
+  const setHeader = useHeaderSetValue()
+  useLayoutEffect(() => {
+    setHeader(t('calender'))
+  }, [t, setHeader])
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -61,7 +64,7 @@ function CalenderPage() {
       <figcaption>
         <Suspense>
           <ScrollShadow className="p-4 flex flex-col items-stretch gap-y-3">
-            <ScheduleList choosenDate={choosenDateStr}></ScheduleList>
+            <ScheduleListWithActions choosenDate={choosenDateStr} />
           </ScrollShadow>
         </Suspense>
       </figcaption>

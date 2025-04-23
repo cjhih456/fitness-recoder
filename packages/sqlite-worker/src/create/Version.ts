@@ -1,4 +1,5 @@
 import type Sqlite3 from '../Sqlite3'
+import sort from 'version-sort'
 
 /**
  * Take version of database from Sqlite DB
@@ -27,6 +28,11 @@ export default function create(db: Sqlite3) {
       version string
     )`)
   if (!getVersion(db)) {
-    updateVersion(db, '0.1.0')
+    updateVersion(db, __APP_VERSION__)
   }
+}
+
+export const isNewVersion = (current: string = '0.1.0', target: string) => {
+  const result = sort([current, target])
+  return result[0] === current
 }
