@@ -1,18 +1,22 @@
 # Fitness Recoder
 
+## Preview
+[Goto Preview](https://cjhih456.github.io/fitness-recoder/)
+
 ## Packages
+
 ### Main App
-1. [@fitness/web](#web)
+1. [@fitness/web](https://github.com/cjhih456/fitness-recoder/tree/main/apps/web)
 
 ### Sub repo
-1. [@fitness/struct](https://github.com/cjhih456/fitness-recoder/tree/main/packages/struct)
+1. @fitness/struct
 1. [@fitness/sqlite-worker](https://github.com/cjhih456/fitness-recoder/tree/main/packages/sqlite-worker)
 1. [@fitness/graphql-worker](https://github.com/cjhih456/fitness-recoder/tree/main/packages/graphql-worker)
 1. [@fitness/vite-plugin-graphql-server](https://github.com/cjhih456/fitness-recoder/tree/main/packages/vite-plugin-graphql-server)
 1. [vite-plugin-i18next-language-pack-loader](https://github.com/cjhih456/fitness-recoder/tree/main/packages/vite-plugin-i18next-language-pack-loader)
-1. [@fitness/storybook](#storybook)
-1. [@types/sqlite-message-types](#sqlite-message-types)
-1. [@fitness/eslint-config](#eslint-config)
+1. @fitness/storybook
+1. @types/sqlite-message-types
+1. @fitness/eslint-config
 
 ### Used Tech
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)

@@ -25,9 +25,6 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
-## Preview
-1. Connect to https://cjhih456.github.io/fitness-recoder/
-
 ## Site map
 1. Home - Feature
     - content
@@ -50,7 +47,7 @@ openssl req -x509 -out ./ssl/server.crt -keyout ./ssl/server.key \
             - Start Schedule - done
             - Modify Schedule - done
             - Share this schedule (QR code)
-            - Delete Schedule
+            - Delete Schedule - done
     - Create / Modify Page
       - top menu
         - load preset
