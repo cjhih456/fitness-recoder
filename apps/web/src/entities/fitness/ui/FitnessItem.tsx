@@ -1,18 +1,19 @@
+import type { FC } from 'react';
 import { Card, CardBody, Chip } from '@heroui/react';
+import { memo } from 'react';
 import { MdCheck } from 'react-icons/md';
 import { useFitnessSimpleFragment } from '@entities/fitness/api';
 import { BooleanRender } from '@shared/ui/StateRender';
-
 export interface FitnessItemProps {
   fitnessId: number
   isSelected?: boolean
   onClick?: (_exercise: number, _isDetail: boolean) => void
 }
-export default function FitnessItem({
+const FitnessItem: FC<FitnessItemProps> = memo(({
   fitnessId,
   isSelected = false,
   onClick
-}: FitnessItemProps) {
+}: FitnessItemProps) => {
   const fitness = useFitnessSimpleFragment(fitnessId)
 
   return <Card className="fitness-item scroll-mb-4 snap-start">
@@ -51,4 +52,7 @@ export default function FitnessItem({
       </div>
     </CardBody>
   </Card >
-}
+}, (prev, next) => {
+  return prev.fitnessId === next.fitnessId && prev.isSelected === next.isSelected
+})
+export default FitnessItem

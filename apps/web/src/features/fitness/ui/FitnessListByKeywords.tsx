@@ -9,11 +9,7 @@ interface FitnessListByFilterProps extends Omit<FitnessListProps, 'fitnessIds' |
 }
 
 const FitnessListByFilter: FC<FitnessListByFilterProps> = ({ searchFilter, ...props }) => {
-  const { data: fitnessListData, fetchMore, hasNext } = useGetFitnessListByKeywords({
-    ...searchFilter,
-    limit: 20,
-    offset: 0,
-  })
+  const { data: fitnessListData, fetchMore, hasNext } = useGetFitnessListByKeywords(searchFilter)
   const fitnessIds = useMemo(() => fitnessListData.getFitnessListByKeywords.map(v => v.id), [fitnessListData])
   return <FitnessList
     {...props}

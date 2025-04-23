@@ -21,7 +21,6 @@ export default function FitnessList({
   onModalOpen,
   onLoadMore
 }: FitnessListProps) {
-
   /**
    * 
    * @param fitnessId Fitness Id
