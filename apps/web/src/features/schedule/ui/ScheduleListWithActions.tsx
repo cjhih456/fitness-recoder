@@ -48,6 +48,7 @@ const ScheduleListWithActions: FC<ScheduleListWithActionsProps> = ({ choosenDate
           </Button>
         </div>,
         <ScheduleList
+          key={`schedule-list-${choosenDate}`}
           scheduleList={scheduleList.getScheduleByDate}
         >
           {(schedule, idx) => <ScheduleDisplayWithExerciseList schedule={schedule} idx={idx + 1} />}
