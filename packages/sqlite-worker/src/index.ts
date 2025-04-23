@@ -3,7 +3,7 @@ import sort from 'version-sort'
 import Sqlite3 from './Sqlite3'
 import createExerciseTable, { migrate as migrateExercise } from './create/Exercise'
 import createExercisePresetTable, { migrate as migrateExercisePreset } from './create/ExercisePreset'
-import createFitnessTable, { migrate as migrateFitness } from './create/Fitness'
+import createFitnessTable, { checkFitnessDataLength, insertFitnessData, migrate as migrateFitness } from './create/Fitness'
 import createScheduleTable, { migrate as migrateSchedule } from './create/Schedule'
 import createSetTable, { migrate as migrateSets } from './create/Sets'
 import createVersionTable, { getVersion, updateVersion } from './create/Version'
@@ -55,6 +55,10 @@ self.addEventListener('message', async (e: MessageEvent) => {
           await db.exec('ROLLBACK TRANSACTION;')
           console.error(e)
         }
+      }
+      if (checkFitnessDataLength(db) === 0) {
+        const { sql, value } = await insertFitnessData()
+        db.exec(sql, value)
       }
     })
     return

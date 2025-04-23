@@ -21,22 +21,18 @@ export default function create(db: Sqlite3) {
     )`)
 }
 
-export function migrate(bus: MigrationQueryBus, v: Versions) {
-  if (isNewVersion(v, '0.1.0')) {
-    const loadData = async () => {
-      const data = () => import('./fitness-datas/fitness-flat-data.ts')
-      const loaded = await data()
-      const json_loaded = loaded.fitnessData
-      const sql = Array(json_loaded.length / 13).fill('(?,?,?,?,?,?,?,?,?,?,?,?,?)').join(',')
-      return {
-        sql,
-        value: json_loaded
-      }
-    }
-    const list = bus.get('0.1.0') || []
-    list.push(loadData().then(({ sql, value }) => {
-      return {
-        sql: `insert into fitness (
+export const checkFitnessDataLength = (db: Sqlite3) => {
+  const data = db.selectValue('select count(*) from fitness')
+  return Number(data)
+}
+
+export const insertFitnessData = async () => {
+  const data = () => import('./fitness-datas/fitness-flat-data.ts')
+  const loaded = await data()
+  const json_loaded = loaded.fitnessData
+  const sql = Array(json_loaded.length / 13).fill('(?,?,?,?,?,?,?,?,?,?,?,?,?)').join(',')
+  return {
+    sql: `insert into fitness (
             name,
             aliases,
             primaryMuscles,
@@ -52,6 +48,16 @@ export function migrate(bus: MigrationQueryBus, v: Versions) {
             tips
           ) values ${sql}
         `,
+    value: json_loaded
+  }
+}
+
+export function migrate(bus: MigrationQueryBus, v: Versions) {
+  if (isNewVersion(v, '0.1.0')) {
+    const list = bus.get('0.1.0') || []
+    list.push(insertFitnessData().then(({ sql, value }) => {
+      return {
+        sql,
         args: value
       } as QueryType
     }))
