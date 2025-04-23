@@ -4,9 +4,15 @@ import { cloneElement } from 'react';
 import { useGetExerciseListByScheduleId } from '@entities/exercise/api';
 import MenuableAccordion from '@shared/ui/MenuableAccordion';
 
+interface ExerciseDataChildrenProps {
+  exercise: Exercise.Data
+  idx: number,
+  exerciseList: Exercise.Data[]
+  gotoNext: () => void
+}
 export interface ExerciseDataListProps {
   scheduleId: number
-  children: (_props: { exercise: Exercise.Data }) => ReactElement
+  children: (_props: ExerciseDataChildrenProps) => ReactElement
 }
 
 export default function ExerciseDataList({
@@ -15,10 +21,9 @@ export default function ExerciseDataList({
 }: ExerciseDataListProps) {
   const { data: getExerciseListByScheduleIdData } = useGetExerciseListByScheduleId(scheduleId)
   const exerciseList = getExerciseListByScheduleIdData.getExerciseListByScheduleId
-
   return <div className="flex flex-col gap-y-3">
-    <MenuableAccordion.GroupProvider>
-      {exerciseList.map((exercise) => cloneElement(children({ exercise }), { key: `${exercise.id}` }))}
+    <MenuableAccordion.GroupProvider valueList={exerciseList.map(v => v.id)} defaultValue={exerciseList[0].id}>
+      {(gotoNext) => exerciseList.map((exercise, idx) => cloneElement(children({ exercise, idx, exerciseList, gotoNext }), { key: `${exercise.id}` }))}
     </MenuableAccordion.GroupProvider>
   </div>
 }
