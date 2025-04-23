@@ -5,7 +5,7 @@ import MenuableAccordion from './MenuableAccordion'
 import { MenuableAccordionGroupContext, useMenuableAccordionGroup } from './group/context'
 
 interface MenuableAccordionGroupProviderProps {
-  valueList: number[]
+  valueList?: number[]
   defaultValue?: number
   children: ReactNode | ((_gotoNext: () => void) => ReactNode)
 }
@@ -20,7 +20,9 @@ const MenuableAccordionGroupProvider: FC<MenuableAccordionGroupProviderProps> = 
       setOpenId(menuList[idx + 1])
     }
   }, [setOpenId, menuList, openId])
-  return <MenuableAccordionGroupContext.Provider value={{ openId, setOpenId, menuList, setMenuList, gotoNext }}>{typeof children === 'function' ? children(gotoNext) : children}</MenuableAccordionGroupContext.Provider>
+  return <MenuableAccordionGroupContext.Provider value={{ openId, setOpenId, menuList, setMenuList, gotoNext }}>
+    {typeof children === 'function' ? children(gotoNext) : children}
+  </MenuableAccordionGroupContext.Provider>
 }
 
 const MenuableAccordionGroupContent = ({ openId, ...props }: Omit<MenuableAccordionProps, 'isOpen' | 'onOpenChange'> & { openId: any }) => {
