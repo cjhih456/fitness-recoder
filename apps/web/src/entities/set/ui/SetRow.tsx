@@ -1,7 +1,8 @@
 import type { SetsStoreType } from '../model'
 import { Button, Checkbox, Input } from '@heroui/react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { MdClear } from 'react-icons/md'
+import { useDebounceCallback } from 'usehooks-ts'
 import useSetFragment from '@entities/set/api/useSetFragment'
 import { BooleanRender } from '@shared/ui/StateRender'
 
@@ -16,9 +17,9 @@ export interface SetRowProps {
 
 export default function SetRow({ setId, index, hasDoneChange, hasSetChange, onRemoveSet, readonly = false }: SetRowProps) {
   const set = useSetFragment(setId)
-  const { register, handleSubmit } = useForm({
-    values: set,
-    mode: 'onBlur'
+  const { register, handleSubmit, control } = useForm({
+    defaultValues: set,
+    mode: 'onChange'
   })
 
   function saveChange(data: SetsStoreType) {
@@ -29,11 +30,13 @@ export default function SetRow({ setId, index, hasDoneChange, hasSetChange, onRe
     }
   }
 
+  const debouncedSaveChange = useDebounceCallback(saveChange, 300)
+  const changeSubmitAction = handleSubmit(debouncedSaveChange)
   function removeSet() {
     onRemoveSet && onRemoveSet(set.id)
   }
 
-  return <form onBlur={handleSubmit(saveChange)} className="flex gap-x-2 items-center justify-center">
+  return <form onChange={changeSubmitAction} className="flex gap-x-2 items-center justify-center">
     <span className='min-w-12'>Set {index}</span>
     <Input {...register('repeat', {
       disabled: readonly,
@@ -43,9 +46,24 @@ export default function SetRow({ setId, index, hasDoneChange, hasSetChange, onRe
       disabled: readonly,
       valueAsNumber: true
     })} isReadOnly={readonly} className="w-28" type='number'></Input>
-    <Checkbox {...register('isDone', {
-      disabled: readonly
-    })} isReadOnly={readonly} classNames={{ wrapper: 'mr-0' }} size='lg' radius='full'></Checkbox>
+    <Controller
+      control={control}
+      name="isDone"
+      render={({ field: { onChange, value, ...field } }) => <Checkbox
+        {...field}
+        isSelected={value}
+        isReadOnly={readonly}
+        classNames={{ wrapper: 'mr-0' }}
+        size='lg'
+        radius='full'
+        onValueChange={(e) => {
+          onChange(e)
+        }}
+        onChange={() => {
+          changeSubmitAction()
+        }}
+      />}
+    />
     <BooleanRender
       state={readonly}
       render={{
