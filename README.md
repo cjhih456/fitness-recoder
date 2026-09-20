@@ -1,7 +1,11 @@
 # Fitness Recoder
 
+> [!IMPORTANT]
+> this package is deprecated
+> please check https://github.com/cjhih456/fitness-recorder-v2
+
 ## Preview
-[Goto Preview](https://cjhih456.github.io/fitness-recoder/)
+[Goto Preview](https://cjhih456.github.io/fitness-recoder-v2/)
 
 ## Packages
 
